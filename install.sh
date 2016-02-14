@@ -34,15 +34,16 @@ function symlink_safe() {
   fi
 }
 
-symlink_or_ask ~/.dotfiles/shell/.bash_aliases ~/.bash_aliases
+symlink_or_ask ~/.dotfiles/shell/.bash_profile ~/.bashrc
 symlink_or_ask ~/.dotfiles/shell/.bash_profile ~/.bash_profile
+symlink_or_ask ~/.dotfiles/shell/.bash_aliases ~/.bash_aliases
 symlink_or_ask ~/.dotfiles/shell/.bash_colors ~/.bash_colors
 
 symlink_or_ask ~/.dotfiles/vim ~/.vim
 symlink_or_ask ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # install vundle
-if [ ! -f ~/.dotfiles/vim/Vundle.vim ]; then
+if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
   cd ~/.dotfiles/vim && git clone https://github.com/gmarik/Vundle.vim.git
   vim +BundleInstall +BundleClean +BundleClean +quitall
 fi
