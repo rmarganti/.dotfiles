@@ -49,10 +49,10 @@ if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
 fi
 
 if [ ! -f ~/.git-prompt.sh ]; then
-  curl -o https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh ~/.git-prompt.sh
+  curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh ~/.git-prompt.sh
 fi
 
 # install z
 if [ ! -f ~/z.sh ]; then
-  curl -o https://raw.githubusercontent.com/rupa/z/master/z.sh ~/z.sh
+  curl -O https://raw.githubusercontent.com/rupa/z/master/z.sh ~/z.sh
 fi
