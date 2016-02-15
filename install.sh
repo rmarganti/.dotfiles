@@ -39,7 +39,7 @@ symlink_or_ask ~/.dotfiles/shell/.bash_profile ~/.bash_profile
 symlink_or_ask ~/.dotfiles/shell/.bash_aliases ~/.bash_aliases
 symlink_or_ask ~/.dotfiles/shell/.bash_colors ~/.bash_colors
 
-symlink_or_ask ~/.dotfiles/vim ~/.vim
+symlink_or_ask ~/.dotfiles/vim/ ~/.vim
 symlink_or_ask ~/.dotfiles/vim/.vimrc ~/.vimrc
 
 # install vundle
