@@ -39,6 +39,8 @@ nmap <Leader><space> :nohlsearch<cr>
 "Make it easier to toggle NERDTree
 nmap <Leader>` :NERDTreeToggle<cr>
 
+"Speed up tags usage
+nmap <Leader>f :tag<space>
 
 "-------------Auto-Commands--------------"
 
