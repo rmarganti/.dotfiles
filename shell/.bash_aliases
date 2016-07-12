@@ -7,6 +7,7 @@ alias h='history'
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add .'
+alias gaam='git add .; git commit -m'
 alias gb='git branch'
 alias gc='git commit'
 alias gcm='git commit -m'
@@ -17,6 +18,7 @@ alias gf='git fetch'
 alias gl='git log'
 alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gfc="git diff-tree --no-commit-id --name-only -r"
+alias gt="git tag"
 
 # Laravel
 alias art='php artisan'
@@ -38,4 +40,10 @@ alias cda='composer dump-autoload -o'
 alias cu='composer update'
 
 # PHPUnit
-alias phpunit='./vendor/bin/phpunit'
+alias pu='./vendor/bin/phpunit'
+
+# Misc
+function strlen() {
+    echo -n "$1" | wc -c
+}
+
