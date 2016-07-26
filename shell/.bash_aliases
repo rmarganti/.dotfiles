@@ -19,6 +19,7 @@ alias gl='git log'
 alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gfc="git diff-tree --no-commit-id --name-only -r"
 alias gt="git tag"
+alias gfl="git diff-tree --no-commit-id --name-only -r"
 
 # Laravel
 alias art='php artisan'
