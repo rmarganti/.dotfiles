@@ -2,6 +2,7 @@
 alias ll='ls -lahG'
 alias up='cd ..'
 alias h='history'
+alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 
 # Git
 alias gs='git status'
