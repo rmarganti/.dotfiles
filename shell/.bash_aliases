@@ -1,5 +1,5 @@
 # General
-alias ll='ls -lahG'
+alias ll='ls -alFh'
 alias up='cd ..'
 alias h='history'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
