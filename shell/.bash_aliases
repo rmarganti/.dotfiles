@@ -3,6 +3,7 @@ alias ll='ls -alFh'
 alias up='cd ..'
 alias h='history'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
+alias userlist="cut -d: -f1 /etc/passwd"
 
 # Git
 alias gst='git status'
@@ -46,7 +47,7 @@ alias cu='composer update'
 # PHPUnit
 alias pu='./vendor/bin/phpunit'
 
-# Misc
+# Misc Functions
 function strlen() {
     echo -n "$1" | wc -c
 }
