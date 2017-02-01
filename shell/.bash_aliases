@@ -6,7 +6,6 @@ alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
 
 # Git
-alias gst='git status'
 alias ga='git add'
 alias gaa='git add .'
 alias gaam='git add .; git commit -m'
@@ -14,16 +13,17 @@ alias gb='git branch'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
-alias go='git checkout'
-alias gm='git merge'
 alias gf='git fetch'
+alias gfl="git diff-tree --no-commit-id --name-only -r"
 alias gl='git log'
 alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gfc="git diff-tree --no-commit-id --name-only -r"
+alias gm='git merge'
+alias go='git checkout'
+alias grp='git remote prune origin'
+alias gst='git status'
 alias gt="git tag"
-alias gfl="git diff-tree --no-commit-id --name-only -r"
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
 
 # Laravel
 alias art='php artisan'
