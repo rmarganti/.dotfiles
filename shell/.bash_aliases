@@ -4,6 +4,7 @@ alias up='cd ..'
 alias h='history'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
+alias stalk="telnet localhost 11300"
 
 # Git
 alias ga='git add'
