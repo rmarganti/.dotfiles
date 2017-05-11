@@ -18,9 +18,9 @@ short_pwd() {
     number_of_dirs=$( grep -o "/" <<< "$PWD" | wc -l )
 
     if [[ $number_of_dirs -gt 2 ]]; then
-        echo "$(tput setaf 2)$charpath/$tdir"
+        echo "$charpath/$tdir"
     else
-        echo "$(tput setaf 2)$PWD"
+        echo "$PWD"
     fi
 
 }
