@@ -47,6 +47,9 @@ alias cu='composer update'
 
 # PHPUnit
 alias pu='./vendor/bin/phpunit'
+function puf() {
+    ./vendor/bin/phpunit --filter=$1
+}
 
 # Misc Functions
 function strlen() {
