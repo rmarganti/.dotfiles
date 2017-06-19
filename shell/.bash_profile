@@ -43,14 +43,16 @@ short_pwd() {
 
 }
 
-set_bash_prompt() {
-    PS1="\[$txtblu\]\h$(parse_git_branch) \[$txtgrn\]$(short_pwd) \[$txtrst\]\$ "
-}
-
-PROMPT_COMMAND=set_bash_prompt
+export PS1="\[$txtblu\]\h$(parse_git_branch) \[$txtgrn\]$(short_pwd) \[$txtrst\]\$ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 if [ -f ~/.bash_profile_local ]; then
   . ~/.bash_profile_local
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rmarganti/google-cloud-sdk/path.bash.inc' ]; then source '/Users/rmarganti/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rmarganti/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/rmarganti/google-cloud-sdk/completion.bash.inc'; fi
