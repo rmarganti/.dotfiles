@@ -1,4 +1,5 @@
 # General
+alias cpwd='pwd | pbcopy'
 alias ll='ls -alFh'
 alias up='cd ..'
 alias h='history'
