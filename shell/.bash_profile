@@ -43,7 +43,7 @@ short_pwd() {
 
 }
 
-export PS1="\[$txtblu\]\h$(parse_git_branch) \[$txtgrn\]$(short_pwd) \[$txtrst\]\$ "
+export PS1="\[$txtblu\]\h$(parse_git_branch) \[$txtgrn\]\$(short_pwd) \[$txtrst\]\$ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
