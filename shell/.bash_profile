@@ -12,11 +12,11 @@ parse_git_branch() {
 
     if [[ ! $git_error =~ "fatal" ]]; then
         if [[ ! $git_status =~ "working directory clean" ]]; then
-          echo -e " \[$txtred\]$(__git_ps1)\[$txtrst\]"
+          echo -en " \001$txtred\002$(__git_ps1)\001$txtrst\002"
         elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-          echo -e " \[$txtylw\]$(__git_ps1)\[$txtrst\]"
+          echo -en " \001$txtylw\002$(__git_ps1)\001$txtrst\002"
         elif [[ $git_status =~ "nothing to commit" ]]; then
-          echo -e " \[$txtpur\]$(__git_ps1)\[$txtrst\]"
+          echo -en " \001$txtpur\002$(__git_ps1)\001$txtrst\002"
         fi
     fi
 }
@@ -43,16 +43,10 @@ short_pwd() {
 
 }
 
-export PS1="\[$txtblu\]\h$(parse_git_branch) \[$txtgrn\]\$(short_pwd) \[$txtrst\]\$ "
+export PS1="\[$txtblu\]\h\$(parse_git_branch) \[$txtgrn\]\$(short_pwd) \[$txtrst\]\$ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 if [ -f ~/.bash_profile_local ]; then
   . ~/.bash_profile_local
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/rmarganti/google-cloud-sdk/path.bash.inc' ]; then source '/Users/rmarganti/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/rmarganti/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/rmarganti/google-cloud-sdk/completion.bash.inc'; fi
