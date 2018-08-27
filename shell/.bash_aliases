@@ -25,7 +25,7 @@ alias grp='git remote prune origin'
 alias gst='git status'
 alias gt="git tag"
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 
 # Laravel
 alias art='php artisan'
