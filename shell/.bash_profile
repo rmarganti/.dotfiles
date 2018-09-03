@@ -11,7 +11,7 @@ parse_git_branch() {
     git_error=$(git status 2>&1)
 
     if [[ ! $git_error =~ "fatal" ]]; then
-        if [[ ! $git_status =~ "working directory clean" ]]; then
+        if [[ ! $git_status =~ working\ (tree|directory)\ clean ]]; then
           echo -en " \001$txtred\002$(__git_ps1)\001$txtrst\002"
         elif [[ $git_status =~ "Your branch is ahead of" ]]; then
           echo -en " \001$txtylw\002$(__git_ps1)\001$txtrst\002"
