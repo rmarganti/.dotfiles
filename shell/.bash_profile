@@ -16,7 +16,7 @@ parse_git_branch() {
         elif [[ $git_status =~ "Your branch is ahead of" ]]; then
           echo -en " \001$txtylw\002$(__git_ps1)\001$txtrst\002"
         elif [[ $git_status =~ "nothing to commit" ]]; then
-          echo -en " \001$txtpur\002$(__git_ps1)\001$txtrst\002"
+          echo -en " \001$txtgrn\002$(__git_ps1)\001$txtrst\002"
         fi
     fi
 }
@@ -43,7 +43,7 @@ short_pwd() {
 
 }
 
-export PS1="\n\[$txtblu\]\h\$(parse_git_branch) \[$txtgrn\]\$(short_pwd) \[$txtrst\]\n\$ "
+export PS1="\n\[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n\$ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
