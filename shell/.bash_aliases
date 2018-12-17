@@ -51,6 +51,7 @@ alias pu='./vendor/bin/phpunit'
 function puf() {
     ./vendor/bin/phpunit --filter=$1
 }
+alias pus='./vendor/bin/phpunit --testsuite'
 
 # Misc Functions
 function strlen() {
