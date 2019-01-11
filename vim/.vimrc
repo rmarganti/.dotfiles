@@ -2,7 +2,7 @@ source ~/.vim/plugins.vim
 
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme nord
 
 
 "-------------General Settings--------------"
