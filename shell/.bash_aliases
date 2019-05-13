@@ -16,17 +16,19 @@ alias gbc='gb | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbc
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
-alias gf='git fetch'
+alias gf='git fetch --tags --prune'
 alias gfl="git diff-tree --no-commit-id --name-only -r"
 alias gl='git log'
 alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gm='git merge'
 alias go='git checkout'
+alias gp='git pull'
 alias grp='git remote prune origin'
 alias gst='git status'
 alias gt="git tag"
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+alias gpuo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
 # Laravel
 alias art='php artisan'
@@ -42,6 +44,9 @@ alias d:su='art doctrine:schema:update'
 alias d:sv='art doctrine:schema:validate'
 alias d:ge='vendor/doctrine/orm/bin/doctrine orm:generate-entities .'
 alias d:gp='art doctrine:generate:proxies'
+alias d:mg='art doctrine:migrations:generate'
+alias d:mm='art doctrine:migrations:migrate'
+alias d:mr='art doctrine:migrations:rollback'
 
 # Composer aliases
 alias cda='composer dump-autoload -o'
