@@ -8,27 +8,27 @@ alias userlist="cut -d: -f1 /etc/passwd"
 alias stalk="telnet localhost 11300"
 
 # Git
-alias ga='git add'
-alias gaa='git add --all'
-alias gaam='git add --all; git commit -m'
-alias gb='git branch'
-alias gbc='gb | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gd='git diff'
-alias gf='git fetch --tags --prune'
-alias gfl="git diff-tree --no-commit-id --name-only -r"
-alias gl='git log'
-alias glp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gm='git merge'
-alias go='git checkout'
-alias gp='git pull'
-alias grp='git remote prune origin'
-alias gst='git status'
-alias gt="git tag"
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
-alias gpuo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
+alias g:a='git add'
+alias g:aa='git add --all'
+alias g:am='git add --all; git commit -m'
+alias g:b='git branch'
+alias g:bc='gb | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
+alias g:c='git commit'
+alias g:cm='git commit -m'
+alias g:d='git diff'
+alias g:f='git fetch --tags --prune'
+alias g:fl="git diff-tree --no-commit-id --name-only -r"
+alias g:l='git log'
+alias g:lp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias g:m='git merge'
+alias g:o='git checkout'
+alias g:p='git pull'
+alias g:rp='git remote prune origin'
+alias g:st='git status'
+alias g:t="git tag"
+alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias g:wip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
 # Laravel
 alias art='php artisan'
@@ -49,15 +49,15 @@ alias d:mm='art doctrine:migrations:migrate'
 alias d:mr='art doctrine:migrations:rollback'
 
 # Composer aliases
-alias cda='composer dump-autoload -o'
-alias cu='composer update'
+alias c:da='composer dump-autoload -o'
+alias c:u='composer update'
 
 # PHPUnit
 alias pu='./vendor/bin/phpunit'
-function puf() {
+function pu:f() {
     ./vendor/bin/phpunit --filter=$1
 }
-alias pus='./vendor/bin/phpunit --testsuite'
+alias pu:s='./vendor/bin/phpunit --testsuite'
 
 # Misc Functions
 function strlen() {
