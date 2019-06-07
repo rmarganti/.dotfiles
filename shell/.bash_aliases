@@ -10,9 +10,9 @@ alias stalk="telnet localhost 11300"
 # Git
 alias g:a='git add'
 alias g:aa='git add --all'
-alias g:am='git add --all; git commit -m'
+alias g:aam='git add --all; git commit -m'
 alias g:b='git branch'
-alias g:bc='gb | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
+alias g:bc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
 alias g:c='git commit'
 alias g:cm='git commit -m'
 alias g:d='git diff'
