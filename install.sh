@@ -56,3 +56,9 @@ fi
 if [ ! -f ~/z.sh ]; then
   curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o ~/z.sh
 fi
+
+# install fzf
+if [ ! ~/.fzf ] then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi

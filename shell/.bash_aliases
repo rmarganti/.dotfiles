@@ -30,6 +30,15 @@ alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias g:wip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
+# Select a git branch to checkout from a list.
+function g:fb() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
 # Laravel
 alias art='php artisan'
 alias a:cc='php artisan cache:clear'

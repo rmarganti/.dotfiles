@@ -4,6 +4,17 @@
 
 export PATH=~/.composer/vendor/bin:$PATH
 
+export PS1="┌ \[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
+
+# iTerm Shell Integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# fzf Integration
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Use ~~ as the fzf trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
 # GIT integration
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/\(\1\)/'"
 parse_git_branch() {
@@ -20,7 +31,6 @@ parse_git_branch() {
         fi
     fi
 }
-
 
 # Abbreviated current working directory
 short_pwd() {
@@ -43,10 +53,7 @@ short_pwd() {
 
 }
 
-export PS1="┌ \[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
+# Load local-specific config if it exists (not commited to git)
 if [ -f ~/.bash_profile_local ]; then
   . ~/.bash_profile_local
 fi
