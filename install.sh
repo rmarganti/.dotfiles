@@ -43,15 +43,20 @@ symlink_or_ask ~/.dotfiles/shell/.bash_colors ~/.bash_colors
 symlink_or_ask ~/.dotfiles/vim ~/.vim
 symlink_or_ask ~/.dotfiles/vim/.vimrc ~/.vimrc
 
-# tmux config
-symlink_or_ask ~/.dotfiles/tmux ~/.tmux
-symlink_or_ask ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
-~/.tmux/plugins/tpm/scripts/install_plugins.sh
-
 # install vundle
 if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
   cd ~/.dotfiles/vim && git clone https://github.com/gmarik/Vundle.vim.git
   vim +BundleInstall +BundleClean +BundleClean +quitall
+fi
+
+# tmux config
+symlink_or_ask ~/.dotfiles/tmux ~/.tmux
+symlink_or_ask ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
+
+# install Tmux Plugin Manager
+if [ ! -d ~/.dotfiles/tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins ~/.dotfiles/tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
 
 # git shell completion
