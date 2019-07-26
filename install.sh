@@ -39,8 +39,14 @@ symlink_or_ask ~/.dotfiles/shell/.bash_profile ~/.bash_profile
 symlink_or_ask ~/.dotfiles/shell/.bash_aliases ~/.bash_aliases
 symlink_or_ask ~/.dotfiles/shell/.bash_colors ~/.bash_colors
 
+# vim config
 symlink_or_ask ~/.dotfiles/vim ~/.vim
 symlink_or_ask ~/.dotfiles/vim/.vimrc ~/.vimrc
+
+# tmux config
+symlink_or_ask ~/.dotfiles/tmux ~/.tmux
+symlink_or_ask ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 # install vundle
 if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
@@ -48,6 +54,7 @@ if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
   vim +BundleInstall +BundleClean +BundleClean +quitall
 fi
 
+# git shell completion
 if [ ! -f ~/.git-prompt.sh ]; then
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 fi
@@ -58,7 +65,7 @@ if [ ! -f ~/z.sh ]; then
 fi
 
 # install fzf
-if [ ! ~/.fzf ] then
+if [ ! -d ~/.fzf ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
 fi
