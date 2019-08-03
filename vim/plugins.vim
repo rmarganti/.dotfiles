@@ -9,7 +9,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
