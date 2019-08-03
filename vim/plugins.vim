@@ -1,15 +1,15 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/Vundle.vim
-call vundle#begin()
+" Plugins go here
+Plug 'arcticicestudio/nord-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-vinegar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'arcticicestudio/nord-vim'
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+
