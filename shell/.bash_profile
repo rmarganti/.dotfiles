@@ -1,19 +1,36 @@
+################################################################
+#
+# Imports
+#
+################################################################
+
 . ~/.bash_aliases
 . ~/.bash_colors
 . ~/z.sh
 
-export PATH=~/.composer/vendor/bin:$PATH
 
-export PS1="┌ \[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
-
-# iTerm Shell Integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
+################################################################
+#
 # fzf Integration
+#
+################################################################
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Use ~~ as the fzf trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='~~'
+
+# Use ag instead of find
+export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden -g ""'
+
+
+################################################################
+#
+# Command line
+#
+################################################################
+
+export PS1="┌ \[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
 
 # GIT integration
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/\(\1\)/'"
@@ -53,6 +70,16 @@ short_pwd() {
 
 }
 
+
+################################################################
+#
+# Misc
+#
+################################################################
+
+# iTerm Shell Integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
 # Load local-specific config if it exists (not commited to git)
 if [ -f ~/.bash_profile_local ]; then
   . ~/.bash_profile_local
@@ -62,3 +89,4 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
 
+export PATH=~/.composer/vendor/bin:$PATH

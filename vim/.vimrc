@@ -35,9 +35,11 @@ let g:lightline = {
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' }
 	\ }
+
 function! LightlineReadonly()
 	return &readonly ? '' : ''
 endfunction
+
 function! LightlineFugitive()
 	if exists('*fugitive#head')
 		let branch = fugitive#head()
@@ -65,21 +67,28 @@ set number
 " Macvim-specific line-height.
 set linespace=15
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
 
 "---------------------------------------------------------------
 "
-" Search
+" File Search
+"
+"---------------------------------------------------------------
+
+" fzf file name searching
+nnoremap <C-p> :Files!<Cr>
+
+" fzf full-screen file content searching
+nnoremap <C-f> :Ag!<Cr>
+command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(<q-args>,
+        \ <bang>0 ? fzf#vim#with_preview('up:60%')
+        \ : fzf#vim#with_preview('right:50%:hidden', '?'),
+        \ <bang>0)
+
+
+"---------------------------------------------------------------
+"
+" Text Search
 "
 "---------------------------------------------------------------
 
@@ -146,4 +155,3 @@ augroup autosourcing
    autocmd BufWritePost .vimrc source %
    autocmd BufWritePost plugins.vim source %
 augroup END
-
