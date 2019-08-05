@@ -43,10 +43,12 @@ symlink_or_ask ~/.dotfiles/shell/.bash_colors ~/.bash_colors
 symlink_or_ask ~/.dotfiles/vim ~/.vim
 symlink_or_ask ~/.dotfiles/vim/.vimrc ~/.vimrc
 
+
 # install vundle
-if [ ! -d ~/.dotfiles/vim/Vundle.vim ]; then
-  cd ~/.dotfiles/vim && git clone https://github.com/gmarik/Vundle.vim.git
-  vim +BundleInstall +BundleClean +BundleClean +quitall
+if [ ! -d ~/.dotfiles/vim/autoload/plug.vim ]; then
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  vim +PlugInstall +qall
 fi
 
 # tmux config
