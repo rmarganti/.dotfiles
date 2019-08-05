@@ -70,6 +70,11 @@ let mapleader = ' '
 " Let's activate line numbers.
 set number
 
+" Keep swap, backup, and undo files out of working directory
+set backupdir=/tmp//
+set directory=/tmp//
+set undodir=/tmp//
+
 
 "---------------------------------------------------------------
 "
