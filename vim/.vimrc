@@ -37,9 +37,18 @@ let g:lightline = {
 	\   'readonly': 'LightlineReadonly',
 	\   'fugitive': 'LightlineFugitive'
 	\ },
+    \ 'tabline': {
+    \   'left': [ ['bufferline'] ]
+    \ },
+    \ 'component_expand': {
+    \   'bufferline': 'LightlineBufferline',
+    \ },
+    \ 'component_type': {
+    \   'bufferline': 'tabsel',
+    \ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' }
-	\ }
+\ }
 
 function! LightlineReadonly()
 	return &readonly ? '' : ''
@@ -51,6 +60,11 @@ function! LightlineFugitive()
 		return branch !=# '' ? ' '.branch : ''
 	endif
 	return ''
+endfunction
+
+function! LightlineBufferline()
+    call bufferline#refresh_status()
+    return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
 endfunction
 
 
@@ -69,6 +83,9 @@ let mapleader = ' '
 
 " Let's activate line numbers.
 set number
+
+" Allow modified buffers to be hidden
+set hidden
 
 " Keep swap, backup, and undo files out of working directory
 set backupdir=/tmp//
@@ -122,7 +139,7 @@ set expandtab
 set splitbelow
 
 " And to the right. This feels more natural.
-set splitright 
+set splitright
 
 " We'll set simpler mappings to switch between splits.
 nmap <C-J> <C-W><C-J>

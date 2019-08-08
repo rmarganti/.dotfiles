@@ -10,21 +10,21 @@
 
 "----------------------------------------------------------------
 "
-" Tabs
+" Tabs (actually buffers)
 "
 "----------------------------------------------------------------
 
 " Tab New
-nmap <Leader>tn :tabnew<CR>
+nmap <leader>tn :enew<cr>
 
 " Tab Close
-nmap <Leader>tc :tabclose<CR>
+nmap <Leader>tc :bp <BAR> bd #<CR>
 
 " Tab Left
-nmap <Leader>th :tabprevious<CR>
+nmap <Leader>th :bprevious<CR>
 
 " Tab Right
-nmap <Leader>tl :tabnext<CR>
+nmap <Leader>tl :bnext<CR>
 
 
 "----------------------------------------------------------------
