@@ -23,50 +23,6 @@ set showtabline=2
 " Always show status bar
 set laststatus=2
 
-" Configure the status bar
-let g:lightline = {
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-	\ },
-    \ 'colorscheme': 'nord',
-	\ 'component': {
-	\   'lineinfo': ' %3l:%-2v',
-	\ },
-	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
-	\ },
-    \ 'tabline': {
-    \   'left': [ ['bufferline'] ]
-    \ },
-    \ 'component_expand': {
-    \   'bufferline': 'LightlineBufferline',
-    \ },
-    \ 'component_type': {
-    \   'bufferline': 'tabsel',
-    \ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
-\ }
-
-function! LightlineReadonly()
-	return &readonly ? '' : ''
-endfunction
-
-function! LightlineFugitive()
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
-endfunction
-
-function! LightlineBufferline()
-    call bufferline#refresh_status()
-    return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-endfunction
-
 
 "---------------------------------------------------------------
 "
@@ -77,15 +33,30 @@ endfunction
 " Make backspace behave like every other editor.
 set backspace=indent,eol,start
 
-" The default leader is `\`, but space is better.
+" Change leader key to spacebar.
 nnoremap <SPACE> <Nop>
 let mapleader = ' '
 
-" Let's activate line numbers.
+" Show line numbers.
 set number
 
-" Allow modified buffers to be hidden
+" Allow modified buffers to be hidden.
 set hidden
+
+" Don't show status in ex command line,
+" since we'll show it in lightline.
+set noshowmode
+
+" Enhanced tab-completion for commands
+set wildmenu
+
+" Ignore compiled files, etc.
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
 
 " Keep swap, backup, and undo files out of working directory
 set backupdir=/tmp//
@@ -95,21 +66,7 @@ set undodir=/tmp//
 
 "---------------------------------------------------------------
 "
-" fzf
-"
-"---------------------------------------------------------------
-
-" When text-searching, show full screen with preview.
-command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>,
-        \ <bang>0 ? fzf#vim#with_preview('up:60%')
-        \ : fzf#vim#with_preview('right:50%:hidden', '?'),
-        \ <bang>0)
-
-
-"---------------------------------------------------------------
-"
-" Text Search
+" Text search, tabs, indents
 "
 "---------------------------------------------------------------
 
@@ -128,6 +85,12 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" Be smart, obviously.
+set smarttab
+
+" Auto indent, smart indent
+set ai
+set si
 
 "---------------------------------------------------------------
 "
