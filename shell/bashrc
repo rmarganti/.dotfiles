@@ -81,8 +81,8 @@ short_pwd() {
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # Load local-specific config if it exists (not commited to git)
-if [ -f ~/.bash_profile_local ]; then
-  . ~/.bash_profile_local
+if [ -f ~/.bashrc.local ]; then
+  . ~/.bashrc.local
 fi
 
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
