@@ -12,6 +12,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-scripts/ReplaceWithRegister'
 
 call plug#end()
