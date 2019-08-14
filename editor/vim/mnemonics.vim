@@ -15,7 +15,7 @@
 "----------------------------------------------------------------
 
 " Tab New
-nmap <leader>tn :enew<cr>
+nmap <leader>tn :enew<CR>
 
 " Tab Close
 nmap <Leader>tc :bp <BAR> bd #<CR>
@@ -29,6 +29,17 @@ nmap <Leader>tl :bnext<CR>
 
 "----------------------------------------------------------------
 "
+" Buffers (actually actually buffers)
+"
+"----------------------------------------------------------------
+
+" Buffer Delete
+nmap <Leader>bd :bdelete<Space>
+
+
+
+"----------------------------------------------------------------
+"
 " Splits
 "
 "----------------------------------------------------------------
@@ -38,6 +49,19 @@ nmap <Leader>sv :vsplit<CR>
 
 " Split Horiztonal
 nmap <Leader>sh :split<CR>
+
+
+"----------------------------------------------------------------
+"
+" Windows
+"
+"----------------------------------------------------------------
+
+" Window Close
+nmap <Leader>wc <C-W>q
+
+" Window Only
+nmap <Leader>wo :only<CR>
 
 
 "----------------------------------------------------------------
@@ -60,4 +84,4 @@ nmap <Leader>ft :Ag!<Cr>
 "----------------------------------------------------------------
 
 " Edit `.vimrc`
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>ev :tabedit $MYVIMRC<CR>
