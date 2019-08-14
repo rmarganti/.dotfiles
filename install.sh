@@ -59,7 +59,7 @@ symlink_or_ask ~/.dotfiles/shell/tmux.conf ~/.tmux.conf
 
 # install Tmux Plugin Manager
 if [ ! -d ~/.dotfiles/shell/tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins ~/.dotfiles/shell/tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm.git ~/.dotfiles/shell/tmux/plugins/tpm
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
 
