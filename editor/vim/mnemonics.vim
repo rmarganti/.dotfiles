@@ -7,36 +7,29 @@
 "
 "----------------------------------------------------------------
 
-
 "----------------------------------------------------------------
 "
-" Tabs (actually buffers)
-"
-"----------------------------------------------------------------
-
-" Tab New
-nmap <leader>tn :enew<CR>
-
-" Tab Close
-nmap <Leader>tc :bp <BAR> bd #<CR>
-
-" Tab Left
-nmap <Leader>th :bprevious<CR>
-
-" Tab Right
-nmap <Leader>tl :bnext<CR>
-
-
-"----------------------------------------------------------------
-"
-" Buffers (actually actually buffers)
+" Buffers
 "
 "----------------------------------------------------------------
 
-" Buffer Delete
-nmap <Leader>bd :bdelete<Space>
+" Buffer New
+nmap <leader>bn :enew<CR>
 
+" Buffer Edit (prompts for buffer number)
+nmap <leader>be :buffer<SPACE>
 
+" Buffer Left
+nmap <Leader>bh :bprevious<CR>
+
+" Buffer Right
+nmap <Leader>bl :bnext<CR>
+
+" Buffer Delete (prompts for buffer number)
+nmap <Leader>bd :bdelete<SPACE>
+
+" Buffer Quit (Deletes current buffer)
+nmap <Leader>bq :bdelete<CR>
 
 "----------------------------------------------------------------
 "
@@ -57,10 +50,10 @@ nmap <Leader>sh :split<CR>
 "
 "----------------------------------------------------------------
 
-" Window Close
-nmap <Leader>wc <C-W>q
+" Window Quit
+nmap <Leader>wq <C-W>q
 
-" Window Only
+" Window Only (Close all other windows)
 nmap <Leader>wo :only<CR>
 
 
