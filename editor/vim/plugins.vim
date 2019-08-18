@@ -85,3 +85,14 @@ command! -bang -nargs=* Ag
         \ <bang>0 ? fzf#vim#with_preview('up:60%')
         \ : fzf#vim#with_preview('right:50%:hidden', '?'),
         \ <bang>0)
+
+"---------------------------------------------------------------
+"
+" Ale
+"
+"---------------------------------------------------------------
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+    \ 'typescript': ['eslint']
+\}
