@@ -7,25 +7,29 @@
 "
 "----------------------------------------------------------------
 
-
 "----------------------------------------------------------------
 "
-" Tabs (actually buffers)
+" Buffers
 "
 "----------------------------------------------------------------
 
-" Tab New
-nmap <leader>tn :enew<cr>
+" Buffer New
+nmap <leader>bn :enew<CR>
 
-" Tab Close
-nmap <Leader>tc :bp <BAR> bd #<CR>
+" Buffer Edit (prompts for buffer number)
+nmap <leader>be :buffer<SPACE>
 
-" Tab Left
-nmap <Leader>th :bprevious<CR>
+" Buffer Left
+nmap <Leader>bh :bprevious<CR>
 
-" Tab Right
-nmap <Leader>tl :bnext<CR>
+" Buffer Right
+nmap <Leader>bl :bnext<CR>
 
+" Buffer Delete (prompts for buffer number)
+nmap <Leader>bd :bdelete<SPACE>
+
+" Buffer Quit (Deletes current buffer)
+nmap <Leader>bq :bdelete<CR>
 
 "----------------------------------------------------------------
 "
@@ -38,6 +42,19 @@ nmap <Leader>sv :vsplit<CR>
 
 " Split Horiztonal
 nmap <Leader>sh :split<CR>
+
+
+"----------------------------------------------------------------
+"
+" Windows
+"
+"----------------------------------------------------------------
+
+" Window Quit
+nmap <Leader>wq <C-W>q
+
+" Window Only (Close all other windows)
+nmap <Leader>wo :only<CR>
 
 
 "----------------------------------------------------------------
@@ -60,4 +77,4 @@ nmap <Leader>ft :Ag!<Cr>
 "----------------------------------------------------------------
 
 " Edit `.vimrc`
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>ev :tabedit $MYVIMRC<CR>

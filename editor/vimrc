@@ -47,7 +47,7 @@ set hidden
 " since we'll show it in lightline.
 set noshowmode
 
-" Enhanced tab-completion for commands
+" Enhanced tab-completion for commands.
 set wildmenu
 
 " Ignore compiled files, etc.
@@ -58,7 +58,10 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-" Keep swap, backup, and undo files out of working directory
+" Don't wrap lines.
+set nowrap
+
+" Keep swap, backup, and undo files out of working directory.
 set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
