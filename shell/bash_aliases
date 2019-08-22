@@ -25,7 +25,7 @@ alias g:o='git checkout'
 alias g:p='git pull'
 alias g:rp='git remote prune origin'
 alias g:st='git status'
-alias g:t="git tag"
+alias g:t="git tag --sort=v:refname"
 alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias g:wip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
