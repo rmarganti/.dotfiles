@@ -59,15 +59,15 @@ nmap <Leader>wo :only<CR>
 
 "----------------------------------------------------------------
 "
-" Find
+" Search
 "
 "----------------------------------------------------------------
 
-" Find Files
-nmap <Leader>ff :Files!<Cr>
+" Search Files
+nmap <Leader>sf :Files!<Cr>
 
-" Find Text
-nmap <Leader>ft :Ag!<Cr>
+" Search Text
+nmap <Leader>st :Ag!<Cr>
 
 
 "----------------------------------------------------------------
@@ -78,3 +78,16 @@ nmap <Leader>ft :Ag!<Cr>
 
 " Edit `.vimrc`
 nmap <Leader>ev :tabedit $MYVIMRC<CR>
+
+
+"----------------------------------------------------------------
+"
+" Files
+"
+"----------------------------------------------------------------
+
+" File Shell (open shell at current file's path)
+nmap <Leader>fs :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
+
+" File Find (show current file in NERDTree
+nmap <Leader>ff :NERDTreeFind<CR>
