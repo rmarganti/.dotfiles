@@ -7,6 +7,7 @@
 "
 "----------------------------------------------------------------
 
+
 "----------------------------------------------------------------
 "
 " Buffers
@@ -30,6 +31,10 @@ nmap <Leader>bd :bdelete<SPACE>
 
 " Buffer Quit (Deletes current buffer)
 nmap <Leader>bq :bdelete<CR>
+
+" Buffer Only (Close all other buffers)
+nmap <Leader>bo :%bd<CR><C-O>:bd#<CR>
+
 
 "----------------------------------------------------------------
 "
@@ -62,6 +67,9 @@ nmap <Leader>wo :only<CR>
 " Search
 "
 "----------------------------------------------------------------
+
+" Search Buffers
+nmap <Leader>sb :Buffers!<Cr>
 
 " Search Files
 nmap <Leader>sf :Files!<Cr>
