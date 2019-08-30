@@ -69,6 +69,11 @@ set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
 
+" Update UI more often.
+set updatetime=300
+
+" Make sure vim sees *.md files as Markdown.
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 "---------------------------------------------------------------
 "
