@@ -1,0 +1,6 @@
+{
+    "diagnostic.infoSign": "•",
+    "diagnostic.hintSign": "•",
+    "eslint.autoFixOnSave": true,
+    "eslint.filetypes": ["javascript", "javascriptreact", "typescript"]
+}

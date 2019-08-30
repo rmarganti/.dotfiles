@@ -69,6 +69,8 @@ set backupdir=/tmp//
 set directory=/tmp//
 set undodir=/tmp//
 
+" Update UI more often.
+set updatetime=300
 
 "---------------------------------------------------------------
 "

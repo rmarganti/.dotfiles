@@ -5,10 +5,10 @@ Plug '~/.fzf'
 Plug 'arcticicestudio/nord-vim'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
@@ -87,16 +87,30 @@ command! -bang -nargs=* Ag
         \ : fzf#vim#with_preview('right:50%:hidden', '?'),
         \ <bang>0)
 
+
 "---------------------------------------------------------------
 "
-" Ale
+" COC
 "
 "---------------------------------------------------------------
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-    \ 'php': ['php_cs_fixer'],
-    \ 'typescript': ['eslint']
-\}
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
+
+" Use <cr> to confirm completion.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Go to definition
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
