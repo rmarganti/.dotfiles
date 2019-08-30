@@ -30,7 +30,7 @@ export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden --ignore .git -g
 #
 ################################################################
 
-export PS1="┌ \[$txtblu\]\h\$(parse_git_branch) \[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
+export PS1="┌ \[$txtblu\]\h\$(parse_git_branch)\$(responsive_break)\[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
 
 # GIT integration
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/\(\1\)/'"
@@ -46,6 +46,14 @@ parse_git_branch() {
         elif [[ $git_status =~ "nothing to commit" ]]; then
           echo -en " \001$txtgrn\002$(__git_ps1)\001$txtrst\002"
         fi
+    fi
+}
+
+responsive_break() {
+    if [[ `tput cols` -lt 110 ]]; then
+        echo -en "\n│ ";
+    else
+        echo -en " ";
     fi
 }
 
