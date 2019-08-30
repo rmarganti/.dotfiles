@@ -16,6 +16,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/ReplaceWithRegister'
 
+" COC Extensions
+Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()
 
 
@@ -97,11 +103,29 @@ command! -bang -nargs=* Ag
 " Use <cr> to confirm completion.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+
 " Go to definition
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Go to Implementation
+nmap <silent> gi <Plug>(coc-implementation)
+
+" Go to References
+nmap <silent> gr <Plug>(coc-references)
+
+" Go to Hint.
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -113,4 +137,33 @@ endfunction
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Code Outline
+nnoremap <silent> <Leader>co  :<C-u>CocList outline<cr>
+
+" Code Symbols
+nnoremap <silent> <Leader>cs  :<C-u>CocList -I symbols<cr>
+
+" Code List errors
+nnoremap <silent> <Leader>cl  :<C-u>CocList locationlist<cr>
+
+" Code Commands
+nnoremap <silent> <Leader>cc  :<C-u>CocList commands<cr>
+
+" Code Restart
+nnoremap <silent> <Leader>cR  :<C-u>CocRestart<CR>
+
+" Code eXtensions
+nnoremap <silent> <Leader>cx  :<C-u>CocList extensions<cr>
+
+" Code Rename
+nmap <Leader>cr  <Plug>(coc-rename)
+
+" Code Format
+nmap <Leader>cf  <Plug>(coc-format-selected)
+vmap <Leader>cf  <Plug>(coc-format-selected)
+
+" Code Actions
+vmap <Leader>ca  <Plug>(coc-codeaction-selected)
+nmap <Leader>ca  <Plug>(coc-codeaction-selected)
 

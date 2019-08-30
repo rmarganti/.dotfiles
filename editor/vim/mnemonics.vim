@@ -15,10 +15,10 @@
 "----------------------------------------------------------------
 
 " Buffer New
-nmap <leader>bn :enew<CR>
+nmap <Leader>bn :enew<CR>
 
 " Buffer Edit (prompts for buffer number)
-nmap <leader>be :buffer<SPACE>
+nmap <Leader>be :buffer<SPACE>
 
 " Buffer Left
 nmap <Leader>bh :bprevious<CR>
@@ -99,3 +99,13 @@ nmap <Leader>fs :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
 
 " File Find (show current file in NERDTree
 nmap <Leader>ff :NERDTreeFind<CR>
+
+
+"----------------------------------------------------------------
+"
+" Toggle
+"
+"----------------------------------------------------------------
+
+nnoremap <Leader>tp :set invpaste paste?<CR>
+
