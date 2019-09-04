@@ -47,6 +47,14 @@ function g:fc() {
   git checkout $(echo "$commit" | sed "s/ .*//")
 }
 
+# Select a branch to delete.
+function g:bd() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
 # Laravel
 alias art='php artisan'
 alias a:cc='php artisan cache:clear'
