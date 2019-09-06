@@ -11,6 +11,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdtree'
+Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -23,6 +24,13 @@ Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
+
+"---------------------------------------------------------------
+"
+" hardtime
+"
+"---------------------------------------------------------------
+let g:hardtime_default_on = 1
 
 
 "---------------------------------------------------------------
