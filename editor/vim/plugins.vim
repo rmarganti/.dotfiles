@@ -27,10 +27,16 @@ call plug#end()
 
 "---------------------------------------------------------------
 "
-" hardtime
+" hardtime 
+" Prevent pressing the listed keys multiple times.
+" Prefer more effecient word movement.
 "
 "---------------------------------------------------------------
 let g:hardtime_default_on = 1
+let g:list_of_normal_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_disabled_keys = []
 
 
 "---------------------------------------------------------------
