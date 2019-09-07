@@ -1,34 +1,14 @@
+################################################################
+#
 # General
+#
+################################################################
+
 alias cpwd='pwd | pbcopy'
 alias ll='ls -alFh'
 alias up='cd ..'
-alias h='history'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
-alias stalk="telnet localhost 11300"
-
-# Git
-alias g:a='git add'
-alias g:aa='git add --all'
-alias g:aam='git add --all; git commit -m'
-alias g:b='git branch'
-alias g:bc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
-alias g:c='git commit'
-alias g:cm='git commit -m'
-alias g:d='git diff'
-alias g:f='git fetch --tags --prune'
-alias g:fl="git diff-tree --no-commit-id --name-only -r"
-alias g:l='git log'
-alias g:lp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias g:m='git merge'
-alias g:o='git checkout'
-alias g:p='git pull'
-alias g:rp='git remote prune origin'
-alias g:st='git status'
-alias g:t="git tag --sort=v:refname"
-alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias g:wip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
-alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
 # CTRL-R script to insert the selected command from history into the command line/region
 __fzf_history ()
@@ -67,6 +47,46 @@ builtin set -o histexpand;
 builtin bind -x '"\C-x1": __fzf_history';
 builtin bind '"\C-r": "\C-x1\e^\er"'
 
+# rupa/z - Provides fzf prompt if no arguments are provided.
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+# z hurts my pinky :(
+alias j=z
+
+
+
+################################################################
+#
+# Git
+#
+################################################################
+
+alias g:a='git add'
+alias g:aa='git add --all'
+alias g:aam='git add --all; git commit -m'
+alias g:b='git branch'
+alias g:bc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
+alias g:c='git commit'
+alias g:cm='git commit -m'
+alias g:d='git diff'
+alias g:f='git fetch --tags --prune'
+alias g:fl="git diff-tree --no-commit-id --name-only -r"
+alias g:l='git log'
+alias g:lp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias g:m='git merge'
+alias g:o='git checkout'
+alias g:p='git pull'
+alias g:rp='git remote prune origin'
+alias g:st='git status'
+alias g:t="git tag --sort=v:refname"
+alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias g:wip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
+
 # Select a git branch to checkout from a list.
 function g:fb() {
   local branches branch
@@ -92,11 +112,20 @@ function g:bd() {
   git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
+
+################################################################
+#
+# PHP
+#
+################################################################
+
 # Laravel
+# --------------------------------
 alias art='php artisan'
 alias a:cc='php artisan cache:clear'
 
 # Laravel Doctrine
+# --------------------------------
 alias d:ccm='vendor/doctrine/orm/bin/doctrine orm:clear-cache:metadata'
 alias d:ccq='vendor/doctrine/orm/bin/doctrine orm:clear-cache:query'
 alias d:ccr='vendor/doctrine/orm/bin/doctrine orm:clear-cache:result'
@@ -110,11 +139,14 @@ alias d:mg='art doctrine:migrations:generate'
 alias d:mm='art doctrine:migrations:migrate'
 alias d:mr='art doctrine:migrations:rollback'
 
-# Composer aliases
+
+# Composer
+# --------------------------------
 alias c:da='composer dump-autoload -o'
 alias c:u='composer update'
 
 # PHPUnit
+# --------------------------------
 alias pu='./vendor/bin/phpunit'
 function pu:f() {
     ./vendor/bin/phpunit --filter=$1
