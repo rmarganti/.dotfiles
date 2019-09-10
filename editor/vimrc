@@ -30,6 +30,9 @@ set laststatus=2
 "
 "---------------------------------------------------------------
 
+" Show menus in UTF-8
+set encoding=utf-8
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -74,6 +77,12 @@ set updatetime=300
 
 " Make sure vim sees *.md files as Markdown.
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" Preview %s commands as you type them.
+if has('nvim')
+    set inccommand=nosplit
+endif
+
 
 "---------------------------------------------------------------
 "
