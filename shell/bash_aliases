@@ -13,34 +13,34 @@ alias userlist="cut -d: -f1 /etc/passwd"
 # CTRL-R script to insert the selected command from history into the command line/region
 __fzf_history ()
 {
-    builtin history -a;
-    builtin history -c;
-    builtin history -r;
-    builtin typeset \
-        READLINE_LINE_NEW="$(
-            HISTTIMEFORMAT= builtin history |
-            command fzf +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r |
-            command sed '
-                /^ *[0-9]/ {
-                    s/ *\([0-9]*\) .*/!\1/;
-                    b end;
-                };
-                d;
-                : end
-            '
-        )";
+      builtin history -a;
+      builtin history -c;
+      builtin history -r;
+      builtin typeset \
+          READLINE_LINE_NEW="$(
+              HISTTIMEFORMAT= builtin history |
+              command fzf +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r |
+              command sed '
+                  /^ *[0-9]/ {
+                      s/ *\([0-9]*\) .*/!\1/;
+                      b end;
+                  };
+                  d;
+                  : end
+              '
+          )";
 
-        if
-                [[ -n $READLINE_LINE_NEW ]]
-        then
-                builtin bind '"\er": redraw-current-line'
-                builtin bind '"\e^": magic-space'
-                READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${READLINE_LINE_NEW}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
-                READLINE_POINT=$(( READLINE_POINT + ${#READLINE_LINE_NEW} ))
-        else
-                builtin bind '"\er":'
-                builtin bind '"\e^":'
-        fi
+          if
+                  [[ -n $READLINE_LINE_NEW ]]
+          then
+                  builtin bind '"\er": redraw-current-line'
+                  builtin bind '"\e^": magic-space'
+                  READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${READLINE_LINE_NEW}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+                  READLINE_POINT=$(( READLINE_POINT + ${#READLINE_LINE_NEW} ))
+          else
+                  builtin bind '"\er":'
+                  builtin bind '"\e^":'
+          fi
 }
 
 builtin set -o histexpand;
@@ -50,13 +50,15 @@ builtin bind '"\C-r": "\C-x1\e^\er"'
 # rupa/z - Provides fzf prompt if no arguments are provided.
 unalias z 2> /dev/null
 z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+    [ $# -gt 0 ] && _z "$*" && return
+    cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
 # z hurts my pinky :(
 alias j=z
 
+# Restart service (via systemctl)
+alias sys:r="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 
 
 ################################################################
@@ -89,27 +91,27 @@ alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u o
 
 # Select a git branch to checkout from a list.
 function g:fb() {
-  local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+    local branches branch
+    branches=$(git branch --all | grep -v HEAD) &&
+    branch=$(echo "$branches" |
+             fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # Select a git commit to checkout from a list.
 function g:fc() {
-  local commits commit
-  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf --tac +s +m -e) &&
-  git checkout $(echo "$commit" | sed "s/ .*//")
+    local commits commit
+    commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+    commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+    git checkout $(echo "$commit" | sed "s/ .*//")
 }
 
 # Select a branch to delete.
 function g:bd() {
-  local branches branch
-  branches=$(git --no-pager branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+    local branches branch
+    branches=$(git --no-pager branch -vv) &&
+    branch=$(echo "$branches" | fzf +m) &&
+    git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
 
@@ -121,7 +123,11 @@ function g:bd() {
 
 # Laravel
 # --------------------------------
-alias art='php artisan'
+function art() {
+    [ $# -gt 0 ] && php artisan "$*" && return
+    php artisan | fzf --reverse | sed -e 's/^[[:space:]]*//' | cut -d' ' -f1 | xargs php artisan
+}
+
 alias a:cc='php artisan cache:clear'
 
 # Laravel Doctrine
