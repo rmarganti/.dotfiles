@@ -7,6 +7,7 @@ Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
+Plug 'janko/vim-test'
 Plug 'kamykn/spelunker.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -182,3 +183,15 @@ vmap <Leader>cf  <Plug>(coc-format-selected)
 vmap <Leader>ca  <Plug>(coc-codeaction-selected)
 nmap <Leader>ca  <Plug>(coc-codeaction-selected)
 
+
+"---------------------------------------------------------------
+"
+" vim-test
+"
+"---------------------------------------------------------------
+
+" Make tests run in a neovim split terminal
+if has('nvim')
+    let test#strategy = "neovim"
+    let test#neovim#term_position = "vertical"
+endif

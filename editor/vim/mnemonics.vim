@@ -109,3 +109,15 @@ nmap <Leader>ff :NERDTreeFind<CR>
 
 nnoremap <Leader>tp :set invpaste paste?<CR>
 
+
+"----------------------------------------------------------------
+"
+" Test
+"
+"----------------------------------------------------------------
+
+nmap <Leader>tn :TestNearest<CR>
+nmap <Leader>tf :TestFile<CR>
+nmap <Leader>ts :TestSuite<CR>
+nmap <Leader>tl :TestLast<CR>
+nmap <Leader>tv :TestVisit<CR>
