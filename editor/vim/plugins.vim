@@ -5,6 +5,7 @@ Plug '~/.fzf'
 Plug 'arcticicestudio/nord-vim'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'janko/vim-test'
@@ -13,10 +14,13 @@ Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdtree'
+Plug 'stephpy/vim-php-cs-fixer'
 Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
 
 " COC Extensions
@@ -189,9 +193,13 @@ nmap <Leader>ca  <Plug>(coc-codeaction-selected)
 " vim-test
 "
 "---------------------------------------------------------------
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
-" Make tests run in a neovim split terminal
-if has('nvim')
-    let test#strategy = "neovim"
-    let test#neovim#term_position = "vertical"
-endif
+
+"---------------------------------------------------------------
+"
+" vim-test
+"
+"---------------------------------------------------------------
+
+let test#strategy = "vtr"
