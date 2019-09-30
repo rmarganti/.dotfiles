@@ -167,3 +167,14 @@ augroup autosourcing
    autocmd BufWritePost plugins.vim source %
    autocmd BufWritePost mnemonics.vim source %
 augroup END
+
+" Highlight current line in the current window.
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+" Automatically resize windows when the host 
+" window size changes. Useful for tmux zooms.
+autocmd VimResized * wincmd =

@@ -61,6 +61,21 @@ nmap <Leader>wq <C-W>q
 " Window Only (Close all other windows)
 nmap <Leader>wo :only<CR>
 
+" Window Zoom toggle
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <Leader>wz :ZoomToggle<CR>
+
 
 "----------------------------------------------------------------
 "
