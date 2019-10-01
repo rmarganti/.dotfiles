@@ -30,7 +30,7 @@ export FZF_DEFAULT_COMMAND='ag -l --nogroup  --nocolor --hidden --ignore .git -g
 #
 ################################################################
 
-export PS1="┌ \[$txtblu\]\h\$(parse_git_branch)\$(responsive_break)\[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
+export PS1="┌ \[$txtblu\]\h\$(parse_git_branch)\[$txtrst\]\$(responsive_break)\[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
 
 # GIT integration
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/\(\1\)/'"
