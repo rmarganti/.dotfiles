@@ -93,7 +93,18 @@ if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+
+# Automatically attach to a tmux `default` session.
+
+## Get the parent process
+pid=$$
+until (( pid == 1 ))
+do
+    [[ $(ps -o command= -p $pid) =~ Code ]] && break
+    pid=$(ps -o ppid= $pid)
+done
+
+if command -v tmux &> /dev/null && [ -z "$TMUX" ] && (( pid == 1 )) ; then
     tmux attach -t default || tmux new -s default
 fi
 

@@ -33,7 +33,7 @@ nmap <Leader>bd :bdelete<SPACE>
 nmap <Leader>bq :bdelete<CR>
 
 " Buffer Only (Close all other buffers)
-nmap <Leader>bo :%bd<CR><C-O>:bd#<CR>
+nmap <Leader>bo :BufOnly<CR>
 
 
 "----------------------------------------------------------------

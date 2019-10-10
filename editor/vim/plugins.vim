@@ -5,7 +5,6 @@ Plug '~/.fzf'
 Plug 'arcticicestudio/nord-vim'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-tmux-runner'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'janko/vim-test'
@@ -22,6 +21,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/BufOnly.vim'
 
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
@@ -31,9 +31,95 @@ Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
+
 "---------------------------------------------------------------
 "
-" hardtime 
+" vim-bufferline 
+"
+"---------------------------------------------------------------
+
+let g:bufferline_echo = 0
+let g:bufferline_active_buffer_left = ''
+let g:bufferline_active_buffer_right = ''
+
+
+"---------------------------------------------------------------
+"
+" coc.nvim
+"
+"---------------------------------------------------------------
+
+" Use <cr> to confirm completion.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+
+" Go to definition
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+" Go to Implementation
+nmap <silent> gi <Plug>(coc-implementation)
+
+" Go to References
+nmap <silent> gr <Plug>(coc-references)
+
+" Go to Hint.
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Code Outline
+nnoremap <silent> <Leader>co :<C-u>CocList outline<cr>
+
+" Code Symbols
+nnoremap <silent> <Leader>cs :<C-u>CocList -I symbols<cr>
+
+" Code List errors
+nnoremap <silent> <Leader>cl :<C-u>CocList locationlist<cr>
+
+" Code Commands
+nnoremap <silent> <Leader>cc :<C-u>CocList commands<cr>
+
+" Code Restart
+nnoremap <silent> <Leader>cR :<C-u>CocRestart<CR>
+
+" Code eXtensions
+nnoremap <silent> <Leader>cx :<C-u>CocList extensions<cr>
+
+" Code Rename
+nmap <Leader>cr <Plug>(coc-rename)
+
+" Code Format
+nmap <Leader>cf <Plug>(coc-format-selected)
+vmap <Leader>cf <Plug>(coc-format-selected)
+
+" Code Actions
+vmap <Leader>ca <Plug>(coc-codeaction-selected)
+nmap <Leader>ca <Plug>(coc-codeaction-selected)
+
+
+"---------------------------------------------------------------
+"
+" vim-hardtime 
 " Prevent pressing the listed keys multiple times.
 " Prefer more effecient word movement.
 "
@@ -47,7 +133,7 @@ let g:list_of_disabled_keys = []
 
 "---------------------------------------------------------------
 "
-" Lightline
+" lightlight.vim
 "
 "---------------------------------------------------------------
 let g:lightline = {
@@ -102,95 +188,21 @@ endfunction
 
 "---------------------------------------------------------------
 "
-" fzf
+" fzf.vim
 "
 "---------------------------------------------------------------
 
 " When text-searching, show full screen with preview.
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
-        \ <bang>0 ? fzf#vim#with_preview('up:60%')
-        \ : fzf#vim#with_preview('right:50%:hidden', '?'),
+        \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+        \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
         \ <bang>0)
 
 
 "---------------------------------------------------------------
 "
-" COC
-"
-"---------------------------------------------------------------
-
-" Use <cr> to confirm completion.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<Tab>" :
-    \ coc#refresh()
-
-" Go to definition
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-
-" Go to Implementation
-nmap <silent> gi <Plug>(coc-implementation)
-
-" Go to References
-nmap <silent> gr <Plug>(coc-references)
-
-" Go to Hint.
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Code Outline
-nnoremap <silent> <Leader>co  :<C-u>CocList outline<cr>
-
-" Code Symbols
-nnoremap <silent> <Leader>cs  :<C-u>CocList -I symbols<cr>
-
-" Code List errors
-nnoremap <silent> <Leader>cl  :<C-u>CocList locationlist<cr>
-
-" Code Commands
-nnoremap <silent> <Leader>cc  :<C-u>CocList commands<cr>
-
-" Code Restart
-nnoremap <silent> <Leader>cR  :<C-u>CocRestart<CR>
-
-" Code eXtensions
-nnoremap <silent> <Leader>cx  :<C-u>CocList extensions<cr>
-
-" Code Rename
-nmap <Leader>cr  <Plug>(coc-rename)
-
-" Code Format
-nmap <Leader>cf  <Plug>(coc-format-selected)
-vmap <Leader>cf  <Plug>(coc-format-selected)
-
-" Code Actions
-vmap <Leader>ca  <Plug>(coc-codeaction-selected)
-nmap <Leader>ca  <Plug>(coc-codeaction-selected)
-
-
-"---------------------------------------------------------------
-"
-" vim-test
+" vim-php-cs-fixer
 "
 "---------------------------------------------------------------
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
@@ -202,4 +214,7 @@ autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 "
 "---------------------------------------------------------------
 
-let test#strategy = "vtr"
+if has('nvim')
+    let test#strategy = "neovim"
+    let test#neovim#term_position = "rightbelow"
+endif
