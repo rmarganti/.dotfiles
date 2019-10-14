@@ -85,6 +85,10 @@ short_pwd() {
 #
 ################################################################
 
+# Set default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # iTerm Shell Integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
