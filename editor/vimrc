@@ -112,6 +112,22 @@ set smarttab
 set ai
 set si
 
+
+"---------------------------------------------------------------
+"
+" Auto close brackets, parenthesis, quotes, etc.
+"
+"---------------------------------------------------------------
+
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+
 "---------------------------------------------------------------
 "
 " Splits
