@@ -12,6 +12,7 @@ Plug 'kamykn/spelunker.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'takac/vim-hardtime'
@@ -30,17 +31,6 @@ Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
-
-
-"---------------------------------------------------------------
-"
-" vim-bufferline 
-"
-"---------------------------------------------------------------
-
-let g:bufferline_echo = 0
-let g:bufferline_active_buffer_left = ''
-let g:bufferline_active_buffer_right = ''
 
 
 "---------------------------------------------------------------
@@ -119,20 +109,6 @@ nmap <Leader>ca <Plug>(coc-codeaction-selected)
 
 "---------------------------------------------------------------
 "
-" vim-hardtime 
-" Prevent pressing the listed keys multiple times.
-" Prefer more effecient word movement.
-"
-"---------------------------------------------------------------
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_visual_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_disabled_keys = []
-
-
-"---------------------------------------------------------------
-"
 " lightlight.vim
 "
 "---------------------------------------------------------------
@@ -198,6 +174,43 @@ command! -bang -nargs=* Ag
         \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
         \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
         \ <bang>0)
+
+
+"---------------------------------------------------------------
+"
+" nerdtree
+"
+"---------------------------------------------------------------
+
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+
+"---------------------------------------------------------------
+"
+" vim-bufferline 
+"
+"---------------------------------------------------------------
+
+let g:bufferline_echo = 0
+let g:bufferline_active_buffer_left = ''
+let g:bufferline_active_buffer_right = ''
+
+
+"---------------------------------------------------------------
+"
+" vim-hardtime 
+" Prevent pressing the listed keys multiple times.
+" Prefer more effecient word movement.
+"
+"---------------------------------------------------------------
+let g:hardtime_default_on = 1
+let g:list_of_normal_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_disabled_keys = []
 
 
 "---------------------------------------------------------------
