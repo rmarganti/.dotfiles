@@ -38,6 +38,58 @@ nmap <Leader>bo :BufOnly<CR>
 
 "----------------------------------------------------------------
 "
+" Edit
+"
+"----------------------------------------------------------------
+
+" Edit `.vimrc`
+nmap <Leader>ev :tabedit $MYVIMRC<CR>
+
+
+"----------------------------------------------------------------
+"
+" Files
+"
+"----------------------------------------------------------------
+
+" File Shell (open shell at current file's path)
+nmap <Leader>fs :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
+
+" File Find (show current file in NERDTree
+nmap <Leader>ff :NERDTreeFind<CR>
+
+
+"----------------------------------------------------------------
+"
+" Registers
+"
+"----------------------------------------------------------------
+
+" Yank to system clipboard
+nmap <Leader>y "+y
+
+" Parse from system clipboard
+nmap <Leader>p "+p
+
+
+"----------------------------------------------------------------
+"
+" Search
+"
+"----------------------------------------------------------------
+
+" Search Buffers
+nmap <Leader>sb :Buffers!<Cr>
+
+" Search Files
+nmap <Leader>sf :Files!<Cr>
+
+" Search Text
+nmap <Leader>st :Ag!<Cr>
+
+
+"----------------------------------------------------------------
+"
 " Splits
 "
 "----------------------------------------------------------------
@@ -47,6 +99,35 @@ nmap <Leader>sv :vsplit<CR>
 
 " Split Horiztonal
 nmap <Leader>sh :split<CR>
+
+
+"----------------------------------------------------------------
+"
+" Test
+"
+"----------------------------------------------------------------
+
+nmap <Leader>tn :TestNearest<CR>
+nmap <Leader>tf :TestFile<CR>
+nmap <Leader>ts :TestSuite<CR>
+nmap <Leader>tl :TestLast<CR>
+nmap <Leader>tv :TestVisit<CR>
+
+
+"----------------------------------------------------------------
+"
+" Toggle
+"
+"----------------------------------------------------------------
+
+" Toggle paste
+nnoremap <Leader>Tp :set invpaste paste?<CR>
+
+" Toggle line numbers
+nnoremap <Leader>Tl :set invnumber<CR>
+
+" Toggle word wrap
+nnoremap <Leader>Tw :setlocal wrap!<CR>
 
 
 "----------------------------------------------------------------
@@ -75,64 +156,3 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>wz :ZoomToggle<CR>
-
-
-"----------------------------------------------------------------
-"
-" Search
-"
-"----------------------------------------------------------------
-
-" Search Buffers
-nmap <Leader>sb :Buffers!<Cr>
-
-" Search Files
-nmap <Leader>sf :Files!<Cr>
-
-" Search Text
-nmap <Leader>st :Ag!<Cr>
-
-
-"----------------------------------------------------------------
-"
-" Edit
-"
-"----------------------------------------------------------------
-
-" Edit `.vimrc`
-nmap <Leader>ev :tabedit $MYVIMRC<CR>
-
-
-"----------------------------------------------------------------
-"
-" Files
-"
-"----------------------------------------------------------------
-
-" File Shell (open shell at current file's path)
-nmap <Leader>fs :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
-
-" File Find (show current file in NERDTree
-nmap <Leader>ff :NERDTreeFind<CR>
-
-
-"----------------------------------------------------------------
-"
-" Toggle
-"
-"----------------------------------------------------------------
-
-nnoremap <Leader>tp :set invpaste paste?<CR>
-
-
-"----------------------------------------------------------------
-"
-" Test
-"
-"----------------------------------------------------------------
-
-nmap <Leader>tn :TestNearest<CR>
-nmap <Leader>tf :TestFile<CR>
-nmap <Leader>ts :TestSuite<CR>
-nmap <Leader>tl :TestLast<CR>
-nmap <Leader>tv :TestVisit<CR>
