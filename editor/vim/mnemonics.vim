@@ -55,6 +55,18 @@ nmap <Leader>ev :tabedit $MYVIMRC<CR>
 " File Shell (open shell at current file's path)
 nmap <Leader>fs :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
 
+" File Edit. Pre-populates the current directory.
+nmap <Leader>fe :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" File Delete
+nmap <Leader>fd :Delete
+
+" File Move
+nmap <Leader>fm :Move <C-R>=expand("%:p")<CR>
+
+" File Rename
+nmap <Leader>fr :Rename <C-R>=expand("%:t")<CR>
+
 " File Find (show current file in NERDTree
 nmap <Leader>ff :NERDTreeFind<CR>
 
@@ -77,6 +89,10 @@ nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 xnoremap <Leader>p "+p
 xnoremap <Leader>P "+P
+
+" Replace from system clipboard
+nmap <Leader>gr "+gr
+xmap <Leader>gr "+gr
 
 
 "----------------------------------------------------------------

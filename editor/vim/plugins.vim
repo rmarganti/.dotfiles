@@ -1,30 +1,30 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins go here
-Plug '~/.fzf'
-Plug 'arcticicestudio/nord-vim'
-Plug 'bling/vim-bufferline'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf.vim'
-Plug 'janko/vim-test'
-Plug 'kamykn/spelunker.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'Raimondi/delimitMate'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'stephpy/vim-php-cs-fixer'
-Plug 'takac/vim-hardtime'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'vim-scripts/BufOnly.vim'
+Plug '~/.fzf' " File and text searching
+Plug 'arcticicestudio/nord-vim' " Theme
+Plug 'bling/vim-bufferline' " Show list of buffers
+Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes
+Plug 'francoiscabrol/ranger.vim' " Range file navigation
+Plug 'itchyny/lightline.vim' " Bottom info line
+Plug 'junegunn/fzf.vim' " File and text searching
+Plug 'janko/vim-test' " Run tests
+Plug 'kamykn/spelunker.vim' " Spell check
+Plug 'leafgarland/typescript-vim' " Typescript support
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers
+Plug 'peitalin/vim-jsx-typescript' " JSX formatting
+Plug 'Raimondi/delimitMate' " Bracket and quote completion
+Plug 'scrooloose/nerdtree' " Tree file navigation
+Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
+Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly
+Plug 'tpope/vim-commentary' " Quick commenting
+Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.)
+Plug 'tpope/vim-fugitive' " Git integration
+Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
+Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
+Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs
+Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register
+Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one
 
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
@@ -201,7 +201,7 @@ let g:ranger_map_keys = 0
 
 "---------------------------------------------------------------
 "
-" vim-bufferline 
+" vim-bufferline
 "
 "---------------------------------------------------------------
 
@@ -212,7 +212,7 @@ let g:bufferline_active_buffer_right = ''
 
 "---------------------------------------------------------------
 "
-" vim-hardtime 
+" vim-hardtime
 " Prevent pressing the listed keys multiple times.
 " Prefer more effecient word movement.
 "
