@@ -2,8 +2,8 @@
 "
 " Mnemonics.vim
 "
-" THINK QUICK! Mnemonic keyboard shorctus
-" for getting thangs done.
+" THINK QUICK! Mnemonic keyboard 
+" shortcuts for getting thangs done.
 "
 "----------------------------------------------------------------
 
@@ -66,10 +66,17 @@ nmap <Leader>ff :NERDTreeFind<CR>
 "----------------------------------------------------------------
 
 " Yank to system clipboard
-nmap <Leader>y "+y
+nnoremap <Leader>y "+y
+xnoremap <Leader>y "+y
 
-" Parse from system clipboard
-nmap <Leader>p "+p
+" Delete to system clipboard
+xnoremap <Leader>d "+d
+
+" Paste from system clipboard
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+xnoremap <Leader>p "+p
+xnoremap <Leader>P "+P
 
 
 "----------------------------------------------------------------
