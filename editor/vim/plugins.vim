@@ -5,6 +5,7 @@ Plug '~/.fzf'
 Plug 'arcticicestudio/nord-vim'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'francoiscabrol/ranger.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'janko/vim-test'
@@ -13,6 +14,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'Raimondi/delimitMate'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'takac/vim-hardtime'
@@ -190,6 +192,15 @@ let NERDTreeDirArrows = 1
 
 "---------------------------------------------------------------
 "
+" ranger.vim
+"
+"---------------------------------------------------------------
+
+let g:ranger_map_keys = 0
+
+
+"---------------------------------------------------------------
+"
 " vim-bufferline 
 "
 "---------------------------------------------------------------
@@ -206,6 +217,7 @@ let g:bufferline_active_buffer_right = ''
 " Prefer more effecient word movement.
 "
 "---------------------------------------------------------------
+
 let g:hardtime_default_on = 1
 let g:list_of_normal_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 let g:list_of_visual_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
@@ -218,6 +230,11 @@ let g:list_of_disabled_keys = []
 " vim-php-cs-fixer
 "
 "---------------------------------------------------------------
+
+" Disable default mappings
+let g:php_cs_fixer_enable_default_mapping = 0
+
+" Auto-fix on save.
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
 

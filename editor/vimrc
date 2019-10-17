@@ -143,8 +143,16 @@ source ~/.vim/mnemonics.vim
 " Add simple highlight removal.
 nmap <Leader><space> :nohlsearch<cr>
 
-" Make it easier to toggle NERDTree
-nmap <Leader>` :NERDTreeToggle<cr>
+" Use Ranger if the binary is available; otherwise, use NERDTree.
+if executable('ranger')
+    nmap <Leader>` :Ranger<cr>
+
+    "  open ranger when vim open a directory
+    let g:NERDTreeHijackNetrw = 0
+    let g:ranger_replace_netrw = 1
+else
+    nmap <Leader>` :NERDTreeToggle<cr>
+endif
 
 " Move a line of text using Ctrl+Shift+j/k
 nmap <C-S-j> mz:m+<cr>`z
@@ -175,6 +183,6 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-" Automatically resize windows when the host 
+" Automatically resize windows when the host
 " window size changes. Useful for tmux zooms.
 autocmd VimResized * wincmd =
