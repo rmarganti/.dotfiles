@@ -14,6 +14,7 @@ Plug 'leafgarland/typescript-vim' " Typescript support
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers
 Plug 'peitalin/vim-jsx-typescript' " JSX formatting
 Plug 'Raimondi/delimitMate' " Bracket and quote completion
+Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
 Plug 'scrooloose/nerdtree' " Tree file navigation
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
 Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly
@@ -172,10 +173,13 @@ endfunction
 
 " When text-searching, show full screen with preview.
 command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>,
-        \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-        \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-        \ <bang>0)
+    \ call fzf#vim#ag(
+        \ <q-args>,
+        \ <bang>0
+            \ ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+            \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+        \ <bang>0
+    \ )
 
 
 "---------------------------------------------------------------

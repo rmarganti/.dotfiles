@@ -71,6 +71,9 @@ set nowrap
 set nobackup
 set noswapfile
 
+" Increase timeout for mapped key sequences.
+set timeoutlen=2000
+
 " Update UI more often.
 set updatetime=300
 
