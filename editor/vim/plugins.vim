@@ -5,7 +5,7 @@ Plug '~/.fzf' " File and text searching
 Plug 'arcticicestudio/nord-vim' " Theme
 Plug 'bling/vim-bufferline' " Show list of buffers
 Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes
-Plug 'francoiscabrol/ranger.vim' " Range file navigation
+Plug 'francoiscabrol/ranger.vim' " Ranger file navigation
 Plug 'itchyny/lightline.vim' " Bottom info line
 Plug 'junegunn/fzf.vim' " File and text searching
 Plug 'janko/vim-test' " Run tests
@@ -24,8 +24,8 @@ Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
 Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
 Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs
-Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register
 Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one
+Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register
 
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
@@ -80,23 +80,23 @@ endfunction
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-" Code Outline
-nnoremap <silent> <Leader>co :<C-u>CocList outline<cr>
+" Code document Symbols.
+nnoremap <silent> <Leader>cs :CocList outline<cr>
 
-" Code Symbols
-nnoremap <silent> <Leader>cs :<C-u>CocList -I symbols<cr>
+" Code Workspace symbols
+nnoremap <silent> <Leader>cw :CocList -I symbols<cr>
 
 " Code List errors
-nnoremap <silent> <Leader>cl :<C-u>CocList locationlist<cr>
+nnoremap <silent> <Leader>cl :CocList locationlist<cr>
 
 " Code Commands
-nnoremap <silent> <Leader>cc :<C-u>CocList commands<cr>
+nnoremap <silent> <Leader>cc :CocList commands<cr>
 
 " Code Restart
-nnoremap <silent> <Leader>cR :<C-u>CocRestart<CR>
+nnoremap <silent> <Leader>cR :CocRestart<CR>
 
 " Code eXtensions
-nnoremap <silent> <Leader>cx :<C-u>CocList extensions<cr>
+nnoremap <silent> <Leader>cx :CocList extensions<cr>
 
 " Code Rename
 nmap <Leader>cr <Plug>(coc-rename)
@@ -201,6 +201,7 @@ let NERDTreeDirArrows = 1
 "---------------------------------------------------------------
 
 let g:ranger_map_keys = 0
+let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
 
 
 "---------------------------------------------------------------
