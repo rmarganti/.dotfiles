@@ -31,7 +31,11 @@ Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of registe
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+
+" UltiSnips
+Plug 'algotech/ultisnips-php'
 
 call plug#end()
 
@@ -42,19 +46,27 @@ call plug#end()
 "
 "---------------------------------------------------------------
 
-" Use <cr> to confirm completion.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <CR> to confirm completion.
+inoremap <expr> <CR> pumvisible()
+    \ ? coc#_select_confirm()
+    \ : "\<C-g>u\<CR>"
 
-" use <tab> for trigger completion and navigate to the next complete item
+" <TAB> is used for completion, completion confirm,
+" and snippet expand (like VSCode).
+inoremap <silent><expr> <TAB> pumvisible()
+    \ ? coc#_select_confirm()
+    \ : coc#expandableOrJumpable()
+    \     ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>"
+    \     : <SID>check_back_space()
+    \         ? "\<TAB>"
+    \         : coc#refresh()
+
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<Tab>" :
-    \ coc#refresh()
+let g:coc_snippet_next = '<TAB>'
 
 " Go to definition
 nmap <silent> gd <Plug>(coc-definition)
@@ -63,40 +75,37 @@ nmap <silent> gy <Plug>(coc-type-definition)
 " Go to Implementation
 nmap <silent> gi <Plug>(coc-implementation)
 
-" Go to References
-nmap <silent> gr <Plug>(coc-references)
-
 " Go to Hint.
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Code document Symbols.
-nnoremap <silent> <Leader>cs :CocList outline<cr>
+nnoremap <silent> <Leader>cs :CocList outline<CR>
 
 " Code Workspace symbols
-nnoremap <silent> <Leader>cw :CocList -I symbols<cr>
+nnoremap <silent> <Leader>cw :CocList -I symbols<CR>
 
 " Code List errors
-nnoremap <silent> <Leader>cl :CocList locationlist<cr>
+nnoremap <silent> <Leader>cl :CocList locationlist<CR>
 
 " Code Commands
-nnoremap <silent> <Leader>cc :CocList commands<cr>
+nnoremap <silent> <Leader>cc :CocList commands<CR>
 
 " Code Restart
 nnoremap <silent> <Leader>cR :CocRestart<CR>
 
 " Code eXtensions
-nnoremap <silent> <Leader>cx :CocList extensions<cr>
+nnoremap <silent> <Leader>cx :CocList extensions<CR>
 
 " Code Rename
 nmap <Leader>cr <Plug>(coc-rename)
@@ -117,31 +126,27 @@ nmap <Leader>ca <Plug>(coc-codeaction-selected)
 "---------------------------------------------------------------
 let g:lightline = {
 	\ 'active': {
-	\   'left': [
-    \       [ 'mode', 'paste' ],
-	\       [ 'fugitive', 'readonly', 'filename', 'modified' ]
-    \   ],
-    \   'right': [
-    \       ['lineinfo'],
-    \       ['fileformat', 'fileencoding', 'filetype']
-    \   ]
+	\     'left': [
+    \         [ 'mode', 'paste' ],
+	\         [ 'fugitive', 'readonly', 'filename', 'modified' ]
+    \     ],
+    \     'right': [
+    \         ['fileformat', 'fileencoding', 'filetype']
+    \     ]
 	\ },
     \ 'colorscheme': 'nord',
-	\ 'component': {
-	\   'lineinfo': ' %3l:%-2v',
-	\ },
 	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
+	\     'readonly': 'LightlineReadonly',
+	\     'fugitive': 'LightlineFugitive'
 	\ },
     \ 'tabline': {
-    \   'left': [ ['bufferline'] ]
+    \     'left': [ ['bufferline'] ]
     \ },
     \ 'component_expand': {
-    \   'bufferline': 'LightlineBufferline',
+    \     'bufferline': 'LightlineBufferline',
     \ },
     \ 'component_type': {
-    \   'bufferline': 'tabsel',
+    \     'bufferline': 'tabsel',
     \ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' }
