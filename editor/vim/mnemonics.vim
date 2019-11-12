@@ -32,6 +32,9 @@ nmap <Leader>bd :bdelete<SPACE>
 " Buffer Quit (Deletes current buffer)
 nmap <Leader>bq :bdelete<CR>
 
+" Buffer delete All
+nmap <Leader>ba :%bd<CR>
+
 " Buffer Only (Close all other buffers)
 nmap <Leader>bo :BufOnly<CR>
 
@@ -43,7 +46,10 @@ nmap <Leader>bo :BufOnly<CR>
 "----------------------------------------------------------------
 
 " Edit `.vimrc`
-nmap <Leader>ev :tabedit $MYVIMRC<CR>
+nmap <Leader>ev :edit $MYVIMRC<CR>
+
+" Edit Env
+nmap <Leader>ee :edit .env<CR>
 
 
 "----------------------------------------------------------------
@@ -75,6 +81,64 @@ nmap <Leader>ff :NERDTreeFind<CR>
 
 " File Write
 nmap <Leader>fw :w<CR>
+
+
+"----------------------------------------------------------------
+"
+" Code
+"
+"----------------------------------------------------------------
+
+" Go to definition
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+" Go to Implementation
+nmap <silent> gi <Plug>(coc-implementation)
+
+" Go to Hint.
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Code document Symbols.
+nnoremap <Leader>cs :CocList outline<CR>
+
+" Code Workspace symbols
+nnoremap <Leader>cw :CocList -I symbols<CR>
+
+" Code List errors
+nnoremap <Leader>cl :CocList locationlist<CR>
+
+" Code Commands
+nnoremap <Leader>cc :CocList commands<CR>
+
+" Code Restart
+nnoremap <Leader>cR :CocRestart<CR>
+
+" Code eXtensions
+nnoremap <Leader>cx :CocList extensions<CR>
+
+" Code Rename
+nmap <Leader>cr <Plug>(coc-rename)
+
+" Code Format
+nmap <Leader>cf <Plug>(coc-format-selected)
+vmap <Leader>cf <Plug>(coc-format-selected)
+
+" Code Actions
+vmap <Leader>ca <Plug>(coc-codeaction-selected)
+nmap <Leader>ca <Plug>(coc-codeaction-selected)
+
 
 "----------------------------------------------------------------
 "

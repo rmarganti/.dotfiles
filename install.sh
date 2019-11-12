@@ -63,13 +63,9 @@ if [ ! -d ~/.dotfiles/shell/tmux/plugins/tpm ]; then
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
 
-# git shell completion and PS1 extension
+# git shell completion
 if [ ! -f ~/.git-completion.bash ]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-fi
-
-if [ ! -f ~/.git-prompt.sh ]; then
-    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 fi
 
 # install z

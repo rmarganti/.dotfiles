@@ -68,56 +68,6 @@ endfunction
 
 let g:coc_snippet_next = '<TAB>'
 
-" Go to definition
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-
-" Go to Implementation
-nmap <silent> gi <Plug>(coc-implementation)
-
-" Go to Hint.
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Code document Symbols.
-nnoremap <silent> <Leader>cs :CocList outline<CR>
-
-" Code Workspace symbols
-nnoremap <silent> <Leader>cw :CocList -I symbols<CR>
-
-" Code List errors
-nnoremap <silent> <Leader>cl :CocList locationlist<CR>
-
-" Code Commands
-nnoremap <silent> <Leader>cc :CocList commands<CR>
-
-" Code Restart
-nnoremap <silent> <Leader>cR :CocRestart<CR>
-
-" Code eXtensions
-nnoremap <silent> <Leader>cx :CocList extensions<CR>
-
-" Code Rename
-nmap <Leader>cr <Plug>(coc-rename)
-
-" Code Format
-nmap <Leader>cf <Plug>(coc-format-selected)
-vmap <Leader>cf <Plug>(coc-format-selected)
-
-" Code Actions
-vmap <Leader>ca <Plug>(coc-codeaction-selected)
-nmap <Leader>ca <Plug>(coc-codeaction-selected)
-
 
 "---------------------------------------------------------------
 "
