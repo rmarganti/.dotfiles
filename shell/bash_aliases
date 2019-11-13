@@ -109,7 +109,7 @@ function g:fc() {
 # Select a branch to delete.
 function g:bd() {
     local branches branch
-    branches=$(git --no-pager branch -vv) &&
+    branches=$(git --no-pager branch) &&
     branch=$(echo "$branches" | fzf +m) &&
     git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
