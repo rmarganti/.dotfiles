@@ -13,15 +13,25 @@ source ~/.vim/plugins.vim
 "
 "---------------------------------------------------------------
 
-syntax enable
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+" Configure and set theme
 set background=dark
+let g:nord_cursor_line_number_background = 1
+let g:nord_underline = 1
 colorscheme nord
 
-" Always show tab bar
-set showtabline=2
+set showtabline=2 " Always show tab bar
+set laststatus=2 " Always show status bar
+syntax enable " Syntax high-lighting
 
-" Always show status bar
-set laststatus=2
+" Overrides to allow terminal BG to show through.
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi VertSplit guibg=NONE ctermbg=NONE
 
 
 "---------------------------------------------------------------
@@ -189,3 +199,6 @@ augroup END
 " Automatically resize windows when the host
 " window size changes. Useful for tmux zooms.
 autocmd VimResized * wincmd =
+
+" Disable nord background color.
+autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
