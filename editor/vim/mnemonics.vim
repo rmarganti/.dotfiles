@@ -178,8 +178,12 @@ xmap <Leader>gr "+gr
 " Yank File name to system clipboard.
 nmap <Leader>yf :let @+ = expand("%:t")<cr>
 
-" Yank file Path to system clipboard.
-nmap <Leader>yp :let @+ = expand("%:p")<cr>
+" Yank file Absolute path to system clipboard.
+nmap <Leader>ya :let @+ = expand("%:p")<cr>
+
+" Yank file Relative path to system clipboard.
+nmap <Leader>yr :let @+ = expand("%")<cr>
+
 
 "----------------------------------------------------------------
 "
