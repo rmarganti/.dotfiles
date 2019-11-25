@@ -91,26 +91,28 @@ alias g:puo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u o
 
 # Select a git branch to checkout from a list.
 function g:fb() {
-    local branches branch
+    local branches branch query
+    query="$*"
     branches=$(git branch --all | grep -v HEAD) &&
-    branch=$(echo "$branches" |
-             fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+    branch=$(echo "$branches" | fzf --query="$query" +m) &&
     git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # Select a git commit to checkout from a list.
 function g:fc() {
-    local commits commit
+    local branches branch query
+    query="$*"
     commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
-    commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+    commit=$(echo "$commits" | fzf --query="$query" --tac +s +m -e) &&
     git checkout $(echo "$commit" | sed "s/ .*//")
 }
 
 # Select a branch to delete.
 function g:bd() {
-    local branches branch
+    local branches branch query
+    query="$*"
     branches=$(git --no-pager branch) &&
-    branch=$(echo "$branches" | fzf +m) &&
+    branch=$(echo "$branches" | fzf --query="$query" +m) &&
     git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
@@ -124,8 +126,13 @@ function g:bd() {
 # Laravel
 # --------------------------------
 function art() {
-    [ $# -gt 0 ] && php artisan "$*" && return
-    php artisan | fzf --reverse | sed -e 's/^[[:space:]]*//' | cut -d' ' -f1 | xargs php artisan
+    if
+        [ $# -gt 0 ]
+    then
+        php artisan $*
+    else
+        php artisan | fzf --reverse | sed -e 's/^[[:space:]]*//' | cut -d' ' -f1 | xargs php artisan
+    fi
 }
 
 alias a:cc='php artisan cache:clear'
