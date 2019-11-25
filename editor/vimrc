@@ -31,6 +31,8 @@ syntax enable " Syntax high-lighting
 " Overrides to allow terminal BG to show through.
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
+hi FoldColumn guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
 hi VertSplit guibg=NONE ctermbg=NONE
 
 
@@ -95,6 +97,8 @@ if has('nvim')
     set inccommand=nosplit
 endif
 
+" Always show sign column
+set signcolumn=yes
 
 "---------------------------------------------------------------
 "

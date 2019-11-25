@@ -139,6 +139,10 @@ vmap <Leader>cf <Plug>(coc-format-selected)
 vmap <Leader>ca <Plug>(coc-codeaction-selected)
 nmap <Leader>ca <Plug>(coc-codeaction-selected)
 
+" Code Hide (hides error messages).
+nmap <Leader>ch <Plug>(coc-float-hide)
+vmap <Leader>ch <Plug>(coc-float-hide)
+
 
 "----------------------------------------------------------------
 "
