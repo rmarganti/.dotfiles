@@ -3,5 +3,6 @@
     "diagnostic.infoSign": "•",
     "diagnostic.hintSign": "•",
     "eslint.autoFixOnSave": true,
-    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "html.format.enable": true
 }

@@ -156,6 +156,7 @@ nnoremap <Leader>Id "=strftime("%Y-%m-%d")<CR>P
 " Insert Date After
 nnoremap <Leader>id "=strftime("%Y-%m-%d")<CR>p
 
+
 "----------------------------------------------------------------
 "
 " Registers

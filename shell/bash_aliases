@@ -131,7 +131,7 @@ function art() {
     then
         php artisan $*
     else
-        php artisan | fzf --reverse | sed -e 's/^[[:space:]]*//' | cut -d' ' -f1 | xargs php artisan
+        php artisan | fzf --reverse | awk '{ print $1 }' | xargs php artisan
     fi
 }
 
@@ -170,4 +170,3 @@ alias pu:s='./vendor/bin/phpunit --testsuite'
 function strlen() {
     echo -n "$1" | wc -c
 }
-

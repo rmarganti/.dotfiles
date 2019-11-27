@@ -17,6 +17,7 @@ Plug 'Raimondi/delimitMate' " Bracket and quote completion
 Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
 Plug 'scrooloose/nerdtree' " Tree file navigation
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
+Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting
 Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly
 Plug 'tpope/vim-commentary' " Quick commenting
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.)
@@ -30,6 +31,7 @@ Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of registe
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
