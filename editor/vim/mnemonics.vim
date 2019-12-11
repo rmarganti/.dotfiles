@@ -14,30 +14,38 @@
 "
 "----------------------------------------------------------------
 
-" Buffer New
+" Buffer New.
 nmap <Leader>bn :enew<CR>
 
-" Buffer Edit (prompts for buffer number)
+" Buffer Edit (prompts for buffer number).
 nmap <Leader>be :buffer<SPACE>
 
-" Buffer Left
+" Buffer Left.
 nmap <Leader>bh :bprevious<CR>
 
-" Buffer Right
+" Buffer Right.
 nmap <Leader>bl :bnext<CR>
 
-" Buffer Delete (prompts for buffer number)
+" Buffer Delete (prompts for buffer number).
 nmap <Leader>bd :bdelete<SPACE>
 
-" Buffer Quit (Deletes current buffer)
-nmap <Leader>bq :bdelete<CR>
+" Buffer Quit (Deletes current buffer).
+nmap <Leader>bq :Bclose<CR>
 
-" Buffer delete All
+" Buffer force Quit (Deletes current buffer).
+nmap <Leader>bQ :Bclose!<CR>
+
+" Buffer delete All.
 nmap <Leader>ba :%bd<CR>
 
-" Buffer Only (Close all other buffers)
+" Buffer force delete All.
+nmap <Leader>bA :%bd!<CR>
+
+" Buffer Only (Close all other buffers).
 nmap <Leader>bo :BufOnly<CR>
 
+" Buffer force Only (Close all other buffers).
+nmap <Leader>bO :BufOnly!<CR>
 
 "----------------------------------------------------------------
 "

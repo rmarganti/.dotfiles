@@ -91,6 +91,7 @@ set updatetime=300
 
 " Make sure vim sees *.md files as Markdown.
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.mdx set filetype=markdown
 
 " Preview %s commands as you type them.
 if has('nvim')
