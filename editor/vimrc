@@ -159,24 +159,33 @@ nmap <C-L> <C-W><C-L>
 source ~/.vim/mnemonics.vim
 
 " Add simple highlight removal.
-nmap <Leader><space> :nohlsearch<cr>
+nmap <Leader><space> :nohlsearch<CR>
 
 " Use Ranger if the binary is available; otherwise, use NERDTree.
 if executable('ranger')
-    nmap <Leader>` :Ranger<cr>
+    nmap <Leader>` :Ranger<CR>
 
     "  open ranger when vim open a directory
-    let g:NERDTreeHijackNetrw = 0
     let g:ranger_replace_netrw = 1
 else
-    nmap <Leader>` :NERDTreeToggle<cr>
+    nmap <Leader>` :Explore<CR>
 endif
 
 " Move a line of text using Ctrl+Shift+j/k
-nmap <C-S-j> mz:m+<cr>`z
-nmap <C-S-k> mz:m-2<cr>`z
-vmap <C-S-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-S-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <C-S-j> mz:m+<CR>`z
+nmap <C-S-k> mz:m-2<CR>`z
+vmap <C-S-j> :m'>+<CR>`<my`>mzgv`yo`z
+vmap <C-S-k> :m'<-2<CR>`>my`<mzgv`yo`z
+
+
+"----------------------------------------------------------------
+"
+" Insert-mode abbreviations 
+"
+"----------------------------------------------------------------
+
+" Date
+iab <expr> !!d strftime("%Y-%m-%d")
 
 
 "---------------------------------------------------------------

@@ -11,11 +11,11 @@ Plug 'junegunn/fzf.vim' " File and text searching
 Plug 'janko/vim-test' " Run tests
 Plug 'kamykn/spelunker.vim' " Spell check
 Plug 'leafgarland/typescript-vim' " Typescript support
+Plug 'metakirby5/codi.vim' " Interactive scratchpad
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers
 Plug 'peitalin/vim-jsx-typescript' " JSX formatting
 Plug 'Raimondi/delimitMate' " Bracket and quote completion
 Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
-Plug 'scrooloose/nerdtree' " Tree file navigation
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
 Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting
 Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly

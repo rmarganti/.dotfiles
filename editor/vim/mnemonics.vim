@@ -53,11 +53,14 @@ nmap <Leader>bO :BufOnly!<CR>
 "
 "----------------------------------------------------------------
 
-" Edit `.vimrc`
-nmap <Leader>ev :edit $MYVIMRC<CR>
+" Edit Changelog
+nmap <Leader>ec :edit CHANGELOG.md<CR>
 
 " Edit Env
 nmap <Leader>ee :edit .env<CR>
+
+" Edit `.vimrc`
+nmap <Leader>ev :edit $MYVIMRC<CR>
 
 
 "----------------------------------------------------------------
@@ -150,19 +153,6 @@ nmap <Leader>ca <Plug>(coc-codeaction-selected)
 " Code Hide (hides error messages).
 nmap <Leader>ch <Plug>(coc-float-hide)
 vmap <Leader>ch <Plug>(coc-float-hide)
-
-
-"----------------------------------------------------------------
-"
-" Insert
-"
-"----------------------------------------------------------------
-
-" Insert Date Before
-nnoremap <Leader>Id "=strftime("%Y-%m-%d")<CR>P
-
-" Insert Date After
-nnoremap <Leader>id "=strftime("%Y-%m-%d")<CR>p
 
 
 "----------------------------------------------------------------
