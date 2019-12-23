@@ -19,6 +19,7 @@ Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing 
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
 Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting
 Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary' " Quick commenting
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.)
 Plug 'tpope/vim-fugitive' " Git integration

@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
-let g:netrw_dirhist_3='/Users/rmarganti/.dotfiles/editor/vim/plugged/vim-unimpaired'
-let g:netrw_dirhist_2='/Users/rmarganti/.dotfiles/editor/vim/plugged'
-let g:netrw_dirhist_1='/Users/rmarganti/.dotfiles/editor/vim'

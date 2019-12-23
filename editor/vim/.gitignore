@@ -1,2 +1,5 @@
-autoload
-plugged
+*
+.netrwhist
+!*.vim
+!.gitignore
+!coc-settings.json
