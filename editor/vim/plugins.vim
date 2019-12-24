@@ -1,33 +1,33 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins go here
-Plug '~/.fzf' " File and text searching
-Plug 'arcticicestudio/nord-vim' " Theme
-Plug 'bling/vim-bufferline' " Show list of buffers
-Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes
-Plug 'francoiscabrol/ranger.vim' " Ranger file navigation
-Plug 'itchyny/lightline.vim' " Bottom info line
-Plug 'junegunn/fzf.vim' " File and text searching
-Plug 'janko/vim-test' " Run tests
-Plug 'kamykn/spelunker.vim' " Spell check
-Plug 'leafgarland/typescript-vim' " Typescript support
-Plug 'metakirby5/codi.vim' " Interactive scratchpad
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers
-Plug 'peitalin/vim-jsx-typescript' " JSX formatting
-Plug 'Raimondi/delimitMate' " Bracket and quote completion
-Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
-Plug 'stephpy/vim-php-cs-fixer' " PHP formatting
-Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting
-Plug 'takac/vim-hardtime' " Don't let yourself navigation ineffeciantly
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-commentary' " Quick commenting
-Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.)
-Plug 'tpope/vim-fugitive' " Git integration
+Plug '~/.fzf' " File and text searching.
+Plug 'arcticicestudio/nord-vim' " Theme.
+Plug 'bling/vim-bufferline' " Show list of buffers.
+Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
+Plug 'francoiscabrol/ranger.vim' " Ranger file navigation.
+Plug 'itchyny/lightline.vim' " Bottom info line.
+Plug 'junegunn/fzf.vim' " File and text searching.
+Plug 'janko/vim-test' " Run tests.
+Plug 'kamykn/spelunker.vim' " Spell check.
+Plug 'leafgarland/typescript-vim' " Typescript support.
+Plug 'metakirby5/codi.vim' " Interactive scratchpad.
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
+Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
+Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window..
+Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
+Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
+Plug 'takac/vim-hardtime' " Don't let yourself navigation inefficiently.
+Plug 'tmsvg/pear-tree' " Bracket and quote completion.
+Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
+Plug 'tpope/vim-commentary' " Quick commenting.
+Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
+Plug 'tpope/vim-fugitive' " Git integration.
 Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
 Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
-Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs
-Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one
-Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register
+Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
+Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one.
+Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register.
 
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
