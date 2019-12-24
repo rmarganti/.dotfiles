@@ -59,9 +59,11 @@ nmap <Leader>ec :edit CHANGELOG.md<CR>
 " Edit Env
 nmap <Leader>ee :edit .env<CR>
 
-" Edit `.vimrc`
+" Edit `.Vimrc`
 nmap <Leader>ev :edit $MYVIMRC<CR>
 
+" Edit Snippets
+nmap <Leader>es :CocCommand snippets.editSnippets<CR>
 
 "----------------------------------------------------------------
 "
@@ -93,6 +95,13 @@ nmap <Leader>ff :NERDTreeFind<CR>
 " File Write
 nmap <Leader>fw :w<CR>
 
+" File Types
+nmap <Leader>ftm :set filetype=markdown<CR>
+nmap <Leader>ftj :set filetype=javascript<CR>
+nmap <Leader>ftJ :set filetype=json<CR>
+nmap <Leader>ftp :set filetype=php<CR>
+nmap <Leader>ftt :set filetype=typescript<CR>
+nmap <Leader>ftv :set filetype=vim<CR>
 
 "----------------------------------------------------------------
 "
