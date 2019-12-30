@@ -196,23 +196,27 @@ iab <expr> !!d strftime("%Y-%m-%d")
 
 " Automatically source the `.vimrc`, `mnemonics.vim`,
 " and `plugins.vim` files on save.
-augroup autosourcing
-   autocmd!
-   autocmd BufWritePost .vimrc source %
-   autocmd BufWritePost plugins.vim source %
-   autocmd BufWritePost mnemonics.vim source %
+augroup AutoSourcing
+    autocmd!
+    autocmd BufWritePost .vimrc source %
+    autocmd BufWritePost plugins.vim source %
+    autocmd BufWritePost mnemonics.vim source %
 augroup END
 
 " Highlight current line in the current window.
 augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
 augroup END
 
-" Automatically resize windows when the host
-" window size changes. Useful for tmux zooms.
-autocmd VimResized * wincmd =
+augroup Misc
+    autocmd!
 
-" Disable nord background color.
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+    " Automatically resize windows when the host
+    " window size changes. Useful for tmux zooms.
+    autocmd VimResized * wincmd =
+
+    " Disable nord background color.
+    autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+augroup END

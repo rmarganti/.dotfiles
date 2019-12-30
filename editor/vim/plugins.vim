@@ -96,7 +96,7 @@ let g:lightline = {
 	\         [ 'fugitive', 'readonly', 'filename', 'modified' ]
     \     ],
     \     'right': [
-    \         ['fileformat', 'fileencoding', 'filetype']
+    \         ['percent', 'fileformat', 'fileencoding', 'filetype'],
     \     ]
 	\ },
     \ 'colorscheme': 'nord',
@@ -113,8 +113,21 @@ let g:lightline = {
     \ 'component_type': {
     \     'bufferline': 'tabsel',
     \ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
+    \ 'mode_map': {
+    \     'n' : 'N',
+    \     'i' : 'I',
+    \     'R' : 'R',
+    \     'v' : 'V',
+    \     'V' : 'VL',
+    \     "\<C-v>": 'VB',
+    \     'c' : 'C',
+    \     's' : 'S',
+    \     'S' : 'SL',
+    \     "\<C-s>": 'SB',
+    \     't': 'T',
+    \ },
 \ }
 
 function! LightlineReadonly()
