@@ -36,6 +36,7 @@ Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 
 " UltiSnips
 Plug 'algotech/ultisnips-php'

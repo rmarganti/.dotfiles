@@ -95,6 +95,9 @@ nmap <Leader>ff :NERDTreeFind<CR>
 " File Write
 nmap <Leader>fw :w<CR>
 
+" File eXplore
+nmap <Leader>fx :CocCommand explorer<CR>
+
 " File Types
 nmap <Leader>ftm :set filetype=markdown<CR>
 nmap <Leader>ftj :set filetype=javascript<CR>
