@@ -14,11 +14,11 @@ Plug 'leafgarland/typescript-vim' " Typescript support.
 Plug 'metakirby5/codi.vim' " Interactive scratchpad.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
 Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
+Plug 'Raimondi/delimitMate' " Bracket and quote completion.
 Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window..
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
 Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
 Plug 'takac/vim-hardtime' " Don't let yourself navigation inefficiently.
-Plug 'tmsvg/pear-tree' " Bracket and quote completion.
 Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
 Plug 'tpope/vim-commentary' " Quick commenting.
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
