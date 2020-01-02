@@ -1,8 +1,10 @@
 #!/bin/bash
 
 ################################################################
+#
 # Helper functions
 # Credit: https://github.com/mjacobus/.dotfiles
+#
 ################################################################
 
 function ask_should_symlink() {
@@ -44,7 +46,9 @@ function symlink_safe() {
 
 
 ################################################################
+#
 # Shell
+#
 ################################################################
 
 # bash config
@@ -81,12 +85,15 @@ fi
 
 
 ################################################################
-# VIM
+#
+# VIM / NEOVIM
+#
 ################################################################
 
 # vim config
 symlink_or_ask ~/.dotfiles/editor/vim ~/.vim
 symlink_or_ask ~/.dotfiles/editor/vimrc ~/.vimrc
+symlink_or_ask ~/.dotfiles/editor/nvim ~/.config/nvim
 
 # install vim-plug
 if [ ! -d ~/.dotfiles/editor/vim/autoload/plug.vim ]; then
