@@ -2,11 +2,11 @@
     "diagnostic.errorSign": "•",
     "diagnostic.infoSign": "•",
     "diagnostic.hintSign": "•",
+    "diagnostic.warningSign": "•",
     "explorer.icon.enableNerdfont": true,
     "explorer.width": 60,
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-    "typescript.preferences.importModuleSpecifier": "auto",
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
 
