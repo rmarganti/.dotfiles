@@ -1,33 +1,39 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins go here
-Plug '~/.fzf' " File and text searching.
+
+" Theme/UI
 Plug 'arcticicestudio/nord-vim' " Theme.
 Plug 'bling/vim-bufferline' " Show list of buffers.
-Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
-Plug 'francoiscabrol/ranger.vim' " Ranger file navigation.
 Plug 'itchyny/lightline.vim' " Bottom info line.
+
+" Text manipulation
+Plug 'Raimondi/delimitMate' " Bracket and quote completion.
+Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
+Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
+Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register.
+
+" Misc utilities
+Plug '~/.fzf' " File and text searching.
+Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
 Plug 'junegunn/fzf.vim' " File and text searching.
 Plug 'janko/vim-test' " Run tests.
 Plug 'kamykn/spelunker.vim' " Spell check.
-Plug 'leafgarland/typescript-vim' " Typescript support.
 Plug 'metakirby5/codi.vim' " Interactive scratchpad.
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
-Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
-Plug 'Raimondi/delimitMate' " Bracket and quote completion.
-Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window..
-Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
-Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
-Plug 'takac/vim-hardtime' " Don't let yourself navigation inefficiently.
+Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
 Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
 Plug 'tpope/vim-commentary' " Quick commenting.
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
 Plug 'tpope/vim-fugitive' " Git integration.
-Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
-Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
 Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
 Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one.
-Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register.
+
+" Language support
+Plug 'leafgarland/typescript-vim' " Typescript support.
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
+Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
+Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
+Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
 
 " COC Extensions
 Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
@@ -179,16 +185,6 @@ let NERDTreeDirArrows = 1
 
 "---------------------------------------------------------------
 "
-" ranger.vim
-"
-"---------------------------------------------------------------
-
-let g:ranger_map_keys = 0
-let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
-
-
-"---------------------------------------------------------------
-"
 " vim-bufferline
 "
 "---------------------------------------------------------------
@@ -196,21 +192,6 @@ let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
 let g:bufferline_echo = 0
 let g:bufferline_active_buffer_left = ''
 let g:bufferline_active_buffer_right = ''
-
-
-"---------------------------------------------------------------
-"
-" vim-hardtime
-" Prevent pressing the listed keys multiple times.
-" Prefer more effecient word movement.
-"
-"---------------------------------------------------------------
-
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_visual_keys = ["h", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_disabled_keys = []
 
 
 "---------------------------------------------------------------
