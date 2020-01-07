@@ -30,7 +30,7 @@ nmap <Leader>bl :bnext<CR>
 nmap <Leader>bd :bdelete<SPACE>
 
 " Buffer Quit (Deletes current buffer).
-nmap <Leader>bq :Bclose<CR>
+nmap <Leader>bq :bdelete<CR>
 
 " Buffer force Quit (Deletes current buffer).
 nmap <Leader>bQ :Bclose!<CR>

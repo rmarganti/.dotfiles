@@ -20,7 +20,6 @@ Plug 'junegunn/fzf.vim' " File and text searching.
 Plug 'janko/vim-test' " Run tests.
 Plug 'kamykn/spelunker.vim' " Spell check.
 Plug 'metakirby5/codi.vim' " Interactive scratchpad.
-Plug 'rbgrouleff/bclose.vim' " Allows neovim to delete a buffer without closing the window.
 Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
 Plug 'tpope/vim-commentary' " Quick commenting.
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
@@ -48,17 +47,6 @@ Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 Plug 'algotech/ultisnips-php'
 
 call plug#end()
-
-
-"---------------------------------------------------------------
-"
-" bclose
-"
-"---------------------------------------------------------------
-
-" bclose is only here for plugins' use,
-" so we don't need the keybinding.
-let g:bclose_no_plugin_maps = 1
 
 
 "---------------------------------------------------------------
