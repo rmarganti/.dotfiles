@@ -1,3 +1,26 @@
+"---------------------------------------------------------------
+"
+" coc.nvim extensions
+"
+"---------------------------------------------------------------
+
+let g:coc_global_extensions = [
+    \ 'coc-phpls',
+    \ 'coc-eslint',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-snippets',
+    \ 'coc-tsserver',
+    \ 'coc-explorer',
+\ ]
+
+
+"---------------------------------------------------------------
+"
+" Plugins
+"
+"---------------------------------------------------------------
+
 call plug#begin('~/.vim/plugged')
 
 " Plugins go here
@@ -33,15 +56,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
 Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
 Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
-
-" COC Extensions
-Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 
 " UltiSnips
 Plug 'algotech/ultisnips-php'

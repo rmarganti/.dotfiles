@@ -5,6 +5,7 @@
     "diagnostic.hintSign": "•",
     "diagnostic.warningSign": "•",
     "explorer.icon.enableNerdfont": true,
+    "explorer.quitOnOpen": true,
     "explorer.width": 60,
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
