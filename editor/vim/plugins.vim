@@ -121,8 +121,10 @@ let g:lightline = {
     \ 'component_type': {
     \     'bufferline': 'tabsel',
     \ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' },
+	\ 'tabline_separator': { 'left': '', 'right': '' },
+	\ 'tabline_subseparator': { 'left': '', 'right': '' },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
     \ 'mode_map': {
     \     'n' : 'NORM',
     \     'i' : 'INST',
