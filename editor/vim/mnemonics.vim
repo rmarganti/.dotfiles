@@ -284,3 +284,13 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>wz :ZoomToggle<CR>
+
+
+"----------------------------------------------------------------
+"
+" Miscellaneous
+"
+"----------------------------------------------------------------
+
+" Force close all buffers and Quit
+nnoremap <Leader>qq :qa!<CR>
