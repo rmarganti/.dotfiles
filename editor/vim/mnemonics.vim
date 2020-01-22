@@ -18,7 +18,7 @@
 nmap <Leader>bn :enew<CR>
 
 " Buffer Edit (prompts for buffer number).
-nmap <Leader>be :buffer<SPACE>
+nmap <Leader>be :ls<CR>:buffer<SPACE>
 
 " Buffer Left.
 nmap <Leader>bh :bprevious<CR>
@@ -35,17 +35,12 @@ nmap <Leader>bq :bdelete<CR>
 " Buffer force Quit (Deletes current buffer).
 nmap <Leader>bQ :bdelete!<CR>
 
-" Buffer delete All.
-nmap <Leader>ba :%bd<CR>
-
 " Buffer force delete All.
-nmap <Leader>bA :%bd!<CR>
-
-" Buffer Only (Close all other buffers).
-nmap <Leader>bo :BufOnly<CR>
+nmap <Leader>ba :%bd!<CR>
 
 " Buffer force Only (Close all other buffers).
-nmap <Leader>bO :BufOnly!<CR>
+nmap <Leader>bo :BufOnly!<CR>
+
 
 "----------------------------------------------------------------
 "
