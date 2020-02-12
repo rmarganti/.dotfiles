@@ -11,7 +11,6 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-snippets',
     \ 'coc-tsserver',
-    \ 'coc-explorer',
 \ ]
 
 
@@ -43,6 +42,7 @@ Plug 'junegunn/fzf.vim' " File and text searching.
 Plug 'janko/vim-test' " Run tests.
 Plug 'kamykn/spelunker.vim' " Spell check.
 Plug 'metakirby5/codi.vim' " Interactive scratchpad.
+Plug 'preservim/nerdtree' " File explorer
 Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
 Plug 'tpope/vim-commentary' " Quick commenting.
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
@@ -177,15 +177,15 @@ command! -bang -nargs=* Ag
 
 "---------------------------------------------------------------
 "
-" nerdtree
+" NERDTree
 "
 "---------------------------------------------------------------
 
-let NERDTreeQuitOnOpen = 1
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeWinSize=48
 
 "---------------------------------------------------------------
 "

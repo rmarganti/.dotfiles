@@ -54,11 +54,12 @@ nmap <Leader>ec :edit CHANGELOG.md<CR>
 " Edit Env
 nmap <Leader>ee :edit .env<CR>
 
+" Edit Snippets
+nmap <Leader>es :CocCommand snippets.editSnippets<CR>
+
 " Edit `.Vimrc`
 nmap <Leader>ev :edit $MYVIMRC<CR>
 
-" Edit Snippets
-nmap <Leader>es :CocCommand snippets.editSnippets<CR>
 
 "----------------------------------------------------------------
 "
@@ -84,14 +85,24 @@ nmap <Leader>fm :Move <C-R>=expand("%:p")<CR>
 " File Rename
 nmap <Leader>fr :Rename <C-R>=expand("%:t")<CR>
 
-" File Find (show current file in NERDTree
-nmap <Leader>ff :NERDTreeFind<CR>
-
 " File Write
 nmap <Leader>fw :w<CR>
 
 " File eXplore
-nmap <Leader>fx :CocCommand explorer<CR>
+nmap <Leader>fx :call <SID>toggle_nerdtree()<CR>
+
+function! s:toggle_nerdtree()
+    " Close NERDTree if it is already open.
+    if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+        NERDTreeClose
+    " Show NERDTree if no file is currently open.
+    elseif @% == ""
+        NERDTreeToggle                      
+    " Focus current file in NERDTree.
+    else                                    
+        NERDTreeFind                        
+    endif                                   
+endfunction
 
 " File Types
 nmap <Leader>fth :set filetype=html<CR>
