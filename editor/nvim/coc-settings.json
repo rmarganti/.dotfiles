@@ -7,11 +7,49 @@
     "diagnostic-languageserver.filetypes": {
         "php": "phpstan"
     },
+    "diagnostic-languageserver.linters": {
+        "phpstan": {
+            "command": "./vendor/bin/phpstan",
+            "debounce": 100,
+            "rootPatterns": [
+                "composer.json",
+                "composer.lock",
+                "vendor",
+                ".git"
+            ],
+            "args": [
+                "analyze",
+                "--error-format",
+                "raw",
+                "--no-progress",
+                "%file"
+            ],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "phpstan",
+            "formatLines": 1,
+            "formatPattern": [
+                "^[^:]+:(\\d+):(.*)(\\r|\\n)*$",
+                {
+                    "line": 1,
+                    "message": 2
+                }
+            ],
+            "requiredFiles": [
+                "phpstan.neon"
+            ]
+        }
+    },
     "explorer.icon.enableNerdfont": true,
     "explorer.quitOnOpen": true,
     "explorer.width": 60,
     "eslint.autoFixOnSave": true,
-    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "eslint.filetypes": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
         "variable": "\ue79b",
@@ -38,7 +76,6 @@
         "snippet": "\ue60b",
         "typeParameter": "\uf728",
         "default": "\uf29c"
-	},
+    },
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
 }
-
