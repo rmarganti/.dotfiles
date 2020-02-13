@@ -9,6 +9,7 @@
 augroup AutoSourcing
     autocmd!
     autocmd BufWritePost .vimrc source %
+    autocmd BufWritePost autocmds.vim source %
     autocmd BufWritePost plugins.vim source %
     autocmd BufWritePost mnemonics.vim source %
 augroup END
@@ -26,6 +27,13 @@ augroup FileTypes
     " Make sure vim sees *.md files as Markdown.
     autocmd BufNewFile,BufRead *.md set filetype=markdown
     autocmd BufNewFile,BufRead *.mdx set filetype=markdown
+augroup END
+
+augroup FormatJson
+    autocmd!
+
+    "" Automatically format JSON on save.
+    autocmd BufWritePre *.json call CocAction('format')
 augroup END
 
 augroup Misc

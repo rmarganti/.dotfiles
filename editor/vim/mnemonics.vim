@@ -299,5 +299,8 @@ nnoremap <silent> <Leader>wz :ZoomToggle<CR>
 "
 "----------------------------------------------------------------
 
+" Quit
+nnoremap <Leader>qq :qa<CR>
+
 " Force close all buffers and Quit
-nnoremap <Leader>qq :qa!<CR>
+nnoremap <Leader>qQ :qa!<CR>
