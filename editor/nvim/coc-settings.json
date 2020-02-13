@@ -4,6 +4,9 @@
     "diagnostic.infoSign": "•",
     "diagnostic.hintSign": "•",
     "diagnostic.warningSign": "•",
+    "diagnostic-languageserver.filetypes": {
+        "php": "phpstan"
+    },
     "explorer.icon.enableNerdfont": true,
     "explorer.quitOnOpen": true,
     "explorer.width": 60,

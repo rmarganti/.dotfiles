@@ -5,10 +5,11 @@
 "---------------------------------------------------------------
 
 let g:coc_global_extensions = [
-    \ 'coc-phpls',
+    \ 'coc-diagnostic',
     \ 'coc-eslint',
     \ 'coc-html',
     \ 'coc-json',
+    \ 'coc-phpls',
     \ 'coc-snippets',
     \ 'coc-tsserver',
 \ ]
