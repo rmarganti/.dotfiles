@@ -15,9 +15,11 @@ source ~/.vim/plugins.vim
 "---------------------------------------------------------------
 
 " set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
+if exists('&termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 " Configure and set theme
 set background=dark
@@ -89,7 +91,9 @@ if has('nvim')
 endif
 
 " Always show sign column
-set signcolumn=yes
+if exists('&signcolumn')
+    set signcolumn=yes
+endif
 
 
 "---------------------------------------------------------------
