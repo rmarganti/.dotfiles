@@ -36,20 +36,12 @@ Plug 'tpope/vim-repeat' " Repeat plug-in operations, etc.
 Plug 'tpope/vim-surround' " Quickly surround text with brackets, quotes, etc.
 Plug 'vim-scripts/ReplaceWithRegister' " Easily replace with contents of register.
 
-" Misc utilities
-Plug '~/.fzf' " File and text searching.
-Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
-Plug 'junegunn/fzf.vim' " File and text searching.
+" Code-specific
 Plug 'janko/vim-test' " Run tests.
-Plug 'kamykn/spelunker.vim' " Spell check.
-Plug 'metakirby5/codi.vim' " Interactive scratchpad.
-Plug 'preservim/nerdtree' " File explorer
-Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
+Plug 'metakirby5/codi.vim' " Interactive scratch pad.
+Plug 'rhysd/devdocs.vim' " Search devdocs.in.
 Plug 'tpope/vim-commentary' " Quick commenting.
-Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
 Plug 'tpope/vim-fugitive' " Git integration.
-Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
-Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one.
 
 " Language support
 Plug 'leafgarland/typescript-vim' " Typescript support.
@@ -57,6 +49,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
 Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
 Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
+
+" Misc utilities
+Plug '~/.fzf' " File and text searching.
+Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
+Plug 'junegunn/fzf.vim' " File and text searching.
+Plug 'kamykn/spelunker.vim' " Spell check.
+Plug 'preservim/nerdtree' " File explorer
+Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
+Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
+Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
+Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one.
 
 " UltiSnips
 Plug 'algotech/ultisnips-php'

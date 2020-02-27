@@ -173,6 +173,9 @@ nmap <Leader>ca <Plug>(coc-codeaction-selected)
 nmap <Leader>ch <Plug>(coc-float-hide)
 vmap <Leader>ch <Plug>(coc-float-hide)
 
+" Code Devdocs.io for under cursor.
+nmap <leader>cd <Plug>(devdocs-under-cursor)
+
 
 "----------------------------------------------------------------
 "
@@ -215,6 +218,9 @@ nmap <Leader>yr :let @+ = expand("%")<cr>
 
 " Search Buffers
 nmap <Leader>sb :Buffers!<Cr>
+
+" Search Devdocs.io
+nmap <Leader>sd :DevDocs<Space>
 
 " Search Files
 nmap <Leader>sf :Files!<Cr>
