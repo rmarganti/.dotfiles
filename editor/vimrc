@@ -95,6 +95,12 @@ if exists('&signcolumn')
     set signcolumn=yes
 endif
 
+" Always show at least 2 lines above/below the cursor.
+set scrolloff=2
+
+" Always show at least 5 columns to the left/right the cursor.
+set sidescrolloff=5
+
 
 "---------------------------------------------------------------
 "
