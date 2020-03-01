@@ -267,6 +267,9 @@ nnoremap <Leader>Tp :set invpaste paste?<CR>
 " Toggle line numbers
 nnoremap <Leader>Tl :set invnumber<CR>
 
+" Toggle relative numbers
+nnoremap <Leader>Tr :set invrelativenumber<CR>
+
 " Toggle word wrap
 nnoremap <Leader>Tw :setlocal wrap!<CR>
 

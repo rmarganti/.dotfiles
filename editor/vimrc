@@ -51,8 +51,9 @@ set backspace=indent,eol,start
 nnoremap <SPACE> <Nop>
 let mapleader = ' '
 
-" Show line numbers.
+" Show relative line numbers.
 set number
+set relativenumber
 
 " Allow modified buffers to be hidden.
 set hidden
