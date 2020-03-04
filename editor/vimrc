@@ -97,10 +97,10 @@ if exists('&signcolumn')
 endif
 
 " Always show at least 2 lines above/below the cursor.
-set scrolloff=2
+set scrolloff=5
 
 " Always show at least 5 columns to the left/right the cursor.
-set sidescrolloff=5
+set sidescrolloff=10
 
 
 "---------------------------------------------------------------
@@ -172,5 +172,3 @@ nmap <Leader><space> :nohlsearch<CR>
 
 " Date
 iab <expr> !!d strftime("%Y-%m-%d")
-
-
