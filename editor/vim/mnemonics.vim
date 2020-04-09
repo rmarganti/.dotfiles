@@ -166,8 +166,12 @@ nmap <Leader>cf <Plug>(coc-format-selected)
 vmap <Leader>cf <Plug>(coc-format-selected)
 
 " Code Actions
-vmap <Leader>ca <Plug>(coc-codeaction-selected)
-nmap <Leader>ca <Plug>(coc-codeaction-selected)
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
+xmap <silent> <leader>ca :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>ca :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " Code Hide (hides error messages).
 nmap <Leader>ch <Plug>(coc-float-hide)

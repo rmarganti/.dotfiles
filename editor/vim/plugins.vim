@@ -5,6 +5,7 @@
 "---------------------------------------------------------------
 
 let g:coc_global_extensions = [
+    \ 'coc-actions',
     \ 'coc-diagnostic',
     \ 'coc-eslint',
     \ 'coc-html',
