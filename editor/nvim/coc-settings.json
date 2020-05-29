@@ -35,14 +35,10 @@
                     "message": 2
                 }
             ],
-            "requiredFiles": [
-                "phpstan.neon"
-            ]
+            "requiredFiles": ["phpstan.neon"]
         }
     },
-    "explorer.icon.enableNerdfont": true,
-    "explorer.quitOnOpen": true,
-    "explorer.width": 60,
+    "prettier.tabWidth": 4,
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": [
         "javascript",

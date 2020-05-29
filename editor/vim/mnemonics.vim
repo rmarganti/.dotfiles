@@ -180,6 +180,9 @@ vmap <Leader>ch <Plug>(coc-float-hide)
 " Code Devdocs.io for under cursor.
 nmap <leader>cd <Plug>(devdocs-under-cursor)
 
+" Code Prettier
+nmap <leader>cp :CocCommand prettier.formatFile<CR>
+
 
 "----------------------------------------------------------------
 "
