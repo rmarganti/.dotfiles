@@ -79,7 +79,7 @@ alias g:d='git diff'
 alias g:f='git fetch --tags --prune'
 alias g:fl="git diff-tree --no-commit-id --name-only -r"
 alias g:l='git log'
-alias g:lp="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias g:lp="git log --graph --pretty=format:'%C(bold black)%h%C(reset) %C(green)(%cr)%C(reset) %s %C(bold black)<%an>%C(yellow)%d%Creset' --abbrev-commit"
 alias g:m='git merge'
 alias g:o='git checkout'
 alias g:p='git pull'
