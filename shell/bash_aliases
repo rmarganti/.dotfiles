@@ -4,9 +4,12 @@
 #
 ################################################################
 
+# Enable color for `ls` command
+export CLICOLOR=1 # For BSD/Darwin
+ls --color=auto &> /dev/null && alias ls='ls --color=auto' ||
+
 alias cpwd='pwd | pbcopy'
-alias ls='ls --color'
-alias ll='ls -alFh --color'
+alias ll='ls -alFh'
 alias up='cd ..'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
