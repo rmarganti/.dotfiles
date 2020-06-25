@@ -12,6 +12,7 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-phpls',
     \ 'coc-prettier',
+    \ 'coc-rls',
     \ 'coc-snippets',
     \ 'coc-tsserver',
 \ ]

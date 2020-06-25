@@ -1,4 +1,5 @@
 {
+    "coc.preferences.formatOnSaveFiletypes": ["rust"],
     "diagnostic.maxWindowHeight": 16,
     "diagnostic.errorSign": "•",
     "diagnostic.infoSign": "•",
