@@ -55,3 +55,11 @@ function s:TransparentBackground()
     highlight SignColumn guibg=NONE ctermbg=NONE
     highlight VertSplit guibg=NONE ctermbg=NONE
 endfunction
+
+" Restore previous position when returning to a buffer.
+augroup RememberPosition
+    autocmd!
+
+    autocmd BufLeave * let b:winview = winsaveview()
+    autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+augroup END
