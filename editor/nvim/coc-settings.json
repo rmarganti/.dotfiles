@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["rust"],
+    "coc.preferences.formatOnSaveFiletypes": ["php", "rust"],
     "diagnostic.maxWindowHeight": 16,
     "diagnostic.errorSign": "•",
     "diagnostic.infoSign": "•",
