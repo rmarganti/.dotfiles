@@ -47,6 +47,7 @@
         "typescript",
         "typescriptreact"
     ],
+    "rust.clippy_preference": "on",
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
         "variable": "\ue79b",
