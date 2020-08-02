@@ -63,6 +63,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost ev
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
 Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
 Plug 'vim-scripts/BufOnly.vim' " Close all buffers but current one.
+Plug 'voldikss/vim-floaterm' " Floating terminal
 
 " UltiSnips
 Plug 'algotech/ultisnips-php'

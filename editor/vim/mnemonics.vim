@@ -276,6 +276,10 @@ nnoremap <Leader>Tr :set invrelativenumber<CR>
 " Toggle word wrap
 nnoremap <Leader>Tw :setlocal wrap!<CR>
 
+noremap  <F12> :FloatermToggle<CR>
+noremap! <F12> <Esc>:FloatermToggle<CR>
+tnoremap <F12> <C-\><C-n>:FloatermToggle<CR>
+
 
 "----------------------------------------------------------------
 "
