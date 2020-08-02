@@ -89,7 +89,7 @@ nmap <Leader>fr :Rename <C-R>=expand("%:t")<CR>
 nmap <Leader>fw :w<CR>
 
 " File eXplore
-nmap <Leader>fx :call <SID>toggle_nerdtree()<CR>
+nmap <Leader>fx :Ranger<CR>
 
 function! s:toggle_nerdtree()
     " Close NERDTree if it is already open.

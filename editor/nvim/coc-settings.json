@@ -39,6 +39,8 @@
             "requiredFiles": ["phpstan.neon"]
         }
     },
+    "explorer.position": "floating",
+    "explorer.openAction.strategy": "sourceWindow",
     "prettier.tabWidth": 4,
     "eslint.autoFixOnSave": true,
     "eslint.filetypes": [

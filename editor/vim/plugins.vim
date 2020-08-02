@@ -54,9 +54,10 @@ Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
 " Misc utilities
 Plug '~/.fzf' " File and text searching.
 Plug 'christoomey/vim-tmux-navigator' " Navigate between splits and tmux panes.
+Plug 'francoiscabrol/ranger.vim'
 Plug 'junegunn/fzf.vim' " File and text searching.
 Plug 'kamykn/spelunker.vim' " Spell check.
-Plug 'preservim/nerdtree' " File explorer
+Plug 'rbgrouleff/bclose.vim' " Delete a buffer without closing the window
 Plug 'tmux-plugins/vim-tmux-focus-events' " Restore FocusGained and FocusLost events in tmux.
 Plug 'tpope/vim-eunuch' " Sugar for file operations (rename, move, etc.).
 Plug 'tpope/vim-unimpaired' " Random shortcuts that typically work in pairs.
@@ -184,15 +185,13 @@ command! -bang -nargs=* Ag
 
 "---------------------------------------------------------------
 "
-" NERDTree
+" ranger
 "
 "---------------------------------------------------------------
 
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeWinSize=48
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
+
 
 "---------------------------------------------------------------
 "

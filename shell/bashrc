@@ -22,7 +22,7 @@
 export FZF_COMPLETION_TRIGGER='~~'
 
 # Use ag instead of find
-export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .git --ignore node_modules --ignore vendor -g ""'
+export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .git --ignore node_modules --ignore vendor --ignore target -g ""'
 
 ################################################################
 #
