@@ -47,11 +47,9 @@ Plug 'tpope/vim-commentary' " Quick commenting.
 Plug 'tpope/vim-fugitive' " Git integration.
 
 " Language support
-Plug 'leafgarland/typescript-vim' " Typescript support.
+Plug 'sheerun/vim-polyglot' " Multi-language syntax highlighting, etc.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
-Plug 'peitalin/vim-jsx-typescript' " JSX formatting.
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
-Plug 'StanAngeloff/php.vim', {'for': 'php'} " Improve PHP syntax highlighting.
 
 " Misc utilities
 Plug '~/.fzf' " File and text searching.
@@ -105,6 +103,7 @@ let g:coc_snippet_next = '<TAB>'
 " lightlight.vim
 "
 "---------------------------------------------------------------
+
 let g:lightline = {
 	\ 'active': {
 	\     'left': [
