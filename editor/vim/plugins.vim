@@ -212,6 +212,7 @@ let g:bufferline_active_buffer_right = ''
 
 " Disable default mappings
 let g:php_cs_fixer_enable_default_mapping = 0
+let g:php_cs_fixer_path = "./vendor/bin/php-cs-fixer"
 
 " Auto-fix on save.
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
