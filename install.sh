@@ -63,7 +63,7 @@ symlink_or_ask ~/.dotfiles/shell/tmux.conf ~/.tmux.conf
 
 # install Tmux Plugin Manager
 if [ ! -d ~/.dotfiles/shell/tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm.git ~/.dotfiles/shell/tmux/plugins/tpm
+    git clone --depth 1 https://github.com/tmux-plugins/tpm.git ~/.dotfiles/shell/tmux/plugins/tpm
     ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 fi
 
@@ -94,6 +94,7 @@ fi
 symlink_or_ask ~/.dotfiles/editor/vim ~/.vim
 symlink_or_ask ~/.dotfiles/editor/vimrc ~/.vimrc
 symlink_or_ask ~/.dotfiles/editor/nvim ~/.config/nvim
+symlink_or_ask ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # install vim-plug
 if [ ! -d ~/.dotfiles/editor/vim/autoload/plug.vim ]; then
