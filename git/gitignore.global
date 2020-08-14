@@ -1,0 +1,4 @@
+.DS_Store
+.php_cs.cache
+.phpunit.result.cache
+yarn-error.log
