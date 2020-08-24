@@ -24,6 +24,7 @@ export FZF_COMPLETION_TRIGGER='~~'
 # Use ag instead of find
 export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .git --ignore node_modules --ignore vendor --ignore target -g ""'
 
+
 ################################################################
 #
 # Command line
@@ -32,7 +33,7 @@ export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .
 
 export PS1="┌ \[$txtblu\]\h\$(parse_git_branch)\[$txtrst\]\$(responsive_break)\[$txtcyn\]\$(short_pwd) \[$txtrst\]\n└ \$ "
 
-# GIT integration
+# Git integration
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/\(\1\)/'"
 parse_git_branch() {
     git_status=$(git status 2>/dev/null)
@@ -86,7 +87,7 @@ short_pwd() {
 ################################################################
 
 # Set default editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # iTerm Shell Integration
