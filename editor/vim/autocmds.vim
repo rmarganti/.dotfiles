@@ -43,12 +43,15 @@ augroup Misc
     " window size changes. Useful for tmux zooms.
     autocmd VimResized * wincmd =
 
-    " Disable nord background color.
-    autocmd ColorScheme * call s:TransparentBackground()
+    " Tweak Nord color scheme.
+    autocmd ColorScheme * call s:TweakColorScheme()
 augroup END
 
-" Overrides to allow terminal BG to show through.
-function s:TransparentBackground()
+function s:TweakColorScheme()
+    " Code Lens color
+    highlight CocCodeLens guifg=#4C566A 
+
+    " Override to allow terminal BG to show through.
     highlight Normal guibg=NONE ctermbg=NONE
     highlight LineNr guibg=NONE ctermbg=NONE
     highlight FoldColumn guibg=NONE ctermbg=NONE

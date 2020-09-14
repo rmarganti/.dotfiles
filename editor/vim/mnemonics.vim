@@ -126,6 +126,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 " Go to Implementation
 nmap <silent> gi <Plug>(coc-implementation)
 
+" Go to reFerences
+nmap <silent> gf <Plug>(coc-references)
+
 " Go to Hint.
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
