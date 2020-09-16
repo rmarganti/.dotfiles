@@ -112,5 +112,3 @@ done
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && (( pid == 1 )) ; then
     tmux attach -t default || tmux new -s default
 fi
-
-export PATH=~/.composer/vendor/bin:$PATH
