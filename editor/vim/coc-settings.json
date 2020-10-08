@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["php", "rust"],
+    "coc.preferences.formatOnSaveFiletypes": ["prisma", "php", "rust"],
     "codeLens.enable": true,
     "diagnostic.maxWindowHeight": 16,
     "diagnostic.errorSign": "•",

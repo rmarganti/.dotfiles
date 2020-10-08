@@ -12,6 +12,7 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-phpls',
     \ 'coc-prettier',
+    \ 'coc-prisma',
     \ 'coc-rls',
     \ 'coc-snippets',
     \ 'coc-tsserver',
@@ -50,6 +51,7 @@ Plug 'tpope/vim-fugitive' " Git integration.
 Plug 'sheerun/vim-polyglot' " Multi-language syntax highlighting, etc.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language servers.
 Plug 'stephpy/vim-php-cs-fixer' " PHP formatting.
+Plug 'pantharshit00/vim-prisma' " Prsima syntax highlighting.
 
 " Misc utilities
 Plug '~/.fzf' " File and text searching.
