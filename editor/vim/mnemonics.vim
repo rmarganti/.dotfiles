@@ -242,10 +242,10 @@ nmap <Leader>st :Ag!<Cr>
 "----------------------------------------------------------------
 
 " Split Vertical
-nmap <Leader>sv :vsplit<CR>
+nmap <Leader>sv :vnew<CR>
 
 " Split Horiztonal
-nmap <Leader>sh :split<CR>
+nmap <Leader>sh :new<CR>
 
 
 "----------------------------------------------------------------
