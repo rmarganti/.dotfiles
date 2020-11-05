@@ -31,8 +31,8 @@ call plug#begin('~/.vim/plugged')
 
 " Theme/UI
 Plug 'arcticicestudio/nord-vim' " Theme.
-Plug 'bling/vim-bufferline' " Show list of buffers.
 Plug 'itchyny/lightline.vim' " Bottom info line.
+Plug 'mengelbrecht/lightline-bufferline' " Buffer list
 
 " Text manipulation
 Plug 'Raimondi/delimitMate' " Bracket and quote completion.
@@ -126,13 +126,13 @@ let g:lightline = {
     \     'left': [ ['bufferline'] ]
     \ },
     \ 'component_expand': {
-    \     'bufferline': 'LightlineBufferline',
+    \     'bufferline': 'lightline#bufferline#buffers',
     \ },
     \ 'component_type': {
     \     'bufferline': 'tabsel',
     \ },
 	\ 'tabline_separator': { 'left': '', 'right': '' },
-	\ 'tabline_subseparator': { 'left': '', 'right': '' },
+	\ 'tabline_subseparator': { 'left': ' ', 'right': ' ' },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '', 'right': '' },
     \ 'mode_map': {
@@ -162,10 +162,15 @@ function! LightlineFugitive()
 	return ''
 endfunction
 
-function! LightlineBufferline()
-    call bufferline#refresh_status()
-    return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-endfunction
+
+"---------------------------------------------------------------
+"
+" lightline-bufferline
+"
+"---------------------------------------------------------------
+
+" Show oridnal buffer number
+let g:lightline#bufferline#show_number = 2
 
 
 "---------------------------------------------------------------

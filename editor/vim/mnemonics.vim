@@ -17,8 +17,17 @@
 " Buffer New.
 nmap <Leader>bn :enew<CR>
 
-" Buffer Edit (prompts for buffer number).
-nmap <Leader>be :ls<CR>:buffer<SPACE>
+" Buffer Edit #.
+nmap <Leader>be1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>be2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>be3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>be4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>be5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>be6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>be7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>be8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>be9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>be0 <Plug>lightline#bufferline#go(10)
 
 " Buffer Left.
 nmap <Leader>bh :bprevious<CR>
@@ -26,8 +35,17 @@ nmap <Leader>bh :bprevious<CR>
 " Buffer Right.
 nmap <Leader>bl :bnext<CR>
 
-" Buffer Delete (prompts for buffer number).
-nmap <Leader>bd :bdelete<SPACE>
+" Buffer Delete #.
+nmap <Leader>bd1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>bd2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>bd3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>bd4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>bd5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>bd6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>bd7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>bd8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>bd9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>bd0 <Plug>lightline#bufferline#delete(10)
 
 " Buffer Quit (Deletes current buffer).
 nmap <Leader>bq :bdelete<CR>
