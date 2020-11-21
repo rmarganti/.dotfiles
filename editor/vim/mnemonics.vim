@@ -53,8 +53,11 @@ nmap <Leader>bq :bdelete<CR>
 " Buffer force Quit (Deletes current buffer).
 nmap <Leader>bQ :bdelete!<CR>
 
+" Buffer delete All.
+nmap <Leader>ba :%bd<CR>
+
 " Buffer force delete All.
-nmap <Leader>ba :%bd!<CR>
+nmap <Leader>bA :%bd!<CR>
 
 " Buffer force Only (Close all other buffers).
 nmap <Leader>bo :BufOnly!<CR>
@@ -123,13 +126,7 @@ function! s:toggle_nerdtree()
 endfunction
 
 " File Types
-nmap <Leader>fth :set filetype=html<CR>
-nmap <Leader>ftj :set filetype=javascript<CR>
-nmap <Leader>ftJ :set filetype=json<CR>
-nmap <Leader>ftp :set filetype=php<CR>
-nmap <Leader>ftm :set filetype=markdown<CR>
-nmap <Leader>ftt :set filetype=typescript<CR>
-nmap <Leader>ftv :set filetype=vim<CR>
+nmap <Leader>ft :Filetypes<CR>
 
 "----------------------------------------------------------------
 "
