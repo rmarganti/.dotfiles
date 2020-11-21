@@ -111,10 +111,10 @@ let g:lightline = {
 	\ 'active': {
 	\     'left': [
     \         [ 'mode', 'paste' ],
-	\         [ 'fugitive', 'readonly', 'filename', 'modified' ]
+	\         [ 'fugitive' ]
     \     ],
     \     'right': [
-    \         ['percent', 'fileformat', 'fileencoding', 'filetype'],
+    \         ['linecount', 'filetype'],
     \     ]
 	\ },
     \ 'colorscheme': 'nord',
@@ -125,16 +125,19 @@ let g:lightline = {
     \ 'tabline': {
     \     'left': [ ['bufferline'] ]
     \ },
+    \ 'component': {
+    \     'linecount': '%l/%L'
+    \ },
     \ 'component_expand': {
     \     'bufferline': 'lightline#bufferline#buffers',
     \ },
     \ 'component_type': {
     \     'bufferline': 'tabsel',
     \ },
-	\ 'tabline_separator': { 'left': '', 'right': '' },
+	\ 'tabline_separator': { 'left': '', 'right': '' },
 	\ 'tabline_subseparator': { 'left': ' ', 'right': ' ' },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' },
     \ 'mode_map': {
     \     'n' : 'NORM',
     \     'i' : 'INST',
