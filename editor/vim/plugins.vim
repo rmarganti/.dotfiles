@@ -108,24 +108,25 @@ let g:coc_snippet_next = '<TAB>'
 "---------------------------------------------------------------
 
 let g:lightline = {
-	\ 'active': {
-	\     'left': [
-    \         [ 'mode', 'paste' ],
-	\         [ 'fugitive' ]
+    \ 'active': {
+    \     'left': [
+    \         [ 'duck', 'mode', 'paste' ],
+    \         [ 'fugitive' ]
     \     ],
     \     'right': [
     \         ['linecount', 'filetype'],
     \     ]
-	\ },
+    \ },
     \ 'colorscheme': 'nord',
-	\ 'component_function': {
-	\     'readonly': 'LightlineReadonly',
-	\     'fugitive': 'LightlineFugitive'
-	\ },
+    \ 'component_function': {
+    \     'readonly': 'LightlineReadonly',
+    \     'fugitive': 'LightlineFugitive'
+    \ },
     \ 'tabline': {
     \     'left': [ ['bufferline'] ]
     \ },
     \ 'component': {
+    \     'duck': '',
     \     'linecount': '%l/%L'
     \ },
     \ 'component_expand': {
@@ -134,10 +135,10 @@ let g:lightline = {
     \ 'component_type': {
     \     'bufferline': 'tabsel',
     \ },
-	\ 'tabline_separator': { 'left': '', 'right': '' },
-	\ 'tabline_subseparator': { 'left': ' ', 'right': ' ' },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' },
+    \ 'tabline_separator': { 'left': '', 'right': '' },
+    \ 'tabline_subseparator': { 'left': ' ', 'right': ' ' },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' },
     \ 'mode_map': {
     \     'n' : 'NORM',
     \     'i' : 'INST',
@@ -154,15 +155,15 @@ let g:lightline = {
 \ }
 
 function! LightlineReadonly()
-	return &readonly ? '' : ''
+    return &readonly ? '' : ''
 endfunction
 
 function! LightlineFugitive()
-	if exists('*FugitiveHead')
-		let branch = FugitiveHead()
-		return branch !=# '' ? ' '.branch : ''
-	endif
-	return ''
+    if exists('*FugitiveHead')
+        let branch = FugitiveHead()
+        return branch !=# '' ? ' '.branch : ''
+    endif
+    return ''
 endfunction
 
 
