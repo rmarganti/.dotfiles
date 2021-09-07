@@ -90,6 +90,9 @@ short_pwd() {
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# Bat config
+export BAT_THEME="Nord"
+
 # iTerm Shell Integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
