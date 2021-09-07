@@ -1,5 +1,16 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["prisma", "php", "rust"],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "php",
+        "prisma",
+        "rust",
+        "scss",
+        "typescript",
+        "typescriptreact"
+    ],
     "codeLens.enable": false,
     "diagnostic.maxWindowHeight": 16,
     "diagnostic.errorSign": "•",
@@ -41,6 +52,7 @@
         }
     },
     "eslint.autoFixOnSave": true,
+    "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
     "rust.clippy_preference": "on",
     "suggest.completionItemKindLabels": {
