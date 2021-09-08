@@ -166,17 +166,17 @@ function! s:show_documentation()
     endif
 endfunction
 
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Code previous error
+nmap <Leader>ck <Plug>(coc-diagnostic-prev)
+
+" Code previous error
+nmap <Leader>cj <Plug>(coc-diagnostic-next)
 
 " Code document Symbols.
 nnoremap <Leader>cs :CocList outline<CR>
 
 " Code Workspace symbols
 nnoremap <Leader>cw :CocList -I symbols<CR>
-
-" Code List errors
-nnoremap <Leader>cl :CocList locationlist<CR>
 
 " Code Commands
 nnoremap <Leader>cc :CocList commands<CR>
