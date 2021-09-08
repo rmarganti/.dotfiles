@@ -1,8 +1,9 @@
 return function()
 	require('bufferline').setup({
 		options = {
-			numbers = 'ordinal',
-			number_style = '',
+			numbers = function(opts)
+                return string.format('%s.', opts.ordinal)
+            end,
 			separator_style = 'slant'
 		},
 	})
