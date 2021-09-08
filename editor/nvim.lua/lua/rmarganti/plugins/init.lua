@@ -41,7 +41,6 @@ packer.startup(function(use)
         opt = true,
     })
 
-
     -- Tree-Sitter
     use({
         'nvim-treesitter/nvim-treesitter',
@@ -74,7 +73,6 @@ packer.startup(function(use)
         config = require('rmarganti.plugins.config.lualine'),
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     })
-
 
     --------------------------------
     -- LSP
@@ -145,10 +143,13 @@ packer.startup(function(use)
 
     -- Sugar for file operations (rename, move, etc.).
     use('tpope/vim-eunuch')
-    --
+
     --  Random shortcuts that typically work in pairs.
     use('tpope/vim-unimpaired')
 
     -- Close all buffers but current one.
     use('vim-scripts/BufOnly.vim')
+
+    -- Git
+    use('tpope/vim-fugitive')
 end)
