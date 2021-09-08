@@ -82,10 +82,10 @@ utils.map('n', 'ca', ':Lspsaga code_action<CR>')
 utils.map('n', 'cr', ":lua require('lspsaga.rename').rename()<CR>")
 
 -- Previous diagnostic
-utils.map('n', '<Leader>cp', ':Lspsaga diagnostic_jump_prev<CR>')
+utils.map('n', '<Leader>cj', ':Lspsaga diagnostic_jump_prev<CR>')
 
 -- Next diagnostic
-utils.map('n', '<Leader>cn', ':Lspsaga diagnostic_jump_next<CR>')
+utils.map('n', '<Leader>ck', ':Lspsaga diagnostic_jump_next<CR>')
 
 -- Scroll down documents.
 utils.map(
