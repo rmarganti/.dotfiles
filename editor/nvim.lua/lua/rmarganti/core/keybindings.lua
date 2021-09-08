@@ -111,7 +111,7 @@ vim.cmd(
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
 
 -- Code Workspace symbols
-utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").dynamic_workspace_symbols({})<CR>')
+utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>')
 
 
 ------------------------------------------------
