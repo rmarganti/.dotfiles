@@ -137,8 +137,18 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
         module = 'telescope',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+        requires = {
+            {'nvim-lua/popup.nvim'},
+            {'nvim-lua/plenary.nvim'},
+            {'nvim-telescope/telescope-fzf-native.nvim'}
+        },
         config = require('rmarganti.plugins.config.telescope'),
+    })
+
+    -- Use FZF for search
+    use({
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
     })
 
     -- Sugar for file operations (rename, move, etc.).
