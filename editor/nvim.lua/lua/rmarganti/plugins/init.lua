@@ -54,7 +54,7 @@ packer.startup(function(use)
     -- Theme/UI
     --------------------------------
 
-     use({
+    use({
         'shaunsingh/nord.nvim',
         config = require('rmarganti.plugins.config.nord')
     })
@@ -120,6 +120,13 @@ packer.startup(function(use)
 
     -- Easily comment/uncomment code.
     use('b3nj5m1n/kommentary')
+
+    -- Auto-close brackets, etc.
+    use({
+        'windwp/nvim-autopairs',
+        after = 'nvim-compe',
+        config = require('rmarganti.plugins.config.nvim-autopairs')
+    })
 
     --------------------------------
     -- Tmux integration

@@ -58,7 +58,7 @@ utils.map('n', '<Leader>bo', ':BufOnly<CR>')
 
 -- Code completion.
 utils.map('i', '<Tab>', "compe#confirm({ 'keys': '<Tab>', 'select': v:true })", { expr = true });
-utils.map('i', '<CR>', "compe#confirm({ 'keys': '<CR>', 'select': v:true })", { expr = true });
+utils.map('i', '<CR>', [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]], { expr = true });
 utils.map('i', '<C-e>', 'compe#close("<C-e>")', { expr = true })
 utils.map('i', '<C-f>', 'compe#scroll({ "delta": +4 })', { expr = true })
 utils.map('i', '<C-d>', 'compe#scroll({ "delta": -4 })', { expr = true })
@@ -203,7 +203,7 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map('n', '<Leader>sf', '<cmd>Telescope find_files<CR>')
+utils.map('n', '<Leader>sf', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>')
 
 -- Search Text
 utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')

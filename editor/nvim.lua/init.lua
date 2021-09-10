@@ -26,8 +26,6 @@ vim.g.loaded_remote_plugins = false
 local async
 
 async = vim.loop.new_async(vim.schedule_wrap(function()
-	---- Doom Configurations ------------------------
-	-------------------------------------------------
 	vim.defer_fn(function()
 		require('rmarganti.core')
 
