@@ -91,7 +91,7 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Bat config
-export BAT_THEME="Nord"
+export BAT_THEME="base16-256"
 
 # iTerm Shell Integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
