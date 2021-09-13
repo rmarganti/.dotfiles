@@ -55,8 +55,8 @@ packer.startup(function(use)
     --------------------------------
 
     use({
-        'shaunsingh/nord.nvim',
-        config = require('rmarganti.plugins.config.nord')
+        'sainnhe/everforest',
+        config = require('rmarganti.plugins.config.everforest')
     })
 
     use('rbgrouleff/bclose.vim')
@@ -71,7 +71,8 @@ packer.startup(function(use)
     use({
         'hoob3rt/lualine.nvim',
         config = require('rmarganti.plugins.config.lualine'),
-        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        event = "ColorScheme"
     })
 
     --------------------------------
