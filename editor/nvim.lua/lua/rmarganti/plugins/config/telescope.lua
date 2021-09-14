@@ -26,8 +26,13 @@ return function()
                     preview_cutoff = 40
                 },
                 width = 0.9
+            },
+            file_ignore_patterns = {
+                '.git',
+                'node_modules',
+                'vendor',
             }
-        }
+        },
     })
 
     require('telescope').load_extension('fzf')
