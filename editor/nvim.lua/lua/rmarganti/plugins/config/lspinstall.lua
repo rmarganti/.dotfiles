@@ -1,5 +1,7 @@
 return function()
     local lspconfig = require('lspconfig')
+    local eslint = require('rmarganti.plugins.config.efm.eslint')
+    local prettier = require('rmarganti.plugins.config.efm.prettier')
 
     -- https://github.com/kabouzeid/nvim-lspinstall#advanced-configuration-recommended
     local function setup_servers()
@@ -9,13 +11,46 @@ return function()
         -- Use default config for every installed language server.
         local servers = require('lspinstall').installed_servers()
         for _, server in pairs(servers) do
+			if server == 'efm' then
+                lspconfig.efm.setup({
+                    init_options = {
+                        documentFormatting = true,
+                    },
+                    filetypes = {
+                        'css',
+                        'html',
+                        'javascript',
+                        'javascriptreact',
+                        'json',
+                        'markdown',
+                        'scss',
+                        'typescript',
+                        'typescriptreact',
+                        'yaml',
+                    },
+                    settings = {
+                        rootMarkers = { ".git/" },
+                        languages = {
+                            css = { prettier },
+                            html = { prettier },
+                            javascript = { prettier, eslint },
+                            javascriptreact = { prettier, eslint },
+                            json = { prettier },
+                            markdown = { prettier },
+                            scss = { prettier },
+                            typescript = { prettier, eslint },
+                            typescriptreact = { prettier, eslint },
+                            yaml = { prettier },
+                        },
+                    },
+                })
 			-- Configure sumneko for neovim lua development
-			if server == 'lua' then
+			elseif server == 'lua' then
 				local lua_path = vim.split(package.path, ';')
 				table.insert(lua_path, 'lua/?.lua')
 				table.insert(lua_path, 'lua/?/init.lua')
 
-				lspconfig[server].setup({
+				lspconfig.lua.setup({
 					settings = {
 						Lua = {
 							awakened = { cat = true },
@@ -40,7 +75,27 @@ return function()
 						},
 					},
 				})
-			else
+            elseif server == 'typescript' then
+                lspconfig.typescript.setup({
+                    on_attach = function(client, _)
+                        -- This makes sure tsserver is not used for formatting (I prefer prettier)
+                        client.resolved_capabilities.document_formatting = false
+                    end,
+                    settings = {
+                        documentFormatting = false
+                    }
+                })
+            elseif server == 'json' then
+                lspconfig.json.setup({
+                    on_attach = function(client, _)
+                        -- This makes sure tsserver is not used for formatting (I prefer prettier)
+                        client.resolved_capabilities.document_formatting = false
+                    end,
+                    settings = {
+                        documentFormatting = false
+                    }
+                })
+            else
 				-- Use default settings for all the other language servers
 				lspconfig[server].setup({})
 			end
