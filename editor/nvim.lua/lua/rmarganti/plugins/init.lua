@@ -168,6 +168,9 @@ packer.startup(function(use)
     -- Close all buffers but current one.
     use('vim-scripts/BufOnly.vim')
 
-    -- Git
+    -- Git.
     use('tpope/vim-fugitive')
+
+    -- Make more things repeatalble.
+    use('tpope/vim-repeat')
 end)
