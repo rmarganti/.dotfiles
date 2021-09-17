@@ -89,14 +89,20 @@ packer.startup(function(use)
     use {
         'kabouzeid/nvim-lspinstall',
         config = require('rmarganti.plugins.config.lspinstall'),
-        after = 'nvim-lspconfig'
+        after = 'nvim-cmp'
     }
 
     -- Code completion.
     use({
-        'hrsh7th/nvim-compe',
-        config = require('rmarganti.plugins.config.compe'),
+        'hrsh7th/nvim-cmp',
+        config = require('rmarganti.plugins.config.cmp'),
         after = 'nvim-lspconfig',
+        requires = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'tzachar/cmp-tabnine', run='./install.sh' },
+            { 'hrsh7th/vim-vsnip' }
+        },
     })
 
     -- UI for common LSP actions.
@@ -125,7 +131,7 @@ packer.startup(function(use)
     -- Auto-close brackets, etc.
     use({
         'windwp/nvim-autopairs',
-        after = 'nvim-compe',
+        after = 'nvim-cmp',
         config = require('rmarganti.plugins.config.nvim-autopairs')
     })
 
@@ -146,9 +152,9 @@ packer.startup(function(use)
         cmd = 'Telescope',
         module = 'telescope',
         requires = {
-            {'nvim-lua/popup.nvim'},
-            {'nvim-lua/plenary.nvim'},
-            {'nvim-telescope/telescope-fzf-native.nvim'}
+            { 'nvim-lua/popup.nvim' },
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim' }
         },
         config = require('rmarganti.plugins.config.telescope'),
     })

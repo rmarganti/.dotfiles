@@ -57,11 +57,7 @@ utils.map('n', '<Leader>bo', ':BufOnly<CR>')
 ------------------------------------------------
 
 -- Code completion.
-utils.map('i', '<Tab>', "compe#confirm({ 'keys': '<Tab>', 'select': v:true })", { expr = true });
-utils.map('i', '<CR>', [[compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))]], { expr = true });
-utils.map('i', '<C-e>', 'compe#close("<C-e>")', { expr = true })
-utils.map('i', '<C-f>', 'compe#scroll({ "delta": +4 })', { expr = true })
-utils.map('i', '<C-d>', 'compe#scroll({ "delta": -4 })', { expr = true })
+-- NOTE: These are set in 'lua/rmarganti/plugins/config/cmp.lua'
 
 -- Goto Definition.
 utils.map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
