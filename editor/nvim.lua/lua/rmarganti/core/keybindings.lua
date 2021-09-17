@@ -159,7 +159,9 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 --
 ------------------------------------------------
 
--- TODO
+utils.map('n', '<Leader>gc', '<cmd>lua require("telescope.builtin").git_commits({})<CR>')
+utils.map('n', '<Leader>gb', '<cmd>lua require("telescope.builtin").git_branches({})<CR>')
+utils.map('n', '<Leader>gs', '<cmd>lua require("telescope.builtin").git_status({})<CR>')
 
 
 ------------------------------------------------
