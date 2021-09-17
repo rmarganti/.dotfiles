@@ -45,10 +45,14 @@ packer.startup(function(use)
     use({
         'nvim-treesitter/nvim-treesitter',
         config = require('rmarganti.plugins.config.treesitter'),
-        run = ':TSUpdate'
+        run = ':TSUpdate',
+        event = 'ColorScheme'
     })
 
-    use('nvim-treesitter/nvim-treesitter-textobjects')
+    use({
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        after = 'nvim-treesitter',
+    })
 
     --------------------------------
     -- Theme/UI
@@ -59,20 +63,25 @@ packer.startup(function(use)
         config = require('rmarganti.plugins.config.everforest')
     })
 
-    use('rbgrouleff/bclose.vim')
-    use('francoiscabrol/ranger.vim')
+    use({
+        'rbgrouleff/bclose.vim',
+        event = 'BufWinEnter'
+    })
+
+    use({
+        'francoiscabrol/ranger.vim',
+        cmd = 'Ranger',
+    })
 
     use({
         'akinsho/nvim-bufferline.lua',
         config = require('rmarganti.plugins.config.bufferline'),
-        event = "ColorScheme",
     })
 
     use({
         'hoob3rt/lualine.nvim',
         config = require('rmarganti.plugins.config.lualine'),
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
-        event = "ColorScheme"
     })
 
     --------------------------------
@@ -83,27 +92,28 @@ packer.startup(function(use)
     use({
         'neovim/nvim-lspconfig',
         config = require('rmarganti.plugins.config.lspconfig'),
+        event = 'ColorScheme',
     })
 
     -- Adds LSPInstall command.
     use {
         'kabouzeid/nvim-lspinstall',
         config = require('rmarganti.plugins.config.lspinstall'),
-        after = 'nvim-cmp'
+        after = 'nvim-lspconfig'
     }
 
     -- Code completion.
     use({
         'hrsh7th/nvim-cmp',
         config = require('rmarganti.plugins.config.cmp'),
-        after = 'nvim-lspconfig',
-        requires = {
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'tzachar/cmp-tabnine', run='./install.sh' },
-            { 'hrsh7th/vim-vsnip' }
-        },
+        event = 'InsertEnter'
     })
+
+    -- Completion sources.
+    use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
+    use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
+    use({ 'tzachar/cmp-tabnine', run='./install.sh', after = 'nvim-cmp' })
+    use({ 'hrsh7th/vim-vsnip', after = 'nvim-cmp' })
 
     -- UI for common LSP actions.
     use({
@@ -116,17 +126,26 @@ packer.startup(function(use)
     --------------------------------
 
     -- Quickly surround text with brackets, quotes, etc.
-    use('tpope/vim-surround')
+    use({
+        'tpope/vim-surround',
+        event = 'BufWinEnter'
+    })
 
     -- Easily replace with contents of register.
-    use('vim-scripts/ReplaceWithRegister')
+    use({
+        'vim-scripts/ReplaceWithRegister',
+        event = 'BufWinEnter'
+    })
 
     --------------------------------
     -- Code Specific
     --------------------------------
 
     -- Easily comment/uncomment code.
-    use('b3nj5m1n/kommentary')
+    use({
+        'b3nj5m1n/kommentary',
+        event = 'BufWinEnter'
+    })
 
     -- Auto-close brackets, etc.
     use({
@@ -139,8 +158,15 @@ packer.startup(function(use)
     -- Tmux integration
     --------------------------------
 
-    use('christoomey/vim-tmux-navigator')
-    use('tmux-plugins/vim-tmux-focus-events')
+    use({
+        'christoomey/vim-tmux-navigator',
+        event = 'ColorScheme'
+    })
+
+    use({
+        'tmux-plugins/vim-tmux-focus-events',
+        event = 'ColorScheme'
+    })
 
     --------------------------------
     -- Misc
@@ -154,29 +180,50 @@ packer.startup(function(use)
         requires = {
             { 'nvim-lua/popup.nvim' },
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim' }
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                run = 'make',
+            }
         },
         config = require('rmarganti.plugins.config.telescope'),
     })
 
-    -- Use FZF for search
+    -- Sugar for file operations (rename, move, etc.).
     use({
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make'
+        'tpope/vim-eunuch',
+        event = 'BufWinEnter',
     })
 
-    -- Sugar for file operations (rename, move, etc.).
-    use('tpope/vim-eunuch')
-
     --  Random shortcuts that typically work in pairs.
-    use('tpope/vim-unimpaired')
+    use({
+        'tpope/vim-unimpaired',
+        event = 'BufWinEnter',
+    })
 
     -- Close all buffers but current one.
-    use('vim-scripts/BufOnly.vim')
+    use({
+        'vim-scripts/BufOnly.vim',
+        event = 'ColorScheme'
+    })
 
     -- Git.
-    use('tpope/vim-fugitive')
+    use({
+        'tpope/vim-fugitive',
+        event = 'BufWinEnter',
+    })
 
     -- Make more things repeatalble.
-    use('tpope/vim-repeat')
+    use({
+        'tpope/vim-repeat',
+        event = 'BufWinEnter',
+    })
+
+    -- Code spell-checking.
+    use({
+        'kamykn/spelunker.vim',
+        setup = function()
+            vim.g.spelunker_check_type = 2
+        end,
+        event = 'BufWinEnter',
+    })
 end)
