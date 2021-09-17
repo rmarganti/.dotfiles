@@ -129,7 +129,7 @@ utils.map('n', '<Leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 ------------------------------------------------
 
 -- File Edit. Pre-populates the current directory.
-utils.map('n', '<Leader>fe', '<C-R>=expand("%:p:h") . "/" <CR>')
+utils.map('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>')
 
 -- File Copy
 utils.map('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>')
