@@ -13,8 +13,15 @@ return function()
                     ["ab"] = "@block.outer",
                     ["ib"] = "@block.inner",
                     ["af"] = "@function.outer",
-                    ["if"] = "@function.inner"
+                    ["if"] = "@function.inner",
                 }
+            }
+        },
+        textsubjects = {
+            enable = true,
+            keymaps = {
+                ['.'] = 'textsubjects-smart',
+                [';'] = 'textsubjects-container-outer',
             }
         },
 	})

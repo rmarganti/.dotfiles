@@ -11,7 +11,7 @@ return function()
         -- Use default config for every installed language server.
         local servers = require('lspinstall').installed_servers()
         for _, server in pairs(servers) do
-			if server == 'efm' then
+            if server == 'efm' then
                 lspconfig.efm.setup({
                     init_options = {
                         documentFormatting = true,
@@ -44,37 +44,37 @@ return function()
                         },
                     },
                 })
-			-- Configure sumneko for neovim lua development
-			elseif server == 'lua' then
-				local lua_path = vim.split(package.path, ';')
-				table.insert(lua_path, 'lua/?.lua')
-				table.insert(lua_path, 'lua/?/init.lua')
+            -- Configure sumneko for neovim lua development
+            elseif server == 'lua' then
+                local lua_path = vim.split(package.path, ';')
+                table.insert(lua_path, 'lua/?.lua')
+                table.insert(lua_path, 'lua/?/init.lua')
 
-				lspconfig.lua.setup({
-					settings = {
-						Lua = {
-							awakened = { cat = true },
-							runtime = {
-								-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-								version = 'LuaJIT',
-								-- Setup your lua path
-								path = lua_path,
-							},
-							diagnostics = {
-								-- Get the language server to recognize the `vim` global
-								globals = { 'vim' },
-							},
-							workspace = {
-								-- Make the server aware of Neovim runtime files
-								library = {},
-								maxPreload = 2000,
-								preloadFileSize = 150,
-							},
-							-- Do not send telemetry data containing a randomized but unique identifier
-							telemetry = { enable = false },
-						},
-					},
-				})
+                lspconfig.lua.setup({
+                    settings = {
+                        Lua = {
+                            awakened = { cat = true },
+                            runtime = {
+                                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                version = 'LuaJIT',
+                                -- Setup your lua path
+                                path = lua_path,
+                            },
+                            diagnostics = {
+                                -- Get the language server to recognize the `vim` global
+                                globals = { 'vim' },
+                            },
+                            workspace = {
+                                -- Make the server aware of Neovim runtime files
+                                library = {},
+                                maxPreload = 2000,
+                                preloadFileSize = 150,
+                            },
+                            -- Do not send telemetry data containing a randomized but unique identifier
+                            telemetry = { enable = false },
+                        },
+                    },
+                })
             elseif server == 'typescript' then
                 lspconfig.typescript.setup({
                     on_attach = function(client, _)
@@ -96,9 +96,9 @@ return function()
                     }
                 })
             else
-				-- Use default settings for all the other language servers
-				lspconfig[server].setup({})
-			end
+                -- Use default settings for all the other language servers
+                lspconfig[server].setup({})
+            end
         end
     end
 

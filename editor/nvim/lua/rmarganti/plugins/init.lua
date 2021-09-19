@@ -54,6 +54,11 @@ packer.startup(function(use)
         after = 'nvim-treesitter',
     })
 
+    use({
+        'RRethy/nvim-treesitter-textsubjects',
+        after = 'nvim-treesitter',
+    })
+
     --------------------------------
     -- Theme/UI
     --------------------------------
