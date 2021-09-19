@@ -1,5 +1,39 @@
 return function()
+    -- The color used for unfocused windows in Tmux.
+    local unfocused_window_bg = '#404649'
+
 	require('bufferline').setup({
+        highlights = {
+            background = {
+                guibg = unfocused_window_bg,
+            },
+            fill = {
+                guibg = unfocused_window_bg,
+            },
+            pick_selected = {
+                guibg = 'none',
+            },
+            pick_visible = {
+                guibg = unfocused_window_bg,
+            },
+            pick = {
+                guibg = unfocused_window_bg,
+            },
+            separator_selected = {
+                guifg = unfocused_window_bg,
+            },
+            separator_visible = {
+                guifg = unfocused_window_bg,
+            },
+            separator = {
+                guibg = unfocused_window_bg,
+                guifg = unfocused_window_bg,
+            },
+
+		--[[ BufferLinePick = { fg = fg, bg = bg, gui = 'bold' },
+		BufferLinePickSelected = { fg = blue, bg = bg, gui = 'bold,italic' },
+		BufferLinePickVisible = { fg = fg, bg = bg_alt }, ]]
+        },
 		options = {
             diagnostics = 'nvim_lsp',
             diagnostics_indicator = function(_, level, _, _)
