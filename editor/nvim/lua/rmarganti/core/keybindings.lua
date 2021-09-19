@@ -72,10 +72,11 @@ utils.map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations(
 utils.map('n', 'gh', ':Lspsaga hover_doc<CR>')
 
 -- Code Actions.
-utils.map('n', 'ca', ':Lspsaga code_action<CR>')
+utils.map('n', '<Leader>ca', ':Lspsaga code_action<CR>')
+utils.map('v', '<Leader>ca', [[:<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]])
 
 -- Code symbol Rename.
-utils.map('n', 'cr', ":lua require('lspsaga.rename').rename()<CR>")
+utils.map('n', '<Leader>cr', ":lua require('lspsaga.rename').rename()<CR>")
 
 -- Previous diagnostic
 utils.map('n', '<Leader>cj', ':Lspsaga diagnostic_jump_next<CR>')
@@ -97,13 +98,7 @@ utils.map(
     ":lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"
 )
 
--- Code Actions.
-vim.cmd(
-    'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()'
-)
-
-
--- Code document Symbols.
+-- Code file Symbols.
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
 
 -- Code Workspace symbols
