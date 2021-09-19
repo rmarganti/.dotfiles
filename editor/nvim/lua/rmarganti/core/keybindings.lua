@@ -228,6 +228,24 @@ utils.map('n', '<Leader>sh', ':new<CR>')
 
 ------------------------------------------------
 --
+-- Testing
+--
+------------------------------------------------
+
+-- Run Tests for the whole File.
+utils.map('n', '<Leader>tf', ':Ultest<CR>')
+
+-- Run the Test that is Nearest.
+utils.map('n', '<Leader>tn', ':UltestNearest<CR>')
+
+-- Jump to the next Test.
+utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)')
+
+-- Jump to the previous Test.
+utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)')
+
+------------------------------------------------
+--
 -- Windows
 --
 ------------------------------------------------

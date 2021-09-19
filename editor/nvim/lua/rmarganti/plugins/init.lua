@@ -154,6 +154,13 @@ packer.startup(function(use)
         config = require('rmarganti.plugins.config.nvim-autopairs')
     })
 
+    use({
+        'rcarriga/vim-ultest',
+        requires = { 'vim-test/vim-test' },
+        run = ':UpdateRemotePlugins',
+        event = 'BufWinEnter'
+    })
+
     --------------------------------
     -- Tmux integration
     --------------------------------
