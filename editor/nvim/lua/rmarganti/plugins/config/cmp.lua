@@ -13,7 +13,7 @@ return function()
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
-            ['<Tab>'] = cmp.mapping(
+            ['<TAB>'] = cmp.mapping(
                 function(fallback)
                     if vim.fn.pumvisible() == 1 then
                         cmp.confirm({
