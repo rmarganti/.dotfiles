@@ -1,4 +1,5 @@
 return function()
+    local utils = require('rmarganti.utils')
     local lspconfig = require('lspconfig')
     local eslint = require('rmarganti.plugins.config.efm.eslint')
     local prettier = require('rmarganti.plugins.config.efm.prettier')
@@ -75,18 +76,8 @@ return function()
                         },
                     },
                 })
-            elseif server == 'typescript' then
+            elseif utils.has_value({ 'html', 'json', 'typescript' }, server) then
                 lspconfig.typescript.setup({
-                    on_attach = function(client, _)
-                        -- This makes sure tsserver is not used for formatting (I prefer prettier)
-                        client.resolved_capabilities.document_formatting = false
-                    end,
-                    settings = {
-                        documentFormatting = false
-                    }
-                })
-            elseif server == 'json' then
-                lspconfig.json.setup({
                     on_attach = function(client, _)
                         -- This makes sure tsserver is not used for formatting (I prefer prettier)
                         client.resolved_capabilities.document_formatting = false
