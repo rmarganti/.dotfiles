@@ -4,43 +4,42 @@ return function()
 
 	require('bufferline').setup({
         highlights = {
-            background = {
-                guibg = unfocused_window_bg,
-            },
+            background = { guibg = unfocused_window_bg, },
             buffer_visible = {
                 guibg = unfocused_window_bg,
-                guifg = {
-                    attribute = "fg",
-                    highlight = "Normal"
-                },
+                guifg = { attribute = "fg", highlight = "Normal" },
             },
-            fill = {
-                guibg = unfocused_window_bg,
-            },
-            pick_selected = {
-                guibg = 'none',
-            },
-            pick_visible = {
-                guibg = unfocused_window_bg,
-            },
-            pick = {
-                guibg = unfocused_window_bg,
-            },
-            separator_selected = {
-                guifg = unfocused_window_bg,
-            },
-            separator_visible = {
-                guibg = unfocused_window_bg,
-                guifg = unfocused_window_bg,
-            },
+            diagnostic = { guibg = unfocused_window_bg },
+            diagnostic_visible = { guibg = unfocused_window_bg },
+            duplicate = { guibg = unfocused_window_bg },
+            duplicate_visible = { guibg = unfocused_window_bg },
+            error = { guibg = unfocused_window_bg },
+            error_visible = { guibg = unfocused_window_bg },
+            error_diagnostic = { guibg = unfocused_window_bg },
+            error_diagnostic_visible = { guibg = unfocused_window_bg },
+            fill = { guibg = unfocused_window_bg, },
+            info = { guibg = unfocused_window_bg },
+            info_visible = { guibg = unfocused_window_bg },
+            info_diagnostic = { guibg = unfocused_window_bg },
+            info_diagnostic_visible = { guibg = unfocused_window_bg },
+            modified = { guibg = unfocused_window_bg },
+            modified_visible = { guibg = unfocused_window_bg },
+            pick_selected = { guibg = 'none', },
+            pick_visible = { guibg = unfocused_window_bg, },
+            pick = { guibg = unfocused_window_bg, },
             separator = {
                 guibg = unfocused_window_bg,
                 guifg = unfocused_window_bg,
             },
-
-		--[[ BufferLinePick = { fg = fg, bg = bg, gui = 'bold' },
-		BufferLinePickSelected = { fg = blue, bg = bg, gui = 'bold,italic' },
-		BufferLinePickVisible = { fg = fg, bg = bg_alt }, ]]
+            separator_selected = { guifg = unfocused_window_bg, },
+            separator_visible = {
+                guibg = unfocused_window_bg,
+                guifg = unfocused_window_bg,
+            },
+            warning = { guibg = unfocused_window_bg },
+            warning_visible = { guibg = unfocused_window_bg },
+            warning_diagnostic = { guibg = unfocused_window_bg },
+            warning_diagnostic_visible = { guibg = unfocused_window_bg },
         },
 		options = {
             diagnostics = 'nvim_lsp',
