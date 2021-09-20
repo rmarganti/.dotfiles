@@ -1,5 +1,7 @@
 return function()
     require('lualine').setup({
-        options = {}
+        options = {
+            theme = 'everforest',
+        }
     })
 end
