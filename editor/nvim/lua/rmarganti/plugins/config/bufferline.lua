@@ -7,6 +7,13 @@ return function()
             background = {
                 guibg = unfocused_window_bg,
             },
+            buffer_visible = {
+                guibg = unfocused_window_bg,
+                guifg = {
+                    attribute = "fg",
+                    highlight = "Normal"
+                },
+            },
             fill = {
                 guibg = unfocused_window_bg,
             },
@@ -23,6 +30,7 @@ return function()
                 guifg = unfocused_window_bg,
             },
             separator_visible = {
+                guibg = unfocused_window_bg,
                 guifg = unfocused_window_bg,
             },
             separator = {
