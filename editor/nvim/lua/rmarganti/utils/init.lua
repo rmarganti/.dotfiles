@@ -12,6 +12,7 @@ M.map = function(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- Determine if a table contains a value.
 M.has_value = function(tab, val)
     for _, value in ipairs(tab) do
         if value == val then
