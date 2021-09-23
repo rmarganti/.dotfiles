@@ -118,6 +118,7 @@ packer.startup(function(use)
     use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
     use({ 'tzachar/cmp-tabnine', run='./install.sh', after = 'nvim-cmp' })
+    use({ 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' })
     use({ 'hrsh7th/vim-vsnip', after = 'nvim-cmp' })
 
     -- UI for common LSP actions.
