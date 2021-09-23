@@ -69,6 +69,9 @@ vim.opt.scrolloff=5
 -- Always show at least 5 columns to the left/right the cursor.
 vim.opt.sidescrolloff=10
 
+-- Highlight the current line. 
+vim.opt.cursorline = true
+
 
 ------------------------------------------------
 --
