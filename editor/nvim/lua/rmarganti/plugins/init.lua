@@ -236,7 +236,14 @@ packer.startup(function(use)
         'kamykn/spelunker.vim',
         setup = function()
             vim.g.spelunker_check_type = 2
+            vim.g.spelunker_spell_bad_group = 'SpellBad'
         end,
+        requires = {
+            {
+                'kamykn/popup-menu.nvim',
+                event = 'BufWinEnter'
+            }
+        },
         event = 'BufWinEnter',
     })
 end)
