@@ -246,6 +246,9 @@ utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)')
 -- Jump to the previous Test.
 utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)')
 
+-- Jump to the previous Test.
+utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
+
 ------------------------------------------------
 --
 -- Windows
