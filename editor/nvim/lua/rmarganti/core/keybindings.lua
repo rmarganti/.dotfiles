@@ -1,4 +1,4 @@
-local utils = require('rmarganti.utils')
+local utils = require('rmarganti.utils.misc')
 
 -- Set <Space> as the leader key.
 utils.map('n', '<Space>', '<Nop>')
@@ -114,7 +114,14 @@ utils.map('n', '<Leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 --
 ------------------------------------------------
 
--- TODO
+-- Edit nearest Changelog
+utils.map('n', '<Leader>ec', [[:lua require('rmarganti.edit-nearest').edit_nearest('CHANGELOG.md')<CR>]])
+
+-- Edit nearest Env
+utils.map('n', '<Leader>ee', [[:lua require('rmarganti.edit-nearest').edit_nearest('.env')<CR>]])
+
+-- Edit nearest Readme
+utils.map('n', '<Leader>er', [[:lua require('rmarganti.edit-nearest').edit_nearest('README.md')<CR>]])
 
 
 ------------------------------------------------

@@ -1,5 +1,5 @@
 return function()
-    local utils = require('rmarganti.utils')
+    local utils = require('rmarganti.utils.misc')
     local lspconfig = require('lspconfig')
     local eslint = require('rmarganti.plugins.config.efm.eslint')
     local prettier = require('rmarganti.plugins.config.efm.prettier')
