@@ -33,6 +33,7 @@ return function()
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'cmp_tabnine' },
+            { name = 'path' },
             { name = 'vsnip' },
         }
     })
