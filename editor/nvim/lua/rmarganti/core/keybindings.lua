@@ -249,6 +249,22 @@ utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)')
 -- Jump to the previous Test.
 utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
 
+
+------------------------------------------------
+--
+-- Toggle
+--
+------------------------------------------------
+
+-- Toggle Paste
+utils.map('n', '<Leader>tp', ':set invpaste paste?<CR>')
+
+-- Toggle Word wrap
+utils.map('n', '<Leader>tw', ':setlocal wrap!<CR>')
+
+-- Toggle Quick ix
+utils.map('n', '<Leader>tq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
+
 ------------------------------------------------
 --
 -- Windows
