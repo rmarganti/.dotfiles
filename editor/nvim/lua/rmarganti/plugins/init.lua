@@ -101,11 +101,11 @@ packer.startup(function(use)
     })
 
     -- Adds LSPInstall command.
-    use {
+    use ({
         'kabouzeid/nvim-lspinstall',
         config = require('rmarganti.plugins.config.lspinstall'),
         after = 'nvim-lspconfig'
-    }
+    })
 
     -- Code completion.
     use({

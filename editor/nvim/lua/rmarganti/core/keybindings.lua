@@ -241,10 +241,10 @@ utils.map('n', '<Leader>tf', ':Ultest<CR>')
 utils.map('n', '<Leader>tn', ':UltestNearest<CR>')
 
 -- Jump to the next Test.
-utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)')
+utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)', { noremap = false })
 
 -- Jump to the previous Test.
-utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)')
+utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { noremap = false })
 
 -- Jump to the previous Test.
 utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
