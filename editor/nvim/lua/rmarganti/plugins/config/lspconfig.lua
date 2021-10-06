@@ -12,10 +12,10 @@ return function()
 
     -- Set diagnostic icons.
     local signs = {
-        Error = "●",
-        Warning = "●",
-        Hint = "●",
-        Information = "●"
+        Error = "–",
+        Warning = "–",
+        Hint = "–",
+        Information = "–"
     }
 
     for type, icon in pairs(signs) do
