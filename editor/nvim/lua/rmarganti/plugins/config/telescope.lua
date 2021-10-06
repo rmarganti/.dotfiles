@@ -1,8 +1,8 @@
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
 return function()
-	local telescope = require('telescope')
+    local telescope = require('telescope')
 
-	telescope.setup({
+    telescope.setup({
         extensions = {
             fzf = {
                 fuzzy = true,                    -- false will only do exact matching

@@ -30,8 +30,8 @@ M.parent_directory = parent_directory;
 -- @param string path The path to the file
 -- @return boolean
 M.file_exists = function(path)
-	local stat = vim.loop.fs_stat(path)
-	return (stat and stat.type) or false
+    local stat = vim.loop.fs_stat(path)
+    return (stat and stat.type) or false
 end
 
 return M

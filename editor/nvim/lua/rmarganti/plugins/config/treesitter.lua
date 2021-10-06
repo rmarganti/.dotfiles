@@ -1,9 +1,9 @@
 return function()
-	require('nvim-treesitter.configs').setup({
+    require('nvim-treesitter.configs').setup({
         ensure_installed = 'all',
         ignore_install = { 'haskell' },
-		highlight = { enable = true },
-		indent = { enable = true },
+        highlight = { enable = true },
+        indent = { enable = true },
         textobjects = {
             select = {
                 enable = true,
@@ -24,5 +24,5 @@ return function()
                 [';'] = 'textsubjects-container-outer',
             }
         },
-	})
+    })
 end

@@ -25,12 +25,12 @@ vim.g.loaded_2html_plugin = false
 local async
 
 async = vim.loop.new_async(vim.schedule_wrap(function()
-	vim.defer_fn(function()
-		require('rmarganti.core')
+    vim.defer_fn(function()
+        require('rmarganti.core')
 
-		vim.opt.shadafile = ''
-		vim.defer_fn(function()
-			vim.cmd([[
+        vim.opt.shadafile = ''
+        vim.defer_fn(function()
+            vim.cmd([[
                 rshada!
                 doautocmd BufRead
                 syntax on
@@ -38,10 +38,10 @@ async = vim.loop.new_async(vim.schedule_wrap(function()
                 filetype plugin indent on
                 silent! bufdo e
             ]])
-		end, 15)
-	end, 0)
+        end, 15)
+    end, 0)
 
-	async:close()
+    async:close()
 end))
 
 async:send()

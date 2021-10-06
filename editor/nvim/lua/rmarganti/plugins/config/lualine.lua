@@ -9,7 +9,7 @@ return function()
         },
         sections = {
             lualine_a = { rubber_duck, 'mode'},
-            lualine_b = {'branch', 'diff'},
+            lualine_b = {'branch'},
             lualine_c = {'filename'},
             lualine_x = {'filetype'},
             lualine_y = {'progress'},

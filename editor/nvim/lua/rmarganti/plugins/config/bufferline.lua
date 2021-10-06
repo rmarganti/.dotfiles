@@ -2,7 +2,7 @@ return function()
     -- The color used for unfocused windows in Tmux.
     local unfocused_window_bg = '#404649'
 
-	require('bufferline').setup({
+    require('bufferline').setup({
         highlights = {
             background = { guibg = unfocused_window_bg, },
             buffer_visible = {
@@ -41,18 +41,18 @@ return function()
             warning_diagnostic = { guibg = unfocused_window_bg },
             warning_diagnostic_visible = { guibg = unfocused_window_bg },
         },
-		options = {
+        options = {
             diagnostics = 'nvim_lsp',
             diagnostics_indicator = function(_, level, _, _)
                   local icon = level:match("error") and " " or " "
                   return " " .. icon
             end,
-			numbers = function(opts)
+            numbers = function(opts)
                 return string.format('%s.', opts.ordinal)
             end,
-			separator_style = 'slant',
+            separator_style = 'slant',
             show_buffer_close_icons = false,
             show_close_icon = false,
-		},
-	})
+        },
+    })
 end
