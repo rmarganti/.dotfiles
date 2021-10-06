@@ -30,11 +30,20 @@ utils.map('n', '<Leader>bn', ':enew<CR>')
 -- Buffer Edit.
 utils.map('n', '<Leader>be', '<cmd>lua require("bufferline").pick_buffer()<CR>')
 
--- Buffer Left.
+-- Buffer Delete.
+utils.map('n', '<Leader>bd', '<cmd>BufferLinePickClose<CR>')
+
+-- Buffer focus Left.
 utils.map('n', '<leader>bh', '<cmd>lua require("bufferline").cycle(-1)<CR>')
 
--- Buffer Right.
+-- Buffer focus Right.
 utils.map('n', '<leader>bl', '<cmd>lua require("bufferline").cycle(1)<CR>')
+
+-- Buffer move Left.
+utils.map('n', '<leader>bH', '<cmd>BufferLineMovePrev<CR>')
+
+-- Buffer move Right.
+utils.map('n', '<leader>bL', '<cmd>BufferLineMoveNext<CR>')
 
 -- Buffer Quit.
 utils.map(
