@@ -3,28 +3,18 @@
 return function()
     local cmp = require('cmp')
 
-    local complete_or_fallback = cmp.mapping(
-        function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                cmp.confirm({
-                    behavior = cmp.ConfirmBehavior.Insert,
-                    select = true,
-                })
-            else
-                fallback()
-            end
-        end
-    )
-
     cmp.setup({
         formatting = {
-            format = require("lspkind").cmp_format({with_text = true, menu = ({
-                buffer = "[Buffer]",
-                nvim_lsp = "[LSP]",
-                luasnip = "[LuaSnip]",
-                nvim_lua = "[Lua]",
-                latex_symbols = "[Latex]",
-            })}),
+            format = require("lspkind").cmp_format({
+                with_text = true,
+                menu = ({
+                    buffer = "[Buffer]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[LuaSnip]",
+                    nvim_lua = "[Lua]",
+                    latex_symbols = "[Latex]",
+                })
+            }),
         },
         snippet = {
             expand = function(args)
@@ -35,7 +25,10 @@ return function()
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
-            ['<TAB>'] = complete_or_fallback,
+            ['<Tab>'] = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
+            }),
         },
         sources = {
             { name = 'nvim_lsp' },
@@ -45,4 +38,5 @@ return function()
             { name = 'vsnip' },
         }
     })
+
 end
