@@ -87,6 +87,16 @@ packer.startup(function(use)
         'hoob3rt/lualine.nvim',
         config = require('rmarganti.plugins.config.lualine'),
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        event = 'ColorScheme',
+    })
+
+    use({
+        'rlch/github-notifications.nvim',
+        config = require('rmarganti.plugins.config.github-notifications'),
+        module = 'github-notifications',
+        requires = {
+            'nvim-telescope/telescope.nvim',
+        },
     })
 
     --------------------------------
@@ -192,6 +202,20 @@ packer.startup(function(use)
     })
 
     --------------------------------
+    -- Utility
+    --------------------------------
+
+    use({
+        'nvim-lua/plenary.nvim',
+        module = 'plenary',
+    })
+
+    use({
+        'nvim-lua/popup.nvim',
+        module = 'popup',
+    })
+
+    --------------------------------
     -- Misc
     --------------------------------
 
@@ -201,8 +225,6 @@ packer.startup(function(use)
         cmd = 'Telescope',
         module = 'telescope',
         requires = {
-            { 'nvim-lua/popup.nvim' },
-            { 'nvim-lua/plenary.nvim' },
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'make',
