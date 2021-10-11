@@ -17,6 +17,15 @@ return function()
     )
 
     cmp.setup({
+        formatting = {
+            format = require("lspkind").cmp_format({with_text = true, menu = ({
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                nvim_lua = "[Lua]",
+                latex_symbols = "[Latex]",
+            })}),
+        },
         snippet = {
             expand = function(args)
                 vim.fn["vsnip#anonymous"](args.body)
@@ -27,7 +36,6 @@ return function()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
             ['<TAB>'] = complete_or_fallback,
-            ['<CR>'] = complete_or_fallback,
         },
         sources = {
             { name = 'nvim_lsp' },

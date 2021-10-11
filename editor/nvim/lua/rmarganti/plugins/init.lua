@@ -101,9 +101,16 @@ packer.startup(function(use)
     })
 
     -- Adds LSPInstall command.
-    use ({
+    use({
         'kabouzeid/nvim-lspinstall',
         config = require('rmarganti.plugins.config.lspinstall'),
+        after = 'nvim-lspconfig'
+    })
+
+    -- Adds icons to auto-complete.
+    use({
+        'onsails/lspkind-nvim',
+        config = require('rmarganti.plugins.config.lspkind'),
         after = 'nvim-lspconfig'
     })
 
@@ -111,7 +118,7 @@ packer.startup(function(use)
     use({
         'hrsh7th/nvim-cmp',
         config = require('rmarganti.plugins.config.cmp'),
-        event = 'InsertEnter'
+        event = 'InsertEnter',
     })
 
     -- Completion sources.
