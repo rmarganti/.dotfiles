@@ -7,17 +7,16 @@ return function()
         -- Provide the missing :LspInstall
         require('lspinstall').setup()
 
-        -- Use default config for every installed language server.
         local servers = require('lspinstall').installed_servers()
+
         for _, server in pairs(servers) do
-            if server == 'efm' then
-                require('rmarganti.plugins.config.lspinstall.efm')(lspconfig)
-            elseif server == 'lua' then
+            if server == 'lua' then
                 require('rmarganti.plugins.config.lspinstall.lua')(lspconfig)
-            elseif utils.has_value({ 'html', 'json', 'typescript' }, server) then
+            elseif utils.has_value({ 'html', 'json', 'php', 'typescript' }, server) then
+                -- Disable the language server's `document_formatting` capability,
+                -- since we will use some other linter/formatter (prettier, etc).
                 lspconfig[server].setup({
                     on_attach = function(client, _)
-                        -- This makes sure tsserver is not used for formatting (I prefer prettier)
                         client.resolved_capabilities.document_formatting = false
                     end,
                     settings = {

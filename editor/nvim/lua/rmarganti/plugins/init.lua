@@ -118,6 +118,12 @@ packer.startup(function(use)
         after = 'nvim-lspconfig'
     })
 
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        config = require('rmarganti.plugins.config.null-ls'),
+        event = 'ColorScheme',
+    })
+
     -- Adds icons to auto-complete.
     use({
         'onsails/lspkind-nvim',

@@ -13,7 +13,6 @@ installed for every language you would like to support. That is easy as running
     - json
     - lua
     - prismals
-    - efm
     - rust
 
 ## Dependencies
