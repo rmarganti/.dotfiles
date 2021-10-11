@@ -81,6 +81,7 @@ packer.startup(function(use)
     use({
         'akinsho/nvim-bufferline.lua',
         config = require('rmarganti.plugins.config.bufferline'),
+        event = 'ColorScheme',
     })
 
     use({

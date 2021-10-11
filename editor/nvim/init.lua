@@ -22,6 +22,9 @@ vim.g.loaded_tarPlugin = false
 vim.g.loaded_zipPlugin = false
 vim.g.loaded_2html_plugin = false
 
+-- Won't show this until bufferline is loaded.
+vim.opt.showtabline = 0
+
 local async
 
 async = vim.loop.new_async(vim.schedule_wrap(function()

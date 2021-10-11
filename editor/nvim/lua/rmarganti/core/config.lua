@@ -4,7 +4,6 @@
 --
 ------------------------------------------------
 
-vim.opt.showtabline = 2
 vim.opt.laststatus = 2
 
 if vim.fn.exists('+termguicolors') == 1 then
@@ -69,7 +68,7 @@ vim.opt.scrolloff=5
 -- Always show at least 5 columns to the left/right the cursor.
 vim.opt.sidescrolloff=10
 
--- Highlight the current line. 
+-- Highlight the current line.
 vim.opt.cursorline = true
 
 
