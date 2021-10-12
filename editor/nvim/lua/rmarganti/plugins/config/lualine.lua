@@ -10,8 +10,8 @@ return function()
         sections = {
             lualine_a = { rubber_duck, 'mode'},
             lualine_b = {
+                require('github-notifications').statusline_notification_count,
                 'branch',
-                require('github-notifications').statusline_notification_count
             },
             lualine_c = {'filename'},
             lualine_x = {'filetype'},

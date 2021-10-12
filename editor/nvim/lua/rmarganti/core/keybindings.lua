@@ -180,7 +180,7 @@ utils.map('n', '<Leader>gb', '<cmd>lua require("telescope.builtin").git_branches
 utils.map('n', '<Leader>gs', '<cmd>lua require("telescope.builtin").git_status({})<CR>')
 
 -- GitHub Notifications
-utils.map('n', '<Leader>gn', '<cmd>lua require("telescope").extensions.ghn.ghn()<CR>')
+utils.map('n', '<Leader>gn', [[<cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]])
 
 
 ------------------------------------------------
