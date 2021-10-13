@@ -17,5 +17,6 @@ installed for every language you would like to support. That is easy as running
 
 ## Dependencies
 
-- eslint_d (https://github.com/mantoni/eslint_d.js)
-- prettierd (https://github.com/fsouza/prettierd)
+- [eslint_d](https://github.com/mantoni/eslint_d.js)
+- [prettierd](https://github.com/fsouza/prettierd)
+- [Github CLI](https://cli.github.com/)

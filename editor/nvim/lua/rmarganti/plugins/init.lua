@@ -91,6 +91,7 @@ packer.startup(function(use)
         event = 'ColorScheme',
     })
 
+    -- Show GitHub notification count in status line.
     use({
         'rlch/github-notifications.nvim',
         config = require('rmarganti.plugins.config.github-notifications'),
@@ -111,17 +112,17 @@ packer.startup(function(use)
         event = 'ColorScheme',
     })
 
+    use({
+        'jose-elias-alvarez/null-ls.nvim',
+        config = require('rmarganti.plugins.config.null-ls'),
+        after = 'nvim-lspconfig'
+    })
+
     -- Adds LSPInstall command.
     use({
         'kabouzeid/nvim-lspinstall',
         config = require('rmarganti.plugins.config.lspinstall'),
-        after = 'nvim-lspconfig'
-    })
-
-    use({
-        'jose-elias-alvarez/null-ls.nvim',
-        config = require('rmarganti.plugins.config.null-ls'),
-        event = 'ColorScheme',
+        after = 'null-ls.nvim'
     })
 
     -- Adds icons to auto-complete.
@@ -238,6 +239,14 @@ packer.startup(function(use)
             }
         },
         config = require('rmarganti.plugins.config.telescope'),
+    })
+
+    use({
+        'nvim-telescope/telescope-github.nvim',
+        after = 'telescope.nvim',
+        config = function()
+            require('telescope').load_extension('gh')
+        end
     })
 
     -- Sugar for file operations (rename, move, etc.).

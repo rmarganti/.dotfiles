@@ -17,12 +17,12 @@ utils.map('n', '<c-z>', '<Nop>')
 -- Disable ex mode
 utils.map('n', 'Q', '<Nop>')
 
+
 ------------------------------------------------
 --
 -- Buffers
 --
 ------------------------------------------------
-
 
 -- Buffer New.
 utils.map('n', '<Leader>bn', ':enew<CR>')
@@ -171,13 +171,19 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 ------------------------------------------------
 
 -- Git Commits
-utils.map('n', '<Leader>gc', '<cmd>lua require("telescope.builtin").git_commits({})<CR>')
+utils.map('n', '<Leader>gc', '<cmd>Telescope git_commits<CR>')
 
 -- Git Branches
-utils.map('n', '<Leader>gb', '<cmd>lua require("telescope.builtin").git_branches({})<CR>')
+utils.map('n', '<Leader>gb', '<cmd>Telescope git_branches<CR>')
 
 -- Git Status
-utils.map('n', '<Leader>gs', '<cmd>lua require("telescope.builtin").git_status({})<CR>')
+utils.map('n', '<Leader>gs', '<cmd>Telescope git_status<CR>')
+
+-- GitHub gists
+utils.map('n', '<Leader>gg', '<cmd>Telescope gh gist<CR>')
+
+-- GitHub Pull Requests
+utils.map('n', '<Leader>gp', '<cmd>Telescope gh pull_request<CR>')
 
 -- GitHub Notifications
 utils.map('n', '<Leader>gn', [[<cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]])
