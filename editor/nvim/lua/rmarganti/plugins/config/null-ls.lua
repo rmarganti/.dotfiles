@@ -25,20 +25,9 @@ return function()
         -- Lots of languages
         builtins.formatting.eslint_d,
         builtins.formatting.prettierd.with({
-            filetypes = {
-                "css",
-                "html",
-                "javascript",
-                "javascriptreact",
-                "json",
-                "markdown",
-                "scss",
-                "svelte",
-                "typescript",
-                "typescriptreact",
-                "vue",
-                "yaml",
-            }
+            condition = function()
+                return true
+            end
         }),
     }
 
