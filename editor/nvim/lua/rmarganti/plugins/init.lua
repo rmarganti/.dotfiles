@@ -232,21 +232,20 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
         module = 'telescope',
-        requires = {
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                run = 'make',
-            }
-        },
         config = require('rmarganti.plugins.config.telescope'),
+    })
+
+    use({
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        after = 'telescope.nvim',
+        config = require('rmarganti.plugins.config.telescope-fzf-native'),
     })
 
     use({
         'nvim-telescope/telescope-github.nvim',
         after = 'telescope.nvim',
-        config = function()
-            require('telescope').load_extension('gh')
-        end
+        config = require('rmarganti.plugins.config.telescope-github'),
     })
 
     -- Sugar for file operations (rename, move, etc.).

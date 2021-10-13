@@ -1,5 +1,5 @@
 return function()
-    local secrets = require 'rmarganti.secrets'
+    local secrets = require('rmarganti.secrets')
 
     require('telescope').load_extension('ghn')
 
