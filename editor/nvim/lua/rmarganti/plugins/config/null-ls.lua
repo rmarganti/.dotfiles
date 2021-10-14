@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins
@@ -38,3 +40,5 @@ return function()
 
     require('lspconfig')['null-ls'].setup({})
 end
+
+return M

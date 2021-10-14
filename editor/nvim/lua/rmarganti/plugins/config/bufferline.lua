@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     -- The color used for unfocused windows in Tmux.
     local unfocused_window_bg = '#404649'
 
@@ -56,3 +58,5 @@ return function()
         },
     })
 end
+
+return M

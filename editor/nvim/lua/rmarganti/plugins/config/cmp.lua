@@ -1,6 +1,8 @@
+local M = {}
+
 --- nvim-cmp configuration
 -- https://github.com/hrsh7th/nvim-compe#lua-config
-return function()
+M.setup = function()
     local cmp = require('cmp')
 
     cmp.setup({
@@ -40,3 +42,5 @@ return function()
     })
 
 end
+
+return M

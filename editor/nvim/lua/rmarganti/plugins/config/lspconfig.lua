@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     -- Disable inline diagnostics
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
@@ -28,3 +30,5 @@ return function()
         })
     end
 end
+
+return M

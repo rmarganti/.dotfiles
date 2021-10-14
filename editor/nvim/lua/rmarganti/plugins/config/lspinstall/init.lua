@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     local lspconfig = require('lspconfig')
     local utils = require('rmarganti.utils.misc')
 
@@ -11,7 +13,7 @@ return function()
 
         for _, server in pairs(servers) do
             if server == 'lua' then
-                require('rmarganti.plugins.config.lspinstall.lua')(lspconfig)
+                require('rmarganti.plugins.config.lspinstall.lua').setup(lspconfig)
             elseif utils.has_value({ 'html', 'json', 'php', 'typescript' }, server) then
                 -- Disable the language server's `document_formatting` capability,
                 -- since we will use some other linter/formatter (prettier, etc).
@@ -38,3 +40,5 @@ return function()
         vim.cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
     end
 end
+
+return M

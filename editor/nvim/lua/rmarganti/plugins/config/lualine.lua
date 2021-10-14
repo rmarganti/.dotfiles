@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     local function rubber_duck()
         return ''
     end
@@ -20,3 +22,5 @@ return function()
         },
     })
 end
+
+return M

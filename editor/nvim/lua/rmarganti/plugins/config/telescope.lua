@@ -1,5 +1,7 @@
+local M = {}
+
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
-return function()
+M.setup = function()
     local telescope = require('telescope')
 
     telescope.setup({
@@ -35,3 +37,5 @@ return function()
         },
     })
 end
+
+return M

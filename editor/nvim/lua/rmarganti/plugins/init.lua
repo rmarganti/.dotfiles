@@ -44,9 +44,11 @@ packer.startup(function(use)
     -- Tree-Sitter
     use({
         'nvim-treesitter/nvim-treesitter',
-        config = require('rmarganti.plugins.config.treesitter'),
+        config = function()
+            require('rmarganti.plugins.config.treesitter').setup()
+        end,
         run = ':TSUpdate',
-        event = 'ColorScheme'
+        event = 'BufWinEnter',
     })
 
     use({
@@ -65,7 +67,9 @@ packer.startup(function(use)
 
     use({
         'sainnhe/everforest',
-        config = require('rmarganti.plugins.config.everforest')
+        config = function()
+            require('rmarganti.plugins.config.everforest').setup()
+        end,
     })
 
     use({
@@ -80,13 +84,17 @@ packer.startup(function(use)
 
     use({
         'akinsho/nvim-bufferline.lua',
-        config = require('rmarganti.plugins.config.bufferline'),
+        config = function()
+            require('rmarganti.plugins.config.bufferline').setup()
+        end,
         event = 'ColorScheme',
     })
 
     use({
         'hoob3rt/lualine.nvim',
-        config = require('rmarganti.plugins.config.lualine'),
+        config = function()
+            require('rmarganti.plugins.config.lualine').setup()
+        end,
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
         event = 'ColorScheme',
     })
@@ -94,7 +102,9 @@ packer.startup(function(use)
     -- Show GitHub notification count in status line.
     use({
         'rlch/github-notifications.nvim',
-        config = require('rmarganti.plugins.config.github-notifications'),
+        config = function()
+            require('rmarganti.plugins.config.github-notifications').setup()
+        end,
         module = 'github-notifications',
         requires = {
             'nvim-telescope/telescope.nvim',
@@ -108,34 +118,44 @@ packer.startup(function(use)
     -- Common LSP configs.
     use({
         'neovim/nvim-lspconfig',
-        config = require('rmarganti.plugins.config.lspconfig'),
-        event = 'ColorScheme',
+        config = function()
+            require('rmarganti.plugins.config.lspconfig').setup()
+        end,
+        event = 'BufWinEnter',
     })
 
     use({
         'jose-elias-alvarez/null-ls.nvim',
-        config = require('rmarganti.plugins.config.null-ls'),
+        config = function()
+            require('rmarganti.plugins.config.null-ls').setup()
+        end,
         after = 'nvim-lspconfig'
     })
 
     -- Adds LSPInstall command.
     use({
         'kabouzeid/nvim-lspinstall',
-        config = require('rmarganti.plugins.config.lspinstall'),
+        config = function()
+            require('rmarganti.plugins.config.lspinstall').setup()
+        end,
         after = 'null-ls.nvim'
     })
 
     -- Adds icons to auto-complete.
     use({
         'onsails/lspkind-nvim',
-        config = require('rmarganti.plugins.config.lspkind'),
+        config = function()
+            require('rmarganti.plugins.config.lspkind').setup()
+        end,
         after = 'nvim-lspconfig'
     })
 
     -- Code completion.
     use({
         'hrsh7th/nvim-cmp',
-        config = require('rmarganti.plugins.config.cmp'),
+        config = function()
+            require('rmarganti.plugins.config.cmp').setup()
+        end,
         event = 'InsertEnter',
     })
 
@@ -185,7 +205,9 @@ packer.startup(function(use)
     use({
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
-        config = require('rmarganti.plugins.config.nvim-autopairs')
+        config = function()
+            require('rmarganti.plugins.config.nvim-autopairs').setup()
+        end,
     })
 
     use({
@@ -201,12 +223,12 @@ packer.startup(function(use)
 
     use({
         'christoomey/vim-tmux-navigator',
-        event = 'ColorScheme'
+        event = 'BufWinEnter',
     })
 
     use({
         'tmux-plugins/vim-tmux-focus-events',
-        event = 'ColorScheme'
+        event = 'BufWinEnter',
     })
 
     --------------------------------
@@ -232,20 +254,26 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
         module = 'telescope',
-        config = require('rmarganti.plugins.config.telescope'),
+        config = function()
+            require('rmarganti.plugins.config.telescope').setup()
+        end,
     })
 
     use({
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
         after = 'telescope.nvim',
-        config = require('rmarganti.plugins.config.telescope-fzf-native'),
+        config = function()
+            require('rmarganti.plugins.config.telescope-fzf-native').setup()
+        end,
     })
 
     use({
         'nvim-telescope/telescope-github.nvim',
         after = 'telescope.nvim',
-        config = require('rmarganti.plugins.config.telescope-github'),
+        config = function()
+            require('rmarganti.plugins.config.telescope-github').setup()
+        end,
     })
 
     -- Sugar for file operations (rename, move, etc.).
@@ -263,7 +291,7 @@ packer.startup(function(use)
     -- Close all buffers but current one.
     use({
         'vim-scripts/BufOnly.vim',
-        event = 'ColorScheme'
+        event = 'BufWinEnter',
     })
 
     -- Git.

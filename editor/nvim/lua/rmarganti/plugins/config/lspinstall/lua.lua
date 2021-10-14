@@ -1,4 +1,6 @@
-return function(lspconfig)
+local M = {}
+
+M.setup = function(lspconfig)
     -- Configure sumneko for neovim lua development
     local lua_path = vim.split(package.path, ';')
     table.insert(lua_path, 'lua/?.lua')
@@ -30,3 +32,5 @@ return function(lspconfig)
         },
     })
 end
+
+return M

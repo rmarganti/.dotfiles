@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     local secrets = require('rmarganti.secrets')
 
     require('telescope').load_extension('ghn')
@@ -8,3 +10,5 @@ return function()
         token = secrets.github_token,
     })
 end
+
+return M

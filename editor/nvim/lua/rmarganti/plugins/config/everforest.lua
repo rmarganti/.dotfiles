@@ -1,4 +1,8 @@
-return function()
+local M = {}
+
+M.setup = function()
     vim.g.everforest_transparent_background = 1
     vim.cmd([[colorscheme everforest]])
 end
+
+return M

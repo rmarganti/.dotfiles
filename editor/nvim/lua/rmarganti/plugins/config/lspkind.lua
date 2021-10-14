@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
     require('lspkind').init({
         with_text = true,
         preset = 'default',
@@ -31,3 +33,5 @@ return function()
         },
     })
 end
+
+return M
