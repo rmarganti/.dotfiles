@@ -17,6 +17,7 @@ M.setup = function()
             end,
             command = 'vendor/bin/phpstan'
         }),
+
         builtins.formatting.phpcsfixer.with({
             condition = function()
                 return path.file_exists('vendor/bin/php-cs-fixer')
@@ -33,7 +34,7 @@ M.setup = function()
     }
 
     null_ls.config({
-        debounce = 150,
+        debounce = 1000,
         sources = sources
     })
 
