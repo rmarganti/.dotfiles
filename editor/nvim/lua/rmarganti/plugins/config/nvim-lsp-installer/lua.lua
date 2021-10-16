@@ -1,12 +1,12 @@
 local M = {}
 
-M.setup = function(lspconfig)
+M.setup = function(server)
     -- Configure sumneko for neovim lua development
     local lua_path = vim.split(package.path, ';')
     table.insert(lua_path, 'lua/?.lua')
     table.insert(lua_path, 'lua/?/init.lua')
 
-    lspconfig.lua.setup({
+    server:setup({
         settings = {
             Lua = {
                 awakened = { cat = true },
