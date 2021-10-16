@@ -25,7 +25,6 @@ M.setup = function()
         }),
 
         -- Lots of languages
-        builtins.formatting.eslint_d,
         builtins.formatting.prettierd.with({
             condition = function()
                 return true

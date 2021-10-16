@@ -4,19 +4,19 @@
 
 Language servers are not automatically installed. A language server must be
 installed for every language you would like to support. That is easy as running
-`:LspInstall <language>`. Here is a recommended list of languages.
+`:LspInstall <language>`. Here is a recommended list of language servers.
 
-    - html
-    - typescript (this also supports Javascript, React, etc)
-    - php
-    - bash
-    - json
-    - lua
-    - prismals
-    - rust
+    - intelephense (PHP)
+    - tsserver (Javascript flavors)
+    - sumneko_lua (Lua)
+    - eslint (Javascript flavors)
+    - html (HTML)
+    - bashls (Bash scripting)
+    - prismals (Prisma ORM)
+    - cssls (CSS)
+    - jsonls (JSON)
 
 ## Dependencies
 
-- [eslint_d](https://github.com/mantoni/eslint_d.js)
-- [prettierd](https://github.com/fsouza/prettierd)
-- [Github CLI](https://cli.github.com/)
+    - [prettierd](https://github.com/fsouza/prettierd)
+    - [Github CLI](https://cli.github.com/)
