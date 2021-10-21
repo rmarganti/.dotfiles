@@ -25,26 +25,16 @@ vim.g.loaded_2html_plugin = false
 -- Won't show this until bufferline is loaded.
 vim.opt.showtabline = 0
 
-local async
+require('rmarganti.core')
 
-async = vim.loop.new_async(vim.schedule_wrap(function()
-    vim.defer_fn(function()
-        require('rmarganti.core')
-
-        vim.opt.shadafile = ''
-        vim.defer_fn(function()
-            vim.cmd([[
-                rshada!
-                doautocmd BufRead
-                syntax on
-                filetype on
-                filetype plugin indent on
-                silent! bufdo e
-            ]])
-        end, 15)
-    end, 0)
-
-    async:close()
-end))
-
-async:send()
+vim.opt.shadafile = ''
+vim.defer_fn(function()
+    vim.cmd([[
+        rshada!
+        doautocmd BufRead
+        syntax on
+        filetype on
+        filetype plugin indent on
+        silent! bufdo e
+    ]])
+end, 15)
