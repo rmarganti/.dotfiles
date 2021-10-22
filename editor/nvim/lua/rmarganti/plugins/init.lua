@@ -210,6 +210,7 @@ packer.startup(function(use)
         end,
     })
 
+    -- The ultimate testing plugin. moon2cool.
     use({
         'rcarriga/vim-ultest',
         requires = { 'vim-test/vim-test' },

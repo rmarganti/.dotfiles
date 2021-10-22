@@ -269,7 +269,7 @@ utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)', { noremap = false })
 -- Jump to the previous Test.
 utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { noremap = false })
 
--- Jump to the previous Test.
+-- Open summary window.
 utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
 
 
