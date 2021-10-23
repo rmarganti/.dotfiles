@@ -164,6 +164,15 @@ packer.startup(function(use)
         after = 'null-ls.nvim'
     })
 
+    -- Show function signature as you type.
+    use({
+        'ray-x/lsp_signature.nvim',
+        event = 'InsertEnter',
+        config = function()
+            require('lsp_signature').setup()
+        end
+    })
+
     -- Adds icons to auto-complete.
     use({
         'onsails/lspkind-nvim',
