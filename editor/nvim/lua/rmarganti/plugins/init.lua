@@ -104,14 +104,11 @@ packer.startup(function(use)
     -- Git
     --------------------------------
 
-    -- Show Git changes.
+    -- Used to power feline git functionality.
     use ({
         'lewis6991/gitsigns.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim'
-        },
         config = function()
-            require('gitsigns').setup()
+            require('rmarganti.plugins.config.gitsigns').setup()
         end,
         event = 'ColorScheme',
     })

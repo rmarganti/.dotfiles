@@ -8,9 +8,9 @@ M.setup = function()
         NORMAL = theme.green,
         OP = theme.red,
         INSERT = theme.red,
-        VISUAL = theme.orange,
-        LINES = theme.orange,
-        BLOCK = theme.orange,
+        VISUAL = theme.yellow,
+        LINES = theme.yellow,
+        BLOCK = theme.yellow,
         REPLACE = theme.purple,
         ['V-REPLACE'] = theme.purple,
         ENTER = theme.aqua,
@@ -56,13 +56,27 @@ M.setup = function()
 
         file_info_inactive = {
             provider = 'file_info',
-            left_sep = ' ',
+            left_sep = '       ',
             right_sep = ' ',
+        },
+
+        file_format = {
+            provider = function()
+                local os = vim.bo.fileformat:lower()
+
+                if os == 'unix' then
+                    return ' '
+                elseif os == 'mac' then
+                    return ' '
+                else
+                    return ' '
+                end
+            end,
+            left_sep = ' ',
         },
 
         file_encoding = {
             provider = 'file_encoding',
-            left_sep = ' ',
             right_sep = '  ',
         },
 
@@ -96,7 +110,7 @@ M.setup = function()
                 end
             end,
             hl = {
-                fg = theme.purple,
+                fg = theme.blue,
             },
             left_sep = ' ',
             right_sep = ' ',
@@ -125,6 +139,7 @@ M.setup = function()
             },
             {
                 pieces.github_notifications,
+                pieces.file_format,
                 pieces.file_encoding,
                 pieces.file_type,
                 pieces.scroll_bar,
