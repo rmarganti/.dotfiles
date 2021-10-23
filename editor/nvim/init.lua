@@ -35,6 +35,7 @@ vim.defer_fn(function()
         syntax on
         filetype on
         filetype plugin indent on
+
         silent! bufdo e
     ]])
 end, 15)

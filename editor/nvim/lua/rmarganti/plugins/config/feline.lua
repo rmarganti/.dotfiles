@@ -1,0 +1,151 @@
+local M = {}
+
+M.setup = function()
+    local theme = require('rmarganti.core.theme')
+    local vi_mode_utils = require('feline.providers.vi_mode')
+
+    local vi_mode_colors = {
+        NORMAL = theme.green,
+        OP = theme.red,
+        INSERT = theme.red,
+        VISUAL = theme.orange,
+        LINES = theme.orange,
+        BLOCK = theme.orange,
+        REPLACE = theme.purple,
+        ['V-REPLACE'] = theme.purple,
+        ENTER = theme.aqua,
+        MORE = theme.aqua,
+        SELECT = theme.orange,
+        COMMAND = theme.green,
+        SHELL = theme.green,
+        TERM = theme.green,
+        NONE = theme.grey1
+    }
+
+    local pieces = {
+        vim_mode = {
+            provider = '▊ ',
+            hl = function()
+                return {
+                    name = vi_mode_utils.get_mode_highlight_name(),
+                    fg = vi_mode_utils.get_mode_color(),
+                    style = 'bold',
+                }
+            end,
+        },
+
+        duck = {
+            provider = ' '
+        },
+
+        file_info_active = {
+            provider = 'file_info',
+            hl = {
+                bg = theme.none,
+                style = 'bold',
+            },
+            left_sep = {
+                str = '  ',
+                hl = { bg = theme.none, fg = theme.bg0 },
+            },
+            right_sep = {
+                str = ' ',
+                hl = { bg = theme.none, fg = theme.bg0 },
+            },
+        },
+
+        file_info_inactive = {
+            provider = 'file_info',
+            left_sep = ' ',
+            right_sep = ' ',
+        },
+
+        file_encoding = {
+            provider = 'file_encoding',
+            left_sep = ' ',
+            right_sep = '  ',
+        },
+
+        file_type = {
+            provider = 'file_type',
+            hl = {
+                bg = theme.bg1,
+            },
+            left_sep = {
+                str = '  ',
+                hl = { bg = theme.bg1 },
+            },
+            right_sep = {
+                str = '  ',
+                hl = { bg = theme.bg1 },
+            },
+        },
+
+        git_branch = {
+            provider = 'git_branch',
+            left_sep = '  ',
+        },
+
+        github_notifications = {
+            provider = function()
+                local data = require('github-notifications').statusline_notifications()
+                if data.count > 0 then
+                    return data.icon .. ' ' .. tostring(data.count)
+                else
+                    return ''
+                end
+            end,
+            hl = {
+                fg = theme.purple,
+            },
+            left_sep = ' ',
+            right_sep = ' ',
+        },
+
+        scroll_bar = {
+            provider = 'scroll_bar',
+            hl = function()
+                return {
+                    bg = theme.bg3,
+                    fg = vi_mode_utils.get_mode_color(),
+                    style = 'bold'
+                }
+            end
+        }
+    }
+
+    local components = {
+        active = {
+            {
+                pieces.vim_mode,
+                pieces.duck,
+                pieces.file_info_active,
+                pieces.git_branch,
+                {}, -- empty componet to clear styles
+            },
+            {
+                pieces.github_notifications,
+                pieces.file_encoding,
+                pieces.file_type,
+                pieces.scroll_bar,
+            }
+        },
+        inactive = {
+            {
+                pieces.file_info_inactive,
+                {}, -- empty componet to clear styles
+            }
+        }
+    }
+
+    require('feline').setup({
+        components = components,
+        colors = {
+            bg = theme.bg0,
+            fg = theme.grey1,
+        },
+        vi_mode_colors = vi_mode_colors,
+    })
+end
+
+return M

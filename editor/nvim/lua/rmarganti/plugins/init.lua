@@ -91,11 +91,28 @@ packer.startup(function(use)
     })
 
     use({
-        'hoob3rt/lualine.nvim',
+        'famiu/feline.nvim',
         config = function()
-            require('rmarganti.plugins.config.lualine').setup()
+            require('rmarganti.plugins.config.feline').setup()
         end,
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        after = 'gitsigns.nvim',
+    })
+
+
+    --------------------------------
+    -- Git
+    --------------------------------
+
+    -- Show Git changes.
+    use ({
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require('gitsigns').setup()
+        end,
         event = 'ColorScheme',
     })
 
@@ -109,6 +126,12 @@ packer.startup(function(use)
         requires = {
             'nvim-telescope/telescope.nvim',
         },
+    })
+
+    -- Git.
+    use({
+        'tpope/vim-fugitive',
+        event = 'BufWinEnter',
     })
 
     --------------------------------
@@ -291,12 +314,6 @@ packer.startup(function(use)
     -- Close all buffers but current one.
     use({
         'vim-scripts/BufOnly.vim',
-        event = 'BufWinEnter',
-    })
-
-    -- Git.
-    use({
-        'tpope/vim-fugitive',
         event = 'BufWinEnter',
     })
 
