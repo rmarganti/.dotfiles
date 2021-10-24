@@ -99,7 +99,6 @@ packer.startup(function(use)
         after = 'gitsigns.nvim',
     })
 
-
     --------------------------------
     -- Git
     --------------------------------
@@ -125,7 +124,7 @@ packer.startup(function(use)
         },
     })
 
-    -- Git.
+    -- Git diffs/commands.
     use({
         'tpope/vim-fugitive',
         event = 'BufWinEnter',
@@ -344,4 +343,7 @@ packer.startup(function(use)
         },
         event = 'BufWinEnter',
     })
+
+    -- Quick navigate.
+    use('ggandor/lightspeed.nvim')
 end)
