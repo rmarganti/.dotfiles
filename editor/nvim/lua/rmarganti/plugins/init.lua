@@ -343,7 +343,4 @@ packer.startup(function(use)
         },
         event = 'BufWinEnter',
     })
-
-    -- Quick navigate.
-    use('ggandor/lightspeed.nvim')
 end)
