@@ -78,34 +78,20 @@ utils.map('n', 'gf', '<cmd>lua require("telescope.builtin").lsp_references({})<C
 utils.map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations({})<CR>')
 
 -- Goto Hint
-utils.map('n', 'gh', ':Lspsaga hover_doc<CR>')
+utils.map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
 
 -- Code Actions.
-utils.map('n', '<Leader>ca', ':Lspsaga code_action<CR>')
-utils.map('v', '<Leader>ca', [[:<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]])
+utils.map('n', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>]])
+utils.map('v', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_range_code_actions(require('telescope.themes').get_dropdown({}))<CR>]])
 
 -- Code symbol Rename.
-utils.map('n', '<Leader>cr', ":lua require('lspsaga.rename').rename()<CR>")
-
--- Previous diagnostic
-utils.map('n', '<Leader>cj', ':Lspsaga diagnostic_jump_next<CR>')
+utils.map('n', '<Leader>cr', [[<cmd>lua require('rmarganti.core.functions').rename()<CR>]])
 
 -- Next diagnostic
-utils.map('n', '<Leader>ck', ':Lspsaga diagnostic_jump_prev<CR>')
+utils.map('n', '<Leader>cj', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "rounded" }})<CR>')
 
--- Scroll down documents.
-utils.map(
-    'n',
-    '<C-f>',
-    ':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>'
-)
-
--- Scroll up documents
-utils.map(
-    'n',
-    '<C-b>',
-    ":lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"
-)
+-- Previous diagnostic
+utils.map('n', '<Leader>ck', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "rounded" }})<CR>')
 
 -- Code file Symbols.
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')

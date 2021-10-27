@@ -197,12 +197,6 @@ packer.startup(function(use)
     -- Snippets.
     use({ 'hrsh7th/vim-vsnip', after = 'nvim-cmp' })
 
-    -- UI for common LSP actions.
-    use({
-        'glepnir/lspsaga.nvim',
-        after = 'nvim-lspconfig',
-    })
-
     --------------------------------
     -- Text manipulation
     --------------------------------
@@ -243,6 +237,14 @@ packer.startup(function(use)
         requires = { 'vim-test/vim-test' },
         run = ':UpdateRemotePlugins',
         event = 'BufWinEnter'
+    })
+
+    use({
+        'kosayoda/nvim-lightbulb',
+        event = 'BufWinEnter',
+        config = function()
+            require('rmarganti.plugins.config.lightbulb').setup()
+        end
     })
 
     --------------------------------
