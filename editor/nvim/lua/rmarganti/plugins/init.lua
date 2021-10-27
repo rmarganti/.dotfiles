@@ -165,7 +165,7 @@ packer.startup(function(use)
         'ray-x/lsp_signature.nvim',
         event = 'InsertEnter',
         config = function()
-            require('lsp_signature').setup()
+            require('rmarganti.plugins.config.lsp_signature').setup()
         end
     })
 

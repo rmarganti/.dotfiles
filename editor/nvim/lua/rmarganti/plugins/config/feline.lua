@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-    local theme = require('rmarganti.core.theme')
+    local theme = require('rmarganti.config.theme')
     local vi_mode_utils = require('feline.providers.vi_mode')
 
     local vi_mode_colors = {

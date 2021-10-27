@@ -124,14 +124,16 @@ utils.map('n', '<Leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 ------------------------------------------------
 
 -- Edit nearest Changelog
-utils.map('n', '<Leader>ec', [[:lua require('rmarganti.edit-nearest').edit_nearest('CHANGELOG.md')<CR>]])
+utils.map('n', '<Leader>ec', [[:lua require('rmarganti.core.functions').edit_nearest('CHANGELOG.md')<CR>]])
 
 -- Edit nearest Env
-utils.map('n', '<Leader>ee', [[:lua require('rmarganti.edit-nearest').edit_nearest('.env')<CR>]])
+utils.map('n', '<Leader>ee', [[:lua require('rmarganti.core.functions').edit_nearest('.env')<CR>]])
 
 -- Edit nearest Readme
-utils.map('n', '<Leader>er', [[:lua require('rmarganti.edit-nearest').edit_nearest('README.md')<CR>]])
+utils.map('n', '<Leader>er', [[:lua require('rmarganti.core.functions').edit_nearest('README.md')<CR>]])
 
+-- Edit Test
+utils.map('n', '<Leader>et', [[:lua require('rmarganti.core.functions').edit_test()<CR>]])
 
 ------------------------------------------------
 --

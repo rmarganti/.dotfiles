@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-    local theme = require('rmarganti.core.theme')
+    local theme = require('rmarganti.config.theme')
 
     require('bufferline').setup({
         highlights = {
