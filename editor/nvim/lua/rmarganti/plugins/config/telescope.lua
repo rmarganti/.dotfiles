@@ -30,10 +30,11 @@ M.setup = function()
                 width = 0.9
             },
             file_ignore_patterns = {
-                '.git',
-                'node_modules',
-                'vendor',
-            }
+                '^.git/',
+                '^node_modules/',
+                '^vendor/',
+            },
+            dynamic_preview_title = true,
         },
     })
 end
