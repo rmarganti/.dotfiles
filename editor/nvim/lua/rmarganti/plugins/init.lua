@@ -73,8 +73,11 @@ packer.startup(function(use)
     })
 
     use({
-        'rbgrouleff/bclose.vim',
-        event = 'BufWinEnter'
+        'ojroques/nvim-bufdel',
+        event = 'BufWinEnter',
+        config = function()
+            require('bufdel').setup({ quit = false })
+        end
     })
 
     use({
@@ -343,6 +346,14 @@ packer.startup(function(use)
                 event = 'BufWinEnter'
             }
         },
+        event = 'BufWinEnter',
+    })
+
+    use({
+        'phaazon/hop.nvim',
+        config = function()
+            require'hop'.setup()
+        end,
         event = 'BufWinEnter',
     })
 end)

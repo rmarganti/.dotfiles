@@ -20,6 +20,15 @@ utils.map('n', 'Q', '<Nop>')
 
 ------------------------------------------------
 --
+-- Randoms
+--
+------------------------------------------------
+
+utils.map('n', '<Leader>j', '<cmd>HopWord<CR>')
+
+
+------------------------------------------------
+--
 -- Buffers
 --
 ------------------------------------------------
@@ -46,11 +55,10 @@ utils.map('n', '<leader>bH', '<cmd>BufferLineMovePrev<CR>')
 utils.map('n', '<leader>bL', '<cmd>BufferLineMoveNext<CR>')
 
 -- Buffer Quit.
-utils.map(
-    'n',
-    '<leader>bq',
-    '<cmd>lua require("bufferline").handle_close_buffer(vim.fn.bufnr("%"))<CR>'
-)
+utils.map('n', '<leader>bq', '<cmd>BufDel<CR>')
+
+-- Buffer force Quit.
+utils.map('n', '<leader>bQ', '<cmd>BufDel!<CR>')
 
 -- Buffer quit All.
 utils.map('n', '<Leader>ba', ':%bd<CR>')
@@ -273,7 +281,7 @@ utils.map('n', '<Leader>tp', ':set invpaste paste?<CR>')
 -- Toggle Word wrap
 utils.map('n', '<Leader>tw', ':setlocal wrap!<CR>')
 
--- Toggle Quick ix
+-- Toggle Quick fix
 utils.map('n', '<Leader>tq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
 
 ------------------------------------------------
