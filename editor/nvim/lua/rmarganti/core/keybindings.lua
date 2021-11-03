@@ -20,11 +20,32 @@ utils.map('n', 'Q', '<Nop>')
 
 ------------------------------------------------
 --
--- Randoms
+-- vim-unimpaired (and inspired) remaps
 --
 ------------------------------------------------
 
-utils.map('n', '<Leader>j', '<cmd>HopWord<CR>')
+
+-- Diagnostics
+utils.map('n', '<Leader>jd', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "rounded" }})<CR>')
+utils.map('n', '<Leader>kd', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "rounded" }})<CR>')
+
+-- Exchange
+utils.map('n', '<Leader>je', ']e', { noremap = false })
+utils.map('n', '<Leader>ke', '[e', { noremap = false })
+utils.map('x', '<Leader>je', ']e', { noremap = false })
+utils.map('x', '<Leader>ke', '[e', { noremap = false })
+
+-- Quickfix
+utils.map('n', '<Leader>jq', ']q', { noremap = false })
+utils.map('n', '<Leader>kq', '[q', { noremap = false })
+
+-- Add Space
+utils.map('n', '<Leader>j<Space>', ']<Space>', { noremap = false })
+utils.map('n', '<Leader>k<Space>', '[<Space>', { noremap = false })
+
+-- Conflict markers
+utils.map('n', '<Leader>jc', ']n', { noremap = false })
+utils.map('n', '<Leader>kc', '[n', { noremap = false })
 
 
 ------------------------------------------------
@@ -94,12 +115,6 @@ utils.map('v', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_range_c
 
 -- Code symbol Rename.
 utils.map('n', '<Leader>cr', [[<cmd>lua require('rmarganti.core.functions').rename()<CR>]])
-
--- Next diagnostic
-utils.map('n', '<Leader>cj', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "rounded" }})<CR>')
-
--- Previous diagnostic
-utils.map('n', '<Leader>ck', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "rounded" }})<CR>')
 
 -- Code file Symbols.
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
@@ -232,6 +247,9 @@ utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')
 
 -- Search Buffers
 utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
+
+-- Search Word
+utils.map('n', '<Leader>sw', '<cmd>HopWord<CR>')
 
 
 ------------------------------------------------
