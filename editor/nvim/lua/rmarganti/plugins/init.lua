@@ -83,6 +83,10 @@ packer.startup(function(use)
     use({
         'francoiscabrol/ranger.vim',
         cmd = 'Ranger',
+        requires = {
+            'rbgrouleff/bclose.vim',
+            cmd = 'Bclose',
+        }
     })
 
     use({
