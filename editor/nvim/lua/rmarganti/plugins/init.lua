@@ -84,8 +84,13 @@ packer.startup(function(use)
         'francoiscabrol/ranger.vim',
         cmd = 'Ranger',
         requires = {
-            'rbgrouleff/bclose.vim',
-            cmd = 'Bclose',
+            {
+                'rbgrouleff/bclose.vim',
+                cmd = 'Bclose',
+                setup = function()
+                    vim.g.bclose_no_plugin_maps = true
+                end
+            }
         }
     })
 
