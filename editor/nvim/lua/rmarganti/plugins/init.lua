@@ -99,7 +99,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.bufferline').setup()
         end,
-        event = 'ColorScheme',
+        event = 'BufWinEnter',
     })
 
     use({
@@ -121,7 +121,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.gitsigns').setup()
         end,
-        event = 'ColorScheme',
+        event = 'BufWinEnter',
     })
 
     -- Show GitHub notification count in status line.
