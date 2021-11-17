@@ -242,6 +242,9 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 -- Search Files
 utils.map('n', '<Leader>sf', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>')
 
+-- Search Recent files
+utils.map('n', '<Leader>sr', '<cmd>Telescope oldfiles<CR>')
+
 -- Search Text
 utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')
 

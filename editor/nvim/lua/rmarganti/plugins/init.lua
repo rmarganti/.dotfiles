@@ -111,6 +111,13 @@ packer.startup(function(use)
         after = 'gitsigns.nvim',
     })
 
+    use({
+        'goolord/alpha-nvim',
+        config = function()
+            require('rmarganti.plugins.config.alpha').setup()
+        end
+    })
+
     --------------------------------
     -- Git
     --------------------------------
