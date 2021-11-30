@@ -251,8 +251,8 @@ utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')
 -- Search Buffers
 utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
 
--- Search Word
-utils.map('n', '<Leader>sw', '<cmd>HopWord<CR>')
+-- Search Window (jumps to character visible in current window)
+utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
 
 
 ------------------------------------------------
