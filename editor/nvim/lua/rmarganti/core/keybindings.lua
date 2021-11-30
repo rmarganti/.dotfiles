@@ -24,10 +24,9 @@ utils.map('n', 'Q', '<Nop>')
 --
 ------------------------------------------------
 
-
 -- Diagnostics
-utils.map('n', '<Leader>jd', '<cmd>lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "rounded" }})<CR>')
-utils.map('n', '<Leader>kd', '<cmd>lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "rounded" }})<CR>')
+utils.map('n', '<Leader>jd', [[<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' } })<CR>]])
+utils.map('n', '<Leader>kd', [[<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' } })<CR>]])
 
 -- Exchange
 utils.map('n', '<Leader>je', ']e', { noremap = false })
