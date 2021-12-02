@@ -65,6 +65,7 @@ packer.startup(function(use)
     -- Theme/UI
     --------------------------------
 
+    -- Colorscheme.
     use({
         'sainnhe/everforest',
         config = function()
@@ -72,6 +73,7 @@ packer.startup(function(use)
         end,
     })
 
+    -- Delete buffers without affecting layout of windows.
     use({
         'ojroques/nvim-bufdel',
         event = 'BufWinEnter',
@@ -80,6 +82,7 @@ packer.startup(function(use)
         end
     })
 
+    -- File explorer.
     use({
         'francoiscabrol/ranger.vim',
         cmd = 'Ranger',
@@ -94,6 +97,7 @@ packer.startup(function(use)
         }
     })
 
+    -- Tabs.
     use({
         'akinsho/nvim-bufferline.lua',
         config = function()
@@ -102,6 +106,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
+    -- Status line.
     use({
         'famiu/feline.nvim',
         config = function()
@@ -111,10 +116,21 @@ packer.startup(function(use)
         after = 'gitsigns.nvim',
     })
 
+    -- Startup screen.
     use({
         'goolord/alpha-nvim',
         config = function()
             require('rmarganti.plugins.config.alpha').setup()
+        end
+    })
+
+    -- Show lines where tabs are.
+    use({
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require('indent_blankline').setup({
+                filetype_exclude = {'alpha'}
+            })
         end
     })
 
@@ -162,6 +178,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
+    -- Language server for linters, formatters, etc.
     use({
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
@@ -251,6 +268,7 @@ packer.startup(function(use)
         end,
     })
 
+    -- Run tests.
     use({
         'rcarriga/vim-ultest',
         requires = { 'vim-test/vim-test' },
@@ -258,12 +276,23 @@ packer.startup(function(use)
         event = 'BufWinEnter'
     })
 
+    -- Show light bulb icon when code action is available.
     use({
         'kosayoda/nvim-lightbulb',
         event = 'BufWinEnter',
         config = function()
             require('rmarganti.plugins.config.lightbulb').setup()
         end
+    })
+
+    -- Preview CSS colors.
+    use({
+        'norcalli/nvim-colorizer.lua',
+        event = 'BufWinEnter',
+        config = function()
+            require('colorizer').setup()
+        end
+
     })
 
     --------------------------------
@@ -365,6 +394,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
+    -- Quickly jump elsewhere in window.
     use({
         'phaazon/hop.nvim',
         config = function()
