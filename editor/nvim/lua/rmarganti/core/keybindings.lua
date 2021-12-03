@@ -304,6 +304,9 @@ utils.map('n', '<Leader>tw', ':setlocal wrap!<CR>')
 -- Toggle Quick fix
 utils.map('n', '<Leader>tq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
 
+-- Toggle Format on save
+utils.map('n', '<Leader>tf', [[:lua require('rmarganti.core.functions').toggle_format_on_save()<CR>]])
+
 ------------------------------------------------
 --
 -- Windows

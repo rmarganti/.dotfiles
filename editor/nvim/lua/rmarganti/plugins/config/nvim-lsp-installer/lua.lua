@@ -1,12 +1,13 @@
 local M = {}
 
-M.setup = function(server)
+M.setup = function(server, on_attach)
     -- Configure sumneko for neovim lua development
     local lua_path = vim.split(package.path, ';')
     table.insert(lua_path, 'lua/?.lua')
     table.insert(lua_path, 'lua/?/init.lua')
 
     server:setup({
+        on_attach = on_attach,
         settings = {
             Lua = {
                 awakened = { cat = true },

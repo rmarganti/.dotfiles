@@ -37,8 +37,6 @@ M.setup = function()
         debounce = 1000,
         sources = sources
     })
-
-    require('lspconfig')['null-ls'].setup({})
 end
 
 return M

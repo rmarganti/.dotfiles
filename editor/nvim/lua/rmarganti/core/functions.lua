@@ -122,4 +122,22 @@ M.rename = function()
     end
 end
 
+local enable_format_on_save = true
+
+M.toggle_format_on_save = function ()
+    if enable_format_on_save == true then
+        enable_format_on_save = false
+        print('Disabled format-on-save')
+    else
+        enable_format_on_save = true
+        print('Enabled format-on-save')
+    end
+end
+
+M.format_on_save = function()
+    if enable_format_on_save == true then
+        vim.lsp.buf.formatting_sync()
+    end
+end
+
 return M
