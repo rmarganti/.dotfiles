@@ -52,6 +52,11 @@ packer.startup(function(use)
     })
 
     use({
+        'nvim-treesitter/playground',
+        after = "nvim-treesitter"
+    })
+
+    use({
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
     })
@@ -64,14 +69,6 @@ packer.startup(function(use)
     --------------------------------
     -- Theme/UI
     --------------------------------
-
-    -- Colorscheme.
-    use({
-        'sainnhe/everforest',
-        config = function()
-            require('rmarganti.plugins.config.everforest').setup()
-        end,
-    })
 
     -- Delete buffers without affecting layout of windows.
     use({

@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-    local theme = require('rmarganti.config.theme')
+    local theme = require('rmarganti.colors.palette')
     local vi_mode_utils = require('feline.providers.vi_mode')
 
     local vi_mode_colors = {
@@ -12,10 +12,10 @@ M.setup = function()
         LINES = theme.yellow,
         BLOCK = theme.yellow,
         REPLACE = theme.purple,
-        ['V-REPLACE'] = theme.purple,
-        ENTER = theme.aqua,
-        MORE = theme.aqua,
-        SELECT = theme.orange,
+        ['V-REPLACE'] = theme.magenta,
+        ENTER = theme.cyan,
+        MORE = theme.cyan,
+        SELECT = theme.blue,
         COMMAND = theme.green,
         SHELL = theme.green,
         TERM = theme.green,

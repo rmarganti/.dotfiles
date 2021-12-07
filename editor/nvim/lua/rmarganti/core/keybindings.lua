@@ -349,3 +349,5 @@ utils.map('n', '<Leader>qq', ':qa<CR>')
 
 -- Force close all buffers and Quit
 utils.map('n', '<Leader>qQ', ':qa!<CR>')
+
+utils.map('n', '<Leader>gh', '<CMD>TSHighlightCapturesUnderCursor<CR>')

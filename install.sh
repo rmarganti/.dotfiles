@@ -57,6 +57,9 @@ symlink_or_ask ~/.dotfiles/shell/bash_profile ~/.bash_profile
 symlink_or_ask ~/.dotfiles/shell/bash_aliases ~/.bash_aliases
 symlink_or_ask ~/.dotfiles/shell/bash_colors ~/.bash_colors
 
+# kitty
+symlink_or_ask ~/.dotfiles/shell/kitty ~/.config/kitty
+
 # tmux config
 symlink_or_ask ~/.dotfiles/shell/tmux ~/.tmux
 symlink_or_ask ~/.dotfiles/shell/tmux.conf ~/.tmux.conf
