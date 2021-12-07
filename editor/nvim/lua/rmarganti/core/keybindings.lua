@@ -261,10 +261,10 @@ utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
 ------------------------------------------------
 
 -- Split Vertical
-utils.map('n', '<Leader>sv', ':vnew<CR>')
+utils.map('n', '<Leader>sv', ':vsplit<CR>')
 
 -- Split Horiztonal
-utils.map('n', '<Leader>sh', ':new<CR>')
+utils.map('n', '<Leader>sh', ':split<CR>')
 
 
 ------------------------------------------------
