@@ -12,14 +12,14 @@ M = {
     plus2 = p.green,
     plus3 = p.white,
 
-    sucess = p.green,
+    success = p.green,
     error = p.red,
     warning = p.yellow,
     info = p.blue,
 
     border = p.gray0,
 
-    float_bg = p.bg_dark,
+    float_bg = p.bg_light,
 
     select_fg = p.fg,
     select_bg = p.bg_lightest,

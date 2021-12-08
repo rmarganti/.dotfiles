@@ -1,40 +1,40 @@
 return {
-    none = 'NONE',
+    none = { gui = 'NONE', cterm = '0' },
 
-    bg_darker = '#1e2428',
-    bg_dark = '#22292d',
-    bg = '#2b3339',
-    bg_light = '#323d43',
-    bg_lighter = '#3c474d',
-    bg_lightest = '#505a60',
+    bg_darker = { gui = '#1e2428', cterm = '16' },
+    bg_dark = { gui = '#22292d', cterm = '16' },
+    bg = { gui = '#2b3339', cterm = '23' },
+    bg_light = { gui = '#323d43', cterm = '59' },
+    bg_lighter = { gui = '#3c474d', cterm = '59' },
+    bg_lightest = { gui = '#505a60', cterm = '59' },
 
-    fg = '#d3c6aa',
+    fg = { gui = '#d3c6aa', cterm = '187' },
 
-    black = '#4b565c',
-    black_bright = '#546066',
+    black = { gui = '#4b565c', cterm = '59' },
+    black_bright = { gui = '#546066', cterm = '59' },
 
-    red = '#e67e80',
-    red_bright = '#ff8c8e',
+    red = { gui = '#e67e80', cterm = '174' },
+    red_bright = { gui = '#ff8c8e', cterm = '210' },
 
-    green = '#a7c080',
-    green_bright = '#bdd991',
+    green = { gui = '#a7c080', cterm = '144' },
+    green_bright = { gui = '#bdd991', cterm = '150' },
 
-    yellow = '#dbbc7f',
-    yellow_bright = '#f5d38e',
+    yellow = { gui = '#dbbc7f', cterm = '180' },
+    yellow_bright = { gui = '#f5d38e', cterm = '222' },
 
-    blue = '#7fbbb3',
-    blue_bright = '#90d4cb',
+    blue = { gui = '#7fbbb3', cterm = '109' },
+    blue_bright = { gui = '#90d4cb', cterm = '116' },
 
-    magenta = '#d699b6',
-    magenta_bright = '#f0aacc',
+    magenta = { gui = '#d699b6', cterm = '175' },
+    magenta_bright = { gui = '#f0aacc', cterm = '218' },
 
-    cyan = '#83c092',
-    cyan_bright = '#93d9a5',
+    cyan = { gui = '#83c092', cterm = '108' },
+    cyan_bright = { gui = '#93d9a5', cterm = '115' },
 
-    white = '#d3c6aa',
-    white_bright = '#eddfc0',
+    white = { gui = '#d3c6aa', cterm = '187' },
+    white_bright = { gui = '#eddfc0', cterm = '223' },
 
-    gray0 = '#7a8478',
-    gray1 = '#859289',
-    gray2 = '#9da9a0',
+    gray0 = { gui = '#7a8478', cterm = '102' },
+    gray1 = { gui = '#859289', cterm = '102' },
+    gray2 = { gui = '#9da9a0', cterm = '145' },
 }

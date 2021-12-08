@@ -8,8 +8,8 @@ return {
     Cursor = { fg = p.fg, bg = p.bg_light }, -- character under the cursor
     lCursor = { fg = p.fg, bg = p.bg_light }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM = { fg = p.fg, bg = p.bg_light }, -- like Cursor, but used when in IME mode |CursorIM|
-    CursorColumn = { bg = p.bg_light }, -- Screen-column at the cursor, when 'cursorcolumn' is secp.
-    CursorLine = { bg = p.bg_light }, -- Screen-line at the cursor, when 'cursorline' is secp.  Low-priority if foreground (ctermfg OR guifg) is not secp.
+    CursorColumn = { bg = p.bg_dark }, -- Screen-column at the cursor, when 'cursorcolumn' is secp.
+    CursorLine = { bg = p.bg_dark }, -- Screen-line at the cursor, when 'cursorline' is secp.  Low-priority if foreground (ctermfg OR guifg) is not secp.
     Directory = { fg = p.fg }, -- directory names (and other special names in listings)
     EndOfBuffer = { fg = p.black }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg = { fg = a.error }, -- error messages on the command line
@@ -59,9 +59,6 @@ return {
 
     -- These groups are not listed as default vim groups,
     -- but they are defacto standard group names for syntax highlighting.
-    -- catppuccin11ed out groups should chain up to their "prefercatppuccin5" group by
-    -- default,
-    -- Uncatppuccin11 and edit if you want more specific syntax highlighting.
 
     -- code itself
 

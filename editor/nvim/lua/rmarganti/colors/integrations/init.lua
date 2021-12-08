@@ -6,6 +6,6 @@ return {
 
     -- Plugins
     hop = require('rmarganti.colors.integrations.hop'),
-    intendt_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
+    indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
     telescope = require('rmarganti.colors.integrations.telescope'),
 }

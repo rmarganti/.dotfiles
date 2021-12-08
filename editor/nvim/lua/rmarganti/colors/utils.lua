@@ -14,12 +14,22 @@ M.syntax = function(tbl)
 	end
 end
 
+M.expand_color =  function(type, color)
+    return string.format(
+        "gui%s=%s cterm%s=%s",
+        type,
+        color.gui,
+        type,
+        color.cterm
+    )
+end
+
 M.highlight = function(group, color)
 	-- Doc: :h highlight-gui
 	local style = color.style and "gui=" .. color.style or "gui=NONE"
-	local fg = color.fg and "guifg=" .. color.fg or "guifg=NONE"
-	local bg = color.bg and "guibg=" .. color.bg or "guibg=NONE"
-	local sp = color.sp and "guisp=" .. color.sp or ""
+	local fg = color.fg and M.expand_color('fg', color.fg) or "guifg=NONE ctermfg=NONE"
+	local bg = color.bg and M.expand_color('bg', color.bg) or "guibg=NONE ctermbg=NONE"
+	local sp = color.sp and "guisp=" .. color.sp.gui or ""
 	local blend = color.blend and "blend=" .. color.blend or ""
 	local hl = "highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp .. " " .. blend
 
