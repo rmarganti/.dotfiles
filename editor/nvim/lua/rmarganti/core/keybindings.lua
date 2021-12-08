@@ -307,6 +307,9 @@ utils.map('n', '<Leader>tq', [[:lua require('rmarganti.core.functions').toggle_q
 -- Toggle Format on save
 utils.map('n', '<Leader>tf', [[:lua require('rmarganti.core.functions').toggle_format_on_save()<CR>]])
 
+-- Toggle Colorizer
+utils.map('n', '<Leader>tc', '<CMD>ColorizerToggle<CR>')
+
 ------------------------------------------------
 --
 -- Windows
