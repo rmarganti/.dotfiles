@@ -5,20 +5,20 @@ return {
     Comment = { fg = a.minus2 }, -- just comments
     ColorColumn = { bg = p.black }, -- used for the columns set with 'colorcolumn'
     Conceal = { fg = p.black }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor = { fg = p.fg, bg = p.bg0 }, -- character under the cursor
-    lCursor = { fg = p.fg, bg = p.bg0 }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
-    CursorIM = { fg = p.fg, bg = p.bg0 }, -- like Cursor, but used when in IME mode |CursorIM|
-    CursorColumn = { bg = p.bg0 }, -- Screen-column at the cursor, when 'cursorcolumn' is secp.
-    CursorLine = { bg = p.bg1 }, -- Screen-line at the cursor, when 'cursorline' is secp.  Low-priority if foreground (ctermfg OR guifg) is not secp.
+    Cursor = { fg = p.fg, bg = p.bg_light }, -- character under the cursor
+    lCursor = { fg = p.fg, bg = p.bg_light }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
+    CursorIM = { fg = p.fg, bg = p.bg_light }, -- like Cursor, but used when in IME mode |CursorIM|
+    CursorColumn = { bg = p.bg_light }, -- Screen-column at the cursor, when 'cursorcolumn' is secp.
+    CursorLine = { bg = p.bg_light }, -- Screen-line at the cursor, when 'cursorline' is secp.  Low-priority if foreground (ctermfg OR guifg) is not secp.
     Directory = { fg = p.fg }, -- directory names (and other special names in listings)
     EndOfBuffer = { fg = p.black }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg = { fg = a.error }, -- error messages on the command line
     VertSplit = { fg = p.black }, -- the column separating vertically split windows
-    Folded = { fg = p.fg, bg = p.bg0 }, -- line used for closed folds
-    FoldColumn = { bg = p.bg0, fg = p.fg }, -- 'foldcolumn'
-    SignColumn = { bg = p.none, fg = p.bg01 }, -- column where |signs| are displayed
-    signcolumnsb = { bg = p.bg0, fg = p.fg }, -- column where |signs| are displayed
-    substitute = { bg = p.bg0, fg = p.fg }, -- |:substitute| replacement text highlighting
+    Folded = { fg = p.fg, bg = p.bg_light }, -- line used for closed folds
+    FoldColumn = { bg = p.bg_light, fg = p.fg }, -- 'foldcolumn'
+    SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
+    signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
+    substitute = { bg = p.bg_light, fg = p.fg }, -- |:substitute| replacement text highlighting
     LineNr = { fg = a.minus2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
     CursorLineNr = { fg = a.plus1 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     MatchParen = { fg = p.yellow }, -- The character under the cursor or just before it, if it is a paicatppuccin5 bracket, and its match. |pi_paren.txt|
@@ -29,27 +29,27 @@ return {
     NonText = { fg = p.fg }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal = { fg = p.fg, bg = p.none }, -- normal text
     NormalNC = { fg = p.fg, bg = p.none }, -- normal text in non-current windows
-    NormalSB = { fg = p.fg, bg = p.bg0 }, -- normal text in non-current windows
-    NormalFloat = { fg = p.fg, bg = p.bg0 }, -- Normal text in floating windows.
-    FloatBorder = { fg = p.gray0 },
-    Pmenu = { bg = p.bg0, fg = p.fg }, -- Popup menu: normal item.
-    PmenuSel = { fg = p.bg0, bg = p.fg }, -- Popup menu: selected item.
-    PmenuSbar = { bg = p.bg0 }, -- Popup menu: scrollbar.
-    PmenuThumb = { bg = p.bg0 }, -- Popup menu: Thumb of the scrollbar.
+    NormalSB = { fg = p.fg, bg = p.none }, -- normal text in non-current windows
+    NormalFloat = { fg = p.fg, bg = a.float_bg }, -- Normal text in floating windows.
+    FloatBorder = { fg = a.border, bg = a.float_bg },
+    Pmenu = { fg = p.fg, bg = a.float_bg }, -- Popup menu: normal item.
+    PmenuSel = { fg = a.select_fg, bg = a.select_bg }, -- Popup menu: selected item.
+    PmenuSbar = { bg = a.float_bg }, -- Popup menu: scrollbar.
+    PmenuThumb = { bg = p.bg_light }, -- Popup menu: Thumb of the scrollbar.
     Question = { fg = p.fg }, -- |hit-enter| prompt and yes/no questions
-    QuickFixLine = { bg = p.bg0 }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+    QuickFixLine = { bg = p.bg_light }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     Search = { bg = p.cyan, fg = p.black }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
     IncSearch = { bg = p.cyan, fg = p.black }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     SpecialKey = { fg = p.fg }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad = { sp = a.warning }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap = { sp = a.warning }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal = { sp = a.warning }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare = { sp = a.warning }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-    StatusLine = { fg = p.fg, bg = p.bg0 }, -- status line of current window
-    StatusLineNC = { fg = p.fg, bg = p.bg0 }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine = { bg = p.bg0, fg = p.fg }, -- tab pages line, not active tab page label
+    SpellBad = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    StatusLine = { fg = p.fg, bg = p.bg_light }, -- status line of current window
+    StatusLineNC = { fg = p.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
     TabLineFill = { bg = p.black }, -- tab pages line, where there are no labels
-    TabLineSel = { fg = p.fg, bg = p.bg0 }, -- tab pages line, active tab page label
+    TabLineSel = { fg = p.fg, bg = p.bg_light }, -- tab pages line, active tab page label
     Title = { fg = p.fg }, -- titles for output from ":set all", ":autocmd" etcp.
     Visual = { bg = p.black }, -- Visual mode selection
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
@@ -105,7 +105,7 @@ return {
     Ignore = { }, -- (prefercatppuccin5) left blank, hidden  |hl-Ignore|
 
     Error = { fg = a.error }, -- (prefercatppuccin5) any erroneous construct
-    Todo = { bg = p.bg0, fg = p.fg }, -- (prefercatppuccin5) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo = { bg = p.bg_light, fg = p.fg }, -- (prefercatppuccin5) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
     qfLineNr = { fg = p.fg },
     qfFileName = { fg = p.fg },
     htmlH1 = { fg = p.fg },
@@ -118,11 +118,11 @@ return {
     mkdLink = { fg = p.fg },
 
     -- debugging
-    debugPC = { bg = p.bg0 }, -- used for highlighting the current line in terminal-debug
-    debugBreakpoint = { bg = p.bg0, fg = p.fg }, -- used for breakpoint colors in terminal-debug
+    debugPC = { bg = p.bg_light }, -- used for highlighting the current line in terminal-debug
+    debugBreakpoint = { bg = p.bg_light, fg = p.fg }, -- used for breakpoint colors in terminal-debug
     -- illuminate
-    illuminatedWord = { bg = p.bg0 },
-    illuminatedCurWord = { bg = p.bg0 },
+    illuminatedWord = { bg = p.bg_light },
+    illuminatedCurWord = { bg = p.bg_light },
     -- diff
     diffAdded = { fg = p.green },
     diffRemoved = { fg = p.red },
@@ -132,10 +132,10 @@ return {
     diffFile = { fg = p.fg },
     diffLine = { fg = p.fg },
     diffIndexLine = { fg = p.fg },
-    DiffAdd = { fg = p.fg, bg = p.bg0 }, -- diff mode: Added line |diff.txt|
-    DiffChange = { fg = p.fg, bg = p.bg0 }, -- diff mode: Changed line |diff.txt|
-    DiffDelete = { fg = p.fg, bg = p.bg0 }, -- diff mode: Deleted line |diff.txt|
-    DiffText = { fg = p.fg, bg = p.bg0 }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffAdd = { fg = p.fg, bg = p.bg_light }, -- diff mode: Added line |diff.txt|
+    DiffChange = { fg = p.fg, bg = p.bg_light }, -- diff mode: Changed line |diff.txt|
+    DiffDelete = { fg = p.fg, bg = p.bg_light }, -- diff mode: Deleted line |diff.txt|
+    DiffText = { fg = p.fg, bg = p.bg_light }, -- diff mode: Changed text within a changed line |diff.txt|
     -- NeoVim
     healthError = { fg = a.error },
     healthSuccess = { fg = a.success },

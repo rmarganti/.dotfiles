@@ -1,9 +1,12 @@
 return {
     none = 'NONE',
 
-    bg0 = '#323d43',
-    bg1 = '#3c474d',
-    bg3 = '#505a60',
+    bg_darker = '#1e2428',
+    bg_dark = '#22292d',
+    bg = '#2b3339',
+    bg_light = '#323d43',
+    bg_lighter = '#3c474d',
+    bg_lightest = '#505a60',
 
     fg = '#d3c6aa',
 

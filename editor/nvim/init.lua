@@ -14,6 +14,7 @@
 --                             N E O V I M  C O N F I G                              --
 ---------------------------------------------------------------------------------------
 
+
 -- Disable some unused built-in Neovim plugins
 vim.g.loaded_man = false
 vim.g.loaded_gzip = false

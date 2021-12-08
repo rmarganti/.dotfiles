@@ -1,25 +1,25 @@
 local M = {}
 
 M.setup = function()
-    local theme = require('rmarganti.colors.palette')
+    local p = require('rmarganti.colors.palette')
     local vi_mode_utils = require('feline.providers.vi_mode')
 
     local vi_mode_colors = {
-        NORMAL = theme.green,
-        OP = theme.red,
-        INSERT = theme.red,
-        VISUAL = theme.yellow,
-        LINES = theme.yellow,
-        BLOCK = theme.yellow,
-        REPLACE = theme.purple,
-        ['V-REPLACE'] = theme.magenta,
-        ENTER = theme.cyan,
-        MORE = theme.cyan,
-        SELECT = theme.blue,
-        COMMAND = theme.green,
-        SHELL = theme.green,
-        TERM = theme.green,
-        NONE = theme.grey1
+        NORMAL = p.green,
+        OP = p.red,
+        INSERT = p.red,
+        VISUAL = p.yellow,
+        LINES = p.yellow,
+        BLOCK = p.yellow,
+        REPLACE = p.purple,
+        ['V-REPLACE'] = p.magenta,
+        ENTER = p.cyan,
+        MORE = p.cyan,
+        SELECT = p.blue,
+        COMMAND = p.green,
+        SHELL = p.green,
+        TERM = p.green,
+        NONE = p.grey1
     }
 
     local pieces = {
@@ -41,16 +41,16 @@ M.setup = function()
         file_info_active = {
             provider = 'file_info',
             hl = {
-                bg = theme.none,
+                bg = p.none,
                 style = 'bold',
             },
             left_sep = {
                 str = '  ',
-                hl = { bg = theme.none, fg = theme.bg0 },
+                hl = { bg = p.none, fg = p.bg_light },
             },
             right_sep = {
                 str = ' ',
-                hl = { bg = theme.none, fg = theme.bg0 },
+                hl = { bg = p.none, fg = p.bg_light },
             },
         },
 
@@ -83,15 +83,15 @@ M.setup = function()
         file_type = {
             provider = 'file_type',
             hl = {
-                bg = theme.bg1,
+                bg = p.bg_lighter,
             },
             left_sep = {
                 str = '  ',
-                hl = { bg = theme.bg1 },
+                hl = { bg = p.bg_lighter },
             },
             right_sep = {
                 str = '  ',
-                hl = { bg = theme.bg1 },
+                hl = { bg = p.bg_lighter },
             },
         },
 
@@ -110,7 +110,7 @@ M.setup = function()
                 end
             end,
             hl = {
-                fg = theme.blue,
+                fg = p.blue,
             },
             left_sep = ' ',
             right_sep = ' ',
@@ -120,7 +120,7 @@ M.setup = function()
             provider = 'scroll_bar',
             hl = function()
                 return {
-                    bg = theme.bg3,
+                    bg = p.bg_lightest,
                     fg = vi_mode_utils.get_mode_color(),
                     style = 'bold'
                 }
@@ -156,8 +156,8 @@ M.setup = function()
     require('feline').setup({
         components = components,
         colors = {
-            bg = theme.bg0,
-            fg = theme.grey1,
+            bg = p.bg_light,
+            fg = p.grey0,
         },
         vi_mode_colors = vi_mode_colors,
     })
