@@ -1,3 +1,5 @@
 lua << EOF
-    require('rmarganti.colors.neverforest').load()
+    package.loaded['rmarganti.colors.neverforest'] = nil
+
+    require('rmarganti.colors.neverforest')
 EOF

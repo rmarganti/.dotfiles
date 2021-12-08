@@ -1,3 +1,4 @@
+local a = require('rmarganti.colors.abstractions')
 local p = require('rmarganti.colors.palette')
 
 return {
@@ -8,4 +9,5 @@ return {
     markdownH2 = { fg = p.yellow, style = "bold" },
     markdownH3 = { fg = p.cyan, style = "bold" },
     markdownLinkText = { fg = p.green, style = "underline" },
+    markdownLinkTextDelimiter = { fg = a.base },
 }
