@@ -37,6 +37,8 @@ M.setup = function()
             },
         },
     })
+
+    require("telescope").load_extension("notify")
 end
 
 return M

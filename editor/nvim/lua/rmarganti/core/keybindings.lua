@@ -253,6 +253,9 @@ utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
 -- Search Window (jumps to character visible in current window)
 utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
 
+-- Search Notifications
+utils.map('n', '<Leader>sn', '<cmd>Telescope notify<CR>')
+
 
 ------------------------------------------------
 --
