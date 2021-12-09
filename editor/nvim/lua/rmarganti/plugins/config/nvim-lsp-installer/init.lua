@@ -9,7 +9,7 @@ M.setup = function()
         if client.resolved_capabilities.document_formatting then
             vim.cmd [[augroup Format]]
             vim.cmd [[autocmd! * <buffer>]]
-            vim.cmd [[autocmd BufWritePost <buffer> lua require('rmarganti.core.functions').format_on_save()]]
+            vim.cmd [[autocmd BufWritePost <buffer> lua require('rmarganti.core.functions').format(true)]]
             vim.cmd [[augroup END]]
         end
     end

@@ -122,7 +122,7 @@ utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document
 utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>')
 
 -- Code Format
-utils.map('n', '<Leader>cf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+utils.map('n', '<Leader>cf', [[<cmd>lua require('rmarganti.core.functions').format(false)<CR>]])
 
 
 ------------------------------------------------

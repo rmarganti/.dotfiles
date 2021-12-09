@@ -91,12 +91,13 @@ M.toggle_format_on_save = function ()
     end
 end
 
--- Asynchronously format the current buffer. If any changes occour,
--- the updated buffer will be re-saved in `lspconfig.lua`.
-M.format_on_save = function()
-    if enable_format_on_save == true and not vim.b.is_saving_format then
-        vim.b.init_changedtick = vim.b.changedtick
+-- Asynchronously format the current buffer.
+-- TODO: Auto-save when auto-formatting.
+M.format = function(is_auto_format)
+    -- Manual format.
+    if is_auto_format == false or enable_format_on_save then
         vim.lsp.buf.formatting()
+        return
     end
 end
 
