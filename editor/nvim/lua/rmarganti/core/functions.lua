@@ -102,28 +102,34 @@ M.rename = function()
     api.nvim_win_set_option(win, "sidescrolloff", 0)
     api.nvim_buf_set_option(buf, "modifiable", true)
     api.nvim_buf_set_option(buf, "buftype", "prompt")
+
     vim.fn.prompt_setprompt(buf, " > ")
+
     vim.api.nvim_command "startinsert!"
     local map_opts = { noremap = true }
     api.nvim_buf_set_keymap(buf, "i", "<esc>", "<CMD>stopinsert <BAR> q!<CR>", map_opts)
     api.nvim_buf_set_keymap(buf, "i", "<CR>", "<CMD>stopinsert <BAR> lua require('rmarganti.core.functions')._rename()<CR>", map_opts)
 
     function M._rename()
-        local newName = vim.trim(vim.fn.getline("."):sub(4, -1))
+        local current_name = vim.fn.expand "<cword>"
+        local new_name = vim.trim(vim.fn.getline("."):sub(4, -1))
+
         vim.cmd [[q!]]
+
         local params = lsp.util.make_position_params()
-        local currName = vim.fn.expand "<cword>"
-        if not (newName and #newName > 0) or newName == currName then
+
+        if not (new_name and #new_name > 0) or new_name == current_name then
             return
         end
-        params.newName = newName
-        print(newName)
+
+        params.newName = new_name
         lsp.buf_request(0, "textDocument/rename", params)
     end
 end
 
 local enable_format_on_save = true
 
+-- Toggle whether format-on-save is enabled.
 M.toggle_format_on_save = function ()
     if enable_format_on_save == true then
         enable_format_on_save = false
@@ -134,9 +140,12 @@ M.toggle_format_on_save = function ()
     end
 end
 
+-- Asynchronously format the current buffer. If any changes occour,
+-- the updated buffer will be re-saved in `lspconfig.lua`.
 M.format_on_save = function()
-    if enable_format_on_save == true then
-        vim.lsp.buf.formatting_sync()
+    if enable_format_on_save == true and not vim.b.is_saving_format then
+        vim.b.init_changedtick = vim.b.changedtick
+        vim.lsp.buf.formatting()
     end
 end
 
