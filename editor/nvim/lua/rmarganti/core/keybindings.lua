@@ -113,7 +113,7 @@ utils.map('n', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_code_ac
 utils.map('v', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_range_code_actions(require('telescope.themes').get_dropdown({}))<CR>]])
 
 -- Code symbol Rename.
-utils.map('n', '<Leader>cr', [[<cmd>lua require('rmarganti.core.functions').rename()<CR>]])
+utils.map('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
 -- Code file Symbols.
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')

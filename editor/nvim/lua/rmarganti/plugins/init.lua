@@ -310,16 +310,28 @@ packer.startup(function(use)
     -- Utility
     --------------------------------
 
+    -- Various utility funcctions.
     use({
         'nvim-lua/plenary.nvim',
         module = 'plenary',
     })
 
+    -- Support VIM's `popup_*` APIs. Will likely
+    -- be merged into Neovim at some point.
     use({
         'nvim-lua/popup.nvim',
         module = 'popup',
     })
 
+    -- Replaces `vim.ui.{input,select}`.
+    use({
+        'stevearc/dressing.nvim',
+        config = function()
+            require('rmarganti.plugins.config.dressing').setup()
+        end
+    })
+
+    -- Replaces `vim.notify`.
     use({
         'rcarriga/nvim-notify',
         config = function()
