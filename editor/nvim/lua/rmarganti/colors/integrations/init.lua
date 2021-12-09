@@ -7,5 +7,6 @@ return {
     -- Plugins
     hop = require('rmarganti.colors.integrations.hop'),
     indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
+    nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
     telescope = require('rmarganti.colors.integrations.telescope'),
 }

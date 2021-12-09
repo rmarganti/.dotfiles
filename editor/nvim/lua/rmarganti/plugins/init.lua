@@ -320,6 +320,13 @@ packer.startup(function(use)
         module = 'popup',
     })
 
+    use({
+        'rcarriga/nvim-notify',
+        config = function()
+            require('rmarganti.plugins.config.nvim-notify').setup()
+        end
+    })
+
     --------------------------------
     -- Misc
     --------------------------------
