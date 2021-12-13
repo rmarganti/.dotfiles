@@ -3,16 +3,7 @@ local M = {}
 M.setup = function()
     local lsp_installer = require("nvim-lsp-installer")
     local utils = require('rmarganti.utils.misc')
-
-    local on_attach = function (client, _)
-        -- Auto-format on save.
-        if client.resolved_capabilities.document_formatting then
-            vim.cmd [[augroup Format]]
-            vim.cmd [[autocmd! * <buffer>]]
-            vim.cmd [[autocmd BufWritePost <buffer> lua require('rmarganti.core.functions').format(true)]]
-            vim.cmd [[augroup END]]
-        end
-    end
+    local on_attach = require('rmarganti.plugins.config.nvim-lsp-installer.on_attach')
 
     lsp_installer.on_server_ready(function(server)
         if server.name == 'sumneko_lua' then
@@ -38,11 +29,6 @@ M.setup = function()
 
         vim.cmd [[ do User LspAttachBuffers ]]
     end)
-
-
-    require('lspconfig')['null-ls'].setup({
-        on_attach = on_attach
-    })
 end
 
 return M

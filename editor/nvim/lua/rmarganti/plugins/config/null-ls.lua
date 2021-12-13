@@ -1,5 +1,6 @@
 local M = {}
 
+local on_attach = require "rmarganti.plugins.config.nvim-lsp-installer.on_attach"
 M.setup = function()
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
@@ -33,9 +34,10 @@ M.setup = function()
         }),
     }
 
-    null_ls.config({
+    null_ls.setup({
         debounce = 1000,
-        sources = sources
+        sources = sources,
+        on_attach = on_attach
     })
 end
 
