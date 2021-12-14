@@ -109,8 +109,8 @@ utils.map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations(
 utils.map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
 
 -- Code Actions.
-utils.map('n', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>]])
-utils.map('v', '<Leader>ca', [[<cmd>lua require("telescope.builtin").lsp_range_code_actions(require('telescope.themes').get_dropdown({}))<CR>]])
+utils.map('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+utils.map('v', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 -- Code symbol Rename.
 utils.map('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
