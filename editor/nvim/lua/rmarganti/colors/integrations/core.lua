@@ -38,8 +38,8 @@ return {
     PmenuThumb = { bg = p.bg_light }, -- Popup menu: Thumb of the scrollbar.
     Question = { fg = p.fg }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine = { bg = p.bg_light }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    Search = { bg = p.cyan, fg = p.black }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
-    IncSearch = { bg = p.cyan, fg = p.black }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
+    IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     SpecialKey = { fg = p.fg }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.

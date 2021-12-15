@@ -131,6 +131,37 @@ packer.startup(function(use)
         end
     })
 
+    -- Support VIM's `popup_*` APIs. Will likely
+    -- be merged into Neovim at some point.
+    use({
+        'nvim-lua/popup.nvim',
+        module = 'popup',
+    })
+
+    -- Replaces `vim.ui.{input,select}`.
+    use({
+        'stevearc/dressing.nvim',
+        config = function()
+            require('rmarganti.plugins.config.dressing').setup()
+        end
+    })
+
+    -- Replaces `vim.notify`.
+    use({
+        'rcarriga/nvim-notify',
+        config = function()
+            require('rmarganti.plugins.config.nvim-notify').setup()
+        end
+    })
+
+    -- Add preview to quickfix.
+    use({
+        'kevinhwang91/nvim-bqf',
+        config = function()
+            require('rmarganti.plugins.config.nvim-bqf').setup()
+        end
+    })
+
     --------------------------------
     -- Git
     --------------------------------
@@ -314,29 +345,6 @@ packer.startup(function(use)
     use({
         'nvim-lua/plenary.nvim',
         module = 'plenary',
-    })
-
-    -- Support VIM's `popup_*` APIs. Will likely
-    -- be merged into Neovim at some point.
-    use({
-        'nvim-lua/popup.nvim',
-        module = 'popup',
-    })
-
-    -- Replaces `vim.ui.{input,select}`.
-    use({
-        'stevearc/dressing.nvim',
-        config = function()
-            require('rmarganti.plugins.config.dressing').setup()
-        end
-    })
-
-    -- Replaces `vim.notify`.
-    use({
-        'rcarriga/nvim-notify',
-        config = function()
-            require('rmarganti.plugins.config.nvim-notify').setup()
-        end
     })
 
     --------------------------------
