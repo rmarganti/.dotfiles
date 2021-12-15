@@ -62,19 +62,19 @@ return {
 
     -- code itself
 
-    Constant = { fg = a.plus2 }, -- (prefercatppuccin5) any constant
-    String = { fg = a.plus2 }, -- a string constant: "this is a string"
-    Character = { fg = a.plus2 }, --  a character constant: 'c', '\n'
-    Number = { fg = a.plus2 }, --   a number constant: 234, 0xff
-    Float = { fg = a.plus2 }, --    a floating point constant: 2.3e10
-    Boolean = { fg = a.plus2 }, --  a boolean constant: TRUE, false
+    Constant = { fg = a.plus3 }, -- (prefercatppuccin5) any constant
+    String = { fg = a.plus1 }, -- a string constant: "this is a string"
+    Character = { fg = a.plus1 }, --  a character constant: 'c', '\n'
+    Number = { fg = a.plus1 }, --   a number constant: 234, 0xff
+    Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
+    Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
     Identifier = { fg = a.plus3 }, -- (prefercatppuccin5) any variable name
     Function = { fg = a.plus1 }, -- function name (also: methods for classes)
-    Statement = { fg = a.base }, -- (prefercatppuccin5) any statement
-    Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
-    Repeat = { fg = a.base }, --   for, do, while, etcp.
-    Label = { fg = a.plus1 }, --    case, default, etcp.
-    Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
+    Statement = { fg = a.plus1 }, -- (prefercatppuccin5) any statement
+    Conditional = { fg = a.plus1 }, --  if, then, else, endif, switch, etcp.
+    Repeat = { fg = a.plus1 }, --   for, do, while, etcp.
+    Label = { fg = a.plus2 }, --    case, default, etcp.
+    Operator = { fg = a.plus1 }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
     Exception     = { }, --  try, catch, throw
 
@@ -85,10 +85,10 @@ return {
     PreCondit     = { }, --  preprocessor #if, #else, #endif, etcp.
 
     Type = { fg = a.plus2 }, -- (prefercatppuccin5) int, long, char, etcp.
-    StorageClass = { fg = a.base }, -- static, register, volatile, etcp.
+    StorageClass = { fg = a.plus1 }, -- static, register, volatile, etcp.
     Structure = { fg = a.plus1 }, --  struct, union, enum, etcp.
     Typedef = { fg = a.plus1 }, --  A typedef
-    Special = { fg = a.base }, -- (prefercatppuccin5) any special symbol
+    Special = { fg = a.plus1 }, -- (prefercatppuccin5) any special symbol
     SpecialChar   = { }, --  special character in a constant
     Tag           = { }, --    you can use CTRL-] on this
     Delimiter     = { }, --  character that needs attention

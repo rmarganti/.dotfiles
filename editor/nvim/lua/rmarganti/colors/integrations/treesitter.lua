@@ -6,7 +6,7 @@ return {
     -- TSConditional = { fg = a.base, gui = 'italic' },
     -- TSConstBuiltin = { fg = a.base },
     -- TSConstMacro = { fg = a.base },
-    -- TSConstant = { fg = a.base },
+    -- TSConstant = { fg = a.plus1 },
     TSConstructor = { fg = a.plus3 },
     -- TSCurrentScope = {},
     -- TSDefinition = {},
@@ -14,7 +14,7 @@ return {
     -- TSEmphasis = {},
     TSError = { fg = a.error }, -- For syntax/parser errors.
     -- TSException = { fg = a.base, gui = 'italic' },
-    TSField = { fg = a.plus1 },
+    TSField = { fg = a.plus2 },
     -- TSFloat = { fg = a.base },
     TSFuncBuiltin = { fg = a.plus2 },
     -- TSFuncMacro = { fg = a.base },
@@ -51,5 +51,5 @@ return {
     -- TSURI = {},
     -- TSUnderline = {},
     TSVariable = { fg = a.plus3 },
-    TSVariableBuiltin = { fg = a.plus2 },
+    TSVariableBuiltin = { fg = a.plus3 },
 }
