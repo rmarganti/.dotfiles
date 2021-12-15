@@ -181,7 +181,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.null-ls').setup()
         end,
-        after = 'nvim-lspconfig'
+        after = 'cmp-nvim-lsp'
     })
 
     -- Adds LSPInstall command.
@@ -221,7 +221,7 @@ packer.startup(function(use)
     })
 
     -- Completion sources.
-    use({ 'hrsh7th/cmp-nvim-lsp', after = 'nvim-lspconfig' }) -- Loaded earlier for capabilities.
+    use({ 'hrsh7th/cmp-nvim-lsp', after = 'lspkind-nvim' }) -- Loaded earlier for capabilities.
     use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
     use({ 'tzachar/cmp-tabnine', run='./install.sh', after = 'nvim-cmp' })
