@@ -183,6 +183,9 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 -- Git Commits
 utils.map('n', '<Leader>gc', '<cmd>Telescope git_commits<CR>')
 
+-- Git History (commits for buffer)
+utils.map('n', '<Leader>gh', '<cmd>Telescope git_bcommits<CR>')
+
 -- Git Branches
 utils.map('n', '<Leader>gb', '<cmd>Telescope git_branches<CR>')
 
@@ -356,4 +359,5 @@ utils.map('n', '<Leader>qq', ':qa<CR>')
 -- Force close all buffers and Quit
 utils.map('n', '<Leader>qQ', ':qa!<CR>')
 
-utils.map('n', '<Leader>gh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
+-- Show syntax Highlight group for word under cursor.
+utils.map('n', '<Leader>hh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
