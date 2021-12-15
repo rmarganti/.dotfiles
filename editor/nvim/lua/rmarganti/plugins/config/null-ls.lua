@@ -10,6 +10,9 @@ M.setup = function()
         '~/.config/nvim/lua/rmarganti/plugins/config/.prettierrc.json'
     )
 
+    local capabilities = require('cmp_nvim_lsp')
+        .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     local sources = {
         -- PHP
         builtins.diagnostics.phpstan.with({
@@ -35,6 +38,7 @@ M.setup = function()
     }
 
     null_ls.setup({
+        capabilities = capabilities,
         debounce = 1000,
         sources = sources,
         on_attach = on_attach

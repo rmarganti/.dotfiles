@@ -6,7 +6,11 @@ M.setup = function(server, on_attach)
     table.insert(lua_path, 'lua/?.lua')
     table.insert(lua_path, 'lua/?/init.lua')
 
+    local capabilities = require('cmp_nvim_lsp')
+        .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     server:setup({
+        capabilities = capabilities,
         on_attach = on_attach,
         settings = {
             Lua = {
