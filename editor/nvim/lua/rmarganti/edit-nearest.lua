@@ -35,7 +35,7 @@ M.edit_nearest = function(filename, directory)
     local nearest = find_nearest(filename)
 
     if (nearest == nil) then
-        print(filename .. ' not found in project.')
+        vim.notify(filename .. ' not found in project.', 'warn')
         return
     end
 

@@ -48,7 +48,7 @@ M.edit_nearest = function(filename, directory)
     local nearest = find_nearest(filename)
 
     if (nearest == nil) then
-        print(filename .. ' not found in project.')
+        vim.notify(filename .. ' not found in project.', 'warn')
         return
     end
 
@@ -71,7 +71,7 @@ M.edit_test = function()
     local file_without_extension = file:gsub(extension_regex, '')
 
     if (misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension) == false) then
-        print('File type `' .. extension .. '` not supported')
+        vim.notify('File type `' .. extension .. '` not supported', 'warn')
         return
     end
 
@@ -84,10 +84,10 @@ local enable_format_on_save = true
 M.toggle_format_on_save = function ()
     if enable_format_on_save == true then
         enable_format_on_save = false
-        print('Disabled format-on-save')
+        vim.notify('Disabled format-on-save', 'info')
     else
         enable_format_on_save = true
-        print('Enabled format-on-save')
+        vim.notify('Enabled format-on-save')
     end
 end
 
