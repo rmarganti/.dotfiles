@@ -9,3 +9,14 @@ vim.cmd([[
         autocmd FileType qf nnoremap <buffer><silent> <ESC> :cclose<CR>
     augroup END
 ]])
+
+vim.cmd([[
+    augroup WinResize
+        autocmd!
+
+        " Automatically resize windows when the host
+        " window size changes. Useful for tmux zooms.
+        autocmd VimResized * wincmd =
+
+    augroup END
+]])
