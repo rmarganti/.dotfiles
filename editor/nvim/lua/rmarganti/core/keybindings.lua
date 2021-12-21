@@ -150,19 +150,19 @@ utils.map('n', '<Leader>et', [[:lua require('rmarganti.core.functions').edit_tes
 ------------------------------------------------
 
 -- File Edit. Pre-populates the current directory.
-utils.map('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>')
+utils.map('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>', { silent = false })
 
 -- File Copy
-utils.map('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>')
+utils.map('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>', { silent = false })
 
 -- File Delete
-utils.map('n', '<Leader>fd', ':Delete')
+utils.map('n', '<Leader>fd', ':Delete', { silent = false })
 
 -- File Move
-utils.map('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>')
+utils.map('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>', { silent = false })
 
 -- File Rename
-utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>')
+utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false })
 
 -- File Write
 utils.map('n', '<Leader>fw', 'fw :w<CR>')
