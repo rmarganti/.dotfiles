@@ -4,7 +4,7 @@ local M = {}
 
 M = {
     -- Visual hierarchy
-    minus3 = p.bg_lightest,
+    minus3 = p.bg_light,
     minus2 = p.black_bright,
     minus1 = p.gray0,
     base = p.gray2,

@@ -50,7 +50,7 @@ return {
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
     TabLineFill = { bg = p.black }, -- tab pages line, where there are no labels
     TabLineSel = { fg = p.fg, bg = p.bg_light }, -- tab pages line, active tab page label
-    Title = { fg = p.fg }, -- titles for output from ":set all", ":autocmd" etcp.
+    Title = { fg = p.plus1 }, -- titles for output from ":set all", ":autocmd" etcp.
     Visual = { bg = p.black }, -- Visual mode selection
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
@@ -74,7 +74,7 @@ return {
     Conditional = { fg = a.plus1 }, --  if, then, else, endif, switch, etcp.
     Repeat = { fg = a.plus1 }, --   for, do, while, etcp.
     Label = { fg = a.plus2 }, --    case, default, etcp.
-    Operator = { fg = a.plus1 }, -- "sizeof", "+", "*", etcp.
+    Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
     Exception     = { }, --  try, catch, throw
 
