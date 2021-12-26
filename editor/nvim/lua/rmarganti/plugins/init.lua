@@ -206,13 +206,19 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
+    -- Adds JSON schemas support for jsonls.
+    use({
+        'b0o/schemastore.nvim',
+        after = 'cmp-nvim-lsp'
+    })
+
     -- Language server for linters, formatters, etc.
     use({
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
             require('rmarganti.plugins.config.null-ls').setup()
         end,
-        after = 'cmp-nvim-lsp'
+        after = 'schemastore.nvim'
     })
 
     -- Adds LSPInstall command.
@@ -255,7 +261,7 @@ packer.startup(function(use)
     use({ 'hrsh7th/cmp-nvim-lsp', after = 'lspkind-nvim' }) -- Loaded earlier for capabilities.
     use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
-    use({ 'tzachar/cmp-tabnine', run='./install.sh', after = 'nvim-cmp' })
+    -- use({ 'tzachar/cmp-tabnine', run='./install.sh', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' })
 
     -- Snippets.

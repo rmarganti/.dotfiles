@@ -9,9 +9,34 @@ M.setup = function()
         local capabilities = require('cmp_nvim_lsp')
             .update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+        ------------------------------------------------
+        -- Lua.
+        ------------------------------------------------
         if server.name == 'sumneko_lua' then
             require('rmarganti.plugins.config.nvim-lsp-installer.lua').setup(server, on_attach)
-        elseif utils.has_value({ 'html', 'jsonls', 'intelephense', 'tsserver' }, server.name) then
+
+        ------------------------------------------------
+        -- JSON.
+        ------------------------------------------------
+        elseif server.name == 'jsonls' then
+            server:setup({
+                capabilities = capabilities,
+                on_attach = function(client, buffnr)
+                    client.resolved_capabilities.document_formatting = false
+                    on_attach(client, buffnr)
+                end,
+                settings = {
+                    json = {
+                        schemas = require('schemastore').json.schemas()
+                    },
+                    documentFormatting = false
+                }
+            })
+
+        ------------------------------------------------
+        -- HTML, PHP, Typescript, Javascript.
+        ------------------------------------------------
+        elseif utils.has_value({ 'html', 'intelephense', 'tsserver' }, server.name) then
             -- Disable the language server's `document_formatting` capability,
             -- since we will use some other linter/formatter (prettier, etc).
             server:setup({
@@ -24,6 +49,10 @@ M.setup = function()
                     documentFormatting = false
                 }
             })
+
+        ------------------------------------------------
+        -- Everything else.
+        ------------------------------------------------
         else
             -- Use default settings for all the other language servers
             server:setup({
