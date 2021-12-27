@@ -182,9 +182,6 @@ packer.startup(function(use)
             require('rmarganti.plugins.config.github-notifications').setup()
         end,
         module = 'github-notifications',
-        requires = {
-            'nvim-telescope/telescope.nvim',
-        },
     })
 
     -- Git diffs/commands.
