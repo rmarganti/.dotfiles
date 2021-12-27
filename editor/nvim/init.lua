@@ -14,6 +14,8 @@
 --                             N E O V I M  C O N F I G                              --
 ---------------------------------------------------------------------------------------
 
+require('impatient')
+require('packer_compiled')
 
 -- Disable some unused built-in Neovim plugins
 vim.g.loaded_man = false

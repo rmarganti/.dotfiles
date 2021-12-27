@@ -22,6 +22,7 @@ local packer = require('packer')
 
 -- Change some defaults
 packer.init({
+    compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua',
     git = {
         clone_timeout = 300, -- 5 mins
     },
@@ -399,7 +400,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
-    -- Make more things repeatalble.
+    -- Make more things repeatable.
     use({
         'tpope/vim-repeat',
         event = 'BufWinEnter',
@@ -429,4 +430,10 @@ packer.startup(function(use)
         end,
         event = 'BufWinEnter',
     })
+
+    -- Optimized version of Neovim's included filetype.vim.
+    use("nathom/filetype.nvim")
+
+    -- Optimized lua caching for quicker startup times.
+    use('lewis6991/impatient.nvim')
 end)
