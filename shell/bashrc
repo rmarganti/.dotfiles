@@ -4,7 +4,6 @@
 #
 ################################################################
 
-. ~/z.sh
 . ~/.bash_aliases
 . ~/.bash_colors
 . ~/.git-completion.bash
@@ -96,11 +95,20 @@ export BAT_THEME="base16-256"
 # iTerm Shell Integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-# Load local-specific config if it exists (not commited to git)
+# Load local-specific config if it exists (not committed to git)
 if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
+
+################################################################
+#
+# tmux
+#
+################################################################
 
 # Automatically attach to a tmux `default` session.
 
