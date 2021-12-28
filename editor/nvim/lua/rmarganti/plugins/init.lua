@@ -287,7 +287,12 @@ packer.startup(function(use)
 
     -- Easily comment/uncomment code.
     use({
-        'b3nj5m1n/kommentary',
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup({
+                ignore = '^$'
+            })
+        end,
         event = 'BufWinEnter'
     })
 
