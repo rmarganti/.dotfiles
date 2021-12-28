@@ -1,6 +1,7 @@
 local M = {}
 
 M.setup = function()
+    local feline = require('feline')
     local p = require('rmarganti.colors.palette')
     local vi_mode_utils = require('feline.providers.vi_mode')
 
@@ -153,13 +154,15 @@ M.setup = function()
         }
     }
 
-    require('feline').setup({
+    feline.setup({
         components = components,
-        colors = {
-            bg = p.bg_light.gui,
-            fg = p.gray0.gui,
-        },
         vi_mode_colors = vi_mode_colors,
+    })
+
+
+    feline.use_theme({
+        bg = p.bg_light.gui,
+        fg = p.gray0.gui,
     })
 end
 
