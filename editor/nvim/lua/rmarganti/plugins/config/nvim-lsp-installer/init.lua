@@ -9,11 +9,19 @@ M.setup = function()
         local capabilities = require('cmp_nvim_lsp')
             .update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+        local flags = {
+            debounce_text_changes = 300, -- Wait 5 seconds before sending didChange
+        }
+
         ------------------------------------------------
         -- Lua.
         ------------------------------------------------
         if server.name == 'sumneko_lua' then
-            require('rmarganti.plugins.config.nvim-lsp-installer.lua').setup(server, on_attach)
+            require('rmarganti.plugins.config.nvim-lsp-installer.lua').setup(
+                server,
+                on_attach,
+                flags
+            )
 
         ------------------------------------------------
         -- JSON.
@@ -30,7 +38,8 @@ M.setup = function()
                         schemas = require('schemastore').json.schemas()
                     },
                     documentFormatting = false
-                }
+                },
+                flags = flags
             })
 
         ------------------------------------------------
@@ -47,7 +56,8 @@ M.setup = function()
                 end,
                 settings = {
                     documentFormatting = false
-                }
+                },
+                flags = flags
             })
 
         ------------------------------------------------
@@ -57,7 +67,8 @@ M.setup = function()
             -- Use default settings for all the other language servers
             server:setup({
                 capabilities = capabilities,
-                on_attach = on_attach
+                on_attach = on_attach,
+                flags = flags
             })
         end
 

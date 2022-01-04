@@ -198,9 +198,6 @@ packer.startup(function(use)
     -- Common LSP configs.
     use({
         'neovim/nvim-lspconfig',
-        config = function()
-            require('rmarganti.plugins.config.lspconfig').setup()
-        end,
         event = 'BufWinEnter',
     })
 

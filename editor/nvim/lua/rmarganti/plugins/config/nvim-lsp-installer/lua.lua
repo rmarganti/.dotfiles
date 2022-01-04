@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(server, on_attach)
+M.setup = function(server, on_attach, flags)
     -- Configure sumneko for neovim lua development
     local lua_path = vim.split(package.path, ';')
     table.insert(lua_path, 'lua/?.lua')
@@ -35,6 +35,7 @@ M.setup = function(server, on_attach)
                 telemetry = { enable = false },
             },
         },
+        flags = flags
     })
 end
 
