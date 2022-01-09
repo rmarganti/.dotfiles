@@ -414,6 +414,7 @@ packer.startup(function(use)
         setup = function()
             vim.g.spelunker_check_type = 2
             vim.g.spelunker_spell_bad_group = 'SpellBad'
+            vim.g.spelunker_complex_or_compound_word_group = 'SpellBad'
         end,
         requires = {
             {
