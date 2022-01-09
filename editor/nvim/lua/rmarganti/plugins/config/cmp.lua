@@ -1,14 +1,15 @@
+    local cmp = require('cmp')
+local timer = vim.loop.new_timer()
+
 local M = {}
 
 local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 --- nvim-cmp configuration
 -- https://github.com/hrsh7th/nvim-compe#lua-config
 M.setup = function()
-    local cmp = require('cmp')
-
     local tab_complete = function(fallback)
         if cmp.visible() then
             local entry = cmp.get_selected_entry()
@@ -24,6 +25,9 @@ M.setup = function()
     end
 
     cmp.setup({
+        completion = {
+            autocomplete = false,
+        },
         formatting = {
             format = require("lspkind").cmp_format({
                 with_text = true,
@@ -56,6 +60,26 @@ M.setup = function()
         }
     })
 
+
+    vim.cmd([[
+        augroup CmpDebounceAuGroup
+            au!
+            au TextChangedI * lua require('rmarganti.plugins.config.cmp').debounce()
+        augroup end
+    ]])
+end
+
+local DEBOUNCE_DELAY = 500
+
+M.debounce = function()
+    timer:stop()
+    timer:start(
+        DEBOUNCE_DELAY,
+        0,
+        vim.schedule_wrap(function()
+            cmp.complete({ reason = cmp.ContextReason.Auto })
+        end)
+    )
 end
 
 return M

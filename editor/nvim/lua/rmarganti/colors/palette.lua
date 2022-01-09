@@ -1,5 +1,5 @@
 return {
-    none = { gui = 'NONE', cterm = '0' },
+    none = { gui = 'NONE', cterm = 'NONE' },
 
     bg_darker = { gui = '#1e2428', cterm = '16' },
     bg_dark = { gui = '#22292d', cterm = '16' },

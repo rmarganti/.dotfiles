@@ -30,8 +30,9 @@ M.highlight = function(group, color)
 	local fg = color.fg and M.expand_color('fg', color.fg) or "guifg=NONE ctermfg=NONE"
 	local bg = color.bg and M.expand_color('bg', color.bg) or "guibg=NONE ctermbg=NONE"
 	local sp = color.sp and "guisp=" .. color.sp.gui or ""
+    local gui = color.gui and "gui=" .. color.gui or ""
 	local blend = color.blend and "blend=" .. color.blend or ""
-	local hl = "highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp .. " " .. blend
+	local hl = "highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. gui .. " " .. sp .. " " .. blend
 
 	vim.cmd(hl)
 	if color.link then

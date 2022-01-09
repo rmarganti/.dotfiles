@@ -71,6 +71,8 @@ vim.opt.sidescrolloff=10
 -- Highlight the current line.
 vim.opt.cursorline = true
 
+-- Max height for completion menu
+vim.opt.pumheight = 20
 
 ------------------------------------------------
 --
