@@ -41,10 +41,10 @@ return {
     Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
     IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     SpecialKey = { fg = p.fg }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare = { fg = p.none, sp = a.warning, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    SpellBad = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine = { fg = p.fg, bg = p.bg_light }, -- status line of current window
     StatusLineNC = { fg = p.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
@@ -102,7 +102,7 @@ return {
     Ignore = { }, -- (prefercatppuccin5) left blank, hidden  |hl-Ignore|
 
     Error = { fg = a.error }, -- (prefercatppuccin5) any erroneous construct
-    Todo = { bg = p.bg_light, fg = p.fg }, -- (prefercatppuccin5) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo = { fg = p.cyan, gui = 'italic' }, -- (prefercatppuccin5) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
     qfLineNr = { fg = p.fg },
     qfFileName = { fg = p.fg },
     htmlH1 = { fg = p.fg },

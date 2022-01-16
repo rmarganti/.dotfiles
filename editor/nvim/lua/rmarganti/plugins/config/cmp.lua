@@ -1,4 +1,4 @@
-    local cmp = require('cmp')
+local cmp = require('cmp')
 local timer = vim.loop.new_timer()
 
 local M = {}
@@ -60,7 +60,6 @@ M.setup = function()
         }
     })
 
-
     vim.cmd([[
         augroup CmpDebounceAuGroup
             au!
@@ -69,7 +68,7 @@ M.setup = function()
     ]])
 end
 
-local DEBOUNCE_DELAY = 500
+local DEBOUNCE_DELAY = 250
 
 M.debounce = function()
     timer:stop()
