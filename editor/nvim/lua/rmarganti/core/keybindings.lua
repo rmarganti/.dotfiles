@@ -124,6 +124,9 @@ utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").lsp_dynamic_
 -- Code Format
 utils.map('n', '<Leader>cf', [[<cmd>lua require('rmarganti.core.functions').format(false)<CR>]])
 
+-- Code Organize imports
+utils.map('n', '<Leader>co', [[<cmd>lua require('rmarganti.core.functions').organize_imports()<CR>]])
+
 
 ------------------------------------------------
 --

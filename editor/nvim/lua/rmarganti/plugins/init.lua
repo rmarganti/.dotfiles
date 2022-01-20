@@ -22,7 +22,6 @@ local packer = require('packer')
 
 -- Change some defaults
 packer.init({
-    compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua',
     git = {
         clone_timeout = 300, -- 5 mins
     },
@@ -436,7 +435,4 @@ packer.startup(function(use)
 
     -- Optimized version of Neovim's included filetype.vim.
     use("nathom/filetype.nvim")
-
-    -- Optimized lua caching for quicker startup times.
-    use('lewis6991/impatient.nvim')
 end)

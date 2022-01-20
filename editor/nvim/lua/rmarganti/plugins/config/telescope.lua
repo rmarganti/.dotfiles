@@ -20,6 +20,7 @@ M.setup = function()
                 '^.git/',
                 '^node_modules/',
                 '^vendor/',
+                'yarn.lock',
             },
             layout_config = {
                 center = {
