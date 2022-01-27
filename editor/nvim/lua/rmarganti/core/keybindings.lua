@@ -140,6 +140,9 @@ utils.map('n', '<Leader>ec', [[:lua require('rmarganti.core.functions').edit_nea
 -- Edit nearest Env
 utils.map('n', '<Leader>ee', [[:lua require('rmarganti.core.functions').edit_nearest('.env')<CR>]])
 
+-- Edit nearest Index.ts
+utils.map('n', '<Leader>ei', [[:lua require('rmarganti.core.functions').edit_nearest('index.ts')<CR>]])
+
 -- Edit nearest Readme
 utils.map('n', '<Leader>er', [[:lua require('rmarganti.core.functions').edit_nearest('README.md')<CR>]])
 
