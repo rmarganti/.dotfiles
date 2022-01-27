@@ -1,6 +1,7 @@
+local on_attach = require "rmarganti.plugins.config.nvim-lsp-installer.on_attach"
+
 local M = {}
 
-local on_attach = require "rmarganti.plugins.config.nvim-lsp-installer.on_attach"
 M.setup = function()
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
@@ -28,6 +29,9 @@ M.setup = function()
             end,
             command = 'vendor/bin/php-cs-fixer'
         }),
+
+        -- Terraform
+        builtins.formatting.terraform_fmt,
 
         -- Lots of languages
         builtins.formatting.prettierd.with({
