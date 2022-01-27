@@ -106,7 +106,7 @@ eval "$(zoxide init bash)"
 
 ################################################################
 #
-# tmux
+# Tmux
 #
 ################################################################
 
@@ -123,3 +123,12 @@ done
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && (( pid == 1 )) ; then
     tmux attach -t default || tmux new -s default
 fi
+
+
+################################################################
+#
+# Kitty
+#
+################################################################
+
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
