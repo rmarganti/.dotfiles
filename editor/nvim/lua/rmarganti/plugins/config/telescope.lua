@@ -34,8 +34,9 @@ M.setup = function()
                 vertical = {
                     preview_cutoff = 40
                 },
-                width = 0.9
+                width = 0.9,
             },
+            prompt_prefix = "   ",
         },
     })
 
