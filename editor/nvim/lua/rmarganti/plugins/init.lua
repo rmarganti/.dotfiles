@@ -428,7 +428,7 @@ packer.startup(function(use)
     use({
         'phaazon/hop.nvim',
         config = function()
-            require'hop'.setup()
+            require('rmarganti.plugins.config.hop').setup()
         end,
         event = 'BufWinEnter',
     })
