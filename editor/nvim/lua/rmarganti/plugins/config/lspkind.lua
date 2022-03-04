@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
     require('lspkind').init({
-        with_text = true,
+        mode = 'symbol_text',
         preset = 'default',
         symbol_map = {
             Text = "",
