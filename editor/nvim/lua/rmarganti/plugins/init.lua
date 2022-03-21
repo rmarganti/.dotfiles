@@ -154,14 +154,6 @@ packer.startup(function(use)
         end
     })
 
-    -- Add preview to quickfix.
-    use({
-        'kevinhwang91/nvim-bqf',
-        config = function()
-            require('rmarganti.plugins.config.nvim-bqf').setup()
-        end
-    })
-
     --------------------------------
     -- Git
     --------------------------------
