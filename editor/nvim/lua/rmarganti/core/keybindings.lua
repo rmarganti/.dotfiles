@@ -186,6 +186,9 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 --
 ------------------------------------------------
 
+-- Git Add current file
+utils.map('n', '<Leader>ga', '<cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>')
+
 -- Git Commits
 utils.map('n', '<Leader>gc', '<cmd>Telescope git_commits<CR>')
 
