@@ -3,24 +3,32 @@ local timer = vim.loop.new_timer()
 
 local M = {}
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 --- nvim-cmp configuration
--- https://github.com/hrsh7th/nvim-compe#lua-config
 M.setup = function()
-    local tab_complete = function(fallback)
+    local tab_mapping = function(fallback)
         if cmp.visible() then
             local entry = cmp.get_selected_entry()
             if not entry then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
             cmp.confirm()
-        elseif vim.fn["vsnip#available"](1) == 1 then
-            feedkey("<Plug>(vsnip-expand-or-jump)", "")
+        elseif require("luasnip").expand_or_jumpable() then
+            vim.fn.feedkeys(
+                vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+                ""
+            )
         else
             fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+        end
+    end
+
+    local stab_mapping = function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        elseif require("luasnip").jumpable(-1) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+        else
+            fallback()
         end
     end
 
@@ -42,21 +50,22 @@ M.setup = function()
         },
         snippet = {
             expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body)
+                require('luasnip').lsp_expand(args.body)
             end,
         },
         mapping = {
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
-            ['<Tab>'] = cmp.mapping(tab_complete, { 'i', 's' })
+            ['<Tab>'] = cmp.mapping(tab_mapping, { 'i', 's' }),
+            ['<S-Tab>'] = cmp.mapping(stab_mapping, { 'i', 's' })
         },
         sources = {
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'cmp_tabnine' },
             { name = 'path' },
-            { name = 'vsnip' },
+            { name = 'luasnip' },
         }
     })
 

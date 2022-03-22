@@ -322,6 +322,9 @@ utils.map('n', '<Leader>tf', [[:lua require('rmarganti.core.functions').toggle_f
 -- Toggle Colorizer
 utils.map('n', '<Leader>tc', '<CMD>ColorizerToggle<CR>')
 
+-- Toggle symbol Outline
+utils.map('n', '<Leader>to', '<CMD>SymbolsOutline<CR>')
+
 ------------------------------------------------
 --
 -- Windows

@@ -7,3 +7,5 @@ M.setup = function()
         keys = 'asdhklqwertyuiopzxcvbnmfj'
     })
 end
+
+return M
