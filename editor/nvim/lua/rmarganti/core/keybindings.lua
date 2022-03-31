@@ -268,6 +268,8 @@ utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
 -- Search Notifications
 utils.map('n', '<Leader>sn', '<cmd>Telescope notify<CR>')
 
+-- Search Symbols
+utils.map('n', '<Leader>ss', '<cmd>Telescope symbols<CR>')
 
 ------------------------------------------------
 --

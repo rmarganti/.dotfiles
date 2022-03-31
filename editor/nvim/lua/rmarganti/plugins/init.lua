@@ -387,6 +387,8 @@ packer.startup(function(use)
         end,
     })
 
+    use({ 'nvim-telescope/telescope-symbols.nvim' })
+
     -- Sugar for file operations (rename, move, etc.).
     use({
         'tpope/vim-eunuch',
