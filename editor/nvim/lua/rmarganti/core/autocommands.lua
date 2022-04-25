@@ -1,22 +1,47 @@
-vim.cmd([[
-    augroup qf
-        autocmd!
+------------------------------------------------
+--
+-- Quickfix
+--
+------------------------------------------------
 
-        " Do not show quickfix in buffer lists.
-        autocmd FileType qf set nobuflisted
+local qf_group = vim.api.nvim_create_augroup('qf', { clear = true })
 
-        " Escape to close quickfix.
-        autocmd FileType qf nnoremap <buffer><silent> <ESC> :cclose<CR>
-    augroup END
-]])
+vim.api.nvim_create_autocmd(
+    'FileType',
+    {
+        group = qf_group,
+        pattern = 'qf',
+        callback = function()
+            -- Do not show quickfix in buffer lists.
+            vim.api.nvim_buf_set_option(0, 'buflisted', false)
 
-vim.cmd([[
-    augroup WinResize
-        autocmd!
+            -- Escape closes quickfix window.
+            vim.api.nvim_buf_set_keymap(
+                0,
+                'n',
+                '<ESC>',
+                '<CMD>cclose<CR>',
+                { noremap = true, silent = true }
+            )
+        end,
+        desc = 'Quickfix tweaks'
+    }
+)
 
-        " Automatically resize windows when the host
-        " window size changes. Useful for tmux zooms.
-        autocmd VimResized * wincmd =
+------------------------------------------------
+--
+-- WinResize
+--
+------------------------------------------------
 
-    augroup END
-]])
+local wr_group = vim.api.nvim_create_augroup('WinResize', { clear = true })
+
+vim.api.nvim_create_autocmd(
+    'VimResized',
+    {
+        group = wr_group,
+        pattern = '*',
+        command = 'wincmd =',
+        desc = 'Automatically resize windows when the host window size changes.'
+    }
+)
