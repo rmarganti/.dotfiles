@@ -25,26 +25,26 @@ utils.map('n', 'Q', '<Nop>')
 ------------------------------------------------
 
 -- Diagnostics
-utils.map('n', '<Leader>jd', [[<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' } })<CR>]])
-utils.map('n', '<Leader>kd', [[<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' } })<CR>]])
+utils.map('n', '<Leader>jd', function() vim.diagnostic.goto_next({ float = { border = 'rounded' } }) end)
+utils.map('n', '<Leader>kd', function() vim.diagnostic.goto_prev({ float = { border = 'rounded' } }) end)
 
 -- Exchange
-utils.map('n', '<Leader>je', ']e', { noremap = false })
-utils.map('n', '<Leader>ke', '[e', { noremap = false })
-utils.map('x', '<Leader>je', ']e', { noremap = false })
-utils.map('x', '<Leader>ke', '[e', { noremap = false })
+utils.map('n', '<Leader>je', ']e', { remap = true })
+utils.map('n', '<Leader>ke', '[e', { remap = true })
+utils.map('x', '<Leader>je', ']e', { remap = true })
+utils.map('x', '<Leader>ke', '[e', { remap = true })
 
 -- Quickfix
-utils.map('n', '<Leader>jq', ']q', { noremap = false })
-utils.map('n', '<Leader>kq', '[q', { noremap = false })
+utils.map('n', '<Leader>jq', ']q', { remap = true })
+utils.map('n', '<Leader>kq', '[q', { remap = true })
 
 -- Add Space
-utils.map('n', '<Leader>j<Space>', ']<Space>', { noremap = false })
-utils.map('n', '<Leader>k<Space>', '[<Space>', { noremap = false })
+utils.map('n', '<Leader>j<Space>', ']<Space>', { remap = true })
+utils.map('n', '<Leader>k<Space>', '[<Space>', { remap = true })
 
 -- Conflict markers
-utils.map('n', '<Leader>jc', ']n', { noremap = false })
-utils.map('n', '<Leader>kc', '[n', { noremap = false })
+utils.map('n', '<Leader>jc', ']n', { remap = true })
+utils.map('n', '<Leader>kc', '[n', { remap = true })
 
 
 ------------------------------------------------
@@ -106,14 +106,14 @@ utils.map('n', 'gf', '<cmd>lua require("telescope.builtin").lsp_references({})<C
 utils.map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations({})<CR>')
 
 -- Goto Hint
-utils.map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
+utils.map('n', 'gh', vim.lsp.buf.hover)
 
 -- Code Actions.
-utils.map('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-utils.map('v', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+utils.map('n', '<Leader>ca', vim.lsp.buf.code_action)
+utils.map('v', '<Leader>ca', vim.lsp.buf.code_action)
 
 -- Code symbol Rename.
-utils.map('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
+utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
 
 -- Code file Symbols.
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
@@ -134,17 +134,19 @@ utils.map('n', '<Leader>co', [[<cmd>lua require('rmarganti.core.functions').orga
 --
 ------------------------------------------------
 
+local edit_nearest = require('rmarganti.core.functions').edit_nearest
+
 -- Edit nearest Changelog
-utils.map('n', '<Leader>ec', [[:lua require('rmarganti.core.functions').edit_nearest('CHANGELOG.md')<CR>]])
+utils.map('n', '<Leader>ec', function() edit_nearest('CHANGELOG.md') end)
 
 -- Edit nearest Env
-utils.map('n', '<Leader>ee', [[:lua require('rmarganti.core.functions').edit_nearest('.env')<CR>]])
+utils.map('n', '<Leader>ee', function() edit_nearest('.env') end)
 
 -- Edit nearest Index.ts
-utils.map('n', '<Leader>ei', [[:lua require('rmarganti.core.functions').edit_nearest('index.ts')<CR>]])
+utils.map('n', '<Leader>ei', function() edit_nearest('index.ts') end)
 
 -- Edit nearest Readme
-utils.map('n', '<Leader>er', [[:lua require('rmarganti.core.functions').edit_nearest('README.md')<CR>]])
+utils.map('n', '<Leader>er', function() edit_nearest('README.md') end)
 
 -- Edit Test
 utils.map('n', '<Leader>et', [[:lua require('rmarganti.core.functions').edit_test()<CR>]])
@@ -231,8 +233,8 @@ utils.map('x', '<Leader>p', '"+p')
 utils.map('x', '<Leader>P', '"+P')
 
 -- Replace from system clipboard
-utils.map('n', '<Leader>gr', '"+gr', { noremap = false })
-utils.map('x', '<Leader>gr', '"+gr', { noremap = false })
+utils.map('n', '<Leader>gr', '"+gr', { remap = true })
+utils.map('x', '<Leader>gr', '"+gr', { remap = true })
 
 -- Yank File name to system clipboard.
 utils.map('n', '<Leader>yf', ':let @+ = expand("%:t")<CR>')
@@ -297,10 +299,10 @@ utils.map('n', '<Leader>tf', ':Ultest<CR>')
 utils.map('n', '<Leader>tn', ':UltestNearest<CR>')
 
 -- Jump to the next Test.
-utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)', { noremap = false })
+utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)', { remap = true })
 
 -- Jump to the previous Test.
-utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { noremap = false })
+utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { remap = true })
 
 -- Toggle Test Summary.
 utils.map('n', '<Leader>ts', ':UltestSummary<CR>')

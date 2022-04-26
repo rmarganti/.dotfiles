@@ -53,20 +53,20 @@ M.setup = function()
                 require('luasnip').lsp_expand(args.body)
             end,
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
             ['<Tab>'] = cmp.mapping(tab_mapping, { 'i', 's' }),
             ['<S-Tab>'] = cmp.mapping(stab_mapping, { 'i', 's' })
-        },
+        }),
         sources = {
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'cmp_tabnine' },
             { name = 'path' },
             { name = 'luasnip' },
-        }
+        },
     })
 
     vim.cmd([[

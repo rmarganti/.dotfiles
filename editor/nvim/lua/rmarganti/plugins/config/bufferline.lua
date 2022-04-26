@@ -26,6 +26,7 @@ M.setup = function()
             info_diagnostic_visible = { guibg = p.bg_light.gui },
             modified = { guibg = p.bg_light.gui },
             modified_visible = { guibg = p.bg_light.gui },
+            numbers = { guibg = p.bg_light.gui },
             pick_selected = { guibg = 'none', },
             pick_visible = { guibg = p.bg_light.gui, },
             pick = { guibg = p.bg_light.gui, },
@@ -46,8 +47,8 @@ M.setup = function()
         options = {
             diagnostics = 'nvim_lsp',
             diagnostics_indicator = function(_, level, _, _)
-                  local icon = level:match("error") and " " or " "
-                  return " " .. icon
+                local icon = level:match("error") and " " or " "
+                return " " .. icon
             end,
             numbers = function(opts)
                 return string.format('%s.', opts.ordinal)
