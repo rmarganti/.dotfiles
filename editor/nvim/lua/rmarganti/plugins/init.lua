@@ -109,7 +109,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.feline').setup()
         end,
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         after = 'gitsigns.nvim',
     })
 
@@ -126,7 +126,7 @@ packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require('indent_blankline').setup({
-                filetype_exclude = {'alpha'}
+                filetype_exclude = { 'alpha' }
             })
         end
     })
@@ -159,7 +159,7 @@ packer.startup(function(use)
     --------------------------------
 
     -- Used to power feline git functionality.
-    use ({
+    use({
         'lewis6991/gitsigns.nvim',
         config = function()
             require('rmarganti.plugins.config.gitsigns').setup()
@@ -235,7 +235,7 @@ packer.startup(function(use)
     })
 
     -- Symbol tree panel.
-    use({ 'simrat39/symbols-outline.nvim'})
+    use({ 'simrat39/symbols-outline.nvim' })
 
     -- Code completion.
     use({
@@ -438,7 +438,4 @@ packer.startup(function(use)
         end,
         event = 'BufWinEnter',
     })
-
-    -- Optimized version of Neovim's included filetype.vim.
-    use("nathom/filetype.nvim")
 end)
