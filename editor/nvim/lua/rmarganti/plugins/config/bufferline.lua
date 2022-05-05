@@ -27,6 +27,7 @@ M.setup = function()
             modified = { guibg = p.bg_light.gui },
             modified_visible = { guibg = p.bg_light.gui },
             numbers = { guibg = p.bg_light.gui },
+            numbers_visible = { guibg = p.bg_light.gui },
             pick_selected = { guibg = 'none', },
             pick_visible = { guibg = p.bg_light.gui, },
             pick = { guibg = p.bg_light.gui, },
