@@ -62,47 +62,47 @@ return {
 
     -- code itself
 
-    Constant = { fg = a.plus3 }, -- (prefercatppuccin5) any constant
+    Constant = { fg = a.plus3 }, -- any constant
     String = { fg = a.plus1 }, -- a string constant: "this is a string"
     Character = { fg = a.plus1 }, --  a character constant: 'c', '\n'
     Number = { fg = a.plus1 }, --   a number constant: 234, 0xff
     Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
     Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
-    Identifier = { fg = a.plus3 }, -- (prefercatppuccin5) any variable name
-    Function = { fg = a.plus1 }, -- function name (also: methods for classes)
-    Statement = { fg = a.plus1 }, -- (prefercatppuccin5) any statement
-    Conditional = { fg = a.plus1 }, --  if, then, else, endif, switch, etcp.
+    Identifier = { fg = a.plus3 }, -- any variable name
+    Function = { fg = a.plus2 }, -- function name (also: methods for classes)
+    Statement = { fg = a.plus2 }, -- any statement
+    Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
     Repeat = { fg = a.plus1 }, --   for, do, while, etcp.
     Label = { fg = a.plus2 }, --    case, default, etcp.
     Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
-    Exception     = { }, --  try, catch, throw
+    Exception = { }, --  try, catch, throw
 
-    PreProc = { fg = a.plus1 }, -- (prefercatppuccin5) generic Preprocessor
+    PreProc = { fg = a.plus1 }, -- generic Preprocessor
     Include = { fg = a.plus1 }, --  preprocessor #include
-    Define        = { }, --   preprocessor #define
-    Macro         = { }, --    same as Define
-    PreCondit     = { }, --  preprocessor #if, #else, #endif, etcp.
+    Define = { }, --   preprocessor #define
+    Macro = { }, --    same as Define
+    PreCondit = { }, --  preprocessor #if, #else, #endif, etcp.
 
-    Type = { fg = a.plus2 }, -- (prefercatppuccin5) int, long, char, etcp.
+    Type = { fg = a.plus1 }, -- int, long, char, etcp.
     StorageClass = { fg = a.plus1 }, -- static, register, volatile, etcp.
     Structure = { fg = a.plus1 }, --  struct, union, enum, etcp.
     Typedef = { fg = a.plus1 }, --  A typedef
-    Special = { fg = a.plus1 }, -- (prefercatppuccin5) any special symbol
-    SpecialChar   = { }, --  special character in a constant
-    Tag           = { }, --    you can use CTRL-] on this
-    Delimiter     = { }, --  character that needs attention
+    Special = { fg = a.plus1 }, -- any special symbol
+    SpecialChar = { }, --  special character in a constant
+    Tag = { }, --    you can use CTRL-] on this
+    Delimiter = { }, --  character that needs attention
     Specialcatppuccin11= { }, -- special things inside a catppuccin11
-    Debug         = { }, --    debugging statements
+    Debug = { }, --    debugging statements
 
-    Underlined = { style = "underline" }, -- (prefercatppuccin5) text that stands out, HTML links
+    Underlined = { style = "underline" }, -- text that stands out, HTML links
     Bold = { style = "bold" },
     Italic = { style = "italic" },
     -- ("Ignore", below, may be invisible...)
-    Ignore = { }, -- (prefercatppuccin5) left blank, hidden  |hl-Ignore|
+    Ignore = { }, -- left blank, hidden  |hl-Ignore|
 
-    Error = { fg = a.error }, -- (prefercatppuccin5) any erroneous construct
-    Todo = { fg = p.cyan, gui = 'italic' }, -- (prefercatppuccin5) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Error = { fg = a.error }, -- any erroneous construct
+    Todo = { fg = p.cyan, gui = 'italic' }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
     qfLineNr = { fg = p.fg },
     qfFileName = { fg = p.fg },
     htmlH1 = { fg = p.fg },

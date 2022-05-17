@@ -16,19 +16,19 @@ return {
     red = { gui = '#e67e80', cterm = '174' },
     red_bright = { gui = '#ff8c8e', cterm = '210' },
 
-    green = { gui = '#a7c080', cterm = '144' },
+    green = { gui = '#accea1', cterm = '144' },
     green_bright = { gui = '#bdd991', cterm = '150' },
 
     yellow = { gui = '#dbbc7f', cterm = '180' },
     yellow_bright = { gui = '#f5d38e', cterm = '222' },
 
-    blue = { gui = '#7fbbb3', cterm = '109' },
+    blue = { gui = '#9fccc5', cterm = '109' },
     blue_bright = { gui = '#90d4cb', cterm = '116' },
 
     magenta = { gui = '#d699b6', cterm = '175' },
     magenta_bright = { gui = '#f0aacc', cterm = '218' },
 
-    cyan = { gui = '#83c092', cterm = '108' },
+    cyan = { gui = '#9fcca9', cterm = '108' },
     cyan_bright = { gui = '#93d9a5', cterm = '115' },
 
     white = { gui = '#d3c6aa', cterm = '187' },

@@ -30,7 +30,7 @@ return {
     -- TSOperator = { fg = a.base },
     -- TSParameter = { fg = a.base },
     -- TSParameterReference = { fg = a.base_high },
-    TSProperty = { fg = a.plus1 },
+    TSProperty = { fg = a.base },
     TSPunctBracket = { fg = a.base },
     TSPunctDelimiter = { fg = a.base },
     TSPunctSpecial = { fg = a.base },
