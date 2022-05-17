@@ -105,7 +105,7 @@ packer.startup(function(use)
 
     -- Status line.
     use({
-        'famiu/feline.nvim',
+        'feline-nvim/feline.nvim',
         config = function()
             require('rmarganti.plugins.config.feline').setup()
         end,
