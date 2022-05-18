@@ -1,9 +1,9 @@
 return {
     none = { gui = 'NONE', cterm = 'NONE' },
 
-    bg_darker = { gui = '#1e2428', cterm = '16' },
-    bg_dark = { gui = '#22292d', cterm = '16' },
-    bg = { gui = '#272e33', cterm = '23' },
+    bg_darker = { gui = '#0d1011', cterm = '16' },
+    bg_dark = { gui = '#181c1e', cterm = '16' },
+    bg = { gui = '#23292d', cterm = '23' },
     bg_light = { gui = '#323d43', cterm = '59' },
     bg_lighter = { gui = '#3c474d', cterm = '59' },
     bg_lightest = { gui = '#505a60', cterm = '59' },
