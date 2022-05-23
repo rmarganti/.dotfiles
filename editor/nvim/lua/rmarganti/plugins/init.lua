@@ -438,4 +438,18 @@ packer.startup(function(use)
         end,
         event = 'BufWinEnter',
     })
+
+    -- Maintain a person wiki.
+    use({
+        'vimwiki/vimwiki',
+        setup = function()
+            vim.g.vimwiki_list = {
+                {
+                    path = '~/vimwiki/',
+                    syntax = 'markdown',
+                    ext = '.md',
+                }
+            }
+        end
+    })
 end)
