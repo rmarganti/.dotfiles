@@ -73,7 +73,7 @@ M.setup = function()
                     return ' '
                 end
             end,
-            left_sep = ' ',
+            left_sep = '  ',
         },
 
         file_encoding = {
@@ -117,6 +117,25 @@ M.setup = function()
             right_sep = ' ',
         },
 
+        line_percentage = {
+            provider = 'line_percentage',
+            hl = function()
+                return {
+                    bg = p.bg_lightest.gui,
+                    fg = vi_mode_utils.get_mode_color(),
+                    style = 'bold'
+                }
+            end,
+            left_sep = {
+                hl = { bg = p.bg_lightest.gui },
+                str = '  ',
+            },
+            right_sep = {
+                hl = { bg = p.bg_lightest.gui },
+                str = '  ',
+            },
+        },
+
         scroll_bar = {
             provider = 'scroll_bar',
             hl = function()
@@ -143,7 +162,7 @@ M.setup = function()
                 pieces.file_format,
                 pieces.file_encoding,
                 pieces.file_type,
-                pieces.scroll_bar,
+                pieces.line_percentage,
             }
         },
         inactive = {
