@@ -62,7 +62,14 @@ M.setup = function()
         }),
         sources = {
             { name = 'nvim_lsp' },
-            { name = 'buffer' },
+            {
+                name = 'buffer',
+                option = {
+                    get_bufnrs = function()
+                        return vim.api.nvim_list_bufs()
+                    end
+                }
+            },
             { name = 'cmp_tabnine' },
             { name = 'path' },
             { name = 'luasnip' },
