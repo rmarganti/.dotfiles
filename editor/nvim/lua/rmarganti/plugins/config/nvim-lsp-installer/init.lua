@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local lsp_installer = require("nvim-lsp-installer")
     local utils = require('rmarganti.utils.misc')
     local on_attach = require('rmarganti.plugins.config.nvim-lsp-installer.on_attach')

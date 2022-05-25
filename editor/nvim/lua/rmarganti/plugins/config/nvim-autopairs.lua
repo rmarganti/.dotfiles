@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     require('nvim-autopairs').setup({})
 end
 

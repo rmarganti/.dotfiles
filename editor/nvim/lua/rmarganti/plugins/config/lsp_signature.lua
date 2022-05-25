@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     require('lsp_signature').setup({
         hint_enable = false,
     });

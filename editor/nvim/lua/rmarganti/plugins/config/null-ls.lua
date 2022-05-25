@@ -2,7 +2,7 @@ local on_attach = require "rmarganti.plugins.config.nvim-lsp-installer.on_attach
 
 local M = {}
 
-M.setup = function()
+M.config = function()
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins

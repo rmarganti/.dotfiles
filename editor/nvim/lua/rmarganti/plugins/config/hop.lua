@@ -2,7 +2,7 @@ local hop = require('hop')
 
 local M = {}
 
-M.setup = function()
+M.config = function()
     hop.setup({
         keys = 'asdhklqwertyuiopzxcvbnmfj'
     })

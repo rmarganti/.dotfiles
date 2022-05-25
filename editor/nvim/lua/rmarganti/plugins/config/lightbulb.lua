@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     vim.api.nvim_create_autocmd(
         { 'CursorHold', 'CursorHoldI' },
         {

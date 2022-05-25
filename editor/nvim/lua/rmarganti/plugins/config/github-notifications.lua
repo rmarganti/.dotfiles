@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local secrets = require('rmarganti.config.secrets')
 
     require('telescope').load_extension('ghn')

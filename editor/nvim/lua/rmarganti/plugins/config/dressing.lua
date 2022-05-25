@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     require('dressing').setup({
         input = {
             insert_only = false,

@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local bqf = require('bqf')
 
     bqf.setup({

@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local p = require('rmarganti.colors.palette')
     local a = require('rmarganti.colors.abstractions')
 

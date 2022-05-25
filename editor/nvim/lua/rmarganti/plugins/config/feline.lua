@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local feline = require('feline')
     local p = require('rmarganti.colors.palette')
     local vi_mode_utils = require('feline.providers.vi_mode')

@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     require('gitsigns').setup({
         -- Disable the actual gitsigns, since we're only
         -- using this plugin for feline git functionality.

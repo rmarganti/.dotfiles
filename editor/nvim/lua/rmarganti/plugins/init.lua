@@ -45,7 +45,7 @@ packer.startup(function(use)
     use({
         'nvim-treesitter/nvim-treesitter',
         config = function()
-            require('rmarganti.plugins.config.treesitter').setup()
+            require('rmarganti.plugins.config.treesitter').config()
         end,
         run = ':TSUpdate',
         event = 'BufWinEnter',
@@ -81,24 +81,18 @@ packer.startup(function(use)
 
     -- File explorer.
     use({
-        'francoiscabrol/ranger.vim',
-        cmd = 'Ranger',
-        requires = {
-            {
-                'rbgrouleff/bclose.vim',
-                cmd = 'Bclose',
-                setup = function()
-                    vim.g.bclose_no_plugin_maps = true
-                end
-            }
-        }
+        'kevinhwang91/rnvimr',
+        cmd = 'RnvimrToggle',
+        setup = function()
+            require('rmarganti.plugins.config.rnvimr').setup()
+        end
     })
 
     -- Tabs.
     use({
         'akinsho/nvim-bufferline.lua',
         config = function()
-            require('rmarganti.plugins.config.bufferline').setup()
+            require('rmarganti.plugins.config.bufferline').config()
         end,
         event = 'BufWinEnter',
     })
@@ -107,7 +101,7 @@ packer.startup(function(use)
     use({
         'feline-nvim/feline.nvim',
         config = function()
-            require('rmarganti.plugins.config.feline').setup()
+            require('rmarganti.plugins.config.feline').config()
         end,
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         after = 'gitsigns.nvim',
@@ -117,7 +111,7 @@ packer.startup(function(use)
     use({
         'goolord/alpha-nvim',
         config = function()
-            require('rmarganti.plugins.config.alpha').setup()
+            require('rmarganti.plugins.config.alpha').config()
         end
     })
 
@@ -142,7 +136,7 @@ packer.startup(function(use)
     use({
         'stevearc/dressing.nvim',
         config = function()
-            require('rmarganti.plugins.config.dressing').setup()
+            require('rmarganti.plugins.config.dressing').config()
         end
     })
 
@@ -150,7 +144,7 @@ packer.startup(function(use)
     use({
         'rcarriga/nvim-notify',
         config = function()
-            require('rmarganti.plugins.config.nvim-notify').setup()
+            require('rmarganti.plugins.config.nvim-notify').config()
         end
     })
 
@@ -162,7 +156,7 @@ packer.startup(function(use)
     use({
         'lewis6991/gitsigns.nvim',
         config = function()
-            require('rmarganti.plugins.config.gitsigns').setup()
+            require('rmarganti.plugins.config.gitsigns').config()
         end,
         event = 'BufWinEnter',
     })
@@ -171,7 +165,7 @@ packer.startup(function(use)
     use({
         'rlch/github-notifications.nvim',
         config = function()
-            require('rmarganti.plugins.config.github-notifications').setup()
+            require('rmarganti.plugins.config.github-notifications').config()
         end,
         module = 'github-notifications',
     })
@@ -202,7 +196,7 @@ packer.startup(function(use)
     use({
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-            require('rmarganti.plugins.config.null-ls').setup()
+            require('rmarganti.plugins.config.null-ls').config()
         end,
         after = 'schemastore.nvim'
     })
@@ -211,7 +205,7 @@ packer.startup(function(use)
     use({
         'williamboman/nvim-lsp-installer',
         config = function()
-            require('rmarganti.plugins.config.nvim-lsp-installer').setup()
+            require('rmarganti.plugins.config.nvim-lsp-installer').config()
         end,
         after = 'null-ls.nvim'
     })
@@ -221,7 +215,7 @@ packer.startup(function(use)
         'ray-x/lsp_signature.nvim',
         event = 'InsertEnter',
         config = function()
-            require('rmarganti.plugins.config.lsp_signature').setup()
+            require('rmarganti.plugins.config.lsp_signature').config()
         end
     })
 
@@ -229,7 +223,7 @@ packer.startup(function(use)
     use({
         'onsails/lspkind-nvim',
         config = function()
-            require('rmarganti.plugins.config.lspkind').setup()
+            require('rmarganti.plugins.config.lspkind').config()
         end,
         after = 'nvim-lspconfig'
     })
@@ -241,7 +235,7 @@ packer.startup(function(use)
     use({
         'hrsh7th/nvim-cmp',
         config = function()
-            require('rmarganti.plugins.config.cmp').setup()
+            require('rmarganti.plugins.config.cmp').config()
         end,
         after = 'friendly-snippets',
     })
@@ -301,7 +295,7 @@ packer.startup(function(use)
         'windwp/nvim-autopairs',
         after = 'nvim-cmp',
         config = function()
-            require('rmarganti.plugins.config.nvim-autopairs').setup()
+            require('rmarganti.plugins.config.nvim-autopairs').config()
         end,
     })
 
@@ -318,7 +312,7 @@ packer.startup(function(use)
         'kosayoda/nvim-lightbulb',
         event = 'BufWinEnter',
         config = function()
-            require('rmarganti.plugins.config.lightbulb').setup()
+            require('rmarganti.plugins.config.lightbulb').config()
         end
     })
 
@@ -366,7 +360,7 @@ packer.startup(function(use)
         cmd = 'Telescope',
         module = 'telescope',
         config = function()
-            require('rmarganti.plugins.config.telescope').setup()
+            require('rmarganti.plugins.config.telescope').config()
         end,
     })
 
@@ -375,7 +369,7 @@ packer.startup(function(use)
         run = 'make',
         after = 'telescope.nvim',
         config = function()
-            require('rmarganti.plugins.config.telescope-fzf-native').setup()
+            require('rmarganti.plugins.config.telescope-fzf-native').config()
         end,
     })
 
@@ -383,7 +377,7 @@ packer.startup(function(use)
         'nvim-telescope/telescope-github.nvim',
         after = 'telescope.nvim',
         config = function()
-            require('rmarganti.plugins.config.telescope-github').setup()
+            require('rmarganti.plugins.config.telescope-github').config()
         end,
     })
 
@@ -434,7 +428,7 @@ packer.startup(function(use)
     use({
         'phaazon/hop.nvim',
         config = function()
-            require('rmarganti.plugins.config.hop').setup()
+            require('rmarganti.plugins.config.hop').config()
         end,
         event = 'BufWinEnter',
     })

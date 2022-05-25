@@ -1,7 +1,7 @@
 local M = {}
 
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
-M.setup = function()
+M.config = function()
     local telescope = require('telescope')
 
     telescope.setup({

@@ -176,7 +176,7 @@ utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false
 utils.map('n', '<Leader>fw', 'fw :w<CR>')
 
 -- File eXplore
-utils.map('n', '<Leader>fx', ':Ranger<CR>')
+utils.map('n', '<Leader>fx', ':RnvimrToggle<CR>')
 
 -- File Types
 utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({})<CR>')

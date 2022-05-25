@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.config = function()
     local dashboard = require('alpha.themes.dashboard')
 
     dashboard.section.header.val = {

@@ -4,7 +4,7 @@ local timer = vim.loop.new_timer()
 local M = {}
 
 --- nvim-cmp configuration
-M.setup = function()
+M.config = function()
     local tab_mapping = function(fallback)
         if cmp.visible() then
             local entry = cmp.get_selected_entry()
