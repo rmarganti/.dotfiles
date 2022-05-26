@@ -84,7 +84,7 @@ M.config = function()
     ]])
 end
 
-local DEBOUNCE_DELAY = 250
+local DEBOUNCE_DELAY = 125
 
 M.debounce = function()
     timer:stop()
