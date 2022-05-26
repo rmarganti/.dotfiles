@@ -310,27 +310,23 @@ utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
 
 ------------------------------------------------
 --
--- Toggle
+-- Toggle (follows vim-unimpaired convention)
+-- y = looks like switch. o = option.
 --
 ------------------------------------------------
 
--- Toggle Paste
-utils.map('n', '<Leader>tp', ':set invpaste paste?<CR>')
-
--- Toggle Word wrap
-utils.map('n', '<Leader>tw', ':setlocal wrap!<CR>')
-
 -- Toggle Quick fix
-utils.map('n', '<Leader>tq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
+utils.map('n', 'yoq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
 
 -- Toggle Format on save
-utils.map('n', '<Leader>tf', [[:lua require('rmarganti.core.functions').toggle_format_on_save()<CR>]])
+utils.map('n', 'yof', [[:lua require('rmarganti.core.functions').toggle_format_on_save()<CR>]])
 
 -- Toggle Colorizer
-utils.map('n', '<Leader>tc', '<CMD>ColorizerToggle<CR>')
+utils.map('n', 'yoc', '<CMD>ColorizerToggle<CR>')
 
 -- Toggle symbol Outline
-utils.map('n', '<Leader>to', '<CMD>SymbolsOutline<CR>')
+utils.map('n', 'yoo', '<CMD>SymbolsOutline<CR>')
+
 
 ------------------------------------------------
 --
@@ -343,21 +339,6 @@ utils.map('n', '<Leader>wq', '<C-W>q')
 
 -- Window Only (Close all other windows).
 utils.map('n', '<Leader>wo', ':only<CR>')
-
--- " Window Zoom toggle
--- function! s:ZoomToggle() abort
---     if exists('t:zoomed') && t:zoomed
---         execute t:zoom_winrestcmd
---         let t:zoomed = 0
---     else
---         let t:zoom_winrestcmd = winrestcmd()
---         resize
---         vertical resize
---         let t:zoomed = 1
---     endif
--- endfunction
--- command! ZoomToggle call s:ZoomToggle()
--- nnoremap <silent> <Leader>wz :ZoomToggle<CR>
 
 
 ------------------------------------------------
