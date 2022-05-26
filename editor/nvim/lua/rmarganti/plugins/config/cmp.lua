@@ -62,6 +62,7 @@ M.config = function()
         }),
         sources = {
             { name = 'nvim_lsp' },
+            { name = 'luasnip' },
             {
                 name = 'buffer',
                 option = {
@@ -72,7 +73,6 @@ M.config = function()
             },
             { name = 'cmp_tabnine' },
             { name = 'path' },
-            { name = 'luasnip' },
         },
     })
 
