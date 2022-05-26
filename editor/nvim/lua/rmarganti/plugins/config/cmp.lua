@@ -76,6 +76,10 @@ M.config = function()
         },
     })
 
+    cmp.setup.prompt({
+        enabled = false
+    })
+
     vim.cmd([[
         augroup CmpDebounceAuGroup
             au!
