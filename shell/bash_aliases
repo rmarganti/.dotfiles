@@ -36,7 +36,7 @@ alias sys:r="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 
 alias g:bc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
 alias g:fl="git diff-tree --no-commit-id --name-only -r"
-alias g:lp="git log --graph --pretty=format:'%C(bold black)%h%C(reset)%C(reset) %s %C(green)(%cr) %C(bold black)<%an>%C(cyan)%d%C(reset)' --abbrev-commit"
+alias g:lp="git log --graph --pretty=format:'%C(bold black)%h%C(reset)%C(reset) %s %C(green)(%ci) %C(bold black)<%an>%C(cyan)%d%C(reset)' --abbrev-commit"
 alias g:rp='git remote prune origin'
 alias g:t="git tag --sort=v:refname"
 alias g:unwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
