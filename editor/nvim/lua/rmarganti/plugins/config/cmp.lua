@@ -1,18 +1,23 @@
 local cmp = require('cmp')
-local timer = vim.loop.new_timer()
 
 local M = {}
 
+local enable_debounced_auto_complete -- defined below
+
 --- nvim-cmp configuration
 M.config = function()
+    local luasnip = require("luasnip")
+
     local tab_mapping = function(fallback)
-        if cmp.visible() then
+        if (cmp.visible()) then
             local entry = cmp.get_selected_entry()
-            if not entry then
+
+            if (not entry) then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
+
             cmp.confirm()
-        elseif require("luasnip").expand_or_jumpable() then
+        elseif (luasnip.expand_or_jumpable()) then
             vim.fn.feedkeys(
                 vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
                 ""
@@ -23,10 +28,11 @@ M.config = function()
     end
 
     local stab_mapping = function(fallback)
-        if cmp.visible() then
-            cmp.select_prev_item()
-        elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+        if (luasnip.jumpable(-1)) then
+            vim.fn.feedkeys(
+                vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true),
+                ''
+            )
         else
             fallback()
         end
@@ -50,9 +56,10 @@ M.config = function()
         },
         snippet = {
             expand = function(args)
-                require('luasnip').lsp_expand(args.body)
+                luasnip.lsp_expand(args.body)
             end,
         },
+
         mapping = cmp.mapping.preset.insert({
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -76,29 +83,59 @@ M.config = function()
         },
     })
 
-    cmp.setup.prompt({
-        enabled = false
+    -- `/` cmdline setup.
+    cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' }
+        }
     })
 
-    vim.cmd([[
-        augroup CmpDebounceAuGroup
-            au!
-            au TextChangedI * lua require('rmarganti.plugins.config.cmp').debounce()
-        augroup end
-    ]])
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+            { name = 'cmdline' }
+        })
+    })
+
+    enable_debounced_auto_complete()
 end
 
-local DEBOUNCE_DELAY = 125
 
-M.debounce = function()
-    timer:stop()
-    timer:start(
-        DEBOUNCE_DELAY,
-        0,
-        vim.schedule_wrap(function()
-            cmp.complete({ reason = cmp.ContextReason.Auto })
-        end)
-    )
+-- A debounced auto-complete request. This keeps key presses responsive by only
+-- asking that nvim-cmp does auto-completion once you stop typing.
+enable_debounced_auto_complete = function()
+    local DEBOUNCE_DELAY = 250
+    local timer = vim.loop.new_timer()
+
+    -- Any time text changes, schedule a delayed request to nvim-cmp
+    -- to fire auto completion. If another key press happens before that
+    -- request, cancel the original request and schedule a new one.
+    vim.api.nvim_create_autocmd({ 'TextChangedI', 'TextChangedP', 'CmdLineChanged' }, {
+        group = vim.api.nvim_create_augroup(
+            'DebouncedAutoComplete',
+            { clear = true }
+        ),
+        pattern = '*',
+        callback = function()
+            timer:stop()
+            timer:start(
+                DEBOUNCE_DELAY,
+                0,
+                vim.schedule_wrap(function()
+                    local enabled = require('cmp.config').enabled()
+
+                    if (enabled) then
+                        cmp.complete({ reason = cmp.ContextReason.Auto })
+                    end
+                end)
+            )
+        end,
+        desc = 'Debounced auto-complete',
+    })
 end
 
 return M
