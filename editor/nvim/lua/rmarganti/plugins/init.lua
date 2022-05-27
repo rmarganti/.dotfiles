@@ -256,7 +256,10 @@ packer.startup(function(use)
         end
     })
 
-    use({ 'rafamadriz/friendly-snippets', event = 'InsertEnter' })
+    use({
+        'rafamadriz/friendly-snippets',
+        event = { 'InsertEnter', 'CmdlineEnter' }
+    })
 
     --------------------------------
     -- Text manipulation

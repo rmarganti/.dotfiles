@@ -41,6 +41,7 @@ M.config = function()
     cmp.setup({
         completion = {
             autocomplete = false,
+            completeopt = 'menu,menuone,noinsert'
         },
         formatting = {
             format = require("lspkind").cmp_format({

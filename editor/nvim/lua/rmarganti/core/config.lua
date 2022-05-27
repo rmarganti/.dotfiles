@@ -35,14 +35,6 @@ vim.opt.hidden = true
 -- Enhanced tab-completion for commands.
 vim.opt.wildmenu = true
 
--- Ignore compiled files, etc.
--- vim.opt.wildignore=*.o,*~,*.pyc
--- if has("win16") || has("win32")
---     set wildignore+=.git\*,.hg\*,.svn\*
--- else
---     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
--- endif
-
 -- Don't wrap lines.
 vim.opt.wrap = false
 
