@@ -273,17 +273,14 @@ utils.map('n', '<Leader>sn', '<cmd>Telescope notify<CR>')
 -- Search Symbols
 utils.map('n', '<Leader>ss', '<cmd>Telescope symbols<CR>')
 
-------------------------------------------------
---
--- Splits
---
-------------------------------------------------
+-- Search Commands
+utils.map('n', '<Leader>sc', '<cmd>Telescope commands<CR>')
 
--- Split Vertical
-utils.map('n', '<Leader>sv', ':vsplit<CR>')
+-- Search Help
+utils.map('n', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
 
--- Split Horiztonal
-utils.map('n', '<Leader>sh', ':split<CR>')
+-- Search Resume
+utils.map('n', '<Leader>s.', '<cmd>Telescope resume<CR>')
 
 
 ------------------------------------------------
@@ -339,6 +336,12 @@ utils.map('n', '<Leader>wq', '<C-W>q')
 
 -- Window Only (Close all other windows).
 utils.map('n', '<Leader>wo', ':only<CR>')
+
+-- Window split Vertical
+utils.map('n', '<Leader>wv', ':vsplit<CR>')
+
+-- Window split Horizontal
+utils.map('n', '<Leader>wh', ':split<CR>')
 
 
 ------------------------------------------------
