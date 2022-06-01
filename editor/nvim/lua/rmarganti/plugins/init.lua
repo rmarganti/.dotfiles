@@ -449,4 +449,12 @@ packer.startup(function(use)
             }
         end
     })
+
+    -- Markdown preview.
+    use({
+        'iamcco/markdown-preview.nvim',
+        run = function()
+            vim.fn['mkdp#util#install']()
+        end,
+    })
 end)

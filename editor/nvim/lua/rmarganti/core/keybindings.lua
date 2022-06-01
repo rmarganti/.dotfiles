@@ -97,13 +97,13 @@ utils.map('n', '<Leader>bo', ':BufOnly<CR>')
 -- NOTE: These are set in 'lua/rmarganti/plugins/config/cmp.lua'
 
 -- Goto Definition.
-utils.map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>')
+utils.map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
 
 -- Goto reFerences.
-utils.map('n', 'gf', '<cmd>lua require("telescope.builtin").lsp_references({})<CR>')
+utils.map('n', 'gf', '<cmd>Telescope lsp_references<CR>')
 
 -- Goto Implementation.
-utils.map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations({})<CR>')
+utils.map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
 
 -- Goto Hint
 utils.map('n', 'gh', vim.lsp.buf.hover)
@@ -164,7 +164,7 @@ utils.map('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>', { silent = f
 utils.map('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>', { silent = false })
 
 -- File Delete
-utils.map('n', '<Leader>fd', ':Delete', { silent = false })
+utils.map('n', '<Leader>fd', ':Delete!', { silent = false })
 
 -- File Move
 utils.map('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>', { silent = false })
