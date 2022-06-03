@@ -37,7 +37,25 @@ M.config = function()
         builtins.formatting.prettierd.with({
             condition = function()
                 return true
-            end
+            end,
+            filetypes = {
+                'javascript',
+                'javascriptreact',
+                'typescript',
+                'typescriptreact',
+                'vue',
+                'css',
+                'scss',
+                'less',
+                'html',
+                'json',
+                'jsonc',
+                'yaml',
+                'markdown',
+                'graphql',
+                'handlebars',
+                'vimwiki', -- This is the only non-default
+            }
         }),
     }
 
