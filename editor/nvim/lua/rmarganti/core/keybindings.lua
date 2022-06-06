@@ -1,3 +1,4 @@
+local core_fns = require('rmarganti.core.functions')
 local utils = require('rmarganti.utils.misc')
 
 -- Set <Space> as the leader key.
@@ -81,7 +82,7 @@ utils.map('n', '<leader>bq', '<cmd>BufDel<CR>')
 utils.map('n', '<leader>bQ', '<cmd>BufDel!<CR>')
 
 -- Buffer quit All.
-utils.map('n', '<Leader>ba', ':%bd<CR>')
+utils.map('n', '<Leader>ba', core_fns.buf_delete_all)
 
 -- Keep current Buffer open Only.
 utils.map('n', '<Leader>bo', ':BufOnly<CR>')
@@ -122,10 +123,10 @@ utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document
 utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>')
 
 -- Code Format
-utils.map('n', '<Leader>cf', [[<cmd>lua require('rmarganti.core.functions').format(false)<CR>]])
+utils.map('n', '<Leader>cf', function() core_fns.format(false) end)
 
 -- Code Organize imports
-utils.map('n', '<Leader>co', [[<cmd>lua require('rmarganti.core.functions').organize_imports()<CR>]])
+utils.map('n', '<Leader>co', core_fns.organize_imports)
 
 
 ------------------------------------------------
@@ -149,7 +150,7 @@ utils.map('n', '<Leader>ei', function() edit_nearest('index.ts') end)
 utils.map('n', '<Leader>er', function() edit_nearest('README.md') end)
 
 -- Edit Test
-utils.map('n', '<Leader>et', [[:lua require('rmarganti.core.functions').edit_test()<CR>]])
+utils.map('n', '<Leader>et', core_fns.edit_test)
 
 ------------------------------------------------
 --
@@ -313,10 +314,10 @@ utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
 ------------------------------------------------
 
 -- Toggle Quick fix
-utils.map('n', 'yoq', [[:lua require('rmarganti.core.functions').toggle_quickfix()<CR>]])
+utils.map('n', 'yoq', core_fns.toggle_quickfix)
 
 -- Toggle Format on save
-utils.map('n', 'yof', [[:lua require('rmarganti.core.functions').toggle_format_on_save()<CR>]])
+utils.map('n', 'yof', core_fns.toggle_format_on_save)
 
 -- Toggle Colorizer
 utils.map('n', 'yoc', '<CMD>ColorizerToggle<CR>')

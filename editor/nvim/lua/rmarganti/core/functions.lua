@@ -15,6 +15,8 @@ M.toggle_quickfix = function()
 end
 
 
+-- Relative to the current buffer, find the file in the closest
+-- directory. If no buffer is open, search in the project root.
 local find_nearest
 find_nearest = function(filename, directory)
     directory = directory or path.parent_directory(vim.fn.expand('%')) or '.'
@@ -81,7 +83,7 @@ end
 local enable_format_on_save = true
 
 -- Toggle whether format-on-save is enabled.
-M.toggle_format_on_save = function ()
+M.toggle_format_on_save = function()
     if enable_format_on_save == true then
         enable_format_on_save = false
         vim.notify('Disabled format-on-save', 'info')
@@ -117,7 +119,7 @@ M.organize_imports = function(bufnr, post)
     bufnr = bufnr or api.nvim_get_current_buf()
 
     lsp.buf_request(bufnr, METHOD, make_params(bufnr), function(err)
-        if not err and post then
+        if (not err and post) then
             post()
         end
     end)
@@ -127,6 +129,20 @@ M.organize_imports_sync = function(bufnr)
     bufnr = bufnr or api.nvim_get_current_buf()
 
     lsp.buf_request_sync(bufnr, METHOD, make_params(bufnr), 500)
+end
+
+-- Close all non-hidden buffers.
+M.buf_delete_all = function()
+    local buffers = api.nvim_list_bufs()
+
+    for _, buffer in ipairs(buffers) do
+        local is_listed = api.nvim_buf_get_option(buffer, 'buflisted')
+
+        -- Only close listed buffers
+        if (is_listed) then
+            vim.cmd('bdelete ' .. buffer)
+        end
+    end
 end
 
 return M
