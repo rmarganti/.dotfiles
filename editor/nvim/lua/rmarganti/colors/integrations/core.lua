@@ -26,7 +26,7 @@ return {
     MsgArea = { fg = p.fg }, -- Area for messages and cmdline
     MsgSeparator = {}, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg = { fg = p.fg }, -- |more-prompt|
-    NonText = { fg = p.fg }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+    NonText = { fg = a.minus3 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal = { fg = p.fg, bg = p.none }, -- normal text
     NormalNC = { fg = p.fg, bg = p.none }, -- normal text in non-current windows
     NormalSB = { fg = p.fg, bg = p.none }, -- normal text in non-current windows
@@ -40,7 +40,7 @@ return {
     QuickFixLine = { bg = p.bg_light }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
     IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-    SpecialKey = { fg = p.fg }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
+    SpecialKey = { fg = a.minus3 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal = { fg = p.none, sp = a.minus1, gui = 'undercurl' }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
@@ -54,7 +54,7 @@ return {
     Visual = { bg = p.black }, -- Visual mode selection
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
-    Whitespace = { fg = p.gray2 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace = { fg = a.minus3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu = { bg = p.gray2 }, -- current match in 'wildmenu' completion
 
     -- These groups are not listed as default vim groups,

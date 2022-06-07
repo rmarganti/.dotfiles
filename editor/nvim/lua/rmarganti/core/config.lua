@@ -55,16 +55,20 @@ vim.opt.inccommand = 'nosplit'
 vim.opt.signcolumn = 'yes'
 
 -- Always show at least 2 lines above/below the cursor.
-vim.opt.scrolloff=5
+vim.opt.scrolloff = 5
 
 -- Always show at least 5 columns to the left/right the cursor.
-vim.opt.sidescrolloff=10
+vim.opt.sidescrolloff = 10
 
 -- Highlight the current line.
 vim.opt.cursorline = true
 
 -- Max height for completion menu
 vim.opt.pumheight = 20
+
+-- What hidden characters to show
+vim.opt.list = true
+vim.opt.listchars = 'trail:⋅'
 
 ------------------------------------------------
 --
