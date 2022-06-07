@@ -142,4 +142,13 @@ M.buf_delete_all = function()
     end
 end
 
+-- Edit snippets for the current file type
+M.edit_snippets = function()
+    local filetype = vim.bo.filetype
+    local config_path = vim.fn.stdpath('config')
+
+    local cmd = 'e ' .. config_path .. '/snippets/' .. filetype .. '.json'
+    vim.cmd(cmd)
+end
+
 return M

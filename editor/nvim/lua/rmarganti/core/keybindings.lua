@@ -135,7 +135,7 @@ utils.map('n', '<Leader>co', core_fns.organize_imports)
 --
 ------------------------------------------------
 
-local edit_nearest = require('rmarganti.core.functions').edit_nearest
+local edit_nearest = core_fns.edit_nearest
 
 -- Edit nearest Changelog
 utils.map('n', '<Leader>ec', function() edit_nearest('CHANGELOG.md') end)
@@ -151,6 +151,9 @@ utils.map('n', '<Leader>er', function() edit_nearest('README.md') end)
 
 -- Edit Test
 utils.map('n', '<Leader>et', core_fns.edit_test)
+
+-- Edit Snippets for current file type
+utils.map('n', '<Leader>es', core_fns.edit_snippets)
 
 ------------------------------------------------
 --
