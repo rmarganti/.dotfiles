@@ -103,22 +103,19 @@ M.format = function(is_auto_format)
     end
 end
 
-local lsp = vim.lsp
-local api = vim.api
-
 local METHOD = "workspace/executeCommand"
 
 local make_params = function(bufnr)
     return {
         command = "_typescript.organizeImports",
-        arguments = { api.nvim_buf_get_name(bufnr) },
+        arguments = { vim.api.nvim_buf_get_name(bufnr) },
     }
 end
 
 M.organize_imports = function(bufnr, post)
-    bufnr = bufnr or api.nvim_get_current_buf()
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
 
-    lsp.buf_request(bufnr, METHOD, make_params(bufnr), function(err)
+    vim.lsp.buf_request(bufnr, METHOD, make_params(bufnr), function(err)
         if (not err and post) then
             post()
         end
@@ -126,20 +123,20 @@ M.organize_imports = function(bufnr, post)
 end
 
 M.organize_imports_sync = function(bufnr)
-    bufnr = bufnr or api.nvim_get_current_buf()
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
 
-    lsp.buf_request_sync(bufnr, METHOD, make_params(bufnr), 500)
+    vim.lsp.buf_request_sync(bufnr, METHOD, make_params(bufnr), 500)
 end
 
--- Close all non-hidden buffers.
+-- Close all non-hidden, non-modified buffers.
 M.buf_delete_all = function()
-    local buffers = api.nvim_list_bufs()
+    local buffers = vim.api.nvim_list_bufs()
 
     for _, buffer in ipairs(buffers) do
-        local is_listed = api.nvim_buf_get_option(buffer, 'buflisted')
+        local is_listed = vim.api.nvim_buf_get_option(buffer, 'buflisted')
+        local is_modified = vim.api.nvim_buf_get_option(buffer, 'modified')
 
-        -- Only close listed buffers
-        if (is_listed) then
+        if (is_listed and not is_modified) then
             vim.cmd('bdelete ' .. buffer)
         end
     end
