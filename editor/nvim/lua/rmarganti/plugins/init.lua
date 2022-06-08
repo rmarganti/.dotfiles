@@ -247,6 +247,7 @@ packer.startup(function(use)
     use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
     use({ 'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' })
     use({ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' })
+    use({ 'andersevenrud/cmp-tmux', after = 'nvim-cmp' })
 
     -- Snippets.
     use({
