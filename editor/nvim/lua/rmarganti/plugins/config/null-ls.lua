@@ -1,8 +1,7 @@
-local on_attach = require "rmarganti.plugins.config.nvim-lsp-installer.on_attach"
-
 local M = {}
 
 M.config = function()
+    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins
@@ -11,8 +10,7 @@ M.config = function()
         '~/.config/nvim/lua/rmarganti/plugins/config/.prettierrc.json'
     )
 
-    local capabilities = require('cmp_nvim_lsp')
-        .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = lsp_utils.make_client_capabilities()
 
     local sources = {
         -- PHP
@@ -63,7 +61,7 @@ M.config = function()
         capabilities = capabilities,
         debounce = 1000,
         sources = sources,
-        on_attach = on_attach
+        on_attach = lsp_utils.on_attach
     })
 end
 

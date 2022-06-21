@@ -1,17 +1,16 @@
 local M = {}
 
-M.setup = function(server, on_attach, flags)
+M.setup = function(server, flags)
+    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
+
     -- Configure sumneko for neovim lua development
     local lua_path = vim.split(package.path, ';')
     table.insert(lua_path, 'lua/?.lua')
     table.insert(lua_path, 'lua/?/init.lua')
 
-    local capabilities = require('cmp_nvim_lsp')
-        .update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
     server:setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
+        capabilities = lsp_utils.make_client_capabilities(),
+        on_attach = lsp_utils.on_attach,
         settings = {
             Lua = {
                 awakened = { cat = true },

@@ -3,11 +3,10 @@ local M = {}
 M.config = function()
     local lsp_installer = require("nvim-lsp-installer")
     local utils = require('rmarganti.utils.misc')
-    local on_attach = require('rmarganti.plugins.config.nvim-lsp-installer.on_attach')
+    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
 
     lsp_installer.on_server_ready(function(server)
-        local capabilities = require('cmp_nvim_lsp')
-            .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        capabilties = lsp_utils.make_client_capabilities()
 
         local flags = {
             debounce_text_changes = 300, -- Wait 5 seconds before sending didChange
@@ -19,7 +18,6 @@ M.config = function()
         if server.name == 'sumneko_lua' then
             require('rmarganti.plugins.config.nvim-lsp-installer.lua').setup(
                 server,
-                on_attach,
                 flags
             )
 
@@ -31,7 +29,7 @@ M.config = function()
                 capabilities = capabilities,
                 on_attach = function(client, buffnr)
                     client.resolved_capabilities.document_formatting = false
-                    on_attach(client, buffnr)
+                    lsp_utils.on_attach(client, buffnr)
                 end,
                 settings = {
                     json = {
@@ -52,7 +50,7 @@ M.config = function()
                 capabilities = capabilities,
                 on_attach = function(client, buffnr)
                     client.resolved_capabilities.document_formatting = false
-                    on_attach(client, buffnr)
+                    lsp_utils.on_attach(client, buffnr)
                 end,
                 settings = {
                     documentFormatting = false
@@ -67,7 +65,7 @@ M.config = function()
             -- Use default settings for all the other language servers
             server:setup({
                 capabilities = capabilities,
-                on_attach = on_attach,
+                on_attach = lsp_utils.on_attach,
                 flags = flags
             })
         end

@@ -1,4 +1,13 @@
-local on_attach = function (client, _)
+local M = {}
+
+M.make_client_capabilities = function()
+    local capabilities = require('cmp_nvim_lsp')
+        .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    return capabilities
+end
+
+M.on_attach = function(client, _)
     -- Auto-format on save.
     if client.resolved_capabilities.document_formatting then
         vim.cmd [[augroup Format]]
@@ -8,4 +17,4 @@ local on_attach = function (client, _)
     end
 end
 
-return on_attach
+return M
