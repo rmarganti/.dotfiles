@@ -7,6 +7,10 @@
     "contributes": {
         "snippets": [
             {
+                "language": "php",
+                "path": "./snippets/php.json"
+            },
+            {
                 "language": [
                     "typescript",
                     "typescriptreact"

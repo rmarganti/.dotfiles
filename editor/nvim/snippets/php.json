@@ -1,0 +1,29 @@
+{
+    "PHP Unit Test Class": {
+        "prefix": "putc",
+        "body": [
+            "use Mockery as m;",
+            "",
+            "class ${TM_FILENAME_BASE:ClassTest} extends PHPUnit_Framework_TestCase ",
+            "{",
+            "\tpublic function setUp()",
+            "\t{",
+            "\t\t$0",
+            "\t}",
+            "}",
+            ""
+        ],
+        "description": "PHPUnit test class boilerplate"
+    },
+
+    "PHP Unit Test Method": {
+        "prefix": "putf",
+        "body": [
+            "public function test_it_$1() {",
+            "\t${0:// Do something}",
+            "}",
+            ""
+        ],
+        "description": "PHPUnit test method boilerplate"
+    }
+}
