@@ -112,7 +112,7 @@ end
 -- A debounced auto-complete request. This keeps key presses responsive by only
 -- asking that nvim-cmp does auto-completion once you stop typing.
 enable_debounced_auto_complete = function()
-    local DEBOUNCE_DELAY = 250
+    local DEBOUNCE_DELAY = 125
     local timer = vim.loop.new_timer()
 
     -- Any time text changes, schedule a delayed request to nvim-cmp

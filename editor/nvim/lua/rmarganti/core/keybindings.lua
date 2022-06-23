@@ -54,38 +54,7 @@ utils.map('n', '<Leader>kc', '[n', { remap = true })
 --
 ------------------------------------------------
 
--- Buffer New.
-utils.map('n', '<Leader>bn', ':enew<CR>')
-
--- Buffer Edit.
-utils.map('n', '<Leader>be', '<cmd>lua require("bufferline").pick_buffer()<CR>')
-
--- Buffer Delete.
-utils.map('n', '<Leader>bd', '<cmd>BufferLinePickClose<CR>')
-
--- Buffer focus Left.
-utils.map('n', '<leader>bh', '<cmd>lua require("bufferline").cycle(-1)<CR>')
-
--- Buffer focus Right.
-utils.map('n', '<leader>bl', '<cmd>lua require("bufferline").cycle(1)<CR>')
-
--- Buffer move Left.
-utils.map('n', '<leader>bH', '<cmd>BufferLineMovePrev<CR>')
-
--- Buffer move Right.
-utils.map('n', '<leader>bL', '<cmd>BufferLineMoveNext<CR>')
-
--- Buffer Quit.
-utils.map('n', '<leader>bq', '<cmd>BufDel<CR>')
-
--- Buffer force Quit.
-utils.map('n', '<leader>bQ', '<cmd>BufDel!<CR>')
-
--- Buffer quit All.
-utils.map('n', '<Leader>ba', core_fns.buf_delete_all)
-
--- Keep current Buffer open Only.
-utils.map('n', '<Leader>bo', ':BufOnly<CR>')
+-- See hydra.lua
 
 
 ------------------------------------------------
@@ -338,17 +307,7 @@ utils.map('n', 'yoo', '<CMD>SymbolsOutline<CR>')
 --
 ------------------------------------------------
 
--- Window Quit.
-utils.map('n', '<Leader>wq', '<C-W>q')
-
--- Window Only (Close all other windows).
-utils.map('n', '<Leader>wo', ':only<CR>')
-
--- Window split Vertical
-utils.map('n', '<Leader>wv', ':vsplit<CR>')
-
--- Window split Horizontal
-utils.map('n', '<Leader>wh', ':split<CR>')
+-- See hydra.lua
 
 
 ------------------------------------------------

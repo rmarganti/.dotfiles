@@ -355,7 +355,7 @@ packer.startup(function(use)
     })
 
     --------------------------------
-    -- Misc
+    -- Telescope
     --------------------------------
 
     -- Find, Filter, Preview,Pick
@@ -386,6 +386,20 @@ packer.startup(function(use)
     })
 
     use({ 'nvim-telescope/telescope-symbols.nvim' })
+
+    --------------------------------
+    -- Misc
+    --------------------------------
+
+    -- Create mini-modes with their own set of key bindings.
+    use({
+        'anuvyklack/hydra.nvim',
+        event = 'BufWinEnter',
+        config = function()
+            require('rmarganti.plugins.config.hydra').config()
+        end,
+        -- requires = 'anuvyklack/keymap-layer.nvim' -- needed only for pink hydras
+    })
 
     -- Sugar for file operations (rename, move, etc.).
     use({
