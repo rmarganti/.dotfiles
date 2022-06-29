@@ -129,17 +129,26 @@ M.organize_imports_sync = function(bufnr)
 end
 
 -- Close all non-hidden, non-modified buffers.
-M.buf_delete_all = function()
+M.buf_delete_all = function(keep_current)
+    keep_current = keep_current or false
+
     local buffers = vim.api.nvim_list_bufs()
+    local current_buffer = vim.api.nvim_get_current_buf()
 
     for _, buffer in ipairs(buffers) do
         local is_listed = vim.api.nvim_buf_get_option(buffer, 'buflisted')
         local is_modified = vim.api.nvim_buf_get_option(buffer, 'modified')
+        local should_keep = keep_current and current_buffer == buffer
 
-        if (is_listed and not is_modified) then
-            vim.cmd('bdelete ' .. buffer)
+        if (is_listed and not is_modified and not should_keep) then
+            vim.cmd('silent bdelete ' .. buffer)
         end
     end
+end
+
+-- Delete all buffers except for the current one.
+M.buf_only = function()
+    return M.buf_delete_all(true)
 end
 
 -- Edit snippets for the current file type
