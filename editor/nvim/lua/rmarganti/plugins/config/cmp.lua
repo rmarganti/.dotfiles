@@ -27,7 +27,7 @@ M.config = function()
         end
     end
 
-    local stab_mapping = function(fallback)
+    local shift_tab_mapping = function(fallback)
         if (luasnip.jumpable(-1)) then
             vim.fn.feedkeys(
                 vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true),
@@ -41,7 +41,6 @@ M.config = function()
     cmp.setup({
         completion = {
             autocomplete = false,
-            completeopt = 'menu,menuone,noinsert'
         },
         formatting = {
             format = require("lspkind").cmp_format({
@@ -68,7 +67,7 @@ M.config = function()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
             ['<Tab>'] = cmp.mapping(tab_mapping, { 'i', 's' }),
-            ['<S-Tab>'] = cmp.mapping(stab_mapping, { 'i', 's' })
+            ['<S-Tab>'] = cmp.mapping(shift_tab_mapping, { 'i', 's' })
         }),
         sources = {
             { name = 'nvim_lsp' },
