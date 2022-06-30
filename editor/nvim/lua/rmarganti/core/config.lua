@@ -68,7 +68,6 @@ vim.opt.pumheight = 20
 
 -- What hidden characters to show
 vim.opt.list = true
-vim.opt.listchars = 'trail:⋅'
 
 ------------------------------------------------
 --
