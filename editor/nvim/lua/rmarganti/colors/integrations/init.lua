@@ -5,6 +5,7 @@ return {
     treesitter = require('rmarganti.colors.integrations.treesitter'),
 
     -- Plugins
+    gitsigns = require('rmarganti.colors.integrations.gitsigns'),
     hop = require('rmarganti.colors.integrations.hop'),
     indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
     nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
