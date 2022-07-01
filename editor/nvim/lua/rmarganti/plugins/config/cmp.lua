@@ -2,9 +2,6 @@ local cmp = require('cmp')
 
 local M = {}
 
-local enable_debounced_auto_complete -- defined below
-
---- nvim-cmp configuration
 M.config = function()
     local luasnip = require("luasnip")
 
@@ -39,9 +36,10 @@ M.config = function()
     end
 
     cmp.setup({
-        completion = {
-            autocomplete = false,
+        performance = {
+            debounce = 250,
         },
+
         formatting = {
             format = require("lspkind").cmp_format({
                 with_text = true,
@@ -56,6 +54,7 @@ M.config = function()
                 })
             }),
         },
+
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)
@@ -69,6 +68,7 @@ M.config = function()
             ['<Tab>'] = cmp.mapping(tab_mapping, { 'i', 's' }),
             ['<S-Tab>'] = cmp.mapping(shift_tab_mapping, { 'i', 's' })
         }),
+
         sources = {
             { name = 'nvim_lsp' },
             { name = 'luasnip' },
@@ -102,42 +102,6 @@ M.config = function()
         }, {
             { name = 'cmdline' }
         })
-    })
-
-    enable_debounced_auto_complete()
-end
-
-
--- A debounced auto-complete request. This keeps key presses responsive by only
--- asking that nvim-cmp does auto-completion once you stop typing.
-enable_debounced_auto_complete = function()
-    local DEBOUNCE_DELAY = 125
-    local timer = vim.loop.new_timer()
-
-    -- Any time text changes, schedule a delayed request to nvim-cmp
-    -- to fire auto completion. If another key press happens before that
-    -- request, cancel the original request and schedule a new one.
-    vim.api.nvim_create_autocmd({ 'TextChangedI', 'TextChangedP', 'CmdLineChanged' }, {
-        group = vim.api.nvim_create_augroup(
-            'DebouncedAutoComplete',
-            { clear = true }
-        ),
-        pattern = '*',
-        callback = function()
-            timer:stop()
-            timer:start(
-                DEBOUNCE_DELAY,
-                0,
-                vim.schedule_wrap(function()
-                    local enabled = require('cmp.config').enabled()
-
-                    if (enabled) then
-                        cmp.complete({ reason = cmp.ContextReason.Auto })
-                    end
-                end)
-            )
-        end,
-        desc = 'Debounced auto-complete',
     })
 end
 

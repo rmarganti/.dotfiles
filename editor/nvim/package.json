@@ -7,6 +7,10 @@
     "contributes": {
         "snippets": [
             {
+                "language": "lua",
+                "path": "./snippets/lua.json"
+            },
+            {
                 "language": "php",
                 "path": "./snippets/php.json"
             },
