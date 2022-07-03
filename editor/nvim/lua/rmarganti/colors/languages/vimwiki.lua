@@ -5,14 +5,14 @@ return {
 
     VimwikiHeaderChar = { fg = a.base },
 
-    VimwikiHeader1 = { fg = p.magenta, style = "bold" },
-    VimwikiHeader2 = { fg = p.yellow, style = "bold" },
-    VimwikiHeader3 = { fg = p.cyan, style = "bold" },
-    VimwikiHeader4 = { fg = p.blue, style = "bold" },
-    VimwikiHeader5 = { fg = p.gray2, style = "bold" },
-    VimwikiHeader6 = { fg = p.gray2, style = "bold" },
+    VimwikiHeader1 = { fg = p.magenta, bold = true },
+    VimwikiHeader2 = { fg = p.yellow, bold = true },
+    VimwikiHeader3 = { fg = p.cyan, bold = true },
+    VimwikiHeader4 = { fg = p.blue, bold = true },
+    VimwikiHeader5 = { fg = p.gray2, bold = true },
+    VimwikiHeader6 = { fg = p.gray2, bold = true },
 
-    VimwikiLink = { fg = p.green, style = "underline" },
+    VimwikiLink = { fg = p.green, underline = true },
     VimwikiHR = { fg = a.base },
     VimwikiList = { fg = a.base },
     VimwikiTag = { fg = a.base },

@@ -9,12 +9,12 @@ M.apply = function()
 end
 
 M.syntax = function(tbl)
-	for group, colors in pairs(tbl) do
-		M.highlight(group, colors)
-	end
+    for group, colors in pairs(tbl) do
+        M.highlight(group, colors)
+    end
 end
 
-M.expand_color =  function(type, color)
+M.expand_color = function(type, color)
     return string.format(
         "gui%s=%s cterm%s=%s",
         type,
@@ -25,23 +25,36 @@ M.expand_color =  function(type, color)
 end
 
 M.highlight = function(group, color)
-	-- Doc: :h highlight-gui
-	local style = color.style and "gui=" .. color.style or "gui=NONE"
-	local fg = color.fg and M.expand_color('fg', color.fg) or "guifg=NONE ctermfg=NONE"
-	local bg = color.bg and M.expand_color('bg', color.bg) or "guibg=NONE ctermbg=NONE"
-	local sp = color.sp and ("guisp=" .. color.sp.gui) or ""
-    local gui = color.gui and ("gui=" .. color.gui) or ""
-	local blend = color.blend and ("blend=" .. color.blend) or ""
+    vim.api.nvim_set_hl(0, group, {
+        -- Foreground
+        fg = color.fg and color.fg.gui,
+        ctermfg = color.fg and color.fg.cterm,
 
-    local hl = table.concat(
-        { "highlight", group, style, fg, bg, gui, sp, blend },
-        " "
-    )
+        -- Background
+        bg = color.bg and color.bg.gui,
+        ctermbg = color.bg and color.bg.cterm,
 
-	vim.cmd(hl)
-	if color.link then
-		vim.cmd("highlight! link " .. group .. " " .. color.link)
-	end
+        -- Special
+        sp = color.sp and color.sp.gui,
+
+        -- Blend (number from 1-100)
+
+        -- Attributes (booleans)
+        bold = color.bold,
+        standout = color.standout,
+        underline = color.underline,
+        undercurl = color.undercurl,
+        underdouble = color.underdouble,
+        underdotted = color.underdotted,
+        underdashed = color.underdashed,
+        strikethrough = color.strikethrough,
+        italic = color.italic,
+        reverse = color.reverse,
+        nocombine = color.nocombine,
+
+        -- Name of another group to link to.
+        link = color.link,
+    })
 end
 
 return M
