@@ -71,7 +71,7 @@ M.config = function()
             { 'q', '<cmd>BufDel<CR>', { desc = 'Quit' } },
             { 'Q', '<cmd>BufDel!<CR>', { desc = 'Force Quit' } },
             { 'a', core_fns.buf_delete_all, { desc = 'Quit All', exit = true } },
-            { 'o', '<cmd>BufOnly<CR>', { desc = 'Keep Only', exit = true } },
+            { 'o', core_fns.buf_only, { desc = 'Keep Only', exit = true } },
             { '<Esc>', nil, { exit = true, desc = false } }
         }
     })
