@@ -53,7 +53,7 @@ packer.startup(function(use)
 
     use({
         'nvim-treesitter/playground',
-        after = 'nvim-treesitter'
+        after = 'nvim-treesitter',
     })
 
     use({
@@ -190,7 +190,7 @@ packer.startup(function(use)
     -- Adds JSON schemas support for jsonls.
     use({
         'b0o/schemastore.nvim',
-        after = 'cmp-nvim-lsp'
+        after = 'cmp-nvim-lsp',
     })
 
     -- Language server for linters, formatters, etc.
@@ -199,7 +199,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.null-ls').config()
         end,
-        after = 'schemastore.nvim'
+        after = 'schemastore.nvim',
     })
 
     -- Adds LSPInstall command.
@@ -208,7 +208,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.nvim-lsp-installer').config()
         end,
-        after = 'null-ls.nvim'
+        after = 'null-ls.nvim',
     })
 
     -- Show function signature as you type.
@@ -226,7 +226,7 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.lspkind').config()
         end,
-        after = 'nvim-lspconfig'
+        after = 'nvim-lspconfig',
     })
 
     -- Symbol tree panel.
@@ -270,13 +270,13 @@ packer.startup(function(use)
     -- Quickly surround text with brackets, quotes, etc.
     use({
         'tpope/vim-surround',
-        event = 'BufWinEnter'
+        event = 'BufWinEnter',
     })
 
     -- Easily replace with contents of register.
     use({
         'vim-scripts/ReplaceWithRegister',
-        event = 'BufWinEnter'
+        event = 'BufWinEnter',
     })
 
     --------------------------------
@@ -288,10 +288,10 @@ packer.startup(function(use)
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup({
-                ignore = '^$'
+                ignore = '^$',
             })
         end,
-        event = 'BufWinEnter'
+        event = 'BufWinEnter',
     })
 
     -- Auto-close brackets, etc.
@@ -308,7 +308,10 @@ packer.startup(function(use)
         'rcarriga/vim-ultest',
         requires = { 'vim-test/vim-test' },
         run = ':UpdateRemotePlugins',
-        event = 'BufWinEnter'
+        event = 'BufWinEnter',
+        setup = function()
+            vim.g.ultest_deprecation_notice = 0
+        end,
     })
 
     -- Show light bulb icon when code action is available.
@@ -394,11 +397,11 @@ packer.startup(function(use)
     -- Create mini-modes with their own set of key bindings.
     use({
         'anuvyklack/hydra.nvim',
-        event = 'BufWinEnter',
         config = function()
             require('rmarganti.plugins.config.hydra').config()
         end,
-        -- requires = 'anuvyklack/keymap-layer.nvim' -- needed only for pink hydras
+        requires = 'anuvyklack/keymap-layer.nvim', -- needed only for pink hydras
+        after = 'gitsigns.nvim',
     })
 
     -- Sugar for file operations (rename, move, etc.).
@@ -410,12 +413,6 @@ packer.startup(function(use)
     --  Random shortcuts that typically work in pairs.
     use({
         'tpope/vim-unimpaired',
-        event = 'BufWinEnter',
-    })
-
-    -- Close all buffers but current one.
-    use({
-        'vim-scripts/BufOnly.vim',
         event = 'BufWinEnter',
     })
 
@@ -436,7 +433,7 @@ packer.startup(function(use)
         requires = {
             {
                 'kamykn/popup-menu.nvim',
-                event = 'BufWinEnter'
+                event = 'BufWinEnter',
             }
         },
         event = 'BufWinEnter',

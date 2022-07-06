@@ -2,8 +2,26 @@ local M = {}
 
 M.config = function()
     require('nvim-treesitter.configs').setup({
-        ensure_installed = 'all',
-        ignore_install = { 'haskell' ,'toml' },
+        ensure_installed = {
+            'bash',
+            'css',
+            'go',
+            'javascript',
+            'json',
+            'json5',
+            'lua',
+            'make',
+            'markdown',
+            'php',
+            'prisma',
+            'regex',
+            'rust',
+            'scss',
+            'tsx',
+            'typescript',
+            'vim',
+            'yaml',
+        },
         highlight = { enable = true },
         indent = { enable = true },
         textobjects = {

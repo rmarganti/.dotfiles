@@ -1,4 +1,10 @@
 {
+    "App Log Info": {
+        "prefix": "ali",
+        "body": ["app('log')->info($0);"],
+        "description": "Write to Laravel log"
+    },
+
     "PHP Unit Test Class": {
         "prefix": "putc",
         "body": [
