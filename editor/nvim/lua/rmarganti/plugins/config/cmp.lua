@@ -37,7 +37,7 @@ M.config = function()
 
     cmp.setup({
         performance = {
-            debounce = 250,
+            debounce = 500,
         },
 
         formatting = {
