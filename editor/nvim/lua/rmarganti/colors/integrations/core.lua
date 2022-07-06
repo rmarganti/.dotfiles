@@ -117,9 +117,11 @@ return {
     -- debugging
     debugPC = { bg = p.bg_light }, -- used for highlighting the current line in terminal-debug
     debugBreakpoint = { bg = p.bg_light, fg = p.fg }, -- used for breakpoint colors in terminal-debug
+
     -- illuminate
     illuminatedWord = { bg = p.bg_light },
     illuminatedCurWord = { bg = p.bg_light },
+
     -- diff
     diffAdded = { fg = p.green },
     diffRemoved = { fg = p.red },
@@ -129,10 +131,11 @@ return {
     diffFile = { fg = p.fg },
     diffLine = { fg = p.fg },
     diffIndexLine = { fg = p.fg },
-    DiffAdd = { fg = p.fg, bg = p.bg_light }, -- diff mode: Added line |diff.txt|
-    DiffChange = { fg = p.fg, bg = p.bg_light }, -- diff mode: Changed line |diff.txt|
-    DiffDelete = { fg = p.fg, bg = p.bg_light }, -- diff mode: Deleted line |diff.txt|
-    DiffText = { fg = p.fg, bg = p.bg_light }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffAdd = { fg = p.bg_darker, bg = p.green_dark }, -- diff mode: Added line |diff.txt|
+    DiffChange = { fg = p.bg_darker, bg = p.yellow_dark }, -- diff mode: Added line |diff.txt|
+    DiffDelete = { fg = p.bg_darker, bg = p.red_dark }, -- diff mode: Added line |diff.txt|
+    DiffText = { fg = p.bg_darker, bg = p.yellow }, -- diff mode: Changed text within a changed line |diff.txt|
+
     -- NeoVim
     healthError = { fg = a.error },
     healthSuccess = { fg = a.success },
