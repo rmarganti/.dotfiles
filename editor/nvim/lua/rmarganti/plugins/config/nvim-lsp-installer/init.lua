@@ -43,7 +43,7 @@ M.config = function()
         ------------------------------------------------
         -- HTML, PHP, Typescript, Javascript.
         ------------------------------------------------
-        elseif utils.has_value({ 'html', 'intelephense', 'tsserver' }, server.name) then
+        elseif utils.has_value({ 'html', 'intelephense', 'terraformls', 'tsserver' }, server.name) then
             -- Disable the language server's `document_formatting` capability,
             -- since we will use some other linter/formatter (prettier, etc).
             server:setup({
