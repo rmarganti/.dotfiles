@@ -155,7 +155,8 @@ M.config = function()
                 pieces.duck,
                 pieces.file_info_active,
                 pieces.git_branch,
-                {}, -- empty componet to clear styles
+                -- Empty component to clear styles.
+                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
             },
             {
                 pieces.github_notifications,
@@ -163,12 +164,15 @@ M.config = function()
                 pieces.file_encoding,
                 pieces.file_type,
                 pieces.line_percentage,
+                -- Empty component to clear styles.
+                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
             }
         },
         inactive = {
             {
                 pieces.file_info_inactive,
-                {}, -- empty componet to clear styles
+                -- Empty component to clear styles.
+                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
             }
         }
     }

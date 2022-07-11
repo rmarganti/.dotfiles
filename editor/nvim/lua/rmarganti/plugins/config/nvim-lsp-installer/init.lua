@@ -6,8 +6,6 @@ M.config = function()
     local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
 
     lsp_installer.on_server_ready(function(server)
-        capabilties = lsp_utils.make_client_capabilities()
-
         local flags = {
             debounce_text_changes = 300, -- Wait 5 seconds before sending didChange
         }
