@@ -38,6 +38,9 @@ vim.opt.wildmenu = true
 -- Don't wrap lines.
 vim.opt.wrap = false
 
+-- When wrap is enabled, only break at whitespace.
+vim.opt.linebreak = true
+
 -- Disable backups, swaps, etc.
 vim.opt.backup = false
 vim.opt.swapfile = false
