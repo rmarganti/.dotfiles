@@ -103,29 +103,18 @@ M.format = function(is_auto_format)
     end
 end
 
-local METHOD = "workspace/executeCommand"
+M.organize_imports = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
 
-local make_params = function(bufnr)
-    return {
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(bufnr) },
-    }
-end
-
-M.organize_imports = function(bufnr, post)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
-
-    vim.lsp.buf_request(bufnr, METHOD, make_params(bufnr), function(err)
-        if (not err and post) then
-            post()
-        end
-    end)
-end
-
-M.organize_imports_sync = function(bufnr)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
-
-    vim.lsp.buf_request_sync(bufnr, METHOD, make_params(bufnr), 500)
+    vim.lsp.buf_request(
+        bufnr,
+        "workspace/executeCommand",
+        {
+            command = "_typescript.organizeImports",
+            arguments = { bufname },
+        }
+    )
 end
 
 -- Close all non-hidden, non-modified buffers.
