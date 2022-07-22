@@ -3,7 +3,7 @@ local a = require('rmarganti.colors.abstractions')
 
 return {
     Comment = { fg = a.minus2 }, -- just comments
-    ColorColumn = { bg = p.black }, -- used for the columns set with 'colorcolumn'
+    ColorColumn = { bg = p.bg_darker }, -- used for the columns set with 'colorcolumn'
     Conceal = { fg = p.black }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor = { fg = p.fg, bg = p.bg_light }, -- character under the cursor
     lCursor = { fg = p.fg, bg = p.bg_light }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
@@ -15,8 +15,8 @@ return {
     ErrorMsg = { fg = a.error }, -- error messages on the command line
     VertSplit = { fg = p.black }, -- the column separating vertically split windows
     Folded = { fg = p.fg, bg = p.bg_light }, -- line used for closed folds
-    FoldColumn = { bg = p.bg_light, fg = p.fg }, -- 'foldcolumn'
-    SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
+    FoldColumn = { bg = p.none, fg = a.minus1 }, -- 'foldcolumn'
+    SignColumn = { bg = p.none, fg = a.minus1 }, -- column where |signs| are displayed
     signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
     substitute = { bg = p.bg_light, fg = p.fg }, -- |:substitute| replacement text highlighting
     LineNr = { fg = a.minus2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
