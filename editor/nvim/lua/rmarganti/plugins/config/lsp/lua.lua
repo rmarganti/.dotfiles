@@ -1,6 +1,7 @@
 local M = {}
 
-M.setup = function(server, flags)
+M.setup = function()
+    local lspconfig = require('lspconfig')
     local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
 
     -- Configure sumneko for neovim lua development
@@ -8,7 +9,7 @@ M.setup = function(server, flags)
     table.insert(lua_path, 'lua/?.lua')
     table.insert(lua_path, 'lua/?/init.lua')
 
-    server:setup({
+    lspconfig.sumneko_lua.setup({
         capabilities = lsp_utils.make_client_capabilities(),
         on_attach = lsp_utils.on_attach,
         settings = {
@@ -34,7 +35,7 @@ M.setup = function(server, flags)
                 telemetry = { enable = false },
             },
         },
-        flags = flags
+        flags = lsp_utils.flags
     })
 end
 

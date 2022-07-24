@@ -204,9 +204,9 @@ packer.startup(function(use)
 
     -- Adds LSPInstall command.
     use({
-        'williamboman/nvim-lsp-installer',
+        'williamboman/mason.nvim',
         config = function()
-            require('rmarganti.plugins.config.nvim-lsp-installer').config()
+            require('rmarganti.plugins.config.lsp').config()
         end,
         after = 'null-ls.nvim',
     })
