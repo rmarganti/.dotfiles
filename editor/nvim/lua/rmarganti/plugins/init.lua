@@ -202,12 +202,17 @@ packer.startup(function(use)
         after = 'schemastore.nvim',
     })
 
-    -- Adds LSPInstall command.
+    -- Install LSP servers, DAP, linters, etc.
     use({
         'williamboman/mason.nvim',
         config = function()
             require('rmarganti.plugins.config.lsp').config()
         end,
+        after = 'mason-lspconfig.nvim',
+    })
+
+    use({
+        'williamboman/mason-lspconfig.nvim',
         after = 'null-ls.nvim',
     })
 

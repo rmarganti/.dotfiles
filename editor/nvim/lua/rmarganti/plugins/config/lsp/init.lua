@@ -6,6 +6,7 @@ M.config = function()
 
     -- Installs servers.
     require('mason').setup()
+    require('mason-lspconfig').setup()
 
     ------------------------------------------------
     -- Lua.
