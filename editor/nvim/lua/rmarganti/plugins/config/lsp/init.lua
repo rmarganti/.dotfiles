@@ -6,7 +6,18 @@ M.config = function()
 
     -- Installs servers.
     require('mason').setup()
-    require('mason-lspconfig').setup()
+    require('mason-lspconfig').setup({
+        ensure_installed = {
+            'cssls',
+            'eslint',
+            'html',
+            'intelephense',
+            'jsonls',
+            'sumneko_lua',
+            'terraformls',
+            'tsserver',
+        }
+    })
 
     ------------------------------------------------
     -- Lua.
