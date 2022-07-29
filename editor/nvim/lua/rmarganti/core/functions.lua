@@ -149,4 +149,22 @@ M.edit_snippets = function()
     vim.cmd(cmd)
 end
 
+-- Open a URL in a new buffer.
+M.read_url = function()
+    vim.ui.input(
+        {
+            prompt = 'Enter URL:',
+            kind = 'read_url',
+        },
+        function(input)
+            if (input == nil) then
+                return
+            end
+
+            vim.cmd('enew')
+            vim.cmd('read !curl -s ' .. input)
+        end
+    )
+end
+
 return M
