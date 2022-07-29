@@ -21,7 +21,7 @@ M.config = function()
         }, '\n'),
         config = {
             hint = { border = 'rounded' },
-            invoke_on_body = true,
+            invoke_on_body = false,
         },
         mode = 'n',
         body = '<Leader>w',
