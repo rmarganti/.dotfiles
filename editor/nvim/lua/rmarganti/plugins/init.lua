@@ -270,22 +270,6 @@ packer.startup(function(use)
     })
 
     --------------------------------
-    -- Text manipulation
-    --------------------------------
-
-    -- Quickly surround text with brackets, quotes, etc.
-    use({
-        'tpope/vim-surround',
-        event = 'BufWinEnter',
-    })
-
-    -- Easily replace with contents of register.
-    use({
-        'vim-scripts/ReplaceWithRegister',
-        event = 'BufWinEnter',
-    })
-
-    --------------------------------
     -- Code Specific
     --------------------------------
 
@@ -337,6 +321,39 @@ packer.startup(function(use)
             require('colorizer').setup()
         end
 
+    })
+
+    --------------------------------
+    -- Text manipulation
+    --------------------------------
+
+    -- Quickly surround text with brackets, quotes, etc.
+    use({
+        'tpope/vim-surround',
+        event = 'BufWinEnter',
+    })
+
+    -- Easily replace with contents of register.
+    use({
+        'vim-scripts/ReplaceWithRegister',
+        event = 'BufWinEnter',
+    })
+
+    -- Code spell-checking.
+    use({
+        'kamykn/spelunker.vim',
+        setup = function()
+            vim.g.spelunker_check_type = 2
+            vim.g.spelunker_spell_bad_group = 'SpellBad'
+            vim.g.spelunker_complex_or_compound_word_group = 'SpellBad'
+        end,
+        requires = {
+            {
+                'kamykn/popup-menu.nvim',
+                event = 'BufWinEnter',
+            }
+        },
+        event = 'BufWinEnter',
     })
 
     --------------------------------
@@ -425,23 +442,6 @@ packer.startup(function(use)
     -- Make more things repeatable.
     use({
         'tpope/vim-repeat',
-        event = 'BufWinEnter',
-    })
-
-    -- Code spell-checking.
-    use({
-        'kamykn/spelunker.vim',
-        setup = function()
-            vim.g.spelunker_check_type = 2
-            vim.g.spelunker_spell_bad_group = 'SpellBad'
-            vim.g.spelunker_complex_or_compound_word_group = 'SpellBad'
-        end,
-        requires = {
-            {
-                'kamykn/popup-menu.nvim',
-                event = 'BufWinEnter',
-            }
-        },
         event = 'BufWinEnter',
     })
 
