@@ -94,9 +94,9 @@ M.config = function()
 
     Hydra({
         hint = table.concat({
-            ' _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line',
-            ' _K_: prev hunk   _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full',
-            ' ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file',
+            ' _J_: next hunk    _s_: stage hunk        _d_: show deleted   _b_: blame line',
+            ' _K_: prev hunk    _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full',
+            ' _r_: reset hunk   _S_: stage buffer      ^ ^                 _/_: show base file',
         }, '\n'),
         config = {
             color = 'pink',
@@ -106,7 +106,6 @@ M.config = function()
                 border = 'rounded'
             },
             on_enter = function()
-                vim.bo.modifiable = false
                 gitsigns.toggle_signs(true)
                 gitsigns.toggle_linehl(true)
             end,
@@ -137,6 +136,7 @@ M.config = function()
                 end,
                 { expr = true }
             },
+            { 'r', ':Gitsigns reset_hunk<CR>' },
             { 's', ':Gitsigns stage_hunk<CR>', { silent = true } },
             { 'u', gitsigns.undo_stage_hunk },
             { 'S', gitsigns.stage_buffer },
