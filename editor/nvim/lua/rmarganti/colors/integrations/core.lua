@@ -2,7 +2,7 @@ local p = require('rmarganti.colors.palette')
 local a = require('rmarganti.colors.abstractions')
 
 return {
-    Comment = { fg = a.minus2 }, -- just comments
+    Comment = { fg = a.minus2, italic = true }, -- just comments
     ColorColumn = { bg = p.bg_darker }, -- used for the columns set with 'colorcolumn'
     Conceal = { fg = p.black }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor = { fg = p.fg, bg = p.bg_light }, -- character under the cursor
@@ -20,7 +20,9 @@ return {
     signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
     substitute = { bg = p.bg_light, fg = p.fg }, -- |:substitute| replacement text highlighting
     LineNr = { fg = a.minus2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
-    CursorLineNr = { fg = a.plus1 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+    CursorLineNr = { fg = a.plus1, bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+    CursorLineSign = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+    CursorLineFold = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     MatchParen = { fg = p.yellow }, -- The character under the cursor or just before it, if it is a paicatppuccin5 bracket, and its match. |pi_paren.txt|
     ModeMsg = { fg = p.fg }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea = { fg = p.fg }, -- Area for messages and cmdline
@@ -41,10 +43,10 @@ return {
     Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
     IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     SpecialKey = { fg = a.minus2 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad = { fg = p.none, sp = a.minus1, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap = { fg = p.none, sp = a.minus1, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal = { fg = p.none, sp = a.minus1, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare = { fg = p.none, sp = a.minus1, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    SpellBad = { sp = a.warning, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap = { sp = a.warning, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal = { sp = a.warning, undercurl = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare = { sp = a.warning, undercurl = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine = { fg = p.fg, bg = p.bg_light }, -- status line of current window
     StatusLineNC = { fg = p.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
@@ -69,7 +71,7 @@ return {
     Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
     Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
     Identifier = { fg = a.plus3 }, -- any variable name
-    Function = { fg = a.plus2, italic = true }, -- function name (also: methods for classes)
+    Function = { fg = a.plus2 }, -- function name (also: methods for classes)
     Statement = { fg = a.plus2 }, -- any statement
     Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
     Repeat = { fg = a.plus1 }, --   for, do, while, etcp.
