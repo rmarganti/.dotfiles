@@ -146,7 +146,10 @@ utils.map('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>', { silent = false }
 utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false })
 
 -- File Write
-utils.map('n', '<Leader>fw', 'fw :w<CR>')
+utils.map('n', '<Leader>fw', function()
+    vim.cmd('write');
+    vim.notify('File saved')
+end)
 
 -- File eXplore
 utils.map('n', '<Leader>fx', ':RnvimrToggle<CR>')
