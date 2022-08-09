@@ -89,7 +89,7 @@ M.toggle_format_on_save = function()
         vim.notify('Disabled format-on-save', 'info')
     else
         enable_format_on_save = true
-        vim.notify('Enabled format-on-save')
+        vim.notify('Enabled format-on-save', 'info')
     end
 end
 

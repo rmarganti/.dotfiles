@@ -9,6 +9,7 @@ M.config = function()
     require('mason-lspconfig').setup({
         ensure_installed = {
             'cssls',
+            'emmet_ls',
             'eslint',
             'html',
             'intelephense',
@@ -50,7 +51,7 @@ M.config = function()
 
     -- Disable the language server's `document_formatting` capability,
     -- since we will use some other linter/formatter (prettier, etc).
-    for _, server in pairs({ 'html', 'intelephense', 'terraformls', 'tsserver' }) do
+    for _, server in pairs({ 'emmet_ls', 'html', 'intelephense', 'terraformls', 'tsserver' }) do
         lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = function(client, buffnr)
