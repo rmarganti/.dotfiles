@@ -149,7 +149,7 @@ M.edit_snippets = function()
     vim.cmd(cmd)
 end
 
--- Open a URL in a new buffer.
+-- Import the contents of a URL.
 M.read_url = function()
     vim.ui.input(
         {
@@ -161,7 +161,17 @@ M.read_url = function()
                 return
             end
 
-            vim.cmd('enew')
+            local bufnr = vim.api.nvim_get_current_buf()
+            local buffer_contents = table.concat(
+                vim.api.nvim_buf_get_lines(bufnr, 0, -1, false),
+                '\n'
+            )
+
+            -- Create a new buffer if current buffer has anything in it.
+            if (#buffer_contents > 0) then
+                vim.cmd('enew')
+            end
+
             vim.cmd('read !curl -s ' .. input)
         end
     )
