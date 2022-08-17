@@ -475,4 +475,10 @@ packer.startup(function(use)
             vim.fn['mkdp#util#install']()
         end,
     })
+
+    -- Heuristically set buffer options.
+    use({
+        'tpope/vim-sleuth',
+        event = 'BufWinEnter',
+    })
 end)
