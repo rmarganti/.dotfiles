@@ -125,7 +125,27 @@ function pu:f() {
 }
 alias pu:s='./vendor/bin/phpunit --testsuite'
 
-# Misc Functions
+################################################################
+#
+# Kubernetes
+#
+################################################################
+
+# Get Pods
+alias kgp="kubectl get pods"
+
+# Describe Pod
+alias kdp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl describe pod %"
+
+# Exec - Open shell in pod
+alias ke="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl exec -it % -- sh"
+
+################################################################
+#
+# Misc
+#
+################################################################
+
 function strlen() {
     echo -n "$1" | wc -c
 }
