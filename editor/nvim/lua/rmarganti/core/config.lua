@@ -109,3 +109,12 @@ vim.opt.smartindent = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+
+------------------------------------------------
+--
+-- Terminal.
+--
+------------------------------------------------
+
+vim.opt.scrollback = 100000
