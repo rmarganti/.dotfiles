@@ -11,5 +11,11 @@
             "$0"
         ],
         "description": "Comment block"
+    },
+
+    "Comment line": {
+        "prefix": "cl",
+        "body": ["// - $1----------------------------------------------", "$0"],
+        "description": "Comment block"
     }
 }
