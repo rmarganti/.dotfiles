@@ -50,7 +50,6 @@ M.config = function()
                     nvim_lua = "[Lua]",
                     latex_symbols = "[Latex]",
                     cmp_tabnine = "[Tabnine]",
-                    tmux = "[Tmux]",
                 })
             }),
         },

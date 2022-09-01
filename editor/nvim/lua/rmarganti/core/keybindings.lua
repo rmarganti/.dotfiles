@@ -310,7 +310,12 @@ utils.map('n', 'yoo', '<CMD>SymbolsOutline<CR>')
 --
 ------------------------------------------------
 
--- See hydra.lua
+utils.map('n', '<C-h>', '<C-w>h')
+utils.map('n', '<C-l>', '<C-w>l')
+utils.map('n', '<C-j>', '<C-w>j')
+utils.map('n', '<C-k>', '<C-w>k')
+
+-- See hydra.lua for more Window mappings.
 
 
 ------------------------------------------------

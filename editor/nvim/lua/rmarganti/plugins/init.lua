@@ -148,6 +148,15 @@ packer.startup(function(use)
         end
     })
 
+    -- Resize windows based on focus.
+    use({
+        'beauwilliams/focus.nvim',
+        config = function()
+            require('focus').setup({
+                signcolumn = false,
+            })
+        end
+    })
 
     --------------------------------
     -- Git
@@ -253,7 +262,6 @@ packer.startup(function(use)
     use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
     use({ 'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' })
     use({ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' })
-    use({ 'andersevenrud/cmp-tmux', after = 'nvim-cmp' })
 
     -- Snippets.
     use({
@@ -353,20 +361,6 @@ packer.startup(function(use)
                 event = 'BufWinEnter',
             }
         },
-        event = 'BufWinEnter',
-    })
-
-    --------------------------------
-    -- Tmux integration
-    --------------------------------
-
-    use({
-        'christoomey/vim-tmux-navigator',
-        event = 'BufWinEnter',
-    })
-
-    use({
-        'tmux-plugins/vim-tmux-focus-events',
         event = 'BufWinEnter',
     })
 
