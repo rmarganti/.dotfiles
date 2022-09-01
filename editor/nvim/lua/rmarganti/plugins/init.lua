@@ -368,7 +368,7 @@ packer.startup(function(use)
     -- Utility
     --------------------------------
 
-    -- Various utility funcctions.
+    -- Various utility functions.
     use({
         'nvim-lua/plenary.nvim',
         module = 'plenary',

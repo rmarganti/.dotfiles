@@ -134,11 +134,17 @@ alias pu:s='./vendor/bin/phpunit --testsuite'
 # Get Pods
 alias kgp="kubectl get pods"
 
+# Get Pods Loop
+alias kgpl="while true; do kubectl get pods; echo; echo; sleep 5; done"
+
 # Describe Pod
 alias kdp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl describe pod %"
 
 # Exec - Open shell in pod
 alias ke="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl exec -it % -- sh"
+
+# Logs
+alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl logs % -f"
 
 ################################################################
 #
