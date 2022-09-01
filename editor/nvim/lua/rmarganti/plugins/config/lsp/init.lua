@@ -46,12 +46,31 @@ M.config = function()
     })
 
     ------------------------------------------------
-    -- HTML, PHP, Typescript, Javascript.
+    -- Typescript, Javascript.
+    ------------------------------------------------
+
+    lspconfig.tsserver.setup({
+        capabilities = capabilities,
+        on_attach = function(client, buffnr)
+            client.resolved_capabilities.document_formatting = false
+            lsp_utils.on_attach(client, buffnr)
+        end,
+        settings = {
+            documentFormatting = false, -- Leave it to Prettier.
+            completions = {
+                completeFunctionCalls = true,
+            },
+        },
+        flags = lsp_utils.flags,
+    })
+
+    ------------------------------------------------
+    -- HTML, PHP, Terraform.
     ------------------------------------------------
 
     -- Disable the language server's `document_formatting` capability,
     -- since we will use some other linter/formatter (prettier, etc).
-    for _, server in pairs({ 'emmet_ls', 'html', 'intelephense', 'terraformls', 'tsserver' }) do
+    for _, server in pairs({ 'emmet_ls', 'html', 'intelephense', 'terraformls' }) do
         lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = function(client, buffnr)
