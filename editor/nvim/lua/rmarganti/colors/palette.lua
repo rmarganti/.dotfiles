@@ -3,10 +3,10 @@ return {
 
     bg_darker = { gui = '#0d1011', cterm = 233 },
     bg_dark = { gui = '#181c1e', cterm = 234 },
-    bg = { gui = '#23292d', cterm = 235 },
-    bg_light = { gui = '#323d43', cterm = 237 },
-    bg_lighter = { gui = '#3c474d', cterm = 238 },
-    bg_lightest = { gui = '#505a60', cterm = 240 },
+    bg = { gui = '#1d2226', cterm = 235 },
+    bg_light = { gui = '#2b3238', cterm = 237 },
+    bg_lighter = { gui = '#39434b', cterm = 238 },
+    bg_lightest = { gui = '#48545e', cterm = 240 },
 
     fg = { gui = '#d3c6aa', cterm = 187 },
 
