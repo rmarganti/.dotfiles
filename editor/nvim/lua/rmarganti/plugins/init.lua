@@ -388,6 +388,7 @@ packer.startup(function(use)
         end,
     })
 
+    -- Use FZF for filtering.
     use({
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
@@ -397,6 +398,7 @@ packer.startup(function(use)
         end,
     })
 
+    -- Telescope plugins for GitHub issues, pull requests, gists, workflow runs.
     use({
         'nvim-telescope/telescope-github.nvim',
         after = 'telescope.nvim',
@@ -405,7 +407,17 @@ packer.startup(function(use)
         end,
     })
 
-    use({ 'nvim-telescope/telescope-symbols.nvim' })
+    -- Search text symbols (emoji, unicode).
+    use({
+        'nvim-telescope/telescope-symbols.nvim',
+        after = 'telescope.nvim',
+    })
+
+    -- Like oldfiles, but includes files edited in current session.
+    use({
+        'smartpde/telescope-recent-files',
+        after = 'telescope.nvim',
+    })
 
     --------------------------------
     -- Misc
