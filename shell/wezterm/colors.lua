@@ -93,6 +93,12 @@ M.config = {
             bg_color = M.palette.bg_dark.gui,
             fg_color = M.palette.bg_lightest.gui,
         },
+
+        -- Purposely non-visible.
+        new_tab = {
+            bg_color = M.palette.bg_dark.gui,
+            fg_color = M.palette.bg_dark.gui,
+        }
     },
 }
 

@@ -38,8 +38,7 @@ M.attach = function()
             -- Show alternate colors to indicate the current pane is zoomed.
             if (is_zoomed) then
                 return {
-                    { Foreground = { Color = colors.palette.cyan.gui } },
-                    -- { Background = { Color = colors.palette.cyan.gui } },
+                    { Foreground = { Color = colors.palette.cyan_bright.gui } },
                     { Attribute = { Intensity = 'Bold' } },
                     tab_text,
                 }

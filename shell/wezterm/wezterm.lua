@@ -13,7 +13,7 @@ return {
     --
     ------------------------------------------------
 
-    font = wezterm.font 'JetBrainsMono Nerd Font',
+    font = wezterm.font 'JetBrainsMono Nerd Font Mono',
     font_size = 14.5,
 
     ------------------------------------------------
@@ -86,14 +86,4 @@ return {
         fade_out_duration_ms = 75,
         target = 'CursorColor',
     },
-
-    unix_domains = {
-        { name = 'unix' },
-    },
-
-    -- This causes `wezterm` to act as though it was started as
-    -- `wezterm connect unix` by default, connecting to the unix
-    -- domain on startup.
-    -- If you prefer to connect manually, leave out this line.
-    default_gui_startup_args = { 'connect', 'unix' },
 }
