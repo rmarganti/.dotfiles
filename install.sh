@@ -57,27 +57,12 @@ symlink_or_ask ~/.dotfiles/shell/bash_profile ~/.bash_profile
 symlink_or_ask ~/.dotfiles/shell/bash_aliases ~/.bash_aliases
 symlink_or_ask ~/.dotfiles/shell/bash_colors ~/.bash_colors
 
-# kitty
-symlink_or_ask ~/.dotfiles/shell/kitty ~/.config/kitty
-
-# tmux config
-symlink_or_ask ~/.dotfiles/shell/tmux ~/.tmux
-symlink_or_ask ~/.dotfiles/shell/tmux.conf ~/.tmux.conf
-
-# install Tmux Plugin Manager
-if [ ! -d ~/.dotfiles/shell/tmux/plugins/tpm ]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tpm.git ~/.dotfiles/shell/tmux/plugins/tpm
-    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-fi
+# Wezterm
+symlink_or_ask ~/.dotfiles/shell/wezterm ~/.config/wezterm
 
 # git shell completion
 if [ ! -f ~/.git-completion.bash ]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-fi
-
-# install z
-if [ ! -f ~/z.sh ]; then
-    curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o ~/z.sh
 fi
 
 # install fzf

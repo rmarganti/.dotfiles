@@ -47,6 +47,10 @@ utils.map('n', '<Leader>k<Space>', '[<Space>', { remap = true })
 utils.map('n', '<Leader>jc', ']n', { remap = true })
 utils.map('n', '<Leader>kc', '[n', { remap = true })
 
+-- Method (function)
+utils.map('n', '<Leader>jm', ']m', { remap = true })
+utils.map('n', '<Leader>km', '[m', { remap = true })
+
 
 ------------------------------------------------
 --

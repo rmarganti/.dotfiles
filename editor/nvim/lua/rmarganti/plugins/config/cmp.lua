@@ -49,7 +49,7 @@ M.config = function()
                     luasnip = "[LuaSnip]",
                     nvim_lua = "[Lua]",
                     latex_symbols = "[Latex]",
-                    cmp_tabnine = "[Tabnine]",
+                    cmp_tabnine = "[TabNine]",
                 })
             }),
         },
@@ -80,7 +80,6 @@ M.config = function()
                 }
             },
             { name = 'cmp_tabnine' },
-            { name = 'tmux' },
             { name = 'path' },
         },
     })

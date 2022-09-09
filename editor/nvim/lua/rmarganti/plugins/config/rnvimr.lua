@@ -1,14 +1,8 @@
 local M = {}
 
 M.setup = function()
-    -- Mostly full-screen.
-    vim.g.rnvimr_layout = {
-        relative = 'editor',
-        width = vim.o.columns - 8,
-        height = vim.o.lines - 7,
-        col = 4,
-        row = 3,
-        style = 'minimal'
+    vim.g.rnvimr_presets = {
+        { width = 0.950, height = 0.9 },
     }
 
     -- Take over from netrw.
