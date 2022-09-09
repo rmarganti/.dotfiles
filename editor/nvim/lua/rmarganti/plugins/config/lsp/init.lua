@@ -68,9 +68,24 @@ M.config = function()
     -- HTML, PHP, Terraform.
     ------------------------------------------------
 
+    -- Emmet
+    lspconfig.emmet_ls.setup({
+        -- Disabling for React, because it often gets in the way.
+        filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
+        capabilities = capabilities,
+        on_attach = function(client, buffnr)
+            client.resolved_capabilities.document_formatting = false
+            lsp_utils.on_attach(client, buffnr)
+        end,
+        settings = {
+            documentFormatting = false
+        },
+        flags = lsp_utils.flags,
+    })
+
     -- Disable the language server's `document_formatting` capability,
     -- since we will use some other linter/formatter (prettier, etc).
-    for _, server in pairs({ 'emmet_ls', 'html', 'intelephense', 'terraformls' }) do
+    for _, server in pairs({ 'html', 'intelephense', 'terraformls' }) do
         lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = function(client, buffnr)
@@ -87,6 +102,7 @@ M.config = function()
     ------------------------------------------------
     -- Everything else.
     ------------------------------------------------
+
     for _, server in pairs({ 'cssls', 'eslint' }) do
         lspconfig[server].setup({
             capabilities = capabilities,
