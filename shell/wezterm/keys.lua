@@ -15,14 +15,13 @@ return {
     -- Select next tab.
     { key = 'Tab', mods = 'CTRL', action = action.ActivateTabRelative(1) },
 
-    -- Move tab left.
+    -- Move tab left (<).
     { key = ',', mods = 'SUPER', action = action.MoveTabRelative(-1) },
 
-    -- Move tab right.
+    -- Move tab right (>).
     { key = '.', mods = 'SUPER', action = action.MoveTabRelative(1) },
 
     -- Close tab.
-    { key = 'X', mods = 'LEADER', action = action.CloseCurrentTab({ confirm = true }) },
     { key = 'w', mods = 'SUPER', action = action.CloseCurrentTab({ confirm = true }) },
 
     -- Activate tab by index.
