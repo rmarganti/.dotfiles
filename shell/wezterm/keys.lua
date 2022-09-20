@@ -92,10 +92,7 @@ return {
     {
         key = 'k',
         mods = 'SUPER',
-        action = action.Multiple({
-            action.ClearScrollback 'ScrollbackAndViewport',
-            action.SendKey { key = 'L', mods = 'CTRL' },
-        }),
+        action = action.ClearScrollback('ScrollbackAndViewport'),
     },
 
     -- Search
@@ -104,4 +101,10 @@ return {
         mods = 'LEADER',
         action = action.Search({ CaseSensitiveString = '' }),
     },
+
+    -- Page up/down.
+    { key = 'u', mods = 'CTRL|SHIFT', action = action.ScrollByPage(-0.75) },
+    { key = 'd', mods = 'CTRL|SHIFT', action = action.ScrollByPage(0.75) },
+
+    { key = 'l', mods = 'SUPER', action = action.ShowLauncher },
 }
