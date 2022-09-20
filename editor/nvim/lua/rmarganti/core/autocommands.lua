@@ -16,12 +16,27 @@ vim.api.nvim_create_autocmd(
             vim.api.nvim_buf_set_option(0, 'buflisted', false)
 
             -- Escape closes quickfix window.
-            vim.api.nvim_buf_set_keymap(
-                0,
+            vim.keymap.set(
                 'n',
                 '<ESC>',
                 '<CMD>cclose<CR>',
-                { noremap = true, silent = true }
+                { buffer = true, remap = false, silent = true }
+            )
+
+            -- `dd` deletes an item from the list.
+            vim.keymap.set(
+                'n',
+                'dd',
+                function()
+                    local entry_idx = vim.fn.line('.')
+                    local qflist = vim.fn.getqflist()
+
+                    table.remove(qflist, entry_idx)
+
+                    vim.fn.setqflist(qflist, 'r')
+                    vim.fn.cursor(entry_idx, 1)
+                end,
+                { buffer = true }
             )
         end,
         desc = 'Quickfix tweaks'
