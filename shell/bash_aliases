@@ -14,19 +14,11 @@ alias up='cd ..'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
 
-# rupa/z - Provides fzf prompt if no arguments are provided.
-unalias z 2> /dev/null
-z() {
-    [ $# -gt 0 ] && _z "$*" && return
-    cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-}
-
 # z hurts my pinky :(
 alias j=z
 
 # Restart service (via systemctl)
 alias sys:r="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
-
 
 ################################################################
 #
@@ -34,30 +26,45 @@ alias sys:r="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 #
 ################################################################
 
+# Git Branch Copy -- Copy name to clipboard.
 alias gbc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
+
+# Gif File List -- List files affected by a git ref
 alias gfl="git diff-tree --no-commit-id --name-only -r"
+
+# Git Log Pretty
 alias glp="git log --graph --pretty=format:'%C(black)%h %C(green)(%ci)%C(reset) %s %C(black)<%an>%C(brightblack bold)%d%C(reset)' --abbrev-commit"
+
+# Git Remote Prune
 alias grp='git remote prune origin'
+
+# Git Tag
 alias gt="git tag --sort=v:refname"
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+
+# Git Work In Progress
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
+
+# Git Un-work In Progress
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+
+# Git Push Upstream Origin
 alias gpuo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
-# Select a git branch to checkout from a list.
-function gfb() {
+# Git Branch -- Select a branch to checkout using FZF.
+function gb() {
     local branches branch query
     query="$*"
     branches=$(git branch --all | grep -v HEAD) &&
-    branch=$(echo "$branches" | fzf --query="$query" +m) &&
+    branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
     git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# Select a git commit to checkout from a list.
 alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
 
-function gfc() {
+# Git Commit -- Select commit to checkout using FZF.
+function gc() {
     local commit
     commit=$( glNoGraph |
         fzf --no-sort --reverse --tiebreak=index --no-multi \
@@ -65,16 +72,14 @@ function gfc() {
     git checkout $(echo "$commit" | sed "s/ .*//")
 }
 
-
-# Select a branch to delete.
+# Git Branch Delete
 function gbd() {
     local branches branch query
     query="$*"
     branches=$(git --no-pager branch) &&
-    branch=$(echo "$branches" | fzf --query="$query" +m) &&
+    branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
     git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
-
 
 ################################################################
 #
@@ -98,12 +103,8 @@ alias acc='php artisan cache:clear'
 
 # Laravel Doctrine
 # --------------------------------
-alias dccm='php artisan doctrine:clear:metadata:cache'
-alias dccq='php artisan doctrine:clear:query:cache'
-alias dccr='php artisan doctrine:clear:result:cache'
-alias dcc='dccm && dccq && dccr'
+alias dcc='php artisan doctrine:generate:proxies && php artisan doctrine:clear:metadata:cache && php artisan doctrine:clear:query:cache && php artisan doctrine:clear:result:cache'
 alias dge='vendor/doctrine/orm/bin/doctrine orm:generate-entities .'
-alias dgp='php artisan doctrine:generate:proxies'
 alias dmg='php artisan doctrine:migrations:generate'
 alias dmm='php artisan doctrine:migrations:migrate'
 alias dmr='php artisan doctrine:migrations:rollback'
@@ -111,7 +112,6 @@ alias dsc='php artisan doctrine:schema:create'
 alias dsd='php artisan doctrine:schema:drop'
 alias dsu='php artisan doctrine:schema:update'
 alias dsv='php artisan doctrine:schema:validate'
-
 
 # Composer
 # --------------------------------
