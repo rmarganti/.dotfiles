@@ -6,6 +6,7 @@ M.config = function()
             'bash',
             'css',
             'go',
+            'hcl', -- Terraform
             'javascript',
             'json',
             'json5',
