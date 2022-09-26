@@ -18,7 +18,7 @@ alias userlist="cut -d: -f1 /etc/passwd"
 alias j=z
 
 # Restart service (via systemctl)
-alias sys:r="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
+alias sysr="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 
 ################################################################
 #
@@ -105,6 +105,7 @@ alias acc='php artisan cache:clear'
 # --------------------------------
 alias dcc='php artisan doctrine:generate:proxies && php artisan doctrine:clear:metadata:cache && php artisan doctrine:clear:query:cache && php artisan doctrine:clear:result:cache'
 alias dge='vendor/doctrine/orm/bin/doctrine orm:generate-entities .'
+alias dmd='php artisan doctrine:migrations:diff'
 alias dmg='php artisan doctrine:migrations:generate'
 alias dmm='php artisan doctrine:migrations:migrate'
 alias dmr='php artisan doctrine:migrations:rollback'
@@ -120,10 +121,10 @@ alias cda='composer dump-autoload -o'
 # PHPUnit
 # --------------------------------
 alias pu='./vendor/bin/phpunit'
-function pu:f() {
+function puf() {
     ./vendor/bin/phpunit --filter=$1
 }
-alias pu:s='./vendor/bin/phpunit --testsuite'
+alias pus='./vendor/bin/phpunit --testsuite'
 
 ################################################################
 #
