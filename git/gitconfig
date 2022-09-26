@@ -24,3 +24,5 @@
     # These values are set in ~/.gitconfig.local
 [include]
       path = ~/.gitconfig.local
+[init]
+	defaultBranch = main
