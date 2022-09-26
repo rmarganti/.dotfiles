@@ -331,6 +331,12 @@ packer.startup(function(use)
 
     })
 
+    -- Split function parameters into multiple lines (oppisite of `J`).
+    use({
+        'AckslD/nvim-trevJ.lua',
+        event = 'BufWinEnter',
+    })
+
     --------------------------------
     -- Text manipulation
     --------------------------------

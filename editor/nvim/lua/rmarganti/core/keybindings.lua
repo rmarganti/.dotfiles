@@ -339,3 +339,8 @@ utils.map('n', '<Leader>qQ', ':qa!<CR>')
 
 -- Show syntax Highlight group for word under cursor.
 utils.map('n', '<Leader>hh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
+
+-- Go Split (opposite of `J` for parameters)
+utils.map('n', 'gJ', function()
+    require('trevj').format_at_cursor()
+end)
