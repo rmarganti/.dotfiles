@@ -33,7 +33,7 @@ M.config = function()
     lspconfig.jsonls.setup({
         capabilities = capabilities,
         on_attach = function(client, buffnr)
-            client.resolved_capabilities.document_formatting = false
+            client.server_capabilities.documentHighlightProvider = false
             lsp_utils.on_attach(client, buffnr)
         end,
         settings = {
@@ -52,7 +52,7 @@ M.config = function()
     lspconfig.tsserver.setup({
         capabilities = capabilities,
         on_attach = function(client, buffnr)
-            client.resolved_capabilities.document_formatting = false
+            client.server_capabilities.documentHighlightProvider = false
             lsp_utils.on_attach(client, buffnr)
         end,
         settings = {
@@ -74,7 +74,7 @@ M.config = function()
         filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
         capabilities = capabilities,
         on_attach = function(client, buffnr)
-            client.resolved_capabilities.document_formatting = false
+            client.server_capabilities.documentHighlightProvider = false
             lsp_utils.on_attach(client, buffnr)
         end,
         settings = {
@@ -89,7 +89,7 @@ M.config = function()
         lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = function(client, buffnr)
-                client.resolved_capabilities.document_formatting = false
+                client.server_capabilities.documentHighlightProvider = false
                 lsp_utils.on_attach(client, buffnr)
             end,
             settings = {

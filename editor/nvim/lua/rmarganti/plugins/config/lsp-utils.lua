@@ -14,7 +14,7 @@ end
 
 M.on_attach = function(client, _)
     -- Auto-format on save.
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentHighlightProvider then
         vim.cmd [[augroup Format]]
         vim.cmd [[autocmd! * <buffer>]]
         vim.cmd [[autocmd BufWritePost <buffer> lua require('rmarganti.core.functions').format(true)]]
