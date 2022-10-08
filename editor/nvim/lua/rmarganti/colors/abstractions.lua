@@ -6,7 +6,7 @@ M = {
     -- Visual hierarchy
     minus3 = p.bg_light,
     minus2 = p.black_bright,
-    minus1 = p.gray0,
+    minus1 = p.blue_dark,
     base = p.gray2,
     plus1 = p.blue,
     plus2 = p.green,

@@ -42,6 +42,7 @@ return {
     QuickFixLine = { bg = p.bg_light }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
     IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    CurSearch = { bg = p.bg_light }, -- The 'incsearch' item currently under the cursor
     SpecialKey = { fg = a.minus2 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad = { sp = a.warning, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { sp = a.warning, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -80,8 +81,8 @@ return {
     Keyword = { fg = a.base }, --  any other keyword
     Exception = {}, --  try, catch, throw
 
-    PreProc = { fg = a.plus1 }, -- generic Preprocessor
-    Include = { fg = a.plus1 }, --  preprocessor #include
+    PreProc = { fg = a.minus1 }, -- generic Preprocessor
+    Include = { fg = a.minus1 }, --  preprocessor #include
     Define = {}, --   preprocessor #define
     Macro = {}, --    same as Define
     PreCondit = {}, --  preprocessor #if, #else, #endif, etcp.
