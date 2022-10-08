@@ -4,7 +4,7 @@
 --
 ------------------------------------------------
 
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3 -- use global statusbar
 
 if vim.fn.exists('+termguicolors') == 1 then
     vim.opt.termguicolors = true

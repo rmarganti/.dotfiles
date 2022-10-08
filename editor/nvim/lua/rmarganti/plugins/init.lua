@@ -76,7 +76,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
         config = function()
             require('bufdel').setup({ quit = false })
-        end
+        end,
     })
 
     -- File explorer.
@@ -85,12 +85,13 @@ packer.startup(function(use)
         cmd = 'RnvimrToggle',
         setup = function()
             require('rmarganti.plugins.config.rnvimr').setup()
-        end
+        end,
     })
 
     -- Tabs.
     use({
         'akinsho/nvim-bufferline.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' },
         config = function()
             require('rmarganti.plugins.config.bufferline').config()
         end,
@@ -103,16 +104,8 @@ packer.startup(function(use)
         config = function()
             require('rmarganti.plugins.config.feline').config()
         end,
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        after = 'gitsigns.nvim',
-    })
-
-    -- Startup screen.
-    use({
-        'goolord/alpha-nvim',
-        config = function()
-            require('rmarganti.plugins.config.alpha').config()
-        end
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        after = 'nvim-navic',
     })
 
     -- Show lines where tabs are.
@@ -120,9 +113,9 @@ packer.startup(function(use)
         'lukas-reineke/indent-blankline.nvim',
         config = function()
             require('indent_blankline').setup({
-                filetype_exclude = { 'alpha' }
+                filetype_exclude = { 'alpha' },
             })
-        end
+        end,
     })
 
     -- Support VIM's `popup_*` APIs. Will likely
@@ -137,7 +130,7 @@ packer.startup(function(use)
         'stevearc/dressing.nvim',
         config = function()
             require('rmarganti.plugins.config.dressing').config()
-        end
+        end,
     })
 
     -- Replaces `vim.notify`.
@@ -145,17 +138,24 @@ packer.startup(function(use)
         'rcarriga/nvim-notify',
         config = function()
             require('rmarganti.plugins.config.nvim-notify').config()
-        end
+        end,
     })
 
     -- Resize windows based on focus.
     use({
         'beauwilliams/focus.nvim',
         config = function()
-            require('focus').setup({
-                signcolumn = false,
-            })
-        end
+            require('rmarganti.plugins.config.focus').config()
+        end,
+    })
+
+    -- Dim inactive windows.
+    use({
+        'levouh/tint.nvim',
+        config = function()
+            require('rmarganti.plugins.config.tint').config()
+        end,
+        event = 'BufWinEnter',
     })
 
     --------------------------------
@@ -231,7 +231,7 @@ packer.startup(function(use)
         event = 'InsertEnter',
         config = function()
             require('rmarganti.plugins.config.lsp_signature').config()
-        end
+        end,
     })
 
     -- Adds icons to auto-complete.
@@ -269,12 +269,12 @@ packer.startup(function(use)
         after = 'friendly-snippets',
         config = function()
             require('luasnip.loaders.from_vscode').lazy_load()
-        end
+        end,
     })
 
     use({
         'rafamadriz/friendly-snippets',
-        event = { 'InsertEnter', 'CmdlineEnter' }
+        event = { 'InsertEnter', 'CmdlineEnter' },
     })
 
     --------------------------------
@@ -318,7 +318,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
         config = function()
             require('rmarganti.plugins.config.lightbulb').config()
-        end
+        end,
     })
 
     -- Preview CSS colors.
@@ -327,14 +327,18 @@ packer.startup(function(use)
         event = 'BufWinEnter',
         config = function()
             require('colorizer').setup()
-        end
-
+        end,
     })
 
     -- Split function parameters into multiple lines (oppisite of `J`).
     use({
         'AckslD/nvim-trevJ.lua',
         event = 'BufWinEnter',
+    })
+
+    use({
+        'SmiteshP/nvim-navic',
+        after = 'gitsigns.nvim',
     })
 
     --------------------------------
@@ -365,7 +369,7 @@ packer.startup(function(use)
             {
                 'kamykn/popup-menu.nvim',
                 event = 'BufWinEnter',
-            }
+            },
         },
         event = 'BufWinEnter',
     })
@@ -475,9 +479,9 @@ packer.startup(function(use)
                     path = '~/vimwiki/',
                     syntax = 'markdown',
                     ext = '.md',
-                }
+                },
             }
-        end
+        end,
     })
 
     -- Markdown preview.

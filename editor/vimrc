@@ -28,7 +28,7 @@ let g:nord_underline = 1
 colorscheme nord
 
 set showtabline=2 " Always show tab bar
-set laststatus=2 " Always show status bar
+set laststatus=0 " Always show status bar
 syntax enable " Syntax high-lighting
 
 

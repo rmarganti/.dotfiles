@@ -2,8 +2,9 @@ local M = {}
 
 M.config = function()
     local feline = require('feline')
-    local p = require('rmarganti.colors.palette')
     local vi_mode_utils = require('feline.providers.vi_mode')
+    local navic = require("nvim-navic")
+    local p = require('rmarganti.colors.palette')
 
     local vi_mode_colors = {
         NORMAL = p.green.gui,
@@ -39,28 +40,6 @@ M.config = function()
             provider = ' '
         },
 
-        file_info_active = {
-            provider = 'file_info',
-            hl = {
-                bg = p.none.gui,
-                style = 'bold',
-            },
-            left_sep = {
-                str = '  ',
-                hl = { bg = p.none.gui, fg = p.bg_light.gui },
-            },
-            right_sep = {
-                str = ' ',
-                hl = { bg = p.none.gui, fg = p.bg_light.gui },
-            },
-        },
-
-        file_info_inactive = {
-            provider = 'file_info',
-            left_sep = '       ',
-            right_sep = ' ',
-        },
-
         file_format = {
             provider = function()
                 local os = vim.bo.fileformat:lower()
@@ -81,6 +60,12 @@ M.config = function()
             right_sep = '  ',
         },
 
+        file_info_inactive = {
+            provider = 'file_info',
+            left_sep = '       ',
+            right_sep = ' ',
+        },
+
         file_type = {
             provider = 'file_type',
             hl = {
@@ -98,7 +83,18 @@ M.config = function()
 
         git_branch = {
             provider = 'git_branch',
-            left_sep = '  ',
+            hl = {
+                bg = p.none.gui,
+                style = 'bold',
+            },
+            left_sep = {
+                str = '  ',
+                hl = { bg = p.none.gui, fg = p.bg_light.gui },
+            },
+            right_sep = {
+                str = '  ',
+                hl = { bg = p.none.gui, fg = p.bg_light.gui },
+            },
         },
 
         github_notifications = {
@@ -145,47 +141,120 @@ M.config = function()
                     style = 'bold'
                 }
             end
+        },
+
+        file_info_winbar = {
+            provider = {
+                name = 'file_info',
+                opts = {
+                    colored_icon = false,
+                },
+            },
+            left_sep = {
+                str = ' ',
+                hl = { bg = p.none.gui },
+            },
+            hl = {
+                bg = p.none.gui,
+                fg = p.gray2.gui,
+                style = 'bold',
+            },
+        },
+
+        breadcrumbs = {
+            provider = function()
+                return navic.get_location()
+            end,
+            enabled = function()
+                return navic.is_available()
+            end,
+            left_sep = {
+                str = ' > ',
+                hl = {
+                    bg = p.none.gui,
+                    fg = p.black_bright.gui,
+                },
+            },
+            hl = {
+                bg = p.none.gui,
+                fg = p.black_bright.gui,
+            },
         }
     }
 
-    local components = {
-        active = {
-            {
-                pieces.vim_mode,
-                pieces.duck,
-                pieces.file_info_active,
-                pieces.git_branch,
-                -- Empty component to clear styles.
-                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
-            },
-            {
-                pieces.github_notifications,
-                pieces.file_format,
-                pieces.file_encoding,
-                pieces.file_type,
-                pieces.line_percentage,
-                -- Empty component to clear styles.
-                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
-            }
+    ------------------------------------------------
+    --
+    -- Status bar
+    --
+    ------------------------------------------------
+
+    local status_bar_pieces = {
+        {
+            pieces.vim_mode,
+            pieces.duck,
+            pieces.git_branch,
+            -- Empty component to clear styles.
+            { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
         },
-        inactive = {
-            {
-                pieces.file_info_inactive,
-                -- Empty component to clear styles.
-                { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
-            }
+        {
+            pieces.github_notifications,
+            pieces.file_format,
+            pieces.file_encoding,
+            pieces.file_type,
+            pieces.line_percentage,
+            -- Empty component to clear styles.
+            { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
         }
     }
 
     feline.setup({
-        components = components,
+        components = {
+            active = status_bar_pieces,
+            inactive = status_bar_pieces,
+        },
         vi_mode_colors = vi_mode_colors,
+        theme = {
+            bg = p.bg_light.gui,
+            fg = p.gray0.gui,
+        },
     })
 
+    ------------------------------------------------
+    --
+    -- Win bar
+    --
+    ------------------------------------------------
 
-    feline.use_theme({
-        bg = p.bg_light.gui,
-        fg = p.gray0.gui,
+    feline.winbar.setup({
+        components = {
+            active = {
+                {
+                    pieces.file_info_winbar,
+                    pieces.breadcrumbs,
+                },
+            },
+            inactive = {
+                {
+                    pieces.file_info_winbar,
+                },
+            },
+        },
+
+        disable = {
+            filetypes = {
+                '^NvimTree$',
+                '^packer$',
+                '^startify$',
+                '^fugitive$',
+                '^fugitiveblame$',
+                '^qf$',
+                '^help$'
+            },
+            buftypes = {
+                '^terminal$'
+            },
+            bufnames = {}
+        },
     })
 end
 
