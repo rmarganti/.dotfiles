@@ -32,15 +32,11 @@ M.config = function()
 
     lspconfig.jsonls.setup({
         capabilities = capabilities,
-        on_attach = function(client, buffnr)
-            client.server_capabilities.documentHighlightProvider = false
-            lsp_utils.on_attach(client, buffnr)
-        end,
+        on_attach = lsp_utils.on_attach,
         settings = {
             json = {
                 schemas = require('schemastore').json.schemas()
             },
-            documentFormatting = false
         },
         flags = lsp_utils.flags,
     })
@@ -51,12 +47,8 @@ M.config = function()
 
     lspconfig.tsserver.setup({
         capabilities = capabilities,
-        on_attach = function(client, buffnr)
-            client.server_capabilities.documentHighlightProvider = false
-            lsp_utils.on_attach(client, buffnr)
-        end,
+        on_attach = lsp_utils.on_attach,
         settings = {
-            documentFormatting = false, -- Leave it to Prettier.
             completions = {
                 completeFunctionCalls = true,
             },
@@ -73,28 +65,14 @@ M.config = function()
         -- Disabling for React, because it often gets in the way.
         filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
         capabilities = capabilities,
-        on_attach = function(client, buffnr)
-            client.server_capabilities.documentHighlightProvider = false
-            lsp_utils.on_attach(client, buffnr)
-        end,
-        settings = {
-            documentFormatting = false
-        },
+        on_attach = lsp_utils.on_attach,
         flags = lsp_utils.flags,
     })
 
-    -- Disable the language server's `document_formatting` capability,
-    -- since we will use some other linter/formatter (prettier, etc).
     for _, server in pairs({ 'html', 'intelephense', 'terraformls' }) do
         lspconfig[server].setup({
             capabilities = capabilities,
-            on_attach = function(client, buffnr)
-                client.server_capabilities.documentHighlightProvider = false
-                lsp_utils.on_attach(client, buffnr)
-            end,
-            settings = {
-                documentFormatting = false
-            },
+            on_attach = lsp_utils.on_attach,
             flags = lsp_utils.flags,
         })
     end

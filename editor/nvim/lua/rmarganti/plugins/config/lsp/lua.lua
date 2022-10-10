@@ -15,6 +15,7 @@ M.setup = function()
         settings = {
             Lua = {
                 awakened = { cat = true },
+                documentFormatting = false, -- We use stylua through null-ls
                 runtime = {
                     -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                     version = 'LuaJIT',

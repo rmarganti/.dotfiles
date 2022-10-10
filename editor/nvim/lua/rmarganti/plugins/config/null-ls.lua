@@ -6,10 +6,6 @@ M.config = function()
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins
 
-    vim.env.PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
-        '~/.config/nvim/lua/rmarganti/plugins/config/.prettierrc.json'
-    )
-
     local capabilities = lsp_utils.make_client_capabilities()
 
     local sources = {
@@ -18,18 +14,21 @@ M.config = function()
             condition = function()
                 return path.file_exists('vendor/bin/phpstan')
             end,
-            command = 'vendor/bin/phpstan'
+            command = 'vendor/bin/phpstan',
         }),
 
         builtins.formatting.phpcsfixer.with({
             condition = function()
                 return path.file_exists('vendor/bin/php-cs-fixer')
             end,
-            command = 'vendor/bin/php-cs-fixer'
+            command = 'vendor/bin/php-cs-fixer',
         }),
 
         -- Terraform
         builtins.formatting.terraform_fmt,
+
+        -- Lua
+        builtins.formatting.stylua,
 
         -- Lots of languages
         builtins.formatting.prettierd.with({
@@ -53,7 +52,12 @@ M.config = function()
                 'graphql',
                 'handlebars',
                 'vimwiki', -- This is the only non-default
-            }
+            },
+            env = {
+                PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
+                    '~/.config/nvim/lua/rmarganti/plugins/config/.prettierrc.json'
+                ),
+            },
         }),
     }
 
@@ -61,7 +65,7 @@ M.config = function()
         capabilities = capabilities,
         debounce = 1000,
         sources = sources,
-        on_attach = lsp_utils.on_attach
+        on_attach = lsp_utils.on_attach,
     })
 end
 

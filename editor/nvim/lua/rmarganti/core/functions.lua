@@ -64,7 +64,16 @@ end
 M.format = function(is_auto_format)
     -- Manual format.
     if is_auto_format == false or enable_format_on_save then
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format({
+            async = true,
+            filter = function(client)
+                -- Only allow these language servers to format.
+                return misc_utils.has_value(
+                    { 'null-ls', 'eslint' },
+                    client.name
+                )
+            end,
+        })
         return
     end
 end
