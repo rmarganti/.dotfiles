@@ -7,17 +7,21 @@ M.config = function()
             'css',
             'go',
             'hcl', -- Terraform
+            'html',
             'javascript',
+            'jsdoc',
             'json',
             'json5',
             'lua',
             'make',
             'markdown',
             'php',
+            'phpdoc',
             'prisma',
             'regex',
             'rust',
             'scss',
+            'sql',
             'tsx',
             'typescript',
             'vim',
@@ -31,7 +35,6 @@ M.config = function()
             enable = true,
             keymaps = {
                 init_selection = '<CR>',
-                scope_incremental = '<CR>',
                 node_incremental = '<TAB>',
                 node_decremental = '<S-TAB>',
             },
@@ -41,14 +44,14 @@ M.config = function()
             select = {
                 enable = true,
                 keymaps = {
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner",
-                    ["ab"] = "@block.outer",
-                    ["ib"] = "@block.inner",
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                }
-            }
+                    ['ac'] = '@class.outer',
+                    ['ic'] = '@class.inner',
+                    ['ab'] = '@block.outer',
+                    ['ib'] = '@block.inner',
+                    ['af'] = '@function.outer',
+                    ['if'] = '@function.inner',
+                },
+            },
         },
 
         textsubjects = {
@@ -56,7 +59,7 @@ M.config = function()
             keymaps = {
                 ['.'] = 'textsubjects-smart',
                 [';'] = 'textsubjects-container-outer',
-            }
+            },
         },
     })
 end
