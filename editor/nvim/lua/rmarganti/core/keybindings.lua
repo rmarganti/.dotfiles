@@ -113,11 +113,17 @@ local edit_nearest = core_fns.edit_nearest
 -- Edit nearest Changelog
 utils.map('n', '<Leader>ec', function() edit_nearest('CHANGELOG.md') end)
 
+-- Edit nearest Composer.json
+utils.map('n', '<Leader>eC', function() edit_nearest('composer.json') end)
+
 -- Edit nearest Env
 utils.map('n', '<Leader>ee', function() edit_nearest('.env') end)
 
 -- Edit nearest Index.ts
 utils.map('n', '<Leader>ei', function() edit_nearest('index.ts') end)
+
+-- Edit nearest package.json
+utils.map('n', '<Leader>ep', function() edit_nearest('package.json') end)
 
 -- Edit nearest Readme
 utils.map('n', '<Leader>er', function() edit_nearest('README.md') end)
@@ -329,7 +335,7 @@ utils.map('n', '<C-k>', '<C-w>k')
 ------------------------------------------------
 
 -- Clear search highlight
-utils.map('n', '<Leader><Space>', ':nohlsearch<CR>')
+utils.map('n', '<Esc>', ':nohlsearch<CR>')
 
 -- Quit
 utils.map('n', '<Leader>qq', ':qa<CR>')

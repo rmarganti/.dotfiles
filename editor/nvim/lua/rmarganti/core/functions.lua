@@ -16,12 +16,10 @@ end
 -- Relative to the current buffer, find and edit the file in the closest
 -- directory. If no buffer is open, search in the project root.
 M.edit_nearest = function(filename, directory)
-    local nearest = vim.fs.find(
-        { filename },
-        { upward = true, path = directory }
-    )[1]
+    local nearest =
+        vim.fs.find({ filename }, { upward = true, path = directory })[1]
 
-    if (nearest == nil) then
+    if nearest == nil then
         vim.notify(filename .. ' not found in project.', 'warn')
         return
     end
@@ -31,19 +29,24 @@ end
 
 -- Edit the corresponding test file. Only supports Javascript and Typescript currently.
 M.edit_test = function()
-    local extension_regex = "(%..+)$"
+    local extension_regex = '(%..+)$'
 
     local dir = vim.fn.expand('%:h')
     local file = vim.fn.expand('%:t')
     local extension = file:match(extension_regex)
     local file_without_extension = file:gsub(extension_regex, '')
 
-    if (misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension) == false) then
+    if
+        misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension)
+        == false
+    then
         vim.notify('File type `' .. extension .. '` not supported', 'warn')
         return
     end
 
-    vim.cmd('e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension)
+    vim.cmd(
+        'e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension
+    )
 end
 
 local enable_format_on_save = true
@@ -82,14 +85,10 @@ M.organize_imports = function()
     local bufnr = vim.api.nvim_get_current_buf()
     local bufname = vim.api.nvim_buf_get_name(bufnr)
 
-    vim.lsp.buf_request(
-        bufnr,
-        "workspace/executeCommand",
-        {
-            command = "_typescript.organizeImports",
-            arguments = { bufname },
-        }
-    )
+    vim.lsp.buf_request(bufnr, 'workspace/executeCommand', {
+        command = '_typescript.organizeImports',
+        arguments = { bufname },
+    })
 end
 
 -- Close all non-hidden, non-modified buffers.
@@ -104,7 +103,7 @@ M.buf_delete_all = function(keep_current)
         local is_modified = vim.api.nvim_buf_get_option(buffer, 'modified')
         local should_keep = keep_current and current_buffer == buffer
 
-        if (is_listed and not is_modified and not should_keep) then
+        if is_listed and not is_modified and not should_keep then
             vim.cmd('silent bdelete ' .. buffer)
         end
     end
@@ -126,30 +125,25 @@ end
 
 -- Import the contents of a URL.
 M.read_url = function()
-    vim.ui.input(
-        {
-            prompt = 'Enter URL:',
-            kind = 'read_url',
-        },
-        function(input)
-            if (input == nil) then
-                return
-            end
-
-            local bufnr = vim.api.nvim_get_current_buf()
-            local buffer_contents = table.concat(
-                vim.api.nvim_buf_get_lines(bufnr, 0, -1, false),
-                '\n'
-            )
-
-            -- Create a new buffer if current buffer has anything in it.
-            if (#buffer_contents > 0) then
-                vim.cmd('enew')
-            end
-
-            vim.cmd('read !curl -s ' .. input)
+    vim.ui.input({
+        prompt = 'Enter URL:',
+        kind = 'read_url',
+    }, function(input)
+        if input == nil then
+            return
         end
-    )
+
+        local bufnr = vim.api.nvim_get_current_buf()
+        local buffer_contents =
+            table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
+
+        -- Create a new buffer if current buffer has anything in it.
+        if #buffer_contents > 0 then
+            vim.cmd('enew')
+        end
+
+        vim.cmd('read !curl -s ' .. input)
+    end)
 end
 
 return M
