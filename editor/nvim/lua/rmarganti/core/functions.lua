@@ -16,6 +16,8 @@ end
 -- Relative to the current buffer, find and edit the file in the closest
 -- directory. If no buffer is open, search in the project root.
 M.edit_nearest = function(filename, directory)
+    directory = directory or vim.fs.dirname(vim.fn.expand('%')) or '.'
+
     local nearest =
         vim.fs.find({ filename }, { upward = true, path = directory })[1]
 
