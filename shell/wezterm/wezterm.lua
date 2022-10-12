@@ -13,7 +13,7 @@ return {
     --
     ------------------------------------------------
 
-    font = wezterm.font 'JetBrainsMono Nerd Font Mono',
+    font = wezterm.font('JetBrainsMono Nerd Font Mono'),
     font_size = 14.5,
 
     ------------------------------------------------
@@ -21,7 +21,7 @@ return {
     -- App window
     --
     ------------------------------------------------
-    window_decorations = "RESIZE",
+    window_decorations = 'RESIZE',
 
     window_padding = {
         left = 4,
@@ -85,5 +85,15 @@ return {
         fade_in_duration_ms = 75,
         fade_out_duration_ms = 75,
         target = 'CursorColor',
+    },
+
+    quick_select_patterns = {
+        -- Jira tickets
+        'ADREV-\\d{3,5}',
+        'APPOPS-\\d{3,5}',
+        'GCCDEV-\\d{3,5}',
+
+        -- Versions
+        '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(?:-beta[0-9]?)?',
     },
 }
