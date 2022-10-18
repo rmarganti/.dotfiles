@@ -5,7 +5,6 @@ local utils = require('utils')
 
 local M = {}
 
-
 M.attach = function()
     ------------------------------------------------
     --
@@ -28,15 +27,11 @@ M.attach = function()
             end
 
             local tab_text = {
-                Text = string.format(
-                    '  %d: %s  ',
-                    tab.tab_index + 1,
-                    label
-                )
+                Text = string.format('  %d: %s  ', tab.tab_index + 1, label),
             }
 
             -- Show alternate colors to indicate the current pane is zoomed.
-            if (is_zoomed) then
+            if is_zoomed then
                 return {
                     { Foreground = { Color = colors.palette.cyan_bright.gui } },
                     { Attribute = { Intensity = 'Bold' } },

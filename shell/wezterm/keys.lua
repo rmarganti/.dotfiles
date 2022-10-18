@@ -7,10 +7,18 @@ return {
     ------------------------------------------------
 
     -- Create new Tab.
-    { key = 't', mods = 'SUPER', action = action.SpawnTab('CurrentPaneDomain') },
+    {
+        key = 't',
+        mods = 'SUPER',
+        action = action.SpawnTab('CurrentPaneDomain'),
+    },
 
     -- Select previous tab.
-    { key = 'Tab', mods = 'CTRL|SHIFT', action = action.ActivateTabRelative(-1) },
+    {
+        key = 'Tab',
+        mods = 'CTRL|SHIFT',
+        action = action.ActivateTabRelative(-1),
+    },
 
     -- Select next tab.
     { key = 'Tab', mods = 'CTRL', action = action.ActivateTabRelative(1) },
@@ -22,7 +30,11 @@ return {
     { key = '.', mods = 'SUPER', action = action.MoveTabRelative(1) },
 
     -- Close tab.
-    { key = 'w', mods = 'SUPER', action = action.CloseCurrentTab({ confirm = true }) },
+    {
+        key = 'w',
+        mods = 'SUPER',
+        action = action.CloseCurrentTab({ confirm = true }),
+    },
 
     -- Activate tab by index.
     { key = '1', mods = 'SUPER', action = action.ActivateTab(0) },
@@ -39,19 +51,46 @@ return {
     -- Panes
     ------------------------------------------------
 
-    { key = '\\', mods = 'LEADER', action = action.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
-    { key = '-', mods = 'LEADER', action = action.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+    {
+        key = '\\',
+        mods = 'LEADER',
+        action = action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+    },
+    {
+        key = '-',
+        mods = 'LEADER',
+        action = action.SplitVertical({ domain = 'CurrentPaneDomain' }),
+    },
 
     -- Navigate panes.
-    { key = 'h', mods = 'CTRL', action = action.ActivatePaneDirection('Left') },
-    { key = 'l', mods = 'CTRL', action = action.ActivatePaneDirection('Right') },
-    { key = 'k', mods = 'CTRL', action = action.ActivatePaneDirection('Up') },
-    { key = 'j', mods = 'CTRL', action = action.ActivatePaneDirection('Down') },
-
+    {
+        key = 'h',
+        mods = 'CTRL|SUPER',
+        action = action.ActivatePaneDirection('Left'),
+    },
+    {
+        key = 'l',
+        mods = 'CTRL|SUPER',
+        action = action.ActivatePaneDirection('Right'),
+    },
+    {
+        key = 'k',
+        mods = 'CTRL|SUPER',
+        action = action.ActivatePaneDirection('Up'),
+    },
+    {
+        key = 'j',
+        mods = 'CTRL|SUPER',
+        action = action.ActivatePaneDirection('Down'),
+    },
 
     -- Resize panes.
     { key = 'H', mods = 'CTRL', action = action.AdjustPaneSize({ 'Left', 5 }) },
-    { key = 'L', mods = 'CTRL', action = action.AdjustPaneSize({ 'Right', 5 }) },
+    {
+        key = 'L',
+        mods = 'CTRL',
+        action = action.AdjustPaneSize({ 'Right', 5 }),
+    },
     { key = 'K', mods = 'CTRL', action = action.AdjustPaneSize({ 'Up', 2 }) },
     { key = 'J', mods = 'CTRL', action = action.AdjustPaneSize({ 'Down', 2 }) },
 
@@ -59,15 +98,26 @@ return {
     { key = 'z', mods = 'LEADER', action = action.TogglePaneZoomState },
 
     -- Close pane.
-    { key = 'x', mods = 'LEADER', action = action.CloseCurrentPane({ confirm = true }) },
+    {
+        key = 'x',
+        mods = 'LEADER',
+        action = action.CloseCurrentPane({ confirm = true }),
+    },
 
     -- Rotate panes.
-    { key = '[', mods = 'LEADER', action = action.RotatePanes('CounterClockwise') },
+    {
+        key = '[',
+        mods = 'LEADER',
+        action = action.RotatePanes('CounterClockwise'),
+    },
     { key = ']', mods = 'LEADER', action = action.RotatePanes('Clockwise') },
 
-
     -- Swap panes.
-    { key = 's', mods = 'LEADER', action = action.PaneSelect({ mode = 'SwapWithActive' }) },
+    {
+        key = 's',
+        mods = 'LEADER',
+        action = action.PaneSelect({ mode = 'SwapWithActive' }),
+    },
 
     ------------------------------------------------
     -- Misc
