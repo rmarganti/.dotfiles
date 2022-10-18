@@ -3,11 +3,10 @@ local p = require('rmarganti.colors.palette')
 local M = {}
 
 M = {
-    -- Visual hierarchy
-    minus3 = p.bg_light,
-    minus2 = p.black_bright,
-    minus1 = p.blue_dark,
-    base = p.gray2,
+    minus3 = p.gray0,
+    minus2 = p.gray1,
+    minus1 = p.gray2,
+    base = p.gray3,
     plus1 = p.blue,
     plus2 = p.green,
     plus3 = p.white,
@@ -17,7 +16,7 @@ M = {
     warning = p.yellow,
     info = p.blue,
 
-    border = p.gray0,
+    border = p.gray1,
 
     float_bg = p.bg_light,
 

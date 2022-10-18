@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
     local feline = require('feline')
     local vi_mode_utils = require('feline.providers.vi_mode')
-    local navic = require("nvim-navic")
+    local navic = require('nvim-navic')
     local p = require('rmarganti.colors.palette')
 
     local vi_mode_colors = {
@@ -37,7 +37,7 @@ M.config = function()
         },
 
         duck = {
-            provider = ' '
+            provider = ' ',
         },
 
         file_format = {
@@ -69,6 +69,7 @@ M.config = function()
         file_type = {
             provider = 'file_type',
             hl = {
+                fg = p.gray2.gui,
                 bg = p.bg_lighter.gui,
             },
             left_sep = {
@@ -99,7 +100,8 @@ M.config = function()
 
         github_notifications = {
             provider = function()
-                local data = require('github-notifications').statusline_notifications()
+                local data =
+                    require('github-notifications').statusline_notifications()
                 if data.count > 0 then
                     return data.icon .. ' ' .. tostring(data.count)
                 else
@@ -119,7 +121,7 @@ M.config = function()
                 return {
                     bg = p.bg_lightest.gui,
                     fg = vi_mode_utils.get_mode_color(),
-                    style = 'bold'
+                    style = 'bold',
                 }
             end,
             left_sep = {
@@ -138,9 +140,9 @@ M.config = function()
                 return {
                     bg = p.bg_lightest.gui,
                     fg = vi_mode_utils.get_mode_color(),
-                    style = 'bold'
+                    style = 'bold',
                 }
-            end
+            end,
         },
 
         file_info_winbar = {
@@ -156,7 +158,7 @@ M.config = function()
             },
             hl = {
                 bg = p.none.gui,
-                fg = p.gray2.gui,
+                fg = p.gray3.gui,
                 style = 'bold',
             },
         },
@@ -179,7 +181,7 @@ M.config = function()
                 bg = p.none.gui,
                 fg = p.black_bright.gui,
             },
-        }
+        },
     }
 
     ------------------------------------------------
@@ -204,7 +206,7 @@ M.config = function()
             pieces.line_percentage,
             -- Empty component to clear styles.
             { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
-        }
+        },
     }
 
     feline.setup({
@@ -215,7 +217,7 @@ M.config = function()
         vi_mode_colors = vi_mode_colors,
         theme = {
             bg = p.bg_light.gui,
-            fg = p.gray0.gui,
+            fg = p.gray1.gui,
         },
     })
 
@@ -248,12 +250,12 @@ M.config = function()
                 '^fugitive$',
                 '^fugitiveblame$',
                 '^qf$',
-                '^help$'
+                '^help$',
             },
             buftypes = {
-                '^terminal$'
+                '^terminal$',
             },
-            bufnames = {}
+            bufnames = {},
         },
     })
 end

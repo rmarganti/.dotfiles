@@ -40,9 +40,9 @@ return {
     PmenuThumb = { bg = p.bg_light }, -- Popup menu: Thumb of the scrollbar.
     Question = { fg = p.fg }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine = { bg = p.bg_light }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    Search = { fg = p.bg_darker, bg = p.gray0 }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
-    IncSearch = { fg = p.bg_darker, bg = p.gray0 }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
-    CurSearch = { bg = p.bg_light }, -- The 'incsearch' item currently under the cursor
+    Search = { fg = p.bg_dark, bg = p.green_dark }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand oucp.
+    IncSearch = { fg = p.bg_dark, bg = p.green_dark }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    CurSearch = { fg = p.bg_dark, bg = p.green_bright }, -- The 'incsearch' item currently under the cursor
     SpecialKey = { fg = a.minus2 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad = { sp = a.warning, undercurl = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap = { sp = a.warning, undercurl = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
@@ -58,7 +58,7 @@ return {
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
     Whitespace = { fg = a.minus2 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
-    WildMenu = { bg = p.gray2 }, -- current match in 'wildmenu' completion
+    WildMenu = { bg = p.base }, -- current match in 'wildmenu' completion
 
     -- These groups are not listed as default vim groups,
     -- but they are defacto standard group names for syntax highlighting.
@@ -71,7 +71,7 @@ return {
     Number = { fg = a.plus1 }, --   a number constant: 234, 0xff
     Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
     Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
-    Identifier = { fg = a.plus3 }, -- any variable name
+    Identifier = { fg = a.plus1 }, -- any variable name
     Function = { fg = a.plus2 }, -- function name (also: methods for classes)
     Statement = { fg = a.plus2 }, -- any statement
     Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
@@ -79,7 +79,7 @@ return {
     Label = { fg = a.plus2 }, --    case, default, etcp.
     Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
-    Exception = {}, --  try, catch, throw
+    Exception = { fg = a.base }, --  try, catch, throw
 
     PreProc = { fg = a.minus1 }, -- generic Preprocessor
     Include = { fg = a.minus1 }, --  preprocessor #include
@@ -105,9 +105,9 @@ return {
     Ignore = {}, -- left blank, hidden  |hl-Ignore|
 
     Error = { fg = a.error }, -- any erroneous construct
-    Todo = { fg = p.cyan, italic = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-    qfLineNr = { fg = p.fg },
-    qfFileName = { fg = p.fg },
+    Todo = { fg = a.plus1, italic = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    qfLineNr = { fg = a.plus1 },
+    qfFileName = { fg = a.plus3 },
     htmlH1 = { fg = p.fg },
     htmlH2 = { fg = p.fg },
     mkdHeading = { fg = p.fg },
