@@ -6,14 +6,12 @@ M.flags = {
 }
 
 M.make_client_capabilities = function()
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(
-        vim.lsp.protocol.make_client_capabilities()
-    )
-
-    return capabilities
+    return require('cmp_nvim_lsp').default_capabilities()
 end
 
 M.on_attach = function(client, bufnr)
+    local core_fns = require('rmarganti.core.functions')
+
     -- Provide breadcrumbs
     if client.server_capabilities.documentSymbolProvider then
         local navic = require('nvim-navic')
@@ -22,10 +20,17 @@ M.on_attach = function(client, bufnr)
 
     -- Auto-format on save.
     if client.supports_method('textDocument/formatting') then
-        vim.cmd([[augroup Format]])
-        vim.cmd([[autocmd! * <buffer>]])
-        vim.cmd([[autocmd BufWritePost <buffer> lua require('rmarganti.core.functions').format(true)]])
-        vim.cmd([[augroup END]])
+        local format_group =
+            vim.api.nvim_create_augroup('format', { clear = true })
+
+        vim.api.nvim_create_autocmd('BufWritePost', {
+            group = format_group,
+            callback = function()
+                core_fns.format(true)
+            end,
+            desc = 'Auto-format on save',
+            buffer = 0,
+        })
     end
 end
 
