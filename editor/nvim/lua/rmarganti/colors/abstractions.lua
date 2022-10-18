@@ -7,9 +7,10 @@ M = {
     minus2 = p.gray1,
     minus1 = p.gray2,
     base = p.gray3,
-    plus1 = p.blue,
-    plus2 = p.green,
-    plus3 = p.white,
+    plus1 = p.gray4,
+    plus2 = p.blue,
+    plus3 = p.green,
+    plus4 = p.white,
 
     success = p.green,
     error = p.red,

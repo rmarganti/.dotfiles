@@ -20,7 +20,7 @@ return {
     signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
     substitute = { bg = p.bg_light, fg = p.fg }, -- |:substitute| replacement text highlighting
     LineNr = { fg = a.minus2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
-    CursorLineNr = { fg = a.plus1, bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+    CursorLineNr = { fg = a.plus2, bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineSign = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineFold = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     MatchParen = { fg = p.yellow }, -- The character under the cursor or just before it, if it is a paicatppuccin5 bracket, and its match. |pi_paren.txt|
@@ -53,7 +53,7 @@ return {
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
     TabLineFill = { bg = p.black }, -- tab pages line, where there are no labels
     TabLineSel = { fg = p.fg, bg = p.bg_light }, -- tab pages line, active tab page label
-    Title = { fg = p.plus1 }, -- titles for output from ":set all", ":autocmd" etcp.
+    Title = { fg = p.plus2 }, -- titles for output from ":set all", ":autocmd" etcp.
     Visual = { bg = p.black }, -- Visual mode selection
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
@@ -65,18 +65,18 @@ return {
 
     -- code itself
 
-    Constant = { fg = a.plus3 }, -- any constant
-    String = { fg = a.plus1 }, -- a string constant: "this is a string"
-    Character = { fg = a.plus1 }, --  a character constant: 'c', '\n'
-    Number = { fg = a.plus1 }, --   a number constant: 234, 0xff
-    Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
-    Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
-    Identifier = { fg = a.plus1 }, -- any variable name
-    Function = { fg = a.plus2 }, -- function name (also: methods for classes)
-    Statement = { fg = a.plus2 }, -- any statement
+    Constant = { fg = a.plus4 }, -- any constant
+    String = { fg = a.plus2 }, -- a string constant: "this is a string"
+    Character = { fg = a.plus2 }, --  a character constant: 'c', '\n'
+    Number = { fg = a.plus2 }, --   a number constant: 234, 0xff
+    Float = { fg = a.plus2 }, --    a floating point constant: 2.3e10
+    Boolean = { fg = a.plus2 }, --  a boolean constant: TRUE, false
+    Identifier = { fg = a.plus2 }, -- any variable name
+    Function = { fg = a.plus3 }, -- function name (also: methods for classes)
+    Statement = { fg = a.plus3 }, -- any statement
     Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
-    Repeat = { fg = a.plus1 }, --   for, do, while, etcp.
-    Label = { fg = a.plus2 }, --    case, default, etcp.
+    Repeat = { fg = a.plus2 }, --   for, do, while, etcp.
+    Label = { fg = a.plus1 }, --    case, default, etcp.
     Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
     Exception = { fg = a.base }, --  try, catch, throw
@@ -87,11 +87,11 @@ return {
     Macro = {}, --    same as Define
     PreCondit = {}, --  preprocessor #if, #else, #endif, etcp.
 
-    Type = { fg = a.plus1 }, -- int, long, char, etcp.
-    StorageClass = { fg = a.plus1 }, -- static, register, volatile, etcp.
-    Structure = { fg = a.plus1 }, --  struct, union, enum, etcp.
-    Typedef = { fg = a.plus1 }, --  A typedef
-    Special = { fg = a.plus1 }, -- any special symbol
+    Type = { fg = a.plus2 }, -- int, long, char, etcp.
+    StorageClass = { fg = a.plus2 }, -- static, register, volatile, etcp.
+    Structure = { fg = a.plus2 }, --  struct, union, enum, etcp.
+    Typedef = { fg = a.plus2 }, --  A typedef
+    Special = { fg = a.plus2 }, -- any special symbol
     SpecialChar = {}, --  special character in a constant
     Tag = {}, --    you can use CTRL-] on this
     Delimiter = {}, --  character that needs attention
@@ -105,9 +105,9 @@ return {
     Ignore = {}, -- left blank, hidden  |hl-Ignore|
 
     Error = { fg = a.error }, -- any erroneous construct
-    Todo = { fg = a.plus1, italic = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
-    qfLineNr = { fg = a.plus1 },
-    qfFileName = { fg = a.plus3 },
+    Todo = { fg = a.plus2, italic = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    qfLineNr = { fg = a.plus2 },
+    qfFileName = { fg = a.plus4 },
     htmlH1 = { fg = p.fg },
     htmlH2 = { fg = p.fg },
     mkdHeading = { fg = p.fg },
