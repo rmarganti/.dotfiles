@@ -20,6 +20,7 @@ M.config = function()
             'prisma',
             'regex',
             'rust',
+            'query', -- Treesitter
             'scss',
             'sql',
             'tsx',
