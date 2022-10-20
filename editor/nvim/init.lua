@@ -22,20 +22,12 @@ vim.g.loaded_tarPlugin = false
 vim.g.loaded_zipPlugin = false
 vim.g.loaded_2html_plugin = false
 
--- Won't show this until bufferline is loaded.
-vim.opt.showtabline = 0
+require('rmarganti.core.autocommands')
+require('rmarganti.core.config')
+require('rmarganti.core.lsp')
+require('rmarganti.core.keybindings')
+require('rmarganti.core.user_commands')
 
-require('rmarganti.core')
+vim.cmd('colorscheme neverforest')
 
-vim.opt.shadafile = ''
-vim.defer_fn(function()
-    vim.cmd([[
-        rshada!
-        doautocmd BufRead
-        syntax on
-        filetype on
-        filetype plugin indent on
-
-        silent! bufdo e
-    ]])
-end, 15)
+require('rmarganti.plugins')

@@ -75,6 +75,9 @@ vim.opt.pumheight = 20
 -- What hidden characters to show
 vim.opt.list = true
 
+-- Once bufferline is loaded, it will re-enable this.
+vim.opt.showtabline = 0
+
 ------------------------------------------------
 --
 -- Text search, tabs, indents.
