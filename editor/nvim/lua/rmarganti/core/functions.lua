@@ -18,8 +18,7 @@ end
 M.edit_nearest = function(filename, directory)
     directory = directory or vim.fs.dirname(vim.fn.expand('%')) or '.'
 
-    local nearest =
-        vim.fs.find({ filename }, { upward = true, path = directory })[1]
+    local nearest = vim.fs.find({ filename }, { upward = true, path = directory })[1]
 
     if nearest == nil then
         vim.notify(filename .. ' not found in project.', 'warn')
@@ -38,17 +37,12 @@ M.edit_test = function()
     local extension = file:match(extension_regex)
     local file_without_extension = file:gsub(extension_regex, '')
 
-    if
-        misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension)
-        == false
-    then
+    if misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension) == false then
         vim.notify('File type `' .. extension .. '` not supported', 'warn')
         return
     end
 
-    vim.cmd(
-        'e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension
-    )
+    vim.cmd('e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension)
 end
 
 local enable_format_on_save = true
@@ -69,14 +63,11 @@ end
 M.format = function(is_auto_format)
     -- Manual format.
     if is_auto_format == false or enable_format_on_save then
+        local user_lsp_config = require('rmarganti.config.lsp')
         vim.lsp.buf.format({
             async = true,
             filter = function(client)
-                -- Only allow these language servers to format.
-                return misc_utils.has_value(
-                    { 'null-ls', 'eslint' },
-                    client.name
-                )
+                return user_lsp_config.clients[client.name].formatting_enabled
             end,
         })
         return
@@ -136,8 +127,7 @@ M.read_url = function()
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
-        local buffer_contents =
-            table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
+        local buffer_contents = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
 
         -- Create a new buffer if current buffer has anything in it.
         if #buffer_contents > 0 then

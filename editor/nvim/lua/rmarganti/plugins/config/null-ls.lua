@@ -15,6 +15,7 @@ M.config = function()
                 return path.file_exists('vendor/bin/phpstan')
             end,
             command = 'vendor/bin/phpstan',
+            to_temp_file = false,
         }),
 
         builtins.formatting.phpcsfixer.with({
@@ -22,6 +23,7 @@ M.config = function()
                 return path.file_exists('vendor/bin/php-cs-fixer')
             end,
             command = 'vendor/bin/php-cs-fixer',
+            to_temp_file = false,
         }),
 
         -- Terraform
