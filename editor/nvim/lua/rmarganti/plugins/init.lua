@@ -4,8 +4,7 @@
 --
 ------------------------------------------------
 
-local packer_path = vim.fn.stdpath('data')
-    .. '/site/pack/packer/opt/packer.nvim'
+local packer_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     vim.fn.system({
@@ -58,11 +57,6 @@ packer.startup(function(use)
 
     use({
         'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter',
-    })
-
-    use({
-        'RRethy/nvim-treesitter-textsubjects',
         after = 'nvim-treesitter',
     })
 

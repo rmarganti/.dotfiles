@@ -35,7 +35,7 @@ M.config = function()
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = '<CR>',
+                init_selection = 'vin', -- Visual In Node
                 node_incremental = '<TAB>',
                 node_decremental = '<S-TAB>',
             },
@@ -52,14 +52,6 @@ M.config = function()
                     ['af'] = '@function.outer',
                     ['if'] = '@function.inner',
                 },
-            },
-        },
-
-        textsubjects = {
-            enable = true,
-            keymaps = {
-                ['.'] = 'textsubjects-smart',
-                [';'] = 'textsubjects-container-outer',
             },
         },
     })
