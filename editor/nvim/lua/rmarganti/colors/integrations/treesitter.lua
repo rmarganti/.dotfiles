@@ -104,7 +104,7 @@ return {
     -- Tags (Used for XML-like tags).
 
     ['@tag'] = { fg = a.plus4 }, -- XML tag names
-    ['@tag.attribute'] = { fg = a.plus3 }, -- XML tag attributes
+    ['@tag.attribute'] = { fg = a.plus1 }, -- XML tag attributes
     ['@tag.delimiter'] = { fg = a.base }, -- XML tag delimiters
 
     -- Conceal

@@ -5,7 +5,6 @@ local utils = require('rmarganti.utils.misc')
 utils.map('n', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 
-
 ------------------------------------------------
 --
 -- Disables
@@ -18,7 +17,6 @@ utils.map('n', '<c-z>', '<Nop>')
 -- Disable ex mode
 utils.map('n', 'Q', '<Nop>')
 
-
 ------------------------------------------------
 --
 -- vim-unimpaired (and inspired) remaps
@@ -26,8 +24,12 @@ utils.map('n', 'Q', '<Nop>')
 ------------------------------------------------
 
 -- Diagnostics
-utils.map('n', '<Leader>jd', function() vim.diagnostic.goto_next({ float = { border = 'rounded' } }) end)
-utils.map('n', '<Leader>kd', function() vim.diagnostic.goto_prev({ float = { border = 'rounded' } }) end)
+utils.map('n', '<Leader>jd', function()
+    vim.diagnostic.goto_next({ float = { border = 'rounded' } })
+end)
+utils.map('n', '<Leader>kd', function()
+    vim.diagnostic.goto_prev({ float = { border = 'rounded' } })
+end)
 
 -- Exchange
 utils.map('n', '<Leader>je', ']e', { remap = true })
@@ -51,7 +53,6 @@ utils.map('n', '<Leader>kc', '[n', { remap = true })
 utils.map('n', '<Leader>jm', ']m', { remap = true })
 utils.map('n', '<Leader>km', '[m', { remap = true })
 
-
 ------------------------------------------------
 --
 -- Buffers
@@ -59,7 +60,6 @@ utils.map('n', '<Leader>km', '[m', { remap = true })
 ------------------------------------------------
 
 -- See hydra.lua
-
 
 ------------------------------------------------
 --
@@ -93,14 +93,19 @@ utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
 utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
 
 -- Code Workspace symbols
-utils.map('n', '<Leader>cw', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>')
+utils.map(
+    'n',
+    '<Leader>cw',
+    '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>'
+)
 
 -- Code Format
-utils.map('n', '<Leader>cf', function() core_fns.format(false) end)
+utils.map('n', '<Leader>cf', function()
+    core_fns.format(false)
+end)
 
 -- Code Organize imports
 utils.map('n', '<Leader>co', core_fns.organize_imports)
-
 
 ------------------------------------------------
 --
@@ -111,22 +116,34 @@ utils.map('n', '<Leader>co', core_fns.organize_imports)
 local edit_nearest = core_fns.edit_nearest
 
 -- Edit nearest Changelog
-utils.map('n', '<Leader>ec', function() edit_nearest('CHANGELOG.md') end)
+utils.map('n', '<Leader>ec', function()
+    edit_nearest('CHANGELOG.md')
+end)
 
 -- Edit nearest Composer.json
-utils.map('n', '<Leader>eC', function() edit_nearest('composer.json') end)
+utils.map('n', '<Leader>eC', function()
+    edit_nearest('composer.json')
+end)
 
 -- Edit nearest Env
-utils.map('n', '<Leader>ee', function() edit_nearest('.env') end)
+utils.map('n', '<Leader>ee', function()
+    edit_nearest('.env')
+end)
 
 -- Edit nearest Index.ts
-utils.map('n', '<Leader>ei', function() edit_nearest('index.ts') end)
+utils.map('n', '<Leader>ei', function()
+    edit_nearest('index.ts')
+end)
 
 -- Edit nearest package.json
-utils.map('n', '<Leader>ep', function() edit_nearest('package.json') end)
+utils.map('n', '<Leader>ep', function()
+    edit_nearest('package.json')
+end)
 
 -- Edit nearest Readme
-utils.map('n', '<Leader>er', function() edit_nearest('README.md') end)
+utils.map('n', '<Leader>er', function()
+    edit_nearest('README.md')
+end)
 
 -- Edit Test
 utils.map('n', '<Leader>et', core_fns.edit_test)
@@ -157,7 +174,7 @@ utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false
 
 -- File Write
 utils.map('n', '<Leader>fw', function()
-    vim.cmd('write');
+    vim.cmd('write')
     vim.notify('File saved')
 end)
 
@@ -166,7 +183,6 @@ utils.map('n', '<Leader>fx', ':RnvimrToggle<CR>')
 
 -- File Types
 utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({})<CR>')
-
 
 ------------------------------------------------
 --
@@ -178,7 +194,11 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 utils.map('n', '<Leader>ga', '<cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>')
 
 -- Git checkOut current file
-utils.map('n', '<Leader>go', '<cmd>Git checkout % <bar> lua vim.notify("Git checked out current file")<CR>')
+utils.map(
+    'n',
+    '<Leader>go',
+    '<cmd>Git checkout % <bar> lua vim.notify("Git checked out current file")<CR>'
+)
 
 -- Git Commits
 utils.map('n', '<Leader>gc', '<cmd>Telescope git_commits<CR>')
@@ -192,6 +212,9 @@ utils.map('n', '<Leader>gb', '<cmd>Telescope git_branches<CR>')
 -- Git Status
 utils.map('n', '<Leader>gs', '<cmd>Telescope git_status<CR>')
 
+-- Git bLame
+utils.map('n', '<Leader>gl', '<cmd>Git blame<CR>')
+
 -- GitHub gists
 utils.map('n', '<Leader>gg', '<cmd>Telescope gh gist<CR>')
 
@@ -199,8 +222,11 @@ utils.map('n', '<Leader>gg', '<cmd>Telescope gh gist<CR>')
 utils.map('n', '<Leader>gp', '<cmd>Telescope gh pull_request<CR>')
 
 -- GitHub Notifications
-utils.map('n', '<Leader>gn', [[<cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]])
-
+utils.map(
+    'n',
+    '<Leader>gn',
+    [[<cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]]
+)
 
 ------------------------------------------------
 --
@@ -234,7 +260,6 @@ utils.map('n', '<Leader>ya', ':let @+ = expand("%:p")<CR>')
 -- Yank file Relative path to system clipboard.
 utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 
-
 ------------------------------------------------
 --
 -- Search
@@ -242,7 +267,11 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map('n', '<Leader>sf', '<cmd>lua require("telescope.builtin").find_files({ hidden = true })<CR>')
+utils.map(
+    'n',
+    '<Leader>sf',
+    '<cmd>lua require("telescope.builtin").find_files({ hidden = true })<CR>'
+)
 
 -- Search Recent files
 utils.map('n', '<Leader>sr', '<cmd>lua require("telescope").extensions.recent_files.pick()<CR>')
@@ -271,7 +300,6 @@ utils.map('n', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
 -- Search Resume
 utils.map('n', '<Leader>s.', '<cmd>Telescope resume<CR>')
 
-
 ------------------------------------------------
 --
 -- Testing
@@ -293,7 +321,6 @@ utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { remap = true })
 -- Toggle Test Summary.
 utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
 
-
 ------------------------------------------------
 --
 -- Toggle (follows vim-unimpaired convention)
@@ -313,7 +340,6 @@ utils.map('n', 'yoc', '<CMD>ColorizerToggle<CR>')
 -- Toggle symbol Outline
 utils.map('n', 'yoo', '<CMD>SymbolsOutline<CR>')
 
-
 ------------------------------------------------
 --
 -- Windows
@@ -326,7 +352,6 @@ utils.map('n', '<C-j>', '<C-w>j')
 utils.map('n', '<C-k>', '<C-w>k')
 
 -- See hydra.lua for more Window mappings.
-
 
 ------------------------------------------------
 --
