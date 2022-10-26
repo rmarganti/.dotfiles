@@ -26,6 +26,7 @@ M.config = function()
             flags = flags,
             capabilities = capabilities,
             on_attach = on_attach,
+            filetypes = config.filetypes,
             settings = config.additional_lsp_config,
         })
     end

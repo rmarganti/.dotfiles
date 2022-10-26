@@ -330,6 +330,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
+    -- Provide code tree breadcrumbs.
     use({
         'SmiteshP/nvim-navic',
         after = 'gitsigns.nvim',

@@ -70,10 +70,8 @@ M.clients = {
     ------------------------------------------------
 
     emmet_ls = {
-        additional_lsp_config = {
-            -- Disabling for React, because it often gets in the way.
-            filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
-        },
+        -- Disabling for React, because it often gets in the way.
+        filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
         formatting_enabled = false,
     },
 
@@ -96,10 +94,8 @@ M.clients = {
     jsonls = {
         formatting_enabled = false,
         additional_lsp_config = {
-            settings = {
-                json = {
-                    schemas = require('schemastore').json.schemas(),
-                },
+            json = {
+                schemas = require('schemastore').json.schemas(),
             },
         },
     },
