@@ -3,6 +3,7 @@ local M = {}
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
 M.config = function()
     local telescope = require('telescope')
+    local actions = require('telescope.actions')
 
     telescope.setup({
         extensions = {
@@ -10,11 +11,23 @@ M.config = function()
                 fuzzy = true, -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
                 override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-            }
+                case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+            },
         },
-        dynamic_preview_title = true,
         defaults = {
+            mappings = {
+                i = {
+                    -- Swap Tab and Shift-Tab.
+                    ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
+                    ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
+                },
+
+                n = {
+                    -- Swap Tab and Shift-Tab.
+                    ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
+                    ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
+                },
+            },
             dynamic_preview_title = true,
             file_ignore_patterns = {
                 '^.git/',
@@ -24,23 +37,23 @@ M.config = function()
             },
             layout_config = {
                 center = {
-                    preview_cutoff = 40
+                    preview_cutoff = 40,
                 },
                 height = 0.9,
                 horizontal = {
                     preview_cutoff = 120,
-                    prompt_position = "bottom"
+                    prompt_position = 'bottom',
                 },
                 vertical = {
-                    preview_cutoff = 40
+                    preview_cutoff = 40,
                 },
                 width = 0.9,
             },
-            prompt_prefix = "   ",
+            prompt_prefix = '   ',
         },
     })
 
-    require("telescope").load_extension("notify")
+    require('telescope').load_extension('notify')
 end
 
 return M
