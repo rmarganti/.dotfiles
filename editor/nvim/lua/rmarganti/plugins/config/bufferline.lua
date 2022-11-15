@@ -7,6 +7,10 @@ M.config = function()
     require('bufferline').setup({
         highlights = {
             background = { bg = p.bg_light.gui },
+            buffer_selected = {
+                fg = p.fg.gui,
+                italic = false,
+            },
             buffer_visible = {
                 bg = p.bg_light.gui,
                 fg = a.plus4.gui,
