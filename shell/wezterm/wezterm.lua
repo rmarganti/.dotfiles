@@ -96,4 +96,7 @@ return {
         -- Versions
         '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(?:-beta[0-9]?)?',
     },
+
+    -- Disable hyperlinks
+    hyperlink_rules = {},
 }
