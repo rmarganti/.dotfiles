@@ -10,6 +10,7 @@ return {
     indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
     nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
     rnvimr = require('rmarganti.colors.integrations.rnvimr'),
+    rust_analyzer = require('rmarganti.colors.integrations.rust-analyzer'),
     symbols_outline = require('rmarganti.colors.integrations.symbols-outline'),
     telescope = require('rmarganti.colors.integrations.telescope'),
 }

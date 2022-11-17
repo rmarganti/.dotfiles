@@ -76,7 +76,6 @@ packer.startup(function(use)
     -- File explorer.
     use({
         'kevinhwang91/rnvimr',
-        cmd = 'RnvimrToggle',
         setup = function()
             require('rmarganti.plugins.config.rnvimr').setup()
         end,
@@ -84,7 +83,7 @@ packer.startup(function(use)
 
     -- Tabs.
     use({
-        'akinsho/nvim-bufferline.lua',
+        'akinsho/bufferline.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' },
         config = function()
             require('rmarganti.plugins.config.bufferline').config()
@@ -219,6 +218,14 @@ packer.startup(function(use)
         after = 'null-ls.nvim',
     })
 
+    use({
+        'simrat39/rust-tools.nvim',
+        after = 'mason.nvim',
+        config = function()
+            require('rmarganti.plugins.config.rust-tools').config()
+        end,
+    })
+
     -- Show function signature as you type.
     use({
         'ray-x/lsp_signature.nvim',
@@ -324,7 +331,7 @@ packer.startup(function(use)
         end,
     })
 
-    -- Split function parameters into multiple lines (oppisite of `J`).
+    -- Split function parameters into multiple lines (opposite of `J`).
     use({
         'AckslD/nvim-trevJ.lua',
         event = 'BufWinEnter',
