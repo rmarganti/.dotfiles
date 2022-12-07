@@ -124,6 +124,17 @@ M.clients = {
     },
 
     ------------------------------------------------
+    -- GraphQL
+    ------------------------------------------------
+
+    graphql = {
+        -- Javascript and typescript are supported, but can
+        -- interfere with navic, so disabling for now.
+        filetypes = { 'graphql ' },
+        formatting_enabled = false,
+    },
+
+    ------------------------------------------------
     -- Misc
     ------------------------------------------------
 
@@ -134,6 +145,12 @@ M.clients = {
 
     prismals = {
         formatting_enabled = true,
+    },
+
+    -- This is installed and managed by zbirenbaum/copilot.lua
+    copilot = {
+        formatting_enabled = false,
+        skip_setup = true,
     },
 }
 

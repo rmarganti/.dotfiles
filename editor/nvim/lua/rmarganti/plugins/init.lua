@@ -247,6 +247,18 @@ packer.startup(function(use)
     -- Symbol tree panel.
     use({ 'simrat39/symbols-outline.nvim' })
 
+    -- AI code-completion.
+    use({
+        'zbirenbaum/copilot.lua',
+        event = 'VimEnter',
+        config = function()
+            vim.defer_fn(function()
+                require('copilot').setup()
+            end, 100)
+        end,
+    })
+
+
     -- Code completion.
     use({
         'hrsh7th/nvim-cmp',
@@ -261,8 +273,14 @@ packer.startup(function(use)
     use({ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-path', after = 'nvim-cmp' })
     use({ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' })
-    use({ 'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' })
     use({ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' })
+    use({
+        'zbirenbaum/copilot-cmp',
+        after = { 'copilot.lua' },
+        config = function()
+            require('copilot_cmp').setup()
+        end,
+    })
 
     -- Snippets.
     use({

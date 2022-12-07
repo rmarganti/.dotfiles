@@ -3,21 +3,21 @@ local cmp = require('cmp')
 local M = {}
 
 M.config = function()
-    local luasnip = require("luasnip")
+    local luasnip = require('luasnip')
 
     local tab_mapping = function(fallback)
-        if (cmp.visible()) then
+        if cmp.visible() then
             local entry = cmp.get_selected_entry()
 
-            if (not entry) then
+            if not entry then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
 
             cmp.confirm()
-        elseif (luasnip.expand_or_jumpable()) then
+        elseif luasnip.expand_or_jumpable() then
             vim.fn.feedkeys(
-                vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
-                ""
+                vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true),
+                ''
             )
         else
             fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
@@ -25,7 +25,7 @@ M.config = function()
     end
 
     local shift_tab_mapping = function(fallback)
-        if (luasnip.jumpable(-1)) then
+        if luasnip.jumpable(-1) then
             vim.fn.feedkeys(
                 vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true),
                 ''
@@ -41,16 +41,17 @@ M.config = function()
         },
 
         formatting = {
-            format = require("lspkind").cmp_format({
+            format = require('lspkind').cmp_format({
                 with_text = true,
-                menu = ({
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[LuaSnip]",
-                    nvim_lua = "[Lua]",
-                    latex_symbols = "[Latex]",
-                    cmp_tabnine = "[TabNine]",
-                })
+                menu = {
+                    buffer = '[Buffer]',
+                    nvim_lsp = '[LSP]',
+                    luasnip = '[LuaSnip]',
+                    nvim_lua = '[Lua]',
+                    latex_symbols = '[Latex]',
+                    cmp_tabnine = '[TabNine]',
+                    copilot = '[Copilot]',
+                },
             }),
         },
 
@@ -69,6 +70,7 @@ M.config = function()
         }),
 
         sources = {
+            { name = 'copilot' },
             { name = 'nvim_lsp' },
             { name = 'luasnip' },
             {
@@ -76,11 +78,14 @@ M.config = function()
                 option = {
                     get_bufnrs = function()
                         return vim.api.nvim_list_bufs()
-                    end
-                }
+                    end,
+                },
             },
-            { name = 'cmp_tabnine' },
             { name = 'path' },
+        },
+
+        experimental = {
+            ghost_text = true,
         },
     })
 
@@ -88,18 +93,18 @@ M.config = function()
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = 'buffer' }
-        }
+            { name = 'buffer' },
+        },
     })
 
     -- `:` cmdline setup.
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = 'path' }
+            { name = 'path' },
         }, {
-            { name = 'cmdline' }
-        })
+            { name = 'cmdline' },
+        }),
     })
 end
 
