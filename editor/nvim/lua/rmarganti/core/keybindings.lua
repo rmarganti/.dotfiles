@@ -107,6 +107,16 @@ end)
 -- Code Organize imports
 utils.map('n', '<Leader>co', core_fns.organize_imports)
 
+-- Code Capture screenshot
+utils.map('n', '<Leader>cc', function()
+    require('silicon').visualise_api({ show_buf = true })
+end)
+
+-- Code Capture screenshot
+utils.map('v', '<Leader>cc', function()
+    require('silicon').visualise_api({})
+end)
+
 ------------------------------------------------
 --
 -- Edit

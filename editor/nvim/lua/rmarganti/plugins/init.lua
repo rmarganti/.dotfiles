@@ -361,6 +361,15 @@ packer.startup(function(use)
         after = 'gitsigns.nvim',
     })
 
+    -- Code screenshots.
+    use({
+        'NarutoXY/silicon.lua',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('rmarganti.plugins.config.silicon').config()
+        end,
+    })
+
     --------------------------------
     -- Text manipulation
     --------------------------------
