@@ -456,6 +456,9 @@ packer.startup(function(use)
     use({
         'smartpde/telescope-recent-files',
         after = 'telescope.nvim',
+        config = function()
+            require('rmarganti.plugins.config.telescope-recent-files').config()
+        end,
     })
 
     --------------------------------
