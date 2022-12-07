@@ -24,6 +24,13 @@
             {
                 "language": "typescriptreact",
                 "path": "./snippets/typescriptreact.json"
+            },
+            {
+                "language": [
+                    "markdown",
+                    "vimwiki"
+                ],
+                "path": "./snippets/markdown.json"
             }
         ]
     }

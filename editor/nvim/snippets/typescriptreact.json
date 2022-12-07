@@ -1,5 +1,5 @@
 {
-    "React Functional Component": {
+    "React functional component": {
         "prefix": "rfc",
         "body": [
             "interface ${1:Component}Props {",
