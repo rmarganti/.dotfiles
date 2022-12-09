@@ -20,3 +20,6 @@ urls
 whitelisted
 monorepo
 redux
+whitelist
+psql
+triet
