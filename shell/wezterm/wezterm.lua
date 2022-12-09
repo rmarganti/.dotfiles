@@ -92,6 +92,7 @@ return {
         -- Jira tickets
         'ADREV-\\d{3,5}',
         'APPOPS-\\d{3,5}',
+        'CH-\\d{3,5}',
         'GCCDEV-\\d{3,5}',
 
         -- Versions
