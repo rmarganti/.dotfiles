@@ -277,11 +277,9 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map(
-    'n',
-    '<Leader>sf',
-    '<cmd>lua require("telescope.builtin").find_files({ hidden = true })<CR>'
-)
+utils.map('n', '<Leader>sf', function()
+    require('telescope.builtin').find_files({ hidden = true })
+end)
 
 -- Search Recent files
 utils.map('n', '<Leader>sr', '<cmd>lua require("telescope").extensions.recent_files.pick()<CR>')
@@ -294,6 +292,14 @@ utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
 
 -- Search Window (jumps to character visible in current window)
 utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
+
+-- Search Wiki
+utils.map('n', '<Leader>sW', function()
+    require('telescope.builtin').find_files({
+        hidden = true,
+        search_dirs = { '~/vimwiki' },
+    })
+end)
 
 -- Search Notifications
 utils.map('n', '<Leader>sn', '<cmd>Telescope notify<CR>')
