@@ -290,11 +290,8 @@ utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')
 -- Search Buffers
 utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
 
--- Search Window (jumps to character visible in current window)
-utils.map('n', '<Leader>sw', '<cmd>HopChar1<CR>')
-
 -- Search Wiki
-utils.map('n', '<Leader>sW', function()
+utils.map('n', '<Leader>sw', function()
     require('telescope.builtin').find_files({
         hidden = true,
         search_dirs = { '~/vimwiki' },
@@ -391,3 +388,6 @@ utils.map('n', '<Leader>hh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
 utils.map('n', 'gJ', function()
     require('trevj').format_at_cursor()
 end)
+
+-- Jump to character in current window.
+utils.map('n', '<Leader><Leader>', '<cmd>HopChar1<CR>')
