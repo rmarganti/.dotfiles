@@ -66,7 +66,7 @@ M.config = function()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
             ['<Tab>'] = cmp.mapping(tab_mapping, { 'i', 's' }),
-            ['<S-Tab>'] = cmp.mapping(shift_tab_mapping, { 'i', 's' })
+            ['<S-Tab>'] = cmp.mapping(shift_tab_mapping, { 'i', 's' }),
         }),
 
         sources = {

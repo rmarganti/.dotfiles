@@ -3,7 +3,6 @@ local M = {}
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
 M.config = function()
     local telescope = require('telescope')
-    local actions = require('telescope.actions')
 
     telescope.setup({
         extensions = {
@@ -15,19 +14,6 @@ M.config = function()
             },
         },
         defaults = {
-            mappings = {
-                i = {
-                    -- Swap Tab and Shift-Tab.
-                    ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
-                    ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
-                },
-
-                n = {
-                    -- Swap Tab and Shift-Tab.
-                    ['<S-Tab>'] = actions.toggle_selection + actions.move_selection_worse,
-                    ['<Tab>'] = actions.toggle_selection + actions.move_selection_better,
-                },
-            },
             dynamic_preview_title = true,
             file_ignore_patterns = {
                 '^.git/',
