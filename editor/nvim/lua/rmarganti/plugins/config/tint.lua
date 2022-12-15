@@ -9,6 +9,7 @@ M.config = function()
             'Comment',
             'EndOfBuffer',
             'IndentBlankline.*',
+            'InlayHint',
             'LineNr.*',
             'NonText',
             'Status.*',
