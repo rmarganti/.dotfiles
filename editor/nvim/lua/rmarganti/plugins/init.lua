@@ -258,7 +258,6 @@ packer.startup(function(use)
         end,
     })
 
-
     -- Code completion.
     use({
         'hrsh7th/nvim-cmp',

@@ -130,7 +130,7 @@ M.clients = {
     graphql = {
         -- Javascript and typescript are supported, but can
         -- interfere with navic, so disabling for now.
-        filetypes = { 'graphql ' },
+        filetypes = { 'graphql' },
         formatting_enabled = false,
     },
 
