@@ -13,7 +13,9 @@ M.config = function()
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
 
-            cmp.confirm()
+            cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Replace,
+            })
         elseif luasnip.expand_or_jumpable() then
             vim.fn.feedkeys(
                 vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true),
