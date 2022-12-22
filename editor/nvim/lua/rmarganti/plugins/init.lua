@@ -501,7 +501,7 @@ packer.startup(function(use)
         event = 'BufWinEnter',
     })
 
-    -- Maintain a person wiki.
+    -- Maintain a personal wiki.
     use({
         'vimwiki/vimwiki',
         setup = function()
@@ -527,5 +527,13 @@ packer.startup(function(use)
     use({
         'tpope/vim-sleuth',
         event = 'BufWinEnter',
+    })
+
+    use({
+        'kevinhwang91/nvim-ufo',
+        requires = 'kevinhwang91/promise-async',
+        config = function()
+            require('ufo').setup()
+        end,
     })
 end)

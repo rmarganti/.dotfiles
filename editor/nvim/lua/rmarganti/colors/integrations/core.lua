@@ -15,8 +15,8 @@ return {
     ErrorMsg = { fg = a.error }, -- error messages on the command line
     VertSplit = { fg = p.black }, -- the column separating vertically split windows
     Folded = { fg = p.fg, bg = p.bg_light }, -- line used for closed folds
-    FoldColumn = { bg = p.none, fg = a.minus1 }, -- 'foldcolumn'
-    SignColumn = { bg = p.none, fg = a.minus1 }, -- column where |signs| are displayed
+    FoldColumn = { bg = p.none, fg = a.minus2 }, -- 'foldcolumn'
+    SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
     signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
     substitute = { bg = p.bg_light, fg = p.fg }, -- |:substitute| replacement text highlighting
     LineNr = { fg = a.minus2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is secp.
@@ -57,7 +57,7 @@ return {
     Visual = { bg = p.black }, -- Visual mode selection
     VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
-    Whitespace = { fg = a.minus2 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace = { fg = a.minus3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu = { bg = p.base }, -- current match in 'wildmenu' completion
 
     -- These groups are not listed as default vim groups,

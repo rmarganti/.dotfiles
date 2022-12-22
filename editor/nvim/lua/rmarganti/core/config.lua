@@ -74,6 +74,14 @@ vim.opt.pumheight = 20
 
 -- What hidden characters to show
 vim.opt.list = true
+vim.opt.listchars = {
+    tab = '» ',
+    lead = '·',
+    trail = '·',
+    extends = '›',
+    precedes = '‹',
+    nbsp = '␣',
+}
 
 -- Once bufferline is loaded, it will re-enable this.
 vim.opt.showtabline = 0
@@ -124,3 +132,14 @@ vim.opt.splitright = true
 ------------------------------------------------
 
 vim.opt.scrollback = 100000
+
+------------------------------------------------
+--
+-- Code folding
+--
+------------------------------------------------
+
+vim.o.foldcolumn = '0'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
