@@ -1,6 +1,10 @@
-local M = {}
+-- File explorer.
+local M = {
+    'kevinhwang91/rnvimr',
+    event = 'VeryLazy', -- lazy.lua will fire this after UI has loaded
+}
 
-M.setup = function()
+function M.init()
     vim.g.rnvimr_presets = {
         { width = 0.950, height = 0.9 },
     }

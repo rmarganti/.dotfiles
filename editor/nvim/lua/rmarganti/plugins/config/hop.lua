@@ -1,10 +1,14 @@
-local hop = require('hop')
+-- Quickly jump elsewhere in window.
+local M = {
+    'phaazon/hop.nvim',
+    cmd = { 'HopChar1' },
+}
 
-local M = {}
+function M.config()
+    local hop = require('hop')
 
-M.config = function()
     hop.setup({
-        keys = 'asdhklqwertyuiopzxcvbnmfj'
+        keys = 'asdhklqwertyuiopzxcvbnmfj',
     })
 end
 

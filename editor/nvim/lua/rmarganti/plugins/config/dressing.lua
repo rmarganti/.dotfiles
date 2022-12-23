@@ -1,4 +1,8 @@
-local M = {}
+-- Replaces `vim.ui.{input,select}`.
+local M = {
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+}
 
 M.config = function()
     require('dressing').setup({

@@ -1,6 +1,14 @@
-local M = {}
+-- Create mini-modes with their own set of key bindings.
+local M = {
+    'anuvyklack/hydra.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+        { 'anuvyklack/keymap-layer.nvim' }, -- needed only for pink hydras
+        { 'lewis6991/gitsigns.nvim' }, -- Required for the git interaction
+    },
+}
 
-M.config = function()
+function M.config()
     local Hydra = require('hydra')
     local gitsigns = require('gitsigns')
     local core_fns = require('rmarganti.core.functions')
@@ -45,9 +53,8 @@ M.config = function()
             { 'H', '2<C-w><' },
             { '=', '<C-w>=' },
 
-            --
-            { '<Esc>', nil, { exit = true, desc = false } }
-        }
+            { '<Esc>', nil, { exit = true, desc = false } },
+        },
     })
 
     ------------------------------------------------
@@ -71,7 +78,11 @@ M.config = function()
         body = '<Leader>b',
         heads = {
             { 'n', '<cmd>enew<CR>', { desc = 'New', exit = true } },
-            { 'e', '<cmd>lua require("bufferline").pick_buffer()<CR>', { desc = 'Edit', exit = true } },
+            {
+                'e',
+                '<cmd>lua require("bufferline").pick_buffer()<CR>',
+                { desc = 'Edit', exit = true },
+            },
             { 'd', '<cmd>BufferLinePickClose<CR>', { desc = 'Delete', exit = true } },
             { 'h', '<cmd>lua require("bufferline").cycle(-1)<CR>', { desc = 'Focus left' } },
             { 'l', '<cmd>lua require("bufferline").cycle(1)<CR>', desc = 'Focus Right' },
@@ -81,8 +92,8 @@ M.config = function()
             { 'Q', '<cmd>BufDel!<CR>', { desc = 'Force Quit' } },
             { 'a', core_fns.buf_delete_all, { desc = 'Quit All', exit = true } },
             { 'o', core_fns.buf_only, { desc = 'Keep Only', exit = true } },
-            { '<Esc>', nil, { exit = true, desc = false } }
-        }
+            { '<Esc>', nil, { exit = true, desc = false } },
+        },
     })
 
     ------------------------------------------------
@@ -90,7 +101,6 @@ M.config = function()
     -- Git
     --
     ------------------------------------------------
-
 
     Hydra({
         hint = table.concat({
@@ -103,7 +113,7 @@ M.config = function()
             invoke_on_body = true,
             hint = {
                 position = 'bottom',
-                border = 'rounded'
+                border = 'rounded',
             },
             on_enter = function()
                 gitsigns.toggle_signs(true)
@@ -113,7 +123,7 @@ M.config = function()
                 gitsigns.toggle_signs(false)
                 gitsigns.toggle_linehl(false)
                 gitsigns.toggle_deleted(false)
-            end
+            end,
         },
         mode = { 'n', 'x' },
         body = '<leader>G',
@@ -121,20 +131,28 @@ M.config = function()
             {
                 'J',
                 function()
-                    if vim.wo.diff then return ']c' end
-                    vim.schedule(function() gitsigns.next_hunk() end)
+                    if vim.wo.diff then
+                        return ']c'
+                    end
+                    vim.schedule(function()
+                        gitsigns.next_hunk()
+                    end)
                     return '<Ignore>'
                 end,
-                { expr = true }
+                { expr = true },
             },
             {
                 'K',
                 function()
-                    if vim.wo.diff then return '[c' end
-                    vim.schedule(function() gitsigns.prev_hunk() end)
+                    if vim.wo.diff then
+                        return '[c'
+                    end
+                    vim.schedule(function()
+                        gitsigns.prev_hunk()
+                    end)
                     return '<Ignore>'
                 end,
-                { expr = true }
+                { expr = true },
             },
             { 'r', ':Gitsigns reset_hunk<CR>' },
             { 's', ':Gitsigns stage_hunk<CR>', { silent = true } },
@@ -143,13 +161,16 @@ M.config = function()
             { 'p', gitsigns.preview_hunk },
             { 'd', gitsigns.toggle_deleted, { nowait = true } },
             { 'b', gitsigns.blame_line },
-            { 'B', function() gitsigns.blame_line { full = true } end },
+            {
+                'B',
+                function()
+                    gitsigns.blame_line({ full = true })
+                end,
+            },
             { '/', gitsigns.show, { exit = true } }, -- show the base of the file
             { '<Esc>', nil, { exit = true, nowait = true } },
-        }
+        },
     })
-
-
 end
 
 return M

@@ -1,6 +1,13 @@
-local M = {}
+-- Status line.
+local M = {
+    'feline-nvim/feline.nvim',
+    dependencies = {
+        { 'kyazdani42/nvim-web-devicons' },
+        { 'SmiteshP/nvim-navic' },
+    },
+}
 
-M.config = function()
+function M.config()
     local feline = require('feline')
     local vi_mode_utils = require('feline.providers.vi_mode')
     local navic = require('nvim-navic')
@@ -100,8 +107,8 @@ M.config = function()
 
         github_notifications = {
             provider = function()
-                local data =
-                    require('github-notifications').statusline_notifications()
+                local data = require('github-notifications').statusline_notifications()
+
                 if data.count > 0 then
                     return data.icon .. ' ' .. tostring(data.count)
                 else

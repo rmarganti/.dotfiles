@@ -1,6 +1,10 @@
-local M = {}
+-- Adds icons to auto-complete.
+local M = {
+    'onsails/lspkind-nvim',
+    lazy = true,
+}
 
-M.config = function()
+function M.config()
     require('lspkind').init({
         mode = 'symbol_text',
         preset = 'default',

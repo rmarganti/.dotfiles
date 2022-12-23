@@ -1,11 +1,21 @@
-local user_lsp_config = require('rmarganti.config.lsp')
+local M = {
+    'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
+    dependencies = {
+        { 'b0o/schemastore.nvim' },
+        { 'hrsh7th/cmp-nvim-lsp' },
+        { 'williamboman/mason-lspconfig.nvim' },
+        { 'williamboman/mason.nvim' },
+        { 'SmiteshP/nvim-navic' },
+    },
+}
 
-local M = {}
 local configured_clients
 
-M.config = function()
+function M.config()
     local lspconfig = require('lspconfig')
-    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
+    local user_lsp_config = require('rmarganti.config.lsp')
+    local lsp_utils = require('rmarganti.plugins.config.lsp.lsp-utils')
     local clients = configured_clients()
 
     local capabilities = lsp_utils.make_client_capabilities()
@@ -37,12 +47,16 @@ M.config = function()
         })
     end
 
+    require('rmarganti.plugins.config.null-ls').setup()
+
     vim.cmd([[ do User LspAttachBuffers ]])
 end
 
 -- Get table of clients that should be installed
 -- by Mason and configured by nvim-lspconfig.
 configured_clients = function()
+    local user_lsp_config = require('rmarganti.config.lsp')
+
     local clients = {}
 
     for client, config in pairs(user_lsp_config.clients) do

@@ -1,9 +1,11 @@
-local M = {}
+-- Show GitHub notification count in status line.
+local M = {
+    'rlch/github-notifications.nvim',
+    lazy = true,
+}
 
-M.config = function()
+function M.config()
     local secrets = require('rmarganti.config.secrets')
-
-    require('telescope').load_extension('ghn')
 
     require('github-notifications').setup({
         username = secrets.github_username,

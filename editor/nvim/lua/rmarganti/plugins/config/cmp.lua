@@ -1,8 +1,19 @@
-local cmp = require('cmp')
+-- Code completion.
+local M = {
+    'hrsh7th/nvim-cmp',
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    dependencies = {
+        { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-buffer' },
+        { 'hrsh7th/cmp-path' },
+        { 'hrsh7th/cmp-nvim-lua' },
+        { 'saadparwaiz1/cmp_luasnip' },
+        { 'zbirenbaum/copilot-cmp' },
+    },
+}
 
-local M = {}
-
-M.config = function()
+function M.config()
+    local cmp = require('cmp')
     local luasnip = require('luasnip')
 
     local tab_mapping = function(fallback)

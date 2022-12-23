@@ -1,6 +1,10 @@
-local M = {}
+-- Resize windows based on focus.
+local M = {
+    'beauwilliams/focus.nvim',
+    event = 'VeryLazy',
+}
 
-M.config = function()
+function M.config()
     require('focus').setup({
         signcolumn = false,
         excluded_filetypes = {

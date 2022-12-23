@@ -1,6 +1,15 @@
-local M = {}
+-- Provides AST for code.
+local M = {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    event = 'BufReadPost',
+    dependencies = {
+        { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+        { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    },
+}
 
-M.config = function()
+function M.config()
     require('nvim-treesitter.configs').setup({
         ensure_installed = {
             'bash',

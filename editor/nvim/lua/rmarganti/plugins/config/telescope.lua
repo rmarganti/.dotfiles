@@ -1,7 +1,19 @@
-local M = {}
+-- Find, Filter, Preview,Pick
+local M = {
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    dependencies = {
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        { 'nvim-telescope/telescope-github.nvim' },
+        { 'nvim-telescope/telescope-symbols.nvim' },
+        { 'rcarriga/nvim-notify' },
+        { 'rlch/github-notifications.nvim' },
+        { 'smartpde/telescope-recent-files' },
+    },
+}
 
--- https://github.com/nvim-telescope/telescope.nvim#telescope-defaults
-M.config = function()
+function M.config()
     local telescope = require('telescope')
 
     telescope.setup({
@@ -39,7 +51,11 @@ M.config = function()
         },
     })
 
+    require('telescope').load_extension('fzf')
+    require('telescope').load_extension('gh')
+    require('telescope').load_extension('ghn')
     require('telescope').load_extension('notify')
+    require('telescope').load_extension('recent_files')
 end
 
 return M

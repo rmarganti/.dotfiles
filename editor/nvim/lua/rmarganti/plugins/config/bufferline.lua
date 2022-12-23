@@ -1,6 +1,10 @@
-local M = {}
+-- Buffers as tabs
+local M = {
+    'akinsho/bufferline.nvim',
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+}
 
-M.config = function()
+function M.config()
     local p = require('rmarganti.colors.palette')
     local a = require('rmarganti.colors.abstractions')
 

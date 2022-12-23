@@ -1,6 +1,13 @@
-local M = {}
+-- Code screenshots.
+local M = {
+    'NarutoXY/silicon.lua',
+    dependencies = {
+        { 'nvim-lua/plenary.nvim' },
+    },
+    lazy = true,
+}
 
-M.config = function()
+function M.config()
     require('silicon').setup({
         theme = 'Nord',
         padHoriz = 10, -- Horizontal padding

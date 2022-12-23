@@ -1,8 +1,12 @@
-local M = {}
+-- Provides info to feline, functionality for managing chunks, etc.
+local M = {
+    'lewis6991/gitsigns.nvim',
+    lazy = true,
+}
 
-M.config = function()
+function M.config()
     require('gitsigns').setup({
-        signcolumn = false
+        signcolumn = false,
     })
 end
 

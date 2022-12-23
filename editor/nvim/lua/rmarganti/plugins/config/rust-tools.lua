@@ -1,8 +1,12 @@
-local M = {}
+-- LSP utils for Rust.
+local M = {
+    'simrat39/rust-tools.nvim',
+    ft = 'rust',
+}
 
-M.config = function()
+function M.config()
     local rt = require('rust-tools')
-    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
+    local lsp_utils = require('rmarganti.plugins.config.lsp.lsp-utils')
 
     rt.setup({
         tools = {

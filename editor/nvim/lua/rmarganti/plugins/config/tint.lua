@@ -1,6 +1,10 @@
-local M = {}
+-- Dim inactive windows.
+local M = {
+    'levouh/tint.nvim',
+    event = 'VeryLazy',
+}
 
-M.config = function()
+function M.config()
     require('tint').setup({
         saturation = 0.5,
         tint = -65,

@@ -1,7 +1,12 @@
-local M = {}
+-- Language server for linters, formatters, etc.
+local M = {
+    'jose-elias-alvarez/null-ls.nvim',
+    lazy = true,
+}
 
-M.config = function()
-    local lsp_utils = require('rmarganti.plugins.config.lsp-utils')
+-- This function is not called by lazy.nvim. It is called as part of `lsp@config()`.
+function M.setup()
+    local lsp_utils = require('rmarganti.plugins.config.lsp.lsp-utils')
     local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins
@@ -57,7 +62,7 @@ M.config = function()
             },
             env = {
                 PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
-                    '~/.config/nvim/lua/rmarganti/plugins/config/.prettierrc.json'
+                    '~/.config/nvim/.prettierrc.json'
                 ),
             },
         }),

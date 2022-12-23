@@ -1,6 +1,10 @@
-local M = {}
+-- Auto-close brackets, etc.
+local M = {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+}
 
-M.config = function()
+function M.config()
     require('nvim-autopairs').setup({})
 end
 
