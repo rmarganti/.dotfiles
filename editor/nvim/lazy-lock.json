@@ -1,5 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "45dc21a71ad1450606f5e98261badb28db59d74c" },
+  "FixCursorHold.nvim": { "branch": "master", "commit": "70a9516a64668cbfe59f31b66d0a21678c5e9b12" },
   "LuaSnip": { "branch": "master", "commit": "5570fd797eae0790affb54ea669a150cad76db5d" },
   "ReplaceWithRegister": { "branch": "master", "commit": "832efc23111d19591d495dc72286de2fb0b09345" },
   "bufferline.nvim": { "branch": "main", "commit": "c7492a76ce8218e3335f027af44930576b561013" },
@@ -26,6 +27,10 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "31d8ed0dd3daf6cc64e35d710a190b64080bdc86" },
   "mason.nvim": { "branch": "main", "commit": "5f82a4e5618ebb0f3197141e9f14a07b56d5390f" },
+  "neotest": { "branch": "master", "commit": "de2f68fb13a05c361e0c096e167f7f79712f3a5c" },
+  "neotest-jest": { "branch": "main", "commit": "205168630d00bd9eb24870328d3bda5844cc596d" },
+  "neotest-phpunit": { "branch": "main", "commit": "0e5c306434ebea413585c3d0d39c97f6a33ef977" },
+  "neotest-rust": { "branch": "main", "commit": "3270504691595a317361dcd04798b5d0ff852e52" },
   "null-ls.nvim": { "branch": "main", "commit": "b26851b3e7ac1c0c85666f8a74e36aef2acb89c6" },
   "nvim-autopairs": { "branch": "master", "commit": "03580d758231956d33c8dd91e2be195106a79fa4" },
   "nvim-bufdel": { "branch": "main", "commit": "a60b3531e5bd56f8602acb4ba7f5b2eeb782d54b" },
@@ -61,8 +66,6 @@
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-sleuth": { "branch": "master", "commit": "8332f123a63c739c870c96907d987cc3ff719d24" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
-  "vim-test": { "branch": "master", "commit": "c6e5d249241342fd4592a67113cb539427d57e23" },
-  "vim-ultest": { "branch": "master", "commit": "c93eb128332f8245776b753407ab6c4432c4c556" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vimwiki": { "branch": "dev", "commit": "fea8bee382b2051b0137fd2cacf0862823ee69b3" }
 }

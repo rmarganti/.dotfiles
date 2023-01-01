@@ -320,19 +320,29 @@ utils.map('n', '<Leader>s.', '<cmd>Telescope resume<CR>')
 ------------------------------------------------
 
 -- Run Tests for the whole File.
-utils.map('n', '<Leader>tf', ':Ultest<CR>')
+utils.map('n', '<Leader>tf', function()
+    require('neotest').run.run(vim.fn.expand('%'))
+end)
 
 -- Run the Test that is Nearest.
-utils.map('n', '<Leader>tn', ':UltestNearest<CR>')
+utils.map('n', '<Leader>tn', function()
+    require('neotest').run.run()
+end)
 
--- Jump to the next Test.
-utils.map('n', '<Leader>tj', '<Plug>(ultest-next-fail)', { remap = true })
-
--- Jump to the previous Test.
-utils.map('n', '<Leader>tk', '<Plug>(ultest-prev-fail)', { remap = true })
+-- Run the Last Test.
+utils.map('n', '<Leader>tl', function()
+    require('neotest').run.run_last()
+end)
 
 -- Toggle Test Summary.
-utils.map('n', '<Leader>ts', ':UltestSummary<CR>')
+utils.map('n', '<Leader>ts', function()
+    require('neotest').summary.toggle()
+end)
+
+-- Toggle Test Output.
+utils.map('n', '<Leader>to', function()
+    require('neotest').output_panel.toggle()
+end)
 
 ------------------------------------------------
 --
