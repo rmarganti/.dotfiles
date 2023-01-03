@@ -8,7 +8,6 @@
 . ~/.bash_colors
 . ~/.git-completion.bash
 
-
 ################################################################
 #
 # fzf Integration
@@ -22,7 +21,6 @@ export FZF_COMPLETION_TRIGGER='~~'
 
 # Use ag instead of find
 export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .git --ignore node_modules --ignore vendor --ignore target -g ""'
-
 
 ################################################################
 #
@@ -78,7 +76,6 @@ short_pwd() {
 
 }
 
-
 ################################################################
 #
 # Misc
@@ -92,9 +89,6 @@ export EDITOR="$VISUAL"
 # Bat config
 export BAT_THEME="ansi"
 
-# iTerm Shell Integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
 # Load local-specific config if it exists (not committed to git)
 if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
@@ -102,24 +96,6 @@ fi
 
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
-
-
-################################################################
-#
-# Tmux
-#
-################################################################
-
-# Automatically attach to a tmux `default` session.
-
-## Get the parent process
-pid=$$
-until (( pid == 1 ))
-do
-    [[ $(ps -o command= -p $pid) =~ Code ]] && break
-    pid=$(ps -o ppid= $pid)
-done
-
 
 ################################################################
 #
