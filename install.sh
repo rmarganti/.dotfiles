@@ -44,54 +44,42 @@ function symlink_safe() {
     fi
 }
 
+#----------------------------------------------------------------
+# Initial setup
+#----------------------------------------------------------------
 
-################################################################
-#
+mkdir -p ~/.config
+
+#----------------------------------------------------------------
 # Shell
-#
-################################################################
+#----------------------------------------------------------------
 
 # bash config
-symlink_or_ask ~/.dotfiles/shell/bashrc ~/.bashrc
-symlink_or_ask ~/.dotfiles/shell/bash_profile ~/.bash_profile
-symlink_or_ask ~/.dotfiles/shell/bash_aliases ~/.bash_aliases
-symlink_or_ask ~/.dotfiles/shell/bash_colors ~/.bash_colors
-
-# Wezterm
-symlink_or_ask ~/.dotfiles/shell/wezterm ~/.config/wezterm
+symlink_or_ask ~/.dotfiles/dots/.bashrc ~/.bashrc
+symlink_or_ask ~/.dotfiles/dots/.bash_profile ~/.bash_profile
+symlink_or_ask ~/.dotfiles/dots/.bash_aliases ~/.bash_aliases
+symlink_or_ask ~/.dotfiles/dots/.bash_colors ~/.bash_colors
 
 # git shell completion
 if [ ! -f ~/.git-completion.bash ]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 fi
 
-# install fzf
-if [ ! -d ~/.fzf ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-fi
-
-
-################################################################
-#
+#----------------------------------------------------------------
 # Git
-#
-################################################################
+#----------------------------------------------------------------
 
-symlink_or_ask ~/.dotfiles/git/gitconfig ~/.gitconfig
-symlink_or_ask ~/.dotfiles/git/gitignore.global ~/.gitignore.global
+symlink_or_ask ~/.dotfiles/dots/.gitconfig ~/.gitconfig
+symlink_or_ask ~/.dotfiles/dots/.gitignore.global ~/.gitignore.global
 
-
-################################################################
-#
-# VIM / NEOVIM
-#
-################################################################
+#----------------------------------------------------------------
+# Vim + Neovim
+#----------------------------------------------------------------
 
 # vim config
-symlink_or_ask ~/.dotfiles/editor/vim ~/.vim
-symlink_or_ask ~/.dotfiles/editor/vimrc ~/.vimrc
-symlink_or_ask ~/.dotfiles/editor/nvim ~/.config/nvim
+symlink_or_ask ~/.dotfiles/dots/.vim ~/.vim
+symlink_or_ask ~/.dotfiles/dots/.vimrc ~/.vimrc
+symlink_or_ask ~/.dotfiles/dots/.config/nvim ~/.config/nvim
 symlink_or_ask ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # install vim-plug
@@ -99,4 +87,19 @@ if [ ! -d ~/.dotfiles/editor/vim/autoload/plug.vim ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     vim +PlugInstall +qall
+fi
+
+#----------------------------------------------------------------
+# Misc
+#----------------------------------------------------------------
+
+symlink_or_ask ~/.dotfiles/dots/.config/bat ~/.config/bat
+symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
+symlink_or_ask ~/.dotfiles/dots/.config/ranger ~/.config/ranger
+symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
+
+# install fzf
+if [ ! -d ~/.fzf ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
 fi
