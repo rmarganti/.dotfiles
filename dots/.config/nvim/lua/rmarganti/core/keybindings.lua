@@ -339,8 +339,13 @@ utils.map('n', '<Leader>ts', function()
     require('neotest').summary.toggle()
 end)
 
--- Toggle Test Output.
+-- Show Test Output.
 utils.map('n', '<Leader>to', function()
+    require('neotest').output.open({ enter = true })
+end)
+
+-- Toggle Test Output panel.
+utils.map('n', '<Leader>tO', function()
     require('neotest').output_panel.toggle()
 end)
 
