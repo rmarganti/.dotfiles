@@ -97,6 +97,9 @@ return {
 
         -- Versions
         '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(?:-beta[0-9]?)?',
+
+        -- PHPUnit test names
+        '[A-Za-z]+::test[A-Za-z_]+',
     },
 
     -- Disable hyperlinks
