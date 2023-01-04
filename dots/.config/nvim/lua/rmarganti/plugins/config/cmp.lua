@@ -49,6 +49,8 @@ function M.config()
         end
     end
 
+    require('copilot_cmp').setup()
+
     cmp.setup({
         performance = {
             debounce = 500,
