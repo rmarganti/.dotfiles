@@ -13,4 +13,5 @@ return {
     rust_analyzer = require('rmarganti.colors.integrations.rust-analyzer'),
     symbols_outline = require('rmarganti.colors.integrations.symbols-outline'),
     telescope = require('rmarganti.colors.integrations.telescope'),
+    vim_illuminate = require('rmarganti.colors.integrations.vim-illuminate'),
 }
