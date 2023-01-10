@@ -37,6 +37,9 @@ function M.setup()
         -- Lua
         builtins.formatting.stylua,
 
+        -- Bash
+        null_ls.builtins.formatting.shfmt,
+
         -- Lots of languages
         builtins.formatting.prettierd.with({
             condition = function()
@@ -61,9 +64,7 @@ function M.setup()
                 'vimwiki', -- This is the only non-default
             },
             env = {
-                PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
-                    '~/.config/nvim/.prettierrc.json'
-                ),
+                PRETTIERD_DEFAULT_CONFIG = vim.fn.expand('~/.config/nvim/.prettierrc.json'),
             },
         }),
     }
