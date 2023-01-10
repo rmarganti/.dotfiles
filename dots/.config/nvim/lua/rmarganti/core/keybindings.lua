@@ -348,7 +348,7 @@ end)
 
 -- Show Test Output.
 utils.map('n', '<Leader>to', function()
-    require('neotest').output.open({ enter = true })
+    require('neotest').output.open({ enter = false })
 end)
 
 -- Toggle Test Output panel.
