@@ -15,6 +15,7 @@ return {
     VimwikiHR = { fg = a.base },
     VimwikiList = { fg = a.base },
     VimwikiTag = { fg = a.base },
+    VimwikiCellSeparator = { fg = a.minus2 },
 
     VimwikiCode = { link = 'markdownCodeBlock' },
 }
