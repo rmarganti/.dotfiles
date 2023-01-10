@@ -306,12 +306,19 @@ utils.map('n', '<Leader>ss', '<cmd>Telescope symbols<CR>')
 
 -- Search Commands
 utils.map('n', '<Leader>sc', '<cmd>Telescope commands<CR>')
+utils.map('x', '<Leader>sc', '<cmd>Telescope commands<CR>')
 
 -- Search Help
 utils.map('n', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
+utils.map('x', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
+
+-- Search Highlights
+utils.map('n', '<Leader>sH', '<cmd>Telescope highlights<CR>')
+utils.map('x', '<Leader>sH', '<cmd>Telescope highlights<CR>')
 
 -- Search Resume
 utils.map('n', '<Leader>s.', '<cmd>Telescope resume<CR>')
+utils.map('x', '<Leader>s.', '<cmd>Telescope resume<CR>')
 
 ------------------------------------------------
 --
