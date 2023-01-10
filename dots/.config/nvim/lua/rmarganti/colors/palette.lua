@@ -4,9 +4,9 @@ return {
     bg_darker = { gui = '#0d1011', cterm = 233 },
     bg_dark = { gui = '#181c1e', cterm = 234 },
     bg = { gui = '#1d2226', cterm = 235 },
-    bg_light = { gui = '#2b3238', cterm = 237 },
-    bg_lighter = { gui = '#39434b', cterm = 238 },
-    bg_lightest = { gui = '#48545e', cterm = 240 },
+    bg_light = { gui = '#262D32', cterm = 236 },
+    bg_lighter = { gui = '#30383F', cterm = 237 },
+    bg_lightest = { gui = '#39434b', cterm = 238 },
 
     fg = { gui = '#d3c6aa', cterm = 187 },
 
