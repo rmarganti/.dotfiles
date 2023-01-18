@@ -12,8 +12,7 @@
             "",
             "class ${TM_FILENAME_BASE:ClassTest} extends PHPUnit_Framework_TestCase ",
             "{",
-            "\tpublic function setUp()",
-            "\t{",
+            "\tpublic function setUp(): void {}",
             "\t\t$0",
             "\t}",
             "}",
@@ -25,7 +24,7 @@
     "PHP Unit Test Method": {
         "prefix": "putf",
         "body": [
-            "public function test_it_$1() {",
+            "public function test_it_$1(): void {",
             "\t${0:// Do something}",
             "}",
             ""
