@@ -86,9 +86,9 @@ return {
     },
 
     -- Markdown preview.
+    -- Does not work correctly when lazy-loaded.
     {
         'iamcco/markdown-preview.nvim',
-        cmd = 'MarkdownPreview',
         build = function()
             vim.fn['mkdp#util#install']()
         end,
