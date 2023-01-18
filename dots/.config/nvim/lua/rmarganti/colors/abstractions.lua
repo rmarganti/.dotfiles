@@ -19,10 +19,10 @@ M = {
 
     border = p.gray1,
 
-    float_bg = p.bg_light,
+    float_bg = p.bg_lighter,
 
     select_fg = p.fg,
-    select_bg = p.bg_lightest,
+    select_bg = p.gray1,
 }
 
 return M

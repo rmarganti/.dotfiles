@@ -62,7 +62,7 @@ return {
     -- ['@type'] = {}, -- type or class definitions and annotations
     -- ['@type.builtin'] = {}, -- built-in types
     -- ['@type.definition'] = {}, -- type definitions (e.g. `typedef` in C)
-    -- ['@type.qualifier'] = {}, -- type qualifiers (e.g. `const`)
+    ['@type.qualifier'] = { fg = a.base }, -- type qualifiers (e.g. `const`)
 
     -- ['@storageclass'] = {}, -- visibility/life-time/etc. modifiers (e.g. `static`)
     -- ['@attribute'] = {}, -- attribute annotations (e.g. Python decorators)
@@ -72,13 +72,13 @@ return {
     -- Identifiers
 
     ['@variable'] = { fg = a.plus4 }, -- various variable names
-    ['@variable.builtin'] = { fg = a.plus4 }, -- built-in variable names (e.g. `this`)
+    -- ['@variable.builtin'] = { fg = a.plus4 }, -- built-in variable names (e.g. `this`)
 
     ['@constant'] = { fg = a.plus4 }, -- constant identifiers
     -- ['@constant.builtin'] = {}, -- built-in constant values
     -- ['@constant.macro'] = {}, -- constants defined by the preprocessor
 
-    ['@namespace'] = { fg = a.plus4 }, -- modules or namespaces
+    ['@namespace'] = { fg = a.plus1 }, -- modules or namespaces
     -- ['@symbol'] = {}, -- symbols or atoms
 
     -- Text (Mainly for markup languages).
@@ -88,15 +88,15 @@ return {
     -- ['@text.emphasis'] = {}, -- text with emphasis
     -- ['@text.underline'] = {}, -- underlined text
     -- ['@text.strike'] = {}, -- strikethrough text
-    -- ['@text.title'] = {}, -- text that is part of a title
+    ['@text.title'] = { fg = a.plus3 }, -- text that is part of a title
     -- ['@text.literal'] = {}, -- literal or verbatim text
-    -- ['@text.uri'] = {}, -- URIs (e.g. hyperlinks)
+    ['@text.uri'] = { fg = a.plus2 }, -- URIs (e.g. hyperlinks)
     -- ['@text.math'] = {}, -- math environments (e.g. `$ ... $` in LaTeX)
     -- ['@text.environment'] = {}, -- text environments of markup languages
     -- ['@text.environment.name'] = {}, -- text indicating the type of an environment
     -- ['@text.reference'] = {}, -- text references, footnotes, citations, etc.
 
-    -- ['@text.todo'] = {}, -- todo notes
+    ['@text.todo'] = { fg = a.plus1 }, -- todo notes
     -- ['@text.note'] = {}, -- info notes
     -- ['@text.warning'] = {}, -- warning notes
     -- ['@text.danger'] = {}, -- danger/error notes
