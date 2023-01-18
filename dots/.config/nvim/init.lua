@@ -30,3 +30,4 @@ require('rmarganti.core.user_commands')
 vim.cmd('colorscheme neverforest')
 
 require('rmarganti.plugins')
+require('rmarganti.core.filetypes')
