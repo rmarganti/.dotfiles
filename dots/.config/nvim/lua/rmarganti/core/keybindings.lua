@@ -219,6 +219,9 @@ utils.map('n', '<Leader>gh', '<cmd>Telescope git_bcommits<CR>')
 -- Git Branches
 utils.map('n', '<Leader>gb', '<cmd>Telescope git_branches<CR>')
 
+-- Git Blame
+utils.map('n', '<Leader>gB', '<cmd>Git blame<CR>')
+
 -- Git Status
 utils.map('n', '<Leader>gs', '<cmd>Telescope git_status<CR>')
 
