@@ -8,40 +8,43 @@
 ################################################################
 
 function ask_should_symlink() {
-    while true; do
-        read -p "Do you want to symlink $1 to $2 ? " yn
-        case $yn in
-            [Yy]* ) symlink_safe $1 $2; break;;
-            [Nn]* ) return ;;
-            * ) echo "Please answer yes or no.";
-        esac
-    done
+	while true; do
+		read -p "Do you want to symlink $1 to $2 ? " yn
+		case $yn in
+		[Yy]*)
+			symlink_safe $1 $2
+			break
+			;;
+		[Nn]*) return ;;
+		*) echo "Please answer yes or no." ;;
+		esac
+	done
 }
 
 function symlink_or_ask() {
-    if [ -L $2 ]; then
-        echo "$1 is already linked to $2"
-    elif [ -d $2 ]; then
-        ask_should_symlink $1 $2
-    elif [ -f $2 ]; then
-        ask_should_symlink $1 $2
-    else
-        ln -s $1 $2
-    fi
+	if [ -L $2 ]; then
+		echo "$1 is already linked to $2"
+	elif [ -d $2 ]; then
+		ask_should_symlink $1 $2
+	elif [ -f $2 ]; then
+		ask_should_symlink $1 $2
+	else
+		ln -s $1 $2
+	fi
 }
 
 function backup_move() {
-    SCRIPT_TIME=`date +%Y%m%d%H_%M_%S`
-    mv $1 "${1}_${SCRIPT_TIME}"
+	SCRIPT_TIME=$(date +%Y%m%d%H_%M_%S)
+	mv $1 "${1}_${SCRIPT_TIME}"
 }
 
 function symlink_safe() {
-    echo "symlinking $1 to $2"
-    if [ -f $2 ]; then
-        backup_move $2 && ln -sf $1 $2
-    else
-        ln -sf $1 $2
-    fi
+	echo "symlinking $1 to $2"
+	if [ -f $2 ]; then
+		backup_move $2 && ln -sf $1 $2
+	else
+		ln -sf $1 $2
+	fi
 }
 
 #----------------------------------------------------------------
@@ -62,7 +65,7 @@ symlink_or_ask ~/.dotfiles/dots/.bash_colors ~/.bash_colors
 
 # git shell completion
 if [ ! -f ~/.git-completion.bash ]; then
-    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 fi
 
 #----------------------------------------------------------------
@@ -84,9 +87,9 @@ symlink_or_ask ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # install vim-plug
 if [ ! -d ~/.dotfiles/editor/vim/autoload/plug.vim ]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +qall
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	vim +PlugInstall +qall
 fi
 
 #----------------------------------------------------------------
@@ -101,6 +104,6 @@ symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 
 # install fzf
 if [ ! -d ~/.fzf ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
 fi
