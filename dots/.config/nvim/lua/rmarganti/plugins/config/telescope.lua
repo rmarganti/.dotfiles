@@ -26,6 +26,7 @@ function M.config()
             },
         },
         defaults = {
+            layout_strategy = 'vertical',
             dynamic_preview_title = true,
             file_ignore_patterns = {
                 '^.git/',
@@ -44,6 +45,7 @@ function M.config()
                 },
                 vertical = {
                     preview_cutoff = 40,
+                    preview_height = 20,
                 },
                 width = 0.9,
             },
