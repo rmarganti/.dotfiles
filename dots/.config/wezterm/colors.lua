@@ -88,7 +88,7 @@ M.config = {
 
         active_tab = {
             bg_color = M.palette.bg.gui,
-            fg_color = M.palette.white.gui,
+            fg_color = M.palette.gray4.gui,
         },
 
         inactive_tab = {
@@ -102,6 +102,9 @@ M.config = {
             fg_color = M.palette.bg_dark.gui,
         },
     },
+
+    -- The color of the split lines between panes
+    split = M.palette.bg.gui,
 }
 
 return M
