@@ -83,8 +83,8 @@ M.clients = {
     -- PHP
     ------------------------------------------------
 
-    intelephense = {
-        formatting_enabled = false,
+    phpactor = {
+        formatting_enabled = true,
     },
 
     ------------------------------------------------
