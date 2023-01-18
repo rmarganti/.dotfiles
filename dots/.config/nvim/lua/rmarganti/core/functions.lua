@@ -37,12 +37,13 @@ M.edit_test = function()
     local extension = file:match(extension_regex)
     local file_without_extension = file:gsub(extension_regex, '')
 
-    if misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension) == false then
+    if misc_utils.has_value({ '.js', '.jsx', '.ts', '.tsx' }, extension) then
+        vim.cmd('e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension)
+    elseif misc_utils.has_value({ '.go' }, extension) then
+        vim.cmd('e ' .. dir .. '/' .. file_without_extension .. '_test' .. extension)
+    else
         vim.notify('File type `' .. extension .. '` not supported', 'warn')
-        return
     end
-
-    vim.cmd('e ' .. dir .. '/' .. file_without_extension .. '.spec' .. extension)
 end
 
 local enable_format_on_save = true
