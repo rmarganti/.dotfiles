@@ -6,16 +6,15 @@
 
 # Enable color for `ls` command
 export CLICOLOR=1 # For BSD/Darwin
-ls --color=auto &> /dev/null && alias ls='ls --color=auto' ||
-
-alias cpwd='pwd | pbcopy'
+ls --color=auto &>/dev/null && alias ls='ls --color=auto' ||
+	alias cpwd='pwd | pbcopy'
 alias ll='ls -alFh'
 alias up='cd ..'
 alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
 
 # z hurts my pinky :(
-alias j=z
+alias j=zi
 
 # Restart service (via systemctl)
 alias sysr="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
@@ -52,11 +51,11 @@ alias gpuo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u or
 
 # Git Branch -- Select a branch to checkout using FZF.
 function gb() {
-    local branches branch query
-    query="$*"
-    branches=$(git branch --all | grep -v HEAD) &&
-    branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
-    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+	local branches branch query
+	query="$*"
+	branches=$(git branch --all | grep -v HEAD) &&
+		branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
+		git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
@@ -65,20 +64,20 @@ _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always 
 
 # Git Commit -- Select commit to checkout using FZF.
 function gc() {
-    local commit
-    commit=$( glNoGraph |
-        fzf --no-sort --reverse --tiebreak=index --no-multi \
-            --ansi --preview="$_viewGitLogLine" ) &&
-    git checkout $(echo "$commit" | sed "s/ .*//")
+	local commit
+	commit=$(glNoGraph |
+		fzf --no-sort --reverse --tiebreak=index --no-multi \
+			--ansi --preview="$_viewGitLogLine") &&
+		git checkout $(echo "$commit" | sed "s/ .*//")
 }
 
 # Git Branch Delete
 function gbd() {
-    local branches branch query
-    query="$*"
-    branches=$(git --no-pager branch) &&
-    branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
-    git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+	local branches branch query
+	query="$*"
+	branches=$(git --no-pager branch) &&
+		branch=$(echo "$branches" | fzf --height=40% --query="$query" +m) &&
+		git branch -d $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
 ################################################################
@@ -90,13 +89,13 @@ function gbd() {
 # Laravel
 # --------------------------------
 function art() {
-    if
-        [ $# -gt 0 ]
-    then
-        php artisan $*
-    else
-        php artisan | fzf --reverse | awk '{ print $1 }' | xargs php artisan
-    fi
+	if
+		[ $# -gt 0 ]
+	then
+		php artisan $*
+	else
+		php artisan | fzf --reverse | awk '{ print $1 }' | xargs php artisan
+	fi
 }
 
 alias acc='php artisan cache:clear'
@@ -122,7 +121,7 @@ alias cda='composer dump-autoload -o'
 # --------------------------------
 alias pu='./vendor/bin/phpunit'
 function puf() {
-    ./vendor/bin/phpunit --filter=$1
+	./vendor/bin/phpunit --filter=$1
 }
 alias pus='./vendor/bin/phpunit --testsuite'
 
@@ -154,5 +153,5 @@ alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I 
 ################################################################
 
 function strlen() {
-    echo -n "$1" | wc -c
+	echo -n "$1" | wc -c
 }
