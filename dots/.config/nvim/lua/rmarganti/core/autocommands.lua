@@ -6,36 +6,11 @@ local custom_group = vim.api.nvim_create_augroup('custom', { clear = true })
 --
 ------------------------------------------------
 
-vim.api.nvim_create_autocmd(
-    'FileType',
-    {
-        group = custom_group,
-        pattern = 'qf',
-        callback = function()
-            -- Do not show quickfix in buffer lists.
-            vim.api.nvim_buf_set_option(0, 'buflisted', false)
-
-            -- Escape closes quickfix window.
-            vim.keymap.set(
-                'n',
-                '<ESC>',
-                '<CMD>cclose<CR>',
-                { buffer = true, remap = false, silent = true }
-            )
-
-            -- `dd` deletes an item from the list.
-            vim.keymap.set('n', 'dd', delete_qf_items, { buffer = true })
-            vim.keymap.set('x', 'd', delete_qf_items, { buffer = true })
-        end,
-        desc = 'Quickfix tweaks'
-    }
-)
-
 -- Remove items from quickfix list.
 -- `dd` to delete in Normal
 -- `d` to delete Visual selection
-function delete_qf_items(arg1)
-    local mode = vim.api.nvim_get_mode()["mode"]
+local function delete_qf_items()
+    local mode = vim.api.nvim_get_mode()['mode']
 
     local start_idx
     local count
@@ -55,13 +30,13 @@ function delete_qf_items(arg1)
         -- Go back to normal
         vim.api.nvim_feedkeys(
             vim.api.nvim_replace_termcodes(
-                "<esc>", -- what to escape
+                '<esc>', -- what to escape
                 true, -- Vim leftovers
                 false, -- Also replace `<lt>`?
-                true-- Replace keycodes (like `<esc>`)?
+                true -- Replace keycodes (like `<esc>`)?
             ),
             'x', -- Mode flag
-            false-- Should be false, since we already `nvim_replace_termcodes()`
+            false -- Should be false, since we already `nvim_replace_termcodes()`
         )
     end
 
@@ -75,18 +50,37 @@ function delete_qf_items(arg1)
     vim.fn.cursor(start_idx, 1)
 end
 
+vim.api.nvim_create_autocmd('FileType', {
+    group = custom_group,
+    pattern = 'qf',
+    callback = function()
+        -- Do not show quickfix in buffer lists.
+        vim.api.nvim_buf_set_option(0, 'buflisted', false)
+
+        -- Escape closes quickfix window.
+        vim.keymap.set(
+            'n',
+            '<ESC>',
+            '<CMD>cclose<CR>',
+            { buffer = true, remap = false, silent = true }
+        )
+
+        -- `dd` deletes an item from the list.
+        vim.keymap.set('n', 'dd', delete_qf_items, { buffer = true })
+        vim.keymap.set('x', 'd', delete_qf_items, { buffer = true })
+    end,
+    desc = 'Quickfix tweaks',
+})
+
 ------------------------------------------------
 --
 -- WinResize
 --
 ------------------------------------------------
 
-vim.api.nvim_create_autocmd(
-    'VimResized',
-    {
-        group = custom_group,
-        pattern = '*',
-        command = 'wincmd =',
-        desc = 'Automatically resize windows when the host window size changes.'
-    }
-)
+vim.api.nvim_create_autocmd('VimResized', {
+    group = custom_group,
+    pattern = '*',
+    command = 'wincmd =',
+    desc = 'Automatically resize windows when the host window size changes.',
+})
