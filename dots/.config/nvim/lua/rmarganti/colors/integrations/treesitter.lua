@@ -40,7 +40,7 @@ return {
     ['@method'] = { fg = a.plus3 }, -- method definitions
     -- ['@method.call'] = {}, -- method calls
 
-    ['@constructor'] = { fg = a.plus4 }, -- constructor calls and definitions
+    ['@constructor'] = { fg = a.plus3 }, -- constructor calls and definitions
     ['@parameter'] = { fg = a.plus4 }, -- parameters of a function
 
     -- Keywords
