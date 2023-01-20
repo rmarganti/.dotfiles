@@ -19,7 +19,7 @@ M = {
 
     border = p.gray1,
 
-    float_bg = p.bg_lighter,
+    float_bg = p.bg_light,
 
     select_fg = p.fg,
     select_bg = p.gray1,
