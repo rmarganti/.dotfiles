@@ -161,6 +161,9 @@ utils.map('n', '<Leader>et', core_fns.edit_test)
 -- Edit Snippets for current file type
 utils.map('n', '<Leader>es', core_fns.edit_snippets)
 
+-- Edit Other (edit file related to current one)
+utils.map('n', '<Leader>eo', '<cmd>Other<CR>')
+
 ------------------------------------------------
 --
 -- Files
