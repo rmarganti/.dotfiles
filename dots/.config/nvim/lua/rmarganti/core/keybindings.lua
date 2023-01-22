@@ -162,7 +162,7 @@ utils.map('n', '<Leader>et', core_fns.edit_test)
 utils.map('n', '<Leader>es', core_fns.edit_snippets)
 
 -- Edit Other (edit file related to current one)
-utils.map('n', '<Leader>eo', '<cmd>Other<CR>')
+utils.map('n', '<Leader>eo', core_fns.edit_other)
 
 ------------------------------------------------
 --

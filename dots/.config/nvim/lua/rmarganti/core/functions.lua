@@ -1,6 +1,7 @@
 local M = {}
 
 local misc_utils = require('rmarganti.utils.misc')
+local other_files_config = require('rmarganti.config.other-files')
 
 M.toggle_quickfix = function()
     for _, win in pairs(vim.fn.getwininfo()) do
@@ -137,6 +138,25 @@ M.read_url = function()
 
         vim.cmd('read !curl -s ' .. input)
     end)
+end
+
+-- Open other file related to current buffer. This is usually
+-- either a test, or the file to which a test applies.
+M.edit_other = function()
+    local buffername = vim.api.nvim_buf_get_name(0)
+
+    for _, mapping in pairs(other_files_config) do
+        local match_results = buffername:match(mapping.pattern)
+
+        if match_results ~= nil then
+            local match = buffername:gsub(mapping.pattern, mapping.target)
+            vim.cmd.edit(match)
+
+            return
+        end
+    end
+
+    vim.notify('No other file matches found')
 end
 
 return M
