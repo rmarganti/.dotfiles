@@ -5,6 +5,12 @@
         "description": "Write to Laravel log"
     },
 
+    "App Log Info JSON Encode": {
+        "prefix": "alje",
+        "body": ["app('log')->info(json_encode($0));"],
+        "description": "Write JSON-encoded value to Laravel log"
+    },
+
     "PHP Unit Test Class": {
         "prefix": "putc",
         "body": [

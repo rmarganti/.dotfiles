@@ -11,6 +11,10 @@
                 "path": "./snippets/lua.json"
             },
             {
+                "language": "go",
+                "path": "./snippets/go.json"
+            },
+            {
                 "language": "php",
                 "path": "./snippets/php.json"
             },
