@@ -7,15 +7,18 @@ return {
 
     -- unit test -> class
     {
-        pattern = '/tests/Unit/(.*)/(.*)Test.php$',
+        pattern = '/tests/[Uu]nit/(.*)/(.*)Test.php$',
         target = '/src/%1/%2.php',
         context = 'unit test',
+        condition = function()
+            return vim.fn.isdirectory('src') == 1
+        end,
     },
 
     -- class -> unit test
     {
         pattern = '/src/(.*)/(.*).php$',
-        target = '/tests/Unit/%1/%2Test.php',
+        target = '/tests/unit/%1/%2Test.php',
         context = 'unit test',
     },
 
@@ -25,23 +28,29 @@ return {
 
     -- controller integration test -> controller
     {
-        pattern = '/tests/integration/Http/Controllers/ApiV1/(.*)Test.php$',
-        target = '/app/Http/Controllers/ApiV1/%1.php',
+        pattern = '/tests/[Ii]ntegration/(.*)/(.*)ControllerTest.php$',
+        target = '/app/%1/%2Controller.php',
         context = 'unit test',
+        condition = function()
+            return vim.fn.isdirectory('app') == 1
+        end,
     },
 
     -- controller -> controller integration test
     {
-        pattern = '/app/Http/Controllers/ApiV1/(.*).php$',
-        target = '/tests/integration/Http/Controllers/ApiV1/%1Test.php',
+        pattern = '/app/(.*)/(.*)Controller.php$',
+        target = '/tests/integration/%1/%2ControllerTest.php',
         context = 'unit test',
     },
 
     -- unit test -> class
     {
-        pattern = '/app/(.*)/(.*).php$',
-        target = '/tests/unit/%1/%2Test.php',
+        pattern = '/tests/unit/(.*)/(.*)Test.php$',
+        target = '/app/%1/%2.php',
         context = 'unit test',
+        condition = function()
+            return vim.fn.isdirectory('app') == 1
+        end,
     },
 
     -- class -> unit test
@@ -57,15 +66,15 @@ return {
 
     -- unit test -> class
     {
-        pattern = '/(.*)/(.*).spec.ts$',
-        target = '/%1/%2.ts',
+        pattern = '/(.*)/(.*).spec.(tsx?)$',
+        target = '/%1/%2.%3',
         context = 'tested file',
     },
 
     -- class -> unit test
     {
-        pattern = '/(.*)/(.*).ts$',
-        target = '/%1/%2.spec.ts',
+        pattern = '/(.*)/(.*).(tsx?)$',
+        target = '/%1/%2.spec.%3',
         context = 'unit test',
     },
 
