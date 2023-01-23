@@ -45,7 +45,7 @@ function M.config()
                 },
                 vertical = {
                     preview_cutoff = 40,
-                    preview_height = 20,
+                    preview_height = 18,
                 },
                 width = 0.9,
             },
