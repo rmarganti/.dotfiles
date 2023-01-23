@@ -419,3 +419,9 @@ end)
 
 -- Jump to character in current window.
 utils.map('n', '<Leader><Leader>', '<cmd>HopChar1<CR>')
+
+-- Exchange current line.
+utils.map('n', '<A-j>', ']e', { remap = true })
+utils.map('n', '<A-k>', '[e', { remap = true })
+utils.map('x', '<A-j>', ']egv', { remap = true })
+utils.map('x', '<A-k>', '[egv', { remap = true })
