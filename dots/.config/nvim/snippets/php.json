@@ -11,6 +11,23 @@
         "description": "Write JSON-encoded value to Laravel log"
     },
 
+    "New Class": {
+        "prefix": "nc",
+        "body": [
+            "<?php",
+            "",
+            "namespace A",
+            "",
+            "class A",
+            "{",
+            "\tpublic function __construct()",
+            "\t{",
+            "\t}",
+            "}"
+        ],
+        "description": "A new name-spaced class"
+    },
+
     "PHP Unit Test Class": {
         "prefix": "putc",
         "body": [
