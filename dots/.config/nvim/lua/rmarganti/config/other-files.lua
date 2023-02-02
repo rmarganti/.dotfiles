@@ -71,7 +71,7 @@ return {
         context = 'tested file',
     },
 
-    -- class -> unit test
+    -- file -> unit test
     {
         pattern = '/(.*)/(.*).(tsx?)$',
         target = '/%1/%2.spec.%3',
@@ -89,10 +89,14 @@ return {
         context = 'tested file',
     },
 
-    -- class -> unit test
+    -- file -> unit test
     {
         pattern = '/(.*)/(.*).go$',
         target = '/%1/%2_test.go',
         context = 'unit test',
+        condition = function()
+            local filename = vim.fn.expand('%:t')
+            return filename:find('_test.go') == nil
+        end
     },
 }
