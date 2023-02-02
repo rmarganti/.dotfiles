@@ -82,32 +82,17 @@ short_pwd() {
 #
 ################################################################
 
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
 # Set default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+# Let the world know what terminal we are using
+export TERM="wezterm"
 
 # Load local-specific config if it exists (not committed to git)
 if [ -f ~/.bashrc.local ]; then
 	. ~/.bashrc.local
 fi
-
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init bash)"
-
-################################################################
-#
-# Wezterm
-#
-################################################################
-
-export TERM="wezterm"
-
-################################################################
-#
-# Go
-#
-################################################################
-
-export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
