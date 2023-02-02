@@ -147,6 +147,9 @@ alias ke="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I 
 # Logs
 alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl logs % -f"
 
+# Copy pod
+alias kcp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | tr 'A-Z' 'a-z' | pbcopy"
+
 ################################################################
 #
 # Misc
