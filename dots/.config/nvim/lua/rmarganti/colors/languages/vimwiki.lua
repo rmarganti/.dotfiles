@@ -11,7 +11,7 @@ return {
     VimwikiHeader5 = { fg = p.gray3, bold = true },
     VimwikiHeader6 = { fg = p.gray3, bold = true },
 
-    VimwikiLink = { fg = p.green, underline = true },
+    VimwikiLink = { fg = a.plus1, underline = true },
     VimwikiHR = { fg = a.base },
     VimwikiList = { fg = a.base },
     VimwikiTag = { fg = a.base },

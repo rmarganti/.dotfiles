@@ -14,7 +14,7 @@ return {
     EndOfBuffer = { fg = p.black }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg = { fg = a.error }, -- error messages on the command line
     VertSplit = { fg = p.black }, -- the column separating vertically split windows
-    Folded = { fg = p.fg, bg = p.bg_light }, -- line used for closed folds
+    Folded = { fg = p.fg, bg = p.bg_lighter }, -- line used for closed folds
     FoldColumn = { bg = p.none, fg = a.minus2 }, -- 'foldcolumn'
     SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
     signcolumnsb = { bg = p.bg_light, fg = p.fg }, -- column where |signs| are displayed
@@ -71,7 +71,7 @@ return {
     Number = { fg = a.plus2 }, --   a number constant: 234, 0xff
     Float = { fg = a.plus2 }, --    a floating point constant: 2.3e10
     Boolean = { fg = a.plus2 }, --  a boolean constant: TRUE, false
-    Identifier = { fg = a.plus2 }, -- any variable name
+    Identifier = { fg = a.plus4 }, -- any variable name
     Function = { fg = a.plus3 }, -- function name (also: methods for classes)
     Statement = { fg = a.plus3 }, -- any statement
     Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.

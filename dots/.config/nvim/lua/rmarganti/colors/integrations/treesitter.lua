@@ -18,7 +18,7 @@ return {
 
     -- Literals
 
-    ['@string'] = { fg = a.plus2 }, -- string literals
+    -- ['@string'] = { fg = a.plus2 }, -- string literals
     -- ['@string.regex'] = {}, -- regular expressions
     ['@string.escape'] = { fg = a.base }, -- escape sequences
     -- ['@string.special'] = {}, -- other special strings (e.g. dates)
@@ -32,12 +32,12 @@ return {
 
     -- Functions
 
-    ['@function'] = { fg = a.plus3 }, -- function definitions
-    ['@function.builtin'] = { fg = a.plus3 }, -- built-in functions
+    -- ['@function'] = { fg = a.plus3 }, -- function definitions
+    -- ['@function.builtin'] = { fg = a.plus3 }, -- built-in functions
     -- ['@function.call'] = {}, -- function calls
     -- ['@function.macro'] = {}, -- preprocessor macros
 
-    ['@method'] = { fg = a.plus3 }, -- method definitions
+    -- ['@method'] = { fg = a.plus3 }, -- method definitions
     -- ['@method.call'] = {}, -- method calls
 
     ['@constructor'] = { fg = a.plus3 }, -- constructor calls and definitions
@@ -71,14 +71,14 @@ return {
 
     -- Identifiers
 
-    ['@variable'] = { fg = a.plus4 }, -- various variable names
+    -- ['@variable'] = { fg = a.plus4 }, -- various variable names
     -- ['@variable.builtin'] = { fg = a.plus4 }, -- built-in variable names (e.g. `this`)
 
-    ['@constant'] = { fg = a.plus4 }, -- constant identifiers
+    -- ['@constant'] = { fg = a.plus4 }, -- constant identifiers
     -- ['@constant.builtin'] = {}, -- built-in constant values
     -- ['@constant.macro'] = {}, -- constants defined by the preprocessor
 
-    ['@namespace'] = { fg = a.plus1 }, -- modules or namespaces
+    ['@namespace'] = { fg = a.base }, -- modules or namespaces
     -- ['@symbol'] = {}, -- symbols or atoms
 
     -- Text (Mainly for markup languages).
