@@ -413,9 +413,7 @@ utils.map('n', '<Leader>qQ', ':qa!<CR>')
 utils.map('n', '<Leader>hh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
 
 -- Go Split (opposite of `J` for parameters)
-utils.map('n', 'gJ', function()
-    require('trevj').format_at_cursor()
-end)
+utils.map('n', 'gJ', '<cmd>TSJToggle<CR>')
 
 -- Jump to character in current window.
 utils.map('n', '<Leader><Leader>', '<cmd>HopChar1<CR>')

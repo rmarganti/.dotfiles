@@ -1,15 +1,5 @@
 return {
     --------------------------------
-    -- Code Specific
-    --------------------------------
-
-    -- Split function parameters into multiple lines (opposite of `J`).
-    {
-        'AckslD/nvim-trevJ.lua',
-        event = 'BufReadPost',
-    },
-
-    --------------------------------
     -- Git
     --------------------------------
 
