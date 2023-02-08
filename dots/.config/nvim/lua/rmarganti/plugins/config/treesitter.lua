@@ -32,6 +32,7 @@ function M.config()
             'query', -- Treesitter
             'scss',
             'sql',
+            'terraform',
             'tsx',
             'typescript',
             'vim',
