@@ -33,7 +33,7 @@ return {
     -- Functions
 
     -- ['@function'] = { fg = a.plus3 }, -- function definitions
-    -- ['@function.builtin'] = { fg = a.plus3 }, -- built-in functions
+    ['@function.builtin'] = { fg = a.plus3 }, -- built-in functions
     -- ['@function.call'] = {}, -- function calls
     -- ['@function.macro'] = {}, -- preprocessor macros
 
