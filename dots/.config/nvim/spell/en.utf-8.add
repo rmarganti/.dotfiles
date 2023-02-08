@@ -42,3 +42,7 @@ wezterm
 whitelist
 whitelisted
 postgres
+figma
+adpoint
+timestamp
+timestamptz
