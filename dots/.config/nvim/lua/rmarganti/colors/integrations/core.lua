@@ -54,8 +54,8 @@ return {
     TabLineFill = { bg = p.black }, -- tab pages line, where there are no labels
     TabLineSel = { fg = p.fg, bg = p.bg_light }, -- tab pages line, active tab page label
     Title = { fg = p.plus2 }, -- titles for output from ":set all", ":autocmd" etcp.
-    Visual = { bg = p.black }, -- Visual mode selection
-    VisualNOS = { bg = p.black }, -- Visual mode selection when vim is "Not Owning the Selection".
+    Visual = { bg = p.bg_lighter }, -- Visual mode selection
+    VisualNOS = { bg = p.bg_lighter }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg = { fg = a.warning }, -- warning messages
     Whitespace = { fg = a.minus3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu = { bg = p.base }, -- current match in 'wildmenu' completion
