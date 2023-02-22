@@ -7,6 +7,14 @@ local M = {
     },
 }
 
+local function position_provider()
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local row = cursor_pos[1]
+    local col = cursor_pos[2]
+
+    return string.format('%d:%d', col, row)
+end
+
 function M.config()
     local feline = require('feline')
     local vi_mode_utils = require('feline.providers.vi_mode')
@@ -122,15 +130,13 @@ function M.config()
             right_sep = ' ',
         },
 
-        line_percentage = {
-            provider = 'line_percentage',
-            hl = function()
-                return {
-                    bg = p.bg_lightest.gui,
-                    fg = vi_mode_utils.get_mode_color(),
-                    style = 'bold',
-                }
-            end,
+        cursor_position = {
+            provider = position_provider,
+            hl = {
+                bg = p.bg_lightest.gui,
+                fg = p.gray2.gui,
+                style = 'bold',
+            },
             left_sep = {
                 hl = { bg = p.bg_lightest.gui },
                 str = '  ',
@@ -139,17 +145,6 @@ function M.config()
                 hl = { bg = p.bg_lightest.gui },
                 str = '  ',
             },
-        },
-
-        scroll_bar = {
-            provider = 'scroll_bar',
-            hl = function()
-                return {
-                    bg = p.bg_lightest.gui,
-                    fg = vi_mode_utils.get_mode_color(),
-                    style = 'bold',
-                }
-            end,
         },
 
         file_info_winbar = {
@@ -210,7 +205,7 @@ function M.config()
             pieces.file_format,
             pieces.file_encoding,
             pieces.file_type,
-            pieces.line_percentage,
+            pieces.cursor_position,
             -- Empty component to clear styles.
             { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
         },
