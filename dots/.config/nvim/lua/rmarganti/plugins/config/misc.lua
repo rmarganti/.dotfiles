@@ -74,13 +74,4 @@ return {
         'tpope/vim-sleuth',
         event = 'BufReadPost',
     },
-
-    -- Markdown preview.
-    -- Does not work correctly when lazy-loaded.
-    {
-        'iamcco/markdown-preview.nvim',
-        build = function()
-            vim.fn['mkdp#util#install']()
-        end,
-    },
 }
