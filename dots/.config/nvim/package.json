@@ -15,6 +15,10 @@
                 "path": "./snippets/go.json"
             },
             {
+                "language": "graphql",
+                "path": "./snippets/graphql.json"
+            },
+            {
                 "language": "php",
                 "path": "./snippets/php.json"
             },
