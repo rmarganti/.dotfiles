@@ -104,13 +104,9 @@ M.clients = {
     -- Lua
     ------------------------------------------------
 
-    sumneko_lua = {
+    lua_ls = {
         formatting_enabled = false,
         additional_lsp_config = make_lua_lsp_config(),
-    },
-
-    terraformls = {
-        formatting_enabled = false,
     },
 
     ------------------------------------------------
@@ -159,6 +155,10 @@ M.clients = {
     copilot = {
         formatting_enabled = false,
         skip_setup = true,
+    },
+
+    terraformls = {
+        formatting_enabled = false,
     },
 }
 

@@ -42,7 +42,7 @@ local function delete_qf_items()
 
     local qflist = vim.fn.getqflist()
 
-    for i = 1, count, 1 do
+    for _ = 1, count, 1 do
         table.remove(qflist, start_idx)
     end
 

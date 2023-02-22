@@ -8,7 +8,7 @@ installed for every language you would like to support. That is easy as running
 
     - intelephense (PHP)
     - tsserver (Javascript flavors)
-    - sumneko_lua (Lua)
+    - lua-language-server (Lua)
     - eslint (Javascript flavors)
     - html (HTML)
     - bashls (Bash scripting)
