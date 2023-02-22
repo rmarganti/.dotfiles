@@ -104,7 +104,7 @@ return {
     Ignore = {}, -- left blank, hidden  |hl-Ignore|
 
     Error = { fg = a.error }, -- any erroneous construct
-    Todo = { fg = a.plus2, italic = true }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo = { fg = a.fg, bg = p.blue_darker }, -- anything that needs extra attention; mostly the keywords TODO FIXME and XXX
     qfLineNr = { fg = a.plus2 },
     qfFileName = { fg = a.plus4 },
     htmlH1 = { fg = p.fg },

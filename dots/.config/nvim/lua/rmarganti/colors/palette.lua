@@ -14,18 +14,22 @@ return {
     black = { gui = '#4b565c', cterm = 240 },
     black_bright = { gui = '#546066', cterm = 59 },
 
+    red_darker = { gui = '#5a4041', cterm = 131 },
     red_dark = { gui = '#a56264', cterm = 131 },
     red = { gui = '#e67e80', cterm = 174 },
     red_bright = { gui = '#ff8c8e', cterm = 210 },
 
+    green_darker = { gui = '#505a4d', cterm = 244 },
     green_dark = { gui = '#7e977a', cterm = 244 },
     green = { gui = '#accea1', cterm = 151 },
     green_bright = { gui = '#bdd991', cterm = 150 },
 
+    yellow_darker = { gui = '#5b5541', cterm = 101 },
     yellow_dark = { gui = '#9e8b64', cterm = 101 },
     yellow = { gui = '#dbbc7f', cterm = 180 },
     yellow_bright = { gui = '#f5d38e', cterm = 222 },
 
+    blue_darker = { gui = '#5d6d6d', cterm = 66 },
     blue_dark = { gui = '#769692', cterm = 66 },
     blue = { gui = '#aeccc6', cterm = 152 },
     blue_bright = { gui = '#90d4cb', cterm = 116 },
