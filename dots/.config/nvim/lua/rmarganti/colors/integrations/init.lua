@@ -8,6 +8,7 @@ return {
     gitsigns = require('rmarganti.colors.integrations.gitsigns'),
     hop = require('rmarganti.colors.integrations.hop'),
     indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
+    nvim_lightbulb = require('rmarganti.colors.integrations.nvim_lightbulb'),
     nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
     rnvimr = require('rmarganti.colors.integrations.rnvimr'),
     rust_analyzer = require('rmarganti.colors.integrations.rust-analyzer'),

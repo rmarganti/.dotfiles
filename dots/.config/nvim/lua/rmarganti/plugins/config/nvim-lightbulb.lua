@@ -5,6 +5,11 @@ local M = {
 }
 
 function M.config()
+    vim.fn.sign_define('LightBulbSign', {
+        text = '',
+        texthl = 'CodeAction',
+    })
+
     local lightbulb_group = vim.api.nvim_create_augroup('custom', { clear = true })
 
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
