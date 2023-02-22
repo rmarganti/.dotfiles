@@ -23,7 +23,7 @@ return {
     CursorLineNr = { fg = a.plus2, bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineSign = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineFold = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
-    MatchParen = { fg = p.yellow }, -- The character under the cursor or just before it, if it is a paicatppuccin5 bracket, and its match. |pi_paren.txt|
+    MatchParen = { fg = p.yellow }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg = { fg = p.fg }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea = { fg = p.fg }, -- Area for messages and cmdline
     MsgSeparator = {}, -- Separator for scrolled messages, `msgsep` flag of 'display'
@@ -44,10 +44,10 @@ return {
     IncSearch = { fg = p.bg_dark, bg = p.green_dark }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     CurSearch = { fg = p.bg_dark, bg = p.green_bright }, -- The 'incsearch' item currently under the cursor
     SpecialKey = { fg = a.minus2 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad = { sp = p.yellow_dark, underline = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap = { sp = p.yellow_dark, underline = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal = { sp = p.yellow_dark, underline = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare = { sp = p.yellow_dark, underline = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    SpellBad = { sp = p.yellow_dark, underdotted = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap = { sp = p.yellow_dark, underdotted = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal = { sp = p.yellow_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare = { sp = p.yellow_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine = { fg = p.fg, bg = p.bg_light }, -- status line of current window
     -- StatusLineNC = { fg = p.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
@@ -95,7 +95,6 @@ return {
     SpecialChar = {}, --  special character in a constant
     Tag = {}, --    you can use CTRL-] on this
     Delimiter = {}, --  character that needs attention
-    Specialcatppuccin11 = {}, -- special things inside a catppuccin11
     Debug = {}, --    debugging statements
 
     Underlined = { underline = true }, -- text that stands out, HTML links
