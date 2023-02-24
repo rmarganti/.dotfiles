@@ -117,6 +117,10 @@ M.clients = {
         formatting_enabled = true,
     },
 
+    golangci_lint_ls = {
+        formatting_enabled = false,
+    },
+
     ------------------------------------------------
     -- Rust
     ------------------------------------------------
