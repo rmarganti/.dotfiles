@@ -13,7 +13,7 @@ return {
     Directory = { fg = p.fg }, -- directory names (and other special names in listings)
     EndOfBuffer = { fg = p.black }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg = { fg = a.error }, -- error messages on the command line
-    VertSplit = { fg = p.black }, -- the column separating vertically split windows
+    VertSplit = { fg = a.minus3 }, -- the column separating vertically split windows
     Folded = { fg = p.fg, bg = p.bg_lighter }, -- line used for closed folds
     FoldColumn = { bg = p.none, fg = a.minus2 }, -- 'foldcolumn'
     SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
