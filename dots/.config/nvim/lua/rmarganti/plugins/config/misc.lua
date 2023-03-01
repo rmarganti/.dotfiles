@@ -6,16 +6,7 @@ return {
     -- Git diffs/commands.
     {
         'tpope/vim-fugitive',
-        cmd = {
-            'Git',
-            'Gdiffsplit',
-            'Gread',
-            'Gwrite',
-            'Ggrep',
-            'GMove',
-            'GDelete',
-            'GBrowse',
-        },
+        event = 'BufReadPost',
     },
 
     --------------------------------
