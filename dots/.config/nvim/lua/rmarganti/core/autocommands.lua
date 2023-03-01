@@ -74,13 +74,18 @@ vim.api.nvim_create_autocmd('FileType', {
 
 ------------------------------------------------
 --
--- WinResize
+-- Highlight on yank
 --
 ------------------------------------------------
 
-vim.api.nvim_create_autocmd('VimResized', {
+vim.api.nvim_create_autocmd('TextYankPost', {
     group = custom_group,
     pattern = '*',
-    command = 'wincmd =',
-    desc = 'Automatically resize windows when the host window size changes.',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'Cursor',
+            timeout = 200,
+        })
+    end,
+    desc = 'Highlight on yank',
 })
