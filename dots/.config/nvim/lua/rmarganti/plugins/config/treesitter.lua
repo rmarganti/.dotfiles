@@ -15,6 +15,7 @@ function M.config()
             'bash',
             'css',
             'go',
+            'graphql',
             'hcl', -- Terraform
             'html',
             'javascript',
@@ -24,6 +25,7 @@ function M.config()
             'jsonc',
             'lua',
             'make',
+            'markdown_inline',
             'php',
             'phpdoc',
             'prisma',
