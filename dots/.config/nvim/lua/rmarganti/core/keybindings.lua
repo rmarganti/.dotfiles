@@ -19,7 +19,7 @@ utils.map('n', 'Q', '<Nop>')
 
 ------------------------------------------------
 --
--- vim-unimpaired (and inspired) remaps
+-- Jump to next/prev
 --
 ------------------------------------------------
 
@@ -31,27 +31,29 @@ utils.map('n', '<Leader>kd', function()
     vim.diagnostic.goto_prev({ float = { border = 'rounded' } })
 end)
 
--- Exchange
-utils.map('n', '<Leader>je', ']e', { remap = true })
-utils.map('n', '<Leader>ke', '[e', { remap = true })
-utils.map('x', '<Leader>je', ']e', { remap = true })
-utils.map('x', '<Leader>ke', '[e', { remap = true })
-
 -- Quickfix
-utils.map('n', '<Leader>jq', ']q', { remap = true })
-utils.map('n', '<Leader>kq', '[q', { remap = true })
-
--- Add Space
-utils.map('n', '<Leader>j<Space>', ']<Space>', { remap = true })
-utils.map('n', '<Leader>k<Space>', '[<Space>', { remap = true })
+utils.map('n', '<Leader>jq', '<Cmd>lua MiniBracketed.quickfix("forward")<CR>')
+utils.map('n', '<Leader>kq', '<Cmd>lua MiniBracketed.quickfix("backward")<CR>')
 
 -- Conflict markers
-utils.map('n', '<Leader>jc', ']n', { remap = true })
-utils.map('n', '<Leader>kc', '[n', { remap = true })
+utils.map('n', '<Leader>jx', '<Cmd>lua MiniBracketed.conflict("forward")<CR>')
+utils.map('n', '<Leader>kx', '<Cmd>lua MiniBracketed.conflict("backward")<CR>')
 
--- Method (function)
-utils.map('n', '<Leader>jm', ']m', { remap = true })
-utils.map('n', '<Leader>km', '[m', { remap = true })
+-- Comment
+utils.map('n', '<Leader>jc', '<Cmd>lua MiniBracketed.comment("forward")<CR>')
+utils.map('n', '<Leader>kc', '<Cmd>lua MiniBracketed.comment("backward")<CR>')
+
+-- Files
+utils.map('n', '<Leader>jf', '<Cmd>lua MiniBracketed.file("forward")<CR>')
+utils.map('n', '<Leader>kf', '<Cmd>lua MiniBracketed.file("backward")<CR>')
+
+-- Yank
+utils.map('n', '<Leader>jy', '<Cmd>lua MiniBracketed.yank("forward")<CR>')
+utils.map('n', '<Leader>ky', '<Cmd>lua MiniBracketed.yank("backward")<CR>')
+
+-- Tree-sitter node
+utils.map('n', '<Leader>jt', '<Cmd>lua MiniBracketed.treesitter("forward")<CR>')
+utils.map('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>')
 
 ------------------------------------------------
 --
@@ -71,13 +73,13 @@ utils.map('n', '<Leader>km', '[m', { remap = true })
 -- NOTE: These are set in 'lua/rmarganti/plugins/config/cmp.lua'
 
 -- Goto Definition.
-utils.map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>')
+utils.map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>')
 
 -- Goto reFerences.
-utils.map('n', 'gf', '<cmd>Telescope lsp_references<CR>')
+utils.map('n', 'gf', '<Cmd>Telescope lsp_references<CR>')
 
 -- Goto Implementation.
-utils.map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>')
+utils.map('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>')
 
 -- Goto Hint
 utils.map('n', 'gh', vim.lsp.buf.hover)
@@ -90,13 +92,13 @@ utils.map('v', '<Leader>ca', vim.lsp.buf.code_action)
 utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
 
 -- Code file Symbols.
-utils.map('n', '<Leader>cs', '<cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
+utils.map('n', '<Leader>cs', '<Cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
 
 -- Code Workspace symbols
 utils.map(
     'n',
     '<Leader>cw',
-    '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>'
+    '<Cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>'
 )
 
 -- Code Format
@@ -155,9 +157,6 @@ utils.map('n', '<Leader>er', function()
     edit_nearest('README.md')
 end)
 
--- Edit Test
-utils.map('n', '<Leader>et', core_fns.edit_test)
-
 -- Edit Snippets for current file type
 utils.map('n', '<Leader>es', core_fns.edit_snippets)
 
@@ -195,7 +194,7 @@ end)
 utils.map('n', '<Leader>fx', ':RnvimrToggle<CR>')
 
 -- File Types
-utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({})<CR>')
+utils.map('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
 
 ------------------------------------------------
 --
@@ -204,44 +203,44 @@ utils.map('n', '<Leader>ft', '<cmd>lua require("telescope.builtin").filetypes({}
 ------------------------------------------------
 
 -- Git Add current file
-utils.map('n', '<Leader>ga', '<cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>')
+utils.map('n', '<Leader>ga', '<Cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>')
 
 -- Git checkOut current file
 utils.map(
     'n',
     '<Leader>go',
-    '<cmd>Git checkout % <bar> e! % <bar> lua vim.notify("Git checked out current file")<CR>'
+    '<Cmd>Git checkout % <bar> e! % <bar> lua vim.notify("Git checked out current file")<CR>'
 )
 
 -- Git Commits
-utils.map('n', '<Leader>gc', '<cmd>Telescope git_commits<CR>')
+utils.map('n', '<Leader>gc', '<Cmd>Telescope git_commits<CR>')
 
 -- Git History (commits for buffer)
-utils.map('n', '<Leader>gh', '<cmd>Telescope git_bcommits<CR>')
+utils.map('n', '<Leader>gh', '<Cmd>Telescope git_bcommits<CR>')
 
 -- Git Branches
-utils.map('n', '<Leader>gb', '<cmd>Telescope git_branches<CR>')
+utils.map('n', '<Leader>gb', '<Cmd>Telescope git_branches<CR>')
 
 -- Git Blame
-utils.map('n', '<Leader>gB', '<cmd>Git blame<CR>')
+utils.map('n', '<Leader>gB', '<Cmd>Git blame<CR>')
 
 -- Git Status
-utils.map('n', '<Leader>gs', '<cmd>Telescope git_status<CR>')
+utils.map('n', '<Leader>gs', '<Cmd>Telescope git_status<CR>')
 
 -- Git bLame
-utils.map('n', '<Leader>gl', '<cmd>Git blame<CR>')
+utils.map('n', '<Leader>gl', '<Cmd>Git blame<CR>')
 
 -- GitHub gists
-utils.map('n', '<Leader>gg', '<cmd>Telescope gh gist<CR>')
+utils.map('n', '<Leader>gg', '<Cmd>Telescope gh gist<CR>')
 
 -- GitHub Pull Requests
-utils.map('n', '<Leader>gp', '<cmd>Telescope gh pull_request<CR>')
+utils.map('n', '<Leader>gp', '<Cmd>Telescope gh pull_request<CR>')
 
 -- GitHub Notifications
 utils.map(
     'n',
     '<Leader>gn',
-    [[<cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]]
+    [[<Cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]]
 )
 
 ------------------------------------------------
@@ -288,13 +287,16 @@ utils.map('n', '<Leader>sf', function()
 end)
 
 -- Search Recent files
-utils.map('n', '<Leader>sr', '<cmd>lua require("telescope").extensions.recent_files.pick()<CR>')
+utils.map('n', '<Leader>sr', '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>')
 
 -- Search Text
-utils.map('n', '<Leader>st', '<cmd>Telescope live_grep<CR>')
+utils.map('n', '<Leader>st', '<Cmd>Telescope live_grep<CR>')
+
+-- Search Todos
+utils.map('n', '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 
 -- Search Buffers
-utils.map('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
+utils.map('n', '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Wiki
 utils.map('n', '<Leader>sw', function()
@@ -305,26 +307,26 @@ utils.map('n', '<Leader>sw', function()
 end)
 
 -- Search Notifications
-utils.map('n', '<Leader>sn', '<cmd>Telescope notify<CR>')
+utils.map('n', '<Leader>sn', '<Cmd>Telescope notify<CR>')
 
 -- Search Symbols
-utils.map('n', '<Leader>ss', '<cmd>Telescope symbols<CR>')
+utils.map('n', '<Leader>ss', '<Cmd>Telescope symbols<CR>')
 
 -- Search Commands
-utils.map('n', '<Leader>sc', '<cmd>Telescope commands<CR>')
-utils.map('x', '<Leader>sc', '<cmd>Telescope commands<CR>')
+utils.map('n', '<Leader>sc', '<Cmd>Telescope commands<CR>')
+utils.map('x', '<Leader>sc', '<Cmd>Telescope commands<CR>')
 
 -- Search Help
-utils.map('n', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
-utils.map('x', '<Leader>sh', '<cmd>Telescope help_tags<CR>')
+utils.map('n', '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
+utils.map('x', '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
 
 -- Search Highlights
-utils.map('n', '<Leader>sH', '<cmd>Telescope highlights<CR>')
-utils.map('x', '<Leader>sH', '<cmd>Telescope highlights<CR>')
+utils.map('n', '<Leader>sH', '<Cmd>Telescope highlights<CR>')
+utils.map('x', '<Leader>sH', '<Cmd>Telescope highlights<CR>')
 
 -- Search Resume
-utils.map('n', '<Leader>s.', '<cmd>Telescope resume<CR>')
-utils.map('x', '<Leader>s.', '<cmd>Telescope resume<CR>')
+utils.map('n', '<Leader>s.', '<Cmd>Telescope resume<CR>')
+utils.map('x', '<Leader>s.', '<Cmd>Telescope resume<CR>')
 
 ------------------------------------------------
 --
@@ -369,17 +371,11 @@ end)
 --
 ------------------------------------------------
 
--- Toggle Quick fix
-utils.map('n', 'yoq', core_fns.toggle_quickfix)
-
--- Toggle Format on save
-utils.map('n', 'yof', core_fns.toggle_format_on_save)
-
--- Toggle Colorizer
-utils.map('n', 'yoc', '<CMD>ColorizerToggle<CR>')
-
--- Toggle symbol Outline
-utils.map('n', 'yoo', '<CMD>SymbolsOutline<CR>')
+utils.map('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
+utils.map('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
+utils.map('n', 'yoc', '<Cmd>ColorizerToggle<CR>', { desc = 'Toggle Colorizer' })
+utils.map('n', 'yoo', '<Cmd>SymbolsOutline<CR>', { desc = 'Toggle symbols Outline' })
+utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
 
 ------------------------------------------------
 --
@@ -410,16 +406,16 @@ utils.map('n', '<Leader>qq', ':qa<CR>')
 utils.map('n', '<Leader>qQ', ':qa!<CR>')
 
 -- Show syntax Highlight group for word under cursor.
-utils.map('n', '<Leader>hh', '<CMD>TSHighlightCapturesUnderCursor<CR>')
+utils.map('n', '<Leader>hh', '<Cmd>TSHighlightCapturesUnderCursor<CR>')
 
 -- Go Split (opposite of `J` for parameters)
-utils.map('n', 'gJ', '<cmd>TSJToggle<CR>')
+utils.map('n', 'gJ', '<Cmd>TSJToggle<CR>')
 
 -- Jump to character in current window.
-utils.map('n', '<Leader><Leader>', '<cmd>HopChar1<CR>')
+utils.map('n', '<Leader><Leader>', '<Cmd>HopChar1<CR>')
 
--- Exchange current line.
-utils.map('n', '<A-j>', ']e', { remap = true })
-utils.map('n', '<A-k>', '[e', { remap = true })
-utils.map('x', '<A-j>', ']egv', { remap = true })
-utils.map('x', '<A-k>', '[egv', { remap = true })
+-- Add line below
+utils.map('n', 'go', "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>")
+
+-- Add line above
+utils.map('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")

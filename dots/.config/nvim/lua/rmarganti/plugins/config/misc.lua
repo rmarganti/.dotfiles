@@ -35,13 +35,7 @@ return {
     -- Text manipulation
     --------------------------------
 
-    -- Quickly surround text with brackets, quotes, etc.
-    {
-        'tpope/vim-surround',
-        event = 'VeryLazy',
-    },
-
-    -- Code spell-checking.
+    -- Replace target with value of register.
     {
         'vim-scripts/ReplaceWithRegister',
         event = 'VeryLazy',
@@ -55,12 +49,6 @@ return {
     {
         'tpope/vim-eunuch',
         event = 'BufReadPost',
-    },
-
-    --  Random shortcuts that typically work in pairs.
-    {
-        'tpope/vim-unimpaired',
-        event = 'VeryLazy',
     },
 
     -- Make more things repeatable.
