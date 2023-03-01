@@ -10,7 +10,7 @@ function M.config()
         texthl = 'CodeAction',
     })
 
-    local lightbulb_group = vim.api.nvim_create_augroup('custom', { clear = true })
+    local lightbulb_group = vim.api.nvim_create_augroup('lightbulb', { clear = true })
 
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         pattern = '*',
