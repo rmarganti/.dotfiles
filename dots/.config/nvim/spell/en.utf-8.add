@@ -49,3 +49,5 @@ uuid
 wezterm
 whitelist
 whitelisted
+quickfix
+treesitter
