@@ -10,13 +10,13 @@ return {
     },
 
     --------------------------------
-    --------------------------------
-    {
-    },
-
-    --------------------------------
     -- Text manipulation
     --------------------------------
+    -- Quickly surround text with brackets, quotes, etc.
+    {
+        'tpope/vim-surround',
+        event = 'VeryLazy',
+    },
 
     -- Replace target with value of register.
     {
