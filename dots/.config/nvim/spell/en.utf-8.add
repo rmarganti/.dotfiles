@@ -51,3 +51,10 @@ whitelist
 whitelisted
 quickfix
 treesitter
+adpointtime
+upsert
+upserting
+gofmt
+kubectl
+yaml
+issue
