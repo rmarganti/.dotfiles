@@ -15,13 +15,15 @@ M.on_attach = function(client, bufnr)
     -- Provide breadcrumbs
     if client.server_capabilities.documentSymbolProvider then
         local navic = require('nvim-navic')
+        local navbuddy = require('nvim-navbuddy')
+
+        navbuddy.attach(client, bufnr)
         navic.attach(client, bufnr)
     end
 
     -- Auto-format on save.
     if client.supports_method('textDocument/formatting') then
-        local format_group =
-            vim.api.nvim_create_augroup('format', { clear = true })
+        local format_group = vim.api.nvim_create_augroup('format', { clear = true })
 
         vim.api.nvim_create_autocmd('BufWritePost', {
             group = format_group,
