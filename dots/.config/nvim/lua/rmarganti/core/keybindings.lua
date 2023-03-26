@@ -92,7 +92,7 @@ utils.map('v', '<Leader>ca', vim.lsp.buf.code_action)
 utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
 
 -- Code file Symbols.
-utils.map('n', '<Leader>cs', '<Cmd>lua require("telescope.builtin").lsp_document_symbols({})<CR>')
+utils.map('n', '<Leader>cs', '<Cmd>Navbuddy<CR>', { desc = 'Toggle symbols Outline' })
 
 -- Code Workspace symbols
 utils.map(
@@ -374,7 +374,6 @@ end)
 utils.map('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
 utils.map('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
 utils.map('n', 'yoc', '<Cmd>ColorizerToggle<CR>', { desc = 'Toggle Colorizer' })
-utils.map('n', 'yoo', '<Cmd>SymbolsOutline<CR>', { desc = 'Toggle symbols Outline' })
 utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
 
 ------------------------------------------------
