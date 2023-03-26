@@ -93,6 +93,6 @@ export EDITOR="$VISUAL"
 export TERM="wezterm"
 
 # Load local-specific config if it exists (not committed to git)
-if [ -f ~/.bashrc.local ]; then
-	. ~/.bashrc.local
+if [ -f ~/.local.bashrc ]; then
+	. ~/.local.bashrc
 fi
