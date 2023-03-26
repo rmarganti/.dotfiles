@@ -75,7 +75,7 @@ return {
     Function = { fg = a.plus3 }, -- function name (also: methods for classes)
     Statement = { fg = a.plus3 }, -- any statement
     Conditional = { fg = a.base }, --  if, then, else, endif, switch, etcp.
-    Repeat = { fg = a.plus2 }, --   for, do, while, etcp.
+    Repeat = { fg = a.base }, --   for, do, while, etcp.
     Label = { fg = a.plus1 }, --    case, default, etcp.
     Operator = { fg = a.base }, -- "sizeof", "+", "*", etcp.
     Keyword = { fg = a.base }, --  any other keyword
@@ -92,10 +92,10 @@ return {
     Structure = { fg = a.plus2 }, --  struct, union, enum, etcp.
     Typedef = { fg = a.plus2 }, --  A typedef
     Special = { fg = a.plus2 }, -- any special symbol
-    SpecialChar = {}, --  special character in a constant
-    Tag = {}, --    you can use CTRL-] on this
-    Delimiter = {}, --  character that needs attention
-    Debug = {}, --    debugging statements
+    SpecialChar = { fg = a.plus1 }, --  special character in a constant
+    Tag = { fg = a.base }, --    you can use CTRL-] on this
+    Delimiter = { fg = a.base }, --  character that needs attention
+    Debug = { fg = a.base }, --    debugging statements
 
     Underlined = { underline = true }, -- text that stands out, HTML links
     Bold = { bold = true },

@@ -1,4 +1,5 @@
 local a = require('rmarganti.colors.abstractions')
+local p = require('rmarganti.colors.palette')
 
 return {
     -- Misc
@@ -65,7 +66,7 @@ return {
     ['@type.qualifier'] = { fg = a.base }, -- type qualifiers (e.g. `const`)
 
     -- ['@storageclass'] = {}, -- visibility/life-time/etc. modifiers (e.g. `static`)
-    -- ['@attribute'] = {}, -- attribute annotations (e.g. Python decorators)
+    ['@attribute'] = { fg = a.plus1 }, -- attribute annotations (e.g. Python decorators)
     ['@field'] = { fg = a.plus1 }, -- object and struct fields
     ['@property'] = { fg = a.plus1 }, -- similar to `@field`
 
@@ -79,7 +80,7 @@ return {
     -- ['@constant.macro'] = {}, -- constants defined by the preprocessor
 
     ['@namespace'] = { fg = a.base }, -- modules or namespaces
-    -- ['@symbol'] = {}, -- symbols or atoms
+    ['@symbol'] = { fg = a.base }, -- symbols or atoms
 
     -- Text (Mainly for markup languages).
 
@@ -89,8 +90,8 @@ return {
     -- ['@text.underline'] = {}, -- underlined text
     -- ['@text.strike'] = {}, -- strikethrough text
     ['@text.title'] = { fg = a.plus3 }, -- text that is part of a title
-    -- ['@text.literal'] = {}, -- literal or verbatim text
-    ['@text.uri'] = { fg = a.plus2 }, -- URIs (e.g. hyperlinks)
+    ['@text.literal'] = { fg = a.fg }, -- literal or verbatim text
+    ['@text.uri'] = { fg = a.plus2, underdotted = true, sp = p.blue_darker }, -- URIs (e.g. hyperlinks)
     -- ['@text.math'] = {}, -- math environments (e.g. `$ ... $` in LaTeX)
     -- ['@text.environment'] = {}, -- text environments of markup languages
     -- ['@text.environment.name'] = {}, -- text indicating the type of an environment

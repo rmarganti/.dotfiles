@@ -9,7 +9,7 @@ M = {
     base = p.gray3,
     plus1 = p.gray4,
     plus2 = p.blue,
-    plus3 = p.green,
+    plus3 = p.cyan,
     plus4 = p.white,
 
     success = p.green,
