@@ -1,5 +1,8 @@
 -- Support JSONC.
 vim.filetype.add({
+    extension = {
+        mermaid = 'mermaid',
+    },
     filename = {
         -- NRWL NX project config
         ['project.json'] = function(_, bufnr)
@@ -13,6 +16,7 @@ vim.filetype.add({
         end,
         ['tsconfig.json'] = 'jsonc',
         ['composer.lock'] = 'json',
+        ['go.sum'] = 'gosum',
     },
     pattern = {
         ['tsconfig.*.json'] = 'jsonc',
