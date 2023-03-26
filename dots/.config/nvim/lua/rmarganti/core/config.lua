@@ -83,6 +83,11 @@ vim.opt.listchars = {
     nbsp = '␣',
 }
 
+-- Hide the `~` that indicates end of buffer.
+vim.opt.fillchars = {
+    eob = ' ',
+}
+
 -- Once bufferline is loaded, it will re-enable this.
 vim.opt.showtabline = 0
 
