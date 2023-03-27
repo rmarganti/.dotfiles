@@ -83,9 +83,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'Cursor',
+            higroup = 'Visual',
             timeout = 200,
         })
     end,
     desc = 'Highlight on yank',
+})
+
+------------------------------------------------
+--
+-- Resize windows when Vim is resized
+--
+------------------------------------------------
+
+vim.api.nvim_create_autocmd('VimResized', {
+    group = custom_group,
+    pattern = '*',
+    callback = function()
+        require('focus').resize()
+    end,
+    desc = 'Resize windows Vim resized',
 })
