@@ -101,6 +101,9 @@ function M.config()
             { name = 'path' },
         },
 
+        -- Ignore LSPs suggested first selection
+        preselect = cmp.PreselectMode.None,
+
         experimental = {
             ghost_text = true,
         },
