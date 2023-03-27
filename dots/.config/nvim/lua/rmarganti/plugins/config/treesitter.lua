@@ -1,7 +1,7 @@
 -- Provides AST for code.
 local M = {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    build = ':TSUpdate',
     event = 'BufReadPost',
     dependencies = {
         { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
@@ -15,6 +15,8 @@ function M.config()
             'bash',
             'css',
             'go',
+            'gomod',
+            'gosum',
             'graphql',
             'hcl', -- Terraform
             'html',
@@ -26,6 +28,7 @@ function M.config()
             'lua',
             'make',
             'markdown_inline',
+            'mermaid',
             'php',
             'phpdoc',
             'prisma',
