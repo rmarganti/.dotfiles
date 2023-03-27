@@ -5,7 +5,6 @@ local M = {
     event = 'BufReadPost',
     dependencies = {
         { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
-        { 'nvim-treesitter/nvim-treesitter-textobjects' },
     },
 }
 
@@ -46,29 +45,6 @@ function M.config()
 
         highlight = { enable = true },
         indent = { enable = true },
-
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = 'vin', -- Visual In Node
-                node_incremental = '<TAB>',
-                node_decremental = '<S-TAB>',
-            },
-        },
-
-        textobjects = {
-            select = {
-                enable = true,
-                keymaps = {
-                    ['ac'] = '@class.outer',
-                    ['ic'] = '@class.inner',
-                    ['ab'] = '@block.outer',
-                    ['ib'] = '@block.inner',
-                    ['af'] = '@function.outer',
-                    ['if'] = '@function.inner',
-                },
-            },
-        },
     })
 end
 
