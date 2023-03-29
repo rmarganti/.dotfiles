@@ -382,10 +382,10 @@ utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" 
 --
 ------------------------------------------------
 
-utils.map('n', '<C-h>', '<C-w>h')
-utils.map('n', '<C-l>', '<C-w>l')
-utils.map('n', '<C-j>', '<C-w>j')
-utils.map('n', '<C-k>', '<C-w>k')
+utils.map('n', '<C-h>', '<CMD>NavigatorLeft<CR>')
+utils.map('n', '<C-l>', '<CMD>NavigatorRight<CR>')
+utils.map('n', '<C-j>', '<CMD>NavigatorDown<CR>')
+utils.map('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 
 -- See hydra.lua for more Window mappings.
 

@@ -21,6 +21,7 @@ return {
     -- App window
     --
     ------------------------------------------------
+
     window_decorations = 'RESIZE',
 
     window_padding = {
