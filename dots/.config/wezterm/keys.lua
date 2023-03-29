@@ -7,18 +7,10 @@ return {
     ------------------------------------------------
 
     -- Create new Tab.
-    {
-        key = 't',
-        mods = 'SUPER',
-        action = action.SpawnTab('CurrentPaneDomain'),
-    },
+    { key = 't', mods = 'SUPER', action = action.SpawnTab('CurrentPaneDomain') },
 
     -- Select previous tab.
-    {
-        key = 'Tab',
-        mods = 'CTRL|SHIFT',
-        action = action.ActivateTabRelative(-1),
-    },
+    { key = 'Tab', mods = 'CTRL|SHIFT', action = action.ActivateTabRelative(-1) },
 
     -- Select next tab.
     { key = 'Tab', mods = 'CTRL', action = action.ActivateTabRelative(1) },
@@ -63,34 +55,14 @@ return {
     },
 
     -- Navigate panes.
-    {
-        key = 'h',
-        mods = 'CTRL|SUPER',
-        action = action.ActivatePaneDirection('Left'),
-    },
-    {
-        key = 'l',
-        mods = 'CTRL|SUPER',
-        action = action.ActivatePaneDirection('Right'),
-    },
-    {
-        key = 'k',
-        mods = 'CTRL|SUPER',
-        action = action.ActivatePaneDirection('Up'),
-    },
-    {
-        key = 'j',
-        mods = 'CTRL|SUPER',
-        action = action.ActivatePaneDirection('Down'),
-    },
+    { key = 'h', mods = 'CTRL', action = action.EmitEvent('ActivatePaneDirection-left') },
+    { key = 'j', mods = 'CTRL', action = action.EmitEvent('ActivatePaneDirection-down') },
+    { key = 'k', mods = 'CTRL', action = action.EmitEvent('ActivatePaneDirection-up') },
+    { key = 'l', mods = 'CTRL', action = action.EmitEvent('ActivatePaneDirection-right') },
 
     -- Resize panes.
     { key = 'H', mods = 'CTRL', action = action.AdjustPaneSize({ 'Left', 5 }) },
-    {
-        key = 'L',
-        mods = 'CTRL',
-        action = action.AdjustPaneSize({ 'Right', 5 }),
-    },
+    { key = 'L', mods = 'CTRL', action = action.AdjustPaneSize({ 'Right', 5 }) },
     { key = 'K', mods = 'CTRL', action = action.AdjustPaneSize({ 'Up', 2 }) },
     { key = 'J', mods = 'CTRL', action = action.AdjustPaneSize({ 'Down', 2 }) },
 
@@ -98,26 +70,14 @@ return {
     { key = 'z', mods = 'LEADER', action = action.TogglePaneZoomState },
 
     -- Close pane.
-    {
-        key = 'x',
-        mods = 'LEADER',
-        action = action.CloseCurrentPane({ confirm = true }),
-    },
+    { key = 'x', mods = 'LEADER', action = action.CloseCurrentPane({ confirm = true }) },
 
     -- Rotate panes.
-    {
-        key = '[',
-        mods = 'LEADER',
-        action = action.RotatePanes('CounterClockwise'),
-    },
+    { key = '[', mods = 'LEADER', action = action.RotatePanes('CounterClockwise') },
     { key = ']', mods = 'LEADER', action = action.RotatePanes('Clockwise') },
 
     -- Swap panes.
-    {
-        key = 's',
-        mods = 'LEADER',
-        action = action.PaneSelect({ mode = 'SwapWithActive' }),
-    },
+    { key = 's', mods = 'LEADER', action = action.PaneSelect({ mode = 'SwapWithActive' }) },
 
     ------------------------------------------------
     -- Misc
@@ -146,11 +106,7 @@ return {
     },
 
     -- Search
-    {
-        key = '/',
-        mods = 'LEADER',
-        action = action.Search({ CaseSensitiveString = '' }),
-    },
+    { key = '/', mods = 'LEADER', action = action.Search({ CaseSensitiveString = '' }) },
 
     -- Page up/down.
     { key = 'u', mods = 'CTRL|SHIFT', action = action.ScrollByPage(-0.75) },
