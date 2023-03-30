@@ -79,7 +79,7 @@ return {
     -- ['@constant.builtin'] = {}, -- built-in constant values
     -- ['@constant.macro'] = {}, -- constants defined by the preprocessor
 
-    ['@namespace'] = { fg = a.base }, -- modules or namespaces
+    ['@namespace'] = { fg = a.plus1 }, -- modules or namespaces
     ['@symbol'] = { fg = a.base }, -- symbols or atoms
 
     -- Text (Mainly for markup languages).
