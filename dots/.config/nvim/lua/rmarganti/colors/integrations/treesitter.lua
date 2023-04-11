@@ -42,7 +42,7 @@ return {
     -- ['@method.call'] = {}, -- method calls
 
     ['@constructor'] = { fg = a.plus3 }, -- constructor calls and definitions
-    ['@parameter'] = { fg = a.plus4 }, -- parameters of a function
+    ['@parameter'] = { fg = a.plus4, italic = true }, -- parameters of a function
 
     -- Keywords
 
@@ -73,7 +73,7 @@ return {
     -- Identifiers
 
     -- ['@variable'] = { fg = a.plus4 }, -- various variable names
-    -- ['@variable.builtin'] = { fg = a.plus4 }, -- built-in variable names (e.g. `this`)
+    ['@variable.builtin'] = { fg = a.plus4, italic = true }, -- built-in variable names (e.g. `this`)
 
     -- ['@constant'] = { fg = a.plus4 }, -- constant identifiers
     -- ['@constant.builtin'] = {}, -- built-in constant values
@@ -95,7 +95,7 @@ return {
     -- ['@text.math'] = {}, -- math environments (e.g. `$ ... $` in LaTeX)
     -- ['@text.environment'] = {}, -- text environments of markup languages
     -- ['@text.environment.name'] = {}, -- text indicating the type of an environment
-    -- ['@text.reference'] = {}, -- text references, footnotes, citations, etc.
+    ['@text.reference'] = { fg = a.plus1, underline = true }, -- text references, footnotes, citations, etc.
 
     ['@text.todo'] = { fg = a.plus1 }, -- todo notes
     -- ['@text.note'] = {}, -- info notes
