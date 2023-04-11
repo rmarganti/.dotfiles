@@ -119,6 +119,12 @@ utils.map('v', '<Leader>cc', function()
     require('silicon').visualise_api({})
 end)
 
+-- Inspect the tree node at the current cursor position.
+utils.map('n', '<Leader>ci', '<Cmd>Inspect<CR>')
+
+-- Inspect the tree of the current buffer
+utils.map('n', '<Leader>cI', '<Cmd>InspectTree<CR>')
+
 ------------------------------------------------
 --
 -- Edit
@@ -403,9 +409,6 @@ utils.map('n', '<Leader>qq', ':qa<CR>')
 
 -- Force close all buffers and Quit
 utils.map('n', '<Leader>qQ', ':qa!<CR>')
-
--- Show syntax Highlight group for word under cursor.
-utils.map('n', '<Leader>hh', '<Cmd>TSHighlightCapturesUnderCursor<CR>')
 
 -- Go Split (opposite of `J` for parameters)
 utils.map('n', 'gJ', '<Cmd>TSJToggle<CR>')
