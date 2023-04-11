@@ -3,9 +3,6 @@ local M = {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = 'BufReadPost',
-    dependencies = {
-        { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
-    },
 }
 
 function M.config()
@@ -31,15 +28,16 @@ function M.config()
             'php',
             'phpdoc',
             'prisma',
+            'query', -- Treesitter
             'regex',
             'rust',
-            'query', -- Treesitter
             'scss',
             'sql',
             'terraform',
             'tsx',
             'typescript',
             'vim',
+            'vimdoc',
             'yaml',
         },
 
