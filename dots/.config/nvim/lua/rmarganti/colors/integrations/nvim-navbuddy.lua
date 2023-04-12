@@ -1,6 +1,9 @@
 local a = require('rmarganti.colors.abstractions')
+local p = require('rmarganti.colors.palette')
 
 return {
+    NavbuddyScope = { bg = p.bg_dark },
+
     NavbuddyFile = { fg = a.plus1 },
     NavbuddyModule = { fg = a.plus1 },
     NavbuddyNamespace = { fg = a.plus1 },
