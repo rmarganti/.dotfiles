@@ -14,11 +14,7 @@ M.on_attach = function(client, bufnr)
 
     -- Provide breadcrumbs
     if client.server_capabilities.documentSymbolProvider then
-        local navic = require('nvim-navic')
-        local navbuddy = require('nvim-navbuddy')
-
-        navbuddy.attach(client, bufnr)
-        navic.attach(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
     end
 
     -- Auto-format on save.

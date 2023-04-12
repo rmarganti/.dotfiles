@@ -92,7 +92,12 @@ utils.map('v', '<Leader>ca', vim.lsp.buf.code_action)
 utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
 
 -- Code file Symbols.
-utils.map('n', '<Leader>cs', '<Cmd>Navbuddy<CR>', { desc = 'Toggle symbols Outline' })
+utils.map(
+    'n',
+    '<Leader>cs',
+    '<Cmd>Telescope lsp_document_symbols<CR>',
+    { desc = 'Toggle symbols Outline' }
+)
 
 -- Code Workspace symbols
 utils.map(
