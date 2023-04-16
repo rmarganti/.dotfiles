@@ -87,18 +87,7 @@ function gbd() {
 #
 ################################################################
 
-# Laravel
-# --------------------------------
-function art() {
-	if
-		[ $# -gt 0 ]
-	then
-		php artisan $*
-	else
-		php artisan | fzf --reverse | awk '{ print $1 }' | xargs php artisan
-	fi
-}
-
+alias art='php artisan'
 alias acc='php artisan cache:clear'
 
 # Laravel Doctrine
@@ -109,6 +98,7 @@ alias dmd='php artisan doctrine:migrations:diff'
 alias dmg='php artisan doctrine:migrations:generate'
 alias dmm='php artisan doctrine:migrations:migrate'
 alias dmr='php artisan doctrine:migrations:rollback'
+alias dms='php artisan doctrine:migrations:status'
 alias dsc='php artisan doctrine:schema:create'
 alias dsd='php artisan doctrine:schema:drop'
 alias dsu='php artisan doctrine:schema:update'
