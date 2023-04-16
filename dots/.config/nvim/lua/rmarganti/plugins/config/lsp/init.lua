@@ -28,12 +28,6 @@ function M.config()
         ensure_installed = clients,
     })
 
-    -- Support nvim-ufo code folding
-    capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-    }
-
     -- Register clients via nvim-lspconfig
     for _, client in ipairs(clients) do
         local config = user_lsp_config.clients[client]
