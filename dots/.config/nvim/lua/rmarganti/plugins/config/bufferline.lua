@@ -17,7 +17,7 @@ function M.config()
             },
             buffer_visible = {
                 bg = p.bg_light.gui,
-                fg = a.plus4.gui,
+                fg = a.plus1.gui,
             },
             diagnostic = { bg = p.bg_light.gui },
             diagnostic_visible = { bg = p.bg_light.gui },

@@ -41,7 +41,7 @@ return {
     -- ['@method'] = { fg = a.plus3 }, -- method definitions
     -- ['@method.call'] = {}, -- method calls
 
-    ['@constructor'] = { fg = a.plus3 }, -- constructor calls and definitions
+    ['@constructor'] = {}, -- constructor calls and definitions. This clears out the default link to `Special`.
     ['@parameter'] = { fg = a.plus4, italic = true }, -- parameters of a function
 
     -- Keywords
@@ -66,7 +66,7 @@ return {
     ['@type.qualifier'] = { fg = a.base }, -- type qualifiers (e.g. `const`)
 
     -- ['@storageclass'] = {}, -- visibility/life-time/etc. modifiers (e.g. `static`)
-    ['@attribute'] = { fg = a.plus1 }, -- attribute annotations (e.g. Python decorators)
+    ['@attribute'] = { fg = a.minus1 }, -- attribute annotations (e.g. Python decorators)
     ['@field'] = { fg = a.plus1 }, -- object and struct fields
     ['@property'] = { fg = a.plus1 }, -- similar to `@field`
 
@@ -104,7 +104,7 @@ return {
 
     -- Tags (Used for XML-like tags).
 
-    ['@tag'] = { fg = a.plus4 }, -- XML tag names
+    ['@tag'] = { fg = a.plus3 }, -- XML tag names
     ['@tag.attribute'] = { fg = a.base }, -- XML tag attributes
     ['@tag.delimiter'] = { fg = a.minus1 }, -- XML tag delimiters
 

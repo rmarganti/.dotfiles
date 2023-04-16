@@ -14,16 +14,6 @@ M.syntax = function(tbl)
     end
 end
 
-M.expand_color = function(type, color)
-    return string.format(
-        "gui%s=%s cterm%s=%s",
-        type,
-        color.gui,
-        type,
-        color.cterm
-    )
-end
-
 M.highlight = function(group, color)
     vim.api.nvim_set_hl(0, group, {
         -- Foreground

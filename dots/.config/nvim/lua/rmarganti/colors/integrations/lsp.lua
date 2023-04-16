@@ -1,17 +1,18 @@
 local a = require('rmarganti.colors.abstractions')
+local p = require('rmarganti.colors.palette')
 
 return {
     DiagnosticError = { fg = a.error }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-    DiagnosticUnderlineError = { gui = 'underline', sp = a.error },
+    DiagnosticUnderlineError = { underdotted = true, sp = p.red_dark },
 
     DiagnosticWarn = { fg = a.warning }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-    DiagnosticUnderlineWarn = { gui = 'underline', sp = a.warning },
+    DiagnosticUnderlineWarn = { underdotted = true, sp = p.yellow_dark },
 
     DiagnosticInfo = { fg = a.info }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-    DiagnosticUnderlineInfo = { gui = 'underline', sp = a.info },
+    DiagnosticUnderlineInfo = { underdotted = true, sp = p.blue_dark },
 
     DiagnosticHint = { fg = a.info }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
-    DiagnosticUnderlineHint = { gui = 'underline', sp = a.info },
+    DiagnosticUnderlineHint = { underdotted = true, sp = p.blue_dark },
 
     DiagnosticUnnecessary = { fg = a.minus1 },
 
