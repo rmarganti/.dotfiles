@@ -34,29 +34,12 @@ end
 
 --- Configuration for an LSP client
 -- @field formatting_enabled Should the client be used for file formatting?
+-- @field filetypes Table of file types for which the LSP should be used
+-- @field root_dir Function to determine the root directory for the LSP
 -- @field additional_lsp_config Configuration to be passed to nvim-lspconfig
 -- @table lsp_client_config
 
 M.clients = {
-    ------------------------------------------------
-    -- Typescript, Javascript
-    ------------------------------------------------
-
-    tsserver = {
-        formatting_enabled = false,
-        additional_lsp_config = {
-            settings = {
-                completions = {
-                    completeFunctionCalls = true,
-                },
-            },
-        },
-    },
-
-    eslint = {
-        formatting_enabled = true,
-    },
-
     ------------------------------------------------
     -- CSS
     ------------------------------------------------
@@ -77,14 +60,6 @@ M.clients = {
 
     html = {
         formatting_enabled = false,
-    },
-
-    ------------------------------------------------
-    -- PHP
-    ------------------------------------------------
-
-    phpactor = {
-        formatting_enabled = true,
     },
 
     ------------------------------------------------
@@ -122,6 +97,25 @@ M.clients = {
     },
 
     ------------------------------------------------
+    -- GraphQL
+    ------------------------------------------------
+
+    graphql = {
+        -- Javascript and typescript are supported, but can
+        -- interfere with navic, so disabling for now.
+        filetypes = { 'graphql' },
+        formatting_enabled = false,
+    },
+
+    ------------------------------------------------
+    -- PHP
+    ------------------------------------------------
+
+    phpactor = {
+        formatting_enabled = true,
+    },
+
+    ------------------------------------------------
     -- Rust
     ------------------------------------------------
 
@@ -132,14 +126,22 @@ M.clients = {
     },
 
     ------------------------------------------------
-    -- GraphQL
+    -- Typescript, Javascript
     ------------------------------------------------
 
-    graphql = {
-        -- Javascript and typescript are supported, but can
-        -- interfere with navic, so disabling for now.
-        filetypes = { 'graphql' },
+    tsserver = {
         formatting_enabled = false,
+        additional_lsp_config = {
+            settings = {
+                completions = {
+                    completeFunctionCalls = true,
+                },
+            },
+        },
+    },
+
+    eslint = {
+        formatting_enabled = true,
     },
 
     ------------------------------------------------
@@ -163,6 +165,20 @@ M.clients = {
 
     terraformls = {
         formatting_enabled = false,
+    },
+
+    bufls = {
+        formatting_enabled = true,
+    },
+
+    yamlls = {
+        additional_lsp_config = {
+            settings = {
+                yaml = {
+                    schemas = require('schemastore').yaml.schemas(),
+                },
+            },
+        },
     },
 }
 
