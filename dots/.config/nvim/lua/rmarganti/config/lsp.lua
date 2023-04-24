@@ -34,9 +34,8 @@ end
 
 --- Configuration for an LSP client
 -- @field formatting_enabled Should the client be used for file formatting?
--- @field filetypes Table of file types for which the LSP should be used
--- @field root_dir Function to determine the root directory for the LSP
--- @field additional_lsp_config Configuration to be passed to nvim-lspconfig
+-- @field skip_setup When set to true, the client will not be setup by nvim-lspconfig.
+-- @field user_config Additional configuration for the client. Passed to nvim-lspconfig[client].setup()
 -- @table lsp_client_config
 
 M.clients = {
@@ -53,9 +52,11 @@ M.clients = {
     ------------------------------------------------
 
     emmet_ls = {
-        -- Disabling for React, because it often gets in the way.
-        filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
         formatting_enabled = false,
+        user_config = {
+            -- Disabling for React, because it often gets in the way.
+            filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
+        },
     },
 
     html = {
@@ -68,9 +69,11 @@ M.clients = {
 
     jsonls = {
         formatting_enabled = false,
-        additional_lsp_config = {
-            json = {
-                schemas = require('schemastore').json.schemas(),
+        user_config = {
+            settings = {
+                json = {
+                    schemas = require('schemastore').json.schemas(),
+                },
             },
         },
     },
@@ -81,7 +84,9 @@ M.clients = {
 
     lua_ls = {
         formatting_enabled = false,
-        additional_lsp_config = make_lua_lsp_config(),
+        user_config = {
+            settings = make_lua_lsp_config(),
+        },
     },
 
     ------------------------------------------------
@@ -101,10 +106,12 @@ M.clients = {
     ------------------------------------------------
 
     graphql = {
-        -- Javascript and typescript are supported, but can
-        -- interfere with navic, so disabling for now.
-        filetypes = { 'graphql' },
         formatting_enabled = false,
+        user_config = {
+            -- Javascript and typescript are supported, but can
+            -- interfere with navic, so disabling for now.
+            filetypes = { 'graphql' },
+        },
     },
 
     ------------------------------------------------
@@ -131,7 +138,7 @@ M.clients = {
 
     tsserver = {
         formatting_enabled = false,
-        additional_lsp_config = {
+        user_config = {
             settings = {
                 completions = {
                     completeFunctionCalls = true,
@@ -172,7 +179,7 @@ M.clients = {
     },
 
     yamlls = {
-        additional_lsp_config = {
+        user_config = {
             settings = {
                 yaml = {
                     schemas = require('schemastore').yaml.schemas(),

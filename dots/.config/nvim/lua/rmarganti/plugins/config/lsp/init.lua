@@ -31,14 +31,13 @@ function M.config()
     -- Register clients via nvim-lspconfig
     for _, client in ipairs(clients) do
         local config = user_lsp_config.clients[client]
+        local settings = vim.tbl_extend(
+            "force",
+            { capabilities = capabilities, flags = flags, on_attach = on_attach },
+            config.user_config or {}
+        )
 
-        lspconfig[client].setup({
-            flags = flags,
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = config.filetypes,
-            settings = config.additional_lsp_config,
-        })
+        lspconfig[client].setup(settings)
     end
 
     require('rmarganti.plugins.config.null-ls').setup()
