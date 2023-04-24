@@ -28,6 +28,7 @@ function M.config()
             'php',
             'phpdoc',
             'prisma',
+            'proto',
             'query', -- Treesitter
             'regex',
             'rust',
