@@ -63,6 +63,7 @@ function M.config()
                 local icon = level:match('error') and ' ' or ' '
                 return ' ' .. icon
             end,
+            max_name_length = 32,
             separator_style = 'slant',
             show_buffer_close_icons = false,
             show_buffer_icons = false,
