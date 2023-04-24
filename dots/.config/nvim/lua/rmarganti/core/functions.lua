@@ -60,7 +60,6 @@ M.toggle_format_on_save = function()
 end
 
 -- Asynchronously format the current buffer.
--- TODO: Auto-save when auto-formatting.
 M.format = function(is_auto_format)
     -- Manual format.
     if is_auto_format == false or enable_format_on_save then

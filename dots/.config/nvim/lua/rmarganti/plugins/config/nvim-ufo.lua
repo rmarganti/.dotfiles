@@ -42,6 +42,11 @@ function M.config()
 
     ufo.setup({
         fold_virt_text_handler = handler,
+        preview = {
+            win_config = {
+                winblend = 0,
+            },
+        },
         provider_selector = function()
             return { 'treesitter', 'indent' }
         end,
@@ -49,6 +54,10 @@ function M.config()
 
     vim.keymap.set('n', 'zR', ufo.openAllFolds)
     vim.keymap.set('n', 'zM', ufo.closeAllFolds)
+    vim.keymap.set('n', 'zr', function()
+        ufo.closeFoldsWith(1)
+    end)
+    vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
     -- Clear Fold HL group when using UFO, since
     -- we use other methods of indicating a fold.

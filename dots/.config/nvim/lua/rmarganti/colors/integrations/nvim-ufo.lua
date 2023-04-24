@@ -1,5 +1,6 @@
 local a = require('rmarganti.colors.abstractions')
+local p = require('rmarganti.colors.palette')
 
 return {
-    UfoFoldedEllipsis = { fg = a.plus3 },
+    UfoFoldedEllipsis = { fg = p.yellow_dark },
 }
