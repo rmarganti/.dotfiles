@@ -41,7 +41,7 @@ return {
     -- ['@method'] = { fg = a.plus3 }, -- method definitions
     -- ['@method.call'] = {}, -- method calls
 
-    ['@constructor'] = {}, -- constructor calls and definitions. This clears out the default link to `Special`.
+    ['@constructor'] = { fg = a.plus3 }, -- constructor calls and definitions.
     ['@parameter'] = { fg = a.plus4, italic = true }, -- parameters of a function
 
     -- Keywords

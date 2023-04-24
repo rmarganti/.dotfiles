@@ -44,10 +44,10 @@ return {
     IncSearch = { fg = p.bg_dark, bg = p.green_dark }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     CurSearch = { fg = p.bg_dark, bg = p.green_bright }, -- The 'incsearch' item currently under the cursor
     SpecialKey = { fg = a.minus2 }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
-    SpellBad = { sp = p.yellow_dark, underdotted = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
-    SpellCap = { sp = p.yellow_dark, underdotted = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
-    SpellLocal = { sp = p.yellow_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
-    SpellRare = { sp = p.yellow_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
+    SpellBad = { sp = p.blue_dark, underdotted = true }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
+    SpellCap = { sp = p.blue_dark, underdotted = true }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
+    SpellLocal = { sp = p.blue_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
+    SpellRare = { sp = p.blue_dark, underdotted = true }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine = { fg = p.fg, bg = p.bg_light }, -- status line of current window
     -- StatusLineNC = { fg = p.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = p.bg_light, fg = p.fg }, -- tab pages line, not active tab page label
