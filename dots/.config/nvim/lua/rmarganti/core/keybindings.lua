@@ -293,24 +293,28 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map('n', '<Leader>sf', function()
+utils.map({ 'n', 'x' }, '<Leader>sf', function()
     require('telescope.builtin').find_files({ hidden = true })
 end)
 
 -- Search Recent files
-utils.map('n', '<Leader>sr', '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>')
+utils.map(
+    { 'n', 'x' },
+    '<Leader>sr',
+    '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>'
+)
 
 -- Search Text
-utils.map('n', '<Leader>st', '<Cmd>Telescope live_grep<CR>')
+utils.map({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
 
 -- Search Todos
-utils.map('n', '<Leader>sT', '<Cmd>TodoTelescope<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 
 -- Search Buffers
-utils.map('n', '<Leader>sb', '<Cmd>Telescope buffers<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Wiki
-utils.map('n', '<Leader>sw', function()
+utils.map({ 'n', 'x' }, '<Leader>sw', function()
     require('telescope.builtin').find_files({
         hidden = true,
         search_dirs = { '~/vimwiki' },
@@ -318,26 +322,25 @@ utils.map('n', '<Leader>sw', function()
 end)
 
 -- Search Notifications
-utils.map('n', '<Leader>sn', '<Cmd>Telescope notify<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sn', '<Cmd>Telescope notify<CR>')
 
 -- Search Symbols
-utils.map('n', '<Leader>ss', '<Cmd>Telescope symbols<CR>')
+utils.map({ 'n', 'x' }, '<Leader>ss', '<Cmd>Telescope symbols<CR>')
 
 -- Search Commands
-utils.map('n', '<Leader>sc', '<Cmd>Telescope commands<CR>')
-utils.map('x', '<Leader>sc', '<Cmd>Telescope commands<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sc', '<Cmd>Telescope commands<CR>')
 
 -- Search Help
-utils.map('n', '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
-utils.map('x', '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
 
 -- Search Highlights
-utils.map('n', '<Leader>sH', '<Cmd>Telescope highlights<CR>')
-utils.map('x', '<Leader>sH', '<Cmd>Telescope highlights<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sH', '<Cmd>Telescope highlights<CR>')
+
+-- Search Key maps
+utils.map({ 'n', 'x' }, '<Leader>sk', '<Cmd>Telescope keymaps<CR>')
 
 -- Search Resume
-utils.map('n', '<Leader>s.', '<Cmd>Telescope resume<CR>')
-utils.map('x', '<Leader>s.', '<Cmd>Telescope resume<CR>')
+utils.map({ 'n', 'x' }, '<Leader>s.', '<Cmd>Telescope resume<CR>')
 
 ------------------------------------------------
 --
