@@ -12,6 +12,7 @@ dropdown
 eprintln
 errorf
 figma
+fn
 gannett
 gannettdigital
 gccdev
@@ -19,6 +20,7 @@ gofmt
 gofundme
 graphql
 hasura
+homebrew
 issue
 jira
 krux
@@ -41,6 +43,7 @@ redux
 rmarganti
 saml
 spacebar
+stderr
 stdin
 stdout
 stringify
@@ -59,6 +62,3 @@ wezterm
 whitelist
 whitelisted
 yaml
-stderr
-fn
-homebrew
