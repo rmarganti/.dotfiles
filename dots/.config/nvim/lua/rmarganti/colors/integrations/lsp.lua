@@ -18,7 +18,7 @@ return {
 
     ['@lsp.type.namespace'] = { link = '@namespace' },
     ['@lsp.type.type'] = { link = '@type' },
-    ['@lsp.type.class'] = { fg = a.plus3 },
+    ['@lsp.type.class'] = { fg = a.plus2 },
     ['@lsp.type.enum'] = { link = '@type' },
     ['@lsp.type.interface'] = { link = '@type' },
     ['@lsp.type.struct'] = { link = '@structure' },

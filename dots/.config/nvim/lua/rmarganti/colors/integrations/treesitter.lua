@@ -21,7 +21,7 @@ return {
 
     -- ['@string'] = { fg = a.plus2 }, -- string literals
     -- ['@string.regex'] = {}, -- regular expressions
-    ['@string.escape'] = { fg = a.base }, -- escape sequences
+    ['@string.escape'] = { fg = a.minus1 }, -- escape sequences
     -- ['@string.special'] = {}, -- other special strings (e.g. dates)
 
     -- ['@character'] = {}, -- character literals
@@ -55,7 +55,7 @@ return {
     -- ['@repeat'] = {}, -- keywords related to loops (e.g. `for` / `while`)
     -- ['@debug'] = {}, -- keywords related to debugging
     -- ['@label'] = {}, -- GOTO and other labels (e.g. `label:` in C)
-    ['@include'] = { fg = a.base }, -- keywords for including modules (e.g. `import` / `from` in Python)
+    ['@include'] = { fg = a.minus1 }, -- keywords for including modules (e.g. `import` / `from` in Python)
     -- ['@exception'] = {}, -- keywords related to exceptions (e.g. `throw` / `catch`)
 
     -- Types
@@ -139,4 +139,11 @@ return {
 
     -- ['@scope'] = {}, -- scope block
     -- ['@reference'] = {}, -- identifier reference
+
+    ------------------------------------------------
+    -- PHP
+    ------------------------------------------------
+
+    ['@type.phpdoc'] = { fg = a.minus1 },
+    ['@parameter.phpdoc'] = { fg = a.minus1 },
 }
