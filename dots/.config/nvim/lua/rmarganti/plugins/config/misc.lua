@@ -45,4 +45,6 @@ return {
         'tpope/vim-sleuth',
         event = 'BufReadPost',
     },
+
+    { 'catppuccin/nvim', name = 'catppuccin' },
 }
