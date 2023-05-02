@@ -174,8 +174,13 @@ M.clients = {
         formatting_enabled = false,
     },
 
+    -- Protobufs
     bufls = {
         formatting_enabled = true,
+    },
+
+    helm_ls = {
+        fomatting_enabled = true,
     },
 
     yamlls = {
