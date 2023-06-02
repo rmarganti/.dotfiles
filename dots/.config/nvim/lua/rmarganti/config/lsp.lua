@@ -183,6 +183,11 @@ M.clients = {
         fomatting_enabled = true,
     },
 
+    -- TOML
+    taplo = {
+        formatting_enabled = true,
+    },
+
     yamlls = {
         user_config = {
             settings = {
