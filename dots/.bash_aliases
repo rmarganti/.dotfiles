@@ -50,6 +50,9 @@ alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 # Git Push Upstream Origin
 alias gpuo='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs git push -u origin'
 
+# Git Push Force with Lease
+alias gpfl='git push --force-with-lease'
+
 # Git Branch -- Select a branch to checkout using FZF.
 function gb() {
 	local branches branch query
@@ -90,9 +93,9 @@ function gbd() {
 alias art='php artisan'
 alias acc='php artisan cache:clear'
 
-# Laravel Doctrine
-# --------------------------------
-alias dcc='php artisan doctrine:generate:proxies && php artisan doctrine:clear:metadata:cache && php artisan doctrine:clear:query:cache && php artisan doctrine:clear:result:cache'
+# -[ Laravel Doctrine ]---------------------------
+
+alias dcc='php artisan doctrine:clear:metadata:cache && php artisan doctrine:clear:query:cache && php artisan doctrine:clear:result:cache && php artisan doctrine:generate:proxies'
 alias dge='vendor/doctrine/orm/bin/doctrine orm:generate-entities .'
 alias dmd='php artisan doctrine:migrations:diff'
 alias dmg='php artisan doctrine:migrations:generate'
@@ -104,17 +107,22 @@ alias dsd='php artisan doctrine:schema:drop'
 alias dsu='php artisan doctrine:schema:update'
 alias dsv='php artisan doctrine:schema:validate'
 
-# Composer
-# --------------------------------
+# -[ Composer ]-----------------------------------
+
 alias cda='composer dump-autoload -o'
 
-# PHPUnit
-# --------------------------------
+# -[ PHPUnit ]------------------------------------
+
 alias pu='./vendor/bin/phpunit'
 function puf() {
 	./vendor/bin/phpunit --filter=$1
 }
+
 alias pus='./vendor/bin/phpunit --testsuite'
+
+# -[ PHPStan ]------------------------------------
+
+alias psa='./vendor/bin/phpstan analyse'
 
 ################################################################
 #
