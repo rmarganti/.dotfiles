@@ -1,0 +1,20 @@
+{
+    "name": "palette_gen",
+    "version": "1.0.0",
+    "main": "palette_gen.ts",
+    "author": "Ryan Marganti",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "go": "ts-node-esm ./palette_gen.ts"
+    },
+    "dependencies": {
+        "chalk": "^5.2.0",
+        "colord": "^2.9.3"
+    },
+    "devDependencies": {
+        "@types/node": "^20.2.5",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    }
+}
