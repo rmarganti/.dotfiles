@@ -12,7 +12,7 @@ function M.config()
         highlights = {
             background = { bg = p.bg_light.gui },
             buffer_selected = {
-                fg = p.fg.gui,
+                fg = a.fg.gui,
                 italic = false,
             },
             buffer_visible = {

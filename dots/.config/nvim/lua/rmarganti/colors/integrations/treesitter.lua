@@ -36,7 +36,8 @@ return {
     -- ['@function'] = { fg = a.plus3 }, -- function definitions
     ['@function.builtin'] = { fg = a.plus3 }, -- built-in functions
     -- ['@function.call'] = {}, -- function calls
-    -- ['@function.macro'] = {}, -- preprocessor macros
+    ['@function.macro'] = { fg = a.plus2 }, -- preprocessor macros
+    -- ['@macro'] = {}, -- preprocessor macros
 
     -- ['@method'] = { fg = a.plus3 }, -- method definitions
     -- ['@method.call'] = {}, -- method calls
@@ -63,7 +64,7 @@ return {
     -- ['@type'] = {}, -- type or class definitions and annotations
     -- ['@type.builtin'] = {}, -- built-in types
     -- ['@type.definition'] = {}, -- type definitions (e.g. `typedef` in C)
-    ['@type.qualifier'] = { fg = a.base }, -- type qualifiers (e.g. `const`)
+    ['@type.qualifier'] = { fg = a.minus1 }, -- type qualifiers (e.g. `const`)
 
     -- ['@storageclass'] = {}, -- visibility/life-time/etc. modifiers (e.g. `static`)
     ['@attribute'] = { fg = a.minus1 }, -- attribute annotations (e.g. Python decorators)

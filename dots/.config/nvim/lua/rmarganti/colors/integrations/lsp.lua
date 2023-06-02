@@ -25,9 +25,9 @@ return {
     ['@lsp.type.parameter'] = { link = '@parameter' },
     ['@lsp.type.variable'] = { link = '@variable' },
     ['@lsp.type.property'] = { link = '@property' },
-    ['@lsp.type.enumMember'] = { link = '@constant' },
+    ['@lsp.type.enumMember'] = { fg = a.plus2 },
     ['@lsp.type.function'] = { link = '@function' },
     ['@lsp.type.method'] = { link = '@method' },
     ['@lsp.type.macro'] = { link = '@macro' },
-    ['@lsp.type.decorator'] = { link = '@function' },
+    ['@lsp.type.decorator'] = { fg = a.plus1 },
 }

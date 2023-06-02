@@ -1,20 +1,12 @@
 local M = {}
 
-M.apply = function()
-    local core = M.get_core_config()
-    M.syntax(core)
-
-    local integrations = M.get_integrations_config()
-    M.syntax(integrations)
-end
-
-M.syntax = function(tbl)
+function M.syntax(tbl)
     for group, colors in pairs(tbl) do
         M.highlight(group, colors)
     end
 end
 
-M.highlight = function(group, color)
+function M.highlight(group, color)
     vim.api.nvim_set_hl(0, group, {
         -- Foreground
         fg = color.fg and color.fg.gui,

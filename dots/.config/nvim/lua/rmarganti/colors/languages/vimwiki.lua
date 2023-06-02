@@ -8,8 +8,8 @@ return {
     VimwikiHeader2 = { fg = p.yellow, bold = true },
     VimwikiHeader3 = { fg = p.cyan, bold = true },
     VimwikiHeader4 = { fg = p.blue, bold = true },
-    VimwikiHeader5 = { fg = p.gray3, bold = true },
-    VimwikiHeader6 = { fg = p.gray3, bold = true },
+    VimwikiHeader5 = { fg = p.gray_light, bold = true },
+    VimwikiHeader6 = { fg = p.gray_light, bold = true },
 
     VimwikiLink = { fg = a.plus1, underline = true },
     VimwikiHR = { fg = a.base },

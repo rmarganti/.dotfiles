@@ -36,7 +36,7 @@ function M.config()
         COMMAND = p.green.gui,
         SHELL = p.green.gui,
         TERM = p.green.gui,
-        NONE = p.gray1.gui,
+        NONE = p.gray_dark.gui,
     }
 
     local pieces = {
@@ -84,7 +84,7 @@ function M.config()
         file_type = {
             provider = 'file_type',
             hl = {
-                fg = p.gray2.gui,
+                fg = p.gray.gui,
                 bg = p.bg_lighter.gui,
             },
             left_sep = {
@@ -134,7 +134,7 @@ function M.config()
             provider = position_provider,
             hl = {
                 bg = p.bg_lightest.gui,
-                fg = p.gray2.gui,
+                fg = p.gray.gui,
                 style = 'bold',
             },
             left_sep = {
@@ -160,7 +160,7 @@ function M.config()
             },
             hl = {
                 bg = p.none.gui,
-                fg = p.gray3.gui,
+                fg = p.gray_light.gui,
                 style = 'bold',
             },
         },
@@ -176,12 +176,12 @@ function M.config()
                 str = ' > ',
                 hl = {
                     bg = p.none.gui,
-                    fg = p.black_bright.gui,
+                    fg = p.black_light.gui,
                 },
             },
             hl = {
                 bg = p.none.gui,
-                fg = p.black_bright.gui,
+                fg = p.black_light.gui,
             },
         },
     }
@@ -219,7 +219,7 @@ function M.config()
         vi_mode_colors = vi_mode_colors,
         theme = {
             bg = p.bg_light.gui,
-            fg = p.gray1.gui,
+            fg = p.gray_dark.gui,
         },
     })
 
