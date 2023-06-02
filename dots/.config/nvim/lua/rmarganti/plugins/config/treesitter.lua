@@ -35,6 +35,7 @@ function M.config()
             'scss',
             'sql',
             'terraform',
+            'toml',
             'tsx',
             'typescript',
             'vim',
