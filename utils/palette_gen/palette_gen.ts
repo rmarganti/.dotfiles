@@ -22,8 +22,8 @@ const COLORS = {
 
 function main() {
     Object.entries(COLORS).forEach(([name, value]) => {
-        const darker = colord(value).mix(COLORS.bg, 0.8);
-        const dark = colord(value).mix(COLORS.bg, 0.4);
+        const darker = colord(value).mix(COLORS.bg, 0.6);
+        const dark = colord(value).mix(COLORS.bg, 0.3);
         const light = colord(value).lighten(0.1);
         const lighter = colord(value).lighten(0.2);
 

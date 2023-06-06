@@ -9,12 +9,12 @@ function M.config()
 
     require('todo-comments').setup({
         colors = {
-            error = { 'TodoErrorKeyword', p.red_darker.gui },
-            warning = { 'TodoWarningKeyword', p.yellow_darker.gui },
-            info = { 'TodoInfoKeyword', p.blue_darker.gui },
-            hint = { 'TodoInfoKeyword', p.blue_darker.gui },
-            default = { 'TodoInfoKeyword', p.blue_darker.gui },
-            test = { 'TodoInfoKeyword', p.blue_darker.gui },
+            error = { 'TodoErrorKeyword', p.red_dark.gui },
+            warning = { 'TodoWarningKeyword', p.yellow_dark.gui },
+            info = { 'TodoInfoKeyword', p.blue_dark.gui },
+            hint = { 'TodoInfoKeyword', p.blue_dark.gui },
+            default = { 'TodoInfoKeyword', p.blue_dark.gui },
+            test = { 'TodoInfoKeyword', p.blue_dark.gui },
         },
         highlight = {
             comments_only = true,

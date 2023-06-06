@@ -6,7 +6,7 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "go": "ts-node-esm ./palette_gen.ts"
+        "go": "node --loader ts-node/esm ./palette_gen.ts"
     },
     "dependencies": {
         "chalk": "^5.2.0",
