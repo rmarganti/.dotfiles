@@ -422,7 +422,10 @@ utils.map('n', '<Leader>qQ', ':qa!<CR>')
 utils.map('n', 'gJ', '<Cmd>TSJToggle<CR>')
 
 -- Jump to character in current window.
-utils.map('n', '<Leader><Leader>', '<Cmd>HopChar1<CR>')
+utils.map('n', '<Leader><Leader>', function()
+    local MiniJump2d = require('mini.jump2d')
+    MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
+end)
 
 -- Add line below
 utils.map('n', 'go', "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>")
