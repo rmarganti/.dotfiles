@@ -24,7 +24,15 @@ function M.config()
                 override_file_sorter = true, -- override the file sorter
                 case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
             },
+
+            smart_open = {
+                show_scores = false,
+                ignore_patterns = { '*.git/*', '*/tmp/*' },
+                match_algorithm = 'fzy',
+                disable_devicons = false,
+            },
         },
+
         defaults = {
             layout_strategy = 'vertical',
             dynamic_preview_title = true,
@@ -68,6 +76,7 @@ function M.config()
     require('telescope').load_extension('ghn')
     require('telescope').load_extension('notify')
     require('telescope').load_extension('recent_files')
+    require('telescope').load_extension('smart_open')
 end
 
 return M

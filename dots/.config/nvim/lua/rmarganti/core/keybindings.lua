@@ -293,25 +293,13 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map({ 'n', 'x' }, '<Leader>sf', function()
-    require('telescope.builtin').find_files({ hidden = true })
-end)
-
--- Search Recent files
-utils.map(
-    { 'n', 'x' },
-    '<Leader>sr',
-    '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>'
-)
+utils.map({ 'n', 'x' }, '<Leader>sf', '<Cmd>Telescope smart_open<CR>')
 
 -- Search Text
 utils.map({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
 
 -- Search Todos
 utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
-
--- Search Buffers
-utils.map({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Wiki
 utils.map({ 'n', 'x' }, '<Leader>sw', function()
