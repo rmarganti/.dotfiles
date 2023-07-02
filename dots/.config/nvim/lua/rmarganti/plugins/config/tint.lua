@@ -18,6 +18,7 @@ function M.config()
             'LineNr.*',
             'NonText',
             'Status.*',
+            'VertSplit',
             'WinSeparator',
         },
     })
