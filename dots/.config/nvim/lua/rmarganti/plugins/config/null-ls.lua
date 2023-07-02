@@ -7,6 +7,7 @@ local M = {
 -- This function is not called by lazy.nvim. It is called as part of `lsp@config()`.
 function M.setup()
     local lsp_utils = require('rmarganti.plugins.config.lsp.lsp-utils')
+    local path = require('rmarganti.utils.path')
     local null_ls = require('null-ls')
     local builtins = null_ls.builtins
 
@@ -20,7 +21,15 @@ function M.setup()
         builtins.formatting.stylua,
 
         -- Bash
-        null_ls.builtins.formatting.shfmt,
+        builtins.formatting.shfmt,
+
+        -- PHP
+        builtins.formatting.phpcsfixer.with({
+            condition = function()
+                return path.file_exists('vendor/bin/php-cs-fixer')
+            end,
+            command = 'vendor/bin/php-cs-fixer',
+        }),
 
         -- Lots of languages
         builtins.formatting.prettierd.with({

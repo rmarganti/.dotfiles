@@ -12,6 +12,7 @@ return {
     --------------------------------
     -- Text manipulation
     --------------------------------
+
     -- Quickly surround text with brackets, quotes, etc.
     {
         'tpope/vim-surround',
