@@ -4,6 +4,8 @@ apos
 appops
 atol
 authenticatable
+awaitable
+backend
 chiclet
 colorscheme
 colorspace
@@ -11,8 +13,10 @@ designiq
 dropdown
 eprintln
 errorf
+feedr
 figma
 fn
+frontend
 gannett
 gannettdigital
 gccdev
@@ -62,6 +66,3 @@ wezterm
 whitelist
 whitelisted
 yaml
-DB_DATABASE
-backend
-frontend
