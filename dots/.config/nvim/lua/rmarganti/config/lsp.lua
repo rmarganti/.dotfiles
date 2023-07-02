@@ -136,15 +136,9 @@ M.clients = {
     -- Typescript, Javascript
     ------------------------------------------------
 
-    tsserver = {
+    ['typescript-tools'] = {
+        skip_setup = true, -- typescript-tools does its own setup.
         formatting_enabled = false,
-        user_config = {
-            settings = {
-                completions = {
-                    completeFunctionCalls = true,
-                },
-            },
-        },
     },
 
     eslint = {

@@ -1,5 +1,6 @@
 .DS_Store
 .env
 .php_cs.cache
+.phpactor.json
 .phpunit.result.cache
 yarn-error.log

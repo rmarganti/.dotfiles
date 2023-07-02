@@ -112,7 +112,7 @@ utils.map('n', '<Leader>cf', function()
 end)
 
 -- Code Organize imports
-utils.map('n', '<Leader>co', core_fns.organize_imports)
+utils.map('n', '<Leader>co', '<Cmd>TSToolsOrganizeImports<CR>')
 
 -- Code Capture screenshot
 utils.map('n', '<Leader>cc', function()
