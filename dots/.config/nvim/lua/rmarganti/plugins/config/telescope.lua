@@ -26,10 +26,7 @@ function M.config()
             },
 
             smart_open = {
-                show_scores = false,
-                ignore_patterns = { '*.git/*', '*/tmp/*' },
-                match_algorithm = 'fzy',
-                disable_devicons = false,
+                match_algorithm = 'fzf',
             },
         },
 

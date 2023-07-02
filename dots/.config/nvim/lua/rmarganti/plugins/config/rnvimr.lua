@@ -1,7 +1,7 @@
 -- File explorer.
 local M = {
     'kevinhwang91/rnvimr',
-    event = 'VeryLazy', -- lazy.lua will fire this after UI has loaded
+    event = 'VeryLazy',
 }
 
 function M.init()
