@@ -39,6 +39,13 @@ return {
     { key = '8', mods = 'SUPER', action = action.ActivateTab(7) },
     { key = '9', mods = 'SUPER', action = action.ActivateTab(8) },
 
+    -- Rename tab
+    {
+        key = ',',
+        mods = 'LEADER',
+        action = action.EmitEvent('RenameTab'),
+    },
+
     ------------------------------------------------
     -- Panes
     ------------------------------------------------
