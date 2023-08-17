@@ -26,6 +26,9 @@ alias sysr="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 #
 ################################################################
 
+# Git Add All and Commit
+alias gaac='git add -A && git commit';
+
 # Git Branch Copy -- Copy name to clipboard.
 alias gbc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
 
