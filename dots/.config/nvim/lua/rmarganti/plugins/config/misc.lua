@@ -19,12 +19,6 @@ return {
         event = 'VeryLazy',
     },
 
-    -- Replace target with value of register.
-    {
-        'vim-scripts/ReplaceWithRegister',
-        event = 'VeryLazy',
-    },
-
     --------------------------------
     -- Misc
     --------------------------------
