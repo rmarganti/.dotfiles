@@ -73,7 +73,24 @@ function M.config()
     require('telescope').load_extension('ghn')
     require('telescope').load_extension('notify')
     require('telescope').load_extension('recent_files')
-    require('telescope').load_extension('smart_open')
+
+    local augroup = vim.api.nvim_create_augroup('TelescopeCustom', { clear = true })
+
+    vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter', 'BufEnter' }, {
+        group = augroup,
+        pattern = '*',
+        callback = function(ev)
+            -- Telescope sets the file type after the fact,
+            -- so we use `vim.schedule` to give it time to do so.
+            vim.schedule(function()
+                local filetype = vim.api.nvim_buf_get_option(ev.buf, 'filetype')
+                if filetype == "TelescopePrompt" then
+                    vim.opt_local.cursorline = false
+                end
+            end)
+        end,
+        desc = 'Disables cursorline for Telescope',
+    })
 end
 
 return M

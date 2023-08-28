@@ -28,6 +28,8 @@ return {
     -- Prompt
     ------------------------------------------------
 
+    TelescopePromptNormal = { fg = p.red, bg = a.float_bg },
+    TelescopePromptPrefix = { fg = a.fg, bg = a.float_bg },
     TelescopePromptTitle = { fg = p.gray_light, bg = p.bg_lighter },
     TelescopePromptBorder = { fg = p.gray, bg = a.float_bg, bold = true },
 }
