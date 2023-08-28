@@ -65,7 +65,7 @@ utils.map('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>'
 
 ------------------------------------------------
 --
--- Code
+-- Code & LSP
 --
 ------------------------------------------------
 
@@ -292,8 +292,19 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 --
 ------------------------------------------------
 
--- Search Files
-utils.map({ 'n', 'x' }, '<Leader>sf', '<Cmd>Telescope smart_open<CR>')
+utils.map({ 'n', 'x' }, '<Leader>sf', function()
+    require('telescope.builtin').find_files({ hidden = true })
+end)
+
+-- Search Recent files
+utils.map(
+    { 'n', 'x' },
+    '<Leader>sr',
+    '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>'
+)
+
+-- Search Buffers
+utils.map({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Text
 utils.map({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
