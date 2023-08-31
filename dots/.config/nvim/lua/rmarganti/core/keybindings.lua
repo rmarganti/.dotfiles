@@ -130,6 +130,15 @@ utils.map('n', '<Leader>ci', '<Cmd>Inspect<CR>')
 -- Inspect the tree of the current buffer
 utils.map('n', '<Leader>cI', '<Cmd>InspectTree<CR>')
 
+-- Restart LSP
+utils.map('n', '<Leader>cR', function()
+    vim.cmd('LspRestart')
+    vim.diagnostic.reset()
+end)
+
+-- Reset LSP Diagnostics
+utils.map('n', '<Leader>cD', vim.diagnostic.reset)
+
 ------------------------------------------------
 --
 -- Edit
@@ -265,6 +274,7 @@ utils.map('n', '<Leader>y', '"+y')
 utils.map('x', '<Leader>y', '"+y')
 
 -- Delete to system clipboard
+utils.map('n', '<Leader>d', '"+d')
 utils.map('x', '<Leader>d', '"+d')
 
 -- Paste from system clipboard
