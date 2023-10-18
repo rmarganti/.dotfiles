@@ -16,16 +16,33 @@ end
 -- Relative to the current buffer, find and edit the file in the closest
 -- directory. If no buffer is open, search in the project root.
 M.edit_nearest = function(filename, directory)
-    directory = directory or vim.fs.dirname(vim.fn.expand('%')) or '.'
+    local _edit_nearest = function(fname, dir)
+        dir = dir or vim.fs.dirname(vim.fn.expand('%')) or '.'
+        local nearest = vim.fs.find({ fname }, { upward = true, path = dir })[1]
 
-    local nearest = vim.fs.find({ filename }, { upward = true, path = directory })[1]
+        if nearest == nil then
+            vim.notify(fname .. ' not found in project.', 'warn')
+            return
+        end
 
-    if nearest == nil then
-        vim.notify(filename .. ' not found in project.', 'warn')
+        vim.cmd('e ' .. nearest)
+    end
+
+    if filename ~= '' and filename ~= nil then
+        _edit_nearest(filename, directory)
         return
     end
 
-    vim.cmd('e ' .. nearest)
+    vim.ui.input({
+        prompt = 'Filename: ',
+        kind = 'filename',
+    }, function(input)
+        if input == nil or input == '' then
+            return
+        end
+
+        _edit_nearest(input, directory)
+    end)
 end
 
 -- Edit the corresponding test file. Only supports Javascript and Typescript currently.
@@ -119,7 +136,7 @@ end
 -- Import the contents of a URL.
 M.read_url = function()
     vim.ui.input({
-        prompt = 'Enter URL:',
+        prompt = 'Enter URL: ',
         kind = 'read_url',
     }, function(input)
         if input == nil then

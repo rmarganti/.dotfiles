@@ -12,7 +12,12 @@ M.config = function()
                 if opts.kind == 'read_url' then
                     return {
                         relative = 'win',
-                        prefer_width = 60,
+                        prefer_width = 80
+                    }
+                elseif opts.kind == 'filename' then
+                    return {
+                        relative = 'win',
+                        prefer_width = 50
                     }
                 end
             end,

@@ -145,36 +145,37 @@ utils.map('n', '<Leader>cD', vim.diagnostic.reset)
 --
 ------------------------------------------------
 
-local edit_nearest = core_fns.edit_nearest
+-- Edit Nearest (with prompt)
+utils.map('n', '<Leader>en', core_fns.edit_nearest)
 
 -- Edit nearest Changelog
 utils.map('n', '<Leader>ec', function()
-    edit_nearest('CHANGELOG.md')
+    core_fns.edit_nearest('CHANGELOG.md')
 end)
 
 -- Edit nearest Composer.json
 utils.map('n', '<Leader>eC', function()
-    edit_nearest('composer.json')
+    core_fns.edit_nearest('composer.json')
 end)
 
 -- Edit nearest Env
 utils.map('n', '<Leader>ee', function()
-    edit_nearest('.env')
+    core_fns.edit_nearest('.env')
 end)
 
 -- Edit nearest Index.ts
 utils.map('n', '<Leader>ei', function()
-    edit_nearest('index.ts')
+    core_fns.edit_nearest('index.ts')
 end)
 
 -- Edit nearest package.json
 utils.map('n', '<Leader>ep', function()
-    edit_nearest('package.json')
+    core_fns.edit_nearest('package.json')
 end)
 
 -- Edit nearest Readme
 utils.map('n', '<Leader>er', function()
-    edit_nearest('README.md')
+    core_fns.edit_nearest('README.md')
 end)
 
 -- Edit Snippets for current file type
