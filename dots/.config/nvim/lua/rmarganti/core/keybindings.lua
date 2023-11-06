@@ -173,6 +173,11 @@ utils.map('n', '<Leader>ep', function()
     core_fns.edit_nearest('package.json')
 end)
 
+-- Edit nearest project.json
+utils.map('n', '<Leader>eP', function()
+    core_fns.edit_nearest('project.json')
+end)
+
 -- Edit nearest Readme
 utils.map('n', '<Leader>er', function()
     core_fns.edit_nearest('README.md')
