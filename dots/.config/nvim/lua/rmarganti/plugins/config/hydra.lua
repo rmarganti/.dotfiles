@@ -22,13 +22,17 @@ function M.config()
     Hydra({
         hint = table.concat({
             '^^ Focus ^^  ^^ Resize ^^  ^         Split',
-            '^^-------^^  ^^--------^^  ^------------------------',
+            '^^———————^^  ^^————————^^  ^————————————————————————',
             '^   _k_   ^  ^    _K_   ^   _s_ horizontally  _q_ close',
             ' _h_   _l_     _H_   _L_    _v_ vertically    _o_ only',
             '^   _j_   ^  ^    _J_   ^   _=_ equalize',
         }, '\n'),
         config = {
-            hint = { border = 'rounded' },
+            hint = {
+                position = 'bottom-right',
+                border = 'rounded',
+                offset = 1,
+            },
             invoke_on_body = false,
         },
         mode = 'n',
@@ -66,12 +70,16 @@ function M.config()
     Hydra({
         hint = table.concat({
             '^^      Edit       ^^  ^^          Close           ^^  ^      Move',
-            '^^-----------------^^  ^^--------------------------^^  ^-----------------',
+            '^^—————————————————^^  ^^——————————————————————————^^  ^—————————————————',
             ' _h_ Left  _l_ Right    _q_ Quit  _Q_ Force Quit        _H_ Left  _L_ Right',
             ' _n_ New   _e_ Pick     _a_ All   _o_ Others  _d_ Pick',
         }, '\n'),
         config = {
-            hint = { border = 'rounded' },
+            hint = {
+                position = 'bottom-right',
+                border = 'rounded',
+                offset = 1,
+            },
             invoke_on_body = true,
         },
         mode = 'n',
@@ -112,8 +120,9 @@ function M.config()
             color = 'pink',
             invoke_on_body = true,
             hint = {
-                position = 'bottom',
+                position = 'bottom-right',
                 border = 'rounded',
+                offset = 1,
             },
             on_enter = function()
                 gitsigns.toggle_signs(true)
