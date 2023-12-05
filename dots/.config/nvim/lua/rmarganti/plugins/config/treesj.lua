@@ -7,7 +7,7 @@ local M = {
 function M.config()
     require('treesj').setup({
         max_join_length = 1000,
-        use_default_keymaps = true,
+        use_default_keymaps = false,
         notify = false,
     })
 end
