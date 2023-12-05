@@ -152,6 +152,7 @@ function M.config()
                 name = 'file_info',
                 opts = {
                     colored_icon = false,
+                    type = 'unique',
                 },
             },
             left_sep = {
