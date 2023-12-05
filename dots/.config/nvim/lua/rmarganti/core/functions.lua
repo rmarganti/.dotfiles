@@ -63,7 +63,7 @@ M.edit_test = function()
     end
 end
 
-local enable_format_on_save = true
+local enable_format_on_save = false
 
 -- Toggle whether format-on-save is enabled.
 M.toggle_format_on_save = function()

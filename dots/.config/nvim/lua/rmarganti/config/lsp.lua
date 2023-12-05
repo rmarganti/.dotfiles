@@ -119,7 +119,7 @@ M.clients = {
     ------------------------------------------------
 
     phpactor = {
-        formatting_enabled = true,
+        formatting_enabled = false,
     },
 
     ------------------------------------------------

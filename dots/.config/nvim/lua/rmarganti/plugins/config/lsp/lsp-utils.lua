@@ -10,7 +10,7 @@ M.make_client_capabilities = function()
 end
 
 M.on_attach = function(client, bufnr)
-    local core_fns = require('rmarganti.core.functions')
+    -- local core_fns = require('rmarganti.core.functions')
 
     -- Provide breadcrumbs
     if client.server_capabilities.documentSymbolProvider then
