@@ -1,0 +1,12 @@
+choice.slice is not a function
+TypeError: choice.slice is not a function
+    at file:///Users/rmarganti/.kit/core/utils.js:1012:40
+    at Array.flatMap (<anonymous>)
+    at formatChoices (file:///Users/rmarganti/.kit/core/utils.js:1007:24)
+    at global.___kitFormatChoices (file:///Users/rmarganti/.kit/api/kit.js:568:28)
+    at global.setChoices (file:///Users/rmarganti/.kit/api/kit.js:585:41)
+    at displayChoices (file:///Users/rmarganti/.kit/target/app.js:39:24)
+    at getInitialChoices (file:///Users/rmarganti/.kit/target/app.js:91:9)
+    at file:///Users/rmarganti/.kit/target/app.js:165:13
+    at new Promise (<anonymous>)
+    at waitForPromptValue (file:///Users/rmarganti/.kit/target/app.js:161:12)

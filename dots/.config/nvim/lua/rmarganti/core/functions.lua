@@ -63,7 +63,7 @@ M.edit_test = function()
     end
 end
 
-local enable_format_on_save = false
+local enable_format_on_save = true
 
 -- Toggle whether format-on-save is enabled.
 M.toggle_format_on_save = function()
@@ -76,13 +76,17 @@ M.toggle_format_on_save = function()
     end
 end
 
+-- These file types will be asynchronously formatted.
+local SLOW_FORMAT_FILE_TYPES = { 'php' }
+
 -- Asynchronously format the current buffer.
 M.format = function(is_auto_format)
     -- Manual format.
     if is_auto_format == false or enable_format_on_save then
         local user_lsp_config = require('rmarganti.config.lsp')
-        vim.lsp.buf.format({
-            async = true,
+
+        require('conform').format({
+            async = SLOW_FORMAT_FILE_TYPES[vim.bo.filetype] ~= nil,
             filter = function(client)
                 return user_lsp_config.clients[client.name].formatting_enabled
             end,

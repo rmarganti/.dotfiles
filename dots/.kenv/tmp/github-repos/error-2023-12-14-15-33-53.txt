@@ -1,0 +1,6 @@
+Bad credentials
+HttpError: Bad credentials
+    at /Users/rmarganti/.kenv/node_modules/@octokit/request/dist-node/index.js:124:21
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async requestWithGraphqlErrorHandling (/Users/rmarganti/.kenv/node_modules/@octokit/plugin-retry/dist-node/index.js:71:20)
+    at async Job.doExecute (/Users/rmarganti/.kenv/node_modules/bottleneck/light.js:405:18)

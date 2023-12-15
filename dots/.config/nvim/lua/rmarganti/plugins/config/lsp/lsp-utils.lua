@@ -10,7 +10,7 @@ M.make_client_capabilities = function()
 end
 
 M.on_attach = function(client, bufnr)
-    -- local core_fns = require('rmarganti.core.functions')
+    local core_fns = require('rmarganti.core.functions')
 
     -- Provide breadcrumbs
     if client.server_capabilities.documentSymbolProvider then
@@ -21,7 +21,7 @@ M.on_attach = function(client, bufnr)
     if client.supports_method('textDocument/formatting') then
         local format_group = vim.api.nvim_create_augroup('format', { clear = true })
 
-        vim.api.nvim_create_autocmd('BufWritePost', {
+        vim.api.nvim_create_autocmd('BufWritePre', {
             group = format_group,
             callback = function()
                 core_fns.format(true)

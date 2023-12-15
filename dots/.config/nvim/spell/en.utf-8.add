@@ -96,3 +96,4 @@ config
 ipublish
 configs
 truthy
+artifactory
