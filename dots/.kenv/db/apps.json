@@ -1,0 +1,2249 @@
+{
+  "choices": [
+    {
+      "name": "ATFViewer",
+      "value": "/Applications/Adobe Animate CC 2017/AIR25.0/atftools/ATFViewer.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR25.0/atftools/ATFViewer.app"
+    },
+    {
+      "name": "ATFViewer",
+      "value": "/Applications/Adobe Gaming SDK 1.4/Utilities/ATF Tools/ATFViewer.app",
+      "description": "/Applications/Adobe Gaming SDK 1.4/Utilities/ATF Tools/ATFViewer.app"
+    },
+    {
+      "name": "ATFViewer",
+      "value": "/Applications/Adobe Animate CC 2017/AIR23.0/atftools/ATFViewer.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR23.0/atftools/ATFViewer.app"
+    },
+    {
+      "name": "Accessibility Inspector",
+      "value": "/Applications/Xcode.app/Contents/Applications/Accessibility Inspector.app",
+      "description": "/Applications/Xcode.app/Contents/Applications/Accessibility Inspector.app"
+    },
+    {
+      "name": "Acrobat Distiller",
+      "value": "/Applications/Adobe Acrobat DC/Acrobat Distiller.app",
+      "description": "/Applications/Adobe Acrobat DC/Acrobat Distiller.app"
+    },
+    {
+      "name": "AdTracker X",
+      "value": "/Applications/DPS/AdTracker X.app",
+      "description": "/Applications/DPS/AdTracker X.app"
+    },
+    {
+      "name": "Adium",
+      "value": "/Applications/Adium.app",
+      "description": "/Applications/Adium.app"
+    },
+    {
+      "name": "Adobe Acrobat",
+      "value": "/Applications/Adobe Acrobat DC/Adobe Acrobat.app",
+      "description": "/Applications/Adobe Acrobat DC/Adobe Acrobat.app"
+    },
+    {
+      "name": "Adobe Animate CC 2017",
+      "value": "/Applications/Adobe Animate CC 2017/Adobe Animate CC 2017.app",
+      "description": "/Applications/Adobe Animate CC 2017/Adobe Animate CC 2017.app"
+    },
+    {
+      "name": "Adobe Bridge 2022",
+      "value": "/Applications/Adobe Bridge 2022/Adobe Bridge 2022.app",
+      "description": "/Applications/Adobe Bridge 2022/Adobe Bridge 2022.app"
+    },
+    {
+      "name": "Adobe Edge Animate",
+      "value": "/Applications/Adobe Edge Animate CC/Adobe Edge Animate.app",
+      "description": "/Applications/Adobe Edge Animate CC/Adobe Edge Animate.app"
+    },
+    {
+      "name": "Adobe Extension Manager CC",
+      "value": "/Applications/Adobe Extension Manager CC/Adobe Extension Manager CC.app",
+      "description": "/Applications/Adobe Extension Manager CC/Adobe Extension Manager CC.app"
+    },
+    {
+      "name": "Adobe Illustrator",
+      "value": "/Applications/Adobe Illustrator 2022/Adobe Illustrator.app",
+      "description": "/Applications/Adobe Illustrator 2022/Adobe Illustrator.app"
+    },
+    {
+      "name": "Adobe InDesign 2022",
+      "value": "/Applications/Adobe InDesign 2022/Adobe InDesign 2022.app",
+      "description": "/Applications/Adobe InDesign 2022/Adobe InDesign 2022.app"
+    },
+    {
+      "name": "Adobe Media Encoder 2022",
+      "value": "/Applications/Adobe Media Encoder 2022/Adobe Media Encoder 2022.app",
+      "description": "/Applications/Adobe Media Encoder 2022/Adobe Media Encoder 2022.app"
+    },
+    {
+      "name": "Adobe Photoshop 2022",
+      "value": "/Applications/Adobe Photoshop 2022/Adobe Photoshop 2022.app",
+      "description": "/Applications/Adobe Photoshop 2022/Adobe Photoshop 2022.app"
+    },
+    {
+      "name": "Adobe Prelude CC 2018",
+      "value": "/Applications/Adobe Prelude CC 2018/Adobe Prelude CC 2018.app",
+      "description": "/Applications/Adobe Prelude CC 2018/Adobe Prelude CC 2018.app"
+    },
+    {
+      "name": "Adobe Scout CC",
+      "value": "/Applications/Adobe Scout CC.app",
+      "description": "/Applications/Adobe Scout CC.app"
+    },
+    {
+      "name": "Alfred 5",
+      "value": "/Applications/Alfred 5.app",
+      "description": "/Applications/Alfred 5.app"
+    },
+    {
+      "name": "Cinema 4D Team Render Client",
+      "value": "/Applications/Maxon Cinema 4D R25/Cinema 4D Team Render Client.app",
+      "description": "/Applications/Maxon Cinema 4D R25/Cinema 4D Team Render Client.app"
+    },
+    {
+      "name": "Cinema 4D Team Render Server",
+      "value": "/Applications/Maxon Cinema 4D R25/Cinema 4D Team Render Server.app",
+      "description": "/Applications/Maxon Cinema 4D R25/Cinema 4D Team Render Server.app"
+    },
+    {
+      "name": "Cinema 4D",
+      "value": "/Applications/Maxon Cinema 4D R25/Cinema 4D.app",
+      "description": "/Applications/Maxon Cinema 4D R25/Cinema 4D.app"
+    },
+    {
+      "name": "Cineware",
+      "value": "/Applications/Maxon Cinema 4D R25/Cineware.app",
+      "description": "/Applications/Maxon Cinema 4D R25/Cineware.app"
+    },
+    {
+      "name": "Commandline",
+      "value": "/Applications/Maxon Cinema 4D R25/Commandline.app",
+      "description": "/Applications/Maxon Cinema 4D R25/Commandline.app"
+    },
+    {
+      "name": "Contact Sheets",
+      "value": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Contact Sheet Demo.localized/Contact Sheets.app",
+      "description": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Contact Sheet Demo.localized/Contact Sheets.app"
+    },
+    {
+      "name": "Create ML",
+      "value": "/Applications/Xcode.app/Contents/Applications/Create ML.app",
+      "description": "/Applications/Xcode.app/Contents/Applications/Create ML.app"
+    },
+    {
+      "name": "Cyberduck",
+      "value": "/Applications/Cyberduck.app",
+      "description": "/Applications/Cyberduck.app"
+    },
+    {
+      "name": "DPS Ad Info Panel",
+      "value": "/Applications/DPS/DPS Ad Info Panel.app",
+      "description": "/Applications/DPS/DPS Ad Info Panel.app"
+    },
+    {
+      "name": "Enterprise Connect",
+      "value": "/Applications/Enterprise Connect.app",
+      "description": "/Applications/Enterprise Connect.app"
+    },
+    {
+      "name": "ExtendScript Toolkit",
+      "value": "/Applications/Adobe ExtendScript Toolkit CC/ExtendScript Toolkit.app",
+      "description": "/Applications/Adobe ExtendScript Toolkit CC/ExtendScript Toolkit.app"
+    },
+    {
+      "name": "FileMerge",
+      "value": "/Applications/Xcode.app/Contents/Applications/FileMerge.app",
+      "description": "/Applications/Xcode.app/Contents/Applications/FileMerge.app"
+    },
+    {
+      "name": "Firefox",
+      "value": "/Applications/Firefox.app",
+      "description": "/Applications/Firefox.app"
+    },
+    {
+      "name": "Flash Player Debugger",
+      "value": "/Applications/Adobe Animate CC 2017/Players/Debug/Flash Player Debugger.app",
+      "description": "/Applications/Adobe Animate CC 2017/Players/Debug/Flash Player Debugger.app"
+    },
+    {
+      "name": "Flash Player",
+      "value": "/Applications/Adobe Animate CC 2017/Players/Flash Player.app",
+      "description": "/Applications/Adobe Animate CC 2017/Players/Flash Player.app"
+    },
+    {
+      "name": "Flash Player",
+      "value": "/Applications/Adobe Animate CC 2017/Players/Release/Flash Player.app",
+      "description": "/Applications/Adobe Animate CC 2017/Players/Release/Flash Player.app"
+    },
+    {
+      "name": "Flash Script",
+      "value": "/Applications/SCRIPT/APP/Flash Script",
+      "description": "/Applications/SCRIPT/APP/Flash Script"
+    },
+    {
+      "name": "Flash Script (rw)",
+      "value": "/Applications/SCRIPT/APP/Flash Script (rw)",
+      "description": "/Applications/SCRIPT/APP/Flash Script (rw)"
+    },
+    {
+      "name": "Flash Script Script (rw)",
+      "value": "/Applications/SCRIPT/APP/Flash Script Script (rw)",
+      "description": "/Applications/SCRIPT/APP/Flash Script Script (rw)"
+    },
+    {
+      "name": "GlobalProtect",
+      "value": "/Applications/GlobalProtect.app",
+      "description": "/Applications/GlobalProtect.app"
+    },
+    {
+      "name": "Google Chrome",
+      "value": "/Applications/Google Chrome.app",
+      "description": "/Applications/Google Chrome.app"
+    },
+    {
+      "name": "ImageAlpha",
+      "value": "/Applications/ImageAlpha.app",
+      "description": "/Applications/ImageAlpha.app"
+    },
+    {
+      "name": "ImageOptim",
+      "value": "/Applications/ImageOptim.app",
+      "description": "/Applications/ImageOptim.app"
+    },
+    {
+      "name": "InDesign Script Close",
+      "value": "/Applications/SCRIPT/APP/InDesign Script Close",
+      "description": "/Applications/SCRIPT/APP/InDesign Script Close"
+    },
+    {
+      "name": "InDesign Script Close (rw)",
+      "value": "/Applications/SCRIPT/APP/InDesign Script Close (rw)",
+      "description": "/Applications/SCRIPT/APP/InDesign Script Close (rw)"
+    },
+    {
+      "name": "Install AwayBuilder",
+      "value": "/Applications/Adobe Gaming SDK 1.4/Install AwayBuilder.app",
+      "description": "/Applications/Adobe Gaming SDK 1.4/Install AwayBuilder.app"
+    },
+    {
+      "name": "Instruments",
+      "value": "/Applications/Xcode.app/Contents/Applications/Instruments.app",
+      "description": "/Applications/Xcode.app/Contents/Applications/Instruments.app"
+    },
+    {
+      "name": "Karabiner-Elements",
+      "value": "/Applications/Karabiner-Elements.app",
+      "description": "/Applications/Karabiner-Elements.app"
+    },
+    {
+      "name": "Karabiner-EventViewer",
+      "value": "/Applications/Karabiner-EventViewer.app",
+      "description": "/Applications/Karabiner-EventViewer.app"
+    },
+    {
+      "name": "Keynote",
+      "value": "/Applications/Keynote.app",
+      "description": "/Applications/Keynote.app"
+    },
+    {
+      "name": "Make Calendar",
+      "value": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Calendar.localized/Make Calendar.app",
+      "description": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Calendar.localized/Make Calendar.app"
+    },
+    {
+      "name": "Microsoft Excel",
+      "value": "/Applications/Microsoft Excel.app",
+      "description": "/Applications/Microsoft Excel.app"
+    },
+    {
+      "name": "Microsoft OneNote",
+      "value": "/Applications/Microsoft OneNote.app",
+      "description": "/Applications/Microsoft OneNote.app"
+    },
+    {
+      "name": "Microsoft Outlook",
+      "value": "/Applications/Microsoft Outlook.app",
+      "description": "/Applications/Microsoft Outlook.app"
+    },
+    {
+      "name": "Microsoft PowerPoint",
+      "value": "/Applications/Microsoft PowerPoint.app",
+      "description": "/Applications/Microsoft PowerPoint.app"
+    },
+    {
+      "name": "Microsoft Remote Desktop",
+      "value": "/Applications/Microsoft Remote Desktop.app",
+      "description": "/Applications/Microsoft Remote Desktop.app"
+    },
+    {
+      "name": "Microsoft Teams classic",
+      "value": "/Applications/Microsoft Teams classic.app",
+      "description": "/Applications/Microsoft Teams classic.app"
+    },
+    {
+      "name": "Microsoft Word",
+      "value": "/Applications/Microsoft Word.app",
+      "description": "/Applications/Microsoft Word.app"
+    },
+    {
+      "name": "Numbers",
+      "value": "/Applications/Numbers.app",
+      "description": "/Applications/Numbers.app"
+    },
+    {
+      "name": "OneDrive",
+      "value": "/Applications/OneDrive.app",
+      "description": "/Applications/OneDrive.app"
+    },
+    {
+      "name": "Pages",
+      "value": "/Applications/Pages.app",
+      "description": "/Applications/Pages.app"
+    },
+    {
+      "name": "PluginLauncher",
+      "value": "/Applications/ZoomOutlookPlugin/PluginLauncher.app",
+      "description": "/Applications/ZoomOutlookPlugin/PluginLauncher.app"
+    },
+    {
+      "name": "RealityComposer",
+      "value": "/Applications/Xcode.app/Contents/Applications/RealityComposer.app",
+      "description": "/Applications/Xcode.app/Contents/Applications/RealityComposer.app"
+    },
+    {
+      "name": "Self Service",
+      "value": "/Applications/Jamf Pro/Self Service.app",
+      "description": "/Applications/Jamf Pro/Self Service.app"
+    },
+    {
+      "name": "SentinelOne Extensions",
+      "value": "/Applications/SentinelOne/SentinelOne Extensions.app",
+      "description": "/Applications/SentinelOne/SentinelOne Extensions.app"
+    },
+    {
+      "name": "Slack",
+      "value": "/Applications/Slack.app",
+      "description": "/Applications/Slack.app"
+    },
+    {
+      "name": "Template",
+      "value": "/Applications/Adobe Animate CC 2017/AIR25.0/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR25.0/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app"
+    },
+    {
+      "name": "Template",
+      "value": "/Applications/Adobe Animate CC 2017/AIR23.0/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR23.0/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app"
+    },
+    {
+      "name": "Template",
+      "value": "/Applications/Adobe Gaming SDK 1.4/AIR SDK/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app",
+      "description": "/Applications/Adobe Gaming SDK 1.4/AIR SDK/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Resources/Template.app"
+    },
+    {
+      "name": "TextWrangler",
+      "value": "/Applications/TextWrangler.app",
+      "description": "/Applications/TextWrangler.app"
+    },
+    {
+      "name": "Uninstall",
+      "value": "/Applications/ZoomOutlookPlugin/Uninstall.app",
+      "description": "/Applications/ZoomOutlookPlugin/Uninstall.app"
+    },
+    {
+      "name": "VLC",
+      "value": "/Applications/VLC.app",
+      "description": "/Applications/VLC.app"
+    },
+    {
+      "name": "VirtualBox",
+      "value": "/Applications/VirtualBox.app",
+      "description": "/Applications/VirtualBox.app"
+    },
+    {
+      "name": "Web Gallery",
+      "value": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Web Gallery.localized/Web Gallery.app",
+      "description": "/Applications/Adobe Illustrator 2022/Scripting.localized/Sample Scripts.localized/AppleScript.localized/Web Gallery.localized/Web Gallery.app"
+    },
+    {
+      "name": "Xcode",
+      "value": "/Applications/Xcode.app",
+      "description": "/Applications/Xcode.app"
+    },
+    {
+      "name": "c4dpy",
+      "value": "/Applications/Maxon Cinema 4D R25/c4dpy.app",
+      "description": "/Applications/Maxon Cinema 4D R25/c4dpy.app"
+    },
+    {
+      "name": "connectwisecontrol-628389a28d5e81fb",
+      "value": "/Applications/connectwisecontrol-628389a28d5e81fb.app",
+      "description": "/Applications/connectwisecontrol-628389a28d5e81fb.app"
+    },
+    {
+      "name": "naib",
+      "value": "/Applications/Adobe Animate CC 2017/AIR25.0/lib/nai/lib/naib.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR25.0/lib/nai/lib/naib.app"
+    },
+    {
+      "name": "naib",
+      "value": "/Applications/Adobe Gaming SDK 1.4/AIR SDK/lib/nai/lib/naib.app",
+      "description": "/Applications/Adobe Gaming SDK 1.4/AIR SDK/lib/nai/lib/naib.app"
+    },
+    {
+      "name": "naib",
+      "value": "/Applications/Adobe Animate CC 2017/AIR23.0/lib/nai/lib/naib.app",
+      "description": "/Applications/Adobe Animate CC 2017/AIR23.0/lib/nai/lib/naib.app"
+    },
+    {
+      "name": "zoom.us",
+      "value": "/Applications/zoom.us.app",
+      "description": "/Applications/zoom.us.app"
+    },
+    {
+      "name": "Accounts.prefPane",
+      "value": "/System/Library/PreferencePanes/Accounts.prefPane",
+      "description": "/System/Library/PreferencePanes/Accounts.prefPane"
+    },
+    {
+      "name": "Appearance.prefPane",
+      "value": "/System/Library/PreferencePanes/Appearance.prefPane",
+      "description": "/System/Library/PreferencePanes/Appearance.prefPane"
+    },
+    {
+      "name": "AppleIDPrefPane.prefPane",
+      "value": "/System/Library/PreferencePanes/AppleIDPrefPane.prefPane",
+      "description": "/System/Library/PreferencePanes/AppleIDPrefPane.prefPane"
+    },
+    {
+      "name": "Battery.prefPane",
+      "value": "/System/Library/PreferencePanes/Battery.prefPane",
+      "description": "/System/Library/PreferencePanes/Battery.prefPane"
+    },
+    {
+      "name": "Bluetooth.prefPane",
+      "value": "/System/Library/PreferencePanes/Bluetooth.prefPane",
+      "description": "/System/Library/PreferencePanes/Bluetooth.prefPane"
+    },
+    {
+      "name": "ClassKitPreferencePane.prefPane",
+      "value": "/System/Library/PreferencePanes/ClassKitPreferencePane.prefPane",
+      "description": "/System/Library/PreferencePanes/ClassKitPreferencePane.prefPane"
+    },
+    {
+      "name": "ClassroomSettings.prefPane",
+      "value": "/System/Library/PreferencePanes/ClassroomSettings.prefPane",
+      "description": "/System/Library/PreferencePanes/ClassroomSettings.prefPane"
+    },
+    {
+      "name": "DateAndTime.prefPane",
+      "value": "/System/Library/PreferencePanes/DateAndTime.prefPane",
+      "description": "/System/Library/PreferencePanes/DateAndTime.prefPane"
+    },
+    {
+      "name": "DesktopScreenEffectsPref.prefPane",
+      "value": "/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane",
+      "description": "/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane"
+    },
+    {
+      "name": "DigiHubDiscs.prefPane",
+      "value": "/System/Library/PreferencePanes/DigiHubDiscs.prefPane",
+      "description": "/System/Library/PreferencePanes/DigiHubDiscs.prefPane"
+    },
+    {
+      "name": "Displays.prefPane",
+      "value": "/System/Library/PreferencePanes/Displays.prefPane",
+      "description": "/System/Library/PreferencePanes/Displays.prefPane"
+    },
+    {
+      "name": "Dock.prefPane",
+      "value": "/System/Library/PreferencePanes/Dock.prefPane",
+      "description": "/System/Library/PreferencePanes/Dock.prefPane"
+    },
+    {
+      "name": "EnergySaver.prefPane",
+      "value": "/System/Library/PreferencePanes/EnergySaver.prefPane",
+      "description": "/System/Library/PreferencePanes/EnergySaver.prefPane"
+    },
+    {
+      "name": "EnergySaverPref.prefPane",
+      "value": "/System/Library/PreferencePanes/EnergySaverPref.prefPane",
+      "description": "/System/Library/PreferencePanes/EnergySaverPref.prefPane"
+    },
+    {
+      "name": "Expose.prefPane",
+      "value": "/System/Library/PreferencePanes/Expose.prefPane",
+      "description": "/System/Library/PreferencePanes/Expose.prefPane"
+    },
+    {
+      "name": "Extensions.prefPane",
+      "value": "/System/Library/PreferencePanes/Extensions.prefPane",
+      "description": "/System/Library/PreferencePanes/Extensions.prefPane"
+    },
+    {
+      "name": "FamilySharingPrefPane.prefPane",
+      "value": "/System/Library/PreferencePanes/FamilySharingPrefPane.prefPane",
+      "description": "/System/Library/PreferencePanes/FamilySharingPrefPane.prefPane"
+    },
+    {
+      "name": "InternetAccounts.prefPane",
+      "value": "/System/Library/PreferencePanes/InternetAccounts.prefPane",
+      "description": "/System/Library/PreferencePanes/InternetAccounts.prefPane"
+    },
+    {
+      "name": "Keyboard.prefPane",
+      "value": "/System/Library/PreferencePanes/Keyboard.prefPane",
+      "description": "/System/Library/PreferencePanes/Keyboard.prefPane"
+    },
+    {
+      "name": "Localization.prefPane",
+      "value": "/System/Library/PreferencePanes/Localization.prefPane",
+      "description": "/System/Library/PreferencePanes/Localization.prefPane"
+    },
+    {
+      "name": "Mouse.prefPane",
+      "value": "/System/Library/PreferencePanes/Mouse.prefPane",
+      "description": "/System/Library/PreferencePanes/Mouse.prefPane"
+    },
+    {
+      "name": "Network.prefPane",
+      "value": "/System/Library/PreferencePanes/Network.prefPane",
+      "description": "/System/Library/PreferencePanes/Network.prefPane"
+    },
+    {
+      "name": "Notifications.prefPane",
+      "value": "/System/Library/PreferencePanes/Notifications.prefPane",
+      "description": "/System/Library/PreferencePanes/Notifications.prefPane"
+    },
+    {
+      "name": "Passwords.prefPane",
+      "value": "/System/Library/PreferencePanes/Passwords.prefPane",
+      "description": "/System/Library/PreferencePanes/Passwords.prefPane"
+    },
+    {
+      "name": "PrintAndFax.prefPane",
+      "value": "/System/Library/PreferencePanes/PrintAndFax.prefPane",
+      "description": "/System/Library/PreferencePanes/PrintAndFax.prefPane"
+    },
+    {
+      "name": "PrintAndScan.prefPane",
+      "value": "/System/Library/PreferencePanes/PrintAndScan.prefPane",
+      "description": "/System/Library/PreferencePanes/PrintAndScan.prefPane"
+    },
+    {
+      "name": "Profiles.prefPane",
+      "value": "/System/Library/PreferencePanes/Profiles.prefPane",
+      "description": "/System/Library/PreferencePanes/Profiles.prefPane"
+    },
+    {
+      "name": "ScreenTime.prefPane",
+      "value": "/System/Library/PreferencePanes/ScreenTime.prefPane",
+      "description": "/System/Library/PreferencePanes/ScreenTime.prefPane"
+    },
+    {
+      "name": "Security.prefPane",
+      "value": "/System/Library/PreferencePanes/Security.prefPane",
+      "description": "/System/Library/PreferencePanes/Security.prefPane"
+    },
+    {
+      "name": "SharingPref.prefPane",
+      "value": "/System/Library/PreferencePanes/SharingPref.prefPane",
+      "description": "/System/Library/PreferencePanes/SharingPref.prefPane"
+    },
+    {
+      "name": "SoftwareUpdate.prefPane",
+      "value": "/System/Library/PreferencePanes/SoftwareUpdate.prefPane",
+      "description": "/System/Library/PreferencePanes/SoftwareUpdate.prefPane"
+    },
+    {
+      "name": "Sound.prefPane",
+      "value": "/System/Library/PreferencePanes/Sound.prefPane",
+      "description": "/System/Library/PreferencePanes/Sound.prefPane"
+    },
+    {
+      "name": "Speech.prefPane",
+      "value": "/System/Library/PreferencePanes/Speech.prefPane",
+      "description": "/System/Library/PreferencePanes/Speech.prefPane"
+    },
+    {
+      "name": "Spotlight.prefPane",
+      "value": "/System/Library/PreferencePanes/Spotlight.prefPane",
+      "description": "/System/Library/PreferencePanes/Spotlight.prefPane"
+    },
+    {
+      "name": "StartupDisk.prefPane",
+      "value": "/System/Library/PreferencePanes/StartupDisk.prefPane",
+      "description": "/System/Library/PreferencePanes/StartupDisk.prefPane"
+    },
+    {
+      "name": "TimeMachine.prefPane",
+      "value": "/System/Library/PreferencePanes/TimeMachine.prefPane",
+      "description": "/System/Library/PreferencePanes/TimeMachine.prefPane"
+    },
+    {
+      "name": "TouchID.prefPane",
+      "value": "/System/Library/PreferencePanes/TouchID.prefPane",
+      "description": "/System/Library/PreferencePanes/TouchID.prefPane"
+    },
+    {
+      "name": "Trackpad.prefPane",
+      "value": "/System/Library/PreferencePanes/Trackpad.prefPane",
+      "description": "/System/Library/PreferencePanes/Trackpad.prefPane"
+    },
+    {
+      "name": "UniversalAccessPref.prefPane",
+      "value": "/System/Library/PreferencePanes/UniversalAccessPref.prefPane",
+      "description": "/System/Library/PreferencePanes/UniversalAccessPref.prefPane"
+    },
+    {
+      "name": "Wallet.prefPane",
+      "value": "/System/Library/PreferencePanes/Wallet.prefPane",
+      "description": "/System/Library/PreferencePanes/Wallet.prefPane"
+    },
+    {
+      "name": "AAM Registration Notifier",
+      "value": "/Applications/Utilities/Adobe Application Manager/P6/AAM Registration Notifier.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/P6/AAM Registration Notifier.app"
+    },
+    {
+      "name": "AAM Registration Notifier",
+      "value": "/Applications/Utilities/Adobe Application Manager/LWA/AAM Registration Notifier.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/LWA/AAM Registration Notifier.app"
+    },
+    {
+      "name": "AAM Updates Notifier",
+      "value": "/Applications/Utilities/Adobe Application Manager/UWA/AAM Updates Notifier.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/UWA/AAM Updates Notifier.app"
+    },
+    {
+      "name": "AAMLauncherUtil",
+      "value": "/Applications/Utilities/Adobe Application Manager/core/AAMLauncherUtil.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/core/AAMLauncherUtil.app"
+    },
+    {
+      "name": "AASIapp",
+      "value": "/Applications/Utilities/Adobe Application Manager/P7/AASIapp.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/P7/AASIapp.app"
+    },
+    {
+      "name": "Adobe Application Manager",
+      "value": "/Applications/Utilities/Adobe Application Manager/core/Adobe Application Manager.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/core/Adobe Application Manager.app"
+    },
+    {
+      "name": "Adobe Creative Cloud Diagnostics",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/Diagnostics/Adobe Creative Cloud Diagnostics.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/Diagnostics/Adobe Creative Cloud Diagnostics.app"
+    },
+    {
+      "name": "Adobe Flash Player Install Manager",
+      "value": "/Applications/Utilities/Adobe Flash Player Install Manager.app",
+      "description": "/Applications/Utilities/Adobe Flash Player Install Manager.app"
+    },
+    {
+      "name": "AdobeIPCBroker",
+      "value": "/Applications/Utilities/Adobe Application Manager/IPC/AdobeIPCBroker.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/IPC/AdobeIPCBroker.app"
+    },
+    {
+      "name": "CC Troubleshooter",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/Utils/CC Troubleshooter.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/Utils/CC Troubleshooter.app"
+    },
+    {
+      "name": "CCXProcess",
+      "value": "/Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud Experience/CCXProcess/CCXProcess.app"
+    },
+    {
+      "name": "Core Sync",
+      "value": "/Applications/Utilities/Adobe Sync/CoreSync/Core Sync.app",
+      "description": "/Applications/Utilities/Adobe Sync/CoreSync/Core Sync.app"
+    },
+    {
+      "name": "Creative Cloud Desktop App",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Desktop App.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Desktop App.app"
+    },
+    {
+      "name": "Creative Cloud Helper",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/ACC/Creative Cloud Helper.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/ACC/Creative Cloud Helper.app"
+    },
+    {
+      "name": "Creative Cloud Installer",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Installer.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Installer.app"
+    },
+    {
+      "name": "Creative Cloud Uninstaller",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Uninstaller.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/Utils/Creative Cloud Uninstaller.app"
+    },
+    {
+      "name": "Creative Cloud",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/ACC/Creative Cloud.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/ACC/Creative Cloud.app"
+    },
+    {
+      "name": "Install",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/HDCore/Install.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/HDCore/Install.app"
+    },
+    {
+      "name": "LogTransport2",
+      "value": "/Applications/Utilities/Adobe Application Manager/UWA/LogTransport2.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/UWA/LogTransport2.app"
+    },
+    {
+      "name": "ODBC Manager",
+      "value": "/Applications/Utilities/ODBC Manager.app",
+      "description": "/Applications/Utilities/ODBC Manager.app"
+    },
+    {
+      "name": "Setup",
+      "value": "/Applications/Utilities/Adobe Application Manager/D6/Setup.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/D6/Setup.app"
+    },
+    {
+      "name": "Setup",
+      "value": "/Applications/Utilities/Adobe Application Manager/DECore/Setup.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/DECore/Setup.app"
+    },
+    {
+      "name": "Setup",
+      "value": "/Applications/Utilities/Adobe Application Manager/DWA/Setup.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/DWA/Setup.app"
+    },
+    {
+      "name": "Uninstall Product",
+      "value": "/Applications/Utilities/Adobe Application Manager/DECore/DE5/resources/uninstall/Uninstall Product.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/DECore/DE5/resources/uninstall/Uninstall Product.app"
+    },
+    {
+      "name": "Uninstall Product",
+      "value": "/Applications/Utilities/Adobe Application Manager/DECore/DE6/resources/uninstall/Uninstall Product.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/DECore/DE6/resources/uninstall/Uninstall Product.app"
+    },
+    {
+      "name": "Uninstaller",
+      "value": "/Applications/Utilities/Adobe Creative Cloud/HDCore/Uninstaller.app",
+      "description": "/Applications/Utilities/Adobe Creative Cloud/HDCore/Uninstaller.app"
+    },
+    {
+      "name": "adobe_lichelper",
+      "value": "/Applications/Utilities/Adobe Application Manager/P7/adobe_lichelper.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/P7/adobe_lichelper.app"
+    },
+    {
+      "name": "adobe_licutil",
+      "value": "/Applications/Utilities/Adobe Application Manager/P6/adobe_licutil.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/P6/adobe_licutil.app"
+    },
+    {
+      "name": "adobe_licutil",
+      "value": "/Applications/Utilities/Adobe Application Manager/LWA/adobe_licutil.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/LWA/adobe_licutil.app"
+    },
+    {
+      "name": "adobe_licutil",
+      "value": "/Applications/Utilities/Adobe Application Manager/P7/adobe_licutil.app",
+      "description": "/Applications/Utilities/Adobe Application Manager/P7/adobe_licutil.app"
+    },
+    {
+      "name": "50onPaletteServer",
+      "value": "/System/Library/Input Methods/50onPaletteServer.app",
+      "description": "/System/Library/Input Methods/50onPaletteServer.app"
+    },
+    {
+      "name": "ABAssistantService",
+      "value": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/ABAssistantService.app",
+      "description": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/ABAssistantService.app"
+    },
+    {
+      "name": "AMSEngagementViewService",
+      "value": "/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/Versions/A/Resources/AMSEngagementViewService.app",
+      "description": "/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/Versions/A/Resources/AMSEngagementViewService.app"
+    },
+    {
+      "name": "AOSAlertManager",
+      "value": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSAlertManager.app",
+      "description": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSAlertManager.app"
+    },
+    {
+      "name": "AOSHeartbeat",
+      "value": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSHeartbeat.app",
+      "description": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSHeartbeat.app"
+    },
+    {
+      "name": "AOSPushRelay",
+      "value": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSPushRelay.app",
+      "description": "/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/Helpers/AOSPushRelay.app"
+    },
+    {
+      "name": "AOSUIPrefPaneLauncher",
+      "value": "/System/Library/CoreServices/AOSUIPrefPaneLauncher.app",
+      "description": "/System/Library/CoreServices/AOSUIPrefPaneLauncher.app"
+    },
+    {
+      "name": "ARDAgent",
+      "value": "/System/Library/CoreServices/RemoteManagement/ARDAgent.app",
+      "description": "/System/Library/CoreServices/RemoteManagement/ARDAgent.app"
+    },
+    {
+      "name": "AVB Audio Configuration",
+      "value": "/System/Library/CoreServices/AVB Audio Configuration.app",
+      "description": "/System/Library/CoreServices/AVB Audio Configuration.app"
+    },
+    {
+      "name": "AXVisualSupportAgent",
+      "value": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/AXVisualSupportAgent.app",
+      "description": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/AXVisualSupportAgent.app"
+    },
+    {
+      "name": "About This Mac",
+      "value": "/System/Library/CoreServices/Applications/About This Mac.app",
+      "description": "/System/Library/CoreServices/Applications/About This Mac.app"
+    },
+    {
+      "name": "AccessibilityVisualsAgent",
+      "value": "/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Resources/AccessibilityVisualsAgent.app",
+      "description": "/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Resources/AccessibilityVisualsAgent.app"
+    },
+    {
+      "name": "Activity Monitor",
+      "value": "/System/Applications/Utilities/Activity Monitor.app",
+      "description": "/System/Applications/Utilities/Activity Monitor.app"
+    },
+    {
+      "name": "AddPrinter",
+      "value": "/System/Library/CoreServices/AddPrinter.app",
+      "description": "/System/Library/CoreServices/AddPrinter.app"
+    },
+    {
+      "name": "AddressBookManager",
+      "value": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/AddressBookManager.app",
+      "description": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/AddressBookManager.app"
+    },
+    {
+      "name": "AddressBookSourceSync",
+      "value": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/AddressBookSourceSync.app",
+      "description": "/System/Library/Frameworks/AddressBook.framework/Versions/A/Helpers/AddressBookSourceSync.app"
+    },
+    {
+      "name": "AddressBookSync",
+      "value": "/System/Library/Frameworks/AddressBook.framework/Helpers/AddressBookSync.app",
+      "description": "/System/Library/Frameworks/AddressBook.framework/Helpers/AddressBookSync.app"
+    },
+    {
+      "name": "AddressBookUrlForwarder",
+      "value": "/System/Library/CoreServices/AddressBookUrlForwarder.app",
+      "description": "/System/Library/CoreServices/AddressBookUrlForwarder.app"
+    },
+    {
+      "name": "AinuIM",
+      "value": "/System/Library/Input Methods/AinuIM.app",
+      "description": "/System/Library/Input Methods/AinuIM.app"
+    },
+    {
+      "name": "AirDrop",
+      "value": "/System/Library/CoreServices/Finder.app/Contents/Applications/AirDrop.app",
+      "description": "/System/Library/CoreServices/Finder.app/Contents/Applications/AirDrop.app"
+    },
+    {
+      "name": "AirPlayUIAgent",
+      "value": "/System/Library/CoreServices/AirPlayUIAgent.app",
+      "description": "/System/Library/CoreServices/AirPlayUIAgent.app"
+    },
+    {
+      "name": "AirPort Base Station Agent",
+      "value": "/System/Library/CoreServices/AirPort Base Station Agent.app",
+      "description": "/System/Library/CoreServices/AirPort Base Station Agent.app"
+    },
+    {
+      "name": "AirPort Utility",
+      "value": "/System/Applications/Utilities/AirPort Utility.app",
+      "description": "/System/Applications/Utilities/AirPort Utility.app"
+    },
+    {
+      "name": "AirScanScanner",
+      "value": "/System/Library/Image Capture/Devices/AirScanScanner.app",
+      "description": "/System/Library/Image Capture/Devices/AirScanScanner.app"
+    },
+    {
+      "name": "App Store",
+      "value": "/System/Applications/App Store.app",
+      "description": "/System/Applications/App Store.app"
+    },
+    {
+      "name": "AppSSOAgent",
+      "value": "/System/Library/PrivateFrameworks/AppSSO.framework/Support/AppSSOAgent.app",
+      "description": "/System/Library/PrivateFrameworks/AppSSO.framework/Support/AppSSOAgent.app"
+    },
+    {
+      "name": "AppleMobileDeviceHelper",
+      "value": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/AppleMobileDeviceHelper.app",
+      "description": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/AppleMobileDeviceHelper.app"
+    },
+    {
+      "name": "AppleMobileSync",
+      "value": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/AppleMobileSync.app",
+      "description": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/AppleMobileSync.app"
+    },
+    {
+      "name": "AppleScript Utility",
+      "value": "/System/Library/CoreServices/AppleScript Utility.app",
+      "description": "/System/Library/CoreServices/AppleScript Utility.app"
+    },
+    {
+      "name": "AppleSpell.service",
+      "value": "/System/Library/Services/AppleSpell.service",
+      "description": "/System/Library/Services/AppleSpell.service"
+    },
+    {
+      "name": "AquaAppearanceHelper",
+      "value": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/AquaAppearanceHelper.app",
+      "description": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/AquaAppearanceHelper.app"
+    },
+    {
+      "name": "Archive Utility",
+      "value": "/System/Library/CoreServices/Applications/Archive Utility.app",
+      "description": "/System/Library/CoreServices/Applications/Archive Utility.app"
+    },
+    {
+      "name": "AskPermissionUI",
+      "value": "/System/Library/PrivateFrameworks/AskPermission.framework/Versions/A/Resources/AskPermissionUI.app",
+      "description": "/System/Library/PrivateFrameworks/AskPermission.framework/Versions/A/Resources/AskPermissionUI.app"
+    },
+    {
+      "name": "Assistive Control",
+      "value": "/System/Library/Input Methods/Assistive Control.app",
+      "description": "/System/Library/Input Methods/Assistive Control.app"
+    },
+    {
+      "name": "Audio MIDI Setup",
+      "value": "/System/Applications/Utilities/Audio MIDI Setup.app",
+      "description": "/System/Applications/Utilities/Audio MIDI Setup.app"
+    },
+    {
+      "name": "AutomationModeUI",
+      "value": "/System/Library/PrivateFrameworks/AutomationMode.framework/AutomationModeUI.app",
+      "description": "/System/Library/PrivateFrameworks/AutomationMode.framework/AutomationModeUI.app"
+    },
+    {
+      "name": "Automator Application Stub",
+      "value": "/System/Library/CoreServices/Automator Application Stub.app",
+      "description": "/System/Library/CoreServices/Automator Application Stub.app"
+    },
+    {
+      "name": "Automator Installer",
+      "value": "/System/Library/CoreServices/Automator Installer.app",
+      "description": "/System/Library/CoreServices/Automator Installer.app"
+    },
+    {
+      "name": "Automator",
+      "value": "/System/Applications/Automator.app",
+      "description": "/System/Applications/Automator.app"
+    },
+    {
+      "name": "BackgroundTaskManagementAgent",
+      "value": "/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Support/BackgroundTaskManagementAgent.app",
+      "description": "/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Support/BackgroundTaskManagementAgent.app"
+    },
+    {
+      "name": "Bluetooth File Exchange",
+      "value": "/System/Applications/Utilities/Bluetooth File Exchange.app",
+      "description": "/System/Applications/Utilities/Bluetooth File Exchange.app"
+    },
+    {
+      "name": "BluetoothSetupAssistant",
+      "value": "/System/Library/CoreServices/BluetoothSetupAssistant.app",
+      "description": "/System/Library/CoreServices/BluetoothSetupAssistant.app"
+    },
+    {
+      "name": "BluetoothUIServer",
+      "value": "/System/Library/CoreServices/BluetoothUIServer.app",
+      "description": "/System/Library/CoreServices/BluetoothUIServer.app"
+    },
+    {
+      "name": "BluetoothUIService",
+      "value": "/System/Library/CoreServices/BluetoothUIService.app",
+      "description": "/System/Library/CoreServices/BluetoothUIService.app"
+    },
+    {
+      "name": "Books",
+      "value": "/System/Applications/Books.app",
+      "description": "/System/Applications/Books.app"
+    },
+    {
+      "name": "Boot Camp Assistant",
+      "value": "/System/Applications/Utilities/Boot Camp Assistant.app",
+      "description": "/System/Applications/Utilities/Boot Camp Assistant.app"
+    },
+    {
+      "name": "Build Web Page",
+      "value": "/System/Library/Image Capture/Automatic Tasks/Build Web Page.app",
+      "description": "/System/Library/Image Capture/Automatic Tasks/Build Web Page.app"
+    },
+    {
+      "name": "CIMFindInputCodeTool",
+      "value": "/System/Library/PrivateFrameworks/CoreChineseEngine.framework/Versions/A/SharedSupport/CIMFindInputCodeTool.app",
+      "description": "/System/Library/PrivateFrameworks/CoreChineseEngine.framework/Versions/A/SharedSupport/CIMFindInputCodeTool.app"
+    },
+    {
+      "name": "Calculator",
+      "value": "/System/Applications/Calculator.app",
+      "description": "/System/Applications/Calculator.app"
+    },
+    {
+      "name": "Calendar",
+      "value": "/System/Applications/Calendar.app",
+      "description": "/System/Applications/Calendar.app"
+    },
+    {
+      "name": "CalendarFileHandler",
+      "value": "/System/Library/CoreServices/CalendarFileHandler.app",
+      "description": "/System/Library/CoreServices/CalendarFileHandler.app"
+    },
+    {
+      "name": "Calibration Assistant",
+      "value": "/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/Resources/Calibration Assistant.app",
+      "description": "/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/Resources/Calibration Assistant.app"
+    },
+    {
+      "name": "Captive Network Assistant",
+      "value": "/System/Library/CoreServices/Captive Network Assistant.app",
+      "description": "/System/Library/CoreServices/Captive Network Assistant.app"
+    },
+    {
+      "name": "Certificate Assistant",
+      "value": "/System/Library/CoreServices/Certificate Assistant.app",
+      "description": "/System/Library/CoreServices/Certificate Assistant.app"
+    },
+    {
+      "name": "CharacterPalette",
+      "value": "/System/Library/Input Methods/CharacterPalette.app",
+      "description": "/System/Library/Input Methods/CharacterPalette.app"
+    },
+    {
+      "name": "Chess",
+      "value": "/System/Applications/Chess.app",
+      "description": "/System/Applications/Chess.app"
+    },
+    {
+      "name": "ChineseTextConverterService",
+      "value": "/System/Library/Services/ChineseTextConverterService.app",
+      "description": "/System/Library/Services/ChineseTextConverterService.app"
+    },
+    {
+      "name": "CinematicFramingOnboardingUI",
+      "value": "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/CinematicFramingOnboardingUI.app",
+      "description": "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/CinematicFramingOnboardingUI.app"
+    },
+    {
+      "name": "ClassroomStudentMenuExtra",
+      "value": "/System/Library/Classroom/ClassroomStudentMenuExtra.app",
+      "description": "/System/Library/Classroom/ClassroomStudentMenuExtra.app"
+    },
+    {
+      "name": "Clock",
+      "value": "/System/Applications/Clock.app",
+      "description": "/System/Applications/Clock.app"
+    },
+    {
+      "name": "ColorSync Utility",
+      "value": "/System/Applications/Utilities/ColorSync Utility.app",
+      "description": "/System/Applications/Utilities/ColorSync Utility.app"
+    },
+    {
+      "name": "Computer",
+      "value": "/System/Library/CoreServices/Finder.app/Contents/Applications/Computer.app",
+      "description": "/System/Library/CoreServices/Finder.app/Contents/Applications/Computer.app"
+    },
+    {
+      "name": "Conflict Resolver",
+      "value": "/System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/Resources/Conflict Resolver.app",
+      "description": "/System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/Resources/Conflict Resolver.app"
+    },
+    {
+      "name": "Console",
+      "value": "/System/Applications/Utilities/Console.app",
+      "description": "/System/Applications/Utilities/Console.app"
+    },
+    {
+      "name": "Contacts",
+      "value": "/System/Applications/Contacts.app",
+      "description": "/System/Applications/Contacts.app"
+    },
+    {
+      "name": "ContinuityCaptureOnboardingUI",
+      "value": "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/ContinuityCaptureOnboardingUI.app",
+      "description": "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/ContinuityCaptureOnboardingUI.app"
+    },
+    {
+      "name": "ControlCenter",
+      "value": "/System/Library/CoreServices/ControlCenter.app",
+      "description": "/System/Library/CoreServices/ControlCenter.app"
+    },
+    {
+      "name": "ControlStrip",
+      "value": "/System/Library/CoreServices/ControlStrip.app",
+      "description": "/System/Library/CoreServices/ControlStrip.app"
+    },
+    {
+      "name": "CoreLocationAgent",
+      "value": "/System/Library/CoreServices/CoreLocationAgent.app",
+      "description": "/System/Library/CoreServices/CoreLocationAgent.app"
+    },
+    {
+      "name": "CoreServicesUIAgent",
+      "value": "/System/Library/CoreServices/CoreServicesUIAgent.app",
+      "description": "/System/Library/CoreServices/CoreServicesUIAgent.app"
+    },
+    {
+      "name": "Coverage Details",
+      "value": "/System/Library/CoreServices/Coverage Details.app",
+      "description": "/System/Library/CoreServices/Coverage Details.app"
+    },
+    {
+      "name": "DFRHUD",
+      "value": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/DFRHUD.app",
+      "description": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/DFRHUD.app"
+    },
+    {
+      "name": "DVD Player",
+      "value": "/System/Library/CoreServices/Applications/DVD Player.app",
+      "description": "/System/Library/CoreServices/Applications/DVD Player.app"
+    },
+    {
+      "name": "Database Events",
+      "value": "/System/Library/CoreServices/Database Events.app",
+      "description": "/System/Library/CoreServices/Database Events.app"
+    },
+    {
+      "name": "Desk View",
+      "value": "/System/Library/CoreServices/Applications/Desk View.app",
+      "description": "/System/Library/CoreServices/Applications/Desk View.app"
+    },
+    {
+      "name": "Diagnostics Reporter",
+      "value": "/System/Library/CoreServices/Diagnostics Reporter.app",
+      "description": "/System/Library/CoreServices/Diagnostics Reporter.app"
+    },
+    {
+      "name": "DictationIM",
+      "value": "/System/Library/Input Methods/DictationIM.app",
+      "description": "/System/Library/Input Methods/DictationIM.app"
+    },
+    {
+      "name": "Dictionary",
+      "value": "/System/Applications/Dictionary.app",
+      "description": "/System/Applications/Dictionary.app"
+    },
+    {
+      "name": "Digital Color Meter",
+      "value": "/System/Applications/Utilities/Digital Color Meter.app",
+      "description": "/System/Applications/Utilities/Digital Color Meter.app"
+    },
+    {
+      "name": "Directory Utility",
+      "value": "/System/Library/CoreServices/Applications/Directory Utility.app",
+      "description": "/System/Library/CoreServices/Applications/Directory Utility.app"
+    },
+    {
+      "name": "DiscHelper",
+      "value": "/System/Library/CoreServices/DiscHelper.app",
+      "description": "/System/Library/CoreServices/DiscHelper.app"
+    },
+    {
+      "name": "Disk Utility",
+      "value": "/System/Applications/Utilities/Disk Utility.app",
+      "description": "/System/Applications/Utilities/Disk Utility.app"
+    },
+    {
+      "name": "DiskImageMounter",
+      "value": "/System/Library/CoreServices/DiskImageMounter.app",
+      "description": "/System/Library/CoreServices/DiskImageMounter.app"
+    },
+    {
+      "name": "DiskImages UI Agent",
+      "value": "/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/Resources/DiskImages UI Agent.app",
+      "description": "/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/Resources/DiskImages UI Agent.app"
+    },
+    {
+      "name": "Display Calibrator",
+      "value": "/System/Library/ColorSync/Calibrators/Display Calibrator.app",
+      "description": "/System/Library/ColorSync/Calibrators/Display Calibrator.app"
+    },
+    {
+      "name": "Dock",
+      "value": "/System/Library/CoreServices/Dock.app",
+      "description": "/System/Library/CoreServices/Dock.app"
+    },
+    {
+      "name": "Dwell Control",
+      "value": "/System/Library/CoreServices/Dwell Control.app",
+      "description": "/System/Library/CoreServices/Dwell Control.app"
+    },
+    {
+      "name": "EmojiFunctionRowIM",
+      "value": "/System/Library/Input Methods/EmojiFunctionRowIM.app",
+      "description": "/System/Library/Input Methods/EmojiFunctionRowIM.app"
+    },
+    {
+      "name": "Erase Assistant",
+      "value": "/System/Library/CoreServices/Erase Assistant.app",
+      "description": "/System/Library/CoreServices/Erase Assistant.app"
+    },
+    {
+      "name": "EscrowSecurityAlert",
+      "value": "/System/Library/CoreServices/EscrowSecurityAlert.app",
+      "description": "/System/Library/CoreServices/EscrowSecurityAlert.app"
+    },
+    {
+      "name": "Expansion Slot Utility",
+      "value": "/System/Library/CoreServices/Applications/Expansion Slot Utility.app",
+      "description": "/System/Library/CoreServices/Applications/Expansion Slot Utility.app"
+    },
+    {
+      "name": "FaceTime",
+      "value": "/System/Applications/FaceTime.app",
+      "description": "/System/Applications/FaceTime.app"
+    },
+    {
+      "name": "Family",
+      "value": "/System/Library/CoreServices/Family.app",
+      "description": "/System/Library/CoreServices/Family.app"
+    },
+    {
+      "name": "Feedback Assistant",
+      "value": "/System/Library/CoreServices/Applications/Feedback Assistant.app",
+      "description": "/System/Library/CoreServices/Applications/Feedback Assistant.app"
+    },
+    {
+      "name": "FindMy",
+      "value": "/System/Applications/FindMy.app",
+      "description": "/System/Applications/FindMy.app"
+    },
+    {
+      "name": "FindMyMacMessenger",
+      "value": "/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/Resources/FindMyMacMessenger.app",
+      "description": "/System/Library/PrivateFrameworks/FindMyMac.framework/Versions/A/Resources/FindMyMacMessenger.app"
+    },
+    {
+      "name": "Finder",
+      "value": "/System/Library/CoreServices/Finder.app",
+      "description": "/System/Library/CoreServices/Finder.app"
+    },
+    {
+      "name": "Folder Actions Setup",
+      "value": "/System/Library/CoreServices/Applications/Folder Actions Setup.app",
+      "description": "/System/Library/CoreServices/Applications/Folder Actions Setup.app"
+    },
+    {
+      "name": "FolderActionsDispatcher",
+      "value": "/System/Library/CoreServices/FolderActionsDispatcher.app",
+      "description": "/System/Library/CoreServices/FolderActionsDispatcher.app"
+    },
+    {
+      "name": "FollowUpUI",
+      "value": "/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/Resources/FollowUpUI.app",
+      "description": "/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/Resources/FollowUpUI.app"
+    },
+    {
+      "name": "Font Book",
+      "value": "/System/Applications/Font Book.app",
+      "description": "/System/Applications/Font Book.app"
+    },
+    {
+      "name": "FontRegistryUIAgent",
+      "value": "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Support/FontRegistryUIAgent.app",
+      "description": "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Support/FontRegistryUIAgent.app"
+    },
+    {
+      "name": "Freeform",
+      "value": "/System/Applications/Freeform.app",
+      "description": "/System/Applications/Freeform.app"
+    },
+    {
+      "name": "Game Center",
+      "value": "/System/Library/CoreServices/Game Center.app",
+      "description": "/System/Library/CoreServices/Game Center.app"
+    },
+    {
+      "name": "Grapher",
+      "value": "/System/Applications/Utilities/Grapher.app",
+      "description": "/System/Applications/Utilities/Grapher.app"
+    },
+    {
+      "name": "HelpViewer",
+      "value": "/System/Library/CoreServices/HelpViewer.app",
+      "description": "/System/Library/CoreServices/HelpViewer.app"
+    },
+    {
+      "name": "Home",
+      "value": "/System/Applications/Home.app",
+      "description": "/System/Applications/Home.app"
+    },
+    {
+      "name": "IDSRemoteURLConnectionAgent",
+      "value": "/System/Library/PrivateFrameworks/IDSFoundation.framework/IDSRemoteURLConnectionAgent.app",
+      "description": "/System/Library/PrivateFrameworks/IDSFoundation.framework/IDSRemoteURLConnectionAgent.app"
+    },
+    {
+      "name": "IMAutomaticHistoryDeletionAgent",
+      "value": "/System/Library/PrivateFrameworks/IMDPersistence.framework/IMAutomaticHistoryDeletionAgent.app",
+      "description": "/System/Library/PrivateFrameworks/IMDPersistence.framework/IMAutomaticHistoryDeletionAgent.app"
+    },
+    {
+      "name": "IMTransferAgent",
+      "value": "/System/Library/PrivateFrameworks/IMTransferServices.framework/IMTransferAgent.app",
+      "description": "/System/Library/PrivateFrameworks/IMTransferServices.framework/IMTransferAgent.app"
+    },
+    {
+      "name": "IOUIAgent",
+      "value": "/System/Library/CoreServices/IOUIAgent.app",
+      "description": "/System/Library/CoreServices/IOUIAgent.app"
+    },
+    {
+      "name": "Image Capture",
+      "value": "/System/Applications/Image Capture.app",
+      "description": "/System/Applications/Image Capture.app"
+    },
+    {
+      "name": "Image Events",
+      "value": "/System/Library/CoreServices/Image Events.app",
+      "description": "/System/Library/CoreServices/Image Events.app"
+    },
+    {
+      "name": "Install Command Line Developer Tools",
+      "value": "/System/Library/CoreServices/Install Command Line Developer Tools.app",
+      "description": "/System/Library/CoreServices/Install Command Line Developer Tools.app"
+    },
+    {
+      "name": "Install in Progress",
+      "value": "/System/Library/CoreServices/Install in Progress.app",
+      "description": "/System/Library/CoreServices/Install in Progress.app"
+    },
+    {
+      "name": "Installer Progress",
+      "value": "/System/Library/CoreServices/Installer Progress.app",
+      "description": "/System/Library/CoreServices/Installer Progress.app"
+    },
+    {
+      "name": "Installer",
+      "value": "/System/Library/CoreServices/Installer.app",
+      "description": "/System/Library/CoreServices/Installer.app"
+    },
+    {
+      "name": "JapaneseIM-KanaTyping",
+      "value": "/System/Library/Input Methods/JapaneseIM-KanaTyping.app",
+      "description": "/System/Library/Input Methods/JapaneseIM-KanaTyping.app"
+    },
+    {
+      "name": "JapaneseIM-RomajiTyping",
+      "value": "/System/Library/Input Methods/JapaneseIM-RomajiTyping.app",
+      "description": "/System/Library/Input Methods/JapaneseIM-RomajiTyping.app"
+    },
+    {
+      "name": "JavaLauncher",
+      "value": "/System/Library/CoreServices/JavaLauncher.app",
+      "description": "/System/Library/CoreServices/JavaLauncher.app"
+    },
+    {
+      "name": "KerberosMenuExtra",
+      "value": "/System/Library/PrivateFrameworks/AppSSOKerberos.framework/Support/KerberosMenuExtra.app",
+      "description": "/System/Library/PrivateFrameworks/AppSSOKerberos.framework/Support/KerberosMenuExtra.app"
+    },
+    {
+      "name": "KeyboardAccessAgent",
+      "value": "/System/Library/CoreServices/KeyboardAccessAgent.app",
+      "description": "/System/Library/CoreServices/KeyboardAccessAgent.app"
+    },
+    {
+      "name": "KeyboardSetupAssistant",
+      "value": "/System/Library/CoreServices/KeyboardSetupAssistant.app",
+      "description": "/System/Library/CoreServices/KeyboardSetupAssistant.app"
+    },
+    {
+      "name": "Keychain Access",
+      "value": "/System/Applications/Utilities/Keychain Access.app",
+      "description": "/System/Applications/Utilities/Keychain Access.app"
+    },
+    {
+      "name": "Keychain Circle Notification",
+      "value": "/System/Library/CoreServices/Keychain Circle Notification.app",
+      "description": "/System/Library/CoreServices/Keychain Circle Notification.app"
+    },
+    {
+      "name": "KoreanIM",
+      "value": "/System/Library/Input Methods/KoreanIM.app",
+      "description": "/System/Library/Input Methods/KoreanIM.app"
+    },
+    {
+      "name": "Language Chooser",
+      "value": "/System/Library/CoreServices/Language Chooser.app",
+      "description": "/System/Library/CoreServices/Language Chooser.app"
+    },
+    {
+      "name": "Launchpad",
+      "value": "/System/Applications/Launchpad.app",
+      "description": "/System/Applications/Launchpad.app"
+    },
+    {
+      "name": "LinkedNotesUIService",
+      "value": "/System/Library/PrivateFrameworks/PaperKit.framework/Contents/LinkedNotesUIService.app",
+      "description": "/System/Library/PrivateFrameworks/PaperKit.framework/Contents/LinkedNotesUIService.app"
+    },
+    {
+      "name": "LiveTranscriptionAgent",
+      "value": "/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/Resources/LiveTranscriptionAgent.app",
+      "description": "/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/Resources/LiveTranscriptionAgent.app"
+    },
+    {
+      "name": "MTLReplayer",
+      "value": "/System/Library/CoreServices/MTLReplayer.app",
+      "description": "/System/Library/CoreServices/MTLReplayer.app"
+    },
+    {
+      "name": "Mail",
+      "value": "/System/Applications/Mail.app",
+      "description": "/System/Applications/Mail.app"
+    },
+    {
+      "name": "MakePDF",
+      "value": "/System/Library/Image Capture/Automatic Tasks/MakePDF.app",
+      "description": "/System/Library/Image Capture/Automatic Tasks/MakePDF.app"
+    },
+    {
+      "name": "ManagedClient",
+      "value": "/System/Library/CoreServices/ManagedClient.app",
+      "description": "/System/Library/CoreServices/ManagedClient.app"
+    },
+    {
+      "name": "Maps",
+      "value": "/System/Applications/Maps.app",
+      "description": "/System/Applications/Maps.app"
+    },
+    {
+      "name": "Memory Slot Utility",
+      "value": "/System/Library/CoreServices/Memory Slot Utility.app",
+      "description": "/System/Library/CoreServices/Memory Slot Utility.app"
+    },
+    {
+      "name": "Messages",
+      "value": "/System/Applications/Messages.app",
+      "description": "/System/Applications/Messages.app"
+    },
+    {
+      "name": "Migration Assistant",
+      "value": "/System/Applications/Utilities/Migration Assistant.app",
+      "description": "/System/Applications/Utilities/Migration Assistant.app"
+    },
+    {
+      "name": "Mission Control",
+      "value": "/System/Applications/Mission Control.app",
+      "description": "/System/Applications/Mission Control.app"
+    },
+    {
+      "name": "MobileDeviceUpdater",
+      "value": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/Resources/MobileDeviceUpdater.app",
+      "description": "/Library/Apple/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/Resources/MobileDeviceUpdater.app"
+    },
+    {
+      "name": "Music",
+      "value": "/System/Applications/Music.app",
+      "description": "/System/Applications/Music.app"
+    },
+    {
+      "name": "NetAuthAgent",
+      "value": "/System/Library/CoreServices/NetAuthAgent.app",
+      "description": "/System/Library/CoreServices/NetAuthAgent.app"
+    },
+    {
+      "name": "Network",
+      "value": "/System/Library/CoreServices/Finder.app/Contents/Applications/Network.app",
+      "description": "/System/Library/CoreServices/Finder.app/Contents/Applications/Network.app"
+    },
+    {
+      "name": "News",
+      "value": "/System/Applications/News.app",
+      "description": "/System/Applications/News.app"
+    },
+    {
+      "name": "Notes",
+      "value": "/System/Applications/Notes.app",
+      "description": "/System/Applications/Notes.app"
+    },
+    {
+      "name": "NotificationCenter",
+      "value": "/System/Library/CoreServices/NotificationCenter.app",
+      "description": "/System/Library/CoreServices/NotificationCenter.app"
+    },
+    {
+      "name": "NowPlayingTouchUI",
+      "value": "/System/Library/CoreServices/NowPlayingTouchUI.app",
+      "description": "/System/Library/CoreServices/NowPlayingTouchUI.app"
+    },
+    {
+      "name": "OBEXAgent",
+      "value": "/System/Library/CoreServices/OBEXAgent.app",
+      "description": "/System/Library/CoreServices/OBEXAgent.app"
+    },
+    {
+      "name": "ODSAgent",
+      "value": "/System/Library/CoreServices/ODSAgent.app",
+      "description": "/System/Library/CoreServices/ODSAgent.app"
+    },
+    {
+      "name": "OSDUIHelper",
+      "value": "/System/Library/CoreServices/OSDUIHelper.app",
+      "description": "/System/Library/CoreServices/OSDUIHelper.app"
+    },
+    {
+      "name": "OpenSpell.service",
+      "value": "/System/Library/Services/OpenSpell.service",
+      "description": "/System/Library/Services/OpenSpell.service"
+    },
+    {
+      "name": "PIPAgent",
+      "value": "/System/Library/CoreServices/PIPAgent.app",
+      "description": "/System/Library/CoreServices/PIPAgent.app"
+    },
+    {
+      "name": "Paired Devices",
+      "value": "/System/Library/CoreServices/Paired Devices.app",
+      "description": "/System/Library/CoreServices/Paired Devices.app"
+    },
+    {
+      "name": "ParentalControls",
+      "value": "/System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/Resources/ParentalControls.app",
+      "description": "/System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/Resources/ParentalControls.app"
+    },
+    {
+      "name": "Pass Viewer",
+      "value": "/System/Library/CoreServices/Pass Viewer.app",
+      "description": "/System/Library/CoreServices/Pass Viewer.app"
+    },
+    {
+      "name": "Photo Booth",
+      "value": "/System/Applications/Photo Booth.app",
+      "description": "/System/Applications/Photo Booth.app"
+    },
+    {
+      "name": "Photos",
+      "value": "/System/Applications/Photos.app",
+      "description": "/System/Applications/Photos.app"
+    },
+    {
+      "name": "PluginIM",
+      "value": "/System/Library/Input Methods/PluginIM.app",
+      "description": "/System/Library/Input Methods/PluginIM.app"
+    },
+    {
+      "name": "Podcasts",
+      "value": "/System/Applications/Podcasts.app",
+      "description": "/System/Applications/Podcasts.app"
+    },
+    {
+      "name": "PodcastsAuthAgent",
+      "value": "/System/Library/CoreServices/PodcastsAuthAgent.app",
+      "description": "/System/Library/CoreServices/PodcastsAuthAgent.app"
+    },
+    {
+      "name": "PowerChime",
+      "value": "/System/Library/CoreServices/PowerChime.app",
+      "description": "/System/Library/CoreServices/PowerChime.app"
+    },
+    {
+      "name": "PressAndHold",
+      "value": "/System/Library/Input Methods/PressAndHold.app",
+      "description": "/System/Library/Input Methods/PressAndHold.app"
+    },
+    {
+      "name": "Preview",
+      "value": "/System/Applications/Preview.app",
+      "description": "/System/Applications/Preview.app"
+    },
+    {
+      "name": "PrinterProxy",
+      "value": "/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/Plugins/PrinterProxy.app",
+      "description": "/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/Plugins/PrinterProxy.app"
+    },
+    {
+      "name": "Pro Display Calibrator",
+      "value": "/System/Library/CoreServices/Pro Display Calibrator.app",
+      "description": "/System/Library/CoreServices/Pro Display Calibrator.app"
+    },
+    {
+      "name": "Problem Reporter",
+      "value": "/System/Library/CoreServices/Problem Reporter.app",
+      "description": "/System/Library/CoreServices/Problem Reporter.app"
+    },
+    {
+      "name": "ProfileHelper",
+      "value": "/System/Library/CoreServices/ProfileHelper.app",
+      "description": "/System/Library/CoreServices/ProfileHelper.app"
+    },
+    {
+      "name": "Quick Look Simulator",
+      "value": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/Resources/Quick Look Simulator.app",
+      "description": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/Resources/Quick Look Simulator.app"
+    },
+    {
+      "name": "QuickLookUIHelper",
+      "value": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/Resources/QuickLookUIHelper.app",
+      "description": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/Resources/QuickLookUIHelper.app"
+    },
+    {
+      "name": "QuickTime Player",
+      "value": "/System/Applications/QuickTime Player.app",
+      "description": "/System/Applications/QuickTime Player.app"
+    },
+    {
+      "name": "RapportUIAgent",
+      "value": "/System/Library/CoreServices/RapportUIAgent.app",
+      "description": "/System/Library/CoreServices/RapportUIAgent.app"
+    },
+    {
+      "name": "Recents",
+      "value": "/System/Library/CoreServices/Finder.app/Contents/Applications/Recents.app",
+      "description": "/System/Library/CoreServices/Finder.app/Contents/Applications/Recents.app"
+    },
+    {
+      "name": "RegisterPluginIMApp",
+      "value": "/System/Library/CoreServices/RegisterPluginIMApp.app",
+      "description": "/System/Library/CoreServices/RegisterPluginIMApp.app"
+    },
+    {
+      "name": "Reminders",
+      "value": "/System/Applications/Reminders.app",
+      "description": "/System/Applications/Reminders.app"
+    },
+    {
+      "name": "Rosetta 2 Updater",
+      "value": "/System/Library/CoreServices/Rosetta 2 Updater.app",
+      "description": "/System/Library/CoreServices/Rosetta 2 Updater.app"
+    },
+    {
+      "name": "SCIM",
+      "value": "/System/Library/Input Methods/SCIM.app",
+      "description": "/System/Library/Input Methods/SCIM.app"
+    },
+    {
+      "name": "SSMenuAgent",
+      "value": "/System/Library/CoreServices/RemoteManagement/SSMenuAgent.app",
+      "description": "/System/Library/CoreServices/RemoteManagement/SSMenuAgent.app"
+    },
+    {
+      "name": "STMUIHelper",
+      "value": "/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/Resources/STMUIHelper.app",
+      "description": "/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/Resources/STMUIHelper.app"
+    },
+    {
+      "name": "Screen Sharing",
+      "value": "/System/Library/CoreServices/Applications/Screen Sharing.app",
+      "description": "/System/Library/CoreServices/Applications/Screen Sharing.app"
+    },
+    {
+      "name": "Screen Time",
+      "value": "/System/Library/CoreServices/Screen Time.app",
+      "description": "/System/Library/CoreServices/Screen Time.app"
+    },
+    {
+      "name": "ScreenReaderUIServer",
+      "value": "/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/ScreenReaderUIServer.app",
+      "description": "/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/ScreenReaderUIServer.app"
+    },
+    {
+      "name": "ScreenSaverEngine",
+      "value": "/System/Library/CoreServices/ScreenSaverEngine.app",
+      "description": "/System/Library/CoreServices/ScreenSaverEngine.app"
+    },
+    {
+      "name": "Screenshot",
+      "value": "/System/Applications/Utilities/Screenshot.app",
+      "description": "/System/Applications/Utilities/Screenshot.app"
+    },
+    {
+      "name": "Script Editor",
+      "value": "/System/Applications/Utilities/Script Editor.app",
+      "description": "/System/Applications/Utilities/Script Editor.app"
+    },
+    {
+      "name": "Script Menu",
+      "value": "/System/Library/CoreServices/Script Menu.app",
+      "description": "/System/Library/CoreServices/Script Menu.app"
+    },
+    {
+      "name": "ScriptMonitor",
+      "value": "/System/Library/CoreServices/ScriptMonitor.app",
+      "description": "/System/Library/CoreServices/ScriptMonitor.app"
+    },
+    {
+      "name": "Setup Assistant",
+      "value": "/System/Library/CoreServices/Setup Assistant.app",
+      "description": "/System/Library/CoreServices/Setup Assistant.app"
+    },
+    {
+      "name": "ShortcutDroplet",
+      "value": "/System/Library/CoreServices/ShortcutDroplet.app",
+      "description": "/System/Library/CoreServices/ShortcutDroplet.app"
+    },
+    {
+      "name": "Shortcuts Events",
+      "value": "/System/Library/CoreServices/Shortcuts Events.app",
+      "description": "/System/Library/CoreServices/Shortcuts Events.app"
+    },
+    {
+      "name": "Shortcuts",
+      "value": "/System/Applications/Shortcuts.app",
+      "description": "/System/Applications/Shortcuts.app"
+    },
+    {
+      "name": "Siri",
+      "value": "/System/Applications/Siri.app",
+      "description": "/System/Applications/Siri.app"
+    },
+    {
+      "name": "Siri",
+      "value": "/System/Library/CoreServices/Siri.app",
+      "description": "/System/Library/CoreServices/Siri.app"
+    },
+    {
+      "name": "Software Update",
+      "value": "/System/Library/CoreServices/Software Update.app",
+      "description": "/System/Library/CoreServices/Software Update.app"
+    },
+    {
+      "name": "SoftwareUpdateNotificationManager",
+      "value": "/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/Resources/SoftwareUpdateNotificationManager.app",
+      "description": "/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/Resources/SoftwareUpdateNotificationManager.app"
+    },
+    {
+      "name": "SpacesTouchBarAgent",
+      "value": "/System/Library/CoreServices/SpacesTouchBarAgent.app",
+      "description": "/System/Library/CoreServices/SpacesTouchBarAgent.app"
+    },
+    {
+      "name": "SpeechDataInstallerd",
+      "value": "/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechDataInstallerd.app",
+      "description": "/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechDataInstallerd.app"
+    },
+    {
+      "name": "SpeechRecognitionServer",
+      "value": "/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechRecognitionServer.app",
+      "description": "/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechRecognitionServer.app"
+    },
+    {
+      "name": "SpeechService.service",
+      "value": "/System/Library/Services/SpeechService.service",
+      "description": "/System/Library/Services/SpeechService.service"
+    },
+    {
+      "name": "Spotlight",
+      "value": "/System/Library/CoreServices/Spotlight.app",
+      "description": "/System/Library/CoreServices/Spotlight.app"
+    },
+    {
+      "name": "Spotlight.service",
+      "value": "/System/Library/Services/Spotlight.service",
+      "description": "/System/Library/Services/Spotlight.service"
+    },
+    {
+      "name": "StageManagerEducation",
+      "value": "/System/Library/CoreServices/StageManagerEducation.app",
+      "description": "/System/Library/CoreServices/StageManagerEducation.app"
+    },
+    {
+      "name": "Stickies",
+      "value": "/System/Applications/Stickies.app",
+      "description": "/System/Applications/Stickies.app"
+    },
+    {
+      "name": "Stocks",
+      "value": "/System/Applications/Stocks.app",
+      "description": "/System/Applications/Stocks.app"
+    },
+    {
+      "name": "SummaryService",
+      "value": "/System/Library/Services/SummaryService.app",
+      "description": "/System/Library/Services/SummaryService.app"
+    },
+    {
+      "name": "SyncServer",
+      "value": "/System/Library/Frameworks/SyncServices.framework/Versions/A/Resources/SyncServer.app",
+      "description": "/System/Library/Frameworks/SyncServices.framework/Versions/A/Resources/SyncServer.app"
+    },
+    {
+      "name": "System Events",
+      "value": "/System/Library/CoreServices/System Events.app",
+      "description": "/System/Library/CoreServices/System Events.app"
+    },
+    {
+      "name": "System Information",
+      "value": "/System/Applications/Utilities/System Information.app",
+      "description": "/System/Applications/Utilities/System Information.app"
+    },
+    {
+      "name": "System Settings",
+      "value": "/System/Applications/System Settings.app",
+      "description": "/System/Applications/System Settings.app"
+    },
+    {
+      "name": "System Speech",
+      "value": "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/System Speech.app",
+      "description": "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/System Speech.app"
+    },
+    {
+      "name": "SystemUIServer",
+      "value": "/System/Library/CoreServices/SystemUIServer.app",
+      "description": "/System/Library/CoreServices/SystemUIServer.app"
+    },
+    {
+      "name": "TCIM",
+      "value": "/System/Library/Input Methods/TCIM.app",
+      "description": "/System/Library/Input Methods/TCIM.app"
+    },
+    {
+      "name": "TMHelperAgent",
+      "value": "/System/Library/CoreServices/TimeMachine/TMHelperAgent.app",
+      "description": "/System/Library/CoreServices/TimeMachine/TMHelperAgent.app"
+    },
+    {
+      "name": "TV",
+      "value": "/System/Applications/TV.app",
+      "description": "/System/Applications/TV.app"
+    },
+    {
+      "name": "TYIM",
+      "value": "/System/Library/Input Methods/TYIM.app",
+      "description": "/System/Library/Input Methods/TYIM.app"
+    },
+    {
+      "name": "TamilIM",
+      "value": "/System/Library/Input Methods/TamilIM.app",
+      "description": "/System/Library/Input Methods/TamilIM.app"
+    },
+    {
+      "name": "Terminal",
+      "value": "/System/Applications/Utilities/Terminal.app",
+      "description": "/System/Applications/Utilities/Terminal.app"
+    },
+    {
+      "name": "TextEdit",
+      "value": "/System/Applications/TextEdit.app",
+      "description": "/System/Applications/TextEdit.app"
+    },
+    {
+      "name": "TextInputMenuAgent",
+      "value": "/System/Library/CoreServices/TextInputMenuAgent.app",
+      "description": "/System/Library/CoreServices/TextInputMenuAgent.app"
+    },
+    {
+      "name": "TextInputSwitcher",
+      "value": "/System/Library/CoreServices/TextInputSwitcher.app",
+      "description": "/System/Library/CoreServices/TextInputSwitcher.app"
+    },
+    {
+      "name": "ThermalTrap",
+      "value": "/System/Library/CoreServices/ThermalTrap.app",
+      "description": "/System/Library/CoreServices/ThermalTrap.app"
+    },
+    {
+      "name": "Ticket Viewer",
+      "value": "/System/Library/CoreServices/Applications/Ticket Viewer.app",
+      "description": "/System/Library/CoreServices/Applications/Ticket Viewer.app"
+    },
+    {
+      "name": "Time Machine",
+      "value": "/System/Applications/Time Machine.app",
+      "description": "/System/Applications/Time Machine.app"
+    },
+    {
+      "name": "Tips",
+      "value": "/System/Library/CoreServices/Tips.app",
+      "description": "/System/Library/CoreServices/Tips.app"
+    },
+    {
+      "name": "TrackpadIM",
+      "value": "/System/Library/Input Methods/TrackpadIM.app",
+      "description": "/System/Library/Input Methods/TrackpadIM.app"
+    },
+    {
+      "name": "TransliterationIM",
+      "value": "/System/Library/Input Methods/TransliterationIM.app",
+      "description": "/System/Library/Input Methods/TransliterationIM.app"
+    },
+    {
+      "name": "UASharedPasteboardProgressUI",
+      "value": "/System/Library/PrivateFrameworks/UserActivity.framework/Agents/UASharedPasteboardProgressUI.app",
+      "description": "/System/Library/PrivateFrameworks/UserActivity.framework/Agents/UASharedPasteboardProgressUI.app"
+    },
+    {
+      "name": "UIKitSystem",
+      "value": "/System/Library/CoreServices/UIKitSystem.app",
+      "description": "/System/Library/CoreServices/UIKitSystem.app"
+    },
+    {
+      "name": "UniversalAccessControl",
+      "value": "/System/Library/CoreServices/UniversalAccessControl.app",
+      "description": "/System/Library/CoreServices/UniversalAccessControl.app"
+    },
+    {
+      "name": "UniversalControl",
+      "value": "/System/Library/CoreServices/UniversalControl.app",
+      "description": "/System/Library/CoreServices/UniversalControl.app"
+    },
+    {
+      "name": "UnmountAssistantAgent",
+      "value": "/System/Library/CoreServices/UnmountAssistantAgent.app",
+      "description": "/System/Library/CoreServices/UnmountAssistantAgent.app"
+    },
+    {
+      "name": "UserNotificationCenter",
+      "value": "/System/Library/CoreServices/UserNotificationCenter.app",
+      "description": "/System/Library/CoreServices/UserNotificationCenter.app"
+    },
+    {
+      "name": "VietnameseIM",
+      "value": "/System/Library/Input Methods/VietnameseIM.app",
+      "description": "/System/Library/Input Methods/VietnameseIM.app"
+    },
+    {
+      "name": "VoiceMemos",
+      "value": "/System/Applications/VoiceMemos.app",
+      "description": "/System/Applications/VoiceMemos.app"
+    },
+    {
+      "name": "VoiceOver Quickstart",
+      "value": "/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/VoiceOver Quickstart.app",
+      "description": "/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/VoiceOver Quickstart.app"
+    },
+    {
+      "name": "VoiceOver Utility",
+      "value": "/System/Applications/Utilities/VoiceOver Utility.app",
+      "description": "/System/Applications/Utilities/VoiceOver Utility.app"
+    },
+    {
+      "name": "VoiceOver",
+      "value": "/System/Library/CoreServices/VoiceOver.app",
+      "description": "/System/Library/CoreServices/VoiceOver.app"
+    },
+    {
+      "name": "WatchFaceAlert",
+      "value": "/System/Library/CoreServices/WatchFaceAlert.app",
+      "description": "/System/Library/CoreServices/WatchFaceAlert.app"
+    },
+    {
+      "name": "Weather",
+      "value": "/System/Applications/Weather.app",
+      "description": "/System/Applications/Weather.app"
+    },
+    {
+      "name": "WebKitPluginHost",
+      "value": "/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitPluginHost.app",
+      "description": "/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitPluginHost.app"
+    },
+    {
+      "name": "WiFiAgent",
+      "value": "/System/Library/CoreServices/WiFiAgent.app",
+      "description": "/System/Library/CoreServices/WiFiAgent.app"
+    },
+    {
+      "name": "WidgetKit Simulator",
+      "value": "/System/Library/CoreServices/WidgetKit Simulator.app",
+      "description": "/System/Library/CoreServices/WidgetKit Simulator.app"
+    },
+    {
+      "name": "WindowManager",
+      "value": "/System/Library/CoreServices/WindowManager.app",
+      "description": "/System/Library/CoreServices/WindowManager.app"
+    },
+    {
+      "name": "Wireless Diagnostics",
+      "value": "/System/Library/CoreServices/Applications/Wireless Diagnostics.app",
+      "description": "/System/Library/CoreServices/Applications/Wireless Diagnostics.app"
+    },
+    {
+      "name": "Wish",
+      "value": "/System/Library/Frameworks/Tk.framework/Versions/8.5/Resources/Wish.app",
+      "description": "/System/Library/Frameworks/Tk.framework/Versions/8.5/Resources/Wish.app"
+    },
+    {
+      "name": "XProtect",
+      "value": "/Library/Apple/System/Library/CoreServices/XProtect.app",
+      "description": "/Library/Apple/System/Library/CoreServices/XProtect.app"
+    },
+    {
+      "name": "Xcode Previews",
+      "value": "/System/Library/CoreServices/Xcode Previews.app",
+      "description": "/System/Library/CoreServices/Xcode Previews.app"
+    },
+    {
+      "name": "ctkbind",
+      "value": "/System/Library/Frameworks/CryptoTokenKit.framework/ctkbind.app",
+      "description": "/System/Library/Frameworks/CryptoTokenKit.framework/ctkbind.app"
+    },
+    {
+      "name": "eaptlstrust",
+      "value": "/System/Library/PrivateFrameworks/EAP8021X.framework/Support/eaptlstrust.app",
+      "description": "/System/Library/PrivateFrameworks/EAP8021X.framework/Support/eaptlstrust.app"
+    },
+    {
+      "name": "iCloud Drive",
+      "value": "/System/Library/CoreServices/Finder.app/Contents/Applications/iCloud Drive.app",
+      "description": "/System/Library/CoreServices/Finder.app/Contents/Applications/iCloud Drive.app"
+    },
+    {
+      "name": "iCloud Drive",
+      "value": "/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/Resources/iCloud Drive.app",
+      "description": "/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/Resources/iCloud Drive.app"
+    },
+    {
+      "name": "iCloud+",
+      "value": "/System/Library/CoreServices/iCloud+.app",
+      "description": "/System/Library/CoreServices/iCloud+.app"
+    },
+    {
+      "name": "iCloud",
+      "value": "/System/Library/CoreServices/iCloud.app",
+      "description": "/System/Library/CoreServices/iCloud.app"
+    },
+    {
+      "name": "iCloudUserNotificationsd",
+      "value": "/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/Resources/iCloudUserNotificationsd.app",
+      "description": "/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/Resources/iCloudUserNotificationsd.app"
+    },
+    {
+      "name": "iOS App Installer",
+      "value": "/System/Library/CoreServices/Applications/iOS App Installer.app",
+      "description": "/System/Library/CoreServices/Applications/iOS App Installer.app"
+    },
+    {
+      "name": "identityservicesd",
+      "value": "/System/Library/PrivateFrameworks/IDS.framework/identityservicesd.app",
+      "description": "/System/Library/PrivateFrameworks/IDS.framework/identityservicesd.app"
+    },
+    {
+      "name": "imagent",
+      "value": "/System/Library/PrivateFrameworks/IMCore.framework/imagent.app",
+      "description": "/System/Library/PrivateFrameworks/IMCore.framework/imagent.app"
+    },
+    {
+      "name": "loginwindow",
+      "value": "/System/Library/CoreServices/loginwindow.app",
+      "description": "/System/Library/CoreServices/loginwindow.app"
+    },
+    {
+      "name": "nbagent",
+      "value": "/System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Resources/nbagent.app",
+      "description": "/System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Resources/nbagent.app"
+    },
+    {
+      "name": "qlmanage",
+      "value": "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/qlmanage.app",
+      "description": "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/qlmanage.app"
+    },
+    {
+      "name": "quicklookd",
+      "value": "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd.app",
+      "description": "/System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd.app"
+    },
+    {
+      "name": "rcd",
+      "value": "/System/Library/CoreServices/rcd.app",
+      "description": "/System/Library/CoreServices/rcd.app"
+    },
+    {
+      "name": "screencaptureui",
+      "value": "/System/Library/CoreServices/screencaptureui.app",
+      "description": "/System/Library/CoreServices/screencaptureui.app"
+    },
+    {
+      "name": "sociallayerd",
+      "value": "/System/Library/PrivateFrameworks/SocialLayer.framework/sociallayerd.app",
+      "description": "/System/Library/PrivateFrameworks/SocialLayer.framework/sociallayerd.app"
+    },
+    {
+      "name": "storeuid",
+      "value": "/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeuid.app",
+      "description": "/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeuid.app"
+    },
+    {
+      "name": "syncuid",
+      "value": "/System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/Resources/syncuid.app",
+      "description": "/System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/Resources/syncuid.app"
+    },
+    {
+      "name": "universalAccessAuthWarn",
+      "value": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/universalAccessAuthWarn.app",
+      "description": "/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/universalAccessAuthWarn.app"
+    },
+    {
+      "name": "Brother MFC-J470DW",
+      "value": "/Users/rmarganti/Library/Printers/Brother MFC-J470DW.app",
+      "description": "/Users/rmarganti/Library/Printers/Brother MFC-J470DW.app"
+    },
+    {
+      "name": "Canon TS3300 series",
+      "value": "/Users/rmarganti/Library/Printers/Canon TS3300 series.app",
+      "description": "/Users/rmarganti/Library/Printers/Canon TS3300 series.app"
+    },
+    {
+      "name": "Charles",
+      "value": "/Users/rmarganti/Applications/Charles.app",
+      "description": "/Users/rmarganti/Applications/Charles.app"
+    },
+    {
+      "name": "Cisco WebEx Start",
+      "value": "/Users/rmarganti/Library/Application Support/WebEx Folder/Add-ons/Cisco WebEx Start.app",
+      "description": "/Users/rmarganti/Library/Application Support/WebEx Folder/Add-ons/Cisco WebEx Start.app"
+    },
+    {
+      "name": "FontXChange",
+      "value": "/Users/rmarganti/Applications/FontXChange.app",
+      "description": "/Users/rmarganti/Applications/FontXChange.app"
+    },
+    {
+      "name": "Google Web Designer",
+      "value": "/Users/rmarganti/Applications/Google Web Designer.app",
+      "description": "/Users/rmarganti/Applications/Google Web Designer.app"
+    },
+    {
+      "name": "GoogleUpdater",
+      "value": "/Users/rmarganti/Library/Application Support/Google/GoogleUpdater/121.0.6116.0/GoogleUpdater.app",
+      "description": "/Users/rmarganti/Library/Application Support/Google/GoogleUpdater/121.0.6116.0/GoogleUpdater.app"
+    },
+    {
+      "name": "Java 8 Update 281",
+      "value": "/Users/rmarganti/Library/Application Support/Java/Java 1.8.281.09/Java 8 Update 281.app",
+      "description": "/Users/rmarganti/Library/Application Support/Java/Java 1.8.281.09/Java 8 Update 281.app"
+    },
+    {
+      "name": "Keybase",
+      "value": "/Users/rmarganti/Applications/Keybase.app",
+      "description": "/Users/rmarganti/Applications/Keybase.app"
+    },
+    {
+      "name": "Kit",
+      "value": "/Users/rmarganti/Applications/Kit.app",
+      "description": "/Users/rmarganti/Applications/Kit.app"
+    },
+    {
+      "name": "Meeting Center",
+      "value": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64UMC_40.10.11.12/Meeting Center.app",
+      "description": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64UMC_40.10.11.12/Meeting Center.app"
+    },
+    {
+      "name": "MongoDB Compass",
+      "value": "/Users/rmarganti/Applications/MongoDB Compass.app",
+      "description": "/Users/rmarganti/Applications/MongoDB Compass.app"
+    },
+    {
+      "name": "Postman",
+      "value": "/Users/rmarganti/Applications/Postman.app",
+      "description": "/Users/rmarganti/Applications/Postman.app"
+    },
+    {
+      "name": "Rectangle Pro",
+      "value": "/Users/rmarganti/Applications/Rectangle Pro.app",
+      "description": "/Users/rmarganti/Applications/Rectangle Pro.app"
+    },
+    {
+      "name": "Sequel Ace",
+      "value": "/Users/rmarganti/Applications/Sequel Ace.app",
+      "description": "/Users/rmarganti/Applications/Sequel Ace.app"
+    },
+    {
+      "name": "Spotify",
+      "value": "/Users/rmarganti/Applications/Spotify.app",
+      "description": "/Users/rmarganti/Applications/Spotify.app"
+    },
+    {
+      "name": "Training Center",
+      "value": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64TC/Training Center.app",
+      "description": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64TC/Training Center.app"
+    },
+    {
+      "name": "VLC",
+      "value": "/Users/rmarganti/Applications/VLC.app",
+      "description": "/Users/rmarganti/Applications/VLC.app"
+    },
+    {
+      "name": "Visual Studio Code",
+      "value": "/Users/rmarganti/Applications/Visual Studio Code.app",
+      "description": "/Users/rmarganti/Applications/Visual Studio Code.app"
+    },
+    {
+      "name": "WebexAppLauncher",
+      "value": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64UMC_40.10.11.12/WebexAppLauncher.app",
+      "description": "/Users/rmarganti/Library/Application Support/WebEx Folder/T33_64UMC_40.10.11.12/WebexAppLauncher.app"
+    },
+    {
+      "name": "WezTerm",
+      "value": "/Users/rmarganti/Applications/WezTerm.app",
+      "description": "/Users/rmarganti/Applications/WezTerm.app"
+    },
+    {
+      "name": "ZoomAutoUpdater",
+      "value": "/Users/rmarganti/Library/Application Support/zoom.us/AutoUpdater/UpdaterApp/ZoomAutoUpdater.app",
+      "description": "/Users/rmarganti/Library/Application Support/zoom.us/AutoUpdater/UpdaterApp/ZoomAutoUpdater.app"
+    },
+    {
+      "name": "ZoomAutoUpdater",
+      "value": "/Users/rmarganti/Library/Application Support/zoom.us/Plugins/Frameworks/ZoomAutoUpdater.app",
+      "description": "/Users/rmarganti/Library/Application Support/zoom.us/Plugins/Frameworks/ZoomAutoUpdater.app"
+    },
+    {
+      "name": "ZoomClips",
+      "value": "/Users/rmarganti/Library/Application Support/zoom.us/Plugins/Frameworks/ZoomClips.app",
+      "description": "/Users/rmarganti/Library/Application Support/zoom.us/Plugins/Frameworks/ZoomClips.app"
+    },
+    {
+      "name": "comle.ctcategories.service",
+      "value": "/Users/rmarganti/Library/HTTPStorages/com.apple.ctcategories.service",
+      "description": "/Users/rmarganti/Library/HTTPStorages/com.apple.ctcategories.service"
+    },
+    {
+      "name": "com.microsoft.openxml.excel",
+      "value": "/Users/rmarganti/Library/Application Scripts/com.microsoft.openxml.excel.app",
+      "description": "/Users/rmarganti/Library/Application Scripts/com.microsoft.openxml.excel.app"
+    },
+    {
+      "name": "draw.io",
+      "value": "/Users/rmarganti/Applications/draw.io.app",
+      "description": "/Users/rmarganti/Applications/draw.io.app"
+    },
+    {
+      "name": "group.is.workflow.my",
+      "value": "/Users/rmarganti/Library/Application Scripts/group.is.workflow.my.app",
+      "description": "/Users/rmarganti/Library/Application Scripts/group.is.workflow.my.app"
+    },
+    {
+      "name": "https+++documentation.immich",
+      "value": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++documentation.immich.app",
+      "description": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++documentation.immich.app"
+    },
+    {
+      "name": "https+++immich",
+      "value": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++immich.app",
+      "description": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++immich.app"
+    },
+    {
+      "name": "https+++railway",
+      "value": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++railway.app",
+      "description": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++railway.app"
+    },
+    {
+      "name": "https+++www.mermaidflow",
+      "value": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++www.mermaidflow.app",
+      "description": "/Users/rmarganti/Library/Application Support/Firefox/Profiles/5id8b56r.default-release-2-1695215887665/storage/default/https+++www.mermaidflow.app"
+    },
+    {
+      "name": "pgAdmin 4",
+      "value": "/Users/rmarganti/Applications/pgAdmin 4.app",
+      "description": "/Users/rmarganti/Applications/pgAdmin 4.app"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@johnlindquist/kit": "file:../.kit",
+    "octokit": "^3.1.2"
+  }
+}
