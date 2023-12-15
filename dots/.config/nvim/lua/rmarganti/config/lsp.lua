@@ -149,11 +149,6 @@ M.clients = {
     -- Misc
     ------------------------------------------------
 
-    ['null-ls'] = {
-        formatting_enabled = true,
-        skip_setup = true, -- null-ls does its own setup.
-    },
-
     prismals = {
         formatting_enabled = true,
     },

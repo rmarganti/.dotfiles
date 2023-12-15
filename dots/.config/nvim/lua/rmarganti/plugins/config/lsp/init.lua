@@ -40,8 +40,6 @@ function M.config()
         lspconfig[client].setup(settings)
     end
 
-    require('rmarganti.plugins.config.null-ls').setup()
-
     vim.cmd([[ do User LspAttachBuffers ]])
 end
 
