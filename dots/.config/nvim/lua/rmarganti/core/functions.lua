@@ -84,9 +84,10 @@ M.format = function(is_auto_format)
     -- Manual format.
     if is_auto_format == false or enable_format_on_save then
         local user_lsp_config = require('rmarganti.config.lsp')
+        local should_format_async = misc_utils.has_value(SLOW_FORMAT_FILE_TYPES, vim.bo.filetype)
 
         require('conform').format({
-            async = SLOW_FORMAT_FILE_TYPES[vim.bo.filetype] ~= nil,
+            async = should_format_async,
             filter = function(client)
                 return user_lsp_config.clients[client.name].formatting_enabled
             end,
