@@ -2,6 +2,7 @@
 // Description: List and launch all GitHub notifications
 // Author: Ryan Marganti
 // Twitter: @soulsizzledsgn
+// Keyword: ghn
 
 import '@johnlindquist/kit';
 import { Octokit } from 'octokit';
