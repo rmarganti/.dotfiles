@@ -52,7 +52,7 @@ function M.config()
         },
 
         duck = {
-            provider = ' ',
+            provider = '󰇥 ',
         },
 
         file_format = {
