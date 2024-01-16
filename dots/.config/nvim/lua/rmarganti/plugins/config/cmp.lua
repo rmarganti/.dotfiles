@@ -52,10 +52,6 @@ function M.config()
     require('copilot_cmp').setup()
 
     cmp.setup({
-        performance = {
-            debounce = 500,
-        },
-
         formatting = {
             format = require('lspkind').cmp_format({
                 with_text = true,
