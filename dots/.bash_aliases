@@ -10,7 +10,6 @@ ls --color=auto &>/dev/null && alias ls='ls --color=auto' ||
 	alias cpwd='pwd | pbcopy'
 alias ll='ls -alFh'
 alias up='cd ..'
-alias uuid="uuidgen | tr 'A-Z' 'a-z' | tr -d '\n' | pbcopy"
 alias userlist="cut -d: -f1 /etc/passwd"
 
 # z hurts my pinky :(
