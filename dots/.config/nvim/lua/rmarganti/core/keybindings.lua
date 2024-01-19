@@ -217,7 +217,7 @@ utils.map('n', '<Leader>fw', function()
 end)
 
 -- File eXplore
-utils.map('n', '<Leader>fx', ':RnvimrToggle<CR>')
+utils.map('n', '<Leader>fx', '<Cmd>Lf<CR>')
 
 -- File Types
 utils.map('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
