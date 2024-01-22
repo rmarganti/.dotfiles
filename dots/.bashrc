@@ -86,6 +86,16 @@ short_pwd() {
 
 ################################################################
 #
+# Rust
+#
+################################################################
+
+if [ -f "$HOME/.cargo/env" ]; then
+	. "$HOME/.cargo/env"
+fi
+
+################################################################
+#
 # Misc
 #
 ################################################################
@@ -96,9 +106,6 @@ eval "$(zoxide init bash)"
 # Set default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-
-# Let the world know what terminal we are using
-export TERM="wezterm"
 
 # Load local-specific config if it exists (not committed to git)
 if [ -f ~/.local.bashrc ]; then
