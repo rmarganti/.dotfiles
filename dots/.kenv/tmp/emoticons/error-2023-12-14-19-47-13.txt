@@ -1,4 +1,0 @@
-Cannot read properties of undefined (reading 'emote')
-TypeError: Cannot read properties of undefined (reading 'emote')
-    at file:///Users/rmarganti/.kenv/.scripts/emoticons.mjs?uuid=aec4f60a-2185-4b7c-8ec6-ff4d235a4672:50:34
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

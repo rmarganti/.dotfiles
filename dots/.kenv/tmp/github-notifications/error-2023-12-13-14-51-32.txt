@@ -1,7 +1,0 @@
-[@octokit/auth-token] Token passed to createTokenAuth is not a string
-Error: [@octokit/auth-token] Token passed to createTokenAuth is not a string
-    at createTokenAuth2 (/Users/rmarganti/.kenv/node_modules/@octokit/auth-token/dist-node/index.js:67:11)
-    at new Octokit (/Users/rmarganti/.kenv/node_modules/@octokit/core/dist-node/index.js:129:60)
-    at new NewOctokit (/Users/rmarganti/.kenv/node_modules/@octokit/core/dist-node/index.js:78:24)
-    at new OctokitWithDefaults (/Users/rmarganti/.kenv/node_modules/@octokit/core/dist-node/index.js:53:9)
-    at file:///Users/rmarganti/.kenv/scripts/github-notifications.js?uuid=ff39a4d3-2401-4830-bb01-32b86bfd00ef:11:17
