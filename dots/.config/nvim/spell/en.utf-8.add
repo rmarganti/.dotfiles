@@ -5,9 +5,11 @@ appops
 artifactory
 atol
 authenticatable
+autocmd
 awaitable
 backend
 bundleTypes
+cachebuster
 chiclet
 colima
 colorscheme
@@ -40,6 +42,7 @@ homebrew
 ipublish
 issue
 jira
+keymap
 koaBody
 krux
 kubectl
@@ -50,7 +53,9 @@ magicproof
 mailgun
 marganti
 mimecast
+mongo
 monorepo
+netrw
 okta
 omitempty
 options
@@ -63,9 +68,11 @@ psql
 qqms
 quickfix
 ramda
+raycast
 redux
 rmarganti
 saml
+screenshot
 serializable
 simplifi
 sluggify
@@ -73,6 +80,7 @@ spacebar
 stderr
 stdin
 stdout
+stringified
 stringify
 symfony
 teardown
@@ -98,4 +106,5 @@ wezterm
 whitelist
 whitelisted
 whitespace
+winblend
 yaml
