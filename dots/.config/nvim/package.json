@@ -27,11 +27,17 @@
                 "path": "./snippets/rust.json"
             },
             {
+                "language": "sh",
+                "path": "./snippets/sh.json"
+            },
+            {
                 "language": [
+                    "javascript",
+                    "javascriptreact",
                     "typescript",
                     "typescriptreact"
                 ],
-                "path": "./snippets/typescript.json"
+                "path": "./snippets/javascript.json"
             },
             {
                 "language": "typescriptreact",
