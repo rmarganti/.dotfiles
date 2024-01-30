@@ -38,7 +38,7 @@ local function get_tab_label(tab)
 
     -- Otherwise, use the current working directory of the active pane.
 
-    local cwd = tab.active_pane.current_working_dir
+    local cwd = tab.active_pane.current_working_dir.path
     local path_pieces = utils.string_split(cwd, '/')
     local label = path_pieces[#path_pieces]
 
