@@ -61,7 +61,6 @@ function M.config()
                     luasnip = '[LuaSnip]',
                     nvim_lua = '[Lua]',
                     latex_symbols = '[Latex]',
-                    cmp_tabnine = '[TabNine]',
                     copilot = '[Copilot]',
                 },
             }),

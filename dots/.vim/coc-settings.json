@@ -82,5 +82,6 @@
         "typeParameter": "\uf728",
         "default": "\uf29c"
     },
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+    "snippets.ultisnips.pythonPrompt": false
 }
