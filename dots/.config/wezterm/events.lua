@@ -116,7 +116,6 @@ M.attach = function()
             pane
         )
     end)
-
 end
 
 return M

@@ -28,7 +28,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export FZF_COMPLETION_TRIGGER='~~'
 
 # Use ag instead of find
-export FZF_DEFAULT_COMMAND='ag -l -f --nogroup  --nocolor --hidden -U --ignore .git --ignore node_modules --ignore vendor --ignore target -g ""'
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden -g '!node_modules/*' -g '!.git/*'"
 
 ################################################################
 #
