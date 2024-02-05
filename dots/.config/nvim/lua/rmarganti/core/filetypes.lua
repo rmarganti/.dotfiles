@@ -1,6 +1,7 @@
 -- Support JSONC.
 vim.filetype.add({
     extension = {
+        hurl = 'hurl',
         mermaid = 'mermaid',
     },
     filename = {
