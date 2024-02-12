@@ -34,7 +34,7 @@ return {
     NormalSB = { fg = a.fg, bg = p.none }, -- normal text in non-current windows
     NormalFloat = { fg = a.fg, bg = a.float_bg }, -- Normal text in floating windows.
     FloatBorder = { fg = a.border, bg = a.float_bg },
-    -- FloatTitle = { fg = a.plus1, bg = a.float_bg },
+    FloatTitle = { fg = a.plus2, bg = a.float_bg },
     Pmenu = { fg = a.fg, bg = a.float_bg }, -- Popup menu: normal item.
     PmenuSel = { fg = a.select_fg, bg = a.select_bg }, -- Popup menu: selected item.
     PmenuSbar = { bg = a.float_bg }, -- Popup menu: scrollbar.
