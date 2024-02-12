@@ -217,7 +217,12 @@ utils.map('n', '<Leader>fw', function()
 end)
 
 -- File eXplore
-utils.map('n', '<Leader>fx', '<Cmd>Lf<CR>')
+utils.map('n', '<Leader>fx', function()
+    require('lf').start({
+        height = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.lines)),
+        width = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.columns)),
+    })
+end)
 
 -- File Types
 utils.map('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
