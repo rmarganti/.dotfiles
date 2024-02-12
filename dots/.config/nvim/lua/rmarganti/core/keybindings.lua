@@ -308,8 +308,14 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 --
 ------------------------------------------------
 
+-- Search Files
 utils.map({ 'n', 'x' }, '<Leader>sf', function()
     require('telescope.builtin').find_files({ hidden = true })
+end)
+
+-- Search Directory Files
+utils.map({ 'n', 'x' }, '<Leader>sdf', function()
+    require('telescope').extensions.dir.find_files()
 end)
 
 -- Search Recent files
@@ -324,6 +330,11 @@ utils.map({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Text
 utils.map({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
+
+-- Search Directory Text
+utils.map({ 'n', 'x' }, '<Leader>sdt', function()
+    require('telescope').extensions.dir.live_grep()
+end)
 
 -- Search Todos
 utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
