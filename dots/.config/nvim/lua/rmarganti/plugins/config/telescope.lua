@@ -7,6 +7,7 @@ local M = {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { 'nvim-telescope/telescope-github.nvim' },
         { 'nvim-telescope/telescope-symbols.nvim' },
+        { 'princejoogie/dir-telescope.nvim' },
         { 'rcarriga/nvim-notify' },
         { 'rlch/github-notifications.nvim' },
         { 'smartpde/telescope-recent-files' },
@@ -64,6 +65,7 @@ function M.config()
         },
     })
 
+    require('telescope').load_extension('dir')
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('gh')
     require('telescope').load_extension('ghn')
@@ -80,7 +82,7 @@ function M.config()
             -- so we use `vim.schedule` to give it time to do so.
             vim.schedule(function()
                 local filetype = vim.api.nvim_buf_get_option(ev.buf, 'filetype')
-                if filetype == "TelescopePrompt" then
+                if filetype == 'TelescopePrompt' then
                     vim.opt_local.cursorline = false
                 end
             end)
