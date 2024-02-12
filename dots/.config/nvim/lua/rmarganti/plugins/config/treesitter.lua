@@ -16,6 +16,7 @@ function M.config()
             'graphql',
             'hcl', -- Terraform
             'html',
+            'hurl',
             'javascript',
             'jsdoc',
             'json',
