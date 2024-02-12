@@ -5,8 +5,16 @@ local M = {
 }
 
 function M.config()
-    require('indent_blankline').setup({
-        filetype_exclude = { 'alpha' },
+    require('ibl').setup({
+        exclude = {
+            filetypes = { 'alpha' },
+        },
+        indent = {
+            char = '│',
+        },
+        scope = {
+            enabled = false,
+        },
     })
 end
 
