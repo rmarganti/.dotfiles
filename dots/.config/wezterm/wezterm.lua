@@ -105,4 +105,6 @@ return {
 
     -- Disable hyperlinks
     hyperlink_rules = {},
+
+    prefer_to_spawn_tabs = true,
 }
