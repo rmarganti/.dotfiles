@@ -39,6 +39,7 @@ gofundme
 graphql
 hasura
 homebrew
+hub
 ipublish
 issue
 jira
@@ -48,6 +49,7 @@ krux
 kubectl
 kubernetes
 laravel
+localiq
 loggable
 magicproof
 mailgun
@@ -76,6 +78,7 @@ screenshot
 serializable
 simplifi
 sluggify
+smtp
 spacebar
 stderr
 stdin
@@ -88,6 +91,8 @@ throwable
 timestamp
 timestamptz
 trackings
+transitioner
+transitioners
 traxex
 treesitter
 triet
@@ -108,4 +113,3 @@ whitelisted
 whitespace
 winblend
 yaml
-hub
