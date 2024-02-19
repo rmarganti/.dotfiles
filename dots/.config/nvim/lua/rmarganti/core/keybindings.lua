@@ -219,8 +219,8 @@ end)
 -- File eXplore
 utils.map('n', '<Leader>fx', function()
     require('lf').start({
-        height = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.lines)),
-        width = vim.fn.float2nr(vim.fn.round(0.75 * vim.o.columns)),
+        height = vim.fn.float2nr(vim.o.lines - 10),
+        width = vim.fn.float2nr(vim.o.columns - 18),
     })
 end)
 
