@@ -11,6 +11,7 @@ function M.config()
         },
         indent = {
             char = '│',
+            tab_char = '│',
         },
         scope = {
             enabled = false,
