@@ -10,10 +10,10 @@ function M.config()
         tint = -65,
         highlight_ignore_patterns = {
             '@comment',
+            '@ibl.*',
             '@text.literal',
             'Comment',
             'EndOfBuffer',
-            'IndentBlankline.*',
             'InlayHint',
             'LineNr.*',
             'NonText',
