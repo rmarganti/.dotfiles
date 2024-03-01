@@ -97,22 +97,6 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # ------------------------------------------------
-# Misc
-# ------------------------------------------------
-
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init bash)"
-
-# Set default editor
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
-# Load local-specific config if it exists (not committed to git)
-if [ -f ~/.local.bashrc ]; then
-	. ~/.local.bashrc
-fi
-
-# ------------------------------------------------
 # NVM
 # ------------------------------------------------
 
@@ -127,4 +111,60 @@ _nvmrc_hook() {
 
 if ! [[ "${PROMPT_COMMAND:-}" =~ _nvmrc_hook ]]; then
 	PROMPT_COMMAND="_nvmrc_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+fi
+
+# Github CLI
+eval "$(gh completion -s bash)"
+
+# ------------------------------------------------
+# NX
+# ------------------------------------------------
+
+alias nxb="nx build"
+alias nxdmc="nx db-migration-create"
+alias nxdmg="nx db-migration-generate"
+alias nxdmr="nx db-migration-run"
+alias nxt="nx test"
+
+# NX Serve
+function nxs() {
+	local query
+	query="$*"
+
+	# If a query was provided, just run the serve command
+	if [ -n "$query" ]; then
+		nx serve "$query"
+		return
+	fi
+
+	nx show projects --projects "apps/*" | fzf | xargs nx serve
+}
+
+# NX Serve with Dependencies
+function nxswd() {
+	local query
+	query="$*"
+	# If a query was provided, just run the serve command
+	if [ -n "$query" ]; then
+		nx serve-with-dependencies "$query"
+		return
+	fi
+
+	nx show projects --projects "apps/*" | fzf | xargs nx serve-with-dependencies
+}
+
+# ------------------------------------------------
+# Misc
+# ------------------------------------------------
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
+# Set default editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Load local-specific config if it exists (not committed to git)
+if [ -f ~/.local.bashrc ]; then
+	. ~/.local.bashrc
 fi
