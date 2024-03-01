@@ -82,9 +82,9 @@ function M.config()
 
         sources = {
             { name = 'nvim_lsp_signature_help' },
+            { name = 'luasnip' },
             { name = 'copilot' },
             { name = 'nvim_lsp' },
-            { name = 'luasnip' },
             {
                 name = 'buffer',
                 option = {
