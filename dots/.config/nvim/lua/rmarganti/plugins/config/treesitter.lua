@@ -2,7 +2,7 @@
 local M = {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    event = 'BufReadPost',
+    event = 'VeryLazy',
 }
 
 function M.config()
