@@ -348,7 +348,7 @@ utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 utils.map({ 'n', 'x' }, '<Leader>sw', function()
     require('telescope.builtin').find_files({
         hidden = true,
-        search_dirs = { '~/vimwiki' },
+        search_dirs = { '~/OneDrive - Gannett Company, Incorporated/obsidian/work' },
     })
 end)
 
@@ -433,6 +433,15 @@ utils.map('n', '<C-j>', '<CMD>NavigatorDown<CR>')
 utils.map('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 
 -- See hydra.lua for more Window mappings.
+
+------------------------------------------------
+--
+-- Obsidian.nvim
+--
+------------------------------------------------
+
+utils.map('n', '<Leader>w<Leader>w', ':ObsidianToday<CR>')
+utils.map('n', '<Leader>w<Leader>y', ':ObsidianYesterday<CR>')
 
 ------------------------------------------------
 --
