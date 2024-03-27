@@ -11,8 +11,13 @@ local function is_vim_process(pane)
     -- get_foreground_process_name On Linux, macOS and Windows,
     -- the process can be queried to determine this path. Other operating systems
     -- (notably, FreeBSD and other unix systems) are not currently supported
-    return pane:get_foreground_process_name():find('n?vim') ~= nil
-    -- return pane:get_title():find("n?vim") ~= nil
+    local process_name = pane:get_foreground_process_name()
+
+    if process_name == nil then
+        return false
+    end
+
+    return process_name:find('n?vim') ~= nil
 end
 
 -- Send window navigation keys to (N)vim if is actively focused. Otherwise, navigate Weterm panes.
@@ -38,8 +43,13 @@ local function get_tab_label(tab)
 
     -- Otherwise, use the current working directory of the active pane.
 
-    local cwd = tab.active_pane.current_working_dir.path
-    local path_pieces = utils.string_split(cwd, '/')
+    local cwd = tab.active_pane.current_working_dir
+
+    if cwd == nil then
+        return '<unknown>'
+    end
+
+    local path_pieces = utils.string_split(cwd.path, '/')
     local label = path_pieces[#path_pieces]
 
     if label == nil then
