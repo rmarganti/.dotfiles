@@ -104,3 +104,19 @@ vim.api.nvim_create_autocmd('VimResized', {
     end,
     desc = 'Resize windows Vim resized',
 })
+
+------------------------------------------------
+--
+-- Markdown
+--
+------------------------------------------------
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = custom_group,
+    pattern = 'markdown',
+    callback = function()
+        -- Set the conceal level
+        vim.opt_local.conceallevel = 2
+    end,
+    desc = 'Markdown tweaks',
+})
