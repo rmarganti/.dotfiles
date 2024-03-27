@@ -3,6 +3,7 @@ vim.filetype.add({
     extension = {
         hurl = 'hurl',
         mermaid = 'mermaid',
+        mjml = 'mjml',
     },
     filename = {
         -- NRWL NX project config
