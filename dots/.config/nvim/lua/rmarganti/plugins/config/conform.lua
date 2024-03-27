@@ -5,7 +5,11 @@ local M = {
 }
 
 function M.config()
-    require('conform').setup({
+    local conform = require('conform')
+
+    conform.setup({
+        log_level = vim.log.levels.DEBUG,
+
         formatters_by_ft = {
             css = { 'prettierd' },
             graphql = { 'prettierd' },
@@ -26,6 +30,7 @@ function M.config()
             typescriptreact = { 'prettierd' },
             vimwiki = { 'prettierd' },
             vue = { 'prettierd' },
+            xml = { 'prettierd' },
             yaml = { 'prettierd' },
         },
 
@@ -34,8 +39,8 @@ function M.config()
                 env = {
                     PRETTIERD_DEFAULT_CONFIG = vim.fn.expand('~/.config/nvim/.prettierrc.json'),
                 },
-            }
-        }
+            },
+        },
     })
 end
 

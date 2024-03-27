@@ -41,12 +41,15 @@ function M.config()
             'typescript',
             'vim',
             'vimdoc',
+            'xml',
             'yaml',
         },
 
         highlight = { enable = true },
         indent = { enable = true },
     })
+
+    vim.treesitter.language.register('xml', { 'mjml' })
 end
 
 return M
