@@ -420,6 +420,7 @@ utils.map('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
 utils.map('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
 utils.map('n', 'yoc', '<Cmd>ColorizerToggle<CR>', { desc = 'Toggle Colorizer' })
 utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
+utils.map('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' })
 
 ------------------------------------------------
 --
