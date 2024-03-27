@@ -8,6 +8,9 @@ local M = {
     },
     opts = {
         on_attach = lsp_utils.on_attach,
+        settings = {
+            code_lens = 'references_only',
+        },
     },
     event = 'VeryLazy',
 }
