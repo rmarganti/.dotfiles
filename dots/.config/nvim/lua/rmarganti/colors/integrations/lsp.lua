@@ -16,6 +16,9 @@ return {
 
     DiagnosticUnnecessary = { fg = a.minus1 },
 
+    LspCodeLens = { fg = a.minus3 },
+    LspCodeLensSeparator = { fg = a.minus3 },
+
     ['@lsp.type.namespace'] = { link = '@namespace' },
     ['@lsp.type.type'] = { link = '@type' },
     ['@lsp.type.class'] = { fg = a.plus2 },
@@ -30,4 +33,6 @@ return {
     ['@lsp.type.method'] = { link = '@method' },
     ['@lsp.type.macro'] = { link = '@macro' },
     ['@lsp.type.decorator'] = { fg = a.plus1 },
+
+    ['@lsp.typemod.function.declaration'] = { italic = true },
 }
