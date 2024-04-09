@@ -120,4 +120,9 @@ return {
     { key = 'd', mods = 'CTRL|SHIFT', action = action.ScrollByPage(0.75) },
 
     { key = 'l', mods = 'SUPER', action = action.ShowLauncher },
+
+    -- Font size
+    { key = '=', mods = 'SUPER', action = wezterm.action.IncreaseFontSize },
+    { key = '-', mods = 'SUPER', action = wezterm.action.DecreaseFontSize },
+    { key = '0', mods = 'SUPER', action = wezterm.action.ResetFontSize },
 }

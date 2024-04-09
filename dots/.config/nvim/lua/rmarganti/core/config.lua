@@ -121,6 +121,9 @@ vim.opt.autoindent = true
 -- When hitting <CR>, adjust indentation based on the current line's contents.
 vim.opt.smartindent = true
 
+-- Every wrapped line will continue visually indented
+vim.opt.breakindent = true
+
 ------------------------------------------------
 --
 -- Splits.

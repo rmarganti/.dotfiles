@@ -111,6 +111,9 @@ utils.map('n', '<Leader>cf', function()
     core_fns.format(false)
 end)
 
+-- Code eslint Fix all
+utils.map('n', '<Leader>cF', '<Cmd>EslintFixAll<CR>')
+
 -- Code Organize imports
 utils.map('n', '<Leader>co', '<Cmd>TSToolsOrganizeImports<CR>')
 
@@ -345,12 +348,7 @@ end)
 utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 
 -- Search Wiki
-utils.map({ 'n', 'x' }, '<Leader>sw', function()
-    require('telescope.builtin').find_files({
-        hidden = true,
-        search_dirs = { '~/OneDrive - Gannett Company, Incorporated/obsidian/work' },
-    })
-end)
+utils.map({ 'n', 'x' }, '<Leader>sw', '<Cmd>ObsidianQuickSwitch<CR>')
 
 -- Search Notifications
 utils.map({ 'n', 'x' }, '<Leader>sn', '<Cmd>Telescope notify<CR>')
@@ -418,7 +416,7 @@ end)
 
 utils.map('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
 utils.map('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
-utils.map('n', 'yoc', '<Cmd>ColorizerToggle<CR>', { desc = 'Toggle Colorizer' })
+utils.map('n', 'yoc', '<Cmd>HighlightColors Toggle<CR>', { desc = 'Toggle Color highlighting' })
 utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
 utils.map('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' })
 
@@ -441,8 +439,14 @@ utils.map('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 --
 ------------------------------------------------
 
-utils.map('n', '<Leader>w<Leader>w', ':ObsidianToday<CR>')
-utils.map('n', '<Leader>w<Leader>y', ':ObsidianYesterday<CR>')
+utils.map('n', '<Leader>oy', ':ObsidianYesterday<CR>', { desc = 'Obsidian Yesterday' })
+utils.map('n', '<Leader>ot', ':ObsidianToday<CR>', { desc = 'Obsidian Today' })
+utils.map('n', '<Leader>on', ':ObsidianNew<CR>', { desc = 'Obsidian New' })
+utils.map('n', '<Leader>oo', ':ObsidianOpen<CR>', { desc = 'Obsidian Open' })
+utils.map('n', '<Leader>oq', ':ObsidianQuickSwitch<CR>', { desc = 'Obsidian Quick switch' })
+utils.map('n', '<Leader>or', ':ObsidianRename<CR>', { desc = 'Obsidian Rename' })
+utils.map('n', '<Leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Search' })
+utils.map('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
 
 ------------------------------------------------
 --

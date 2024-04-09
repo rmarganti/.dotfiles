@@ -137,7 +137,7 @@ alias kdp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I
 alias ke="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl exec -it % -- sh"
 
 # Logs
-alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl logs % -f"
+alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I % kubectl logs % -f | npx pino-pretty"
 
 # Copy pod
 alias kcp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | tr 'A-Z' 'a-z' | pbcopy"

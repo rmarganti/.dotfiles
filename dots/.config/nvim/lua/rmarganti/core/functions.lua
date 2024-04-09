@@ -113,6 +113,11 @@ M.buf_delete_all = function(keep_current)
     local buffers = vim.api.nvim_list_bufs()
     local current_buffer = vim.api.nvim_get_current_buf()
 
+    -- Closing the last buffer can cause issues when the quickfix window is open.
+    if not keep_current then
+        vim.cmd.cclose()
+    end
+
     for _, buffer in ipairs(buffers) do
         local is_listed = vim.api.nvim_buf_get_option(buffer, 'buflisted')
         local is_modified = vim.api.nvim_buf_get_option(buffer, 'modified')
