@@ -1,8 +1,7 @@
 local core_fns = require('rmarganti.core.functions')
-local utils = require('rmarganti.utils.misc')
 
 -- Set <Space> as the leader key.
-utils.map('n', '<Space>', '<Nop>')
+vim.keymap.set('n', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 
 ------------------------------------------------
@@ -12,10 +11,10 @@ vim.g.mapleader = ' '
 ------------------------------------------------
 
 -- Disable accidentally pressing ctrl-z and suspending
-utils.map('n', '<c-z>', '<Nop>')
+vim.keymap.set('n', '<c-z>', '<Nop>')
 
 -- Disable ex mode
-utils.map('n', 'Q', '<Nop>')
+vim.keymap.set('n', 'Q', '<Nop>')
 
 ------------------------------------------------
 --
@@ -24,36 +23,36 @@ utils.map('n', 'Q', '<Nop>')
 ------------------------------------------------
 
 -- Diagnostics
-utils.map('n', '<Leader>jd', function()
+vim.keymap.set('n', '<Leader>jd', function()
     vim.diagnostic.goto_next({ float = { border = 'rounded' } })
 end)
-utils.map('n', '<Leader>kd', function()
+vim.keymap.set('n', '<Leader>kd', function()
     vim.diagnostic.goto_prev({ float = { border = 'rounded' } })
 end)
 
 -- Quickfix
-utils.map('n', '<Leader>jq', '<Cmd>lua MiniBracketed.quickfix("forward")<CR>')
-utils.map('n', '<Leader>kq', '<Cmd>lua MiniBracketed.quickfix("backward")<CR>')
+vim.keymap.set('n', '<Leader>jq', '<Cmd>lua MiniBracketed.quickfix("forward")<CR>')
+vim.keymap.set('n', '<Leader>kq', '<Cmd>lua MiniBracketed.quickfix("backward")<CR>')
 
 -- Conflict markers
-utils.map('n', '<Leader>jx', '<Cmd>lua MiniBracketed.conflict("forward")<CR>')
-utils.map('n', '<Leader>kx', '<Cmd>lua MiniBracketed.conflict("backward")<CR>')
+vim.keymap.set('n', '<Leader>jx', '<Cmd>lua MiniBracketed.conflict("forward")<CR>')
+vim.keymap.set('n', '<Leader>kx', '<Cmd>lua MiniBracketed.conflict("backward")<CR>')
 
 -- Comment
-utils.map('n', '<Leader>jc', '<Cmd>lua MiniBracketed.comment("forward")<CR>')
-utils.map('n', '<Leader>kc', '<Cmd>lua MiniBracketed.comment("backward")<CR>')
+vim.keymap.set('n', '<Leader>jc', '<Cmd>lua MiniBracketed.comment("forward")<CR>')
+vim.keymap.set('n', '<Leader>kc', '<Cmd>lua MiniBracketed.comment("backward")<CR>')
 
 -- Files
-utils.map('n', '<Leader>jf', '<Cmd>lua MiniBracketed.file("forward")<CR>')
-utils.map('n', '<Leader>kf', '<Cmd>lua MiniBracketed.file("backward")<CR>')
+vim.keymap.set('n', '<Leader>jf', '<Cmd>lua MiniBracketed.file("forward")<CR>')
+vim.keymap.set('n', '<Leader>kf', '<Cmd>lua MiniBracketed.file("backward")<CR>')
 
 -- Yank
-utils.map('n', '<Leader>jy', '<Cmd>lua MiniBracketed.yank("forward")<CR>')
-utils.map('n', '<Leader>ky', '<Cmd>lua MiniBracketed.yank("backward")<CR>')
+vim.keymap.set('n', '<Leader>jy', '<Cmd>lua MiniBracketed.yank("forward")<CR>')
+vim.keymap.set('n', '<Leader>ky', '<Cmd>lua MiniBracketed.yank("backward")<CR>')
 
 -- Tree-sitter node
-utils.map('n', '<Leader>jt', '<Cmd>lua MiniBracketed.treesitter("forward")<CR>')
-utils.map('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>')
+vim.keymap.set('n', '<Leader>jt', '<Cmd>lua MiniBracketed.treesitter("forward")<CR>')
+vim.keymap.set('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>')
 
 ------------------------------------------------
 --
@@ -73,26 +72,26 @@ utils.map('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>'
 -- NOTE: These are set in 'lua/rmarganti/plugins/config/cmp.lua'
 
 -- Goto Definition.
-utils.map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>')
+vim.keymap.set('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>')
 
 -- Goto reFerences.
-utils.map('n', 'gf', '<Cmd>Telescope lsp_references<CR>')
+vim.keymap.set('n', 'gf', '<Cmd>Telescope lsp_references<CR>')
 
 -- Goto Implementation.
-utils.map('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>')
+vim.keymap.set('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>')
 
 -- Goto Hint
-utils.map('n', 'gh', vim.lsp.buf.hover)
+vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
 
 -- Code Actions.
-utils.map('n', '<Leader>ca', vim.lsp.buf.code_action)
-utils.map('v', '<Leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('v', '<Leader>ca', vim.lsp.buf.code_action)
 
 -- Code symbol Rename.
-utils.map('n', '<Leader>cr', vim.lsp.buf.rename)
+vim.keymap.set('n', '<Leader>cr', vim.lsp.buf.rename)
 
 -- Code file Symbols.
-utils.map(
+vim.keymap.set(
     'n',
     '<Leader>cs',
     '<Cmd>Telescope lsp_document_symbols<CR>',
@@ -100,47 +99,47 @@ utils.map(
 )
 
 -- Code Workspace symbols
-utils.map(
+vim.keymap.set(
     'n',
     '<Leader>cw',
     '<Cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({})<CR>'
 )
 
 -- Code Format
-utils.map('n', '<Leader>cf', function()
+vim.keymap.set('n', '<Leader>cf', function()
     core_fns.format(false)
 end)
 
 -- Code eslint Fix all
-utils.map('n', '<Leader>cF', '<Cmd>EslintFixAll<CR>')
+vim.keymap.set('n', '<Leader>cF', '<Cmd>EslintFixAll<CR>')
 
 -- Code Organize imports
-utils.map('n', '<Leader>co', '<Cmd>TSToolsOrganizeImports<CR>')
+vim.keymap.set('n', '<Leader>co', '<Cmd>TSToolsOrganizeImports<CR>')
 
 -- Code Capture screenshot
-utils.map('n', '<Leader>cc', function()
+vim.keymap.set('n', '<Leader>cc', function()
     require('silicon').visualise_api({ show_buf = true })
 end)
 
 -- Code Capture screenshot
-utils.map('v', '<Leader>cc', function()
+vim.keymap.set('v', '<Leader>cc', function()
     require('silicon').visualise_api({})
 end)
 
 -- Inspect the tree node at the current cursor position.
-utils.map('n', '<Leader>ci', '<Cmd>Inspect<CR>')
+vim.keymap.set('n', '<Leader>ci', '<Cmd>Inspect<CR>')
 
 -- Inspect the tree of the current buffer
-utils.map('n', '<Leader>cI', '<Cmd>InspectTree<CR>')
+vim.keymap.set('n', '<Leader>cI', '<Cmd>InspectTree<CR>')
 
 -- Restart LSP
-utils.map('n', '<Leader>cR', function()
+vim.keymap.set('n', '<Leader>cR', function()
     vim.cmd('LspRestart')
     vim.diagnostic.reset()
 end)
 
 -- Reset LSP Diagnostics
-utils.map('n', '<Leader>cD', vim.diagnostic.reset)
+vim.keymap.set('n', '<Leader>cD', vim.diagnostic.reset)
 
 ------------------------------------------------
 --
@@ -149,48 +148,48 @@ utils.map('n', '<Leader>cD', vim.diagnostic.reset)
 ------------------------------------------------
 
 -- Edit Nearest (with prompt)
-utils.map('n', '<Leader>en', core_fns.edit_nearest)
+vim.keymap.set('n', '<Leader>en', core_fns.edit_nearest)
 
 -- Edit nearest Changelog
-utils.map('n', '<Leader>ec', function()
+vim.keymap.set('n', '<Leader>ec', function()
     core_fns.edit_nearest('CHANGELOG.md')
 end)
 
 -- Edit nearest Composer.json
-utils.map('n', '<Leader>eC', function()
+vim.keymap.set('n', '<Leader>eC', function()
     core_fns.edit_nearest('composer.json')
 end)
 
 -- Edit nearest Env
-utils.map('n', '<Leader>ee', function()
+vim.keymap.set('n', '<Leader>ee', function()
     core_fns.edit_nearest('.env')
 end)
 
 -- Edit nearest Index.ts
-utils.map('n', '<Leader>ei', function()
+vim.keymap.set('n', '<Leader>ei', function()
     core_fns.edit_nearest('index.ts')
 end)
 
 -- Edit nearest package.json
-utils.map('n', '<Leader>ep', function()
+vim.keymap.set('n', '<Leader>ep', function()
     core_fns.edit_nearest('package.json')
 end)
 
 -- Edit nearest project.json
-utils.map('n', '<Leader>eP', function()
+vim.keymap.set('n', '<Leader>eP', function()
     core_fns.edit_nearest('project.json')
 end)
 
 -- Edit nearest Readme
-utils.map('n', '<Leader>er', function()
+vim.keymap.set('n', '<Leader>er', function()
     core_fns.edit_nearest('README.md')
 end)
 
 -- Edit Snippets for current file type
-utils.map('n', '<Leader>es', core_fns.edit_snippets)
+vim.keymap.set('n', '<Leader>es', core_fns.edit_snippets)
 
 -- Edit Other (edit file related to current one)
-utils.map('n', '<Leader>eo', require('rmarganti.core.edit_other').edit_other)
+vim.keymap.set('n', '<Leader>eo', require('rmarganti.core.edit_other').edit_other)
 
 ------------------------------------------------
 --
@@ -199,28 +198,28 @@ utils.map('n', '<Leader>eo', require('rmarganti.core.edit_other').edit_other)
 ------------------------------------------------
 
 -- File Edit. Pre-populates the current directory.
-utils.map('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>', { silent = false })
+vim.keymap.set('n', '<Leader>fe', ':e <C-R>=expand("%:p:h") . "/" <CR>', { silent = false })
 
 -- File Copy
-utils.map('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>', { silent = false })
+vim.keymap.set('n', '<Leader>fc', ':saveas <C-R>=expand("%:p")<CR>', { silent = false })
 
 -- File Delete
-utils.map('n', '<Leader>fd', ':Delete!', { silent = false })
+vim.keymap.set('n', '<Leader>fd', ':Delete!', { silent = false })
 
 -- File Move
-utils.map('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>', { silent = false })
+vim.keymap.set('n', '<Leader>fm', ':Move <C-R>=expand("%:p")<CR>', { silent = false })
 
 -- File Rename
-utils.map('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false })
+vim.keymap.set('n', '<Leader>fr', ':Rename <C-R>=expand("%:t")<CR>', { silent = false })
 
 -- File Write
-utils.map('n', '<Leader>fw', function()
+vim.keymap.set('n', '<Leader>fw', function()
     vim.cmd('write')
     vim.notify('File saved')
 end)
 
 -- File eXplore
-utils.map('n', '<Leader>fx', function()
+vim.keymap.set('n', '<Leader>fx', function()
     require('lf').start({
         height = vim.fn.float2nr(vim.o.lines - 10),
         width = vim.fn.float2nr(vim.o.columns - 18),
@@ -228,7 +227,7 @@ utils.map('n', '<Leader>fx', function()
 end)
 
 -- File Types
-utils.map('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
+vim.keymap.set('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
 
 ------------------------------------------------
 --
@@ -237,41 +236,45 @@ utils.map('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({}
 ------------------------------------------------
 
 -- Git Add current file
-utils.map('n', '<Leader>ga', '<Cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>')
+vim.keymap.set(
+    'n',
+    '<Leader>ga',
+    '<Cmd>Git add % <bar> lua vim.notify("Git added current file")<CR>'
+)
 
 -- Git checkOut current file
-utils.map(
+vim.keymap.set(
     'n',
     '<Leader>go',
     '<Cmd>Git checkout % <bar> e! % <bar> lua vim.notify("Git checked out current file")<CR>'
 )
 
 -- Git Commits
-utils.map('n', '<Leader>gc', '<Cmd>Telescope git_commits<CR>')
+vim.keymap.set('n', '<Leader>gc', '<Cmd>Telescope git_commits<CR>')
 
 -- Git History (commits for buffer)
-utils.map('n', '<Leader>gh', '<Cmd>Telescope git_bcommits<CR>')
+vim.keymap.set('n', '<Leader>gh', '<Cmd>Telescope git_bcommits<CR>')
 
 -- Git Branches
-utils.map('n', '<Leader>gb', '<Cmd>Telescope git_branches<CR>')
+vim.keymap.set('n', '<Leader>gb', '<Cmd>Telescope git_branches<CR>')
 
 -- Git Blame
-utils.map('n', '<Leader>gB', '<Cmd>Git blame<CR>')
+vim.keymap.set('n', '<Leader>gB', '<Cmd>Git blame<CR>')
 
 -- Git Status
-utils.map('n', '<Leader>gs', '<Cmd>Telescope git_status<CR>')
+vim.keymap.set('n', '<Leader>gs', '<Cmd>Telescope git_status<CR>')
 
 -- Git bLame
-utils.map('n', '<Leader>gl', '<Cmd>Git blame<CR>')
+vim.keymap.set('n', '<Leader>gl', '<Cmd>Git blame<CR>')
 
 -- GitHub gists
-utils.map('n', '<Leader>gg', '<Cmd>Telescope gh gist<CR>')
+vim.keymap.set('n', '<Leader>gg', '<Cmd>Telescope gh gist<CR>')
 
 -- GitHub Pull Requests
-utils.map('n', '<Leader>gp', '<Cmd>Telescope gh pull_request<CR>')
+vim.keymap.set('n', '<Leader>gp', '<Cmd>Telescope gh pull_request<CR>')
 
 -- GitHub Notifications
-utils.map(
+vim.keymap.set(
     'n',
     '<Leader>gn',
     [[<Cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]]
@@ -284,31 +287,31 @@ utils.map(
 ------------------------------------------------
 
 -- Yank to system clipboard
-utils.map('n', '<Leader>y', '"+y')
-utils.map('x', '<Leader>y', '"+y')
+vim.keymap.set('n', '<Leader>y', '"+y')
+vim.keymap.set('x', '<Leader>y', '"+y')
 
 -- Delete to system clipboard
-utils.map('n', '<Leader>d', '"+d')
-utils.map('x', '<Leader>d', '"+d')
+vim.keymap.set('n', '<Leader>d', '"+d')
+vim.keymap.set('x', '<Leader>d', '"+d')
 
 -- Paste from system clipboard
-utils.map('n', '<Leader>p', '"+p')
-utils.map('n', '<Leader>P', '"+P')
-utils.map('x', '<Leader>p', '"+p')
-utils.map('x', '<Leader>P', '"+P')
+vim.keymap.set('n', '<Leader>p', '"+p')
+vim.keymap.set('n', '<Leader>P', '"+P')
+vim.keymap.set('x', '<Leader>p', '"+p')
+vim.keymap.set('x', '<Leader>P', '"+P')
 
 -- Replace from system clipboard
-utils.map('n', '<Leader>gr', '"+gr', { remap = true })
-utils.map('x', '<Leader>gr', '"+gr', { remap = true })
+vim.keymap.set('n', '<Leader>gr', '"+gr', { remap = true })
+vim.keymap.set('x', '<Leader>gr', '"+gr', { remap = true })
 
 -- Yank File name to system clipboard.
-utils.map('n', '<Leader>yf', ':let @+ = expand("%:t")<CR>')
+vim.keymap.set('n', '<Leader>yf', ':let @+ = expand("%:t")<CR>')
 
 -- Yank file Absolute path to system clipboard.
-utils.map('n', '<Leader>ya', ':let @+ = expand("%:p")<CR>')
+vim.keymap.set('n', '<Leader>ya', ':let @+ = expand("%:p")<CR>')
 
 -- Yank file Relative path to system clipboard.
-utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
+vim.keymap.set('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 
 ------------------------------------------------
 --
@@ -317,59 +320,59 @@ utils.map('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 ------------------------------------------------
 
 -- Search Files
-utils.map({ 'n', 'x' }, '<Leader>sf', function()
+vim.keymap.set({ 'n', 'x' }, '<Leader>sf', function()
     require('telescope.builtin').find_files({ hidden = true })
 end)
 
 -- Search Directory Files
-utils.map({ 'n', 'x' }, '<Leader>sdf', function()
+vim.keymap.set({ 'n', 'x' }, '<Leader>sdf', function()
     require('telescope').extensions.dir.find_files()
 end)
 
 -- Search Recent files
-utils.map(
+vim.keymap.set(
     { 'n', 'x' },
     '<Leader>sr',
     '<Cmd>lua require("telescope").extensions.recent_files.pick()<CR>'
 )
 
 -- Search Buffers
-utils.map({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sb', '<Cmd>Telescope buffers<CR>')
 
 -- Search Text
-utils.map({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>st', '<Cmd>Telescope live_grep<CR>')
 
 -- Search Directory Text
-utils.map({ 'n', 'x' }, '<Leader>sdt', function()
+vim.keymap.set({ 'n', 'x' }, '<Leader>sdt', function()
     require('telescope').extensions.dir.live_grep()
 end)
 
 -- Search Todos
-utils.map({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 
 -- Search Wiki
-utils.map({ 'n', 'x' }, '<Leader>sw', '<Cmd>ObsidianQuickSwitch<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sw', '<Cmd>ObsidianQuickSwitch<CR>')
 
 -- Search Notifications
-utils.map({ 'n', 'x' }, '<Leader>sn', '<Cmd>Telescope notify<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sn', '<Cmd>Telescope notify<CR>')
 
 -- Search Symbols
-utils.map({ 'n', 'x' }, '<Leader>ss', '<Cmd>Telescope symbols<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>ss', '<Cmd>Telescope symbols<CR>')
 
 -- Search Commands
-utils.map({ 'n', 'x' }, '<Leader>sc', '<Cmd>Telescope commands<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sc', '<Cmd>Telescope commands<CR>')
 
 -- Search Help
-utils.map({ 'n', 'x' }, '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sh', '<Cmd>Telescope help_tags<CR>')
 
 -- Search Highlights
-utils.map({ 'n', 'x' }, '<Leader>sH', '<Cmd>Telescope highlights<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sH', '<Cmd>Telescope highlights<CR>')
 
 -- Search Key maps
-utils.map({ 'n', 'x' }, '<Leader>sk', '<Cmd>Telescope keymaps<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>sk', '<Cmd>Telescope keymaps<CR>')
 
 -- Search Resume
-utils.map({ 'n', 'x' }, '<Leader>s.', '<Cmd>Telescope resume<CR>')
+vim.keymap.set({ 'n', 'x' }, '<Leader>s.', '<Cmd>Telescope resume<CR>')
 
 ------------------------------------------------
 --
@@ -378,32 +381,32 @@ utils.map({ 'n', 'x' }, '<Leader>s.', '<Cmd>Telescope resume<CR>')
 ------------------------------------------------
 
 -- Run Tests for the whole File.
-utils.map('n', '<Leader>tf', function()
+vim.keymap.set('n', '<Leader>tf', function()
     require('neotest').run.run(vim.fn.expand('%'))
 end)
 
 -- Run the Test that is Nearest.
-utils.map('n', '<Leader>tn', function()
+vim.keymap.set('n', '<Leader>tn', function()
     require('neotest').run.run()
 end)
 
 -- Run the Last Test.
-utils.map('n', '<Leader>tl', function()
+vim.keymap.set('n', '<Leader>tl', function()
     require('neotest').run.run_last()
 end)
 
 -- Toggle Test Summary.
-utils.map('n', '<Leader>ts', function()
+vim.keymap.set('n', '<Leader>ts', function()
     require('neotest').summary.toggle()
 end)
 
 -- Show Test Output.
-utils.map('n', '<Leader>to', function()
+vim.keymap.set('n', '<Leader>to', function()
     require('neotest').output.open({ enter = false })
 end)
 
 -- Toggle Test Output panel.
-utils.map('n', '<Leader>tO', function()
+vim.keymap.set('n', '<Leader>tO', function()
     require('neotest').output_panel.toggle()
 end)
 
@@ -414,11 +417,16 @@ end)
 --
 ------------------------------------------------
 
-utils.map('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
-utils.map('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
-utils.map('n', 'yoc', '<Cmd>HighlightColors Toggle<CR>', { desc = 'Toggle Color highlighting' })
-utils.map('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
-utils.map('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' })
+vim.keymap.set('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
+vim.keymap.set('n', 'yof', core_fns.toggle_format_on_save, { desc = 'Toggle Format on save' })
+vim.keymap.set(
+    'n',
+    'yoc',
+    '<Cmd>HighlightColors Toggle<CR>',
+    { desc = 'Toggle Color highlighting' }
+)
+vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wrap'" })
+vim.keymap.set('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' })
 
 ------------------------------------------------
 --
@@ -426,10 +434,10 @@ utils.map('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' }
 --
 ------------------------------------------------
 
-utils.map('n', '<C-h>', '<CMD>NavigatorLeft<CR>')
-utils.map('n', '<C-l>', '<CMD>NavigatorRight<CR>')
-utils.map('n', '<C-j>', '<CMD>NavigatorDown<CR>')
-utils.map('n', '<C-k>', '<CMD>NavigatorUp<CR>')
+vim.keymap.set('n', '<C-h>', '<CMD>NavigatorLeft<CR>')
+vim.keymap.set('n', '<C-l>', '<CMD>NavigatorRight<CR>')
+vim.keymap.set('n', '<C-j>', '<CMD>NavigatorDown<CR>')
+vim.keymap.set('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 
 -- See hydra.lua for more Window mappings.
 
@@ -439,14 +447,14 @@ utils.map('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 --
 ------------------------------------------------
 
-utils.map('n', '<Leader>oy', ':ObsidianYesterday<CR>', { desc = 'Obsidian Yesterday' })
-utils.map('n', '<Leader>ot', ':ObsidianToday<CR>', { desc = 'Obsidian Today' })
-utils.map('n', '<Leader>on', ':ObsidianNew<CR>', { desc = 'Obsidian New' })
-utils.map('n', '<Leader>oo', ':ObsidianOpen<CR>', { desc = 'Obsidian Open' })
-utils.map('n', '<Leader>oq', ':ObsidianQuickSwitch<CR>', { desc = 'Obsidian Quick switch' })
-utils.map('n', '<Leader>or', ':ObsidianRename<CR>', { desc = 'Obsidian Rename' })
-utils.map('n', '<Leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Search' })
-utils.map('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
+vim.keymap.set('n', '<Leader>oy', ':ObsidianYesterday<CR>', { desc = 'Obsidian Yesterday' })
+vim.keymap.set('n', '<Leader>ot', ':ObsidianToday<CR>', { desc = 'Obsidian Today' })
+vim.keymap.set('n', '<Leader>on', ':ObsidianNew<CR>', { desc = 'Obsidian New' })
+vim.keymap.set('n', '<Leader>oo', ':ObsidianOpen<CR>', { desc = 'Obsidian Open' })
+vim.keymap.set('n', '<Leader>oq', ':ObsidianQuickSwitch<CR>', { desc = 'Obsidian Quick switch' })
+vim.keymap.set('n', '<Leader>or', ':ObsidianRename<CR>', { desc = 'Obsidian Rename' })
+vim.keymap.set('n', '<Leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Search' })
+vim.keymap.set('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
 
 ------------------------------------------------
 --
@@ -455,25 +463,25 @@ utils.map('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
 ------------------------------------------------
 
 -- Clear search highlight
-utils.map('n', '<Esc>', ':nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', ':nohlsearch<CR>')
 
 -- Quit
-utils.map('n', '<Leader>qq', ':qa<CR>')
+vim.keymap.set('n', '<Leader>qq', ':qa<CR>')
 
 -- Force close all buffers and Quit
-utils.map('n', '<Leader>qQ', ':qa!<CR>')
+vim.keymap.set('n', '<Leader>qQ', ':qa!<CR>')
 
 -- Go Split (opposite of `J` for parameters)
-utils.map('n', 'gJ', '<Cmd>TSJToggle<CR>')
+vim.keymap.set('n', 'gJ', '<Cmd>TSJToggle<CR>')
 
 -- Jump to character in current window.
-utils.map('n', '<Leader><Leader>', function()
+vim.keymap.set('n', '<Leader><Leader>', function()
     local MiniJump2d = require('mini.jump2d')
     MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
 end)
 
 -- Add line below
-utils.map('n', 'go', "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>")
+vim.keymap.set('n', 'go', "<Cmd>call append(line('.'), repeat([''], v:count1))<CR>")
 
 -- Add line above
-utils.map('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
+vim.keymap.set('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
