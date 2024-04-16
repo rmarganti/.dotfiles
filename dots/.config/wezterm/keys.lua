@@ -113,7 +113,7 @@ return {
     },
 
     -- Search
-    { key = '/', mods = 'LEADER', action = action.Search({ CaseSensitiveString = '' }) },
+    { key = '/', mods = 'LEADER', action = action.Search('CurrentSelectionOrEmptyString') },
 
     -- Page up/down.
     { key = 'u', mods = 'CTRL|SHIFT', action = action.ScrollByPage(-0.75) },
