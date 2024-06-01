@@ -3,7 +3,7 @@ local a = require('rmarganti.colors.abstractions')
 
 return {
     Comment = { fg = a.minus2, italic = true }, -- just comments
-    ColorColumn = { bg = p.bg_darker }, -- used for the columns set with 'colorcolumn'
+    ColorColumn = { bg = p.bg_dark }, -- used for the columns set with 'colorcolumn'
     Conceal = { fg = p.black }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor = { fg = a.fg, bg = p.bg_light }, -- character under the cursor
     lCursor = { fg = a.fg, bg = p.bg_light }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
@@ -13,7 +13,6 @@ return {
     Directory = { fg = a.fg }, -- directory names (and other special names in listings)
     EndOfBuffer = { fg = p.black }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
     ErrorMsg = { fg = a.error }, -- error messages on the command line
-    VertSplit = { fg = a.minus3 }, -- the column separating vertically split windows
     Folded = { fg = a.fg, bg = p.bg_light }, -- line used for closed folds
     FoldColumn = { bg = p.none, fg = a.minus2 }, -- 'foldcolumn'
     SignColumn = { bg = p.none, fg = a.minus2 }, -- column where |signs| are displayed
@@ -23,6 +22,7 @@ return {
     CursorLineNr = { fg = a.plus2, bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineSign = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
     CursorLineFold = { bg = p.bg_dark }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line. highlights the number in numberline.
+    LspInlayHint = { fg = a.minus2 },
     MatchParen = { fg = p.yellow }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg = { fg = a.fg }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea = { fg = a.fg }, -- Area for messages and cmdline
@@ -60,6 +60,7 @@ return {
     WarningMsg = { fg = a.warning }, -- warning messages
     Whitespace = { fg = a.minus3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu = { bg = p.base }, -- current match in 'wildmenu' completion
+    WinSeparator = { fg = a.minus3 },
 
     -- These groups are not listed as default vim groups,
     -- but they are defacto standard group names for syntax highlighting.

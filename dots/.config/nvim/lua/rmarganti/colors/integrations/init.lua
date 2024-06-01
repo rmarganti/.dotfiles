@@ -14,7 +14,6 @@ return {
     nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
     nvim_ufo = require('rmarganti.colors.integrations.nvim-ufo'),
     rnvimr = require('rmarganti.colors.integrations.rnvimr'),
-    rust_analyzer = require('rmarganti.colors.integrations.rust-analyzer'),
     telescope = require('rmarganti.colors.integrations.telescope'),
     vim_illuminate = require('rmarganti.colors.integrations.vim-illuminate'),
 }

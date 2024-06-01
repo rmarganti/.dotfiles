@@ -1,6 +1,8 @@
 local a = require('rmarganti.colors.abstractions')
 local p = require('rmarganti.colors.palette')
 
+-- https://neovim.io/doc/user/treesitter.html#treesitter-highlight-groups
+
 return {
     -- Misc
 
@@ -73,7 +75,7 @@ return {
 
     -- Identifiers
 
-    -- ['@variable'] = { fg = a.plus4 }, -- various variable names
+    ['@variable'] = { fg = a.plus4 }, -- various variable names
     ['@variable.builtin'] = { fg = a.plus4, italic = true }, -- built-in variable names (e.g. `this`)
 
     -- ['@constant'] = { fg = a.plus4 }, -- constant identifiers
@@ -86,10 +88,10 @@ return {
     -- Text (Mainly for markup languages).
 
     -- ['@text'] = {}, -- non-structured text
-    -- ['@text.strong'] = {}, -- bold text
-    -- ['@text.emphasis'] = {}, -- text with emphasis
-    -- ['@text.underline'] = {}, -- underlined text
-    -- ['@text.strike'] = {}, -- strikethrough text
+    ['@text.strong'] = { bold = true }, -- bold text
+    ['@text.emphasis'] = { italic = true }, -- text with emphasis
+    ['@text.underline'] = { underline = true }, -- underlined text
+    ['@text.strike'] = { fg = a.minus2 }, -- strikethrough text
     ['@text.title'] = { fg = a.plus3 }, -- text that is part of a title
     ['@text.literal'] = { fg = a.fg }, -- literal or verbatim text
     ['@text.uri'] = { fg = a.plus2, underdotted = true, sp = p.blue_darker }, -- URIs (e.g. hyperlinks)
@@ -108,6 +110,13 @@ return {
     ['@tag'] = { fg = a.plus3 }, -- XML tag names
     ['@tag.attribute'] = { fg = a.base }, -- XML tag attributes
     ['@tag.delimiter'] = { fg = a.minus1 }, -- XML tag delimiters
+
+    -- Markup
+
+    ['@markup'] = { fg = a.plus1 }, -- markup tags
+    ['@markup.strong'] = { bold = true }, -- bold markup
+    ['@markup.italic'] = { italic = true }, -- emphasized markup
+    ['@markup.strikethrough'] = { fg = a.minus2 },
 
     -- Conceal
 
