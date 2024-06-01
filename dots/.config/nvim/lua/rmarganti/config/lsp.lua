@@ -10,22 +10,26 @@ local function make_lua_lsp_config()
         Lua = {
             awakened = { cat = true },
             documentFormatting = false, -- We use stylua through null-ls
+
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
                 -- Setup your lua path
                 path = lua_path,
             },
+
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
                 globals = { 'vim' },
             },
+
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = {},
                 maxPreload = 2000,
                 preloadFileSize = 150,
             },
+
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = { enable = false },
         },
@@ -35,7 +39,7 @@ end
 --- Configuration for an LSP client
 -- @field formatting_enabled Should the client be used for file formatting?
 -- @field skip_setup When set to true, the client will not be setup by nvim-lspconfig.
--- @field user_config Additional configuration for the client. Passed to nvim-lspconfig[client].setup()
+-- @field setup Additional configuration for the client. Passed to nvim-lspconfig[client].setup()
 -- @table lsp_client_config
 
 M.clients = {
@@ -73,7 +77,7 @@ M.clients = {
 
     emmet_ls = {
         formatting_enabled = false,
-        user_config = {
+        setup = {
             -- Disabling for React, because it often gets in the way.
             filetypes = { 'html', 'css', 'sass', 'scss', 'less' },
         },
@@ -89,7 +93,7 @@ M.clients = {
 
     jsonls = {
         formatting_enabled = false,
-        user_config = {
+        setup = {
             settings = {
                 json = {
                     schemas = require('schemastore').json.schemas(),
@@ -104,7 +108,7 @@ M.clients = {
 
     lua_ls = {
         formatting_enabled = false,
-        user_config = {
+        setup = {
             settings = make_lua_lsp_config(),
         },
     },
@@ -115,6 +119,19 @@ M.clients = {
 
     gopls = {
         formatting_enabled = true,
+        setup = {
+            gopls = {
+                hints = {
+                    assignVariableTypes = true,
+                    compositeLiteralFields = true,
+                    compositeLiteralTypes = true,
+                    constantValues = true,
+                    functionTypeParameters = true,
+                    parameterNames = true,
+                    rangeVariableTypes = true,
+                },
+            },
+        },
     },
 
     golangci_lint_ls = {
@@ -127,7 +144,7 @@ M.clients = {
 
     graphql = {
         formatting_enabled = false,
-        user_config = {
+        setup = {
             -- Javascript and typescript are supported, but can
             -- interfere with navic, so disabling for now.
             filetypes = { 'graphql' },
@@ -198,7 +215,7 @@ M.clients = {
     },
 
     yamlls = {
-        user_config = {
+        setup = {
             settings = {
                 yaml = {
                     schemas = require('schemastore').yaml.schemas(),

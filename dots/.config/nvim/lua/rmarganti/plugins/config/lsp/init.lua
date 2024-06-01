@@ -32,9 +32,9 @@ function M.config()
     for _, client in ipairs(clients) do
         local config = user_lsp_config.clients[client]
         local settings = vim.tbl_extend(
-            "force",
+            'force',
             { capabilities = capabilities, flags = flags, on_attach = on_attach },
-            config.user_config or {}
+            config.setup or {}
         )
 
         lspconfig[client].setup(settings)
