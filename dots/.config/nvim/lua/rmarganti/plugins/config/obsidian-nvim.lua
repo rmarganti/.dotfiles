@@ -14,6 +14,9 @@ local M = {
         },
         daily_notes = {
             folder = 'diary',
+            date_format = '%Y-%m-%d',
+            alias_format = '%B %-d, %Y',
+            template = nil,
         },
 
         preferred_link_style = 'markdown',
