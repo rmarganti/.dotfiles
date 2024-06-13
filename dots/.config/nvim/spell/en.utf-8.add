@@ -16,6 +16,7 @@ colorscheme
 colorspace
 config
 configs
+courtnee
 deps
 deserialize
 designiq
@@ -74,6 +75,7 @@ quickfix
 ramda
 raycast
 redux
+remeda
 repos
 rmarganti
 saml
@@ -120,3 +122,4 @@ whitelisted
 whitespace
 winblend
 yaml
+zustand
