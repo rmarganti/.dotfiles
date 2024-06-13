@@ -91,16 +91,16 @@ M.clients = {
     -- JSON
     ------------------------------------------------
 
-    jsonls = {
-        formatting_enabled = false,
-        setup = {
-            settings = {
-                json = {
-                    schemas = require('schemastore').json.schemas(),
-                },
-            },
-        },
-    },
+    -- jsonls = {
+    --     formatting_enabled = false,
+    --     setup = {
+    --         settings = {
+    --             json = {
+    --                 schemas = require('schemastore').json.schemas(),
+    --             },
+    --         },
+    --     },
+    -- },
 
     ------------------------------------------------
     -- Lua
@@ -173,10 +173,14 @@ M.clients = {
     -- Typescript, Javascript
     ------------------------------------------------
 
-    ['typescript-tools'] = {
-        skip_setup = true, -- typescript-tools does its own setup.
-        formatting_enabled = false,
+    vtsls = {
+        formatting_enabled
     },
+
+    -- ['typescript-tools'] = {
+    --     skip_setup = true, -- typescript-tools does its own setup.
+    --     formatting_enabled = false,
+    -- },
 
     eslint = {
         formatting_enabled = true,
@@ -214,15 +218,15 @@ M.clients = {
         formatting_enabled = true,
     },
 
-    yamlls = {
-        setup = {
-            settings = {
-                yaml = {
-                    schemas = require('schemastore').yaml.schemas(),
-                },
-            },
-        },
-    },
+    -- yamlls = {
+    --     setup = {
+    --         settings = {
+    --             yaml = {
+    --                 schemas = require('schemastore').yaml.schemas(),
+    --             },
+    --         },
+    --     },
+    -- },
 }
 
 return M

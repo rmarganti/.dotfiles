@@ -2,11 +2,11 @@ local M = {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-        -- { 'b0o/schemastore.nvim' },
+        { 'b0o/schemastore.nvim' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'williamboman/mason-lspconfig.nvim' },
         { 'williamboman/mason.nvim' },
-        -- { 'SmiteshP/nvim-navic' },
+        { 'SmiteshP/nvim-navic' },
     },
 }
 
