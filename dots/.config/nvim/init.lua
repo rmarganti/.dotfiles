@@ -22,7 +22,7 @@ vim.g.loaded_zipPlugin = false
 vim.g.loaded_2html_plugin = false
 
 -- require('rmarganti.core.autocommands')
--- require('rmarganti.core.config')
+require('rmarganti.core.config')
 -- require('rmarganti.core.statuscolumn')
 -- require('rmarganti.core.lsp')
 require('rmarganti.core.keybindings')
