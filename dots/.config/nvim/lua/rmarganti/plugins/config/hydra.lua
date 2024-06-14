@@ -4,7 +4,7 @@ local M = {
     event = 'VeryLazy',
     dependencies = {
         { 'anuvyklack/keymap-layer.nvim' }, -- needed only for pink hydras
-        { 'lewis6991/gitsigns.nvim' },      -- Required for the git interaction
+        { 'lewis6991/gitsigns.nvim' }, -- Required for the git interaction
     },
 }
 
@@ -31,7 +31,7 @@ function M.config()
             hint = {
                 position = 'bottom-right',
                 offset = 1,
-	        float_opts = { border = 'rounded' }
+                float_opts = { border = 'rounded' },
             },
             invoke_on_body = false,
         },
@@ -39,25 +39,25 @@ function M.config()
         body = '<Leader>w',
         heads = {
             -- Move focus
-            { 'h',     '<C-w>h' },
-            { 'j',     '<C-w>j' },
-            { 'k',     '<C-w>k' },
-            { 'l',     '<C-w>l' },
+            { 'h', '<C-w>h' },
+            { 'j', '<C-w>j' },
+            { 'k', '<C-w>k' },
+            { 'l', '<C-w>l' },
 
             -- Split
-            { 's',     '<C-w>s' },
-            { 'v',     '<C-w>v' },
-            { 'q',     '<C-W>q' },
-            { 'o',     '<Cmd>only<CR>' },
+            { 's', '<C-w>s' },
+            { 'v', '<C-w>v' },
+            { 'q', '<C-W>q' },
+            { 'o', '<Cmd>only<CR>' },
 
             -- Size
-            { 'K',     '<C-w>+' },
-            { 'J',     '<C-w>-' },
-            { 'L',     '2<C-w>>' },
-            { 'H',     '2<C-w><' },
-            { '=',     '<C-w>=' },
+            { 'K', '<C-w>+' },
+            { 'J', '<C-w>-' },
+            { 'L', '2<C-w>>' },
+            { 'H', '2<C-w><' },
+            { '=', '<C-w>=' },
 
-            { '<Esc>', nil,            { exit = true, desc = false } },
+            { '<Esc>', nil, { exit = true, desc = false } },
         },
     })
 
@@ -85,22 +85,42 @@ function M.config()
         mode = 'n',
         body = '<Leader>b',
         heads = {
-            { 'n',     '<cmd>enew<CR>',                                { desc = 'New', exit = true } },
+            {
+                'n',
+                '<cmd>enew<CR>',
+                { desc = 'New', exit = true },
+            },
             {
                 'e',
                 '<cmd>lua require("bufferline").pick_buffer()<CR>',
                 { desc = 'Edit', exit = true },
             },
-            { 'd',     '<cmd>BufferLinePickClose<CR>',                 { desc = 'Delete', exit = true } },
-            { 'h',     '<cmd>lua require("bufferline").cycle(-1)<CR>', { desc = 'Focus left' } },
-            { 'l',     '<cmd>lua require("bufferline").cycle(1)<CR>',  desc = 'Focus Right' },
-            { 'H',     '<cmd>BufferLineMovePrev<CR>',                  { desc = 'Move Left' } },
-            { 'L',     '<cmd>BufferLineMoveNext<CR>',                  { desc = 'Move Right' } },
-            { 'q',     '<cmd>BufDel<CR>',                              { desc = 'Quit' } },
-            { 'Q',     '<cmd>BufDel!<CR>',                             { desc = 'Force Quit' } },
-            { 'a',     core_fns.buf_delete_all,                        { desc = 'Quit All', exit = true } },
-            { 'o',     core_fns.buf_only,                              { desc = 'Keep Only', exit = true } },
-            { '<Esc>', nil,                                            { exit = true, desc = false } },
+            {
+                'd',
+                '<cmd>BufferLinePickClose<CR>',
+                { desc = 'Delete', exit = true },
+            },
+            { 'h', '<cmd>lua require("bufferline").cycle(-1)<CR>', { desc = 'Focus left' } },
+            { 'l', '<cmd>lua require("bufferline").cycle(1)<CR>', desc = 'Focus Right' },
+            { 'H', '<cmd>BufferLineMovePrev<CR>', { desc = 'Move Left' } },
+            { 'L', '<cmd>BufferLineMoveNext<CR>', { desc = 'Move Right' } },
+            { 'q', '<cmd>BufDel<CR>', { desc = 'Quit' } },
+            { 'Q', '<cmd>BufDel!<CR>', { desc = 'Force Quit' } },
+            {
+                'a',
+                core_fns.buf_delete_all,
+                { desc = 'Quit All', exit = true },
+            },
+            {
+                'o',
+                core_fns.buf_only,
+                { desc = 'Keep Only', exit = true },
+            },
+            {
+                '<Esc>',
+                nil,
+                { exit = true, desc = false },
+            },
         },
     })
 
@@ -168,7 +188,7 @@ function M.config()
             { 'u', gitsigns.undo_stage_hunk },
             { 'S', gitsigns.stage_buffer },
             { 'p', gitsigns.preview_hunk },
-            { 'd', gitsigns.toggle_deleted,    { nowait = true } },
+            { 'd', gitsigns.toggle_deleted, { nowait = true } },
             { 'b', gitsigns.blame_line },
             {
                 'B',
@@ -176,8 +196,8 @@ function M.config()
                     gitsigns.blame_line({ full = true })
                 end,
             },
-            { '/',     gitsigns.show, { exit = true } }, -- show the base of the file
-            { '<Esc>', nil,           { exit = true, nowait = true } },
+            { '/', gitsigns.show, { exit = true } }, -- show the base of the file
+            { '<Esc>', nil, { exit = true, nowait = true } },
         },
     })
 end
