@@ -9,7 +9,7 @@ local M = {
         { 'hrsh7th/cmp-nvim-lua' },
         { 'hrsh7th/cmp-path' },
         -- { 'saadparwaiz1/cmp_luasnip' },
-        -- { 'zbirenbaum/copilot-cmp' },
+        { 'zbirenbaum/copilot-cmp' },
     },
 }
 
@@ -49,7 +49,7 @@ function M.config()
         -- end
     end
 
-    -- require('copilot_cmp').setup()
+    require('copilot_cmp').setup()
 
     cmp.setup({
         -- formatting = {
