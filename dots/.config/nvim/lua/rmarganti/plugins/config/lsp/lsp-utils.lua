@@ -13,23 +13,23 @@ M.on_attach = function(client, bufnr)
     local core_fns = require('rmarganti.core.functions')
 
     -- Provide breadcrumbs
-    -- if client.server_capabilities.documentSymbolProvider then
-    --     require('nvim-navic').attach(client, bufnr)
-    -- end
+    if client.server_capabilities.documentSymbolProvider then
+        require('nvim-navic').attach(client, bufnr)
+    end
 
     -- Auto-format on save.
-    -- if client.supports_method('textDocument/formatting') then
-    --     local format_group = vim.api.nvim_create_augroup('format', { clear = true })
+    if client.supports_method('textDocument/formatting') then
+        local format_group = vim.api.nvim_create_augroup('format', { clear = true })
 
-    --     vim.api.nvim_create_autocmd('BufWritePre', {
-    --         group = format_group,
-    --         callback = function()
-    --             core_fns.format(true)
-    --         end,
-    --         desc = 'Auto-format on save',
-    --         buffer = 0,
-    --     })
-    -- end
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            group = format_group,
+            callback = function()
+                core_fns.format(true)
+            end,
+            desc = 'Auto-format on save',
+            buffer = 0,
+        })
+    end
 end
 
 return M
