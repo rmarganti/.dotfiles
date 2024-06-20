@@ -54,9 +54,7 @@ function M.config()
 
     vim.keymap.set('n', 'zR', ufo.openAllFolds)
     vim.keymap.set('n', 'zM', ufo.closeAllFolds)
-    vim.keymap.set('n', 'zr', function()
-        ufo.closeFoldsWith(1)
-    end)
+    vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
     vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
     -- Clear Fold HL group when using UFO, since
