@@ -114,7 +114,15 @@ end)
 vim.keymap.set('n', '<Leader>cF', '<Cmd>EslintFixAll<CR>')
 
 -- Code Organize imports
-vim.keymap.set('n', '<Leader>co', '<Cmd>TSToolsOrganizeImports<CR>')
+vim.keymap.set('n', '<Leader>co', function()
+    -- Typescript organize imports code action
+    vim.lsp.buf.code_action({
+        apply = true,
+        context = {
+            only = { 'source.organizeImports' },
+        },
+    })
+end)
 
 -- Code Capture screenshot
 vim.keymap.set('n', '<Leader>cc', function()
