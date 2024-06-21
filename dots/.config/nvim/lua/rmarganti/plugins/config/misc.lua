@@ -23,16 +23,16 @@ return {
     -- Misc
     --------------------------------
 
+    -- Navigate between Neovim and Wezterm panes
+    {
+        'numToStr/Navigator.nvim',
+        opts = {},
+    },
+
     -- Sugar for file operations (rename, move, etc.).
     {
         'tpope/vim-eunuch',
         event = 'BufReadPost',
-    },
-
-    -- Make more things repeatable.
-    {
-        'tpope/vim-repeat',
-        event = 'VeryLazy',
     },
 
     -- Heuristically set buffer options.
@@ -40,6 +40,4 @@ return {
         'tpope/vim-sleuth',
         event = 'BufReadPost',
     },
-
-    { 'catppuccin/nvim', name = 'catppuccin' },
 }

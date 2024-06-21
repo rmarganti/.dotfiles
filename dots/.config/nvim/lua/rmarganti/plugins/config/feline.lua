@@ -113,23 +113,6 @@ function M.config()
             },
         },
 
-        github_notifications = {
-            provider = function()
-                local data = require('github-notifications').statusline_notifications()
-
-                if data.count > 0 then
-                    return data.icon .. ' ' .. tostring(data.count)
-                else
-                    return ''
-                end
-            end,
-            hl = {
-                fg = p.blue.gui,
-            },
-            left_sep = ' ',
-            right_sep = ' ',
-        },
-
         cursor_position = {
             provider = position_provider,
             hl = {
@@ -202,7 +185,6 @@ function M.config()
             { hl = { bg = p.bg_light.gui, fg = p.bg_light.gui } },
         },
         {
-            pieces.github_notifications,
             pieces.file_format,
             pieces.file_encoding,
             pieces.file_type,

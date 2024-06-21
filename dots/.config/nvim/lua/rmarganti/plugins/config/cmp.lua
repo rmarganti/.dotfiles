@@ -52,20 +52,6 @@ function M.config()
     require('copilot_cmp').setup()
 
     cmp.setup({
-        formatting = {
-            format = require('lspkind').cmp_format({
-                with_text = true,
-                menu = {
-                    buffer = '[Buffer]',
-                    nvim_lsp = '[LSP]',
-                    luasnip = '[LuaSnip]',
-                    nvim_lua = '[Lua]',
-                    latex_symbols = '[Latex]',
-                    copilot = '[Copilot]',
-                },
-            }),
-        },
-
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)

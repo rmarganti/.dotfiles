@@ -60,6 +60,8 @@ return {
     WarningMsg = { fg = a.warning }, -- warning messages
     Whitespace = { fg = a.minus3 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu = { bg = p.base }, -- current match in 'wildmenu' completion
+    WinBar = { fg = a.minus3, bg = p.none },
+    WinBarNC = { fg = a.minus3, bg = p.none },
     WinSeparator = { fg = a.minus3 },
 
     -- These groups are not listed as default vim groups,

@@ -173,9 +173,8 @@ M.clients = {
     -- Typescript, Javascript
     ------------------------------------------------
 
-    ['typescript-tools'] = {
-        skip_setup = true, -- typescript-tools does its own setup.
-        formatting_enabled = false,
+    vtsls = {
+        formatting_enabled = true,
     },
 
     eslint = {

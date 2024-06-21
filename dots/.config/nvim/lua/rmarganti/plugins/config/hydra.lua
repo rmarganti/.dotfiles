@@ -1,6 +1,6 @@
 -- Create mini-modes with their own set of key bindings.
 local M = {
-    'anuvyklack/hydra.nvim',
+    'nvimtools/hydra.nvim',
     event = 'VeryLazy',
     dependencies = {
         { 'anuvyklack/keymap-layer.nvim' }, -- needed only for pink hydras
@@ -30,8 +30,8 @@ function M.config()
         config = {
             hint = {
                 position = 'bottom-right',
-                border = 'rounded',
                 offset = 1,
+                float_opts = { border = 'rounded' },
             },
             invoke_on_body = false,
         },
@@ -77,7 +77,7 @@ function M.config()
         config = {
             hint = {
                 position = 'bottom-right',
-                border = 'rounded',
+                float_ops = { border = 'rounded' },
                 offset = 1,
             },
             invoke_on_body = true,
@@ -85,22 +85,42 @@ function M.config()
         mode = 'n',
         body = '<Leader>b',
         heads = {
-            { 'n', '<cmd>enew<CR>', { desc = 'New', exit = true } },
+            {
+                'n',
+                '<cmd>enew<CR>',
+                { desc = 'New', exit = true },
+            },
             {
                 'e',
                 '<cmd>lua require("bufferline").pick_buffer()<CR>',
                 { desc = 'Edit', exit = true },
             },
-            { 'd', '<cmd>BufferLinePickClose<CR>', { desc = 'Delete', exit = true } },
+            {
+                'd',
+                '<cmd>BufferLinePickClose<CR>',
+                { desc = 'Delete', exit = true },
+            },
             { 'h', '<cmd>lua require("bufferline").cycle(-1)<CR>', { desc = 'Focus left' } },
             { 'l', '<cmd>lua require("bufferline").cycle(1)<CR>', desc = 'Focus Right' },
             { 'H', '<cmd>BufferLineMovePrev<CR>', { desc = 'Move Left' } },
             { 'L', '<cmd>BufferLineMoveNext<CR>', { desc = 'Move Right' } },
             { 'q', '<cmd>BufDel<CR>', { desc = 'Quit' } },
             { 'Q', '<cmd>BufDel!<CR>', { desc = 'Force Quit' } },
-            { 'a', core_fns.buf_delete_all, { desc = 'Quit All', exit = true } },
-            { 'o', core_fns.buf_only, { desc = 'Keep Only', exit = true } },
-            { '<Esc>', nil, { exit = true, desc = false } },
+            {
+                'a',
+                core_fns.buf_delete_all,
+                { desc = 'Quit All', exit = true },
+            },
+            {
+                'o',
+                core_fns.buf_only,
+                { desc = 'Keep Only', exit = true },
+            },
+            {
+                '<Esc>',
+                nil,
+                { exit = true, desc = false },
+            },
         },
     })
 
@@ -121,7 +141,7 @@ function M.config()
             invoke_on_body = true,
             hint = {
                 position = 'bottom-right',
-                border = 'rounded',
+                float_opts = { border = 'rounded' },
                 offset = 1,
             },
             on_enter = function()
