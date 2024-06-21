@@ -96,14 +96,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --
 ------------------------------------------------
 
--- vim.api.nvim_create_autocmd('VimResized', {
---     group = custom_group,
---     pattern = '*',
---     callback = function()
---         require('focus').resize()
---     end,
---     desc = 'Resize windows Vim resized',
--- })
+vim.api.nvim_create_autocmd('VimResized', {
+    group = custom_group,
+    pattern = '*',
+    callback = function()
+        require('focus').resize()
+    end,
+    desc = 'Resize windows Vim resized',
+})
 
 ------------------------------------------------
 --
