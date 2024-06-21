@@ -174,7 +174,7 @@ M.clients = {
     ------------------------------------------------
 
     vtsls = {
-        formatting_enabled,
+        formatting_enabled = true,
     },
 
     eslint = {
