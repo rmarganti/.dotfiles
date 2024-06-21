@@ -28,4 +28,16 @@ return {
         'numToStr/Navigator.nvim',
         opts = {},
     },
+
+    -- Sugar for file operations (rename, move, etc.).
+    {
+        'tpope/vim-eunuch',
+        event = 'BufReadPost',
+    },
+
+    -- Heuristically set buffer options.
+    {
+        'tpope/vim-sleuth',
+        event = 'BufReadPost',
+    },
 }
