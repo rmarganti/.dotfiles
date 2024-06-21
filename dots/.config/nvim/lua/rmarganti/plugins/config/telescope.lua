@@ -1,14 +1,12 @@
 -- Find, Filter, Preview,Pick
 local M = {
     'nvim-telescope/telescope.nvim',
-    -- cmd = 'Telescope',
+    event = 'VeryLazy',
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-        -- { 'nvim-telescope/telescope-github.nvim' },
         { 'princejoogie/dir-telescope.nvim' },
-        -- { 'rcarriga/nvim-notify' },
-        -- { 'rlch/github-notifications.nvim' },
+        { 'rcarriga/nvim-notify' },
         { 'smartpde/telescope-recent-files' },
     },
 }
@@ -66,9 +64,7 @@ function M.config()
 
     require('telescope').load_extension('dir')
     require('telescope').load_extension('fzf')
-    -- require('telescope').load_extension('gh')
-    -- require('telescope').load_extension('ghn')
-    -- require('telescope').load_extension('notify')
+    require('telescope').load_extension('notify')
     require('telescope').load_extension('recent_files')
 end
 
