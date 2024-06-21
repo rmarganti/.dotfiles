@@ -26,9 +26,9 @@ require('rmarganti.core.config')
 require('rmarganti.core.statuscolumn')
 require('rmarganti.core.lsp')
 require('rmarganti.core.keybindings')
--- require('rmarganti.core.user_commands')
+require('rmarganti.core.user_commands')
 
 vim.cmd('colorscheme neverforest')
 
 require('rmarganti.plugins')
--- require('rmarganti.core.filetypes')
+require('rmarganti.core.filetypes')
