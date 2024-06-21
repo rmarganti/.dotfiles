@@ -8,14 +8,14 @@ local M = {
         { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         { 'hrsh7th/cmp-nvim-lua' },
         { 'hrsh7th/cmp-path' },
-        -- { 'saadparwaiz1/cmp_luasnip' },
+        { 'saadparwaiz1/cmp_luasnip' },
         { 'zbirenbaum/copilot-cmp' },
     },
 }
 
 function M.config()
     local cmp = require('cmp')
-    -- local luasnip = require('luasnip')
+    local luasnip = require('luasnip')
 
     local tab_mapping = function(fallback)
         if cmp.visible() then
@@ -28,25 +28,25 @@ function M.config()
             cmp.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
             })
-        -- elseif luasnip.expand_or_jumpable() then
-        --     vim.fn.feedkeys(
-        --         vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true),
-        --         ''
-        --     )
+        elseif luasnip.expand_or_jumpable() then
+            vim.fn.feedkeys(
+                vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true),
+                ''
+            )
         else
             fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
         end
     end
 
     local shift_tab_mapping = function(fallback)
-        -- if luasnip.jumpable(-1) then
-        --     vim.fn.feedkeys(
-        --         vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true),
-        --         ''
-        --     )
-        -- else
+        if luasnip.jumpable(-1) then
+            vim.fn.feedkeys(
+                vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true),
+                ''
+            )
+        else
             fallback()
-        -- end
+        end
     end
 
     require('copilot_cmp').setup()
@@ -66,11 +66,11 @@ function M.config()
         --     }),
         -- },
 
-        -- snippet = {
-        --     expand = function(args)
-        --         luasnip.lsp_expand(args.body)
-        --     end,
-        -- },
+        snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+        },
 
         mapping = cmp.mapping.preset.insert({
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
