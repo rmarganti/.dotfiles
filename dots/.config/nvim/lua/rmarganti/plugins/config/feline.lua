@@ -1,6 +1,6 @@
 -- Status line.
 local M = {
-    'feline-nvim/feline.nvim',
+    'freddiehaddad/feline.nvim',
     dependencies = {
         { 'kyazdani42/nvim-web-devicons' },
         { 'SmiteshP/nvim-navic' },
