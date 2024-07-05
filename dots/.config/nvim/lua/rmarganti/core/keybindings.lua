@@ -121,6 +121,9 @@ vim.keymap.set('n', '<Leader>co', function()
         context = {
             only = { 'source.organizeImports' },
         },
+        filter = function(action)
+            return action.title == 'Organize Imports'
+        end,
     })
 end)
 
