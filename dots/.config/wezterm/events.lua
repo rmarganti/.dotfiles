@@ -86,6 +86,10 @@ M.attach = function()
         }
     end)
 
+    ------------------------------------------------
+    -- Put date in bottom-right corner.
+    ------------------------------------------------
+
     wezterm.on('update-right-status', function(window)
         window:set_right_status(wezterm.format({
             { Foreground = { Color = colors.palette.bg_lightest.gui } },
@@ -93,7 +97,10 @@ M.attach = function()
         }))
     end)
 
+    ------------------------------------------------
     -- Neovim panel navigation.
+    ------------------------------------------------
+
     wezterm.on('ActivatePaneDirection-right', function(window, pane)
         conditionally_activate_pane(window, pane, 'Right', 'l')
     end)
@@ -109,6 +116,10 @@ M.attach = function()
     wezterm.on('ActivatePaneDirection-down', function(window, pane)
         conditionally_activate_pane(window, pane, 'Down', 'j')
     end)
+
+    ------------------------------------------------
+    -- Rename a tab.
+    ------------------------------------------------
 
     wezterm.on('RenameTab', function(window, pane)
         window:perform_action(
