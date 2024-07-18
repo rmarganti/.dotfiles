@@ -1,0 +1,85 @@
+[
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+        "bindings": {
+            // ------------------------------------------------
+            // Buffers
+            // ------------------------------------------------
+
+            // Buffer close All
+            "space b a": "pane::CloseCleanItems",
+            // Buffer Quit
+            "space b q": "pane::CloseActiveItem",
+            // Buffer Only
+            "space b o": "pane::CloseInactiveItems",
+            // Buffer New
+            "space b n": ["workspace::NewFileInDirection", "Right"],
+            // Buffer previous
+            "space b h": "pane::ActivatePrevItem",
+            // Buffer next
+            "space b l": "pane::ActivateNextItem",
+
+            // ------------------------------------------------
+            // Code
+            // ------------------------------------------------
+
+            // Code actions
+            "space c a": "editor::ToggleCodeActions",
+            // Code Format
+            "space c f": "editor::Format",
+            // Code Rename
+            "space c r": "editor::Rename",
+            // Code Restart language server
+            "space c R": "editor::RestartLanguageServer",
+            // Code Symbols
+            "space c s": "outline::Toggle",
+            // Code Workspace symbols
+            "space c w": "project_symbols::Toggle",
+
+            // ------------------------------------------------
+            // Diagnostics
+            // ------------------------------------------------
+
+            // Diagnostic Next
+            "space j d": "editor::GoToDiagnostic",
+            // Diagnostic Prev
+            "space k d": "editor::GoToPrevDiagnostic",
+
+            // ------------------------------------------------
+            // Files
+            // ------------------------------------------------
+
+            // File eXplore
+            "space f x": "pane::RevealInProjectPanel",
+
+            // ------------------------------------------------
+            // Search
+            // ------------------------------------------------
+
+            // Search files
+            "space s f": "file_finder::Toggle",
+            // Search text
+            "space s t": "workspace::NewSearch",
+
+            // ------------------------------------------------
+            // Windows
+            // ------------------------------------------------
+
+            "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+            "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+            "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+            "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+
+            // Window Only
+            "space w o": "workspace::CloseInactiveTabsAndPanes",
+            // Window Quit
+            "space w q": "pane::CloseCleanItems",
+            // Window Split
+            "space w s": "pane::SplitDown",
+            // Window split Vertically
+            "space w v": "pane::SplitRight",
+            // Windom Zoom
+            "space w z": "workspace::ToggleZoom"
+        }
+    }
+]
