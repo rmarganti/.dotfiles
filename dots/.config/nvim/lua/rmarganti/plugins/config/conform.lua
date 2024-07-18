@@ -30,7 +30,7 @@ function M.config()
             typescriptreact = { 'prettierd' },
             vimwiki = { 'prettierd' },
             vue = { 'prettierd' },
-            xml = { 'prettierd' },
+            xml = { 'xmlformatter' },
             yaml = { 'prettierd' },
         },
 
