@@ -40,4 +40,9 @@ return {
         'tpope/vim-sleuth',
         event = 'BufReadPost',
     },
+
+    -- Helm filetype detection and syntax
+    {
+        'towolf/vim-helm',
+    },
 }
