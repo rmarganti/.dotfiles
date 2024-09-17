@@ -4,6 +4,7 @@ adrev
 apos
 appops
 artifactory
+assert
 atol
 authenticatable
 autocmd
@@ -59,6 +60,7 @@ loggable
 magicproof
 mailgun
 marganti
+memoization
 mimecast
 mongo
 monorepo

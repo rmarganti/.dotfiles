@@ -9,9 +9,15 @@
 {
     // General
 
-    "tabs": {
-        "size": 4
+    "assistant": {
+        "default_model": {
+            "provider": "zed.dev",
+            "model": "claude-3-5-sonnet-20240620"
+        },
+        "version": "2"
     },
+    "show_whitespaces": "all",
+    "tabs": { "size": 4 },
 
     // Git
 
