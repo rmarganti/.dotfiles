@@ -21,6 +21,7 @@ vim.filetype.add({
         ['go.sum'] = 'gosum',
     },
     pattern = {
+        ['~/.kube/config'] = 'yaml',
         ['tsconfig.*.json'] = 'jsonc',
     },
 })
