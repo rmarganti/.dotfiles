@@ -22,11 +22,13 @@ const COLORS = {
 
 function main() {
     Object.entries(COLORS).forEach(([name, value]) => {
+        const darkest = colord(value).mix('#0d1011', 0.85);
         const darker = colord(value).mix(COLORS.bg, 0.6);
         const dark = colord(value).mix(COLORS.bg, 0.3);
         const light = colord(value).lighten(0.1);
         const lighter = colord(value).lighten(0.2);
 
+        format(`${name}_darkest`, darkest);
         format(`${name}_darker`, darker);
         format(`${name}_dark`, dark);
         format(name, colord(value));
