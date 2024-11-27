@@ -84,10 +84,6 @@ function M.config()
 
         -- Ignore LSPs suggested first selection
         preselect = cmp.PreselectMode.None,
-
-        experimental = {
-            ghost_text = true,
-        },
     })
 end
 
