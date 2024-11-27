@@ -2,3 +2,4 @@ vim.opt.statuscolumn = [[%{(foldlevel(v:lnum) && foldlevel(v:lnum) > foldlevel(v
     .. ' ' -- Spacer
     .. '%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum) : " "}' -- Line number
     .. '%s' -- Sign
+    .. '%{&signcolumn == "no" ? " " : ""}' -- Extra space if sign column is not enabled
