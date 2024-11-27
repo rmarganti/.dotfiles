@@ -6,8 +6,15 @@ local utils = require('utils')
 
 local M = {}
 
--- Determine if the foreground process is (N)vim.
-local function is_vim_process(pane)
+-- A list of processes that should capture the the
+-- pane-management key binds instead of Wezterm.
+local prioritized_processes = {
+    'nim',
+    'k9s',
+}
+
+-- Determine if the foreground process should capture the key strokes.
+local function is_prioritized_process(pane)
     -- get_foreground_process_name On Linux, macOS and Windows,
     -- the process can be queried to determine this path. Other operating systems
     -- (notably, FreeBSD and other unix systems) are not currently supported
@@ -17,17 +24,20 @@ local function is_vim_process(pane)
         return false
     end
 
-    return process_name:find('n?vim') ~= nil
+    for _, name in ipairs(prioritized_processes) do
+        if process_name:find(name) ~= nil then
+            return true
+        end
+    end
+
+    return false
 end
 
--- Send window navigation keys to (N)vim if is actively focused. Otherwise, navigate Weterm panes.
-local function conditionally_activate_pane(window, pane, pane_direction, vim_direction)
-    if is_vim_process(pane) then
-        window:perform_action(
-            -- This should match the keybinds you set in Neovim.
-            action.SendKey({ key = vim_direction, mods = 'CTRL' }),
-            pane
-        )
+-- Send window navigation keys to priority processes if they
+-- are actively focused. Otherwise, navigate Wezterm panes.
+local function conditionally_activate_pane(window, pane, pane_direction, original_key)
+    if is_prioritized_process(pane) then
+        window:perform_action(action.SendKey({ key = original_key, mods = 'CTRL' }), pane)
     else
         window:perform_action(action.ActivatePaneDirection(pane_direction), pane)
     end
@@ -98,7 +108,7 @@ M.attach = function()
     end)
 
     ------------------------------------------------
-    -- Neovim panel navigation.
+    -- Pane navigation.
     ------------------------------------------------
 
     wezterm.on('ActivatePaneDirection-right', function(window, pane)
