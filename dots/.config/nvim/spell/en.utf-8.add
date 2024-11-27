@@ -10,6 +10,8 @@ authenticatable
 autocmd
 awaitable
 backend
+backoff
+brotli
 bundleTypes
 cachebuster
 chiclet
@@ -21,6 +23,7 @@ configs
 courtnee
 deps
 deserialize
+deserialized
 designiq
 dropdown
 elasticsearch
@@ -50,6 +53,7 @@ ipublish
 issue
 jira
 keymap
+keyof
 koaBody
 krux
 kubectl
@@ -103,6 +107,7 @@ tldr
 trackings
 transitioner
 transitioners
+transparentize
 traxex
 treesitter
 triet
