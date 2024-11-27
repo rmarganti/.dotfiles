@@ -137,10 +137,10 @@ return {
     diffFile = { fg = a.fg },
     diffLine = { fg = a.fg },
     diffIndexLine = { fg = a.fg },
-    DiffAdd = { fg = p.bg_darker, bg = p.green_dark }, -- diff mode: Added line |diff.txt|
-    DiffChange = { fg = p.bg_darker, bg = p.yellow_dark }, -- diff mode: Added line |diff.txt|
-    DiffDelete = { fg = p.bg_darker, bg = p.red_dark }, -- diff mode: Added line |diff.txt|
-    DiffText = { fg = p.bg_darker, bg = p.yellow }, -- diff mode: Changed text within a changed line |diff.txt|
+    DiffAdd = { bg = p.green_darkest }, -- diff mode: Added line |diff.txt|
+    DiffChange = { bg = p.yellow_darkest }, -- diff mode: Added line |diff.txt|
+    DiffDelete = { bg = p.red_darkest }, -- diff mode: Added line |diff.txt|
+    DiffText = { fg = p.bg_darker, bg = p.yellow_darker }, -- diff mode: Changed text within a changed line |diff.txt|
 
     -- NeoVim
     healthError = { fg = a.error },
