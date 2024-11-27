@@ -89,19 +89,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     desc = 'Highlight on yank',
 })
-
-------------------------------------------------
---
--- Markdown
---
-------------------------------------------------
-
-vim.api.nvim_create_autocmd('FileType', {
-    group = custom_group,
-    pattern = 'markdown',
-    callback = function()
-        -- Set the conceal level
-        vim.opt_local.conceallevel = 2
-    end,
-    desc = 'Markdown tweaks',
-})

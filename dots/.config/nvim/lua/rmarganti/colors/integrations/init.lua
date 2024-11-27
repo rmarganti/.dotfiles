@@ -13,6 +13,7 @@ return {
     nvim_lightbulb = require('rmarganti.colors.integrations.nvim_lightbulb'),
     nvim_notify = require('rmarganti.colors.integrations.nvim-notify'),
     nvim_ufo = require('rmarganti.colors.integrations.nvim-ufo'),
+    render_markdown = require('rmarganti.colors.integrations.render-markdown'),
     rnvimr = require('rmarganti.colors.integrations.rnvimr'),
     telescope = require('rmarganti.colors.integrations.telescope'),
     vim_illuminate = require('rmarganti.colors.integrations.vim-illuminate'),

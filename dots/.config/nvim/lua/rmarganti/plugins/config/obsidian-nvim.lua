@@ -12,6 +12,7 @@ local M = {
                 path = '~/OneDrive - Gannett Company, Incorporated/obsidian/work',
             },
         },
+
         daily_notes = {
             folder = 'diary',
             date_format = '%Y-%m-%d',
@@ -25,6 +26,9 @@ local M = {
             -- Open the URL in the default web browser.
             vim.fn.jobstart({ 'open', url }) -- Mac OS
         end,
+
+        -- Let render-markdown.nvim handle this
+        ui = { enable = false },
     },
 }
 
