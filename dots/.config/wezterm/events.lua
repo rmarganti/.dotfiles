@@ -9,7 +9,7 @@ local M = {}
 -- A list of processes that should capture the the
 -- pane-management key binds instead of Wezterm.
 local prioritized_processes = {
-    'nim',
+    'nvim',
     'k9s',
 }
 
