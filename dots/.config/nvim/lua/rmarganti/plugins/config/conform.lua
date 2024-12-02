@@ -27,6 +27,7 @@ function M.config()
             scss = { 'prettierd' },
             sh = { 'shfmt' },
             terraform = { 'terraform_fmt' },
+            toml = { 'taplo' },
             typescript = { 'prettierd' },
             typescriptreact = { 'prettierd' },
             vimwiki = { 'prettierd' },
