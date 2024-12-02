@@ -165,8 +165,6 @@ M.clients = {
 
     rust_analyzer = {
         formatting_enabled = true,
-        -- simrat39/rust-tools.nvim runs this setup
-        skip_setup = true,
     },
 
     ------------------------------------------------

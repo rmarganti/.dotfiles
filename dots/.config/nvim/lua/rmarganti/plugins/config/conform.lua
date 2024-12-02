@@ -23,6 +23,7 @@ function M.config()
             lua = { 'stylua' },
             markdown = { 'prettierd' },
             php = { 'php_cs_fixer' },
+            rust = { 'rustfmt' },
             scss = { 'prettierd' },
             sh = { 'shfmt' },
             terraform = { 'terraform_fmt' },
