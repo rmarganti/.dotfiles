@@ -200,6 +200,11 @@ vim.keymap.set('n', '<Leader>er', function()
     core_fns.edit_nearest('README.md')
 end)
 
+-- Edit nearest cArgo.toml
+vim.keymap.set('n', '<Leader>ea', function()
+    core_fns.edit_nearest('Catgo.toml')
+end)
+
 -- Edit Snippets for current file type
 vim.keymap.set('n', '<Leader>es', core_fns.edit_snippets)
 
