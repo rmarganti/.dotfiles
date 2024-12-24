@@ -87,6 +87,10 @@ vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
 vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('v', '<Leader>ca', vim.lsp.buf.code_action)
 
+vim.keymap.set('n', '<Leader>cd', function()
+    vim.diagnostic.open_float({ border = 'rounded' })
+end)
+
 -- Code symbol Rename.
 vim.keymap.set('n', '<Leader>cr', vim.lsp.buf.rename)
 
