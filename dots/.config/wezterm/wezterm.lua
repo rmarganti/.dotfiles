@@ -101,6 +101,9 @@ return {
 
         -- PHPUnit test names
         '[A-Za-z]+::test[A-Za-z_]+',
+
+        -- Git-recommended commands
+        'git branch -D [A-Za-z0-9_-]+',
     },
 
     -- Disable hyperlinks
