@@ -41,6 +41,12 @@ return {
         event = 'BufReadPost',
     },
 
+    -- Expand what actions can be repeated via `.` key
+    {
+        'tpope/vim-repeat',
+        event = 'VeryLazy',
+    },
+
     -- Helm filetype detection and syntax
     {
         'towolf/vim-helm',
