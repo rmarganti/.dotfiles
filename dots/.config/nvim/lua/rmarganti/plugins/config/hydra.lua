@@ -55,7 +55,7 @@ function M.config()
             { 'J', '<C-w>-' },
             { 'L', '2<C-w>>' },
             { 'H', '2<C-w><' },
-            { '=', '<C-w>=' },
+            { '=', '<Cmd>FocusAutoresize<CR>' },
 
             { '<Esc>', nil, { exit = true, desc = false } },
         },
