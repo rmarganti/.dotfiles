@@ -198,7 +198,7 @@ M.clients = {
     },
 
     -- Protobufs
-    bufls = {
+    buf_ls = {
         formatting_enabled = true,
     },
 
