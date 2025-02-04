@@ -2,5 +2,6 @@
 .env
 .php_cs.cache
 .phpactor.json
+.phpunit.cache
 .phpunit.result.cache
 yarn-error.log
