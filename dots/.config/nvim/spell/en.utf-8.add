@@ -136,3 +136,6 @@ whitespace
 winblend
 yaml
 zustand
+dotenv
+migrator
+favorited
