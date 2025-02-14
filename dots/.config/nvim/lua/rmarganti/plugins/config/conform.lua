@@ -12,6 +12,7 @@ function M.config()
 
         formatters_by_ft = {
             css = { 'prettierd' },
+            go = { 'gofmt' },
             graphql = { 'prettierd' },
             handlebars = { 'prettierd' },
             html = { 'prettierd' },
