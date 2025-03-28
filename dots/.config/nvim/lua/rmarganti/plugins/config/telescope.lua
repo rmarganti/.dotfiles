@@ -24,6 +24,7 @@ function M.config()
         },
 
         defaults = {
+            border = false,
             layout_strategy = 'vertical',
             dynamic_preview_title = true,
             file_ignore_patterns = {

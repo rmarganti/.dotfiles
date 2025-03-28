@@ -91,6 +91,9 @@ vim.opt.fillchars = {
 -- Once bufferline is loaded, it will re-enable this.
 vim.opt.showtabline = 0
 
+-- All floating windows will have rounded borders.
+vim.opt.winborder = 'rounded'
+
 ------------------------------------------------
 --
 -- Text search, tabs, indents.
