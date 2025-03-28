@@ -52,7 +52,7 @@ return {
     StatusLine = { fg = a.fg, bg = p.bg_light }, -- status line of current window
     -- StatusLineNC = { fg = a.fg, bg = p.bg_light }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine = { bg = p.bg_light, fg = a.fg }, -- tab pages line, not active tab page label
-    TabLineFill = { bg = p.black }, -- tab pages line, where there are no labels
+    TabLineFill = { bg = p.none }, -- tab pages line, where there are no labels
     TabLineSel = { fg = a.fg, bg = p.bg_light }, -- tab pages line, active tab page label
     Title = { fg = p.plus2 }, -- titles for output from ":set all", ":autocmd" etcp.
     Visual = { bg = p.bg_lighter }, -- Visual mode selection
