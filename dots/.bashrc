@@ -40,14 +40,14 @@ parse_git_branch() {
 	git_status=$(git status 2>/dev/null)
 	git_error=$(git status 2>&1)
 
-	if [[ ! $git_error =~ "fatal" ]]; then
-		if [[ ! $git_status =~ working\ (tree|directory)\ clean ]]; then
-			echo -en " \001$txtred\002$(__git_ps1)\001$txtrst\002"
-		elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-			echo -en " \001$txtylw\002$(__git_ps1)\001$txtrst\002"
-		elif [[ $git_status =~ "nothing to commit" ]]; then
-			echo -en " \001$txtgrn\002$(__git_ps1)\001$txtrst\002"
-		fi
+	if [[ $git_error =~ "fatal" ]]; then
+		return
+	elif [[ ! $git_status =~ working\ (tree|directory)\ clean ]]; then
+		echo -en " \001$txtred\002$(__git_ps1)\001$txtrst\002"
+	elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+		echo -en " \001$txtylw\002$(__git_ps1)\001$txtrst\002"
+	elif [[ $git_status =~ "nothing to commit" ]]; then
+		echo -en " \001$txtgrn\002$(__git_ps1)\001$txtrst\002"
 	fi
 }
 
