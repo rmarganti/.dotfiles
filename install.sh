@@ -102,4 +102,3 @@ symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
 symlink_or_ask ~/.dotfiles/dots/.config/ranger ~/.config/ranger
 symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
-symlink_or_ask ~/.dotfiles/dots/.kenv ~/.kenv
