@@ -2,10 +2,6 @@
 # Homebrew
 # ------------------------------------------------
 
-# ------------------------------------------------
-# Homebrew
-# ------------------------------------------------
-
 export PATH="/opt/homebrew/bin:$PATH"
 
 # ------------------------------------------------
@@ -20,7 +16,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 # fzf Integration
 # ------------------------------------------------
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(fzf --bash)"
 
 # Use ~~ as the fzf trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='~~'
