@@ -99,6 +99,6 @@ fi
 symlink_or_ask ~/.dotfiles/dots/.config/bat ~/.config/bat
 symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
 symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
-symlink_or_ask ~/.dotfiles/dots/.config/ranger ~/.config/ranger
+symlink_or_ask ~/.dotfiles/dots/.config/lf ~/.config/lf
 symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
