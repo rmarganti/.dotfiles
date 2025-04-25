@@ -5,9 +5,7 @@ vim.keymap.set('n', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 
 ------------------------------------------------
---
 -- Disables
---
 ------------------------------------------------
 
 -- Disable accidentally pressing ctrl-z and suspending
@@ -17,9 +15,7 @@ vim.keymap.set('n', '<c-z>', '<Nop>')
 vim.keymap.set('n', 'Q', '<Nop>')
 
 ------------------------------------------------
---
 -- Jump to next/prev
---
 ------------------------------------------------
 
 -- Diagnostics
@@ -55,17 +51,13 @@ vim.keymap.set('n', '<Leader>jt', '<Cmd>lua MiniBracketed.treesitter("forward")<
 vim.keymap.set('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>')
 
 ------------------------------------------------
---
 -- Buffers
---
 ------------------------------------------------
 
 -- See hydra.lua
 
 ------------------------------------------------
---
 -- Code & LSP
---
 ------------------------------------------------
 
 -- Code completion.
@@ -157,9 +149,7 @@ end)
 vim.keymap.set('n', '<Leader>cD', vim.diagnostic.reset)
 
 ------------------------------------------------
---
 -- Edit
---
 ------------------------------------------------
 
 -- Edit Nearest (with prompt)
@@ -212,9 +202,7 @@ vim.keymap.set('n', '<Leader>es', core_fns.edit_snippets)
 vim.keymap.set('n', '<Leader>eo', require('rmarganti.core.edit_other').edit_other)
 
 ------------------------------------------------
---
 -- Files
---
 ------------------------------------------------
 
 -- File Edit. Pre-populates the current directory.
@@ -250,9 +238,7 @@ end)
 vim.keymap.set('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
 
 ------------------------------------------------
---
 -- Git
---
 ------------------------------------------------
 
 -- Git Add current file
@@ -301,9 +287,7 @@ vim.keymap.set(
 )
 
 ------------------------------------------------
---
 -- Registers
---
 ------------------------------------------------
 
 -- Yank to system clipboard
@@ -334,9 +318,7 @@ vim.keymap.set('n', '<Leader>ya', ':let @+ = expand("%:p")<CR>')
 vim.keymap.set('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
 
 ------------------------------------------------
---
 -- Search
---
 ------------------------------------------------
 
 -- Search Files
@@ -395,9 +377,7 @@ vim.keymap.set({ 'n', 'x' }, '<Leader>sk', '<Cmd>Telescope keymaps<CR>')
 vim.keymap.set({ 'n', 'x' }, '<Leader>s.', '<Cmd>Telescope resume<CR>')
 
 ------------------------------------------------
---
 -- Testing
---
 ------------------------------------------------
 
 -- Run Tests for the whole File.
@@ -431,10 +411,8 @@ vim.keymap.set('n', '<Leader>tO', function()
 end)
 
 ------------------------------------------------
---
 -- Toggle (follows vim-unimpaired convention)
 -- y = looks like switch. o = option.
---
 ------------------------------------------------
 
 vim.keymap.set('n', 'yoq', core_fns.toggle_quickfix, { desc = 'Toggle Quick fix' })
@@ -449,9 +427,7 @@ vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap! wrap?<CR>', { desc = "Toggle 'wr
 vim.keymap.set('n', 'yoo', '<Cmd>AerialToggle right<CR>', { desc = 'Toggle Outline' })
 
 ------------------------------------------------
---
 -- Windows
---
 ------------------------------------------------
 
 vim.keymap.set('n', '<C-h>', '<CMD>NavigatorLeft<CR>')
@@ -462,9 +438,7 @@ vim.keymap.set('n', '<C-k>', '<CMD>NavigatorUp<CR>')
 -- See hydra.lua for more Window mappings.
 
 ------------------------------------------------
---
 -- Obsidian.nvim
---
 ------------------------------------------------
 
 vim.keymap.set('n', '<Leader>oy', ':ObsidianYesterday<CR>', { desc = 'Obsidian Yesterday' })
@@ -477,9 +451,32 @@ vim.keymap.set('n', '<Leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Sear
 vim.keymap.set('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
 
 ------------------------------------------------
---
+-- AI
+------------------------------------------------
+
+vim.keymap.set(
+    { 'v', 'x', 's' },
+    '<Leader>ai',
+    ':CodeCompanion ',
+    { desc = 'CodeCompanion: Inline' }
+)
+
+vim.keymap.set(
+    { 'n', 'v', 'x', 's' },
+    '<Leader>ac',
+    '<Cmd>CodeCompanionChat Toggle<CR>',
+    { desc = 'CodeCompanion: Chat' }
+)
+
+vim.keymap.set(
+    { 'n', 'v', 'x', 's' },
+    '<Leader>aa',
+    '<Cmd>CodeCompanionActions<CR>',
+    { desc = 'CodeCompanion: Actions' }
+)
+
+------------------------------------------------
 -- Misc
---
 ------------------------------------------------
 
 -- Clear search highlight

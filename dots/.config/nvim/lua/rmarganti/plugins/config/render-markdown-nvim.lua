@@ -1,8 +1,11 @@
+-- Used for both configuring and lazy-loading the plugin
+local file_types = { 'markdown', 'Avante', 'codecompanion' }
+
 return {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {
-        file_types = { 'markdown', 'Avante' },
+        file_types = file_types,
         heading = { enabled = false },
         bullet = {
             enabled = true,
@@ -12,5 +15,5 @@ return {
             sign = false,
         },
     },
-    ft = { 'markdown', 'Avante' },
+    ft = file_types,
 }
