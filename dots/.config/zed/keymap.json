@@ -3,6 +3,13 @@
         "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
         "bindings": {
             // ------------------------------------------------
+            // AI
+            // ------------------------------------------------
+
+            // AI Agent Chat
+            "space a c": "agent::ToggleFocus",
+
+            // ------------------------------------------------
             // Buffers
             // ------------------------------------------------
 
@@ -35,6 +42,11 @@
             "space c s": "outline::Toggle",
             // Code Workspace symbols
             "space c w": "project_symbols::Toggle",
+            // Organize Imports
+            "space c o": "editor::OrganizeImports",
+
+            // Go to References
+            "g f": "editor::FindAllReferences",
 
             // ------------------------------------------------
             // Diagnostics
