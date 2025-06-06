@@ -13,7 +13,6 @@ local M = {
 local configured_clients
 
 function M.config()
-    local lspconfig = require('lspconfig')
     local user_lsp_config = require('rmarganti.config.lsp')
     local lsp_utils = require('rmarganti.plugins.config.lsp.lsp-utils')
     local clients = configured_clients()
@@ -37,7 +36,8 @@ function M.config()
             config.setup or {}
         )
 
-        lspconfig[client].setup(settings)
+        vim.lsp.config(client, settings)
+        vim.lsp.enable(client)
     end
 
     vim.cmd([[ do User LspAttachBuffers ]])
