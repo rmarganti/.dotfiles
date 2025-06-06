@@ -13,9 +13,9 @@
             // Buffer Only
             "space b o": "pane::CloseInactiveItems",
             // Buffer New
-            "space b n": ["workspace::NewFileInDirection", "Right"],
+            "space b n": "workspace::NewFile",
             // Buffer previous
-            "space b h": "pane::ActivatePrevItem",
+            "space b h": "pane::ActivatePreviousItem",
             // Buffer next
             "space b l": "pane::ActivateNextItem",
 
@@ -43,7 +43,7 @@
             // Diagnostic Next
             "space j d": "editor::GoToDiagnostic",
             // Diagnostic Prev
-            "space k d": "editor::GoToPrevDiagnostic",
+            "space k d": "editor::GoToPreviousDiagnostic",
 
             // ------------------------------------------------
             // Files
@@ -65,10 +65,10 @@
             // Windows
             // ------------------------------------------------
 
-            "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-            "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-            "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
-            "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown",
 
             // Window Only
             "space w o": "workspace::CloseInactiveTabsAndPanes",
