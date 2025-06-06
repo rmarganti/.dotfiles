@@ -11,6 +11,7 @@ local M = {}
 local prioritized_processes = {
     'nvim',
     'k9s',
+    'opencode',
 }
 
 -- Determine if the foreground process should capture the key strokes.
