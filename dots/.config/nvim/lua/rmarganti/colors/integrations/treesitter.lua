@@ -77,6 +77,7 @@ return {
 
     ['@variable'] = { fg = a.plus4 }, -- various variable names
     ['@variable.builtin'] = { fg = a.plus4, italic = true }, -- built-in variable names (e.g. `this`)
+    ['@variable.member'] = { fg = a.plus1, italic = true },
 
     -- ['@constant'] = { fg = a.plus4 }, -- constant identifiers
     -- ['@constant.builtin'] = {}, -- built-in constant values
