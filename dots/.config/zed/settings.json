@@ -7,19 +7,19 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-    // General
+    // [ General ]-------------------------------------
 
-    "assistant": {
+    "agent": {
         "default_model": {
-            "provider": "zed.dev",
-            "model": "claude-3-5-sonnet-20240620"
+            "provider": "copilot_chat",
+            "model": "claude-sonnet-4"
         },
         "version": "2"
     },
     "show_whitespaces": "all",
     "tabs": { "size": 4 },
 
-    // Git
+    // [ Git ]-----------------------------------------
 
     "git": {
         "inline_blame": {
@@ -27,23 +27,41 @@
         }
     },
 
-    // Language servers
+    // [ Language Servers ]----------------------------
 
     "TypeScript": {
         "language_servers": ["!typescript-language-server", "vtsls"]
     },
 
-    // UI
+    // [ UI ]------------------------------------------
 
     "buffer_font_family": "JetBrainsMono Nerd Font",
-    "buffer_font_size": 14,
+    "buffer_font_size": 15,
     "relative_line_numbers": true,
     "tab_size": 4,
     "terminal": {
         "dock": "right"
     },
-    "theme": "Rosé Pine Moon",
+    "theme": "Neverforest",
     "ui_font_size": 16,
     "ui_font_family": "JetBrainsMono Nerd Font",
-    "vim_mode": true
+    "vim_mode": true,
+
+    // [ Panel Sizes ]---------------------------------
+
+    "collaboration_panel": { "default_width": 480 },
+    "git_panel": { "default_width": 480 },
+    "outline_panel": { "default_width": 480 },
+    "project_panel": { "default_width": 480 },
+
+    // [ Search ]--------------------------------------
+
+    "file_finder": {
+        "modal_max_width": "medium"
+    },
+
+    "search": {
+        "case_sensitive": true,
+        "regex": true
+    }
 }
