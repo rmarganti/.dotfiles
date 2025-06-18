@@ -1,0 +1,28 @@
+# Neverforest theme for Television TUI
+# Based on the Neverforest Neovim color scheme
+
+# General colors
+background = '#1d2226'     # p.bg
+border_fg = '#515a5b'      # p.gray_dark (abstractions.border)
+text_fg = '#d3c6aa'        # p.white (abstractions.fg)
+dimmed_text_fg = '#77817d' # p.gray
+
+# Input section
+input_text_fg = '#d3c6aa'   # p.white (abstractions.fg)
+result_count_fg = '#dbbc7f' # p.yellow (for count display)
+
+# Results list
+result_name_fg = '#aeccc6'        # p.blue (abstractions.plus2)
+result_line_number_fg = '#dbbc7f' # p.yellow
+result_value_fg = '#d3c6aa'       # p.white (main text)
+selection_fg = '#d3c6aa'          # p.white (abstractions.select_fg)
+selection_bg = '#515a5b'          # p.gray_dark (abstractions.select_bg)
+match_fg = '#e67e80'              # p.red (for search matches)
+
+# Preview pane
+preview_title_fg = '#d699b6' # p.magenta
+
+# Mode indicators
+channel_mode_fg = '#dbbc7f'         # p.yellow (warning/info color)
+remote_control_mode_fg = '#aec89f'  # p.green (success color)
+send_to_channel_mode_fg = '#aeccc6' # p.blue (info color)
