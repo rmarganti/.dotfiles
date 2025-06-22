@@ -2,16 +2,7 @@
     {
         "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
         "bindings": {
-            // ------------------------------------------------
-            // AI
-            // ------------------------------------------------
-
-            // AI Agent Chat
-            "space a c": "agent::ToggleFocus",
-
-            // ------------------------------------------------
-            // Buffers
-            // ------------------------------------------------
+            // [ Buffers ]-------------------------------------
 
             // Buffer close All
             "space b a": "pane::CloseCleanItems",
@@ -25,10 +16,12 @@
             "space b h": "pane::ActivatePreviousItem",
             // Buffer next
             "space b l": "pane::ActivateNextItem",
+            // Buffer swap left
+            "space b H": "pane::SwapItemLeft",
+            // Buffer swap right
+            "space b L": "pane::SwapItemRight",
 
-            // ------------------------------------------------
-            // Code
-            // ------------------------------------------------
+            // [ Code ]----------------------------------------
 
             // Code actions
             "space c a": "editor::ToggleCodeActions",
@@ -48,34 +41,24 @@
             // Go to References
             "g f": "editor::FindAllReferences",
 
-            // ------------------------------------------------
-            // Diagnostics
-            // ------------------------------------------------
+            // [ Diagnostics ]---------------------------------
 
             // Diagnostic Next
             "space j d": "editor::GoToDiagnostic",
             // Diagnostic Prev
             "space k d": "editor::GoToPreviousDiagnostic",
 
-            // ------------------------------------------------
-            // Files
-            // ------------------------------------------------
+            // [ Files ]---------------------------------------
 
             // File eXplore
             "space f x": "pane::RevealInProjectPanel",
 
-            // ------------------------------------------------
-            // Search
-            // ------------------------------------------------
+            // [ Misc ]----------------------------------------
 
-            // Search files
-            "space s f": "file_finder::Toggle",
-            // Search text
-            "space s t": "workspace::NewSearch",
+            "g o": "vim::InsertEmptyLineBelow",
+            "g O": "vim::InsertEmptyLineAbove",
 
-            // ------------------------------------------------
-            // Windows
-            // ------------------------------------------------
+            // [ Windows ]-------------------------------------
 
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
@@ -90,8 +73,49 @@
             "space w s": "pane::SplitDown",
             // Window split Vertically
             "space w v": "pane::SplitRight",
-            // Windom Zoom
-            "space w z": "workspace::ToggleZoom"
+
+            // [ Yanks ]---------------------------------------
+
+            // Yank Absolute path
+            "space y a": "workspace::CopyPath",
+            // Yank Relative path
+            "space y r": "workspace::CopyRelativePath"
+        }
+    },
+
+    {
+        "context": "vim_mode == normal",
+        "bindings": {
+            // [ Search ]--------------------------------------
+
+            // Search files
+            "space s f": "file_finder::Toggle",
+            // Search text
+            "space s t": "workspace::NewSearch"
+        }
+    },
+
+    {
+        "context": "Workspace",
+        "bindings": {
+            // [ Pane navigation ]-----------------------------
+
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown"
+        }
+    },
+
+    {
+        "context": "MessageEditor > Editor",
+        "bindings": {
+            // [ Pane navigation ]-----------------------------
+
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown"
         }
     }
 ]
