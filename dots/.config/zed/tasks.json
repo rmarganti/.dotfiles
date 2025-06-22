@@ -1,0 +1,20 @@
+// Static tasks configuration.
+[
+    {
+        "label": "File Finder",
+        "command": "zed \"$(tv files)\"",
+        "hide": "always",
+        "allow_concurrent_runs": true,
+        "use_new_terminal": true,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Full Text Search",
+        "command": "zed \"$(tv text)\"",
+        "hide": "always",
+        "allow_concurrent_runs": true,
+        "use_new_terminal": true,
+        "reveal_target": "center"
+    }
+]
