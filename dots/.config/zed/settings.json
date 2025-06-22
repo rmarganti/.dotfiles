@@ -9,15 +9,42 @@
 {
     // [ General ]-------------------------------------
 
+    "show_whitespaces": "all",
+    "tabs": { "size": 4, "show_diagnostics": "all" },
+    "format_on_save": "on",
+
+    // [ AI/Agent ]------------------------------------
+
     "agent": {
+        "default_profile": "write",
+        "always_allow_tool_actions": true,
         "default_model": {
             "provider": "copilot_chat",
             "model": "claude-sonnet-4"
         },
         "version": "2"
     },
-    "show_whitespaces": "all",
-    "tabs": { "size": 4 },
+    "context_servers": {
+        "nx": {
+            "command": {
+                "path": "npx",
+                "args": ["nx-mcp@latest", "."],
+                "env": null
+            },
+            "settings": {}
+        },
+        "effect-docs": {
+            "command": {
+                "path": "docker",
+                "args": ["run", "--rm", "-i", "timsmart/effect-mcp"],
+                "env": null
+            },
+            "settings": {}
+        }
+    },
+    "features": {
+        "edit_prediction_provider": "zed"
+    },
 
     // [ Git ]-----------------------------------------
 
@@ -27,12 +54,6 @@
         }
     },
 
-    // [ Language Servers ]----------------------------
-
-    "TypeScript": {
-        "language_servers": ["!typescript-language-server", "vtsls"]
-    },
-
     // [ UI ]------------------------------------------
 
     "buffer_font_family": "JetBrainsMono Nerd Font",
@@ -40,7 +61,8 @@
     "relative_line_numbers": true,
     "tab_size": 4,
     "terminal": {
-        "dock": "right"
+        "dock": "right",
+        "default_width": 640
     },
     "theme": "Neverforest",
     "ui_font_size": 16,
@@ -55,10 +77,6 @@
     "project_panel": { "default_width": 480 },
 
     // [ Search ]--------------------------------------
-
-    "file_finder": {
-        "modal_max_width": "medium"
-    },
 
     "search": {
         "case_sensitive": true,
