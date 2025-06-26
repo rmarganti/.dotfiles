@@ -1,0 +1,29 @@
+# ------------------------------------------------
+# General
+# ------------------------------------------------
+
+font-size = 15
+theme = kelp
+
+# ------------------------------------------------
+# Keybinds
+# ------------------------------------------------
+
+# General
+
+keybind = ctrl+space>r=reload_config
+
+# Splits
+
+keybind = ctrl+space>\=new_split:right
+keybind = ctrl+space>-=new_split:down
+keybind = ctrl+space>j=goto_split:bottom
+keybind = ctrl+space>k=goto_split:top
+keybind = ctrl+space>h=goto_split:left
+keybind = ctrl+space>l=goto_split:right
+
+# ------------------------------------------------
+# UI
+# ------------------------------------------------
+
+# macos-titlebar-style = tabs
