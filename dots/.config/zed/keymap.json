@@ -1,4 +1,19 @@
 [
+    // ---------------------------------------------------
+    // No Context
+    // ---------------------------------------------------
+
+    {
+        "bindings": {
+            "ctrl-j": "menu::SelectNext",
+            "ctrl-k": "menu::SelectPrevious"
+        }
+    },
+
+    // ---------------------------------------------------
+    // Editor
+    // ---------------------------------------------------
+
     {
         "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
         "bindings": {
@@ -48,22 +63,15 @@
             // Diagnostic Prev
             "space k d": "editor::GoToPreviousDiagnostic",
 
-            // [ Files ]---------------------------------------
-
-            // File eXplore
-            "space f x": "pane::RevealInProjectPanel",
-
             // [ Misc ]----------------------------------------
 
             "g o": "vim::InsertEmptyLineBelow",
             "g O": "vim::InsertEmptyLineAbove",
+            "alt-k": "editor::MoveLineUp",
+            "alt-j": "editor::MoveLineDown",
+            "space f t": "language_selector::Toggle",
 
             // [ Windows ]-------------------------------------
-
-            "ctrl-h": "workspace::ActivatePaneLeft",
-            "ctrl-l": "workspace::ActivatePaneRight",
-            "ctrl-k": "workspace::ActivatePaneUp",
-            "ctrl-j": "workspace::ActivatePaneDown",
 
             // Window Only
             "space w o": "workspace::CloseInactiveTabsAndPanes",
@@ -79,24 +87,42 @@
             // Yank Absolute path
             "space y a": "workspace::CopyPath",
             // Yank Relative path
-            "space y r": "workspace::CopyRelativePath"
-        }
-    },
+            "space y r": "workspace::CopyRelativePath",
 
-    {
-        "context": "vim_mode == normal",
-        "bindings": {
+            // [ Files ]---------------------------------------
+
+            // File eXplore
+            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+
+            // [ Git ]-----------------------------------------
+
+            // Git Diff
+            "space g d": "git::Diff",
+            // Git Status
+            "space g s": "git_panel::ToggleFocus",
+            // Git Blame
+            "space g B": "git::Blame",
+
             // [ Search ]--------------------------------------
 
-            // Search files
-            "space s f": "file_finder::Toggle",
-            // Search text
-            "space s t": "workspace::NewSearch"
+            // Search Files
+            "space s f": ["task::Spawn", { "task_name": "TV File Finder" }],
+            // Search Text
+            "space s t": [
+                "task::Spawn",
+                { "task_name": "TV Full Text Search" }
+            ],
+            // Search Buffers"
+            "space s b": "tab_switcher::Toggle"
         }
     },
 
+    // ---------------------------------------------------
+    // All pnaels
+    // ---------------------------------------------------
+
     {
-        "context": "Workspace",
+        "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
         "bindings": {
             // [ Pane navigation ]-----------------------------
 
@@ -108,14 +134,20 @@
     },
 
     {
-        "context": "MessageEditor > Editor",
+        "context": "EmptyPane || SharedScreen",
         "bindings": {
-            // [ Pane navigation ]-----------------------------
-
-            "ctrl-h": "workspace::ActivatePaneLeft",
-            "ctrl-l": "workspace::ActivatePaneRight",
-            "ctrl-k": "workspace::ActivatePaneUp",
-            "ctrl-j": "workspace::ActivatePaneDown"
+            // Buffer New
+            "space b n": "workspace::NewFile",
+            // File eXplorer
+            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            // Git Diff
+            "space g d": "git::Diff",
+            // Git Status
+            "space g s": "git_panel::ToggleFocus",
+            // Search Files
+            "space s f": ["task::Spawn", { "task_name": "TV File Finder" }],
+            // Search Text
+            "space s t": ["task::Spawn", { "task_name": "TV Full Text Search" }]
         }
     }
 ]
