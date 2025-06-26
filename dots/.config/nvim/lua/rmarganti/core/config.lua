@@ -94,6 +94,10 @@ vim.opt.showtabline = 0
 -- All floating windows will have rounded borders.
 vim.opt.winborder = 'rounded'
 
+-- Terminal window title
+vim.opt.title = true
+vim.opt.titlestring = '%{fnamemodify(getcwd(), ":t")}'
+
 ------------------------------------------------
 --
 -- Text search, tabs, indents.
