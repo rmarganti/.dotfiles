@@ -6,7 +6,8 @@
     {
         "bindings": {
             "ctrl-j": "menu::SelectNext",
-            "ctrl-k": "menu::SelectPrevious"
+            "ctrl-k": "menu::SelectPrevious",
+            "cmd-escape": "terminal_panel::ToggleFocus"
         }
     },
 
@@ -15,8 +16,12 @@
     // ---------------------------------------------------
 
     {
-        "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+        "context": "Editor && VimControl && !VimWaiting && !menu",
         "bindings": {
+            // [ AI ]------------------------------------------
+
+            "space a c": "agent::ToggleFocus",
+
             // [ Buffers ]-------------------------------------
 
             // Buffer close All
@@ -92,7 +97,8 @@
             // [ Files ]---------------------------------------
 
             // File eXplore
-            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f x": "project_panel::ToggleFocus",
+            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
 
             // [ Git ]-----------------------------------------
 
@@ -106,9 +112,11 @@
             // [ Search ]--------------------------------------
 
             // Search Files
-            "space s f": ["task::Spawn", { "task_name": "TV File Finder" }],
+            "space s f": "file_finder::Toggle",
+            "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
             // Search Text
-            "space s t": [
+            "space s t": "pane::DeploySearch",
+            "space s T": [
                 "task::Spawn",
                 { "task_name": "TV Full Text Search" }
             ],
@@ -133,9 +141,47 @@
         }
     },
 
+    // ---------------------------------------------------
+    // Cancels
+    // ---------------------------------------------------
+
+    {
+        "context": "ProjectPanel",
+        "bindings": {
+            "escape": "workspace::ToggleLeftDock"
+        }
+    },
+
+    {
+        "context": "MessageEditor > Editor && VimControl",
+        "bindings": {
+            "escape": "workspace::ToggleRightDock"
+        }
+    },
+
+    {
+        "context": "GitPanel",
+        "bindings": {
+            "escape": "workspace::ToggleLeftDock"
+        }
+    },
+
+    {
+        "context": "Terminal",
+        "bindings": {
+            "cmd-escape": "workspace::ToggleRightDock"
+        }
+    },
+
+    // ---------------------------------------------------
+    // Empty pane
+    // ---------------------------------------------------
+
     {
         "context": "EmptyPane || SharedScreen",
         "bindings": {
+            // Agent Chat
+            "space a c": "agent::ToggleFocus",
             // Buffer New
             "space b n": "workspace::NewFile",
             // File eXplorer
@@ -145,9 +191,11 @@
             // Git Status
             "space g s": "git_panel::ToggleFocus",
             // Search Files
-            "space s f": ["task::Spawn", { "task_name": "TV File Finder" }],
+            "space s f": "file_finder::Toggle",
+            "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
             // Search Text
-            "space s t": ["task::Spawn", { "task_name": "TV Full Text Search" }]
+            "space s t": "pane::DeploySearch",
+            "space s T": ["task::Spawn", { "task_name": "TV Full Text Search" }]
         }
     }
 ]
