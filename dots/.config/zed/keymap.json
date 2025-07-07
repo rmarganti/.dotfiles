@@ -173,6 +173,13 @@
         }
     },
 
+    {
+        "context": "DebugPanel",
+        "bindings": {
+            "escape": "workspace::ToggleBottomDock"
+        }
+    },
+
     // ---------------------------------------------------
     // Empty pane
     // ---------------------------------------------------
@@ -185,7 +192,8 @@
             // Buffer New
             "space b n": "workspace::NewFile",
             // File eXplorer
-            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f x": "project_panel::ToggleFocus",
+            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
             // Git Diff
             "space g d": "git::Diff",
             // Git Status
