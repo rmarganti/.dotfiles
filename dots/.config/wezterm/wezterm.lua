@@ -1,5 +1,3 @@
-local wezterm = require('wezterm')
-
 local colors = require('colors')
 local events = require('events')
 local keys = require('keys')
@@ -13,8 +11,7 @@ return {
     --
     ------------------------------------------------
 
-    font = wezterm.font('JetBrainsMono Nerd Font Mono'),
-    font_size = 14.5,
+    font_size = 15,
 
     ------------------------------------------------
     --
