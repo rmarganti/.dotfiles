@@ -58,8 +58,12 @@
             // Organize Imports
             "space c o": "editor::OrganizeImports",
 
-            // Go to References
+            // Go to reFerences
             "g f": "editor::FindAllReferences",
+            // Go Replace with register
+            "g r": "vim::PushReplaceWithRegister",
+            // Go to Implementation
+            "g i": "editor::GoToImplementation",
 
             // [ Diagnostics ]---------------------------------
 
@@ -96,7 +100,7 @@
 
             // [ Files ]---------------------------------------
 
-            // File eXplore
+            // File eXplorer
             "space f x": "project_panel::ToggleFocus",
             "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
 
