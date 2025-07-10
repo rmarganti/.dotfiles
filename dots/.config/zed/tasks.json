@@ -20,10 +20,28 @@
 
     {
         "label": "LF File Explorer",
-        "command": "~/.config/zed/zed_lf.sh",
+        "command": "~/.config/zed/scripts/zed_lf.sh",
         "hide": "always",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Today's Diary",
+        "command": "~/.config/zed/scripts/open_diary.sh today",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Yesterday's Diary",
+        "command": "~/.config/zed/scripts/open_diary.sh yesterday",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
         "reveal_target": "center"
     }
 ]

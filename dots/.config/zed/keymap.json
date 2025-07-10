@@ -100,6 +100,16 @@
             "space f x": "project_panel::ToggleFocus",
             "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
 
+            // [ Obsidian Diary ]------------------------------
+
+            // Open Today's diary
+            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
+            // Open Yesterday's diary
+            "space o y": [
+                "task::Spawn",
+                { "task_name": "Open Yesterday's Diary" }
+            ],
+
             // [ Git ]-----------------------------------------
 
             // Git Diff
@@ -126,7 +136,7 @@
     },
 
     // ---------------------------------------------------
-    // All pnaels
+    // All panels
     // ---------------------------------------------------
 
     {
@@ -203,7 +213,17 @@
             "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
             // Search Text
             "space s t": "pane::DeploySearch",
-            "space s T": ["task::Spawn", { "task_name": "TV Full Text Search" }]
+            "space s T": [
+                "task::Spawn",
+                { "task_name": "TV Full Text Search" }
+            ],
+            // Open Today's diary
+            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
+            // Open Yesterday's diary
+            "space o y": [
+                "task::Spawn",
+                { "task_name": "Open Yesterday's Diary" }
+            ]
         }
     }
 ]
