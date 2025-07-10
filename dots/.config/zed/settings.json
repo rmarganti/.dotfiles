@@ -10,40 +10,42 @@
     // [ General ]-------------------------------------
 
     "show_whitespaces": "all",
-    "tabs": { "size": 4, "show_diagnostics": "all" },
+    "tabs": { "show_diagnostics": "all" },
     "format_on_save": "on",
 
     // [ AI/Agent ]------------------------------------
 
     "agent": {
+        "inline_assistant_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4.1"
+        },
         "default_profile": "write",
         "always_allow_tool_actions": true,
         "default_model": {
             "provider": "copilot_chat",
             "model": "gpt-4.1"
         },
-        "version": "2"
+        "commit_message_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4.1"
+        },
+        "default_width": 640
     },
     "context_servers": {
         "nx": {
             "source": "custom",
             "enabled": false,
-            "command": {
-                "path": "npx",
-                "args": ["nx-mcp@latest", "."],
-                "env": null
-            },
-            "settings": {}
+            "command": "npx",
+            "args": ["nx-mcp@latest", "."],
+            "env": null
         },
         "effect-docs": {
             "source": "custom",
             "enabled": false,
-            "command": {
-                "path": "docker",
-                "args": ["run", "--rm", "-i", "timsmart/effect-mcp"],
-                "env": null
-            },
-            "settings": {}
+            "command": "docker",
+            "args": ["run", "--rm", "-i", "timsmart/effect-mcp"],
+            "env": null
         }
     },
     "features": {
@@ -78,7 +80,7 @@
     "tab_size": 4,
     "terminal": {
         "dock": "right",
-        "default_width": 640
+        "default_width": 795 // Why does this have to be bigger than other panels?
     },
     "theme": "Neverforest",
     "ui_font_size": 16,
