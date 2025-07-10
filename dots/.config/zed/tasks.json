@@ -11,7 +11,7 @@
 
     {
         "label": "TV Full Text Search",
-        "command": "zed \"$(tv text-hidden)\"",
+        "command": "zed \"$(tv text)\"",
         "hide": "always",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,

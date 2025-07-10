@@ -1,9 +1,4 @@
 [[cable_channel]]
-name = "text-hidden"
-source_command = "rg --files --no-ignore-vcs --hidden -g '!node_modules/*' -g '!.git/*'"
-preview_command = "bat -n --color=always {0}"
-
-[[cable_channel]]
-name = "text-hidden"
+name = "files-hidden"
 source_command = "fd -t f --hidden --exclude node_modules --exclude .git"
 preview_command = "bat -n --color=always {0}"
