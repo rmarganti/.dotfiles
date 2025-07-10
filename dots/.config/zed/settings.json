@@ -58,6 +58,18 @@
         }
     },
 
+    // [ Language Servers ]----------------------------
+
+    "lsp": {
+        "rust-analyzer": {
+            "initialization_options": {
+                "check": {
+                    "command": "clippy" // rust-analyzer.check.command (default: "check")
+                }
+            }
+        }
+    },
+
     // [ UI ]------------------------------------------
 
     "buffer_font_family": "JetBrainsMono Nerd Font",
