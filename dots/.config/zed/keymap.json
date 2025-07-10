@@ -112,12 +112,14 @@
 
             // [ Git ]-----------------------------------------
 
-            // Git Diff
-            "space g d": "git::Diff",
-            // Git Status
-            "space g s": "git_panel::ToggleFocus",
             // Git Blame
             "space g B": "git::Blame",
+            // Git Diff
+            "space g d": "git::Diff",
+            // Git Modified files
+            "space g m": "git::OpenModifiedFiles",
+            // Git Status
+            "space g s": "git_panel::ToggleFocus",
 
             // [ Search ]--------------------------------------
 
@@ -206,6 +208,8 @@
             "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
             // Git Diff
             "space g d": "git::Diff",
+            // Git Modified files
+            "space g m": "git::OpenModifiedFiles",
             // Git Status
             "space g s": "git_panel::ToggleFocus",
             // Search Files
