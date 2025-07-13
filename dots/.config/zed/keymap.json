@@ -72,6 +72,29 @@
             // Diagnostic Prev
             "space k d": "editor::GoToPreviousDiagnostic",
 
+            // [ Edits ]---------------------------------------
+
+            // Edit CHANGELOG.md
+            "space e c": [
+                "task::Spawn",
+                { "task_name": "Open Nearest CHANGELOG.md" }
+            ],
+            // Edit README.md
+            "space e r": [
+                "task::Spawn",
+                { "task_name": "Open Nearest README.md" }
+            ],
+            // Edit package.json
+            "space e p": [
+                "task::Spawn",
+                { "task_name": "Open Nearest package.json" }
+            ],
+            // Edit project.json
+            "space e P": [
+                "task::Spawn",
+                { "task_name": "Open Nearest project.json" }
+            ],
+
             // [ Misc ]----------------------------------------
 
             "g o": "vim::InsertEmptyLineBelow",

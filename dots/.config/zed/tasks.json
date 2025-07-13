@@ -43,5 +43,41 @@
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
         "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Nearest CHANGELOG.md",
+        "command": "~/.config/zed/scripts/open_nearest.sh CHANGELOG.md",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Nearest README.md",
+        "command": "~/.config/zed/scripts/open_nearest.sh README.md",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Nearest package.json",
+        "command": "~/.config/zed/scripts/open_nearest.sh package.json",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Nearest project.json",
+        "command": "~/.config/zed/scripts/open_nearest.sh project.json",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
     }
 ]
