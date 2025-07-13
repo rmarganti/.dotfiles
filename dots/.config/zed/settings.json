@@ -60,6 +60,26 @@
         }
     },
 
+    // [ Languages ]-----------------------------------
+
+    "languages": {
+        "Shell Script": {
+            "format_on_save": "on",
+            "formatter": {
+                "external": {
+                    "command": "shfmt",
+                    // Change `--indent 2` to match your preferred tab_size
+                    "arguments": [
+                        "--filename",
+                        "{buffer_path}",
+                        "--indent",
+                        "2"
+                    ]
+                }
+            }
+        }
+    },
+
     // [ Language Servers ]----------------------------
 
     "lsp": {
