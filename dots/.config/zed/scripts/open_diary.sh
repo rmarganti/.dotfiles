@@ -15,8 +15,20 @@ DIARY_DIR="$HOME/Library/CloudStorage/OneDrive-GannettCompany,Incorporated/obsid
 
 # Determine date
 if [[ "$1" == "yesterday" ]]; then
-    DATE_ID=$(date -v-1d '+%Y-%m-%d')
-    DATE_HUMAN=$(date -v-1d '+%B %d, %Y')
+    DAY_OF_WEEK=$(date '+%u') # 1=Monday, ..., 7=Sunday
+    if [[ "$DAY_OF_WEEK" == "7" ]]; then
+        # Today is Sunday, so "yesterday" should be Friday (2 days ago)
+        DATE_ID=$(date -v-2d '+%Y-%m-%d')
+        DATE_HUMAN=$(date -v-2d '+%B %d, %Y')
+    elif [[ "$DAY_OF_WEEK" == "1" ]]; then
+        # Today is Monday, so "yesterday" should be Friday (3 days ago)
+        DATE_ID=$(date -v-3d '+%Y-%m-%d')
+        DATE_HUMAN=$(date -v-3d '+%B %d, %Y')
+    else
+        # All other days, "yesterday" is just the previous day
+        DATE_ID=$(date -v-1d '+%Y-%m-%d')
+        DATE_HUMAN=$(date -v-1d '+%B %d, %Y')
+    fi
 else
     DATE_ID=$(date '+%Y-%m-%d')
     DATE_HUMAN=$(date '+%B %d, %Y')
