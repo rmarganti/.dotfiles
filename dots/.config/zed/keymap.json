@@ -147,6 +147,8 @@
             "space g m": "git::OpenModifiedFiles",
             // Git Status
             "space g s": "git_panel::ToggleFocus",
+            // Git checkOut file
+            "space g o": "git::RestoreFile",
 
             // [ Search ]--------------------------------------
 
