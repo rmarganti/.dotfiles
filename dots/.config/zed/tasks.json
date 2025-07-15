@@ -64,6 +64,15 @@
     },
 
     {
+        "label": "Open Nearest index.ts",
+        "command": "~/.config/zed/scripts/open_nearest.sh index.ts",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
         "label": "Open Nearest package.json",
         "command": "~/.config/zed/scripts/open_nearest.sh package.json",
         "hide": "always",

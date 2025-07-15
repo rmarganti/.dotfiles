@@ -79,6 +79,11 @@
                 "task::Spawn",
                 { "task_name": "Open Nearest CHANGELOG.md" }
             ],
+            // Edit index.ts
+            "space e i": [
+                "task::Spawn",
+                { "task_name": "Open Nearest index.ts" }
+            ],
             // Edit README.md
             "space e r": [
                 "task::Spawn",
