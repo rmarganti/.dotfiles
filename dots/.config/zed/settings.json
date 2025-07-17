@@ -119,7 +119,9 @@
     "tab_size": 4,
     "terminal": {
         "dock": "right",
-        "default_width": 795 // Why does this have to be bigger than other panels?
+        "default_width": 795, // Why does this have to be bigger than other panels?
+        "line_height": "standard",
+        "minimum_contrast": 0
     },
     "theme": "Neverforest",
     "ui_font_size": 16,
