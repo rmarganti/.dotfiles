@@ -101,6 +101,8 @@
                 "task::Spawn",
                 { "task_name": "Open Nearest README.md" }
             ],
+            // Edit Other File
+            "space e o": ["task::Spawn", { "task_name": "Edit Other File" }],
 
             // [ Misc ]----------------------------------------
 

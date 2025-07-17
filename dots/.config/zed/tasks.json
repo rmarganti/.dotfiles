@@ -97,5 +97,14 @@
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
         "reveal_target": "center"
+    },
+
+    {
+        "label": "Edit Other File",
+        "command": "~/.config/zed/scripts/edit_other.sh",
+        "hide": "on_success",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
     }
 ]
