@@ -55,8 +55,8 @@
     },
 
     {
-        "label": "Open Nearest README.md",
-        "command": "~/.config/zed/scripts/open_nearest.sh README.md",
+        "label": "Open Nearest .env",
+        "command": "~/.config/zed/scripts/open_nearest.sh .env",
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
@@ -84,6 +84,15 @@
     {
         "label": "Open Nearest project.json",
         "command": "~/.config/zed/scripts/open_nearest.sh project.json",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": false,
+        "reveal_target": "center"
+    },
+
+    {
+        "label": "Open Nearest README.md",
+        "command": "~/.config/zed/scripts/open_nearest.sh README.md",
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,

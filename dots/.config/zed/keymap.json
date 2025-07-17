@@ -79,15 +79,12 @@
                 "task::Spawn",
                 { "task_name": "Open Nearest CHANGELOG.md" }
             ],
+            // Edit .env
+            "space e e": ["task::Spawn", { "task_name": "Open Nearest .env" }],
             // Edit index.ts
             "space e i": [
                 "task::Spawn",
                 { "task_name": "Open Nearest index.ts" }
-            ],
-            // Edit README.md
-            "space e r": [
-                "task::Spawn",
-                { "task_name": "Open Nearest README.md" }
             ],
             // Edit package.json
             "space e p": [
@@ -98,6 +95,11 @@
             "space e P": [
                 "task::Spawn",
                 { "task_name": "Open Nearest project.json" }
+            ],
+            // Edit README.md
+            "space e r": [
+                "task::Spawn",
+                { "task_name": "Open Nearest README.md" }
             ],
 
             // [ Misc ]----------------------------------------
