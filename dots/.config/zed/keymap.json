@@ -111,6 +111,7 @@
             "alt-k": "editor::MoveLineUp",
             "alt-j": "editor::MoveLineDown",
             "space f t": "language_selector::Toggle",
+            "g x": "vim::Exchange",
 
             // [ Windows ]-------------------------------------
 
