@@ -23,6 +23,8 @@ match_fg = '#e67e80'              # p.red (for search matches)
 preview_title_fg = '#d699b6' # p.magenta
 
 # Mode indicators
-channel_mode_fg = '#dbbc7f'         # p.yellow (warning/info color)
-remote_control_mode_fg = '#aec89f'  # p.green (success color)
+channel_mode_fg = '#1d2226'         # p.bg (dark text on colored background)
+channel_mode_bg = '#dbbc7f'         # p.yellow (warning/info color)
+remote_control_mode_fg = '#1d2226'  # p.bg (dark text on colored background)
+remote_control_mode_bg = '#aec89f'  # p.green (success color)
 send_to_channel_mode_fg = '#aeccc6' # p.blue (info color)

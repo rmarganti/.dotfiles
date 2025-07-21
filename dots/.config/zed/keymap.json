@@ -7,7 +7,8 @@
         "bindings": {
             "ctrl-j": "menu::SelectNext",
             "ctrl-k": "menu::SelectPrevious",
-            "cmd-escape": "terminal_panel::ToggleFocus"
+            "cmd-/": "terminal_panel::ToggleFocus",
+            "cmd-escape": "workspace::ToggleZoom"
         }
     },
 
@@ -159,6 +160,10 @@
             "space g s": "git_panel::ToggleFocus",
             // Git checkOut file
             "space g o": "git::RestoreFile",
+            // Git Next Hunk
+            "space j x": "editor::GoToHunk",
+            // Git Previous Hunk
+            "space k x": "editor::GoToHunk",
 
             // [ Search ]--------------------------------------
 
@@ -177,23 +182,52 @@
     },
 
     // ---------------------------------------------------
-    // All panels
+    // Git panel
     // ---------------------------------------------------
 
     {
-        "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
+        "context": "GitPanel && ChangesList",
         "bindings": {
-            // [ Pane navigation ]-----------------------------
-
+            "escape": "workspace::ToggleLeftDock",
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
-            "ctrl-k": "workspace::ActivatePaneUp",
-            "ctrl-j": "workspace::ActivatePaneDown"
+            "ctrl-j": "git_panel::FocusEditor"
+        }
+    },
+    {
+        "context": "GitPanel && CommitEditor > Editor",
+        "bindings": {
+            "escape": "workspace::ToggleLeftDock",
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "git_panel::FocusChanges"
         }
     },
 
     // ---------------------------------------------------
-    // Cancels
+    // Agent Panel
+    // ---------------------------------------------------,
+
+    {
+        "context": "MessageEditor > Editor && VimControl",
+        "bindings": {
+            "escape": "workspace::ToggleRightDock"
+        }
+    },
+
+    // ---------------------------------------------------
+    // Debug Panel
+    // ---------------------------------------------------
+
+    {
+        "context": "DebugPanel",
+        "bindings": {
+            "escape": "workspace::ToggleBottomDock"
+        }
+    },
+
+    // ---------------------------------------------------
+    // Project Panel
     // ---------------------------------------------------
 
     {
@@ -203,31 +237,30 @@
         }
     },
 
-    {
-        "context": "MessageEditor > Editor && VimControl",
-        "bindings": {
-            "escape": "workspace::ToggleRightDock"
-        }
-    },
-
-    {
-        "context": "GitPanel",
-        "bindings": {
-            "escape": "workspace::ToggleLeftDock"
-        }
-    },
+    // ---------------------------------------------------
+    // Terminal Panel
+    // ---------------------------------------------------
 
     {
         "context": "Terminal",
         "bindings": {
-            "cmd-escape": "workspace::ToggleRightDock"
+            "cmd-/": "workspace::ToggleRightDock"
         }
     },
 
+    // ---------------------------------------------------
+    // All panels
+    // ---------------------------------------------------
+
     {
-        "context": "DebugPanel",
+        "context": "AgentPanel || Panel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
         "bindings": {
-            "escape": "workspace::ToggleBottomDock"
+            // [ Pane navigation ]-----------------------------
+
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown"
         }
     },
 

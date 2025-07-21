@@ -1,4 +1,0 @@
-[[cable_channel]]
-name = "files-hidden"
-source_command = "fd -t f --hidden --exclude node_modules --exclude .git"
-preview_command = "bat -n --color=always {0}"

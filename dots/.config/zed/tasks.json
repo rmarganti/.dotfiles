@@ -2,8 +2,8 @@
 [
     {
         "label": "TV File Finder",
-        "command": "zed \"$(tv files-hidden)\"",
-        "hide": "always",
+        "command": "zed \"$(tv files)\"",
+        "hide": "on_success",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
         "reveal_target": "center"
