@@ -105,13 +105,26 @@
             // Edit Other File
             "space e o": ["task::Spawn", { "task_name": "Edit Other File" }],
 
+            // [ Files ]---------------------------------------
+
+            // File Copy
+            "space f c": "project_panel::Duplicate",
+            // File Delete
+            "space f d": "project_panel::Delete",
+            // File Rename
+            "space f r": "project_panel::Rename",
+            // File Type
+            "space f t": "language_selector::Toggle",
+            // File eXplorer
+            "space f x": "project_panel::ToggleFocus",
+            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
+
             // [ Misc ]----------------------------------------
 
             "g o": "vim::InsertEmptyLineBelow",
             "g O": "vim::InsertEmptyLineAbove",
             "alt-k": "editor::MoveLineUp",
             "alt-j": "editor::MoveLineDown",
-            "space f t": "language_selector::Toggle",
             "g x": "vim::Exchange",
 
             // [ Windows ]-------------------------------------
@@ -132,22 +145,6 @@
             // Yank Relative path
             "space y r": "workspace::CopyRelativePath",
 
-            // [ Files ]---------------------------------------
-
-            // File eXplorer
-            "space f x": "project_panel::ToggleFocus",
-            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
-
-            // [ Obsidian Diary ]------------------------------
-
-            // Open Today's diary
-            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
-            // Open Yesterday's diary
-            "space o y": [
-                "task::Spawn",
-                { "task_name": "Open Yesterday's Diary" }
-            ],
-
             // [ Git ]-----------------------------------------
 
             // Git Blame
@@ -164,6 +161,16 @@
             "space j x": "editor::GoToHunk",
             // Git Previous Hunk
             "space k x": "editor::GoToHunk",
+
+            // [ Obsidian ]------------------------------------
+
+            // Open Today's diary
+            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
+            // Open Yesterday's diary
+            "space o y": [
+                "task::Spawn",
+                { "task_name": "Open Yesterday's Diary" }
+            ],
 
             // [ Search ]--------------------------------------
 
