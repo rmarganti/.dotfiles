@@ -1,8 +1,7 @@
-// Static tasks configuration.
 [
     {
         "label": "TV File Finder",
-        "command": "zed \"$(tv files)\"",
+        "command": "tv files | tr '\\n' '\\0' | xargs -0 zed",
         "hide": "on_success",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
@@ -11,7 +10,7 @@
 
     {
         "label": "TV Full Text Search",
-        "command": "zed \"$(tv text)\"",
+        "command": "tv text | tr '\\n' '\\0' | xargs -0 zed",
         "hide": "always",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
