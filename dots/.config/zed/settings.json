@@ -42,9 +42,9 @@
         },
         "effect-docs": {
             "source": "custom",
-            "enabled": false,
-            "command": "docker",
-            "args": ["run", "--rm", "-i", "timsmart/effect-mcp"],
+            "enabled": true,
+            "command": "npx",
+            "args": ["-y", "effect-mcp@latest"],
             "env": null
         }
     },
