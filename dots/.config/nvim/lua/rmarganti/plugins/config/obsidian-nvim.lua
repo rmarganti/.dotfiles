@@ -1,51 +1,48 @@
-local function find_workspaces()
-    local ok, machine = pcall(require, "rmarganti.config.machine")
-    local workspaces = {}
-
-    if ok and machine and type(machine.obsidian_workspaces) == "table" then
-        workspaces = machine.obsidian_workspaces
+local function load_diary_config()
+    local config_path = vim.fn.expand("~/.config/diary/config.json")
+    if vim.fn.filereadable(config_path) == 0 then
+        return nil
     end
-
-    local valid_workspaces = {}
-
-    for _, workspace in ipairs(workspaces) do
-        local path = vim.fn.expand(workspace.path)
-        if vim.fn.isdirectory(path) == 1 then
-            table.insert(valid_workspaces, {
-                name = workspace.name,
-                path = path,
-            })
-        end
+    local lines = vim.fn.readfile(config_path)
+    local content = table.concat(lines, "\n")
+    local ok, config = pcall(vim.fn.json_decode, content)
+    if not ok or not config then
+        vim.notify("Failed to parse diary config", vim.log.levels.ERROR)
+        return nil
     end
-
-    return valid_workspaces
+    return config
 end
+
+local function expand_workspace_paths(workspaces)
+    local expanded = {}
+    for _, ws in ipairs(workspaces or {}) do
+        table.insert(expanded, {
+            name = ws.name,
+            path = vim.fn.expand(ws.path),
+        })
+    end
+    return expanded
+end
+
+local config = load_diary_config() or {}
 
 local M = {
     'epwalsh/obsidian.nvim',
-    version = '*', -- recommended, use latest release instead of latest commit
+    version = '*',
     event = 'VeryLazy',
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-    },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
-        workspaces = find_workspaces(),
-
+        workspaces = expand_workspace_paths(config.workspaces),
         daily_notes = {
-            folder = 'diary',
-            date_format = '%Y-%m-%d',
-            alias_format = '%B %-d, %Y',
+            folder = config.diary_folder or "diary",
+            date_format = config.date_format or "%Y-%m-%d",
+            alias_format = config.alias_format or "%B %d, %Y",
             template = nil,
         },
-
         preferred_link_style = 'markdown',
-
         follow_url_func = function(url)
-            -- Open the URL in the default web browser.
-            vim.fn.jobstart({ 'open', url }) -- Mac OS
+            vim.fn.jobstart({ 'open', url })
         end,
-
-        -- Let render-markdown.nvim handle this
         ui = { enable = false },
     },
 }
