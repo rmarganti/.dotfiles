@@ -262,7 +262,7 @@
     // ---------------------------------------------------
 
     {
-        "context": "ProjectPanel",
+        "context": "ProjectPanel && not_editing",
         "bindings": {
             "escape": "workspace::ToggleLeftDock"
         }
@@ -275,7 +275,8 @@
     {
         "context": "Terminal",
         "bindings": {
-            "cmd-/": "workspace::ToggleRightDock"
+            "cmd-/": "workspace::ToggleRightDock",
+            "cmd-t": "workspace::NewTerminal"
         }
     },
 
@@ -311,6 +312,8 @@
             "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
             // Git Diff
             "space g d": "git::Diff",
+            // Git Branch
+            "space g b": "git::Branch",
             // Git Modified files
             "space g m": "git::OpenModifiedFiles",
             // Git Status
