@@ -50,6 +50,8 @@
 
             // Code actions
             "space c a": "editor::ToggleCodeActions",
+            // Code Diagnostics
+            "space c d": "diagnostics::Deploy",
             // Code Format
             "space c f": "editor::Format",
             // Code Rename
@@ -130,6 +132,8 @@
             "alt-k": "editor::MoveLineUp",
             "alt-j": "editor::MoveLineDown",
             "g x": "vim::Exchange",
+            "alt-n": "editor::FindNextMatch",
+            "alt-p": "editor::FindPreviousMatch",
 
             // [ Windows ]-------------------------------------
 
