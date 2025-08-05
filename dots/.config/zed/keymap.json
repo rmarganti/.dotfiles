@@ -157,6 +157,10 @@
 
             // [ Git ]-----------------------------------------
 
+            // Git Add file
+            "space g a": "git::Add",
+            // Git Branch
+            "space g b": "git::Branch",
             // Git Blame
             "space g B": "git::Blame",
             // Git Diff
