@@ -5,7 +5,8 @@
         "hide": "on_success",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -14,7 +15,8 @@
         "hide": "always",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -23,7 +25,8 @@
         "hide": "always",
         "allow_concurrent_runs": true,
         "use_new_terminal": true,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -32,7 +35,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -41,7 +45,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -50,7 +55,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -59,7 +65,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -68,7 +75,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -77,7 +85,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -86,7 +95,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -95,7 +105,8 @@
         "hide": "always",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     },
 
     {
@@ -104,6 +115,7 @@
         "hide": "on_success",
         "allow_concurrent_runs": false,
         "use_new_terminal": false,
-        "reveal_target": "center"
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     }
 ]
