@@ -232,7 +232,17 @@
     {
         "context": "MessageEditor > Editor && VimControl",
         "bindings": {
-            "escape": "workspace::ToggleRightDock"
+            "escape": "workspace::ToggleRightDock",
+
+            "space a h": "agent::OpenHistory",
+            "space a s": "agent::OpenConfiguration",
+            "space a r": "agent::OpenRulesLibrary",
+            "space a p": "agent::ToggleProfileSelector",
+            "space a m": "agent::ToggleModelSelector",
+            "space a c": "agent::ToggleContextPicker",
+            "space a n": "agent::ToggleNavigationMenu",
+            "space a o": "agent::ToggleOptionsMenu",
+            "space a e": "agent::ExpandMessageEditor"
         }
     },
 
