@@ -29,8 +29,12 @@
             "space b a": "pane::CloseCleanItems",
             // Buffer Quit
             "space b q": "pane::CloseActiveItem",
+            // Buffer Quit Right
+            "space b Q l": "pane::CloseItemsToTheRight",
+            // Buffer Quit Left
+            "space b Q h": "pane::CloseItemsToTheLeft",
             // Buffer Only
-            "space b o": "pane::CloseInactiveItems",
+            "space b o": "pane::CloseOtherItems",
             // Buffer New
             "space b n": "workspace::NewFile",
             // Buffer previous
