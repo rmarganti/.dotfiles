@@ -1,5 +1,5 @@
-local function load_diary_config()
-    local config_path = vim.fn.expand("~/.config/diary/config.json")
+local function load_ide_common_config()
+    local config_path = vim.fn.expand("~/.config/ide-common.json")
     if vim.fn.filereadable(config_path) == 0 then
         return nil
     end
@@ -7,7 +7,7 @@ local function load_diary_config()
     local content = table.concat(lines, "\n")
     local ok, config = pcall(vim.fn.json_decode, content)
     if not ok or not config then
-        vim.notify("Failed to parse diary config", vim.log.levels.ERROR)
+        vim.notify("Failed to parse ide-common config", vim.log.levels.ERROR)
         return nil
     end
     return config
@@ -24,7 +24,7 @@ local function expand_workspace_paths(workspaces)
     return expanded
 end
 
-local config = load_diary_config() or {}
+local config = (load_ide_common_config() or {}).obsidian or {}
 
 local M = {
     'epwalsh/obsidian.nvim',

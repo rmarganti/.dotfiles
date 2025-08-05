@@ -11,13 +11,24 @@
 # Exit immediately if any command exits with a non-zero status.
 set -e
 
-# Load config from ~/.config/diary/config.json
-CONFIG="$HOME/.config/diary/config.json"
+# Load config from ~/.config/ide-common.json
+CONFIG="$HOME/.config/ide-common.json"
 
-WORKSPACE_PATH=$(eval echo "$(jq -r '.workspaces[0].path' "$CONFIG")")
-DIARY_FOLDER=$(jq -r '.diary_folder' "$CONFIG")
-DATE_FORMAT=$(jq -r '.date_format' "$CONFIG")
-ALIAS_FORMAT=$(jq -r '.alias_format' "$CONFIG")
+if [[ ! -f "$CONFIG" ]]; then
+    echo "ERROR: Config file $CONFIG not found."
+    exit 1
+fi
+
+# Validate required keys exist
+if ! jq -e '.obsidian.workspaces[0].path and .obsidian.diary_folder and .obsidian.date_format and .obsidian.alias_format' "$CONFIG" >/dev/null; then
+    echo "ERROR: Required keys missing or malformed in $CONFIG."
+    exit 1
+fi
+
+WORKSPACE_PATH=$(eval echo "$(jq -r '.obsidian.workspaces[0].path' "$CONFIG")")
+DIARY_FOLDER=$(jq -r '.obsidian.diary_folder' "$CONFIG")
+DATE_FORMAT=$(jq -r '.obsidian.date_format' "$CONFIG")
+ALIAS_FORMAT=$(jq -r '.obsidian.alias_format' "$CONFIG")
 
 DIARY_DIR="$WORKSPACE_PATH/$DIARY_FOLDER"
 
