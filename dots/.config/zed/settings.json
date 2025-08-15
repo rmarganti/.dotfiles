@@ -11,7 +11,23 @@
 
     "show_whitespaces": "all",
     "tabs": { "show_diagnostics": "all" },
-    "format_on_save": "on",
+
+    "file_scan_exclusions": [
+        "**/.git",
+        "**/.svn",
+        "**/.hg",
+        "**/.jj",
+        "**/CVS",
+        "**/.DS_Store",
+        "**/Thumbs.db",
+        "**/.classpath",
+        "**/.settings",
+        "**/*.min.js",
+        "**/*.min.cjs",
+        "**/*.min.mjs",
+        "**/yarn.lock",
+        ".yarn"
+    ],
 
     // [ AI/Agent ]------------------------------------
 
