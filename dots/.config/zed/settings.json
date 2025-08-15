@@ -83,7 +83,8 @@
 
     "file_types": {
         "JSONC": [".prettierrc"],
-        "Shell Script": [".*.env"]
+        "Shell Script": [".*.env"],
+        "XML": ["*.mjml"]
     },
     "languages": {
         "Shell Script": {
