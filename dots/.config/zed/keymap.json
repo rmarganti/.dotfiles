@@ -235,7 +235,7 @@
             "escape": "workspace::ToggleRightDock",
 
             "space a h": "agent::OpenHistory",
-            "space a s": "agent::OpenConfiguration",
+            "space a s": "agent::OpenSettings",
             "space a r": "agent::OpenRulesLibrary",
             "space a p": "agent::ToggleProfileSelector",
             "space a m": "agent::ToggleModelSelector",
@@ -276,7 +276,11 @@
         "context": "Terminal",
         "bindings": {
             "cmd-/": "workspace::ToggleRightDock",
-            "cmd-t": "workspace::NewTerminal"
+            "cmd-t": "workspace::NewTerminal",
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "workspace::ActivatePaneDown"
         }
     },
 
@@ -334,6 +338,18 @@
                 "task::Spawn",
                 { "task_name": "Open Yesterday's Diary" }
             ]
+        }
+    },
+
+    // ---------------------------------------------------
+    // Code Actions
+    // ---------------------------------------------------
+
+    {
+        "context": "Editor && showing_code_actions",
+        "use_key_equivalents": true,
+        "bindings": {
+            "tab": "editor::ConfirmCodeAction"
         }
     }
 ]
