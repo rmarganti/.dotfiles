@@ -87,6 +87,76 @@
         "XML": ["*.mjml"]
     },
     "languages": {
+        "JavaScript": {
+            "formatter": [
+                { "code_actions": { "source.fixAll.eslint": true } },
+                { "code_actions": { "source.organizeImports": true } },
+                {
+                    "external": {
+                        "command": "/opt/homebrew/bin/prettierd",
+                        "arguments": ["--stdin-filepath", "{buffer_path}"]
+                    }
+                }
+            ]
+        },
+
+        "JSON": {
+            "formatter": {
+                "external": {
+                    "command": "/opt/homebrew/bin/prettierd",
+                    "arguments": ["--stdin-filepath", "{buffer_path}"]
+                }
+            }
+        },
+        "JSONC": {
+            "formatter": {
+                "external": {
+                    "command": "/opt/homebrew/bin/prettierd",
+                    "arguments": ["--stdin-filepath", "{buffer_path}"]
+                }
+            }
+        },
+
+        "Lua": {
+            "formatter": {
+                "external": {
+                    "command": "stylua",
+                    "arguments": [
+                        "--syntax=Lua54",
+                        "--respect-ignores",
+                        "--stdin-filepath",
+                        "{buffer_path}",
+                        "-"
+                    ]
+                }
+            }
+        },
+
+        "TypeScript": {
+            "formatter": [
+                { "code_actions": { "source.fixAll.eslint": true } },
+                { "code_actions": { "source.organizeImports": true } },
+                {
+                    "external": {
+                        "command": "/opt/homebrew/bin/prettierd",
+                        "arguments": ["--stdin-filepath", "{buffer_path}"]
+                    }
+                }
+            ]
+        },
+        "TSX": {
+            "formatter": [
+                { "code_actions": { "source.fixAll.eslint": true } },
+                { "code_actions": { "source.organizeImports": true } },
+                {
+                    "external": {
+                        "command": "/opt/homebrew/bin/prettierd",
+                        "arguments": ["--stdin-filepath", "{buffer_path}"]
+                    }
+                }
+            ]
+        },
+
         "Shell Script": {
             "format_on_save": "on",
             "formatter": {
@@ -99,25 +169,6 @@
                         "4"
                     ]
                 }
-            }
-        },
-
-        "JavaScript": {
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-                // "source.organizeImports": true
-            }
-        },
-        "TypeScript": {
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-                // "source.organizeImports": true
-            }
-        },
-        "TSX": {
-            "code_actions_on_format": {
-                "source.fixAll.eslint": true
-                // "source.organizeImports": true
             }
         }
     },
