@@ -36,14 +36,6 @@ function M.config()
             xml = { 'xmlformatter' },
             yaml = { 'prettierd' },
         },
-
-        formatters = {
-            prettierd = {
-                env = {
-                    PRETTIERD_DEFAULT_CONFIG = vim.fn.expand('~/.config/nvim/.prettierrc.json'),
-                },
-            },
-        },
     })
 end
 
