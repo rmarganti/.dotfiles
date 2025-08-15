@@ -9,6 +9,9 @@
 {
     // [ General ]-------------------------------------
 
+    "format_on_save": "on",
+    "pane_split_direction_horizontal": "down",
+    "pane_split_direction_vertical": "right",
     "show_whitespaces": "all",
     "tabs": { "show_diagnostics": "all" },
 
