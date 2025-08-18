@@ -1,5 +1,11 @@
 # ------------------------------------------------
-# pyenv (login shell setup)
+# Homebrew (must be executed first)
+# ------------------------------------------------
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+# ------------------------------------------------
+# pyenv
 # ------------------------------------------------
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -7,7 +13,7 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # ------------------------------------------------
-# NVM (login shell setup)
+# NVM
 # ------------------------------------------------
 
 export NVM_DIR="$HOME/.nvm"
@@ -18,8 +24,7 @@ export NVM_DIR="$HOME/.nvm"
 # Misc
 # ------------------------------------------------
 
-export PATH="/opt/homebrew/bin:$PATH"
-export PRETTIERD_DEFAULT_CONFIG = '~/.dotfiles/.prettierrc.json'
+export PRETTIERD_DEFAULT_CONFIG="~/.dotfiles/.prettierrc.json"
 
 # ------------------------------------------------
 # Source .bashrc for interactive and non-login shell config
