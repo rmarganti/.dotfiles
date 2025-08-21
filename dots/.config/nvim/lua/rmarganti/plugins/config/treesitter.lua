@@ -28,6 +28,7 @@ function M.config()
             'gosum',
             'graphql',
             'hcl', -- Terraform
+            'helm',
             'html',
             'hurl',
             'javascript',
