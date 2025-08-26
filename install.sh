@@ -97,11 +97,13 @@ fi
 #----------------------------------------------------------------
 
 symlink_or_ask ~/.dotfiles/dots/.config/bat ~/.config/bat
-symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
-symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
-symlink_or_ask ~/.dotfiles/dots/.config/lf ~/.config/lf
+symlink_or_ask ~/.dotfiles/dots/.config/codebook ~/.config/codebook
 symlink_or_ask ~/.dotfiles/dots/.config/ghostty ~/.config/ghostty
+symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
+symlink_or_ask ~/.dotfiles/dots/.config/lazygit ~/.config/lazygit
+symlink_or_ask ~/.dotfiles/dots/.config/lf ~/.config/lf
 symlink_or_ask ~/.dotfiles/dots/.config/opencode ~/.config/opencode
+symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
 symlink_or_ask ~/.dotfiles/dots/.config/television ~/.config/television
 symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
