@@ -24,7 +24,7 @@ export NVM_DIR="$HOME/.nvm"
 # Misc
 # ------------------------------------------------
 
-export PRETTIERD_DEFAULT_CONFIG="~/.dotfiles/.prettierrc.json"
+export PRETTIERD_DEFAULT_CONFIG="/Users/rmarganti/.dotfiles/.prettierrc.json"
 
 # ------------------------------------------------
 # Source .bashrc for interactive and non-login shell config
