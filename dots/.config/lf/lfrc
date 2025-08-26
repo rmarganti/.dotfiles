@@ -1,1 +1,25 @@
+# --------------------------------
+# Config
+# --------------------------------
+
+# Show hidden files
 set hidden
+
+# Show files sizes
+set info size
+
+# --------------------------------
+# Commands
+# --------------------------------
+
+# `z` command to jump to a directory
+cmd z %{{
+	result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
+
+# `zi` command to interactively jump to a directory
+cmd zi ${{
+	result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
