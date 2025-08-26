@@ -140,6 +140,23 @@
             }
         },
 
+        "PHP": {
+            "language_servers": [
+                "phpactor",
+                "!intelephense",
+                "!phptools",
+                "..."
+            ]
+        },
+
+        "SQL": {
+            "formatter": {
+                "external": {
+                    "command": "sql-formatter"
+                }
+            }
+        },
+
         "TypeScript": {
             "formatter": [
                 { "code_actions": { "source.fixAll.eslint": true } },
