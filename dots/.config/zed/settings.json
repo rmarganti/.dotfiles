@@ -83,12 +83,12 @@
 
     "file_types": {
         "Helm": [
-          "**/templates/**/*.tpl",
-          "**/templates/**/*.yaml",
-          "**/templates/**/*.yml",
-          "**/helmfile.d/**/*.yaml",
-          "**/helmfile.d/**/*.yml",
-          "**/values*.yaml"
+            "**/templates/**/*.tpl",
+            "**/templates/**/*.yaml",
+            "**/templates/**/*.yml",
+            "**/helmfile.d/**/*.yaml",
+            "**/helmfile.d/**/*.yml",
+            "**/values*.yaml"
         ],
         "JSONC": [".prettierrc"],
         "Shell Script": [".*.env"],
@@ -230,9 +230,9 @@
     // [ Panel Sizes ]---------------------------------
 
     "collaboration_panel": { "default_width": 480 },
-    "git_panel": { "default_width": 480 },
-    "outline_panel": { "default_width": 480 },
-    "project_panel": { "default_width": 480 },
+    "git_panel": { "default_width": 640 },
+    "outline_panel": { "default_width": 640 },
+    "project_panel": { "default_width": 640 },
 
     // [ Search ]--------------------------------------
 
