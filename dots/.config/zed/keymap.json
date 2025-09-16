@@ -122,7 +122,7 @@
             // File Type
             "space f t": "language_selector::Toggle",
             // File eXplorer
-            "space f x": "project_panel::ToggleFocus",
+            "space f x": "pane::RevealInProjectPanel",
             "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
 
             // [ Misc ]----------------------------------------
@@ -137,10 +137,6 @@
 
             // [ Windows ]-------------------------------------
 
-            // Window Only
-            "space w o": "workspace::CloseInactiveTabsAndPanes",
-            // Window Quit
-            "space w q": "pane::CloseCleanItems",
             // Window Split
             "space w s": "pane::SplitDown",
             // Window split Vertically
@@ -171,6 +167,8 @@
             "space g s": "git_panel::ToggleFocus",
             // Git checkOut file
             "space g o": "git::RestoreFile",
+            // Git Lazy
+            "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
             // Git Next Hunk
             "space j x": "editor::GoToHunk",
             // Git Previous Hunk
@@ -240,7 +238,7 @@
             "space a p": "agent::ToggleProfileSelector",
             "space a m": "agent::ToggleModelSelector",
             "space a c": "agent::ToggleContextPicker",
-            "space a n": "agent::ToggleNavigationMenu",
+            "space a n": "agent::ToggleNewThreadMenu",
             "space a o": "agent::ToggleOptionsMenu",
             "space a e": "agent::ExpandMessageEditor"
         }
@@ -320,6 +318,8 @@
             "space g d": "git::Diff",
             // Git Branch
             "space g b": "git::Branch",
+            // Git Lazy
+            "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
             // Git Modified files
             "space g m": "git::OpenModifiedFiles",
             // Git Status
