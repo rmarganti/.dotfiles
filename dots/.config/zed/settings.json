@@ -85,30 +85,8 @@
             "formatter": [
                 { "code_actions": { "source.fixAll.eslint": true } },
                 { "code_actions": { "source.organizeImports": true } },
-                {
-                    "external": {
-                        "command": "/opt/homebrew/bin/prettierd",
-                        "arguments": ["--stdin-filepath", "{buffer_path}"]
-                    }
-                }
+                "prettier"
             ]
-        },
-
-        "JSON": {
-            "formatter": {
-                "external": {
-                    "command": "/opt/homebrew/bin/prettierd",
-                    "arguments": ["--stdin-filepath", "{buffer_path}"]
-                }
-            }
-        },
-        "JSONC": {
-            "formatter": {
-                "external": {
-                    "command": "/opt/homebrew/bin/prettierd",
-                    "arguments": ["--stdin-filepath", "{buffer_path}"]
-                }
-            }
         },
 
         "Lua": {
@@ -147,29 +125,19 @@
             "formatter": [
                 { "code_actions": { "source.fixAll.eslint": true } },
                 { "code_actions": { "source.organizeImports": true } },
-                {
-                    "external": {
-                        "command": "/opt/homebrew/bin/prettierd",
-                        "arguments": ["--stdin-filepath", "{buffer_path}"]
-                    }
-                }
+                "prettier"
             ]
         },
+
         "TSX": {
             "formatter": [
                 { "code_actions": { "source.fixAll.eslint": true } },
                 { "code_actions": { "source.organizeImports": true } },
-                {
-                    "external": {
-                        "command": "/opt/homebrew/bin/prettierd",
-                        "arguments": ["--stdin-filepath", "{buffer_path}"]
-                    }
-                }
+                "prettier"
             ]
         },
 
         "Shell Script": {
-            "format_on_save": "on",
             "formatter": {
                 "external": {
                     "command": "shfmt",
@@ -181,6 +149,10 @@
                     ]
                 }
             }
+        },
+
+        "XML": {
+            "formatter": "prettier"
         }
     },
 
