@@ -117,5 +117,15 @@
         "use_new_terminal": false,
         "reveal_target": "center",
         "shell": { "program": "sh" }
+    },
+
+    {
+        "label": "Lazy Git",
+        "command": "lazygit",
+        "hide": "always",
+        "allow_concurrent_runs": false,
+        "use_new_terminal": true,
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
     }
 ]
