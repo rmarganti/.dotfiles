@@ -31,6 +31,11 @@
         "**/yarn.lock",
         ".yarn"
     ],
+    "file_scan_inclusions": [".env*", "docker-compose.*.yml"],
+
+    "file_finder": {
+        "include_ignored": true
+    },
 
     // [ AI/Agent ]------------------------------------
 
