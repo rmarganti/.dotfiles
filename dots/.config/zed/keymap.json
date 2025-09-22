@@ -118,8 +118,8 @@
             // File Type
             "space f t": "language_selector::Toggle",
             // File eXplorer
-            "space f x": "pane::RevealInProjectPanel",
-            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f X": "pane::RevealInProjectPanel",
 
             // [ Misc ]----------------------------------------
 
@@ -327,8 +327,8 @@
             // Buffer New
             "space b n": "workspace::NewFile",
             // File eXplorer
-            "space f x": "project_panel::ToggleFocus",
-            "space f X": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f X": "project_panel::ToggleFocus",
             // Git Diff
             "space g d": "git::Diff",
             // Git Branch
