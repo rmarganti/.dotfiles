@@ -128,8 +128,8 @@
             "alt-k": "editor::MoveLineUp",
             "alt-j": "editor::MoveLineDown",
             "g x": "vim::Exchange",
-            "alt-n": "editor::FindNextMatch",
-            "alt-p": "editor::FindPreviousMatch",
+            "alt-n": "editor::GoToNextDocumentHighlight",
+            "alt-p": "editor::GoToPreviousDocumentHighlight",
 
             // [ Windows ]-------------------------------------
 
