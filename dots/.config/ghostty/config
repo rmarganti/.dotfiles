@@ -27,3 +27,4 @@ keybind = ctrl+space>l=goto_split:right
 # ------------------------------------------------
 
 # macos-titlebar-style = tabs
+bell-features = no-attention,title
