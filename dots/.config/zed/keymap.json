@@ -131,6 +131,12 @@
             "alt-n": "editor::GoToNextDocumentHighlight",
             "alt-p": "editor::GoToPreviousDocumentHighlight",
 
+            // [ Tasks ]---------------------------------------
+
+            "space t s": "task::Spawn",
+            "space t r": "task::Rerun",
+            "space t n": "editor::SpawnNearestTask",
+
             // [ Windows ]-------------------------------------
 
             // Window Split
@@ -354,7 +360,9 @@
             "space o y": [
                 "task::Spawn",
                 { "task_name": "Open Yesterday's Diary" }
-            ]
+            ],
+            "space t s": "task::Spawn",
+            "space t r": "task::Rerun"
         }
     },
 
