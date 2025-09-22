@@ -130,7 +130,18 @@
     },
 
     {
-        "label": "Github Browse File",
+        "label": "Github Browse Repo",
+        "command": "gh",
+        "args": ["browse"],
+        "use_new_terminal": false,
+        "allow_concurrent_runs": false,
+        "reveal": "never",
+        "reveal_target": "center",
+        "hide": "always",
+        "shell": "system"
+    },
+    {
+        "label": "Github Browse Commit File",
         "command": "gh",
         "args": [
             "browse",
@@ -140,7 +151,18 @@
         "use_new_terminal": false,
         "allow_concurrent_runs": false,
         "reveal": "never",
-        "reveal_target": "dock",
+        "reveal_target": "center",
+        "hide": "always",
+        "shell": "system"
+    },
+    {
+        "label": "Github Browse `main` File",
+        "command": "gh",
+        "args": ["browse", "$ZED_RELATIVE_FILE"],
+        "use_new_terminal": false,
+        "allow_concurrent_runs": false,
+        "reveal": "never",
+        "reveal_target": "center",
         "hide": "always",
         "shell": "system"
     }

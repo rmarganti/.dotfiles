@@ -161,6 +161,21 @@
             "space g B": "git::Blame",
             // Git Diff
             "space g d": "git::Diff",
+            // GitHub Repo
+            "space g h r": [
+                "task::Spawn",
+                { "task_name": "Github Browse Repo" }
+            ],
+            // GitHub File Main
+            "space g h f m": [
+                "task::Spawn",
+                { "task_name": "Github Browse `main` File" }
+            ],
+            // GitHub File Commit
+            "space g h f c": [
+                "task::Spawn",
+                { "task_name": "Github Browse Commit File" }
+            ],
             // Git Modified files
             "space g m": "git::OpenModifiedFiles",
             // Git Status
