@@ -7,8 +7,8 @@
         "bindings": {
             "ctrl-j": "menu::SelectNext",
             "ctrl-k": "menu::SelectPrevious",
-            "cmd-/": "terminal_panel::ToggleFocus",
-            "cmd-escape": "workspace::ToggleZoom"
+            "cmd-escape": "workspace::ToggleZoom",
+            "cmd-/": "terminal_panel::Toggle"
         }
     },
 
@@ -19,10 +19,6 @@
     {
         "context": "Editor && VimControl && !VimWaiting && !menu",
         "bindings": {
-            // [ AI ]------------------------------------------
-
-            "space a c": "agent::ToggleFocus",
-
             // [ Buffers ]-------------------------------------
 
             // Buffer close All
@@ -243,6 +239,13 @@
     // ---------------------------------------------------,
 
     {
+        "context": "AgentPanel",
+        "bindings": {
+            "cmd-?": "workspace::ToggleRightDock"
+        }
+    },
+
+    {
         "context": "MessageEditor > Editor && VimControl",
         "bindings": {
             "escape": "workspace::ToggleRightDock",
@@ -288,7 +291,6 @@
     {
         "context": "Terminal",
         "bindings": {
-            "cmd-/": "workspace::ToggleRightDock",
             "cmd-t": "workspace::NewTerminal",
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
@@ -322,8 +324,6 @@
     {
         "context": "EmptyPane || SharedScreen",
         "bindings": {
-            // Agent Chat
-            "space a c": "agent::ToggleFocus",
             // Buffer New
             "space b n": "workspace::NewFile",
             // File eXplorer
