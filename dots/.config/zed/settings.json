@@ -64,6 +64,7 @@
     // [ AI/Agent ]------------------------------------
 
     "agent": {
+        "use_modifier_to_send": true,
         "single_file_review": false,
         "play_sound_when_agent_done": true,
         "inline_assistant_model": {
