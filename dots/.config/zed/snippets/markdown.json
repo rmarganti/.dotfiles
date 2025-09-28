@@ -1,0 +1,7 @@
+{
+    "Jira link": {
+        "prefix": "jl",
+        "body": ["[$1](https://jira.gannett.com/browse/$1)"],
+        "description": "Link to a Jira issue"
+    }
+}
