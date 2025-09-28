@@ -17,6 +17,22 @@ if command -v git >/dev/null 2>&1 && [ -f ~/.git-completion.bash ]; then
 fi
 
 # ------------------------------------------------
+# pyenv
+# ------------------------------------------------
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# ------------------------------------------------
+# NVM
+# ------------------------------------------------
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+# ------------------------------------------------
 # fzf Integration
 # ------------------------------------------------
 
@@ -89,7 +105,7 @@ _nvmrc_hook() {
     fi
 
     PREV_PWD=$PWD
-    [[ -f ".nvmrc" ]] && nvm use
+    if command -v nvm >/dev/null 2>&1 && [[ -f ".nvmrc" ]]; then nvm use; fi
 }
 
 if ! [[ "${PROMPT_COMMAND:-}" =~ _nvmrc_hook ]]; then
@@ -150,11 +166,12 @@ if command -v zoxide >/dev/null 2>&1; then
     eval "$(zoxide init bash)"
 fi
 
+# Rust Cargo env
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 # Set default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # Load local-specific config if it exists (not committed to git)
 [ -f ~/.local.bashrc ] && . ~/.local.bashrc
-
-source "$HOME/.cargo/env"
