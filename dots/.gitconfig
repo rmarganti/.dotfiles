@@ -1,3 +1,6 @@
+[alias]
+    co = checkout
+
 [core]
     excludesfile = ~/.gitignore.global
     ignorecase = false
@@ -19,17 +22,17 @@
     new = green bold
     whitespace = red reverse
 
+[init]
+    defaultBranch = main
+
 [url "git@github.com:"]
     insteadOf = https://github.com/
 
-[alias]
-    co = checkout
+[pull]
+	rebase = false
 
 [user]
     # These values are set in ~/.gitconfig.local
 
 [include]
     path = ~/.local.gitconfig
-
-[init]
-    defaultBranch = main
