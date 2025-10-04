@@ -256,15 +256,16 @@
         "bindings": {
             "escape": "workspace::ToggleRightDock",
 
-            "space a h": "agent::OpenHistory",
-            "space a s": "agent::OpenSettings",
-            "space a r": "agent::OpenRulesLibrary",
-            "space a p": "agent::ToggleProfileSelector",
-            "space a m": "agent::ToggleModelSelector",
             "space a c": "agent::ToggleContextPicker",
+            "space a e": "agent::ExpandMessageEditor",
+            "space a f": "agent::Follow",
+            "space a h": "agent::OpenHistory",
+            "space a m": "agent::ToggleModelSelector",
             "space a n": "agent::ToggleNewThreadMenu",
             "space a o": "agent::ToggleOptionsMenu",
-            "space a e": "agent::ExpandMessageEditor"
+            "space a p": "agent::ToggleProfileSelector",
+            "space a r": "agent::OpenRulesLibrary",
+            "space a s": "agent::OpenSettings"
         }
     },
 
