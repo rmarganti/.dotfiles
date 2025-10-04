@@ -2,8 +2,8 @@
 
 # Only proceed if this is an interactive shell
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # ------------------------------------------------
@@ -157,4 +157,4 @@ export EDITOR="$VISUAL"
 # Load local-specific config if it exists (not committed to git)
 [ -f ~/.local.bashrc ] && . ~/.local.bashrc
 
-export GIT_PAGER="diff-so-fancy | less --tabs=4 -RFX"
+source "$HOME/.cargo/env"

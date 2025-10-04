@@ -8,7 +8,7 @@ set hidden
 # Show files sizes
 set info size
 
-# Use bat for syntax hightlighting
+# Use bat for syntax highlighting
 set previewer ~/.config/lf/preview.sh
 set preview true
 
