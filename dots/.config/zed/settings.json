@@ -40,6 +40,7 @@
     "auto_install_extensions": {
         "blade": true,
         "codebook-spell-checker": true,
+        "color-highlight": true,
         "context7-mcp-server": true,
         "docker-compose": true,
         "dockerfile": true,
@@ -202,6 +203,7 @@
 
     "buffer_font_family": "JetBrainsMono Nerd Font",
     "buffer_font_size": 15,
+    "lsp_document_colors": "inlay",
     "relative_line_numbers": true,
     "tab_size": 4,
     "terminal": {
