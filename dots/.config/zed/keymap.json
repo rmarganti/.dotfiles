@@ -13,6 +13,64 @@
     },
 
     // ---------------------------------------------------
+    // Global leader-key bindings
+    // ---------------------------------------------------
+
+    {
+        "context": "(Workspace && !Editor && !Terminal) || (Editor && VimControl)",
+        "bindings": {
+            // Buffer New
+            "space b n": "workspace::NewFile",
+            // Code Diagnostics
+            "space c d": "diagnostics::Deploy",
+            // Code Restart language server
+            "space c R": "editor::RestartLanguageServer",
+            // Code Workspace symbols
+            "space c w": "project_symbols::Toggle",
+            // File eXplorer
+            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
+            "space f X": "project_panel::ToggleFocus",
+            // Git Branch
+            "space g b": "git::Branch",
+            // Git Diff
+            "space g d": "git::Diff",
+            // GitHub Repo
+            "space g h r": [
+                "task::Spawn",
+                { "task_name": "Github Browse Repo" }
+            ],
+            // Git Lazy
+            "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
+            // Git Modified files
+            "space g m": "git::OpenModifiedFiles",
+            // Git Status
+            "space g s": "git_panel::ToggleFocus",
+            // Search Buffers"
+            "space s b": "tab_switcher::Toggle",
+            // Search Files
+            "space s f": "file_finder::Toggle",
+            "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
+            // Search Text
+            "space s t": "pane::DeploySearch",
+            "space s T": [
+                "task::Spawn",
+                { "task_name": "TV Full Text Search" }
+            ],
+            // Search Wiki
+            "space s w": ["task::Spawn", { "task_name": "TV Search Wiki" }],
+            // Open Today's diary
+            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
+            // Open Yesterday's diary
+            "space o y": [
+                "task::Spawn",
+                { "task_name": "Open Yesterday's Diary" }
+            ],
+            "space t s": "task::Spawn",
+            "space t r": "task::Rerun"
+        }
+    },
+
+    // ---------------------------------------------------
     // Editor
     // ---------------------------------------------------
 
@@ -31,8 +89,6 @@
             "space b Q h": "pane::CloseItemsToTheLeft",
             // Buffer Only
             "space b o": "pane::CloseOtherItems",
-            // Buffer New
-            "space b n": "workspace::NewFile",
             // Buffer previous
             "space b h": "pane::ActivatePreviousItem",
             // Buffer next
@@ -46,18 +102,12 @@
 
             // Code actions
             "space c a": "editor::ToggleCodeActions",
-            // Code Diagnostics
-            "space c d": "diagnostics::Deploy",
             // Code Format
             "space c f": "editor::Format",
             // Code Rename
             "space c r": "editor::Rename",
-            // Code Restart language server
-            "space c R": "editor::RestartLanguageServer",
             // Code Symbols
             "space c s": "outline::Toggle",
-            // Code Workspace symbols
-            "space c w": "project_symbols::Toggle",
             // Organize Imports
             "space c o": "editor::OrganizeImports",
 
@@ -117,9 +167,6 @@
             "space f r": "project_panel::Rename",
             // File Type
             "space f t": "language_selector::Toggle",
-            // File eXplorer
-            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
-            "space f X": "pane::RevealInProjectPanel",
 
             // [ Misc ]----------------------------------------
 
@@ -133,8 +180,6 @@
 
             // [ Tasks ]---------------------------------------
 
-            "space t s": "task::Spawn",
-            "space t r": "task::Rerun",
             "space t n": "editor::SpawnNearestTask",
 
             // [ Windows ]-------------------------------------
@@ -157,17 +202,8 @@
 
             // Git Add file
             "space g a": "git::Add",
-            // Git Branch
-            "space g b": "git::Branch",
             // Git Blame
             "space g B": "git::Blame",
-            // Git Diff
-            "space g d": "git::Diff",
-            // GitHub Repo
-            "space g h r": [
-                "task::Spawn",
-                { "task_name": "Github Browse Repo" }
-            ],
             // GitHub File Main
             "space g h f m": [
                 "task::Spawn",
@@ -178,42 +214,12 @@
                 "task::Spawn",
                 { "task_name": "Github Browse Commit File" }
             ],
-            // Git Modified files
-            "space g m": "git::OpenModifiedFiles",
-            // Git Status
-            "space g s": "git_panel::ToggleFocus",
             // Git checkOut file
             "space g o": "git::RestoreFile",
-            // Git Lazy
-            "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
             // Git Next Hunk
             "space j x": "editor::GoToHunk",
             // Git Previous Hunk
-            "space k x": "editor::GoToHunk",
-
-            // [ Obsidian ]------------------------------------
-
-            // Open Today's diary
-            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
-            // Open Yesterday's diary
-            "space o y": [
-                "task::Spawn",
-                { "task_name": "Open Yesterday's Diary" }
-            ],
-
-            // [ Search ]--------------------------------------
-
-            // Search Files
-            "space s f": "file_finder::Toggle",
-            "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
-            // Search Text
-            "space s t": "pane::DeploySearch",
-            "space s T": [
-                "task::Spawn",
-                { "task_name": "TV Full Text Search" }
-            ],
-            // Search Buffers"
-            "space s b": "tab_switcher::Toggle"
+            "space k x": "editor::GoToHunk"
         }
     },
 
@@ -255,6 +261,7 @@
         "context": "MessageEditor > Editor && VimControl",
         "bindings": {
             "escape": "workspace::ToggleRightDock",
+            "shift-cmd-enter": "agent::ChatWithFollow",
 
             "space a c": "agent::ToggleContextPicker",
             "space a e": "agent::ExpandMessageEditor",
@@ -321,49 +328,6 @@
             "ctrl-l": "workspace::ActivatePaneRight",
             "ctrl-k": "workspace::ActivatePaneUp",
             "ctrl-j": "workspace::ActivatePaneDown"
-        }
-    },
-
-    // ---------------------------------------------------
-    // Empty pane
-    // ---------------------------------------------------
-
-    {
-        "context": "EmptyPane || SharedScreen",
-        "bindings": {
-            // Buffer New
-            "space b n": "workspace::NewFile",
-            // File eXplorer
-            "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
-            "space f X": "project_panel::ToggleFocus",
-            // Git Diff
-            "space g d": "git::Diff",
-            // Git Branch
-            "space g b": "git::Branch",
-            // Git Lazy
-            "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
-            // Git Modified files
-            "space g m": "git::OpenModifiedFiles",
-            // Git Status
-            "space g s": "git_panel::ToggleFocus",
-            // Search Files
-            "space s f": "file_finder::Toggle",
-            "space s F": ["task::Spawn", { "task_name": "TV File Finder" }],
-            // Search Text
-            "space s t": "pane::DeploySearch",
-            "space s T": [
-                "task::Spawn",
-                { "task_name": "TV Full Text Search" }
-            ],
-            // Open Today's diary
-            "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
-            // Open Yesterday's diary
-            "space o y": [
-                "task::Spawn",
-                { "task_name": "Open Yesterday's Diary" }
-            ],
-            "space t s": "task::Spawn",
-            "space t r": "task::Rerun"
         }
     },
 
