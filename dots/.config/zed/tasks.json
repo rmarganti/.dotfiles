@@ -156,7 +156,7 @@
         "command": "gh",
         "args": [
             "browse",
-            "$ZED_RELATIVE_FILE",
+            "$ZED_RELATIVE_FILE:${ZED_ROW:1}",
             "--commit=$(git rev-parse HEAD)"
         ],
         "use_new_terminal": false,
@@ -169,7 +169,7 @@
     {
         "label": "Github Browse `main` File",
         "command": "gh",
-        "args": ["browse", "$ZED_RELATIVE_FILE"],
+        "args": ["browse", "$ZED_RELATIVE_FILE:${ZED_ROW:1}"],
         "use_new_terminal": false,
         "allow_concurrent_runs": false,
         "reveal": "never",
