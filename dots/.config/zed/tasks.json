@@ -20,6 +20,17 @@
     },
 
     {
+        "label": "TV Search Wiki",
+        "command": "tv files | tr '\\n' '\\0' | xargs -0 zed",
+        "cwd": "/Users/rmarganti/OneDrive - Gannett Company, Incorporated/obsidian/work",
+        "hide": "always",
+        "allow_concurrent_runs": true,
+        "use_new_terminal": true,
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
+    },
+
+    {
         "label": "LF File Explorer",
         "command": "~/.config/zed/scripts/zed_lf.sh",
         "hide": "always",
