@@ -19,6 +19,8 @@
     {
         "context": "(Workspace && !Editor && !Terminal) || (Editor && VimControl)",
         "bindings": {
+            // Agent Chat
+            "space a c": "agent::ToggleFocus",
             // Buffer New
             "space b n": "workspace::NewFile",
             // Code Diagnostics
@@ -27,9 +29,39 @@
             "space c R": "editor::RestartLanguageServer",
             // Code Workspace symbols
             "space c w": "project_symbols::Toggle",
+
+            // Edit CHANGELOG.md
+            "space e c": [
+                "task::Spawn",
+                { "task_name": "Open Nearest CHANGELOG.md" }
+            ],
+            // Edit .env
+            "space e e": ["task::Spawn", { "task_name": "Open Nearest .env" }],
+            // Edit index.ts
+            "space e i": [
+                "task::Spawn",
+                { "task_name": "Open Nearest index.ts" }
+            ],
+            // Edit package.json
+            "space e p": [
+                "task::Spawn",
+                { "task_name": "Open Nearest package.json" }
+            ],
+            // Edit project.json
+            "space e P": [
+                "task::Spawn",
+                { "task_name": "Open Nearest project.json" }
+            ],
+            // Edit README.md
+            "space e r": [
+                "task::Spawn",
+                { "task_name": "Open Nearest README.md" }
+            ],
+
             // File eXplorer
             "space f x": ["task::Spawn", { "task_name": "LF File Explorer" }],
             "space f X": "project_panel::ToggleFocus",
+
             // Git Branch
             "space g b": "git::Branch",
             // Git Diff
@@ -45,6 +77,7 @@
             "space g m": "git::OpenModifiedFiles",
             // Git Status
             "space g s": "git_panel::ToggleFocus",
+
             // Search Buffers"
             "space s b": "tab_switcher::Toggle",
             // Search Files
@@ -58,6 +91,7 @@
             ],
             // Search Wiki
             "space s w": ["task::Spawn", { "task_name": "TV Search Wiki" }],
+
             // Open Today's diary
             "space o t": ["task::Spawn", { "task_name": "Open Today's Diary" }],
             // Open Yesterday's diary
@@ -65,6 +99,7 @@
                 "task::Spawn",
                 { "task_name": "Open Yesterday's Diary" }
             ],
+
             "space t s": "task::Spawn",
             "space t r": "task::Rerun"
         }
@@ -127,33 +162,6 @@
 
             // [ Edits ]---------------------------------------
 
-            // Edit CHANGELOG.md
-            "space e c": [
-                "task::Spawn",
-                { "task_name": "Open Nearest CHANGELOG.md" }
-            ],
-            // Edit .env
-            "space e e": ["task::Spawn", { "task_name": "Open Nearest .env" }],
-            // Edit index.ts
-            "space e i": [
-                "task::Spawn",
-                { "task_name": "Open Nearest index.ts" }
-            ],
-            // Edit package.json
-            "space e p": [
-                "task::Spawn",
-                { "task_name": "Open Nearest package.json" }
-            ],
-            // Edit project.json
-            "space e P": [
-                "task::Spawn",
-                { "task_name": "Open Nearest project.json" }
-            ],
-            // Edit README.md
-            "space e r": [
-                "task::Spawn",
-                { "task_name": "Open Nearest README.md" }
-            ],
             // Edit Other File
             "space e o": ["task::Spawn", { "task_name": "Edit Other File" }],
 
