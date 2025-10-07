@@ -141,7 +141,17 @@
                 "!intelephense",
                 "!phptools",
                 "..."
-            ]
+            ],
+            "formatter": [
+                {
+                    "code_actions": {
+                        "source.fixAll.phpactor.phpCsFixer": true
+                    }
+                }
+            ],
+            "prettier": {
+                "allowed": false
+            }
         },
 
         "SQL": {
