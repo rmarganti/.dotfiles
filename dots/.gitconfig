@@ -36,3 +36,4 @@
 
 [include]
     path = ~/.local.gitconfig
+	path = /Users/rmarganti/.dotfiles/dots/.config/delta/themes.gitconfig

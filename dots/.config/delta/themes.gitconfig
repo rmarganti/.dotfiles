@@ -1,0 +1,101 @@
+# Neverforest Delta Theme
+#
+# Symlink or include this file from your ~/.gitconfig:
+#   [include]
+#       path = /absolute/path/to/dots/.config/delta/themes.gitconfig
+#
+# This defines a feature "neverforest" that you can enable with:
+#   git config --global delta.features neverforest
+#
+# NOTE: Terminals do not support alpha transparency. Background colors
+# below are solid approximations of the semi‑transparent UI tones used
+# in your Zed theme.
+
+[delta]
+    features = neverforest
+
+[delta "neverforest"]
+    dark = true
+    navigate = true
+    line-numbers = true
+    hyperlinks = true
+    side-by-side = false
+
+    # Use the custom bat syntax theme you created (case sensitive).
+    syntax-theme = neverforest
+
+    # File headers
+    file-style = bold "#aeccc6"
+    file-decoration-style = underline "#aeccc6"
+    file-added-label = " ADDED "
+    file-removed-label = " REMOVED "
+
+    # Hunk headers
+    hunk-header-style = bold italic "#9da9a0"
+    hunk-header-decoration-style = box "#515a5b"
+    hunk-header-file-style = bold "#aeccc6"
+
+    # Commit metadata
+    commit-style = bold "#aeccc6"
+    commit-decoration-style = box "#515a5b"
+
+    # Line numbers
+    line-numbers-left-style = dim "#515a5b"
+    line-numbers-right-style = dim "#515a5b"
+    line-numbers-minus-style = "#e67e80"
+    line-numbers-plus-style = "#aec89f"
+    line-numbers-zero-style = "#515a5b"
+
+    # Signs (+ / -)
+    plus-sign-style = bold "#aec89f"
+    minus-sign-style = bold "#e67e80"
+
+    # Core diff line styles
+    # (Using solid backgrounds approximating the intended subtle overlays)
+    zero-style = syntax
+    plus-style = syntax "#2a302a"
+    plus-non-emph-style = syntax "#2a302a"
+    plus-emph-style = syntax bold "#354033"
+    minus-style = syntax "#342525"
+    minus-non-emph-style = syntax "#342525"
+    minus-emph-style = syntax bold "#44302f"
+
+    # Word-diff / intraline emphasis
+    word-diff-regex = "\\w+"
+
+    # Merge conflict markers (optional)
+    # Set them to accent/semantic colors for clarity.
+    minus-empty-line-marker-style = "#e67e80"
+    plus-empty-line-marker-style = "#aec89f"
+
+    # Blame (gradient of subtle panels)
+    blame-palette = "#23292e" "#2a3137" "#30383f" "#515a5b" "#77817d"
+
+    # Inline code / decorations
+    decoration-style = "#9da9a0"
+    # Box around changed file sections (uncomment if desired)
+    # file-decoration-style = box fg:#515a5b
+
+    # Diff header file modification labels (optional alt forms)
+    # file-modified-label = " MOD "
+
+    # Optional: refine paging behavior
+    # pager = less -FRX
+
+    # Explicit 16‑color (ANSI) palette overrides (comment out if not needed)
+    ansi-black = #4b565c
+    ansi-red = #e67e80
+    ansi-green = #aec89f
+    ansi-yellow = #dbbc7f
+    ansi-blue = #aeccc6
+    ansi-magenta = #d699b6
+    ansi-cyan = #a2ccae
+    ansi-white = #d3c6aa
+    ansi-bright-black = #627078
+    ansi-bright-red = #eea9aa
+    ansi-bright-green = #c9dbbf
+    ansi-bright-yellow = #e6d1a7
+    ansi-bright-blue = #cde0dc
+    ansi-bright-magenta = #e5bdd0
+    ansi-bright-cyan = #c3decb
+    ansi-bright-white = #e4ddcc
