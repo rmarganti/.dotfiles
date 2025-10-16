@@ -23,5 +23,14 @@
         "prefix": "clj",
         "body": ["console.log(JSON.stringify($1, null, 4));", "$0"],
         "description": "Console log an items as JSON"
+    },
+
+    // ----------------------------------------------------------------
+    // Effect
+    // ----------------------------------------------------------------
+
+    "Effect.gen()": {
+        "prefix": "eg",
+        "body": ["Effect.gen(function*() {", "    $0", "})"]
     }
 }
