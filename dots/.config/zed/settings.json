@@ -14,6 +14,7 @@
     "pane_split_direction_vertical": "right",
     "show_whitespaces": "all",
     "tabs": { "show_diagnostics": "all" },
+    "vim_mode": true,
 
     "file_scan_exclusions": [
         "**/.git",
@@ -211,6 +212,11 @@
 
     // [ UI ]------------------------------------------
 
+    "active_pane_modifiers": {
+        "inactive_opacity": 0.625
+    },
+    "agent_buffer_font_size": 14,
+    "agent_ui_font_size": 15,
     "buffer_font_family": "JetBrainsMono Nerd Font",
     "buffer_font_size": 15,
     "lsp_document_colors": "inlay",
@@ -223,9 +229,8 @@
         "minimum_contrast": 0
     },
     "theme": "Neverforest",
-    "ui_font_size": 16,
+    "ui_font_size": 15,
     "ui_font_family": "JetBrainsMono Nerd Font",
-    "vim_mode": true,
 
     // [ Panel Sizes ]---------------------------------
 
