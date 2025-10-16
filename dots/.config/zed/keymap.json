@@ -75,8 +75,10 @@
             "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
             // Git Modified files
             "space g m": "git::OpenModifiedFiles",
-            // Git Status
-            "space g s": "git_panel::ToggleFocus",
+            // Git Status (TV)
+            "space g s": ["task::Spawn", { "task_name": "TV Git Status" }],
+            // Git Status (Zed)
+            "space g S": "git_panel::ToggleFocus",
 
             // Search Buffers"
             "space s b": "tab_switcher::Toggle",
