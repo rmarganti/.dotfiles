@@ -20,6 +20,16 @@
     },
 
     {
+        "label": "TV Git Status",
+        "command": "tv git-diff | tr '\\n' '\\0' | xargs -0 zed",
+        "hide": "always",
+        "allow_concurrent_runs": true,
+        "use_new_terminal": true,
+        "reveal_target": "center",
+        "shell": { "program": "sh" }
+    },
+
+    {
         "label": "TV Search Wiki",
         "command": "tv files | tr '\\n' '\\0' | xargs -0 zed",
         "cwd": "/Users/rmarganti/OneDrive - Gannett Company, Incorporated/obsidian/work",
