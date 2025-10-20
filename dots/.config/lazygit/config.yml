@@ -1,3 +1,44 @@
 git:
     pagers:
         - pager: delta --paging=never
+
+gui:
+    theme:
+        activeBorderColor:
+            - '#aeccc6'
+            - bold
+        inactiveBorderColor:
+            - '#515a5b'
+        searchingActiveBorderColor:
+            - '#a2ccae'
+            - bold
+        optionsTextColor:
+            - '#aeccc6'
+        selectedLineBgColor:
+            - '#23292e'
+        inactiveViewSelectedLineBgColor:
+            - '#30383f'
+        cherryPickedCommitFgColor:
+            - '#d699b6'
+        cherryPickedCommitBgColor:
+            - '#23292e'
+        markedBaseCommitFgColor:
+            - '#dbbc7f'
+        markedBaseCommitBgColor:
+            - '#23292e'
+        unstagedChangesColor:
+            - '#e67e80'
+        defaultFgColor:
+            - '#d3c6aa'
+
+    authorColors:
+        # Personalize frequent authors; '*' fallback keeps palette cohesive.
+        'Ryan Marganti': '#a2ccae'
+        '*': '#77817d'
+
+    branchColorPatterns:
+        '^feat': '#a2ccae'
+        '^fix': '#e67e80'
+        '^docs': '#aeccc6'
+        '^chore': '#9da9a0'
+        '^refactor': '#d699b6'
