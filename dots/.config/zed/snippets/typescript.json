@@ -32,5 +32,10 @@
     "Effect.gen()": {
         "prefix": "eg",
         "body": ["Effect.gen(function*() {", "    $0", "})"]
+    },
+
+    "Effect.gen(this, ...)": {
+        "prefix": "egt",
+        "body": ["Effect.gen(this, function*() {", "    $0", "})"]
     }
 }
