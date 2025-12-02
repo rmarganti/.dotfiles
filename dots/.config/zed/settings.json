@@ -35,7 +35,7 @@
     "file_scan_inclusions": [".env*", "docker-compose.*.yml"],
 
     "file_finder": {
-        "include_ignored": true
+        "include_ignored": "all"
     },
 
     "auto_install_extensions": {
@@ -66,10 +66,12 @@
     // [ AI/Agent ]------------------------------------
 
     "agent": {
+        "default_profile": "write",
         "default_model": {
             "provider": "copilot_chat",
             "model": "claude-sonnet-4.5"
         },
+        "always_allow_tool_actions": true,
         "model_parameters": [],
         "use_modifier_to_send": true
     },
@@ -204,7 +206,7 @@
     "buffer_font_family": "JetBrainsMono Nerd Font",
     "buffer_font_size": 15,
     "lsp_document_colors": "inlay",
-    "relative_line_numbers": true,
+    "relative_line_numbers": "enabled",
     "tab_size": 4,
     "terminal": {
         "dock": "right",
