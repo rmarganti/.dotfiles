@@ -33,6 +33,7 @@ words = [
     "typeorm",
     "unobserve",
     "varchar",
+    "vercel",
     "vitest",
     "zod",
 ]
