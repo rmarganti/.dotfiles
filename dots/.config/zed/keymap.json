@@ -229,7 +229,7 @@
             // Git Next Hunk
             "space j x": "editor::GoToHunk",
             // Git Previous Hunk
-            "space k x": "editor::GoToHunk"
+            "space k x": "editor::GoToPreviousHunk"
         }
     },
 
@@ -273,7 +273,6 @@
             "escape": "workspace::ToggleRightDock",
             "shift-cmd-enter": "agent::ChatWithFollow",
 
-            "space a c": "agent::ToggleContextPicker",
             "space a e": "agent::ExpandMessageEditor",
             "space a f": "agent::Follow",
             "space a h": "agent::OpenHistory",
