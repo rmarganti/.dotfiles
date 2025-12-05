@@ -1,0 +1,27 @@
+{
+    "Comment block": {
+        "prefix": "cb",
+        "body": [
+            "// ----------------------------------------------------------------",
+            "// $1",
+            "// ----------------------------------------------------------------",
+            "$0"
+        ],
+        "description": "Comment block"
+    },
+
+    "Comment line": {
+        "prefix": "cl",
+        "body": [
+            "// -[ $1 ]---------------------------------------------------------",
+            "$0"
+        ],
+        "description": "Comment block"
+    },
+
+    "Console Log JSON": {
+        "prefix": "clj",
+        "body": ["console.log(JSON.stringify($1, null, 4));", "$0"],
+        "description": "Console log an items as JSON"
+    }
+}
