@@ -43,6 +43,7 @@
         "codebook-spell-checker": true,
         "color-highlight": true,
         "context7-mcp-server": true,
+        "csv": true,
         "docker-compose": true,
         "dockerfile": true,
         "emmet": true,
