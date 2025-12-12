@@ -101,7 +101,8 @@
         ],
         "JSONC": [".prettierrc"],
         "Shell Script": [".*.env"],
-        "XML": ["*.mjml"]
+        "XML": ["*.mjml"],
+        "YAML": ["~/.kube/config"]
     },
     "languages": {
         "JavaScript": {
