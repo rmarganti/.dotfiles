@@ -4,16 +4,6 @@
     // ================================================
 
     {
-        "description": "TypeScript: implementation → spec",
-        "pattern": "^(.*)\\.ts$",
-        "target": "$1.spec.ts",
-    },
-    {
-        "description": "TypeScript: implementation → test",
-        "pattern": "^(.*)\\.ts$",
-        "target": "$1.test.ts",
-    },
-    {
         "description": "TypeScript: spec → implementation",
         "pattern": "^(.*)\\.spec\\.ts$",
         "target": "$1.ts",
@@ -23,21 +13,21 @@
         "pattern": "^(.*)\\.test\\.ts$",
         "target": "$1.ts",
     },
+    {
+        "description": "TypeScript: implementation → spec",
+        "pattern": "^(.*)\\.ts$",
+        "target": "$1.spec.ts",
+    },
+    {
+        "description": "TypeScript: implementation → test",
+        "pattern": "^(.*)\\.ts$",
+        "target": "$1.test.ts",
+    },
 
     // ================================================
     // JavaScript
     // ================================================
 
-    {
-        "description": "JavaScript: implementation → spec",
-        "pattern": "^(.*)\\.js$",
-        "target": "$1.spec.js",
-    },
-    {
-        "description": "JavaScript: implementation → test",
-        "pattern": "^(.*)\\.js$",
-        "target": "$1.test.js",
-    },
     {
         "description": "JavaScript: spec → implementation",
         "pattern": "^(.*)\\.spec\\.js$",
@@ -48,21 +38,21 @@
         "pattern": "^(.*)\\.test\\.js$",
         "target": "$1.js",
     },
+    {
+        "description": "JavaScript: implementation → spec",
+        "pattern": "^(.*)\\.js$",
+        "target": "$1.spec.js",
+    },
+    {
+        "description": "JavaScript: implementation → test",
+        "pattern": "^(.*)\\.js$",
+        "target": "$1.test.js",
+    },
 
     // ================================================
     // TypeScript React
     // ================================================
 
-    {
-        "description": "TypeScript React: implementation → spec",
-        "pattern": "^(.*)\\.tsx$",
-        "target": "$1.spec.tsx",
-    },
-    {
-        "description": "TypeScript React: implementation → test",
-        "pattern": "^(.*)\\.tsx$",
-        "target": "$1.test.tsx",
-    },
     {
         "description": "TypeScript React: spec → implementation",
         "pattern": "^(.*)\\.spec\\.tsx$",
@@ -73,20 +63,21 @@
         "pattern": "^(.*)\\.test\\.tsx$",
         "target": "$1.tsx",
     },
+    {
+        "description": "TypeScript React: implementation → spec",
+        "pattern": "^(.*)\\.tsx$",
+        "target": "$1.spec.tsx",
+    },
+    {
+        "description": "TypeScript React: implementation → test",
+        "pattern": "^(.*)\\.tsx$",
+        "target": "$1.test.tsx",
+    },
 
     // ================================================
     // JavaScript React
     // ================================================
-    {
-        "description": "JavaScript React: implementation → spec",
-        "pattern": "^(.*)\\.jsx$",
-        "target": "$1.spec.jsx",
-    },
-    {
-        "description": "JavaScript React: implementation → test",
-        "pattern": "^(.*)\\.jsx$",
-        "target": "$1.test.jsx",
-    },
+
     {
         "description": "JavaScript React: spec → implementation",
         "pattern": "^(.*)\\.spec\\.jsx$",
@@ -96,6 +87,16 @@
         "description": "JavaScript React: test → implementation",
         "pattern": "^(.*)\\.test\\.jsx$",
         "target": "$1.jsx",
+    },
+    {
+        "description": "JavaScript React: implementation → spec",
+        "pattern": "^(.*)\\.jsx$",
+        "target": "$1.spec.jsx",
+    },
+    {
+        "description": "JavaScript React: implementation → test",
+        "pattern": "^(.*)\\.jsx$",
+        "target": "$1.test.jsx",
     },
 
     // ================================================
