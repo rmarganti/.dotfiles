@@ -7,9 +7,9 @@
         "bindings": {
             "ctrl-j": "menu::SelectNext",
             "ctrl-k": "menu::SelectPrevious",
-            "cmd-escape": "workspace::ToggleZoom",
-            "cmd-/": "terminal_panel::Toggle"
-        }
+            "shift-cmd-enter": "workspace::ToggleZoom",
+            "cmd-/": "terminal_panel::Toggle",
+        },
     },
 
     // ---------------------------------------------------
@@ -33,29 +33,29 @@
             // Edit CHANGELOG.md
             "space e c": [
                 "task::Spawn",
-                { "task_name": "Open Nearest CHANGELOG.md" }
+                { "task_name": "Open Nearest CHANGELOG.md" },
             ],
             // Edit .env
             "space e e": ["task::Spawn", { "task_name": "Open Nearest .env" }],
             // Edit index.ts
             "space e i": [
                 "task::Spawn",
-                { "task_name": "Open Nearest index.ts" }
+                { "task_name": "Open Nearest index.ts" },
             ],
             // Edit package.json
             "space e p": [
                 "task::Spawn",
-                { "task_name": "Open Nearest package.json" }
+                { "task_name": "Open Nearest package.json" },
             ],
             // Edit project.json
             "space e P": [
                 "task::Spawn",
-                { "task_name": "Open Nearest project.json" }
+                { "task_name": "Open Nearest project.json" },
             ],
             // Edit README.md
             "space e r": [
                 "task::Spawn",
-                { "task_name": "Open Nearest README.md" }
+                { "task_name": "Open Nearest README.md" },
             ],
 
             // File eXplorer
@@ -69,7 +69,7 @@
             // GitHub Repo
             "space g h r": [
                 "task::Spawn",
-                { "task_name": "Github Browse Repo" }
+                { "task_name": "Github Browse Repo" },
             ],
             // Git Lazy
             "space g l": ["task::Spawn", { "task_name": "Lazy Git" }],
@@ -89,7 +89,7 @@
             "space s t": "pane::DeploySearch",
             "space s T": [
                 "task::Spawn",
-                { "task_name": "TV Full Text Search" }
+                { "task_name": "TV Full Text Search" },
             ],
             // Search Wiki
             "space s w": ["task::Spawn", { "task_name": "TV Search Wiki" }],
@@ -99,12 +99,12 @@
             // Open Yesterday's diary
             "space o y": [
                 "task::Spawn",
-                { "task_name": "Open Yesterday's Diary" }
+                { "task_name": "Open Yesterday's Diary" },
             ],
 
             "space t s": "task::Spawn",
-            "space t r": "task::Rerun"
-        }
+            "space t r": "task::Rerun",
+        },
     },
 
     // ---------------------------------------------------
@@ -217,20 +217,20 @@
             // GitHub File Main
             "space g h f m": [
                 "task::Spawn",
-                { "task_name": "Github Browse `main` File" }
+                { "task_name": "Github Browse `main` File" },
             ],
             // GitHub File Commit
             "space g h f c": [
                 "task::Spawn",
-                { "task_name": "Github Browse Commit File" }
+                { "task_name": "Github Browse Commit File" },
             ],
             // Git checkOut file
             "space g o": "git::RestoreFile",
             // Git Next Hunk
             "space j x": "editor::GoToHunk",
             // Git Previous Hunk
-            "space k x": "editor::GoToPreviousHunk"
-        }
+            "space k x": "editor::GoToPreviousHunk",
+        },
     },
 
     // ---------------------------------------------------
@@ -243,8 +243,8 @@
             "escape": "workspace::ToggleLeftDock",
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
-            "ctrl-j": "git_panel::FocusEditor"
-        }
+            "ctrl-j": "git_panel::FocusEditor",
+        },
     },
     {
         "context": "GitPanel && CommitEditor > Editor",
@@ -252,8 +252,8 @@
             "escape": "workspace::ToggleLeftDock",
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
-            "ctrl-k": "git_panel::FocusChanges"
-        }
+            "ctrl-k": "git_panel::FocusChanges",
+        },
     },
 
     // ---------------------------------------------------
@@ -263,8 +263,8 @@
     {
         "context": "AgentPanel",
         "bindings": {
-            "cmd-?": "workspace::ToggleRightDock"
-        }
+            "cmd-?": "workspace::ToggleRightDock",
+        },
     },
 
     {
@@ -281,8 +281,8 @@
             "space a o": "agent::ToggleOptionsMenu",
             "space a p": "agent::ToggleProfileSelector",
             "space a r": "agent::OpenRulesLibrary",
-            "space a s": "agent::OpenSettings"
-        }
+            "space a s": "agent::OpenSettings",
+        },
     },
 
     // ---------------------------------------------------
@@ -292,8 +292,8 @@
     {
         "context": "DebugPanel",
         "bindings": {
-            "escape": "workspace::ToggleBottomDock"
-        }
+            "escape": "workspace::ToggleBottomDock",
+        },
     },
 
     // ---------------------------------------------------
@@ -303,8 +303,8 @@
     {
         "context": "ProjectPanel && not_editing",
         "bindings": {
-            "escape": "workspace::ToggleLeftDock"
-        }
+            "escape": "workspace::ToggleLeftDock",
+        },
     },
 
     // ---------------------------------------------------
@@ -320,8 +320,8 @@
             "ctrl-k": "workspace::ActivatePaneUp",
             "ctrl-j": "workspace::ActivatePaneDown",
             "ctrl-space \\": "pane::SplitRight",
-            "ctrl-space -": "pane::SplitHorizontal"
-        }
+            "ctrl-space -": "pane::SplitHorizontal",
+        },
     },
 
     // ---------------------------------------------------
@@ -336,8 +336,8 @@
             "ctrl-h": "workspace::ActivatePaneLeft",
             "ctrl-l": "workspace::ActivatePaneRight",
             "ctrl-k": "workspace::ActivatePaneUp",
-            "ctrl-j": "workspace::ActivatePaneDown"
-        }
+            "ctrl-j": "workspace::ActivatePaneDown",
+        },
     },
 
     // ---------------------------------------------------
@@ -348,7 +348,7 @@
         "context": "Editor && showing_code_actions",
         "use_key_equivalents": true,
         "bindings": {
-            "tab": "editor::ConfirmCodeAction"
-        }
-    }
+            "tab": "editor::ConfirmCodeAction",
+        },
+    },
 ]
