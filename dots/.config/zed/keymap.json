@@ -66,6 +66,8 @@
             "space g b": "git::Branch",
             // Git Diff
             "space g d": "git::Diff",
+            // Git Fetch
+            "space g f": "git::Fetch",
             // GitHub Repo
             "space g h r": [
                 "task::Spawn",
