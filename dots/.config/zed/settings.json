@@ -103,7 +103,7 @@
             "**/helmfile.d/**/*.yml",
             "**/values*.yaml"
         ],
-        "JSONC": [".prettierrc"],
+        "JSONC": [".prettierrc", "project.json"],
         "Shell Script": [".*.env"],
         "XML": ["*.mjml"],
         "YAML": ["~/.kube/config"]
