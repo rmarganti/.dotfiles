@@ -7,6 +7,14 @@
             "name": "Neverforest",
             "appearance": "dark",
             "style": {
+                "accents": [
+                    "#aeccc6",
+                    "#a2ccae",
+                    "#d699b6",
+                    "#dbbc7f",
+                    "#aec89f",
+                    "#e67e80"
+                ],
                 "border": "#515a5b",
                 "border.variant": "#515a5b60",
                 "border.focused": "#aeccc6",
@@ -49,11 +57,13 @@
                 "tab.inactive_background": "#1d2226",
                 "tab.active_background": "#23292e",
                 "search.match_background": "#7f927850",
+                "search.active_match_background": "#7f9278",
                 "panel.background": "#1d2226",
                 "panel.focused_border": "#aeccc6",
                 "pane.focused_border": "#aeccc6",
                 "scrollbar.thumb.background": "#515a5b60",
                 "scrollbar.thumb.hover_background": "#77817d80",
+                "scrollbar.thumb.active_background": "#9da9a0",
                 "scrollbar.thumb.border": "#00000000",
                 "scrollbar.track.background": "#00000000",
                 "scrollbar.track.border": "#00000000",
@@ -65,6 +75,7 @@
                 "editor.highlighted_line.background": "#23292e",
                 "editor.line_number": "#515a5b",
                 "editor.active_line_number": "#aeccc6",
+                "editor.hover_line_number": "#9da9a0",
                 "editor.invisible": "#2b3238",
                 "editor.wrap_guide": "#2b3238",
                 "editor.active_wrap_guide": "#515a5b",
@@ -249,6 +260,11 @@
                         "font_style": null,
                         "font_weight": null
                     },
+                    "namespace": {
+                        "color": "#aeccc6",
+                        "font_style": null,
+                        "font_weight": null
+                    },
                     "link_text": {
                         "color": "#aeccc6",
                         "font_style": "italic",
@@ -301,6 +317,31 @@
                     },
                     "punctuation.bracket": {
                         "color": "#9da9a0",
+                        "font_style": null,
+                        "font_weight": null
+                    },
+                    "punctuation.list_marker": {
+                        "color": "#9da9a0",
+                        "font_style": null,
+                        "font_weight": null
+                    },
+                    "punctuation.markup": {
+                        "color": "#9da9a0",
+                        "font_style": null,
+                        "font_weight": null
+                    },
+                    "punctuation.special": {
+                        "color": "#9da9a0",
+                        "font_style": null,
+                        "font_weight": null
+                    },
+                    "selector": {
+                        "color": "#aeccc6",
+                        "font_style": null,
+                        "font_weight": null
+                    },
+                    "selector.pseudo": {
+                        "color": "#d699b6",
                         "font_style": null,
                         "font_weight": null
                     },
