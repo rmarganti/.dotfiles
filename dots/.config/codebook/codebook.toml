@@ -30,6 +30,7 @@ words = [
     "orpc",
     "phpstan",
     "pino",
+    "pnpm",
     "preprod",
     "reachlocal",
     "remeda",
@@ -44,4 +45,5 @@ words = [
     "vercel",
     "vitest",
     "zod",
+    "zustand",
 ]
