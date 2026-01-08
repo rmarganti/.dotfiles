@@ -1,6 +1,7 @@
 words = [
     "adpoint",
     "asdf",
+    "axios",
     "bullmq",
     "chakra",
     "clickthru",
@@ -20,6 +21,7 @@ words = [
     "gke",
     "graphql",
     "hasura",
+    "hono",
     "idp",
     "jsdom",
     "localiq",
