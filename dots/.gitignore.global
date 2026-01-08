@@ -1,8 +1,11 @@
+*~
 .DS_Store
+.claude/
 .env
+.local/
 .php_cs.cache
 .phpactor.json
 .phpunit.cache
 .phpunit.result.cache
+CLAUDE.md
 yarn-error.log
-*~
