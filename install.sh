@@ -105,5 +105,6 @@ symlink_or_ask ~/.dotfiles/dots/.config/lf ~/.config/lf
 symlink_or_ask ~/.dotfiles/dots/.config/opencode ~/.config/opencode
 symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
 symlink_or_ask ~/.dotfiles/dots/.config/television ~/.config/television
+symlink_or_ask ~/.dotfiles/dots/.config/tmux ~/.config/tmux
 symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
