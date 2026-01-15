@@ -287,26 +287,8 @@ vim.keymap.set(
 )
 
 ------------------------------------------------
--- Registers
+-- Yank file name, path
 ------------------------------------------------
-
--- Yank to system clipboard
-vim.keymap.set('n', '<Leader>y', '"+y')
-vim.keymap.set('x', '<Leader>y', '"+y')
-
--- Delete to system clipboard
-vim.keymap.set('n', '<Leader>d', '"+d')
-vim.keymap.set('x', '<Leader>d', '"+d')
-
--- Paste from system clipboard
-vim.keymap.set('n', '<Leader>p', '"+p')
-vim.keymap.set('n', '<Leader>P', '"+P')
-vim.keymap.set('x', '<Leader>p', '"+p')
-vim.keymap.set('x', '<Leader>P', '"+P')
-
--- Replace from system clipboard
-vim.keymap.set('n', '<Leader>gr', '"+gr', { remap = true })
-vim.keymap.set('x', '<Leader>gr', '"+gr', { remap = true })
 
 -- Yank File name to system clipboard.
 vim.keymap.set('n', '<Leader>yf', ':let @+ = expand("%:t")<CR>')

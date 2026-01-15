@@ -98,6 +98,9 @@ vim.opt.winborder = 'rounded'
 vim.opt.title = true
 vim.opt.titlestring = '%{fnamemodify(getcwd(), ":t")}'
 
+-- Use system clipboard
+vim.opt.clipboard = 'unnamedplus'
+
 ------------------------------------------------
 --
 -- Text search, tabs, indents.
