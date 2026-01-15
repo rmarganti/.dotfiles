@@ -15,6 +15,7 @@
     "show_whitespaces": "all",
     "tabs": { "show_diagnostics": "all" },
     "vim_mode": true,
+    "which_key": { "enabled": true },
 
     "file_scan_exclusions": [
         "**/*.min.cjs",
@@ -34,12 +35,12 @@
         "**/node_modules",
         "**/dist",
         ".nx",
-        ".yarn"
+        ".yarn",
     ],
     "file_scan_inclusions": [".env*", "docker-compose.*.yml"],
 
     "file_finder": {
-        "include_ignored": "all"
+        "include_ignored": "all",
     },
 
     "auto_install_extensions": {
@@ -65,7 +66,7 @@
         "sql": true,
         "terraform": true,
         "toml": true,
-        "xml": true
+        "xml": true,
     },
 
     // [ AI/Agent ]------------------------------------
@@ -74,22 +75,22 @@
         "default_profile": "write",
         "default_model": {
             "provider": "copilot_chat",
-            "model": "claude-haiku-4.5"
+            "model": "claude-sonnet-4.5",
         },
         "always_allow_tool_actions": true,
         "model_parameters": [],
-        "use_modifier_to_send": true
+        "use_modifier_to_send": true,
     },
     "features": {
-        "edit_prediction_provider": "zed"
+        "edit_prediction_provider": "zed",
     },
 
     // [ Git ]-----------------------------------------
 
     "git": {
         "inline_blame": {
-            "enabled": false
-        }
+            "enabled": false,
+        },
     },
 
     // [ Languages ]-----------------------------------
@@ -101,20 +102,20 @@
             "**/templates/**/*.yml",
             "**/helmfile.d/**/*.yaml",
             "**/helmfile.d/**/*.yml",
-            "**/values*.yaml"
+            "**/values*.yaml",
         ],
         "JSONC": [".prettierrc", "project.json"],
         "Shell Script": [".*.env"],
         "XML": ["*.mjml"],
-        "YAML": ["~/.kube/config"]
+        "YAML": ["~/.kube/config"],
     },
     "languages": {
         "JavaScript": {
             "formatter": [
                 { "code_action": "source.fixAll.eslint" },
                 { "code_action": "source.organizeImports" },
-                "prettier"
-            ]
+                "prettier",
+            ],
         },
 
         "Lua": {
@@ -126,49 +127,49 @@
                         "--respect-ignores",
                         "--stdin-filepath",
                         "{buffer_path}",
-                        "-"
-                    ]
-                }
-            }
+                        "-",
+                    ],
+                },
+            },
         },
 
         "PHP": {
             "code_actions_on_format": {
-                "source.fixAll.phpactor.phpCsFixer": true
+                "source.fixAll.phpactor.phpCsFixer": true,
             },
             "language_servers": [
                 "phpactor",
                 "!intelephense",
                 "!phptools",
-                "..."
+                "...",
             ],
             "prettier": {
-                "allowed": false
-            }
+                "allowed": false,
+            },
         },
 
         "SQL": {
             "formatter": {
                 "external": {
-                    "command": "sql-formatter"
-                }
-            }
+                    "command": "sql-formatter",
+                },
+            },
         },
 
         "TypeScript": {
             "formatter": [
                 { "code_action": "source.fixAll.eslint" },
                 { "code_action": "source.organizeImports" },
-                "prettier"
-            ]
+                "prettier",
+            ],
         },
 
         "TSX": {
             "formatter": [
                 { "code_action": "source.fixAll.eslint" },
                 { "code_action": "source.organizeImports" },
-                "prettier"
-            ]
+                "prettier",
+            ],
         },
 
         "Shell Script": {
@@ -179,15 +180,15 @@
                         "--filename",
                         "{buffer_path}",
                         "--indent",
-                        "4"
-                    ]
-                }
-            }
+                        "4",
+                    ],
+                },
+            },
         },
 
         "XML": {
-            "formatter": "prettier"
-        }
+            "formatter": "prettier",
+        },
     },
 
     // [ Language Servers ]----------------------------
@@ -195,22 +196,22 @@
     "lsp": {
         "biome": {
             "settings": {
-                "require_config_file": true
-            }
+                "require_config_file": true,
+            },
         },
         "rust-analyzer": {
             "initialization_options": {
                 "check": {
-                    "command": "clippy" // rust-analyzer.check.command (default: "check")
-                }
-            }
-        }
+                    "command": "clippy", // rust-analyzer.check.command (default: "check")
+                },
+            },
+        },
     },
 
     // [ UI ]------------------------------------------
 
     "active_pane_modifiers": {
-        "inactive_opacity": 0.625
+        "inactive_opacity": 0.625,
     },
     "agent_buffer_font_size": 14,
     "agent_ui_font_size": 15,
@@ -223,7 +224,7 @@
         "dock": "right",
         "default_width": 640, // Why does this have to be bigger than other panels?
         "line_height": "standard",
-        "minimum_contrast": 0
+        "minimum_contrast": 0,
     },
     "theme": "Neverforest",
     "ui_font_size": 15,
@@ -240,6 +241,6 @@
 
     "search": {
         "case_sensitive": true,
-        "regex": true
-    }
+        "regex": true,
+    },
 }
