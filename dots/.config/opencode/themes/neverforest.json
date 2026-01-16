@@ -3,7 +3,7 @@
     "defs": {
         "bg_darker": "#0d1011",
         "bg_dark": "#181c1e",
-        "bg": "#1d2226",
+        "bg": "none",
         "bg_light": "#23292e",
         "bg_lighter": "#2a3137",
         "bg_lightest": "#30383f",
