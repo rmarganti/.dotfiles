@@ -19,5 +19,8 @@ bell-features = no-attention,title
 # Sends Ctrl+Space (tmux prefix) followed by Shift+T
 keybind = opt+cmd+o=text:\x00s
 
+# Trigger tmux zoom toggle
+keybind = shift+cmd+enter=text:\x00z
+
 # Trigger telescope file finder (escape, space, s, f)
 keybind = cmd+p=text:\x1b sf
