@@ -17,7 +17,7 @@ bell-features = no-attention,title
 
 # Trigger tmux-session-wizard (prefix + T)
 # Sends Ctrl+Space (tmux prefix) followed by Shift+T
-keybind = opt+cmd+o=text:\x00T
+keybind = opt+cmd+o=text:\x00s
 
 # Trigger telescope file finder (escape, space, s, f)
 keybind = cmd+p=text:\x1b sf
