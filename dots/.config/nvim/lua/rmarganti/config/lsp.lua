@@ -203,7 +203,7 @@ M.clients = {
     },
 
     helm_ls = {
-        fomatting_enabled = true,
+        formatting_enabled = true,
     },
 
     -- TOML
@@ -212,6 +212,7 @@ M.clients = {
     },
 
     yamlls = {
+        formatting_enabled = false,
         setup = {
             settings = {
                 yaml = {
@@ -227,12 +228,6 @@ M.clients = {
 
     codebook = {
         formatting_enabled = false,
-        setup = {
-            cmd = {
-                vim.fn.stdpath('data') .. '/mason/bin/codebook-lsp',
-                'serve',
-            },
-        },
     },
 }
 

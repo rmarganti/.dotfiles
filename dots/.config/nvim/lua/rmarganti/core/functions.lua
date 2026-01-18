@@ -89,7 +89,8 @@ M.format = function(is_auto_format)
         require('conform').format({
             async = should_format_async,
             filter = function(client)
-                return user_lsp_config.clients[client.name].formatting_enabled
+                local client_config = user_lsp_config.clients[client.name]
+                return client_config and client_config.formatting_enabled
             end,
         })
         return
