@@ -297,7 +297,7 @@ vim.keymap.set('n', '<Leader>yf', ':let @+ = expand("%:t")<CR>')
 vim.keymap.set('n', '<Leader>ya', ':let @+ = expand("%:p")<CR>')
 
 -- Yank file Relative path to system clipboard.
-vim.keymap.set('n', '<Leader>yr', ':let @+ = expand("%")<CR>')
+vim.keymap.set('n', '<Leader>yr', ':let @+ = expand("%:.")<CR>')
 
 ------------------------------------------------
 -- Search
