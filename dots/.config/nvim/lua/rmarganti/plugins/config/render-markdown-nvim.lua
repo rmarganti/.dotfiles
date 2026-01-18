@@ -1,5 +1,5 @@
 -- Used for both configuring and lazy-loading the plugin
-local file_types = { 'markdown', 'Avante', 'codecompanion' }
+local file_types = { 'markdown' }
 
 return {
     'MeanderingProgrammer/render-markdown.nvim',

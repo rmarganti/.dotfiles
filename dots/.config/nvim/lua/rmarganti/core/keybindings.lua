@@ -433,31 +433,6 @@ vim.keymap.set('n', '<Leader>os', ':ObsidianSearch<CR>', { desc = 'Obsidian Sear
 vim.keymap.set('n', '<Leader>oT', ':ObsidianTags<CR>', { desc = 'Obsidian Tags' })
 
 ------------------------------------------------
--- AI
-------------------------------------------------
-
-vim.keymap.set(
-    { 'v', 'x', 's' },
-    '<Leader>ai',
-    ':CodeCompanion ',
-    { desc = 'CodeCompanion: Inline' }
-)
-
-vim.keymap.set(
-    { 'n', 'v', 'x', 's' },
-    '<Leader>ac',
-    '<Cmd>CodeCompanionChat Toggle<CR>',
-    { desc = 'CodeCompanion: Chat' }
-)
-
-vim.keymap.set(
-    { 'n', 'v', 'x', 's' },
-    '<Leader>aa',
-    '<Cmd>CodeCompanionActions<CR>',
-    { desc = 'CodeCompanion: Actions' }
-)
-
-------------------------------------------------
 -- Misc
 ------------------------------------------------
 

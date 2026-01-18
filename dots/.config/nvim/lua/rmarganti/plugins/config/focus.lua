@@ -1,5 +1,4 @@
 return {
-
     'nvim-focus/focus.nvim',
     version = '*',
     event = 'VeryLazy',
@@ -12,7 +11,7 @@ return {
         })
 
         -- local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
-        local ignore_filetypes = { 'fugitiveblame', 'codecompanion' }
+        local ignore_filetypes = { 'fugitiveblame' }
 
         local augroup = vim.api.nvim_create_augroup('FocusDisable', { clear = true })
 

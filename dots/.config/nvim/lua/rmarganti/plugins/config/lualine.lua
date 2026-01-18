@@ -28,7 +28,7 @@ local M = {
                         separator = { right = '' },
                     },
                 },
-                lualine_c = { 'diff', 'diagnostics', 'filename', 'codecompanion' },
+                lualine_c = { 'diff', 'diagnostics', 'filename' },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
                 lualine_y = {
                     {
