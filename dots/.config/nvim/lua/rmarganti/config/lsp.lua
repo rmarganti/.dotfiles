@@ -220,6 +220,20 @@ M.clients = {
             },
         },
     },
+
+    ------------------------------------------------
+    -- Spell Checking
+    ------------------------------------------------
+
+    codebook = {
+        formatting_enabled = false,
+        setup = {
+            cmd = {
+                vim.fn.stdpath('data') .. '/mason/bin/codebook-lsp',
+                'serve',
+            },
+        },
+    },
 }
 
 return M
