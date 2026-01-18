@@ -1,0 +1,16 @@
+words = [
+    "bashls",
+    "cssls",
+    "dockerls",
+    "golangci",
+    "gopls",
+    "jsonls",
+    "lspconfig",
+    "phpactor",
+    "prismals",
+    "stylua",
+    "taplo",
+    "terraformls",
+    "vtsls",
+    "yamlls",
+]
