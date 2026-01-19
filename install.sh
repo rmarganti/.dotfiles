@@ -76,23 +76,6 @@ symlink_or_ask ~/.dotfiles/dots/.gitconfig ~/.gitconfig
 symlink_or_ask ~/.dotfiles/dots/.gitignore.global ~/.gitignore.global
 
 #----------------------------------------------------------------
-# Vim + Neovim
-#----------------------------------------------------------------
-
-# vim config
-symlink_or_ask ~/.dotfiles/dots/.vim ~/.vim
-symlink_or_ask ~/.dotfiles/dots/.vimrc ~/.vimrc
-symlink_or_ask ~/.dotfiles/dots/.config/nvim ~/.config/nvim
-symlink_or_ask ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
-
-# install vim-plug
-if [ ! -d ~/.dotfiles/editor/vim/autoload/plug.vim ]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +qall
-fi
-
-#----------------------------------------------------------------
 # Misc
 #----------------------------------------------------------------
 
@@ -102,6 +85,7 @@ symlink_or_ask ~/.dotfiles/dots/.config/ghostty ~/.config/ghostty
 symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
 symlink_or_ask ~/.dotfiles/dots/.config/lazygit ~/.config/lazygit
 symlink_or_ask ~/.dotfiles/dots/.config/lf ~/.config/lf
+symlink_or_ask ~/.dotfiles/dots/.config/nvim ~/.config/nvim
 symlink_or_ask ~/.dotfiles/dots/.config/opencode ~/.config/opencode
 symlink_or_ask ~/.dotfiles/dots/.config/phpactor ~/.config/phpactor
 symlink_or_ask ~/.dotfiles/dots/.config/television ~/.config/television
