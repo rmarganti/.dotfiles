@@ -51,6 +51,61 @@ vim.keymap.set('n', '<Leader>jt', '<Cmd>lua MiniBracketed.treesitter("forward")<
 vim.keymap.set('n', '<Leader>kt', '<Cmd>lua MiniBracketed.treesitter("backward")<CR>')
 
 ------------------------------------------------
+-- AI Sidekick
+------------------------------------------------
+
+-- Sidekick Next Edit Suggestions - Jump to or Apply
+vim.keymap.set({ 'n', 'i' }, '<Tab>', function()
+    -- if there is a next edit, jump to it, otherwise apply it if any
+    if not require('sidekick').nes_jump_or_apply() then
+        return '<Tab>' -- fallback to normal tab
+    end
+end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
+
+-- Sidekick CLI Toggle
+vim.keymap.set({ 'n', 't', 'i', 'x' }, '<C-.>', function()
+    require('sidekick.cli').toggle()
+end, { desc = 'Sidekick Toggle' })
+
+-- Sidekick CLI - Select Tool
+vim.keymap.set('n', '<Leader>as', function()
+    require('sidekick.cli').select()
+end, { desc = 'AI Select CLI tool' })
+
+-- Sidekick CLI - Close Session
+vim.keymap.set('n', '<Leader>ad', function()
+    require('sidekick.cli').close()
+end, { desc = 'AI Detach CLI Session' })
+
+-- Sidekick CLI - Send Context
+vim.keymap.set({ 'x', 'n' }, '<Leader>at', function()
+    require('sidekick.cli').send({ msg = '{this}' })
+end, { desc = 'AI Send This' })
+
+vim.keymap.set('n', '<Leader>af', function()
+    require('sidekick.cli').send({ msg = '{file}' })
+end, { desc = 'AI Send File' })
+
+vim.keymap.set('x', '<Leader>av', function()
+    require('sidekick.cli').send({ msg = '{selection}' })
+end, { desc = 'AI Send Visual Selection' })
+
+-- Sidekick CLI - Select Prompt
+vim.keymap.set({ 'n', 'x' }, '<Leader>ap', function()
+    require('sidekick.cli').prompt()
+end, { desc = 'AI Select Prompt' })
+
+-- Sidekick NES - Clear Suggestions
+vim.keymap.set('n', '<Leader>ac', function()
+    require('sidekick.nes').clear()
+end, { desc = 'AI Clear NES' })
+
+-- Sidekick NES - Toggle
+vim.keymap.set('n', '<Leader>aT', function()
+    require('sidekick.nes').toggle()
+end, { desc = 'AI Toggle NES' })
+
+------------------------------------------------
 -- Buffers
 ------------------------------------------------
 
