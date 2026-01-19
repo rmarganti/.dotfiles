@@ -62,20 +62,10 @@ vim.keymap.set({ 'n', 'i' }, '<Tab>', function()
     end
 end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
 
--- Sidekick CLI Toggle
-vim.keymap.set({ 'n', 't', 'i', 'x' }, '<C-.>', function()
-    require('sidekick.cli').toggle()
-end, { desc = 'Sidekick Toggle' })
-
 -- Sidekick CLI - Select Tool
 vim.keymap.set('n', '<Leader>as', function()
     require('sidekick.cli').select()
 end, { desc = 'AI Select CLI tool' })
-
--- Sidekick CLI - Close Session
-vim.keymap.set('n', '<Leader>ad', function()
-    require('sidekick.cli').close()
-end, { desc = 'AI Detach CLI Session' })
 
 -- Sidekick CLI - Send Context
 vim.keymap.set({ 'x', 'n' }, '<Leader>at', function()
