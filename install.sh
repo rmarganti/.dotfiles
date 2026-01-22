@@ -80,6 +80,7 @@ symlink_or_ask ~/.dotfiles/dots/.gitignore.global ~/.gitignore.global
 #----------------------------------------------------------------
 
 symlink_or_ask ~/.dotfiles/dots/.config/bat ~/.config/bat
+symlink_or_ask ~/.dotfiles/dots/.config/btop ~/.config/btop
 symlink_or_ask ~/.dotfiles/dots/.config/codebook ~/.config/codebook
 symlink_or_ask ~/.dotfiles/dots/.config/ghostty ~/.config/ghostty
 symlink_or_ask ~/.dotfiles/dots/.config/karabiner ~/.config/karabiner
