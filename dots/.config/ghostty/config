@@ -15,8 +15,7 @@ bell-features = no-attention,title
 # Keybinds
 # ------------------------------------------------
 
-# Trigger tmux-session-wizard (prefix + T)
-# Sends Ctrl+Space (tmux prefix) followed by Shift+T
+# Trigger tmux-session-wizard (prefix + s)
 keybind = opt+cmd+o=text:\x00s
 
 # Trigger tmux zoom toggle
@@ -25,5 +24,17 @@ keybind = shift+cmd+enter=text:\x00z
 # Trigger telescope file finder (escape, space, s, f)
 keybind = cmd+p=text:\x1b sf
 
+
 # Trigger custom tmux binding (prefix + escape) for clearing the screen
 keybind = cmd+k=text:\x00\x1B
+
+# Windows
+keybind = cmd+digit_1=text:\x001
+keybind = cmd+digit_2=text:\x002
+keybind = cmd+digit_3=text:\x003
+keybind = cmd+digit_4=text:\x004
+keybind = cmd+digit_5=text:\x005
+keybind = cmd+digit_6=text:\x006
+keybind = cmd+digit_7=text:\x007
+keybind = cmd+digit_8=text:\x008
+keybind = cmd+digit_9=text:\x009
