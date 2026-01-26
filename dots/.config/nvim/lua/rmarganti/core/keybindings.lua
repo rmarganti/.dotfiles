@@ -331,6 +331,26 @@ vim.keymap.set(
     [[<Cmd>lua require("telescope").extensions.ghn.ghn({ layout_strategy = 'horizontal' })<CR>]]
 )
 
+-- GitHub browse Repo
+vim.keymap.set('n', '<Leader>ghr', function()
+    vim.fn.system('gh browse &')
+end)
+
+-- GitHub browse File on Main
+vim.keymap.set('n', '<Leader>ghfm', function()
+    local file = vim.fn.expand('%')
+    local row = vim.fn.line('.')
+    vim.fn.system('gh browse ' .. file .. ':' .. row .. ' &')
+end)
+
+-- GitHub browse File at Commit
+vim.keymap.set('n', '<Leader>ghfc', function()
+    local file = vim.fn.expand('%')
+    local row = vim.fn.line('.')
+    local commit = vim.fn.system('git rev-parse HEAD'):gsub('\n', '')
+    vim.fn.system('gh browse ' .. file .. ':' .. row .. ' --commit=' .. commit .. ' &')
+end)
+
 ------------------------------------------------
 -- Yank file name, path
 ------------------------------------------------
