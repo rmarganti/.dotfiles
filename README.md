@@ -43,6 +43,7 @@ This file provides a unified configuration for all IDE/editor workflows (Neovim,
 - [neovim](https://github.com/neovim/neovim) - modal text editor
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - quick text search
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - quickly switch between recent directories
+- [sesh](https://github.com/joshmedeski/sesh) - switch between tmux sessions
 
 ### Homebrew Casks
 
