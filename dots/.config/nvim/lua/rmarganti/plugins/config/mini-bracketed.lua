@@ -1,7 +1,7 @@
--- mini.nvim https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bracketed.md
+-- mini.nvim https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-bracketed.md
 
 local M = {
-    'echasnovski/mini.bracketed',
+    'nvim-mini/mini.bracketed',
     version = false,
     event = 'VeryLazy',
 }

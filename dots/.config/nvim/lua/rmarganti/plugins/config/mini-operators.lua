@@ -1,5 +1,5 @@
 local M = {
-    'echasnovski/mini.operators',
+    'nvim-mini/mini.operators',
     version = false,
 }
 

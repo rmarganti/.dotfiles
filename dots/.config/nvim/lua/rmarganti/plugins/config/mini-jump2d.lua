@@ -1,7 +1,7 @@
--- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
+-- https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-jump2d.md
 
 local M = {
-    'echasnovski/mini.jump2d',
+    'nvim-mini/mini.jump2d',
     version = false,
     event = 'VeryLazy',
 }
