@@ -21,12 +21,14 @@ keybind = opt+cmd+o=text:\x00s
 # Trigger tmux zoom toggle
 keybind = shift+cmd+enter=text:\x00z
 
-# Trigger telescope file finder (escape, space, s, f)
-keybind = cmd+p=text:\x1b sf
-
-
 # Trigger custom tmux binding (prefix + escape) for clearing the screen
 keybind = cmd+k=text:\x00\x1B
+
+# Trigger tmux kill pane (prefix + x)
+keybind = cmd+w=text:\x00x
+
+# Trigger telescope file finder n NeoVim (escape, space, s, f)
+keybind = cmd+p=text:\x1b sf
 
 # Windows
 keybind = cmd+digit_1=text:\x001
