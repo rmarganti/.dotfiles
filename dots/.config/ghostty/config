@@ -15,7 +15,7 @@ bell-features = no-attention,title
 # Keybinds
 # ------------------------------------------------
 
-# Trigger tmux-session-wizard (prefix + s)
+# Trigger sesh session manager (prefix + s)
 keybind = opt+cmd+o=text:\x00s
 
 # Trigger tmux zoom toggle
