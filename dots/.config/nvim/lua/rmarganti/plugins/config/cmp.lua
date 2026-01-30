@@ -58,6 +58,17 @@ function M.config()
             end,
         },
 
+        window = {
+            completion = {
+                border = 'rounded',
+                winhighlight = 'Normal:CmpNormal,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
+            },
+            documentation = {
+                border = 'rounded',
+                winhighlight = 'Normal:CmpDocNormal,FloatBorder:CmpDocBorder',
+            },
+        },
+
         mapping = cmp.mapping.preset.insert({
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
