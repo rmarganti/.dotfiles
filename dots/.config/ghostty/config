@@ -24,6 +24,9 @@ keybind = shift+cmd+enter=text:\x00z
 # Trigger custom tmux binding (prefix + escape) for clearing the screen
 keybind = cmd+k=text:\x00\x1B
 
+# Trigger tmux create window (prefix + c)
+keybind = cmd+t=text:\x00c
+
 # Trigger tmux kill pane (prefix + x)
 keybind = cmd+w=text:\x00x
 
