@@ -336,18 +336,28 @@ vim.keymap.set('n', '<Leader>ghr', function()
 end)
 
 -- GitHub browse File on Main
-vim.keymap.set('n', '<Leader>ghfm', function()
+vim.keymap.set({ 'n', 'v' }, '<Leader>ghfm', function()
     local file = vim.fn.expand('%')
-    local row = vim.fn.line('.')
-    vim.fn.system('gh browse ' .. file .. ':' .. row .. ' &')
+    local start_row = vim.fn.line('.')
+    local end_row = vim.fn.line('v')
+    if start_row > end_row then
+        start_row, end_row = end_row, start_row
+    end
+    local range = start_row == end_row and start_row or (start_row .. '-' .. end_row)
+    vim.fn.system('gh browse ' .. file .. ':' .. range .. ' &')
 end)
 
 -- GitHub browse File at Commit
-vim.keymap.set('n', '<Leader>ghfc', function()
+vim.keymap.set({ 'n', 'v' }, '<Leader>ghfc', function()
     local file = vim.fn.expand('%')
-    local row = vim.fn.line('.')
+    local start_row = vim.fn.line('.')
+    local end_row = vim.fn.line('v')
+    if start_row > end_row then
+        start_row, end_row = end_row, start_row
+    end
+    local range = start_row == end_row and start_row or (start_row .. '-' .. end_row)
     local commit = vim.fn.system('git rev-parse HEAD'):gsub('\n', '')
-    vim.fn.system('gh browse ' .. file .. ':' .. row .. ' --commit=' .. commit .. ' &')
+    vim.fn.system('gh browse ' .. file .. ':' .. range .. ' --commit=' .. commit .. ' &')
 end)
 
 ------------------------------------------------
