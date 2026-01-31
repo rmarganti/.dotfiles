@@ -121,8 +121,7 @@ vim.keymap.set('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>')
 vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
 
 -- Code Actions.
-vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set('v', '<Leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set({ 'n', 'v' }, '<Leader>ca', vim.lsp.buf.code_action)
 
 vim.keymap.set('n', '<Leader>cd', function()
     vim.diagnostic.open_float({ border = 'rounded' })
@@ -147,7 +146,7 @@ vim.keymap.set(
 )
 
 -- Code Format
-vim.keymap.set('n', '<Leader>cf', function()
+vim.keymap.set({ 'n', 'v' }, '<Leader>cf', function()
     core_fns.format(false)
 end)
 
@@ -514,7 +513,7 @@ vim.keymap.set('n', '<Leader>qQ', ':qa!<CR>')
 vim.keymap.set('n', 'gJ', '<Cmd>TSJToggle<CR>')
 
 -- Jump to character in current window.
-vim.keymap.set('n', '<Leader><Leader>', function()
+vim.keymap.set({ 'n', 'x', 'o' }, '<Leader><Leader>', function()
     local MiniJump2d = require('mini.jump2d')
     MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
 end)
