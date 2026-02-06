@@ -36,6 +36,7 @@ function M.config()
             info_visible = { bg = p.bg_light.gui },
             info_diagnostic = { bg = p.bg_light.gui },
             info_diagnostic_visible = { bg = p.bg_light.gui },
+            info_selected = { fg = a.fg.gui, italic = false },
             modified = { bg = p.bg_light.gui },
             modified_visible = { bg = p.bg_light.gui },
             numbers = { bg = p.bg_light.gui },
@@ -60,6 +61,10 @@ function M.config()
         options = {
             diagnostics = 'nvim_lsp',
             diagnostics_indicator = function(_, level, _, _)
+                if level:match('info') then
+                    return ''
+                end
+
                 local icon = level:match('error') and ' ' or ' '
                 return ' ' .. icon
             end,

@@ -18,12 +18,32 @@ vim.keymap.set('n', 'Q', '<Nop>')
 -- Jump to next/prev
 ------------------------------------------------
 
--- Diagnostics
+-- Diagnostics (minimum WARN level)
 vim.keymap.set('n', '<Leader>jd', function()
-    vim.diagnostic.goto_next({ float = { border = 'rounded' } })
+    vim.diagnostic.goto_next({
+        float = { border = 'rounded' },
+        severity = { min = vim.diagnostic.severity.WARN },
+    })
 end)
 vim.keymap.set('n', '<Leader>kd', function()
-    vim.diagnostic.goto_prev({ float = { border = 'rounded' } })
+    vim.diagnostic.goto_prev({
+        float = { border = 'rounded' },
+        severity = { min = vim.diagnostic.severity.WARN },
+    })
+end)
+
+-- Diagnostics (INFO level)
+vim.keymap.set('n', '<Leader>ji', function()
+    vim.diagnostic.goto_next({
+        float = { border = 'rounded' },
+        severity = vim.diagnostic.severity.INFO,
+    })
+end)
+vim.keymap.set('n', '<Leader>ki', function()
+    vim.diagnostic.goto_prev({
+        float = { border = 'rounded' },
+        severity = vim.diagnostic.severity.INFO,
+    })
 end)
 
 -- Quickfix
