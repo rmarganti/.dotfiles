@@ -11,30 +11,51 @@ function M.config()
         log_level = vim.log.levels.DEBUG,
 
         formatters_by_ft = {
-            css = { 'prettierd' },
+            css = { 'oxfmt', 'prettierd' },
             go = { 'gofmt' },
-            graphql = { 'prettierd' },
-            handlebars = { 'prettierd' },
-            html = { 'prettierd' },
-            javascript = { 'prettierd' },
-            javascriptreact = { 'prettierd' },
-            json = { 'prettierd' },
-            jsonc = { 'prettierd' },
-            less = { 'prettierd' },
+            graphql = { 'oxfmt', 'prettierd' },
+            handlebars = { 'oxfmt', 'prettierd' },
+            html = { 'oxfmt', 'prettierd' },
+            javascript = { 'oxfmt', 'biome', 'prettierd', stop_after_first = true },
+            javascriptreact = { 'oxfmt', 'biome', 'prettierd', stop_after_first = true },
+            json = { 'oxfmt', 'prettierd' },
+            jsonc = { 'oxfmt', 'prettierd' },
+            less = { 'oxfmt', 'prettierd' },
             lua = { 'stylua' },
-            markdown = { 'prettierd' },
+            markdown = { 'oxfmt', 'prettierd' },
             php = { 'php_cs_fixer' },
             rust = { 'rustfmt' },
-            scss = { 'prettierd' },
+            scss = { 'oxfmt', 'prettierd' },
             sh = { 'shfmt' },
             terraform = { 'terraform_fmt' },
-            toml = { 'taplo' },
-            typescript = { 'prettierd' },
-            typescriptreact = { 'prettierd' },
-            vimwiki = { 'prettierd' },
-            vue = { 'prettierd' },
+            toml = { 'toml', 'taplo' },
+            typescript = { 'oxfmt', 'biome', 'prettierd', stop_after_first = true },
+            typescriptreact = { 'oxfmt', 'biome', 'prettierd', stop_after_first = true },
+            vimwiki = { 'oxftm', 'prettierd' },
+            vue = { 'oxfmt', 'prettierd' },
             xml = { 'xmlformatter' },
-            yaml = { 'prettierd' },
+            yaml = { 'oxfmt', 'prettierd' },
+        },
+
+        formatters = {
+            oxfmt = {
+                condition = function(_, ctx)
+                    return vim.fs.find({ '.oxfmtrc.json', '.oxfmtrc.jsonc' }, {
+                        path = ctx.filename,
+                        upward = true,
+                        stop = vim.uv.os_homedir(),
+                    })[1] ~= nil
+                end,
+            },
+            biome = {
+                condition = function(_, ctx)
+                    return vim.fs.find({ 'biome.json', 'biome.jsonc' }, {
+                        path = ctx.filename,
+                        upward = true,
+                        stop = vim.uv.os_homedir(),
+                    })[1] ~= nil
+                end,
+            },
         },
     })
 end
