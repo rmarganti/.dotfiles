@@ -357,7 +357,7 @@ end)
 
 -- GitHub browse File on Main
 vim.keymap.set({ 'n', 'v' }, '<Leader>ghfm', function()
-    local file = vim.fn.expand('%')
+    local file = vim.fn.expand('%:.')
     local start_row = vim.fn.line('.')
     local end_row = vim.fn.line('v')
     if start_row > end_row then
@@ -369,7 +369,7 @@ end)
 
 -- GitHub browse File at Commit
 vim.keymap.set({ 'n', 'v' }, '<Leader>ghfc', function()
-    local file = vim.fn.expand('%')
+    local file = vim.fn.expand('%:.')
     local start_row = vim.fn.line('.')
     local end_row = vim.fn.line('v')
     if start_row > end_row then
