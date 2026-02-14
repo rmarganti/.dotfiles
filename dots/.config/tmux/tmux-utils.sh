@@ -32,14 +32,23 @@ refresh_bash_env() {
 }
 
 kill_processes() {
-	killall -9 opencode php nvim node 2>/dev/null
+	killall -9 nvim node opencode php 2>/dev/null
 	tmux display-message "Killed opencode, php, nvim, node processes"
 }
 
+choices=(
+	"Clear all terminals"
+	"Refresh bash env"
+	"Kill nvim, node, opencode, php"
+)
+
+choice_count=${#choices[@]}
+height=$((choice_count + 4))
+
 main() {
 	local choice
-	choice=$(printf "Clear all terminals\nRefresh bash env\nKill opencode, php, nvim, node" |
-		fzf-tmux -p 40%,30% --no-sort --ansi --border-label ' tmux utils ' --prompt '⚡  ')
+	choice=$(printf '%s\n' "${choices[@]}" |
+		fzf-tmux -p 50,$height --no-sort --ansi --border-label ' tmux utils ' --prompt '⚡  ')
 
 	case "$choice" in
 	"Clear all terminals")
@@ -48,7 +57,7 @@ main() {
 	"Refresh bash env")
 		refresh_bash_env
 		;;
-	"Kill opencode, php, nvim, node")
+	"Kill nvim, node, opencode, php")
 		kill_processes
 		;;
 	esac
