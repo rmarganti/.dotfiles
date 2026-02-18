@@ -1,3 +1,2 @@
-*
-!config.json
-!themes
+bun.lock
+node_modules
