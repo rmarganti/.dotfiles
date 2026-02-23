@@ -4,5 +4,11 @@
     "keybinds": {
         "messages_page_up": "ctrl+u",
         "messages_page_down": "ctrl+d"
+    },
+    "mcp": {
+        "overseer": {
+            "type": "local",
+            "command": ["npx", "@dmmulroy/overseer", "mcp"]
+        }
     }
 }
