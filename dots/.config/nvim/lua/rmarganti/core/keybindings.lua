@@ -32,17 +32,23 @@ vim.keymap.set('n', '<Leader>kd', function()
     })
 end)
 
--- Diagnostics (INFO level)
+-- Diagnostics (INFO + HINT levels)
 vim.keymap.set('n', '<Leader>ji', function()
     vim.diagnostic.goto_next({
         float = { border = 'rounded' },
-        severity = vim.diagnostic.severity.INFO,
+        severity = {
+            vim.diagnostic.severity.HINT,
+            vim.diagnostic.severity.INFO,
+        },
     })
 end)
 vim.keymap.set('n', '<Leader>ki', function()
     vim.diagnostic.goto_prev({
         float = { border = 'rounded' },
-        severity = vim.diagnostic.severity.INFO,
+        severity = {
+            vim.diagnostic.severity.HINT,
+            vim.diagnostic.severity.INFO,
+        },
     })
 end)
 
