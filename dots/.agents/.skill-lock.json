@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "skills": {
+    "visual-explainer": {
+      "source": "nicobailon/visual-explainer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nicobailon/visual-explainer.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "ade2031cc727f5ee7e4856bcb61a9b0bceda98ed",
+      "installedAt": "2026-02-20T15:10:30.774Z",
+      "updatedAt": "2026-02-20T15:10:30.774Z"
+    },
+    "build-skill": {
+      "source": "dmmulroy/.dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dmmulroy/.dotfiles.git",
+      "skillPath": "home/.config/opencode/skill/build-skill/SKILL.md",
+      "skillFolderHash": "8be964778c4429506f2cc4f47e04acc8593641b0",
+      "installedAt": "2026-02-24T03:41:21.590Z",
+      "updatedAt": "2026-02-24T03:41:21.590Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode"
+  ]
+}
