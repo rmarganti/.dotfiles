@@ -17,9 +17,12 @@
 # - Nested keys are layout names (window names)
 # - Values are arrays of shell commands, one per pane (horizontal split)
 # - Commands are executed in each pane sequentially
+# - If no configuration exists for the current directory, parent directories
+#   are checked until a match is found. Silently gives up if none found.
 
 CONFIG_FILE="$HOME/.config/tmux/quick-window.json"
 
+# Is this script running in Tmux?
 check_tmux() {
 	if [[ -z "$TMUX" ]]; then
 		echo "Error: Not running inside TMUX" >&2
@@ -27,6 +30,7 @@ check_tmux() {
 	fi
 }
 
+# Does our config file exist?
 check_config() {
 	if [[ ! -f "$CONFIG_FILE" ]]; then
 		exit 0
@@ -40,6 +44,23 @@ get_work_paths() {
 get_layouts_for_path() {
 	local work_path="$1"
 	jq -r ".\"$work_path\" | keys[]" "$CONFIG_FILE"
+}
+
+# Work up the directory tree to find the
+# closest matching work path in the config
+find_work_path() {
+	local cwd="$1"
+	local path="$cwd"
+
+	while [[ -n "$path" && "$path" != "/" ]]; do
+		if jq -e --arg path "$path" 'has($path)' "$CONFIG_FILE" >/dev/null 2>&1; then
+			echo "$path"
+			return 0
+		fi
+		path=$(dirname "$path")
+	done
+
+	return 1
 }
 
 get_commands_for_layout() {
@@ -73,11 +94,8 @@ create_window_with_layout() {
 	local commands
 	commands=$(get_commands_for_layout "$work_path" "$layout")
 
-	local cwd
-	cwd=$(tmux display-message -p '#{pane_current_path}')
-
 	local window_index
-	window_index=$(tmux new-window -c "$cwd" -n "$layout" -P -F '#{window_index}')
+	window_index=$(tmux new-window -c "$work_path" -n "$layout" -P -F '#{window_index}')
 	local last_pane="$window_index.0"
 
 	local index=0
@@ -88,7 +106,7 @@ create_window_with_layout() {
 		if [[ $index -eq 0 ]]; then
 			tmux send-keys -t "$last_pane" "$cmd" C-m
 		else
-			last_pane=$(tmux split-window -h -c "$cwd" -t "$last_pane" -P -F '#{pane_id}')
+			last_pane=$(tmux split-window -h -c "$work_path" -t "$last_pane" -P -F '#{pane_id}')
 			tmux send-keys -t "$last_pane" "$cmd" C-m
 		fi
 		index=$((index + 1))
@@ -105,10 +123,9 @@ main() {
 	cwd=$(tmux display-message -p '#{pane_current_path}')
 
 	local work_path
-	work_path=$(jq -r --arg cwd "$cwd" 'keys[] | select(. == $cwd)' "$CONFIG_FILE")
+	work_path=$(find_work_path "$cwd")
 
 	if [[ -z "$work_path" ]]; then
-		echo "no configuration found for current path: $cwd" >&2
 		exit 0
 	fi
 
