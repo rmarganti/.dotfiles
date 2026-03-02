@@ -27,6 +27,15 @@
       "skillFolderHash": "56959a2ddd833553648e4a884c344acd52e89434",
       "installedAt": "2026-02-25T18:29:42.409Z",
       "updatedAt": "2026-02-25T18:29:42.409Z"
+    },
+    "pnpm": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/antfu/skills.git",
+      "skillPath": "skills/pnpm/SKILL.md",
+      "skillFolderHash": "3e2f92c74abae6e9d2e4fc45b5d73a7b307348c9",
+      "installedAt": "2026-02-27T19:50:44.630Z",
+      "updatedAt": "2026-02-27T19:50:44.630Z"
     }
   },
   "dismissed": {
@@ -34,6 +43,7 @@
   },
   "lastSelectedAgents": [
     "amp",
+    "cline",
     "codex",
     "cursor",
     "gemini-cli",
