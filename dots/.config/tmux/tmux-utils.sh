@@ -32,7 +32,7 @@ refresh_bash_env() {
 }
 
 kill_processes() {
-	killall -9 nvim node opencode php 2>/dev/null
+	killall nvim node opencode php 2>/dev/null
 	tmux display-message "Killed opencode, php, nvim, node processes"
 }
 
