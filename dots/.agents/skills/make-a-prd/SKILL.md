@@ -22,7 +22,7 @@ Check with the user that these modules match their expectations. Check with the 
 6. Write the completed PRD to disk:
    - Run `date +%s` to get the current UTC timestamp.
    - Choose a concise, filesystem-friendly slug that describes the planned feature/update (e.g. `user-auth-refresh`, `bulk-export-api`).
-   - Write the PRD markdown to `.local/plans/${timestamp}-${slug}.md` in the current working directory (create the directory if it does not exist).
+   - Write the PRD markdown to `.local/prds/${timestamp}-${slug}.md` in the current working directory (create the directory if it does not exist).
 
 <prd-template>
 
