@@ -166,6 +166,10 @@ if command -v zoxide >/dev/null 2>&1; then
     eval "$(zoxide init bash)"
 fi
 
+if command -v gh >/dev/null 2>&1; then
+    eval "$(gh completion -s bash)"
+fi
+
 # Rust Cargo env
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
