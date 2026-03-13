@@ -31,6 +31,10 @@
                 "path": "./snippets/sh.json"
             },
             {
+                "language": "terraform",
+                "path": "./snippets/terraform.json"
+            },
+            {
                 "language": [
                     "javascript",
                     "javascriptreact",
