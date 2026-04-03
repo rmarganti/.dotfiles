@@ -1,0 +1,5 @@
+sessions
+auth.json
+logs
+state
+*.local.json

@@ -40,10 +40,12 @@ function backup_move() {
 
 function symlink_safe() {
 	echo "symlinking $1 to $2"
-	if [ -f $2 ]; then
-		backup_move $2 && ln -sf $1 $2
+	if [ -L "$2" ]; then
+		rm "$2" && ln -s "$1" "$2"
+	elif [ -e "$2" ]; then
+		backup_move "$2" && ln -s "$1" "$2"
 	else
-		ln -sf $1 $2
+		ln -s "$1" "$2"
 	fi
 }
 
@@ -80,6 +82,7 @@ symlink_or_ask ~/.dotfiles/dots/.gitignore.global ~/.gitignore.global
 #----------------------------------------------------------------
 
 symlink_or_ask ~/.dotfiles/dots/.agents ~/.agents
+symlink_or_ask ~/.dotfiles/dots/.pi ~/.pi
 symlink_or_ask ~/.dotfiles/dots/.config/bat ~/.config/bat
 symlink_or_ask ~/.dotfiles/dots/.config/btop ~/.config/btop
 symlink_or_ask ~/.dotfiles/dots/.config/codebook ~/.config/codebook
