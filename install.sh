@@ -97,3 +97,10 @@ symlink_or_ask ~/.dotfiles/dots/.config/television ~/.config/television
 symlink_or_ask ~/.dotfiles/dots/.config/tmux ~/.config/tmux
 symlink_or_ask ~/.dotfiles/dots/.config/wezterm ~/.config/wezterm
 symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
+
+#----------------------------------------------------------------
+# Bin scripts
+#----------------------------------------------------------------
+
+mkdir -p ~/.local/bin
+symlink_or_ask ~/.dotfiles/dots/.local/bin/ralph ~/.local/bin/ralph

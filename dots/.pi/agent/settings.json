@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.64.0",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.4",
+  "lastChangelogVersion": "0.65.0",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-sonnet-4.6",
   "theme": "neverforest",
   "packages": [
     "../../code/anno/pi/anno-review"
