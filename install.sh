@@ -103,4 +103,5 @@ symlink_or_ask ~/.dotfiles/dots/.config/zed ~/.config/zed
 #----------------------------------------------------------------
 
 mkdir -p ~/.local/bin
+symlink_or_ask ~/.dotfiles/dots/.local/bin/pi-live ~/.local/bin/pi-live
 symlink_or_ask ~/.dotfiles/dots/.local/bin/ralph ~/.local/bin/ralph

@@ -1,0 +1,240 @@
+#!/usr/bin/env bun
+
+const rawArgs = Bun.argv.slice(2);
+
+if (rawArgs.includes("--help") || rawArgs.includes("-h") || rawArgs.length === 0) {
+	console.log(`pi-live - human-readable streaming wrapper for pi
+
+Usage:
+  pi-live [pi args...] <prompt>
+
+Examples:
+  pi-live "summarize this repo"
+  pi-live --provider openai --model gpt-4o-mini "review src"
+  pi-live --tools read,grep,find,ls "inspect this project"
+
+Notes:
+  - Runs: pi --mode json ...
+  - Strips --print/-p and any explicit --mode flag
+  - Streams assistant text to stdout
+  - Streams tool activity, thinking, and errors to stderr
+  - Set PI_LIVE_SHOW_THINKING=0 to hide thinking output
+`);
+	process.exit(rawArgs.length === 0 ? 1 : 0);
+}
+
+const showThinking = process.env.PI_LIVE_SHOW_THINKING !== "0";
+const showTools = process.env.PI_LIVE_SHOW_TOOLS !== "0";
+const showToolOutput = process.env.PI_LIVE_SHOW_TOOL_OUTPUT !== "0";
+const maxChunkLength = Number(process.env.PI_LIVE_MAX_CHUNK_LENGTH || 4000);
+
+function sanitizeArgs(args: string[]) {
+	const out: string[] = [];
+	for (let i = 0; i < args.length; i++) {
+		const arg = args[i];
+		if (arg === "-p" || arg === "--print") continue;
+		if (arg === "--mode") {
+			i++;
+			continue;
+		}
+		if (arg.startsWith("--mode=")) continue;
+		out.push(arg);
+	}
+	return out;
+}
+
+function writeStdout(text: string) {
+	if (!text) return;
+	process.stdout.write(text);
+	stdoutAtLineStart = text.endsWith("\n");
+}
+
+function writeStderr(text: string) {
+	if (!text) return;
+	process.stderr.write(text);
+}
+
+function ensureAssistantLineBreak() {
+	if (!stdoutAtLineStart) writeStdout("\n");
+}
+
+function truncate(text: string) {
+	if (text.length <= maxChunkLength) return text;
+	return `${text.slice(0, maxChunkLength)}\n[truncated]\n`;
+}
+
+function normalizeNewlines(text: string) {
+	return text.replace(/\r\n/g, "\n");
+}
+
+function extractText(value: unknown): string {
+	if (value == null) return "";
+	if (typeof value === "string") return value;
+	if (typeof value === "number" || typeof value === "boolean") return String(value);
+	if (Array.isArray(value)) return value.map(extractText).filter(Boolean).join("");
+	if (typeof value !== "object") return "";
+
+	const obj = value as Record<string, unknown>;
+
+	if (typeof obj.delta === "string") return obj.delta;
+	if (typeof obj.text === "string") return obj.text;
+	if (typeof obj.stdout === "string" || typeof obj.stderr === "string") {
+		return `${typeof obj.stdout === "string" ? obj.stdout : ""}${typeof obj.stderr === "string" ? obj.stderr : ""}`;
+	}
+	if (typeof obj.message === "string") return obj.message;
+	if (typeof obj.errorMessage === "string") return obj.errorMessage;
+	if (typeof obj.content === "string") return obj.content;
+	if (Array.isArray(obj.content)) {
+		return obj.content
+			.map((item) => {
+				if (item && typeof item === "object" && "text" in item && typeof (item as { text?: unknown }).text === "string") {
+					return (item as { text: string }).text;
+				}
+				return extractText(item);
+			})
+			.filter(Boolean)
+			.join("");
+	}
+
+	return "";
+}
+
+const args = sanitizeArgs(rawArgs);
+const proc = Bun.spawn(["pi", "--mode", "json", ...args], {
+	stdout: "pipe",
+	stderr: "inherit",
+	stdin: "inherit",
+});
+
+let stdoutBuffer = "";
+let stdoutAtLineStart = true;
+let printedAssistantText = false;
+let inThinkingBlock = false;
+const toolOutputState = new Map<string, string>();
+
+function printThinkingPrefix() {
+	writeStderr("[thinking] ");
+}
+
+function printToolLine(line: string) {
+	ensureAssistantLineBreak();
+	writeStderr(`${line}\n`);
+}
+
+function printToolOutput(toolName: string, text: string) {
+	const normalized = truncate(normalizeNewlines(text));
+	if (!normalized.trim()) return;
+	ensureAssistantLineBreak();
+	writeStderr(`[tool ${toolName}] output:\n${normalized}`);
+	if (!normalized.endsWith("\n")) writeStderr("\n");
+}
+
+function handleEvent(event: any) {
+	if (!event || typeof event !== "object") return;
+
+	if (event.type === "message_update" && event.assistantMessageEvent) {
+		const assistantEvent = event.assistantMessageEvent;
+		if (assistantEvent.type === "thinking_start") {
+			if (showThinking) {
+				ensureAssistantLineBreak();
+				printThinkingPrefix();
+			}
+			inThinkingBlock = true;
+			return;
+		}
+		if (assistantEvent.type === "thinking_delta") {
+			if (showThinking && inThinkingBlock && typeof assistantEvent.delta === "string") {
+				writeStderr(assistantEvent.delta);
+			}
+			return;
+		}
+		if (assistantEvent.type === "thinking_end") {
+			if (showThinking && inThinkingBlock) writeStderr("\n");
+			inThinkingBlock = false;
+			return;
+		}
+		if (assistantEvent.type === "text_delta" && typeof assistantEvent.delta === "string") {
+			printedAssistantText = true;
+			writeStdout(assistantEvent.delta);
+		}
+		return;
+	}
+
+	if (event.type === "tool_execution_start") {
+		if (!showTools) return;
+		printToolLine(`[tool ${event.toolName}] calling...`);
+		return;
+	}
+
+	if (event.type === "tool_execution_update") {
+		if (!showTools || !showToolOutput) return;
+		const text = normalizeNewlines(extractText(event.partialResult));
+		if (!text) return;
+		const key = String(event.toolCallId ?? event.toolName ?? "tool");
+		const prev = toolOutputState.get(key) ?? "";
+		const next = text.startsWith(prev) ? text.slice(prev.length) : text;
+		toolOutputState.set(key, text);
+		if (next) printToolOutput(event.toolName, next);
+		return;
+	}
+
+	if (event.type === "tool_execution_end") {
+		if (event.isError) {
+			const text = normalizeNewlines(extractText(event.result));
+			printToolLine(`[error] tool ${event.toolName} failed${text ? `: ${truncate(text).trimEnd()}` : ""}`);
+		}
+		return;
+	}
+
+	if (event.type === "compaction_start") {
+		printToolLine(`[status] compacting context (${event.reason})`);
+		return;
+	}
+
+	if (event.type === "auto_retry_start") {
+		printToolLine(`[status] retry ${event.attempt}/${event.maxAttempts}: ${event.errorMessage}`);
+		return;
+	}
+
+	if (event.type === "agent_end") {
+		if (printedAssistantText && !stdoutAtLineStart) writeStdout("\n");
+	}
+}
+
+async function consumeStdout() {
+	const reader = proc.stdout.getReader();
+	const decoder = new TextDecoder();
+
+	while (true) {
+		const { value, done } = await reader.read();
+		if (done) break;
+		stdoutBuffer += decoder.decode(value, { stream: true });
+
+		while (true) {
+			const newlineIndex = stdoutBuffer.indexOf("\n");
+			if (newlineIndex === -1) break;
+			const line = stdoutBuffer.slice(0, newlineIndex).replace(/\r$/, "");
+			stdoutBuffer = stdoutBuffer.slice(newlineIndex + 1);
+			if (!line.trim()) continue;
+			try {
+				handleEvent(JSON.parse(line));
+			} catch {
+				printToolLine(`[error] could not parse pi JSON event: ${line}`);
+			}
+		}
+	}
+
+	stdoutBuffer += decoder.decode();
+	const lastLine = stdoutBuffer.trim();
+	if (lastLine) {
+		try {
+			handleEvent(JSON.parse(lastLine));
+		} catch {
+			printToolLine(`[error] could not parse pi JSON event: ${lastLine}`);
+		}
+	}
+}
+
+await consumeStdout();
+const exitCode = await proc.exited;
+process.exit(exitCode);

@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+# ralph.sh repeatedly dispatches work to an agent until `bd ready` is empty.
+#
+# Telegram setup (optional):
+# 1. Create a bot with @BotFather and copy the bot token.
+# 2. Start a chat with the bot and send it at least one message.
+# 3. Find your chat ID with:
+#      curl "https://api.telegram.org/bot<token>/getUpdates"
+# 4. Export these environment variables before running the script:
+#      export TELEGRAM_BOT_TOKEN="123456:ABCDEF..."
+#      export TELEGRAM_CHAT_ID="123456789"
+# 5. Optional overrides:
+#      export TELEGRAM_NOTIFY_ON_SUCCESS=1   # default: 1
+#      export TELEGRAM_NOTIFY_ON_FAILURE=1   # default: 1
+#
+# If Telegram config is present, the script sends a message when it finishes
+# because no ready beads remain, and also when it exits due to an error.
+
+set -euo pipefail
+
+PROMPT='Grab the next ready bead and complete its work. Your work is not considered completed until:
+1. All validations pass
+2. Anything that will be useful to future workers on this issue is stored in beads'\''s memory
+3. Commit all changed files (including ones you didn'\''t specifically change) with a conventional commit message.'
+
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 {pi|opencode}" >&2
+	exit 1
+fi
+
+agent="$1"
+case "$agent" in
+pi)
+	agent_name="pi"
+	run_agent=(pi-live --model openai-codex/gpt-5.4 -p "$PROMPT")
+	;;
+opencode)
+	agent_name="OpenCode"
+	run_agent=(opencode run --model openai/gpt-5.4 "$PROMPT")
+	;;
+*)
+	echo "Unknown agent: $agent" >&2
+	echo "Usage: $0 {pi|opencode}" >&2
+	exit 1
+	;;
+esac
+
+project_name=$(basename "$PWD")
+
+telegram_enabled=0
+if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+	telegram_enabled=1
+fi
+
+send_telegram_message() {
+	if [ "$telegram_enabled" -ne 1 ]; then
+		return 0
+	fi
+
+	local message="$1"
+	curl --silent --show-error --fail \
+		-X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+		-d "chat_id=${TELEGRAM_CHAT_ID}" \
+		--data-urlencode "text=${message}" \
+		>/dev/null
+}
+
+notify_exit() {
+	local exit_code=$?
+	local host status
+	host=$(hostname 2>/dev/null || echo "unknown-host")
+
+	if [ "$exit_code" -eq 0 ]; then
+		if [ "${TELEGRAM_NOTIFY_ON_SUCCESS:-1}" = "1" ]; then
+			status="✅ ralph.sh finished for ${project_name} on ${host} with no ready beads remaining."
+			send_telegram_message "$status" || echo "Warning: failed to send Telegram success notification" >&2
+		fi
+	else
+		if [ "${TELEGRAM_NOTIFY_ON_FAILURE:-1}" = "1" ]; then
+			status="❌ ralph.sh failed for ${project_name} on ${host} with exit code ${exit_code}."
+			send_telegram_message "$status" || echo "Warning: failed to send Telegram failure notification" >&2
+		fi
+	fi
+}
+
+trap notify_exit EXIT
+
+iteration=1
+
+while true; do
+	ready=$(bd ready --json 2>/dev/null || echo "[]")
+
+	if [ -z "$ready" ] || [ "$ready" = "[]" ]; then
+		echo "No ready beads. Exiting."
+		exit 0
+	fi
+
+	echo "=== Iteration ${iteration}: ready beads found, dispatching to ${agent_name} ==="
+	"${run_agent[@]}"
+	echo "=== Iteration ${iteration} complete ==="
+	iteration=$((iteration + 1))
+done
