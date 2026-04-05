@@ -4,7 +4,7 @@
   "defaultModel": "gpt-5.4",
   "theme": "neverforest",
   "packages": [
-    "../../code/anno/pi/anno-review"
+    "~/code/rmarganti/anno/pi/anno-review"
   ],
   "defaultThinkingLevel": "medium"
 }
