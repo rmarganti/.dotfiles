@@ -1,7 +1,7 @@
-// amux-status v1.1
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+// amux-status v1.4
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
 
 const DEBUG = process.env.AMUX_STATUS_DEBUG === '1';
 
@@ -33,9 +33,25 @@ function writeStatus(paneId, status) {
     fs.writeFileSync(getStatusFilePath(paneId), payload);
 }
 
-const Plugin = async ({ $, client }) => {
+function removeStatus(paneId) {
+    const filePath = getStatusFilePath(paneId);
+    try { fs.unlinkSync(filePath); } catch (_) {}
+}
+
+export default async function amuxStatusPlugin() {
     const paneId = process.env.TMUX_PANE;
     if (!paneId) return {};
+
+    const cleanup = () => removeStatus(paneId);
+    process.on('exit', cleanup);
+    process.on('SIGINT', () => {
+        cleanup();
+        process.exit(130);
+    });
+    process.on('SIGTERM', () => {
+        cleanup();
+        process.exit(143);
+    });
 
     log('info', 'plugin initialized', { paneId });
 
@@ -47,10 +63,22 @@ const Plugin = async ({ $, client }) => {
             });
 
             if (event.type === 'session.status') {
+                const sessionStatus = event.properties.status?.type;
                 const status =
-                    event.properties.status?.type === 'busy' ? 'busy' : 'idle';
+                    sessionStatus === 'busy' || sessionStatus === 'retry'
+                        ? 'busy'
+                        : 'idle';
                 writeStatus(paneId, status);
-                log('info', 'status written', { paneId, status });
+                log('info', 'status written', {
+                    paneId,
+                    status,
+                    sessionStatus,
+                });
+            }
+
+            if (event.type === 'session.idle') {
+                writeStatus(paneId, 'idle');
+                log('info', 'idle status written (session idle)', { paneId });
             }
 
             if (event.type === 'session.error') {
@@ -80,6 +108,4 @@ const Plugin = async ({ $, client }) => {
             }
         },
     };
-};
-
-module.exports = { Plugin };
+}
