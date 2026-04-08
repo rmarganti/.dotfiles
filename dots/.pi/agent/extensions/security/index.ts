@@ -4,7 +4,7 @@ import * as path from 'node:path';
 /**
  * Comprehensive security hook:
  * - Blocks dangerous bash commands (rm -rf, sudo, chmod 777, etc.)
- * - Protects sensitive paths from writes (.env, node_modules, .git, keys)
+ * - Protects sensitive paths from writes (.env, .git, keys)
  *
  * Modified from: https://github.com/michalvavra/agents/blob/e9b00e31fd36fc0498855e5c2ccd49e0bb57e623/agents/pi/extensions/security.ts
  */
@@ -27,7 +27,6 @@ export default function (pi: ExtensionAPI) {
             desc: 'environment file',
         }, // .env, .env.local, .local.env (but not .env.example, .env.test, .test.env, .example.env)
         { pattern: /\.dev\.vars($|\.[^/]+$)/, desc: 'dev vars file' }, // .dev.vars
-        { pattern: /node_modules\//, desc: 'node_modules' }, // node_modules/
         { pattern: /^\.git\/|\/\.git\//, desc: 'git directory' }, // .git/
         { pattern: /\.pem$|\.key$/, desc: 'private key file' }, // *.pem, *.key
         { pattern: /id_rsa|id_ed25519|id_ecdsa/, desc: 'SSH key' }, // id_rsa, id_ed25519
