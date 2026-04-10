@@ -71,6 +71,7 @@ vim.opt.cursorline = true
 
 -- Max height for completion menu
 vim.opt.pumheight = 20
+vim.opt.pumborder = 'rounded'
 
 -- What hidden characters to show
 vim.opt.list = true

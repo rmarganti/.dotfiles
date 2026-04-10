@@ -18,7 +18,7 @@ M.on_attach = function(client, bufnr)
     end
 
     -- Auto-format on save.
-    if client.supports_method('textDocument/formatting') then
+    if client:supports_method('textDocument/formatting') then
         local format_group = vim.api.nvim_create_augroup('format', { clear = true })
 
         vim.api.nvim_create_autocmd('BufWritePre', {
