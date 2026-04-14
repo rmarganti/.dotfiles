@@ -22,7 +22,7 @@ set -euo pipefail
 PROMPT='Grab the next ready bean and complete its work. Your work is not considered completed until:
 1. All validations pass
 2. Anything that will be useful to future workers on this issue is recorded in the bean itself before you finish it
-3. Commit all changed files (including bean files and ones you didn'\''t specifically change) with a conventional commit message.'
+3. Commit all changed files (including files you didn'\''t specifically change) with a conventional commit message.'
 
 if [ "$#" -ne 1 ]; then
 	echo "Usage: $0 {pi|opencode}" >&2
