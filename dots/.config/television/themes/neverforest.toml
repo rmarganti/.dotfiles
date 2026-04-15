@@ -12,7 +12,7 @@ input_text_fg = '#d3c6aa'   # p.white (abstractions.fg)
 result_count_fg = '#dbbc7f' # p.yellow (for count display)
 
 # Results list
-result_name_fg = '#aeccc6'        # p.blue (abstractions.plus2)
+result_name_fg = '#87b5c1'        # p.blue (abstractions.plus2)
 result_line_number_fg = '#dbbc7f' # p.yellow
 result_value_fg = '#d3c6aa'       # p.white (main text)
 selection_fg = '#d3c6aa'          # p.white (abstractions.select_fg)
@@ -26,5 +26,5 @@ preview_title_fg = '#d699b6' # p.magenta
 channel_mode_fg = '#1d2226'         # p.bg (dark text on colored background)
 channel_mode_bg = '#dbbc7f'         # p.yellow (warning/info color)
 remote_control_mode_fg = '#1d2226'  # p.bg (dark text on colored background)
-remote_control_mode_bg = '#aec89f'  # p.green (success color)
-send_to_channel_mode_fg = '#aeccc6' # p.blue (info color)
+remote_control_mode_bg = '#a2ccae'  # p.green (success color)
+send_to_channel_mode_fg = '#aeccc6' # p.cyan (info color)

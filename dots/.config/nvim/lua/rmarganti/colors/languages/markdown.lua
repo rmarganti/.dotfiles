@@ -8,7 +8,7 @@ return {
     markdownHeadingDelimiter = { fg = p.gray_light, bold = true },
     markdownH1 = { fg = p.magenta, bold = true },
     markdownH2 = { fg = p.yellow, bold = true },
-    markdownH3 = { fg = p.cyan, bold = true },
+    markdownH3 = { fg = p.green, bold = true },
     markdownH4 = { fg = p.blue, bold = true },
     markdownH5 = { fg = p.gray_light, bold = true },
     markdownH6 = { fg = p.gray_light, bold = true },
@@ -18,7 +18,7 @@ return {
 
     ['@markup.heading.1'] = { fg = p.magenta, bold = true },
     ['@markup.heading.2'] = { fg = p.yellow, bold = true },
-    ['@markup.heading.3'] = { fg = p.cyan, bold = true },
+    ['@markup.heading.3'] = { fg = p.green, bold = true },
     ['@markup.heading.4'] = { fg = p.blue, bold = true },
     ['@markup.heading.5'] = { fg = p.gray_light, bold = true },
     ['@markup.heading.6'] = { fg = p.gray_light, bold = true },

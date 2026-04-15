@@ -28,7 +28,7 @@ theme[inactive_fg]="#4b565c"
 theme[graph_text]="#d3c6aa"
 
 # Misc colors for processes box including mini cpu graphs, details memory graph and details status text
-theme[proc_misc]="#aec89f"
+theme[proc_misc]="#a2ccae"
 
 # Cpu box outline color
 theme[cpu_box]="#2a3137"
@@ -46,39 +46,39 @@ theme[proc_box]="#2a3137"
 theme[div_line]="#2a3137"
 
 # Temperature graph colors
-theme[temp_start]="#aec89f"
+theme[temp_start]="#a2ccae"
 theme[temp_mid]="#dbbc7f"
 theme[temp_end]="#e67e80"
 
 # CPU graph colors
-theme[cpu_start]="#aec89f"
+theme[cpu_start]="#a2ccae"
 theme[cpu_mid]="#dbbc7f"
 theme[cpu_end]="#e67e80"
 
 # Mem/Disk free meter
 theme[free_start]="#e67e80"
 theme[free_mid]="#dbbc7f"
-theme[free_end]="#aec89f"
+theme[free_end]="#a2ccae"
 
 # Mem/Disk cached meter
-theme[cached_start]="#aeccc6"
+theme[cached_start]="#87b5c1"
 theme[cached_mid]="#a2ccae"
-theme[cached_end]="#aec89f"
+theme[cached_end]="#a2ccae"
 
 # Mem/Disk available meter
 theme[available_start]="#e67e80"
 theme[available_mid]="#dbbc7f"
-theme[available_end]="#aec89f"
+theme[available_end]="#a2ccae"
 
 # Mem/Disk used meter
-theme[used_start]="#aec89f"
+theme[used_start]="#a2ccae"
 theme[used_mid]="#dbbc7f"
 theme[used_end]="#e67e80"
 
 # Download graph colors
-theme[download_start]="#aec89f"
+theme[download_start]="#a2ccae"
 theme[download_mid]="#a2ccae"
-theme[download_end]="#aeccc6"
+theme[download_end]="#87b5c1"
 
 # Upload graph colors
 theme[upload_start]="#dbbc7f"
@@ -86,6 +86,6 @@ theme[upload_mid]="#eea9aa"
 theme[upload_end]="#e67e80"
 
 # Process box color gradient for threads, mem and cpu usage
-theme[process_start]="#aec89f"
+theme[process_start]="#a2ccae"
 theme[process_mid]="#e67e80"
 theme[process_end]="#a56163"

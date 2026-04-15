@@ -11,8 +11,8 @@ M = {
     minus1 = p.gray,
     base = p.gray_light,
     plus1 = p.gray_lighter,
-    plus2 = p.blue,
-    plus3 = p.cyan,
+    plus2 = p.cyan,
+    plus3 = p.green,
     plus4 = p.white,
 
     success = p.green,
