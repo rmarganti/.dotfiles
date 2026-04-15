@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ralph.sh repeatedly dispatches work to an agent until `bd ready` is empty.
+# ralph.sh repeatedly dispatches work to an agent until `beans list --ready` is empty.
 #
 # Telegram setup (optional):
 # 1. Create a bot with @BotFather and copy the bot token.
@@ -15,14 +15,14 @@
 #      export TELEGRAM_NOTIFY_ON_FAILURE=1   # default: 1
 #
 # If Telegram config is present, the script sends a message when it finishes
-# because no ready beads remain, and also when it exits due to an error.
+# because no ready beans remain, and also when it exits due to an error.
 
 set -euo pipefail
 
-PROMPT='Grab the next ready bead and complete its work. Your work is not considered completed until:
+PROMPT='Grab the next ready bean and complete its work. Your work is not considered completed until:
 1. All validations pass
-2. Anything that will be useful to future workers on this issue is stored in beads'\''s memory
-3. Commit all changed files (including ones you didn'\''t specifically change) with a conventional commit message.'
+2. Anything that will be useful to future workers on this issue is recorded in the bean itself before you finish it
+3. Commit all changed files (including files you didn'\''t specifically change) with a conventional commit message.'
 
 if [ "$#" -ne 1 ]; then
 	echo "Usage: $0 {pi|opencode}" >&2
@@ -73,7 +73,7 @@ notify_exit() {
 
 	if [ "$exit_code" -eq 0 ]; then
 		if [ "${TELEGRAM_NOTIFY_ON_SUCCESS:-1}" = "1" ]; then
-			status="✅ ralph.sh finished for ${project_name} on ${host} with no ready beads remaining."
+			status="✅ ralph.sh finished for ${project_name} on ${host} with no ready beans remaining."
 			send_telegram_message "$status" || echo "Warning: failed to send Telegram success notification" >&2
 		fi
 	else
@@ -89,14 +89,14 @@ trap notify_exit EXIT
 iteration=1
 
 while true; do
-	ready=$(bd ready --json 2>/dev/null || echo "[]")
+	ready=$(beans list --json --ready 2>/dev/null || echo "[]")
 
 	if [ -z "$ready" ] || [ "$ready" = "[]" ]; then
-		echo "No ready beads. Exiting."
+		echo "No ready beans. Exiting."
 		exit 0
 	fi
 
-	echo "=== Iteration ${iteration}: ready beads found, dispatching to ${agent_name} ==="
+	echo "=== Iteration ${iteration}: ready beans found, dispatching to ${agent_name} ==="
 	"${run_agent[@]}"
 	echo "=== Iteration ${iteration} complete ==="
 	iteration=$((iteration + 1))
