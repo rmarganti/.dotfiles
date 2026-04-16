@@ -19,7 +19,6 @@ declare global {
 export default function (pi: ExtensionAPI) {
     pi.on('session_start', async (_event, ctx) => {
         warnIfUnsupported(ctx);
-        if (ctx.hasUI) ctx.ui.setStatus(STATUS_KEY, '');
     });
 
     pi.on('agent_start', async (_event, ctx) => {
@@ -27,12 +26,10 @@ export default function (pi: ExtensionAPI) {
         if (!isDarwin()) return;
 
         try {
-            const started = startKeepAwake();
-            if (ctx.hasUI) ctx.ui.setStatus(STATUS_KEY, started ? 'Awake' : '');
+            startKeepAwake();
         } catch (error: any) {
             stopKeepAwake();
             if (ctx.hasUI) {
-                ctx.ui.setStatus(STATUS_KEY, '');
                 ctx.ui.notify(
                     `Failed to enable macOS keep-awake: ${error.message}`,
                     'error'
@@ -41,9 +38,8 @@ export default function (pi: ExtensionAPI) {
         }
     });
 
-    pi.on('agent_end', async (_event, ctx) => {
+    pi.on('agent_end', async () => {
         stopKeepAwake();
-        if (ctx.hasUI) ctx.ui.setStatus(STATUS_KEY, '');
     });
 
     pi.on('session_shutdown', async () => {
@@ -58,7 +54,6 @@ export default function (pi: ExtensionAPI) {
     });
 }
 
-const STATUS_KEY = 'keep-awake';
 const DEFAULT_CAFFEINATE_PATH = '/usr/bin/caffeinate';
 
 function isDarwin() {
