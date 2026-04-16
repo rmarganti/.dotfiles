@@ -90,8 +90,9 @@ iteration=1
 
 while true; do
 	ready=$(beans list --json --ready 2>/dev/null || echo "[]")
+	ready_compact=${ready//[[:space:]]/}
 
-	if [ -z "$ready" ] || [ "$ready" = "[]" ]; then
+	if [ -z "$ready_compact" ] || [ "$ready_compact" = "[]" ] || [ "$ready_compact" = "null" ]; then
 		echo "No ready beans. Exiting."
 		exit 0
 	fi
