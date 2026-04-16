@@ -1,0 +1,12 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@mariozechner/pi-coding-agent": "^0.67.1",
+    "@mariozechner/pi-tui": "^0.67.1",
+    "@sinclair/typebox": "^0.32.0",
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  }
+}
