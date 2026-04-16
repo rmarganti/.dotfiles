@@ -28,7 +28,7 @@ export const BeansPrimePlugin: Plugin = async ({ $, directory }) => {
             [TOOL_NAME]: tool({
                 description:
                     'Run `beans prime` in the current project and return the current Beans context. Use this only for explicit Beans-related requests.',
-                args: tool.schema.object({}),
+                args: {},
                 async execute(_args, context) {
                     context.metadata({
                         title: 'beans prime',
