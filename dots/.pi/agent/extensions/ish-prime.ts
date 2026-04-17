@@ -6,10 +6,10 @@ import * as path from 'node:path';
 import { promisify } from 'node:util';
 
 const execFileAsync = promisify(execFile);
-const TOOL_NAME = 'beans_prime';
-const TOOL_INSTRUCTION = `Use ${TOOL_NAME} only when the user explicitly asks to create, update, inspect, or otherwise work on Beans. When that is the task, call ${TOOL_NAME} first to load the current Beans context. Do not call ${TOOL_NAME} for unrelated tasks.`;
+const TOOL_NAME = 'ish_prime';
+const TOOL_INSTRUCTION = `Use ${TOOL_NAME} only when the user explicitly asks to create, update, inspect, or otherwise work on Ishes. When that is the task, call ${TOOL_NAME} first to load the current Ish context. Do not call ${TOOL_NAME} for unrelated tasks.`;
 
-export default function beansPrimeExtension(pi: ExtensionAPI) {
+export default function ishPrimeExtension(pi: ExtensionAPI) {
     function syncToolAvailability(available: boolean) {
         const activeTools = pi.getActiveTools();
         const hasTool = activeTools.includes(TOOL_NAME);
@@ -25,25 +25,25 @@ export default function beansPrimeExtension(pi: ExtensionAPI) {
     }
 
     async function refreshAvailability(cwd: string) {
-        syncToolAvailability(await hasBeansAvailable(cwd));
+        syncToolAvailability(await hasIshesAvailable(cwd));
     }
 
     pi.registerTool({
         name: TOOL_NAME,
-        label: 'Beans Prime',
+        label: 'Ish Prime',
         description:
-            'Run `beans prime` in the current project and return the current Beans context. Use this only for explicit Beans-related requests.',
+            'Run `ish prime` in the current project and return the current Ish context. Use this only for explicit Ish-related requests.',
         promptSnippet:
-            'Load the current Beans project context by running `beans prime`.',
+            'Load the current Ish project context by running `ish prime`.',
         parameters: Type.Object({}),
         async execute(_toolCallId, _params, signal, _onUpdate, ctx) {
-            if (!(await hasBeansAvailable(ctx.cwd))) {
+            if (!(await hasIshesAvailable(ctx.cwd))) {
                 syncToolAvailability(false);
                 return {
                     content: [
                         {
                             type: 'text',
-                            text: 'Beans is not available in this project. Make sure `.beans.yml` exists and the `beans` CLI is installed.',
+                            text: 'Ish is not available in this project. Make sure `.ish.yml` exists and the `ish` CLI is installed.',
                         },
                     ],
                     details: { cwd: ctx.cwd, available: false },
@@ -53,12 +53,12 @@ export default function beansPrimeExtension(pi: ExtensionAPI) {
             syncToolAvailability(true);
 
             try {
-                const output = await runBeansPrime(ctx.cwd, signal);
+                const output = await runIshPrime(ctx.cwd, signal);
                 return {
                     content: [
                         {
                             type: 'text',
-                            text: output || 'beans prime produced no output.',
+                            text: output || 'ish prime produced no output.',
                         },
                     ],
                     details: { cwd: ctx.cwd, available: true },
@@ -70,7 +70,7 @@ export default function beansPrimeExtension(pi: ExtensionAPI) {
                     content: [
                         {
                             type: 'text',
-                            text: `Failed to run \`beans prime\`: ${message}`,
+                            text: `Failed to run \`ish prime\`: ${message}`,
                         },
                     ],
                     details: { cwd: ctx.cwd, available: true, error: message },
@@ -92,29 +92,29 @@ export default function beansPrimeExtension(pi: ExtensionAPI) {
         return {
             systemPrompt:
                 event.systemPrompt +
-                `\n\n## Beans Tool Usage\n\n${TOOL_INSTRUCTION}`,
+                `\n\n## Ish Tool Usage\n\n${TOOL_INSTRUCTION}`,
         };
     });
 }
 
-async function hasBeansAvailable(cwd: string): Promise<boolean> {
-    if (!existsSync(path.join(cwd, '.beans.yml'))) {
+async function hasIshesAvailable(cwd: string): Promise<boolean> {
+    if (!existsSync(path.join(cwd, '.ish.yml'))) {
         return false;
     }
 
     try {
-        await execFileAsync('which', ['beans'], { cwd });
+        await execFileAsync('which', ['ish'], { cwd });
         return true;
     } catch {
         return false;
     }
 }
 
-async function runBeansPrime(
+async function runIshPrime(
     cwd: string,
     signal?: AbortSignal
 ): Promise<string | undefined> {
-    const { stdout } = await execFileAsync('beans', ['prime'], {
+    const { stdout } = await execFileAsync('ish', ['prime'], {
         cwd,
         maxBuffer: 1024 * 1024,
         signal,

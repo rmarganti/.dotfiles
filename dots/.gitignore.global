@@ -1,7 +1,5 @@
 *~
 .DS_Store
-.beans.yml
-.beans/
 .claude/
 .env
 .local/
