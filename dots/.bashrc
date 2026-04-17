@@ -40,7 +40,7 @@ if command -v fzf >/dev/null 2>&1; then
     eval "$(fzf --bash)"
     export FZF_COMPLETION_TRIGGER='~~'
     if command -v rg >/dev/null 2>&1; then
-        export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden -g '!node_modules/*' -g '!.git/*'"
+        export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden -g '!node_modules/*' -g '!.git/*' -g '!.yarn/*'"
     fi
 fi
 
