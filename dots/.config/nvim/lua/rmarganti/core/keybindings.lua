@@ -211,7 +211,7 @@ vim.keymap.set('n', '<Leader>cI', '<Cmd>InspectTree<CR>')
 
 -- Restart LSP
 vim.keymap.set('n', '<Leader>cR', function()
-    vim.cmd('LspRestart')
+    vim.cmd('lsp restart')
     vim.diagnostic.reset()
 end)
 
