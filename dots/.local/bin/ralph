@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ralph.sh repeatedly dispatches work to an agent until `beans list --ready` is empty.
+# ralph.sh repeatedly dispatches work to an agent until `ish list --ready` is empty.
 #
 # Telegram setup (optional):
 # 1. Create a bot with @BotFather and copy the bot token.
@@ -15,13 +15,13 @@
 #      export TELEGRAM_NOTIFY_ON_FAILURE=1   # default: 1
 #
 # If Telegram config is present, the script sends a message when it finishes
-# because no ready beans remain, and also when it exits due to an error.
+# because no ready ishes remain, and also when it exits due to an error.
 
 set -euo pipefail
 
-PROMPT='Grab the next ready bean and complete its work. Your work is not considered completed until:
+PROMPT='Grab the next ready ish and complete its work. Your work is not considered completed until:
 1. All validations pass
-2. Anything that will be useful to future workers on this issue is recorded in the bean itself before you finish it
+2. Anything that will be useful to future workers on this issue is recorded in the ish itself before you finish it
 3. Commit all changed files (including files you didn'\''t specifically change) with a conventional commit message.'
 
 if [ "$#" -ne 1 ]; then
@@ -91,15 +91,15 @@ start_time=$(date +%s)
 iteration=1
 
 while true; do
-	ready=$(beans list --json --ready 2>/dev/null || echo "[]")
+	ready=$(ish list --json --ready 2>/dev/null || echo "[]")
 	ready_compact=${ready//[[:space:]]/}
 
 	if [ -z "$ready_compact" ] || [ "$ready_compact" = "[]" ] || [ "$ready_compact" = "null" ]; then
-		echo "No ready beans. Exiting."
+		echo "No ready ishes. Exiting."
 		exit 0
 	fi
 
-	echo "=== Iteration ${iteration}: ready beans found, dispatching to ${agent_name} ==="
+	echo "=== Iteration ${iteration}: ready ishes found, dispatching to ${agent_name} ==="
 	"${run_agent[@]}"
 	echo "=== Iteration ${iteration} complete ==="
 	iteration=$((iteration + 1))
