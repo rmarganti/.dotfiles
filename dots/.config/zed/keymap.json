@@ -122,8 +122,8 @@
             "cmd-7": ["pane::ActivateItem", 6],
             "cmd-8": ["pane::ActivateItem", 7],
             "cmd-9": ["pane::ActivateItem", 8],
-            "cmd-0": "pane::ActivateLastItem"
-        }
+            "cmd-0": "pane::ActivateLastItem",
+        },
     },
 
     // ---------------------------------------------------
@@ -294,7 +294,7 @@
 
             "space a e": "agent::ExpandMessageEditor",
             "space a f": "agent::Follow",
-            "space a h": "agent::OpenHistory",
+            "space a h": "agents_sidebar::ToggleThreadHistory",
             "space a m": "agent::ToggleModelSelector",
             "space a n": "agent::ToggleNewThreadMenu",
             "space a o": "agent::ToggleOptionsMenu",
