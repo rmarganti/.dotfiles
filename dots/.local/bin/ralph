@@ -19,10 +19,17 @@
 
 set -euo pipefail
 
-PROMPT='Grab the next ready ish and complete its work. Your work is not considered completed until:
+DEFAULT_PROMPT='Grab the next ready ish and complete its work. Your work is not considered completed until:
 1. All validations pass
 2. Anything that will be useful to future workers on this issue is recorded in the ish itself before you finish it
 3. Commit all changed files (including files you didn'\''t specifically change) with a conventional commit message.'
+
+PROMPT_SOURCE="built-in prompt"
+PROMPT="$DEFAULT_PROMPT"
+if [ -f "$PWD/RALPH.md" ]; then
+	PROMPT_SOURCE="$PWD/RALPH.md"
+	PROMPT="$(<"$PWD/RALPH.md")"
+fi
 
 if [ "$#" -ne 1 ]; then
 	echo "Usage: $0 {pi|opencode}" >&2
@@ -86,6 +93,8 @@ notify_exit() {
 }
 
 trap notify_exit EXIT
+
+echo "Using prompt from ${PROMPT_SOURCE}"
 
 start_time=$(date +%s)
 iteration=1
