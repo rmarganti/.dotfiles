@@ -1,6 +1,6 @@
 ---
 name: make-a-plan
-description: Create a detailed implementation plan with deep codebase research followed by a structured plan document. Use when the user wants to plan a feature, explore how to implement something, or needs a thorough plan before writing code. More rigorous than make-a-prd — includes deep research and specific implementation details.
+description: Create a detailed implementation plan with deep codebase research followed by a structured plan document. Use ONLY when the user specifically asks to "make a plan". More rigorous than make-a-prd — includes deep research and specific implementation details.
 ---
 
 # Skill: make-a-plan
