@@ -434,8 +434,10 @@ end)
 -- Search Todos
 vim.keymap.set({ 'n', 'x' }, '<Leader>sT', '<Cmd>TodoTelescope<CR>')
 
--- Search Wiki
-vim.keymap.set({ 'n', 'x' }, '<Leader>sw', '<Cmd>ObsidianQuickSwitch<CR>')
+-- Search Wiki Files
+vim.keymap.set({ 'n', 'x' }, '<Leader>swf', '<Cmd>ObsidianQuickSwitch<CR>')
+-- Search Wiki Text
+vim.keymap.set({ 'n', 'x' }, '<Leader>swt', '<Cmd>ObsidianSearch<CR>')
 
 -- Search Notifications
 vim.keymap.set({ 'n', 'x' }, '<Leader>sn', '<Cmd>Telescope notify<CR>')
