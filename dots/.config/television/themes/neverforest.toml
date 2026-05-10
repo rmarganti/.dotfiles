@@ -2,7 +2,7 @@
 # Based on the Neverforest Neovim color scheme
 
 # General colors
-background = '#1d2226'     # p.bg
+background = '#181c1e'     # p.bg
 border_fg = '#515a5b'      # p.gray_dark (abstractions.border)
 text_fg = '#d3c6aa'        # p.white (abstractions.fg)
 dimmed_text_fg = '#77817d' # p.gray
@@ -23,8 +23,8 @@ match_fg = '#e67e80'              # p.red (for search matches)
 preview_title_fg = '#d699b6' # p.magenta
 
 # Mode indicators
-channel_mode_fg = '#1d2226'         # p.bg (dark text on colored background)
+channel_mode_fg = '#181c1e'         # p.bg (dark text on colored background)
 channel_mode_bg = '#dbbc7f'         # p.yellow (warning/info color)
-remote_control_mode_fg = '#1d2226'  # p.bg (dark text on colored background)
+remote_control_mode_fg = '#181c1e'  # p.bg (dark text on colored background)
 remote_control_mode_bg = '#a2ccae'  # p.green (success color)
 send_to_channel_mode_fg = '#aeccc6' # p.cyan (info color)

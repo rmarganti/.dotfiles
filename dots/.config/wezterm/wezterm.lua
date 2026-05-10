@@ -50,8 +50,8 @@ return {
     tab_max_width = 32,
 
     window_frame = {
-        active_titlebar_bg = colors.palette.bg_dark.gui,
-        inactive_titlebar_bg = colors.palette.bg_dark.gui,
+        active_titlebar_bg = colors.palette.bg_darker.gui,
+        inactive_titlebar_bg = colors.palette.bg_darker.gui,
     },
 
     ------------------------------------------------

@@ -34,14 +34,14 @@
         "text": "fg",
         "thinkingText": "gray",
 
-        "selectedBg": "bgLightest",
-        "userMessageBg": "bgDark",
+        "selectedBg": "bgLighter",
+        "userMessageBg": "bgDarker",
         "userMessageText": "fg",
-        "customMessageBg": "bgLighter",
+        "customMessageBg": "bgLight",
         "customMessageText": "fg",
         "customMessageLabel": "blue",
-        "toolPendingBg": "bgLight",
-        "toolSuccessBg": "bgDark",
+        "toolPendingBg": "bg",
+        "toolSuccessBg": "bgDarker",
         "toolErrorBg": "redDarkest",
         "toolTitle": "fg",
         "toolOutput": "gray",
@@ -82,7 +82,7 @@
     },
     "export": {
         "pageBg": "bgDarker",
-        "cardBg": "bgDark",
+        "cardBg": "bgDarker",
         "infoBg": "yellowDarkest"
     }
 }

@@ -13,13 +13,13 @@ return {
     -- Preview
     ------------------------------------------------
 
-    TelescopePreviewTitle = { fg = p.gray, bg = p.bg_lighter },
+    TelescopePreviewTitle = { fg = p.gray, bg = p.bg_light },
 
     ------------------------------------------------
     -- Results
     ------------------------------------------------
 
-    TelescopeResultsTitle = { fg = p.gray, bg = p.bg_lighter },
+    TelescopeResultsTitle = { fg = p.gray, bg = p.bg_light },
     TelescopeSelectionCaret = { fg = a.select_bg },
     TelescopeSelection = { fg = a.select_fg, bg = a.select_bg },
     TelescopeMatching = { fg = p.cyan },
@@ -30,6 +30,6 @@ return {
 
     TelescopePromptNormal = { fg = p.red, bg = a.float_bg },
     TelescopePromptPrefix = { fg = a.fg, bg = a.float_bg },
-    TelescopePromptTitle = { fg = p.gray_light, bg = p.bg_lighter },
+    TelescopePromptTitle = { fg = p.gray_light, bg = p.bg_light },
     TelescopePromptBorder = { fg = p.gray, bg = a.float_bg, bold = true },
 }

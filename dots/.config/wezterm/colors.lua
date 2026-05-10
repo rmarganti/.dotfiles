@@ -52,11 +52,11 @@ M.palette = {
 }
 
 M.config = {
-    background = M.palette.bg.gui,
+    background = M.palette.bg_dark.gui,
     foreground = M.palette.fg.gui,
 
     cursor_bg = M.palette.fg.gui,
-    cursor_fg = M.palette.bg.gui,
+    cursor_fg = M.palette.bg_dark.gui,
 
     selection_bg = M.palette.black_dark.gui,
     selection_fg = M.palette.fg.gui,
@@ -84,27 +84,27 @@ M.config = {
     },
 
     tab_bar = {
-        background = M.palette.bg_dark.gui,
+        background = M.palette.bg_darker.gui,
 
         active_tab = {
-            bg_color = M.palette.bg.gui,
+            bg_color = M.palette.bg_dark.gui,
             fg_color = M.palette.gray4.gui,
         },
 
         inactive_tab = {
-            bg_color = M.palette.bg_dark.gui,
-            fg_color = M.palette.bg_lightest.gui,
+            bg_color = M.palette.bg_darker.gui,
+            fg_color = M.palette.bg_lighter.gui,
         },
 
         -- Purposely non-visible.
         new_tab = {
-            bg_color = M.palette.bg_dark.gui,
-            fg_color = M.palette.bg_dark.gui,
+            bg_color = M.palette.bg_darker.gui,
+            fg_color = M.palette.bg_darker.gui,
         },
     },
 
     -- The color of the split lines between panes
-    split = M.palette.bg.gui,
+    split = M.palette.bg_dark.gui,
 }
 
 return M

@@ -103,7 +103,7 @@ M.attach = function()
 
     wezterm.on('update-right-status', function(window)
         window:set_right_status(wezterm.format({
-            { Foreground = { Color = colors.palette.bg_lightest.gui } },
+            { Foreground = { Color = colors.palette.bg_lighter.gui } },
             { Text = wezterm.strftime(' %A, %d %B %Y %I:%M %p ') },
         }))
     end)

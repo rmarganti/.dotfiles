@@ -12,21 +12,21 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#1d2226</string>
+				<string>#181c1e</string>
 				<key>foreground</key>
 				<string>#d3c6aa</string>
 				<key>caret</key>
 				<string>#87b5c1</string>
 				<key>lineHighlight</key>
-				<string>#181c1e</string>
+				<string>#0d1011</string>
 				<key>selection</key>
-				<string>#30383f</string>
+				<string>#2a3137</string>
 				<key>selectionBorder</key>
 				<string>#515a5b</string>
 				<key>invisibles</key>
 				<string>#2b3238</string>
 				<key>gutter</key>
-				<string>#1d2226</string>
+				<string>#181c1e</string>
 				<key>gutterForeground</key>
 				<string>#515a5b</string>
 			</dict>

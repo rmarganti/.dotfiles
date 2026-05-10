@@ -4,7 +4,7 @@ local M = {}
 
 M = {
     fg = p.white,
-    bg = p.bg,
+    bg = p.bg_dark,
 
     minus3 = p.gray_darker,
     minus2 = p.gray_dark,
@@ -22,7 +22,7 @@ M = {
 
     border = p.gray_dark,
 
-    float_bg = p.bg_light,
+    float_bg = p.bg,
 
     select_fg = p.white,
     select_bg = p.gray_dark,
