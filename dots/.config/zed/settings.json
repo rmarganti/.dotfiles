@@ -9,6 +9,11 @@
 {
     // [ General ]-------------------------------------
 
+    "agent_servers": {
+        "pi-acp": {
+            "type": "registry"
+        }
+    },
     "format_on_save": "on",
     "pane_split_direction_horizontal": "down",
     "pane_split_direction_vertical": "right",
@@ -72,10 +77,12 @@
     // [ AI/Agent ]------------------------------------
 
     "agent": {
+        "dock": "left",
         "default_profile": "write",
         "default_model": {
+            "effort": "high",
             "provider": "copilot_chat",
-            "model": "claude-sonnet-4.5",
+            "model": "gpt-5-mini",
         },
         "always_allow_tool_actions": true,
         "model_parameters": [],
@@ -232,10 +239,14 @@
 
     // [ Panel Sizes ]---------------------------------
 
-    "collaboration_panel": { "default_width": 480 },
-    "git_panel": { "default_width": 640 },
-    "outline_panel": { "default_width": 640 },
-    "project_panel": { "default_width": 640 },
+    "collaboration_panel": { "dock": "right",
+                             "default_width": 480 },
+    "git_panel": { "dock": "right",
+                   "default_width": 640 },
+    "outline_panel": { "dock": "right",
+                       "default_width": 640 },
+    "project_panel": { "dock": "right",
+                       "default_width": 640 },
 
     // [ Search ]--------------------------------------
 
