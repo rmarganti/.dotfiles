@@ -1,4 +1,7 @@
-import type { ExtensionAPI } from '@mariozechner/pi-coding-agent';
+import type {
+    ExtensionAPI,
+    ExtensionContext,
+} from '@earendil-works/pi-coding-agent';
 import { spawn, type ChildProcess } from 'node:child_process';
 import { existsSync } from 'node:fs';
 
@@ -135,18 +138,13 @@ function getStatusText() {
         : 'idle';
 }
 
-function warnIfUnsupported(ctx: {
-    hasUI: boolean;
-    ui: {
-        notify(
-            message: string,
-            level: 'info' | 'error' | 'success' | 'warning'
-        ): void;
-    };
-}) {
-    if (!isDarwin() || isSupported() || globalThis.__piKeepAwakeWarningShown)
+function warnIfUnsupported(ctx: ExtensionContext) {
+    if (!isDarwin() || isSupported() || globalThis.__piKeepAwakeWarningShown) {
         return;
+    }
+
     globalThis.__piKeepAwakeWarningShown = true;
+
     if (ctx.hasUI) {
         ctx.ui.notify(
             'macOS keep-awake disabled: /usr/bin/caffeinate was not found',
