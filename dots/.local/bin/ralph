@@ -40,7 +40,7 @@ agent="$1"
 case "$agent" in
 pi)
     agent_name="pi"
-    run_agent=(pi-live --model openai-codex/gpt-5.4 -p "$PROMPT")
+    run_agent=(pi --stream=all --model openai-codex/gpt-5.4 -p "$PROMPT")
     ;;
 opencode)
     agent_name="OpenCode"
