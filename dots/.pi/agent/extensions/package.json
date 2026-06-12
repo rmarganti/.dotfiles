@@ -1,12 +1,12 @@
 {
-  "name": "pi-extensions",
-  "private": true,
-  "type": "module",
-  "devDependencies": {
-    "@earendil-works/pi-coding-agent": "^0.74.0",
-    "@mariozechner/pi-tui": "^0.67.1",
-    "@sinclair/typebox": "^0.32.0",
-    "@types/node": "^22.15.3",
-    "typescript": "^5.8.3"
-  }
+    "name": "pi-extensions",
+    "private": true,
+    "type": "module",
+    "devDependencies": {
+        "@earendil-works/pi-coding-agent": "^0.79.1",
+        "@mariozechner/pi-tui": "^0.67.1",
+        "@sinclair/typebox": "^0.32.0",
+        "@types/node": "^22.15.3",
+        "typescript": "^5.8.3"
+    }
 }
