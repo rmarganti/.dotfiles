@@ -1,5 +1,7 @@
+npm/
 sessions
 auth.json
 logs
 state
+trust.json
 *.local.json
