@@ -3,3 +3,5 @@
 *
 !.gitignore
 !config.toml
+!local-plugins/
+!local-plugins/**
