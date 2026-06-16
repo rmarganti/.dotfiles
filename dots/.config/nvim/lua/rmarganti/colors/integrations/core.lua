@@ -70,11 +70,11 @@ return {
     -- code itself
 
     Constant = { fg = a.plus4 }, -- any constant
-    String = { fg = p.green }, -- a string constant: "this is a string"
-    Character = { fg = p.green }, --  a character constant: 'c', '\n'
-    Number = { fg = p.green }, --   a number constant: 234, 0xff
-    Float = { fg = p.green }, --    a floating point constant: 2.3e10
-    Boolean = { fg = p.green }, --  a boolean constant: TRUE, false
+    String = { fg = a.plus1 }, -- a string constant: "this is a string"
+    Character = { fg = a.plus1 }, --  a character constant: 'c', '\n'
+    Number = { fg = a.plus1 }, --   a number constant: 234, 0xff
+    Float = { fg = a.plus1 }, --    a floating point constant: 2.3e10
+    Boolean = { fg = a.plus1 }, --  a boolean constant: TRUE, false
     Identifier = { fg = a.plus4 }, -- any variable name
     Function = { fg = a.plus3 }, -- function name (also: methods for classes)
     Statement = { fg = a.plus3 }, -- any statement
