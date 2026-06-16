@@ -1,0 +1,113 @@
+# Herdr config migrated from ~/.config/tmux.
+# Custom tmux scripts/plugins are intentionally omitted for now; this focuses on
+# tmux-like keybindings and the Neverforest palette used by Ghostty/Neovim.
+
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[theme.custom]
+# Neverforest-inspired palette.
+accent = "#9da9a0"      # tmux active window accent
+panel_bg = "#20262a"    # tmux inactive/window background
+surface0 = "#2a3137"    # borders / low-contrast surfaces
+surface1 = "#3e474c"    # selection background
+surface_dim = "#1d2226" # Ghostty background / active pane background
+overlay0 = "#77817d"    # bright black / muted text
+overlay1 = "#7a8a93"    # tmux session label
+text = "#d3c6aa"        # Ghostty foreground
+subtext0 = "#a6b0a8"
+mauve = "#d699b6"
+green = "#a2ccae"
+yellow = "#dbbc7f"
+red = "#e67e80"
+blue = "#87b5c1"
+teal = "#aeccc6"
+peach = "#e6d1a7"
+
+[terminal]
+# Match tmux split/new-window behavior: new panes/tabs follow the source pane cwd.
+new_cwd = "follow"
+
+[keys]
+# tmux prefix: set -g prefix C-space
+prefix = "ctrl+space"
+
+# General / session-ish mappings
+help = "prefix+?"
+settings = "prefix+shift+s"
+reload_config = "prefix+shift+r"
+detach = "prefix+d"
+rename_workspace = "prefix+r"
+close_workspace = "prefix+shift+d"
+workspace_picker = ["prefix+s", "prefix+w"]
+goto = "prefix+g"
+
+# Tabs: Herdr tabs map closest to tmux windows.
+new_tab = "prefix+c"
+rename_tab = ["prefix+shift+t", "prefix+comma"]
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+switch_tab = "prefix+1..9"
+close_tab = "prefix+ampersand"
+
+# Panes. Herdr cannot reproduce tmux's foreground-process-aware C-h/j/k/l
+# routing, so use prefix-based pane navigation and leave raw Ctrl-h/j/k/l to apps.
+focus_pane_left = ["prefix+h", "ctrl+shift+h"]
+focus_pane_down = ["prefix+j", "ctrl+shift+j"]
+focus_pane_up = ["prefix+k", "ctrl+shift+k"]
+focus_pane_right = ["prefix+l", "ctrl+shift+l"]
+# Default Herdr pane swapping.
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+split_vertical = ["prefix+|", "prefix+backslash"]
+split_horizontal = ["prefix+minus", "prefix+_"]
+zoom = "prefix+z"
+copy_mode = "prefix+["
+resize_mode = "prefix+="
+
+# Navigate mode: j/k select workspaces; h/l still move across panes.
+navigate_pane_left = "h"
+navigate_pane_down = "ctrl+j"
+navigate_pane_up = "ctrl+k"
+navigate_pane_right = "l"
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+
+# Keep these unset until we decide on non-tmux equivalents.
+new_workspace = "prefix+shift+n"
+new_worktree = ""
+open_worktree = ""
+remove_worktree = ""
+previous_workspace = "prefix+("
+next_workspace = "prefix+)"
+switch_workspace = "prefix+shift+1..9"
+previous_agent = "prefix+ctrl+k"
+next_agent = "prefix+ctrl+j"
+focus_agent = "prefix+ctrl+1..9"
+edit_scrollback = ""
+rename_pane = ""
+last_pane = ""
+close_pane = "prefix+x"
+toggle_sidebar = "prefix+b"
+open_notification_target = ""
+
+[ui]
+mouse_capture = true
+right_click_passthrough_modifier = "ctrl"
+mouse_scroll_lines = 3
+# tmux new-window does not prompt for a name.
+prompt_new_tab_name = false
+show_agent_labels_on_pane_borders = false
+agent_panel_scope = "all"
+accent = "#9da9a0"
+
+[ui.toast]
+delivery = "off"
+
+[session]
+resume_agents_on_restore = true

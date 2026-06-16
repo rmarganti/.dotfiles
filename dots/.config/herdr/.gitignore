@@ -1,0 +1,5 @@
+# Herdr runtime state lives next to config.toml in ~/.config/herdr.
+# Keep only the portable dotfile configuration in this repo.
+*
+!.gitignore
+!config.toml
