@@ -59,10 +59,10 @@ focus_pane_down = ["prefix+j", "ctrl+shift+j"]
 focus_pane_up = ["prefix+k", "ctrl+shift+k"]
 focus_pane_right = ["prefix+l", "ctrl+shift+l"]
 # Default Herdr pane swapping.
-swap_pane_left = "prefix+shift+h"
-swap_pane_down = "prefix+shift+j"
-swap_pane_up = "prefix+shift+k"
-swap_pane_right = "prefix+shift+l"
+swap_pane_left = "ctrl+alt+shift+h"
+swap_pane_down = "ctrl+alt+shift+j"
+swap_pane_up = "ctrl+alt+shift+k"
+swap_pane_right = "ctrl+alt+shift+l"
 
 split_vertical = ["prefix+|", "prefix+backslash"]
 split_horizontal = ["prefix+minus", "prefix+_"]
@@ -72,20 +72,20 @@ resize_mode = "prefix+="
 
 # Navigate mode: j/k select workspaces; h/l still move across panes.
 navigate_pane_left = "h"
-navigate_pane_down = "ctrl+j"
-navigate_pane_up = "ctrl+k"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
 navigate_pane_right = "l"
-navigate_workspace_up = "k"
-navigate_workspace_down = "j"
+navigate_workspace_down = "ctrl+j"
+navigate_workspace_up = "ctrl+k"
 
 # Keep these unset until we decide on non-tmux equivalents.
 new_workspace = "prefix+shift+n"
 new_worktree = ""
 open_worktree = ""
 remove_worktree = ""
-previous_workspace = "prefix+("
-next_workspace = "prefix+)"
-switch_workspace = "prefix+shift+1..9"
+previous_workspace = "alt+shift+k"
+next_workspace = "alt+shift+j"
+switch_workspace = "prefix+alt+1..9"
 previous_agent = "prefix+ctrl+k"
 next_agent = "prefix+ctrl+j"
 focus_agent = "prefix+ctrl+1..9"
@@ -117,3 +117,9 @@ key = "prefix+shift+c"
 type = "plugin_action"
 command = "dots.quick-window.open"
 description = "quick window"
+
+[[keys.command]]
+key = "prefix+q"
+type = "plugin_action"
+command = "rmarganti.herdr-pluck.pluck"
+description = "pluck visible token"

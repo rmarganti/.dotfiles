@@ -1,17 +1,17 @@
-// amux-status v1.0
+// amux-status v1.1
 // Pi Coding Agent extension for amux status reporting.
-import type { ExtensionAPI } from '@earendil-works/pi-coding-agent';
-import * as fs from 'node:fs';
-import * as os from 'node:os';
-import * as path from 'node:path';
+import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
 
-type Status = 'idle' | 'busy' | 'awaiting_input' | 'errored';
+type Status = "idle" | "running" | "awaiting_input" | "errored";
 
 function getStatusDir(): string {
     const xdgState =
         process.env.XDG_STATE_HOME ||
-        path.join(os.homedir(), '.local', 'state');
-    return path.join(xdgState, 'amux', 'pi');
+        path.join(os.homedir(), ".local", "state");
+    return path.join(xdgState, "amux");
 }
 
 function getStatusFilePath(paneId: string): string {
@@ -22,6 +22,7 @@ function writeStatus(paneId: string, status: Status) {
     const dir = getStatusDir();
     fs.mkdirSync(dir, { recursive: true });
     const payload = JSON.stringify({
+        provider: "pi",
         status,
         pid: process.pid,
         ts: Math.floor(Date.now() / 1000),
@@ -32,7 +33,8 @@ function writeStatus(paneId: string, status: Status) {
 function removeStatus(paneId: string) {
     const filePath = getStatusFilePath(paneId);
     try {
-        fs.unlinkSync(filePath);
+        const current = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        if (current.provider === "pi") fs.unlinkSync(filePath);
     } catch (_) {}
 }
 
@@ -41,25 +43,25 @@ export default function (pi: ExtensionAPI) {
     if (!paneId) return;
 
     const cleanup = () => removeStatus(paneId);
-    process.on('exit', cleanup);
-    process.on('SIGINT', () => {
+    process.on("exit", cleanup);
+    process.on("SIGINT", () => {
         cleanup();
         process.exit(130);
     });
-    process.on('SIGTERM', () => {
+    process.on("SIGTERM", () => {
         cleanup();
         process.exit(143);
     });
 
-    pi.on('agent_start', async () => {
-        writeStatus(paneId, 'busy');
+    pi.on("agent_start", async () => {
+        writeStatus(paneId, "running");
     });
 
-    pi.on('agent_end', async () => {
-        writeStatus(paneId, 'idle');
+    pi.on("agent_end", async () => {
+        writeStatus(paneId, "idle");
     });
 
-    pi.on('session_shutdown', async () => {
+    pi.on("session_shutdown", async () => {
         cleanup();
     });
 }
