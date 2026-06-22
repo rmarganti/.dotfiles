@@ -1,4 +1,4 @@
-// amux-status v1.4
+// amux-status v1.5
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -15,7 +15,7 @@ function getStatusDir() {
     const xdgState =
         process.env.XDG_STATE_HOME ||
         path.join(os.homedir(), '.local', 'state');
-    return path.join(xdgState, 'amux', 'opencode');
+    return path.join(xdgState, 'amux');
 }
 
 function getStatusFilePath(paneId) {
@@ -26,6 +26,7 @@ function writeStatus(paneId, status) {
     const dir = getStatusDir();
     fs.mkdirSync(dir, { recursive: true });
     const payload = JSON.stringify({
+        provider: 'opencode',
         status,
         pid: process.pid,
         ts: Math.floor(Date.now() / 1000),
@@ -35,7 +36,10 @@ function writeStatus(paneId, status) {
 
 function removeStatus(paneId) {
     const filePath = getStatusFilePath(paneId);
-    try { fs.unlinkSync(filePath); } catch (_) {}
+    try {
+        const current = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        if (current.provider === 'opencode') fs.unlinkSync(filePath);
+    } catch (_) {}
 }
 
 export default async function amuxStatusPlugin() {
@@ -66,7 +70,7 @@ export default async function amuxStatusPlugin() {
                 const sessionStatus = event.properties.status?.type;
                 const status =
                     sessionStatus === 'busy' || sessionStatus === 'retry'
-                        ? 'busy'
+                        ? 'running'
                         : 'idle';
                 writeStatus(paneId, status);
                 log('info', 'status written', {
@@ -94,8 +98,8 @@ export default async function amuxStatusPlugin() {
             }
 
             if (event.type === 'question.replied') {
-                writeStatus(paneId, 'busy');
-                log('info', 'busy status written (question replied)', {
+                writeStatus(paneId, 'running');
+                log('info', 'running status written (question replied)', {
                     paneId,
                 });
             }
