@@ -1,0 +1,54 @@
+id = "dots.herdr-navigator"
+name = "Herdr Navigator"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Smart Ctrl+h/j/k/l navigation across Herdr panes and Neovim windows."
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "left"
+title = "Smart navigate left"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/navigate", "left"]
+
+[[actions]]
+id = "down"
+title = "Smart navigate down"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/navigate", "down"]
+
+[[actions]]
+id = "up"
+title = "Smart navigate up"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/navigate", "up"]
+
+[[actions]]
+id = "right"
+title = "Smart navigate right"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/navigate", "right"]
+
+[[actions]]
+id = "send-left"
+title = "Send literal Ctrl+h"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/send-literal", "left"]
+
+[[actions]]
+id = "send-down"
+title = "Send literal Ctrl+j"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/send-literal", "down"]
+
+[[actions]]
+id = "send-up"
+title = "Send literal Ctrl+k"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/send-literal", "up"]
+
+[[actions]]
+id = "send-right"
+title = "Send literal Ctrl+l"
+contexts = ["workspace", "tab", "pane"]
+command = ["bash", "bin/send-literal", "right"]

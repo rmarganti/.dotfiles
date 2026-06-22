@@ -23,12 +23,6 @@ return {
     -- Misc
     --------------------------------
 
-    -- Navigate between Neovim and Wezterm panes
-    {
-        'numToStr/Navigator.nvim',
-        opts = {},
-    },
-
     -- Sugar for file operations (rename, move, etc.).
     {
         'tpope/vim-eunuch',

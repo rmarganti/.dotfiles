@@ -5,3 +5,5 @@
 !config.toml
 !local-plugins/
 !local-plugins/**
+!plugins/
+!/plugins/**

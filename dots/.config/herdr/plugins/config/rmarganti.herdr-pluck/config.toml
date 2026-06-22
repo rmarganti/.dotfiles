@@ -1,0 +1,21 @@
+# Herdr Pluck custom patterns translated from tmux-fingers.
+
+[[patterns]]
+name = "gccdev-ticket"
+regex = "GCCDEV-\\d{4}"
+priority = 25
+
+[[patterns]]
+name = "version"
+regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(?:-beta[0-9]?)?"
+priority = 25
+
+[[patterns]]
+name = "phpunit-test"
+regex = "[A-Za-z]+::test[A-Za-z_]+"
+priority = 25
+
+[[patterns]]
+name = "git-delete-branch-command"
+regex = "git branch -D [A-Za-z0-9._/-]+"
+priority = 12

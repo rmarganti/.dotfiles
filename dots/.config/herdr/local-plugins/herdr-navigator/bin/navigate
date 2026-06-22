@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Smart Herdr/Neovim pane navigation.
+# If the active Herdr pane is running Vim/Neovim, forward ctrl-h/j/k/l into it.
+# Neovim's Navigator.nvim config then handles window navigation and calls back
+# to `herdr pane focus` at editor edges. Otherwise, navigate Herdr panes directly.
+
+set -euo pipefail
+
+dir="${1:?usage: navigate <left|down|up|right>}"
+herdr="${HERDR_BIN_PATH:-herdr}"
+pane="${HERDR_ACTIVE_PANE_ID:-${HERDR_PANE_ID:-}}"
+
+case "$dir" in
+  left)  key="ctrl+h" ;;
+  down)  key="ctrl+j" ;;
+  up)    key="ctrl+k" ;;
+  right) key="ctrl+l" ;;
+  *) echo "navigate: unknown direction: $dir" >&2; exit 2 ;;
+esac
+
+# Same broad family used by vim-tmux-navigator / vim-herdr-navigation:
+# vi, vim, nvim, view, gvim, lvim, vimdiff, nvimdiff, etc.
+vim_re='^g?(view|l?n?vim?x?)(diff)?$'
+
+is_vim=0
+if command -v jq >/dev/null 2>&1; then
+  if "$herdr" pane process-info --current 2>/dev/null \
+    | jq -e --arg re "$vim_re" \
+        '.result.process_info.foreground_processes[]?.name
+         | ascii_downcase
+         | select(test($re))' >/dev/null 2>&1; then
+    is_vim=1
+  fi
+fi
+
+if [ "$is_vim" -eq 1 ] && [ -n "$pane" ]; then
+  exec "$herdr" pane send-keys "$pane" "$key"
+fi
+
+exec "$herdr" pane focus --direction "$dir" --current

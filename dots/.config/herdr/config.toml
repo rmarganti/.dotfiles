@@ -52,13 +52,13 @@ next_tab = "prefix+n"
 switch_tab = "prefix+1..9"
 close_tab = "prefix+ampersand"
 
-# Panes. Herdr cannot reproduce tmux's foreground-process-aware C-h/j/k/l
-# routing, so use prefix-based pane navigation and leave raw Ctrl-h/j/k/l to apps.
-focus_pane_left = ["prefix+h", "ctrl+shift+h"]
-focus_pane_down = ["prefix+j", "ctrl+shift+j"]
-focus_pane_up = ["prefix+k", "ctrl+shift+k"]
-focus_pane_right = ["prefix+l", "ctrl+shift+l"]
-# Default Herdr pane swapping.
+# Panes. Prefix h/j/k/l remain native Herdr focus bindings. Direct Ctrl-h/j/k/l
+# are implemented by the local dots.herdr-navigator plugin below so they can
+# forward into Vim/Neovim and fall back to Herdr at editor edges.
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
 swap_pane_left = "ctrl+alt+shift+h"
 swap_pane_down = "ctrl+alt+shift+j"
 swap_pane_up = "ctrl+alt+shift+k"
@@ -86,8 +86,6 @@ remove_worktree = ""
 previous_workspace = "alt+shift+k"
 next_workspace = "alt+shift+j"
 switch_workspace = "prefix+alt+1..9"
-previous_agent = "prefix+ctrl+k"
-next_agent = "prefix+ctrl+j"
 focus_agent = "prefix+ctrl+1..9"
 edit_scrollback = ""
 rename_pane = ""
@@ -111,6 +109,78 @@ delivery = "off"
 
 [session]
 resume_agents_on_restore = true
+
+[[keys.command]]
+key = "ctrl+shift+h"
+type = "shell"
+command = "herdr pane resize --direction left --amount 0.05 --current"
+description = "resize pane left"
+
+[[keys.command]]
+key = "ctrl+shift+j"
+type = "shell"
+command = "herdr pane resize --direction down --amount 0.05 --current"
+description = "resize pane down"
+
+[[keys.command]]
+key = "ctrl+shift+k"
+type = "shell"
+command = "herdr pane resize --direction up --amount 0.05 --current"
+description = "resize pane up"
+
+[[keys.command]]
+key = "ctrl+shift+l"
+type = "shell"
+command = "herdr pane resize --direction right --amount 0.05 --current"
+description = "resize pane right"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "dots.herdr-navigator.left"
+description = "smart navigate left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "dots.herdr-navigator.down"
+description = "smart navigate down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "dots.herdr-navigator.up"
+description = "smart navigate up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "dots.herdr-navigator.right"
+description = "smart navigate right"
+
+[[keys.command]]
+key = "prefix+ctrl+h"
+type = "plugin_action"
+command = "dots.herdr-navigator.send-left"
+description = "send literal ctrl+h"
+
+[[keys.command]]
+key = "prefix+ctrl+j"
+type = "plugin_action"
+command = "dots.herdr-navigator.send-down"
+description = "send literal ctrl+j"
+
+[[keys.command]]
+key = "prefix+ctrl+k"
+type = "plugin_action"
+command = "dots.herdr-navigator.send-up"
+description = "send literal ctrl+k"
+
+[[keys.command]]
+key = "prefix+ctrl+l"
+type = "plugin_action"
+command = "dots.herdr-navigator.send-right"
+description = "send literal ctrl+l"
 
 [[keys.command]]
 key = "prefix+shift+c"
