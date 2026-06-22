@@ -22,7 +22,7 @@ set -euo pipefail
 DEFAULT_PROMPT='Review the ready ishes and choose the best one to work on using your own judgment; do not just take the first ready item you see. There may be multiple ready candidates, so quickly assess them and pick the one that is the strongest next action for the project. Then complete its work. Your work is not considered completed until:
 1. All validations pass
 2. Anything that will be useful to future workers on this issue is recorded in the ish itself before you finish it
-3. Commit all changed files (including files you didn'\''t specifically change) with a conventional commit message.'
+3. Commit all changed files (including files you didn'\''t specifically change, but not .gitignored files) with a conventional commit message.'
 
 PROMPT_SOURCE="built-in prompt"
 PROMPT="$DEFAULT_PROMPT"
@@ -40,11 +40,11 @@ agent="$1"
 case "$agent" in
 pi)
     agent_name="pi"
-    run_agent=(pi --stream=all --model openai-codex/gpt-5.4 -p "$PROMPT")
+    run_agent=(pi --stream=all --model openai-codex/gpt-5.5 -p "$PROMPT")
     ;;
 opencode)
     agent_name="OpenCode"
-    run_agent=(opencode run --model openai/gpt-5.4 "$PROMPT")
+    run_agent=(opencode run --model openai/gpt-5.5 "$PROMPT")
     ;;
 *)
     echo "Unknown agent: $agent" >&2
