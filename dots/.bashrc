@@ -17,14 +17,6 @@ if command -v git >/dev/null 2>&1 && [ -f ~/.git-completion.bash ]; then
 fi
 
 # ------------------------------------------------
-# pyenv
-# ------------------------------------------------
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# ------------------------------------------------
 # Mise
 # ------------------------------------------------
 
