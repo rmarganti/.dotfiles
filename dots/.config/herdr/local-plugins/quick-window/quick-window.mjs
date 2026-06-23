@@ -9,7 +9,8 @@ const PLUGIN_ID = 'dots.quick-window';
 const CONFIG_FILE = path.join(os.homedir(), '.config/tmux/quick-window.json');
 const HERDR_BIN = process.env.HERDR_BIN_PATH || 'herdr';
 const PLUGIN_ROOT = process.env.HERDR_PLUGIN_ROOT || path.dirname(fileURLToPath(import.meta.url));
-const APPLY_DELAY_MS = 200;
+const OVERLAY_CLOSE_TIMEOUT_MS = 5000;
+const OVERLAY_CLOSE_POLL_MS = 50;
 
 function parseJson(value, fallback = {}) {
   try {
@@ -105,11 +106,13 @@ function logFile() {
   return path.join(process.env.HERDR_PLUGIN_STATE_DIR || os.tmpdir(), 'quick-window.log');
 }
 
-function detachApply(workspaceId, workPath, layout) {
+function detachApply(workspaceId, workPath, layout, pickerPaneId) {
   const file = logFile();
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const out = fs.openSync(file, 'a');
-  const child = spawn(process.execPath, [path.join(PLUGIN_ROOT, 'quick-window.mjs'), 'apply', workspaceId, workPath, layout], {
+  const args = [path.join(PLUGIN_ROOT, 'quick-window.mjs'), 'apply', workspaceId, workPath, layout];
+  if (pickerPaneId) args.push(pickerPaneId);
+  const child = spawn(process.execPath, args, {
     detached: true,
     stdio: ['ignore', out, out],
     env: process.env,
@@ -119,6 +122,21 @@ function detachApply(workspaceId, workPath, layout) {
 
 async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function waitForPaneGone(paneId, timeoutMs = OVERLAY_CLOSE_TIMEOUT_MS) {
+  if (!paneId) return;
+
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const result = spawnSync(HERDR_BIN, ['pane', 'get', paneId], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    if (result.error || result.status !== 0) return;
+    await sleep(OVERLAY_CLOSE_POLL_MS);
+  }
 }
 
 async function cmdOpen() {
@@ -160,25 +178,27 @@ async function cmdPicker() {
   const workspaceId = process.env.QUICK_WINDOW_WORKSPACE_ID || contextValue('workspace_id');
   if (!workspaceId) return;
 
-  detachApply(workspaceId, workPath, layout);
+  const pickerPaneId = contextValue('HERDR_PANE_ID', 'pane_id');
+  detachApply(workspaceId, workPath, layout, pickerPaneId);
 }
 
-async function cmdApply(workspaceId, workPath, layout) {
+async function cmdApply(workspaceId, workPath, layout, pickerPaneId) {
   if (!workspaceId || !workPath || !layout) {
-    process.stderr.write('usage: quick-window.mjs apply <workspace-id> <work-path> <layout>\n');
+    process.stderr.write('usage: quick-window.mjs apply <workspace-id> <work-path> <layout> [picker-pane-id]\n');
     process.exitCode = 2;
     return;
   }
 
-  await sleep(APPLY_DELAY_MS);
+  await waitForPaneGone(pickerPaneId);
 
   const config = loadConfig();
   const commands = config?.[workPath]?.[layout];
   if (!Array.isArray(commands)) return;
 
   const tab = herdrJson(['tab', 'create', '--workspace', workspaceId, '--cwd', workPath, '--label', layout, '--focus']);
+  const tabId = tab?.result?.tab?.tab_id;
   let currentPane = tab?.result?.root_pane?.pane_id;
-  if (!currentPane) throw new Error(`quick-window: failed to read new tab root pane id: ${JSON.stringify(tab)}`);
+  if (!tabId || !currentPane) throw new Error(`quick-window: failed to read new tab ids: ${JSON.stringify(tab)}`);
 
   let index = 0;
   for (const command of commands) {
@@ -195,13 +215,19 @@ async function cmdApply(workspaceId, workPath, layout) {
 
     index += 1;
   }
+
+  // Overlay teardown can restore the previous focus after layout creation. Assert
+  // the intended destination once the layout exists so the new quick-window tab
+  // wins without relying on a fixed sleep.
+  herdr(['workspace', 'focus', workspaceId]);
+  herdr(['tab', 'focus', tabId]);
 }
 
 async function main() {
   const [command, ...args] = process.argv.slice(2);
   if (command === 'open') return cmdOpen();
   if (command === 'picker') return cmdPicker();
-  if (command === 'apply') return cmdApply(args[0], args[1], args[2]);
+  if (command === 'apply') return cmdApply(args[0], args[1], args[2], args[3]);
 
   process.stderr.write('usage: quick-window.mjs <open|picker|apply>\n');
   process.exitCode = 2;
