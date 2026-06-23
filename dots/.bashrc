@@ -143,10 +143,6 @@ fi
 # Rust Cargo env
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
-# Set default editor
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
 # Load local-specific config if it exists (not committed to git)
 [ -f ~/.local.bashrc ] && . ~/.local.bashrc
 
