@@ -12,9 +12,8 @@ esac
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.bash_colors ] && . ~/.bash_colors
-if command -v git >/dev/null 2>&1 && [ -f ~/.git-completion.bash ]; then
-    . ~/.git-completion.bash
-fi
+# git tab completion — source directly (rarely changes)
+[ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
 # ------------------------------------------------
 # Mise (shims mode — avoids sourcing complex shell code on every startup)
