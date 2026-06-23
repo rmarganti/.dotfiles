@@ -17,10 +17,15 @@ if command -v git >/dev/null 2>&1 && [ -f ~/.git-completion.bash ]; then
 fi
 
 # ------------------------------------------------
-# Mise
+# Mise (shims mode — avoids sourcing complex shell code on every startup)
+# Tools are still version-aware via shims (.nvmrc / .tool-versions respected).
+# If you need per-directory switching notifications, change to:
+#   eval "$(mise activate bash)"
 # ------------------------------------------------
 
-eval "$(mise activate bash)"
+if command -v mise >/dev/null 2>&1; then
+    export PATH="$HOME/.local/share/mise/shims:$PATH"
+fi
 
 # ------------------------------------------------
 # fzf Integration
