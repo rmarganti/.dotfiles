@@ -1,6 +1,7 @@
 -- AI Sidekick for Neovim - Next Edit Suggestions & CLI Integration
 local M = {
     'folke/sidekick.nvim',
+    dir = '/Users/rmarganti/code/folke/sidekick.nvim',
     event = 'VeryLazy',
     dependencies = {
         { 'zbirenbaum/copilot.lua' },
@@ -23,9 +24,10 @@ function M.config()
         cli = {
             watch = true, -- notify Neovim of file changes done by AI CLI tools
             mux = {
-                enabled = true, -- Set to true if you want persistent sessions with tmux/zellij
-                backend = 'tmux',
-                create = 'split',
+                enabled = true, -- persistent sessions through Herdr
+                backend = 'herdr',
+                create = vim.env.HERDR_ENV == '1' and 'split' or 'terminal',
+                dump = 2000,
             },
             picker = 'telescope',
 
