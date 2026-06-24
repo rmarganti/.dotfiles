@@ -41,8 +41,8 @@ reload_config = "prefix+shift+r"
 detach = "prefix+d"
 rename_workspace = "prefix+r"
 close_workspace = "prefix+shift+d"
-workspace_picker = ["prefix+s", "prefix+w"]
-goto = "prefix+g"
+workspace_picker = "prefix+w"
+goto = "prefix+s"                  # matches tmux sesh binding
 
 # Tabs: Herdr tabs map closest to tmux windows.
 new_tab = "prefix+c"
@@ -70,21 +70,19 @@ zoom = "prefix+z"
 copy_mode = "prefix+["
 resize_mode = "prefix+="
 
-# Navigate mode: j/k select workspaces; h/l still move across panes.
-navigate_pane_left = "h"
-navigate_pane_down = "j"
-navigate_pane_up = "k"
-navigate_pane_right = "l"
-navigate_workspace_down = "ctrl+j"
-navigate_workspace_up = "ctrl+k"
+navigate_pane_left = ""
+navigate_pane_down = ""
+navigate_pane_up = ""
+navigate_pane_right = ""
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
 
-# Keep these unset until we decide on non-tmux equivalents.
+# Worktrees
 new_workspace = "prefix+shift+n"
-new_worktree = ""
-open_worktree = ""
+new_worktree = "prefix+shift+w"
+open_worktree = "prefix+shift+o"
 remove_worktree = ""
-previous_workspace = "alt+shift+k"
-next_workspace = "alt+shift+j"
+
 switch_workspace = "prefix+alt+1..9"
 focus_agent = "prefix+ctrl+1..9"
 edit_scrollback = ""
