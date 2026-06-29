@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+    "$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
     "name": "neverforest",
     "vars": {
         "bgDarker": "#0d1011",
@@ -35,13 +35,13 @@
         "thinkingText": "gray",
 
         "selectedBg": "bgLightest",
-        "userMessageBg": "bgDark",
+        "userMessageBg": "bgLight",
         "userMessageText": "fg",
         "customMessageBg": "bgLighter",
         "customMessageText": "fg",
         "customMessageLabel": "blue",
-        "toolPendingBg": "bgLight",
-        "toolSuccessBg": "bgDark",
+        "toolPendingBg": "bgDark",
+        "toolSuccessBg": "greenDarkest",
         "toolErrorBg": "redDarkest",
         "toolTitle": "fg",
         "toolOutput": "gray",
