@@ -1,0 +1,20 @@
+id = "dots.herdr-workspace-title-sync"
+name = "Workspace Title Sync"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Sync the outer terminal title to the focused Herdr workspace."
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "refresh"
+title = "Refresh terminal title"
+contexts = ["workspace", "tab", "pane"]
+command = ["node", "sync-workspace-title.mjs"]
+
+[[events]]
+on = "workspace.focused"
+command = ["node", "sync-workspace-title.mjs"]
+
+[[events]]
+on = "workspace.renamed"
+command = ["node", "sync-workspace-title.mjs"]
