@@ -1,0 +1,82 @@
+[settings]
+experimental = true
+# This repo is expected to be cloned to ~/.dotfiles
+# so implied dotfile sources resolve under ~/.dotfiles/dots.
+dotfiles.root = "~/.dotfiles/dots"
+dotfiles.default_mode = "symlink"
+
+[bootstrap.packages]
+"brew:bash" = "latest"
+"brew:bat" = "latest"
+"brew:bruno-cli" = "latest"
+"brew:btop" = "latest"
+"brew:colima" = "latest"
+"brew:docker" = "latest"
+"brew:docker-buildx" = "latest"
+"brew:docker-compose" = "latest"
+"brew:fd" = "latest"
+"brew:ffmpeg" = "latest"
+"brew:gemini-cli" = "latest"
+"brew:gh" = "latest"
+"brew:git" = "latest"
+"brew:git-delta" = "latest"
+"brew:go" = "latest"
+"brew:herdr" = "latest"
+"brew:kubectx" = "latest"
+"brew:lazygit" = "latest"
+"brew:lf" = "latest"
+"brew:lsd" = "latest"
+"brew:neovim" = "latest"
+"brew:opencode" = "latest"
+"brew:pnpm" = "latest"
+"brew:prettierd" = "latest"
+"brew:ripgrep" = "latest"
+"brew:sesh" = "latest"
+"brew:shfmt" = "latest"
+"brew:starship" = "latest"
+"brew:television" = "latest"
+"brew:tldr" = "latest"
+"brew:tmux" = "latest"
+"brew:tree" = "latest"
+"brew:tree-sitter-cli" = "latest"
+"brew:yarn" = "latest"
+"brew:zoxide" = "latest"
+
+[dotfiles]
+"~/.bashrc" = {}
+"~/.bash_profile" = {}
+"~/.bash_aliases" = {}
+"~/.bash_colors" = {}
+
+"~/.gitconfig" = {}
+"~/.gitignore.global" = {}
+
+"~/.agents" = {}
+"~/.pi" = {}
+
+"~/.config/bat" = {}
+"~/.config/btop" = {}
+"~/.config/codebook" = {}
+"~/.config/ghostty" = {}
+"~/.config/herdr" = {}
+"~/.config/karabiner" = {}
+"~/.config/lazygit" = {}
+"~/.config/lf" = {}
+"~/.config/nvim" = {}
+"~/.config/opencode" = {}
+"~/.config/phpactor" = {}
+"~/.config/starship.toml" = {}
+"~/.config/television" = {}
+"~/.config/tmux" = {}
+"~/.config/wezterm" = {}
+"~/.config/zed" = {}
+
+"~/.local/bin/ralph" = {}
+
+[tasks.bootstrap]
+run = '''
+mkdir -p ~/.config ~/.local/bin
+if [ ! -f ~/.git-completion.bash ]; then
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+fi
+'''
