@@ -183,8 +183,8 @@ description = "send literal ctrl+l"
 [[keys.command]]
 key = "prefix+shift+c"
 type = "plugin_action"
-command = "dots.quick-window.open"
-description = "quick window"
+command = "dots.herdr-launchables.open"
+description = "open launchables"
 
 [[keys.command]]
 key = "prefix+q"
