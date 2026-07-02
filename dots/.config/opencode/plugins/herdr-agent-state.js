@@ -2,13 +2,18 @@
 // managed by herdr; reinstalling or updating the integration overwrites this file.
 // add custom hooks/plugins beside this file instead of editing it.
 // HERDR_INTEGRATION_ID=opencode
-// HERDR_INTEGRATION_VERSION=5
+// HERDR_INTEGRATION_VERSION=7
 
 import net from "node:net";
 
 const SOURCE = "herdr:opencode";
 const AGENT = "opencode";
 let reportSeq = Date.now() * 1000;
+
+// Subagent (task tool) sessions carry a parentID; the main agent session does
+// not. Their lifecycle events would otherwise clobber the pane's real state, so
+// learn child session ids from session.created/updated and drop their reports.
+const childSessions = new Set();
 
 function nextReportSeq() {
   reportSeq += 1;
@@ -81,11 +86,15 @@ function request(method, params) {
   });
 }
 
-function reportSession(sessionID) {
+function reportSession(sessionID, sessionStartSource) {
   if (!sessionID) {
     return Promise.resolve();
   }
-  return request("pane.report_agent_session", { agent_session_id: sessionID });
+  const params = { agent_session_id: sessionID };
+  if (sessionStartSource) {
+    params.session_start_source = sessionStartSource;
+  }
+  return request("pane.report_agent_session", params);
 }
 
 function reportState(state, sessionID) {
@@ -94,10 +103,6 @@ function reportState(state, sessionID) {
     params.agent_session_id = sessionID;
   }
   return request("pane.report_agent", params);
-}
-
-function releaseAgent() {
-  return request("pane.release_agent", {});
 }
 
 export const HerdrAgentStatePlugin = async () => {
@@ -111,6 +116,9 @@ export const HerdrAgentStatePlugin = async () => {
 
   return {
     "chat.message": async ({ sessionID }) => {
+      if (sessionID && childSessions.has(sessionID)) {
+        return;
+      }
       await reportState("working", sessionID);
     },
     event: async ({ event }) => {
@@ -118,8 +126,21 @@ export const HerdrAgentStatePlugin = async () => {
       const properties = event?.properties ?? {};
       const sessionID = sessionIDFromProperties(properties);
 
+      const info = properties.info;
+      if (info?.id && info.parentID) {
+        childSessions.add(info.id);
+      }
+      if (sessionID && childSessions.has(sessionID)) {
+        return;
+      }
+
       switch (type) {
         case "session.created":
+          // A root session.created is a genuine new-session start (subagent
+          // creates are dropped above). Signal it so herdr replaces the pane's
+          // prior session id instead of treating the change as cross-talk.
+          await reportSession(sessionID, "new");
+          break;
         case "session.updated":
           await reportSession(sessionID);
           break;
@@ -149,7 +170,6 @@ export const HerdrAgentStatePlugin = async () => {
           await reportState("idle", sessionID);
           break;
         case "session.deleted":
-          await releaseAgent();
           break;
         default:
           break;
