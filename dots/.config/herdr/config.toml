@@ -8,23 +8,23 @@ onboarding = false
 name = "catppuccin"
 
 [theme.custom]
-# Neverforest-inspired palette.
-accent = "#9da9a0"      # tmux active window accent
-panel_bg = "#20262a"    # tmux inactive/window background
-surface0 = "#2a3137"    # borders / low-contrast surfaces
-surface1 = "#3e474c"    # selection background
-surface_dim = "#1d2226" # Ghostty background / active pane background
-overlay0 = "#77817d"    # bright black / muted text
-overlay1 = "#7a8a93"    # tmux session label
-text = "#d3c6aa"        # Ghostty foreground
-subtext0 = "#a6b0a8"
-mauve = "#d699b6"
-green = "#a2ccae"
-yellow = "#dbbc7f"
-red = "#e67e80"
-blue = "#87b5c1"
-teal = "#aeccc6"
-peach = "#e6d1a7"
+
+accent = "#7a8a93"      # Main highlight: active pane borders, selected tabs/buttons, key hints.
+panel_bg = "#20262a"    # Floating panels, popups, toasts, menus, bottom bars; "reset" inherits terminal bg.
+surface0 = "#30383f"    # Selected rows, input fields, inactive tab fill, mobile cards/code badges.
+surface1 = "#4b565c"    # Dragged/hover-ish rows and release-note code blocks.
+surface_dim = "#2a3137" # Active workspace rows, separators, sidebar dividers, empty-pane border.
+overlay0 = "#4b565c"    # Muted labels, unfocused pane borders/titles, unknown states, scrollbar tracks.
+overlay1 = "#7a8a93"    # Brighter muted labels, secondary text, inactive tab text, scrollbar thumbs.
+text = "#d3c6aa"        # Primary UI text in dialogs, sidebar, release notes, status messages.
+subtext0 = "#a6b0a8"    # Subdued workspace names and detail metadata.
+mauve = "#d699b6"       # Branch names when selected; special help/menu labels.
+green = "#a2ccae"       # Idle/seen agent dots, copy success, git-ahead, current integrations.
+yellow = "#dbbc7f"      # Working agent dots/spinners, config warnings, outdated integrations.
+red = "#e67e80"         # Blocked/error/destructive UI, git-behind, needs-attention toasts.
+blue = "#87b5c1"        # Finished/done toasts and mobile done summaries.
+teal = "#aeccc6"        # Done-but-unseen agent dots.
+peach = "#e6d1a7"       # Reserved for interrupted/warning states; currently not rendered in the UI.
 
 [terminal]
 # Match tmux split/new-window behavior: new panes/tabs follow the source pane cwd.
