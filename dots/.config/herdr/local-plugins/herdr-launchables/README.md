@@ -25,7 +25,7 @@ Project launchables override global ones by name.
 Rules:
 - `background` uses `command`
 - `split` uses `command`
-- `tab` uses `commands`
+- `tab` uses exactly one of `commands` or `command`
 - `cwd` is optional
 - relative `cwd` resolves relative to the config file
 - default `cwd`:
@@ -62,6 +62,10 @@ Rules:
       "yarn dev:api",
       "yarn dev:web"
     ]
+  },
+  "storybook": {
+    "type": "tab",
+    "command": "yarn storybook"
   },
   "tests": {
     "type": "split",
