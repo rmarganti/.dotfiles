@@ -16,7 +16,7 @@ Project launchables override global ones by name.
     "type": "background | tab | split",
     "cwd": "optional/path",
     "command": "shell command",
-    "commands": ["shell command", "..."],
+    "commands": ["shell command", { "command": "shell command", "cwd": "optional/path" }],
     "direction": "right | down"
   }
 }
@@ -26,7 +26,9 @@ Rules:
 - `background` uses `command`
 - `split` uses `command`
 - `tab` uses exactly one of `commands` or `command`
+- `tab.commands` entries may be strings or `{ "command": "...", "cwd": "..." }` objects
 - `cwd` is optional
+- for tab command objects, per-command `cwd` overrides the launchable-level `cwd`
 - relative `cwd` resolves relative to the config file
 - default `cwd`:
   - global launchable: current pane cwd
@@ -58,9 +60,17 @@ Rules:
 {
   "web": {
     "type": "tab",
+    "cwd": ".",
     "commands": [
-      "yarn dev:api",
-      "yarn dev:web"
+      {
+        "command": "yarn dev:api",
+        "cwd": "packages/api"
+      },
+      {
+        "command": "yarn dev:web",
+        "cwd": "packages/web"
+      },
+      "yarn dev:worker"
     ]
   },
   "storybook": {

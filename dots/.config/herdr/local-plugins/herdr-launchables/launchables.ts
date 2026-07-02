@@ -23,12 +23,19 @@ export interface BackgroundLaunchable {
     cwd?: string;
 }
 
+export type TabCommand =
+    | string
+    | {
+          command: string;
+          cwd?: string;
+      };
+
 export type TabLaunchable = {
     type: 'tab';
     cwd?: string;
 } & (
     | { command: string; commands?: never }
-    | { command?: never; commands: string[] }
+    | { command?: never; commands: TabCommand[] }
 );
 
 export interface SplitLaunchable {
@@ -65,6 +72,16 @@ interface PluginContext {
 interface ValidationResult {
     launchable: Launchable | null;
     errors: string[];
+}
+
+interface NormalizedTabCommand {
+    command: string;
+    cwd?: string;
+}
+
+interface ResolvedTabCommand {
+    command: string;
+    cwd: string;
 }
 
 function parseJson<T>(value: string, fallback: T): T {
@@ -200,6 +217,25 @@ function isNonEmptyString(value: unknown): value is string {
     return typeof value === 'string' && value.trim().length > 0;
 }
 
+function validateTabCommand(value: unknown): NormalizedTabCommand | null {
+    if (isNonEmptyString(value)) return { command: value };
+
+    if (!value || typeof value !== 'object' || Array.isArray(value)) {
+        return null;
+    }
+
+    const candidate = value as Record<string, unknown>;
+    if (!isNonEmptyString(candidate.command)) return null;
+    if (candidate.cwd !== undefined && !isNonEmptyString(candidate.cwd)) {
+        return null;
+    }
+
+    return {
+        command: candidate.command,
+        ...(isNonEmptyString(candidate.cwd) ? { cwd: candidate.cwd } : {}),
+    };
+}
+
 function validateLaunchable(name: string, value: unknown): ValidationResult {
     const errors: string[] = [];
 
@@ -272,11 +308,11 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
         const commands = candidate.commands;
         const validCommand = isNonEmptyString(command) ? command : null;
         const validCommands =
-            Array.isArray(commands) &&
-            commands.length > 0 &&
-            commands.every((item) => isNonEmptyString(item))
-                ? commands
+            Array.isArray(commands) && commands.length > 0
+                ? commands.map((item) => validateTabCommand(item))
                 : null;
+        const allCommandsValid =
+            validCommands !== null && validCommands.every(Boolean);
 
         if (command !== undefined && commands !== undefined) {
             errors.push(
@@ -286,9 +322,9 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
             if (!validCommand)
                 errors.push(`${name}: tab.command must be a non-empty string`);
         } else if (commands !== undefined) {
-            if (!validCommands)
+            if (!allCommandsValid)
                 errors.push(
-                    `${name}: tab.commands must be a non-empty array of non-empty strings`
+                    `${name}: tab.commands must be a non-empty array of non-empty strings or { command, cwd? } objects`
                 );
         } else {
             errors.push(`${name}: tab must define command or commands`);
@@ -296,7 +332,7 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
 
         if (candidate.direction !== undefined)
             errors.push(`${name}: tab must not define direction`);
-        return errors.length === 0 && (validCommand || validCommands)
+        return errors.length === 0 && (validCommand || allCommandsValid)
             ? {
                   launchable: validCommand
                       ? {
@@ -306,7 +342,7 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
                         }
                       : {
                             type: 'tab',
-                            commands: validCommands!,
+                            commands: validCommands as NormalizedTabCommand[],
                             ...(normalizedCwd ? { cwd: normalizedCwd } : {}),
                         },
                   errors,
@@ -395,17 +431,24 @@ export function discoverLaunchables(cwd: string): ResolvedLaunchable[] {
     );
 }
 
-export function resolveLaunchableCwd(
+function resolveConfiguredCwd(
     item: ResolvedLaunchable,
-    currentCwd: string
+    currentCwd: string,
+    configured?: string
 ): string {
-    const configured = item.launchable.cwd;
     if (!configured) {
         return item.source === 'project' ? item.configDir : currentCwd;
     }
 
     if (path.isAbsolute(configured)) return configured;
     return path.resolve(item.configDir, configured);
+}
+
+export function resolveLaunchableCwd(
+    item: ResolvedLaunchable,
+    currentCwd: string
+): string {
+    return resolveConfiguredCwd(item, currentCwd, item.launchable.cwd);
 }
 
 function displayLine(item: ResolvedLaunchable, index: number): string {
@@ -539,18 +582,38 @@ function executeBackground(name: string, command: string, cwd: string): void {
     child.unref();
 }
 
-function tabCommands(launchable: TabLaunchable): string[] {
-    return typeof launchable.command === 'string'
-        ? [launchable.command]
-        : launchable.commands;
+function tabCommands(
+    item: ResolvedLaunchable,
+    currentCwd: string
+): ResolvedTabCommand[] {
+    if (item.launchable.type !== 'tab') return [];
+
+    const launchableCwd = item.launchable.cwd;
+    if (typeof item.launchable.command === 'string') {
+        return [
+            {
+                command: item.launchable.command,
+                cwd: resolveConfiguredCwd(item, currentCwd, launchableCwd),
+            },
+        ];
+    }
+
+    return item.launchable.commands.map((entry) => {
+        const normalized = typeof entry === 'string' ? { command: entry } : entry;
+        return {
+            command: normalized.command,
+            cwd: resolveConfiguredCwd(
+                item,
+                currentCwd,
+                normalized.cwd || launchableCwd
+            ),
+        };
+    });
 }
 
-function executeTab(payload: SelectionPayload, cwd: string): void {
+function executeTab(payload: SelectionPayload): void {
     const { workspaceId, resolved } = payload;
-    const commands =
-        resolved.launchable.type === 'tab'
-            ? tabCommands(resolved.launchable)
-            : [];
+    const commands = tabCommands(resolved, payload.selectedAtCwd);
     if (!workspaceId || commands.length === 0) return;
 
     const tab = herdrJson<{
@@ -564,7 +627,7 @@ function executeTab(payload: SelectionPayload, cwd: string): void {
         '--workspace',
         workspaceId,
         '--cwd',
-        cwd,
+        commands[0]!.cwd,
         '--label',
         resolved.name,
         '--focus',
@@ -576,7 +639,7 @@ function executeTab(payload: SelectionPayload, cwd: string): void {
 
     commands.forEach((command, index) => {
         if (index === 0) {
-            herdrPaneRun(currentPaneId, command);
+            herdrPaneRun(currentPaneId, command.command);
             return;
         }
 
@@ -587,13 +650,13 @@ function executeTab(payload: SelectionPayload, cwd: string): void {
             '--direction',
             'right',
             '--cwd',
-            cwd,
+            command.cwd,
             '--no-focus',
         ]);
         currentPaneId = split.result?.pane?.pane_id || '';
         if (!currentPaneId)
             throw new Error(`failed to create split for ${resolved.name}`);
-        herdrPaneRun(currentPaneId, command);
+        herdrPaneRun(currentPaneId, command.command);
     });
 
     herdr(['workspace', 'focus', workspaceId]);
@@ -621,20 +684,22 @@ function executeSplit(payload: SelectionPayload, cwd: string): void {
 }
 
 function executeSelection(payload: SelectionPayload): void {
-    const cwd = resolveLaunchableCwd(payload.resolved, payload.selectedAtCwd);
     switch (payload.resolved.launchable.type) {
         case 'background':
             executeBackground(
                 payload.resolved.name,
                 payload.resolved.launchable.command,
-                cwd
+                resolveLaunchableCwd(payload.resolved, payload.selectedAtCwd)
             );
             return;
         case 'tab':
-            executeTab(payload, cwd);
+            executeTab(payload);
             return;
         case 'split':
-            executeSplit(payload, cwd);
+            executeSplit(
+                payload,
+                resolveLaunchableCwd(payload.resolved, payload.selectedAtCwd)
+            );
             return;
     }
 }
