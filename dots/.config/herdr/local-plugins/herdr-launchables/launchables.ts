@@ -119,6 +119,10 @@ function herdr(args: string[], options: Parameters<typeof spawnSync>[2] = {}): s
   return stdout;
 }
 
+function herdrPaneRun(paneId: string, command: string): string {
+  return herdr(['pane', 'run', paneId, `${command} && exit`]);
+}
+
 function herdrJson<T>(args: string[]): T {
   const output = herdr(args);
   return JSON.parse(output) as T;
@@ -418,7 +422,7 @@ function executeTab(payload: SelectionPayload, cwd: string): void {
 
   commands.forEach((command, index) => {
     if (index === 0) {
-      herdr(['pane', 'run', currentPaneId, command]);
+      herdrPaneRun(currentPaneId, command);
       return;
     }
 
@@ -427,7 +431,7 @@ function executeTab(payload: SelectionPayload, cwd: string): void {
     ]);
     currentPaneId = split.result?.pane?.pane_id || '';
     if (!currentPaneId) throw new Error(`failed to create split for ${resolved.name}`);
-    herdr(['pane', 'run', currentPaneId, command]);
+    herdrPaneRun(currentPaneId, command);
   });
 
   herdr(['workspace', 'focus', workspaceId]);
@@ -444,7 +448,7 @@ function executeSplit(payload: SelectionPayload, cwd: string): void {
   ]);
   const paneId = split.result?.pane?.pane_id || '';
   if (!paneId) throw new Error(`failed to create split for ${resolved.name}`);
-  herdr(['pane', 'run', paneId, resolved.launchable.command]);
+  herdrPaneRun(paneId, resolved.launchable.command);
 }
 
 function executeSelection(payload: SelectionPayload): void {
