@@ -9,10 +9,10 @@ platforms = ["linux", "macos"]
 id = "open"
 title = "Open launchables"
 contexts = ["workspace", "tab", "pane"]
-command = ["node", "launchables.ts", "open"]
+command = ["node", "src/launchables.ts", "open"]
 
 [[panes]]
 id = "picker"
 title = "Launchables"
 placement = "overlay"
-command = ["node", "launchables.ts", "picker"]
+command = ["node", "src/launchables.ts", "picker"]

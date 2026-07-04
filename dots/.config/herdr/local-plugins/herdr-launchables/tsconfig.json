@@ -7,8 +7,9 @@
     "types": ["node"],
     "strict": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
-  "include": ["./launchables.ts"]
+  "include": ["./src/**/*.ts"]
 }

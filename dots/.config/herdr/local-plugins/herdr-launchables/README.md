@@ -13,7 +13,7 @@ Project launchables override global ones by name.
 ```json
 {
   "Name": {
-    "type": "background | tab | split",
+    "type": "background | tab | split | idle-panes",
     "cwd": "optional/path",
     "command": "shell command",
     "commands": ["shell command", { "command": "shell command", "cwd": "optional/path" }],
@@ -26,6 +26,7 @@ Rules:
 - `background` uses `command`
 - `split` uses `command`
 - `tab` uses exactly one of `commands` or `command`
+- `idle-panes` uses `command` and runs it in every Herdr pane whose foreground process is an idle shell (`bash`, `sh`, `zsh`, or `fish`)
 - `tab.commands` entries may be strings or `{ "command": "...", "cwd": "..." }` objects
 - `cwd` is optional
 - for tab command objects, per-command `cwd` overrides the launchable-level `cwd`
@@ -40,6 +41,14 @@ Rules:
 
 ```json
 {
+  "Clear all terminals": {
+    "type": "idle-panes",
+    "command": "clear"
+  },
+  "Refresh bash env": {
+    "type": "idle-panes",
+    "command": "source ~/.bash_profile"
+  },
   "Kill node": {
     "type": "background",
     "command": "killall node 2>/dev/null || true"
