@@ -12,7 +12,7 @@ Manage personal and work knowledge vaults using pure GitHub-flavored markdown. O
 Always start by reading the config:
 
 ```bash
-cat ~/.config/ide-common.json
+cat ~/.config/dev-common.json
 ```
 
 The `obsidian.workspaces` array lists available vaults with `name` and `path`. Expand `~` manually when constructing file paths for tools.

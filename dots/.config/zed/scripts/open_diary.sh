@@ -11,8 +11,7 @@
 # Exit immediately if any command exits with a non-zero status.
 set -e
 
-# Load config from ~/.config/ide-common.json
-CONFIG="$HOME/.config/ide-common.json"
+CONFIG="$HOME/.config/dev-common.json"
 
 if [[ ! -f "$CONFIG" ]]; then
     echo "ERROR: Config file $CONFIG not found."

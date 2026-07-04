@@ -5,7 +5,7 @@
 ### Step 1: Discover vault
 
 ```bash
-cat ~/.config/ide-common.json
+cat ~/.config/dev-common.json
 ```
 
 Read the `obsidian.workspaces` array. Expand `~` in paths manually.

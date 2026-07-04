@@ -39,11 +39,11 @@ Notes:
 - `mise bootstrap` is currently experimental; this repo enables it via `[settings].experimental = true`.
 - Dotfile sources are rooted at `~/.dotfiles/dots`, so this repo should be cloned to `~/.dotfiles`.
 
-## Shared IDE Configuration
+## Shared Dev Configuration
 
-### `~/.config/ide-common.json`
+### `~/.config/dev-common.json`
 
-This file provides a unified configuration for all IDE/editor workflows (Neovim, Zed, etc). It is designed to be extensible for future features and tools.
+This file provides a unified configuration for all IDE/editor/dev workflows (Neovim, Zed, etc). It is designed to be extensible for future features and tools.
 
 #### Example
 
