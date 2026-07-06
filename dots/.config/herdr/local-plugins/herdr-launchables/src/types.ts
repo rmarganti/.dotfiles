@@ -12,29 +12,29 @@ export interface BackgroundLaunchable {
     cwd?: string;
 }
 
-/** A command inside a tab launchable; object form can override cwd per pane. */
-export type TabCommand =
-    | string
-    | {
-          command: string;
-          cwd?: string;
-      };
-
-/** Creates a new tab and runs either one command or one command per split pane. */
-export type TabLaunchable = {
-    type: 'tab';
-    cwd?: string;
-} & (
-    | { command: string; commands?: never }
-    | { command?: never; commands: TabCommand[] }
-);
-
-/** Creates a split beside the source pane and runs a command there. */
-export interface SplitLaunchable {
-    type: 'split';
-    command: string;
+/** Creates or configures a Herdr pane. */
+export interface PaneLaunchable {
+    type: 'pane';
+    name?: string;
+    command?: string;
     cwd?: string;
     direction?: SplitDirection;
+}
+
+/** Creates a new tab and configures one or more panes. */
+export interface TabLaunchable {
+    type: 'tab';
+    name?: string;
+    cwd?: string;
+    panes?: PaneLaunchable[];
+}
+
+/** Creates a full Herdr workspace with one or more tabs. */
+export interface WorkspaceLaunchable {
+    type: 'workspace';
+    name?: string;
+    cwd?: string;
+    tabs: TabLaunchable[];
 }
 
 /** Runs a command in every pane that appears to be sitting at an idle shell. */
@@ -45,8 +45,9 @@ export interface IdlePanesLaunchable {
 
 export type Launchable =
     | BackgroundLaunchable
+    | PaneLaunchable
     | TabLaunchable
-    | SplitLaunchable
+    | WorkspaceLaunchable
     | IdlePanesLaunchable;
 
 /** A validated `.launchables.json`, keyed by display name. */
@@ -79,17 +80,5 @@ export interface SelectionPayload {
 export interface PluginContext {
     workspaceId: string;
     paneId: string;
-    cwd: string;
-}
-
-/** Internal validated form for tab command entries before cwd defaults apply. */
-export interface NormalizedTabCommand {
-    command: string;
-    cwd?: string;
-}
-
-/** Internal execution form for tab commands after cwd resolution. */
-export interface ResolvedTabCommand {
-    command: string;
     cwd: string;
 }

@@ -6,8 +6,11 @@ import { appendLog } from './log.ts';
 import type {
     Launchable,
     LaunchableSource,
-    NormalizedTabCommand,
+    PaneLaunchable,
     ResolvedLaunchable,
+    SplitDirection,
+    TabLaunchable,
+    WorkspaceLaunchable,
 } from './types.ts';
 
 /**
@@ -58,169 +61,220 @@ function isNonEmptyString(value: unknown): value is string {
     return typeof value === 'string' && value.trim().length > 0;
 }
 
-function validateTabCommand(value: unknown): NormalizedTabCommand | null {
-    if (isNonEmptyString(value)) return { command: value };
-
-    if (!value || typeof value !== 'object' || Array.isArray(value)) {
-        return null;
-    }
-
-    const candidate = value as Record<string, unknown>;
-    if (!isNonEmptyString(candidate.command)) return null;
-    if (candidate.cwd !== undefined && !isNonEmptyString(candidate.cwd)) {
-        return null;
-    }
-
-    return {
-        command: candidate.command,
-        ...(isNonEmptyString(candidate.cwd) ? { cwd: candidate.cwd } : {}),
-    };
+function isObject(value: unknown): value is Record<string, unknown> {
+    return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
-interface ValidationResult {
-    launchable: Launchable | null;
+interface ValidationResult<T = Launchable> {
+    launchable: T | null;
     errors: string[];
+}
+
+function validateOptionalName(
+    pathName: string,
+    candidate: Record<string, unknown>,
+    errors: string[]
+): string | undefined {
+    if (candidate.name === undefined) return undefined;
+    if (!isNonEmptyString(candidate.name)) {
+        errors.push(`${pathName}: name must be a non-empty string when provided`);
+        return undefined;
+    }
+    return candidate.name;
+}
+
+function validateOptionalCwd(
+    pathName: string,
+    candidate: Record<string, unknown>,
+    errors: string[]
+): string | undefined {
+    if (candidate.cwd === undefined) return undefined;
+    if (!isNonEmptyString(candidate.cwd)) {
+        errors.push(`${pathName}: cwd must be a non-empty string when provided`);
+        return undefined;
+    }
+    return candidate.cwd;
+}
+
+function validateDirection(
+    pathName: string,
+    value: unknown,
+    errors: string[]
+): SplitDirection | undefined {
+    if (value === undefined) return undefined;
+    if (value === 'right' || value === 'down') return value;
+    errors.push(`${pathName}: pane.direction must be right or down`);
+    return undefined;
+}
+
+function validatePaneLaunchable(
+    pathName: string,
+    value: unknown,
+    options: { rootInTab?: boolean } = {}
+): ValidationResult<PaneLaunchable> {
+    const errors: string[] = [];
+    if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected pane object`] };
+
+    const candidate = value;
+    if (candidate.type !== 'pane') errors.push(`${pathName}: type must be "pane"`);
+    const name = validateOptionalName(pathName, candidate, errors);
+    const cwd = validateOptionalCwd(pathName, candidate, errors);
+    const direction = validateDirection(pathName, candidate.direction, errors);
+
+    if (candidate.command !== undefined && !isNonEmptyString(candidate.command)) {
+        errors.push(`${pathName}: pane.command must be a non-empty string when provided`);
+    }
+    if (options.rootInTab && candidate.direction !== undefined) {
+        errors.push(`${pathName}: first/root pane in a tab must not define direction`);
+    }
+    if (candidate.commands !== undefined) errors.push(`${pathName}: pane must not define commands`);
+    if (candidate.tabs !== undefined) errors.push(`${pathName}: pane must not define tabs`);
+
+    return errors.length === 0
+        ? {
+              launchable: {
+                  type: 'pane',
+                  ...(name ? { name } : {}),
+                  ...(isNonEmptyString(candidate.command) ? { command: candidate.command } : {}),
+                  ...(cwd ? { cwd } : {}),
+                  ...(direction ? { direction } : {}),
+              },
+              errors,
+          }
+        : { launchable: null, errors };
+}
+
+function validateTabLaunchable(pathName: string, value: unknown): ValidationResult<TabLaunchable> {
+    const errors: string[] = [];
+    if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected tab object`] };
+
+    const candidate = value;
+    if (candidate.type !== 'tab') errors.push(`${pathName}: type must be "tab"`);
+    const name = validateOptionalName(pathName, candidate, errors);
+    const cwd = validateOptionalCwd(pathName, candidate, errors);
+
+    if (candidate.command !== undefined) errors.push(`${pathName}: tab.command is no longer supported; use tab.panes`);
+    if (candidate.commands !== undefined) errors.push(`${pathName}: tab.commands is no longer supported; use tab.panes`);
+    if (candidate.direction !== undefined) errors.push(`${pathName}: tab must not define direction`);
+
+    let panes: PaneLaunchable[] | undefined;
+    if (candidate.panes !== undefined) {
+        if (!Array.isArray(candidate.panes) || candidate.panes.length === 0) {
+            errors.push(`${pathName}: tab.panes must be a non-empty array when provided`);
+        } else {
+            panes = [];
+            candidate.panes.forEach((pane, index) => {
+                const result = validatePaneLaunchable(`${pathName}.panes[${index}]`, pane, {
+                    rootInTab: index === 0,
+                });
+                if (result.launchable) panes!.push(result.launchable);
+                errors.push(...result.errors);
+            });
+        }
+    }
+
+    return errors.length === 0
+        ? {
+              launchable: {
+                  type: 'tab',
+                  ...(name ? { name } : {}),
+                  ...(cwd ? { cwd } : {}),
+                  ...(panes ? { panes } : {}),
+              },
+              errors,
+          }
+        : { launchable: null, errors };
+}
+
+function validateWorkspaceLaunchable(pathName: string, value: unknown): ValidationResult<WorkspaceLaunchable> {
+    const errors: string[] = [];
+    if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected workspace object`] };
+
+    const candidate = value;
+    if (candidate.type !== 'workspace') errors.push(`${pathName}: type must be "workspace"`);
+    const name = validateOptionalName(pathName, candidate, errors);
+    const cwd = validateOptionalCwd(pathName, candidate, errors);
+
+    if (candidate.command !== undefined) errors.push(`${pathName}: workspace must not define command`);
+    if (candidate.commands !== undefined) errors.push(`${pathName}: workspace must not define commands`);
+    if (candidate.direction !== undefined) errors.push(`${pathName}: workspace must not define direction`);
+
+    const tabs: TabLaunchable[] = [];
+    if (!Array.isArray(candidate.tabs) || candidate.tabs.length === 0) {
+        errors.push(`${pathName}: workspace.tabs must be a non-empty array`);
+    } else {
+        candidate.tabs.forEach((tab, index) => {
+            const result = validateTabLaunchable(`${pathName}.tabs[${index}]`, tab);
+            if (result.launchable) tabs.push(result.launchable);
+            errors.push(...result.errors);
+        });
+    }
+
+    return errors.length === 0
+        ? {
+              launchable: {
+                  type: 'workspace',
+                  ...(name ? { name } : {}),
+                  ...(cwd ? { cwd } : {}),
+                  tabs,
+              },
+              errors,
+          }
+        : { launchable: null, errors };
 }
 
 function validateLaunchable(name: string, value: unknown): ValidationResult {
     const errors: string[] = [];
 
-    if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    if (!isObject(value)) {
         return { launchable: null, errors: [`${name}: expected object`] };
     }
 
-    const candidate = value as Record<string, unknown>;
+    const candidate = value;
     const type = candidate.type;
-    const cwd = candidate.cwd;
-    const normalizedCwd = isNonEmptyString(cwd) ? cwd : undefined;
 
     if (!isNonEmptyString(type)) errors.push(`${name}: missing string type`);
-    if (cwd !== undefined && !normalizedCwd)
-        errors.push(`${name}: cwd must be a non-empty string when provided`);
 
     if (type === 'background') {
+        const cwd = validateOptionalCwd(name, candidate, errors);
         const command = candidate.command;
-        if (!isNonEmptyString(command))
-            errors.push(
-                `${name}: background.command must be a non-empty string`
-            );
-        if (candidate.commands !== undefined)
-            errors.push(`${name}: background must not define commands`);
-        if (candidate.direction !== undefined)
-            errors.push(`${name}: background must not define direction`);
+        if (!isNonEmptyString(command)) errors.push(`${name}: background.command must be a non-empty string`);
+        if (candidate.name !== undefined) errors.push(`${name}: background must not define name`);
+        if (candidate.commands !== undefined) errors.push(`${name}: background must not define commands`);
+        if (candidate.direction !== undefined) errors.push(`${name}: background must not define direction`);
+        if (candidate.panes !== undefined) errors.push(`${name}: background must not define panes`);
+        if (candidate.tabs !== undefined) errors.push(`${name}: background must not define tabs`);
         return errors.length === 0 && isNonEmptyString(command)
-            ? {
-                  launchable: {
-                      type: 'background',
-                      command,
-                      ...(normalizedCwd ? { cwd: normalizedCwd } : {}),
-                  },
-                  errors,
-              }
-            : { launchable: null, errors };
-    }
-
-    if (type === 'split') {
-        const command = candidate.command;
-        const direction = candidate.direction;
-        if (!isNonEmptyString(command))
-            errors.push(`${name}: split.command must be a non-empty string`);
-        if (candidate.commands !== undefined)
-            errors.push(`${name}: split must not define commands`);
-        if (
-            direction !== undefined &&
-            direction !== 'right' &&
-            direction !== 'down'
-        ) {
-            errors.push(`${name}: split.direction must be right or down`);
-        }
-        return errors.length === 0 && isNonEmptyString(command)
-            ? {
-                  launchable: {
-                      type: 'split',
-                      command,
-                      ...(normalizedCwd ? { cwd: normalizedCwd } : {}),
-                      ...(direction === 'right' || direction === 'down'
-                          ? { direction }
-                          : {}),
-                  },
-                  errors,
-              }
+            ? { launchable: { type: 'background', command, ...(cwd ? { cwd } : {}) }, errors }
             : { launchable: null, errors };
     }
 
     if (type === 'idle-panes') {
         const command = candidate.command;
-        if (!isNonEmptyString(command))
-            errors.push(
-                `${name}: idle-panes.command must be a non-empty string`
-            );
-        if (candidate.cwd !== undefined)
-            errors.push(`${name}: idle-panes must not define cwd`);
-        if (candidate.commands !== undefined)
-            errors.push(`${name}: idle-panes must not define commands`);
-        if (candidate.direction !== undefined)
-            errors.push(`${name}: idle-panes must not define direction`);
+        if (!isNonEmptyString(command)) errors.push(`${name}: idle-panes.command must be a non-empty string`);
+        if (candidate.name !== undefined) errors.push(`${name}: idle-panes must not define name`);
+        if (candidate.cwd !== undefined) errors.push(`${name}: idle-panes must not define cwd`);
+        if (candidate.commands !== undefined) errors.push(`${name}: idle-panes must not define commands`);
+        if (candidate.direction !== undefined) errors.push(`${name}: idle-panes must not define direction`);
+        if (candidate.panes !== undefined) errors.push(`${name}: idle-panes must not define panes`);
+        if (candidate.tabs !== undefined) errors.push(`${name}: idle-panes must not define tabs`);
         return errors.length === 0 && isNonEmptyString(command)
-            ? {
-                  launchable: {
-                      type: 'idle-panes',
-                      command,
-                  },
-                  errors,
-              }
+            ? { launchable: { type: 'idle-panes', command }, errors }
             : { launchable: null, errors };
     }
 
-    if (type === 'tab') {
-        const command = candidate.command;
-        const commands = candidate.commands;
-        const validCommand = isNonEmptyString(command) ? command : null;
-        const validCommands =
-            Array.isArray(commands) && commands.length > 0
-                ? commands.map((item) => validateTabCommand(item))
-                : null;
-        const allCommandsValid =
-            validCommands !== null && validCommands.every(Boolean);
-
-        if (command !== undefined && commands !== undefined) {
-            errors.push(
-                `${name}: tab must define exactly one of command or commands`
-            );
-        } else if (command !== undefined) {
-            if (!validCommand)
-                errors.push(`${name}: tab.command must be a non-empty string`);
-        } else if (commands !== undefined) {
-            if (!allCommandsValid)
-                errors.push(
-                    `${name}: tab.commands must be a non-empty array of non-empty strings or { command, cwd? } objects`
-                );
-        } else {
-            errors.push(`${name}: tab must define command or commands`);
-        }
-
-        if (candidate.direction !== undefined)
-            errors.push(`${name}: tab must not define direction`);
-        return errors.length === 0 && (validCommand || allCommandsValid)
-            ? {
-                  launchable: validCommand
-                      ? {
-                            type: 'tab',
-                            command: validCommand,
-                            ...(normalizedCwd ? { cwd: normalizedCwd } : {}),
-                        }
-                      : {
-                            type: 'tab',
-                            commands: validCommands as NormalizedTabCommand[],
-                            ...(normalizedCwd ? { cwd: normalizedCwd } : {}),
-                        },
-                  errors,
-              }
-            : { launchable: null, errors };
+    if (type === 'split') {
+        return {
+            launchable: null,
+            errors: [`${name}: type "split" is unsupported; use type "pane"`],
+        };
     }
 
-    if (isNonEmptyString(type))
-        errors.push(`${name}: unsupported type ${JSON.stringify(type)}`);
+    if (type === 'pane') return validatePaneLaunchable(name, value);
+    if (type === 'tab') return validateTabLaunchable(name, value);
+    if (type === 'workspace') return validateWorkspaceLaunchable(name, value);
+
+    if (isNonEmptyString(type)) errors.push(`${name}: unsupported type ${JSON.stringify(type)}`);
     return { launchable: null, errors };
 }
 
@@ -238,7 +292,7 @@ function loadLaunchablesFile(
         return [];
     }
 
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    if (!isObject(parsed)) {
         appendLog(`ignored ${filePath}: expected top-level object`);
         return [];
     }
@@ -246,9 +300,7 @@ function loadLaunchablesFile(
     const configDir = path.dirname(filePath);
     const entries: ResolvedLaunchable[] = [];
 
-    for (const [name, value] of Object.entries(
-        parsed as Record<string, unknown>
-    )) {
+    for (const [name, value] of Object.entries(parsed)) {
         const result = validateLaunchable(name, value);
         if (!result.launchable) {
             for (const error of result.errors)
