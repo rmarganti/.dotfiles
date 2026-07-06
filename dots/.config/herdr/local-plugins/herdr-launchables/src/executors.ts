@@ -38,6 +38,10 @@ export function executeSelection(payload: SelectionPayload): void {
 
 // -[ Launch Handlers ]------------------------------------------
 
+/**
+ * Execute a command outside Herdr and log
+ * to the plugin's background log directory.
+ */
 function executeBackgroundLaunchable(payload: SelectionPayload): void {
     const { resolved } = payload;
     if (resolved.launchable.type !== 'background') return;
@@ -104,6 +108,10 @@ function executeWorkspaceLaunchable(payload: SelectionPayload): void {
 
     const workspace = resolved.launchable;
     const label = workspace.name || resolved.name;
+
+
+    // Workspaces are addressed by label: selecting an existing one focuses it
+    // instead of recreating the configured layout.
     const existingId = findWorkspaceIdByLabel(label);
     if (existingId) {
         herdr(['workspace', 'focus', existingId]);
@@ -159,6 +167,7 @@ function executeIdlePanesLaunchable(command: string): void {
 
 // -[ Tab / Pane Layout ]----------------------------------------
 
+/** A tab plus its root pane, whether newly created or supplied by Herdr. */
 interface TabTarget {
     tabId: string;
     rootPaneId: string;
@@ -175,6 +184,10 @@ interface ApplyTabLayoutOptions {
     focus?: boolean;
 }
 
+/**
+ * Materializes a tab definition into Herdr panes, optionally reusing the tab that
+ * Herdr created as part of workspace creation.
+ */
 function applyTabLayout(options: ApplyTabLayoutOptions): TabTarget {
     const panes = panesForTab(options.tab);
     const inheritedTabCwd = resolveTabCwd(
@@ -263,6 +276,7 @@ function configurePane(paneId: string, pane: PaneLaunchable): void {
     if (pane.command) herdrPaneRunThenExit(paneId, pane.command);
 }
 
+/** Treats a tab with no pane list as a single default pane. */
 function panesForTab(tab: TabLaunchable): PaneLaunchable[] {
     return tab.panes && tab.panes.length > 0 ? tab.panes : [{ type: 'pane' }];
 }
@@ -303,6 +317,9 @@ function createWorkspace(
 
 // -[ CWD Resolution ]-------------------------------------------
 
+/**
+ * Child launchables inherit cwd from their parent unless they declare their own.
+ */
 function resolveTabCwd(
     resolved: ResolvedLaunchable,
     selectedAtCwd: string,
@@ -331,6 +348,9 @@ function resolvePaneCwd(
     );
 }
 
+/**
+ * Determines the cwd Herdr needs when creating a tab before its full layout exists.
+ */
 function resolveTabRootPaneCwd(
     resolved: ResolvedLaunchable,
     selectedAtCwd: string,
@@ -353,6 +373,9 @@ function resolveTabRootPaneCwd(
 
 // -[ Idle Pane Detection ]--------------------------------------
 
+/**
+ * Finds panes that appear safe to reuse because they are sitting at a shell prompt.
+ */
 function idlePaneIds(): string[] {
     const panes =
         herdrJson<PaneListResponse>(['pane', 'list']).result?.panes || [];
@@ -372,6 +395,10 @@ function idlePaneIds(): string[] {
     return ids;
 }
 
+/**
+ * A pane is considered idle when its foreground process is one of Herdr's known
+ * shell names rather than an interactive program or running task.
+ */
 function isIdleShellProcessInfo(processInfo?: PaneProcessInfo): boolean {
     const foreground = processInfo?.foreground_processes?.[0];
     const candidates = [foreground?.name, foreground?.argv0].filter(
@@ -383,6 +410,9 @@ function isIdleShellProcessInfo(processInfo?: PaneProcessInfo): boolean {
     );
 }
 
+/**
+ * Normalizes argv variants such as login shells (`-zsh`) to comparable names.
+ */
 function normalizeProcessName(value: string): string {
     return path.basename(value).replace(/^-+/, '');
 }
