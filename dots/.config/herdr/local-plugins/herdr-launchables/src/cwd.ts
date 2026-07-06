@@ -7,12 +7,10 @@ export function resolveConfiguredCwd(
     currentCwd: string,
     configured?: string
 ): string {
-    if (!configured) {
-        return item.source === 'project' ? item.configDir : currentCwd;
-    }
-
-    if (path.isAbsolute(configured)) return configured;
-    return path.resolve(item.configDir, configured);
+    return resolveComposedConfiguredCwd(
+        sourceDefaultCwd(item, currentCwd),
+        configured
+    );
 }
 
 export function resolveInheritedConfiguredCwd(
@@ -21,9 +19,20 @@ export function resolveInheritedConfiguredCwd(
     inheritedCwd: string | undefined,
     configured?: string
 ): string {
-    if (configured) return resolveConfiguredCwd(item, currentCwd, configured);
-    if (inheritedCwd) return inheritedCwd;
-    return resolveConfiguredCwd(item, currentCwd);
+    return resolveComposedConfiguredCwd(
+        inheritedCwd || sourceDefaultCwd(item, currentCwd),
+        configured
+    );
+}
+
+function sourceDefaultCwd(item: ResolvedLaunchable, currentCwd: string): string {
+    return item.source === 'project' ? item.configDir : currentCwd;
+}
+
+function resolveComposedConfiguredCwd(baseCwd: string, configured?: string): string {
+    if (!configured) return baseCwd;
+    if (path.isAbsolute(configured)) return configured;
+    return path.resolve(baseCwd, configured);
 }
 
 export function resolveLaunchableCwd(

@@ -93,7 +93,12 @@ Source default:
 - global launchable: current pane cwd
 - project launchable: directory containing `.launchables.json`
 
-Relative `cwd` values always resolve relative to the config file directory.
+CWD values compose in `workspace` and `tab` launchable trees:
+- missing child `cwd` inherits the resolved parent cwd
+- relative child `cwd` resolves against the resolved parent cwd
+- absolute child `cwd` takes precedence and resets the base for its children
+
+Top-level relative `cwd` values resolve against the source default.
 
 ## Workspace idempotency
 
