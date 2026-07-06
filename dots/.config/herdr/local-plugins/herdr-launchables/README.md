@@ -1,95 +1,100 @@
 # herdr-launchables
 
-A Herdr plugin for launching reusable commands from one picker.
+A Herdr plugin for launching reusable commands, panes, tabs, and workspaces from one picker.
 
 It merges:
 - global launchables from `~/.config/.launchables.json`
 - nearest project launchables from `.launchables.json` in the current cwd or an ancestor
 
-Project launchables override global ones by name.
+Project launchables override global ones by JSON key. The picker always displays the JSON key. Optional `name` labels Herdr UI objects only.
 
 ## Schema
 
-```json
-{
-  "Name": {
-    "type": "background | tab | split | idle-panes",
-    "cwd": "optional/path",
-    "command": "shell command",
-    "commands": ["shell command", { "command": "shell command", "cwd": "optional/path" }],
-    "direction": "right | down"
-  }
-}
-```
-
-Rules:
-- `background` uses `command`
-- `split` uses `command`
-- `tab` uses exactly one of `commands` or `command`
-- `idle-panes` uses `command` and runs it in every Herdr pane whose foreground process is an idle shell (`bash`, `sh`, `zsh`, or `fish`)
-- `tab.commands` entries may be strings or `{ "command": "...", "cwd": "..." }` objects
-- `cwd` is optional
-- for tab command objects, per-command `cwd` overrides the launchable-level `cwd`
-- relative `cwd` resolves relative to the config file
-- default `cwd`:
-  - global launchable: current pane cwd
-  - project launchable: directory containing `.launchables.json`
-
-## Example: global config
-
-`~/.config/.launchables.json`
+Top-level entries may be `background`, `pane`, `tab`, `workspace`, or `idle-panes`.
 
 ```json
 {
-  "Clear all terminals": {
-    "type": "idle-panes",
-    "command": "clear"
-  },
-  "Refresh bash env": {
-    "type": "idle-panes",
-    "command": "source ~/.bash_profile"
-  },
-  "Kill node": {
-    "type": "background",
-    "command": "killall node 2>/dev/null || true"
-  },
-  "Pi Coding Agent": {
-    "type": "split",
-    "command": "pi",
-    "direction": "right"
-  }
-}
-```
-
-## Example: project config
-
-`.launchables.json`
-
-```json
-{
-  "web": {
-    "type": "tab",
+  "Dev Workspace": {
+    "type": "workspace",
+    "name": "my-project",
     "cwd": ".",
-    "commands": [
+    "tabs": [
       {
-        "command": "yarn dev:api",
-        "cwd": "packages/api"
+        "type": "tab",
+        "name": "server",
+        "panes": [
+          {
+            "type": "pane",
+            "name": "api",
+            "command": "yarn dev:api",
+            "cwd": "packages/api"
+          },
+          {
+            "type": "pane",
+            "name": "web",
+            "command": "yarn dev:web",
+            "cwd": "packages/web",
+            "direction": "right"
+          }
+        ]
       },
       {
-        "command": "yarn dev:web",
-        "cwd": "packages/web"
-      },
-      "yarn dev:worker"
+        "type": "tab",
+        "name": "shell"
+      }
     ]
   },
-  "storybook": {
-    "type": "tab",
-    "command": "yarn storybook"
+  "Pi Coding Agent": {
+    "type": "pane",
+    "command": "pi"
   },
-  "tests": {
-    "type": "split",
-    "command": "yarn test --watch",
-    "cwd": "packages/app"
+  "Diff": {
+    "type": "tab",
+    "panes": [
+      {
+        "type": "pane",
+        "command": "diffnav --watch"
+      }
+    ]
   }
 }
 ```
+
+## Rules
+
+- `background` runs `command` detached and logs output by picker key.
+- `pane` replaces the old `split` type. Top-level panes split from the source pane.
+- `tab.panes` is optional. Omitted `panes` creates a single interactive shell pane.
+- `tab.panes`, when provided, must be non-empty. Every pane object must include `"type": "pane"`.
+- `workspace.tabs` is required and non-empty. Every tab object must include `"type": "tab"`.
+- Pane `command` is optional. Missing `command` leaves an interactive shell open.
+- Pane commands run as `<command> && exit`, preserving prior command-pane behavior.
+- Pane `direction` may be `right` or `down`; it defaults to `right` for top-level panes and non-root tab panes.
+- The first/root pane inside a tab must not define `direction`.
+- `idle-panes` runs `command` in every Herdr pane whose foreground process is an idle shell (`bash`, `sh`, `zsh`, or `fish`).
+- `background` and `idle-panes` must not define `name`.
+- No backward compatibility is provided for old `type: "split"`, `tab.command`, or `tab.commands`; those entries are rejected and logged.
+
+## Naming
+
+- JSON key: picker identity and project-over-global override key.
+- Top-level workspace label: `workspace.name ?? jsonKey`.
+- Top-level tab label: `tab.name ?? jsonKey`.
+- Nested workspace tab label: `tab.name` when provided; otherwise Herdr chooses its default.
+- Pane label: `pane.name` when provided.
+
+## CWD precedence
+
+```text
+pane.cwd > tab.cwd > workspace.cwd > source default
+```
+
+Source default:
+- global launchable: current pane cwd
+- project launchable: directory containing `.launchables.json`
+
+Relative `cwd` values always resolve relative to the config file directory.
+
+## Workspace idempotency
+
+Workspace launchables are idempotent by Herdr workspace label. If `herdr workspace list` already contains a workspace whose label matches `workspace.name ?? jsonKey`, the plugin focuses that workspace and does not replay tab/pane creation or commands.
