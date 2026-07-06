@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { IDLE_SHELL_NAMES } from './constants.ts';
 import { resolveConfiguredCwd, resolveInheritedConfiguredCwd } from './cwd.ts';
-import { herdr, herdrJson, herdrPaneRunThenExit } from './herdr.ts';
+import { herdr, herdrJson, herdrPaneRun } from './herdr.ts';
 import { backgroundLogFile } from './log.ts';
 import type {
     PaneLaunchable,
@@ -273,7 +273,7 @@ function createTab(
 
 function configurePane(paneId: string, pane: PaneLaunchable): void {
     if (pane.name) herdr(['pane', 'rename', paneId, pane.name]);
-    if (pane.command) herdrPaneRunThenExit(paneId, pane.command);
+    if (pane.command) herdrPaneRun(paneId, pane.command, pane.commandMode);
 }
 
 /** Treats a tab with no pane list as a single default pane. */

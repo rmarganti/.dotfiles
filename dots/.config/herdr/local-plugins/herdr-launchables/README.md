@@ -33,6 +33,7 @@ Top-level entries may be `background`, `pane`, `tab`, `workspace`, or `idle-pane
             "type": "pane",
             "name": "web",
             "command": "yarn dev:web",
+            "commandMode": "loop",
             "cwd": "packages/web",
             "direction": "right"
           }
@@ -68,7 +69,12 @@ Top-level entries may be `background`, `pane`, `tab`, `workspace`, or `idle-pane
 - `tab.panes`, when provided, must be non-empty. Every pane object must include `"type": "pane"`.
 - `workspace.tabs` is required and non-empty. Every tab object must include `"type": "tab"`.
 - Pane `command` is optional. Missing `command` leaves an interactive shell open.
-- Pane commands run as `<command> && exit`, preserving prior command-pane behavior.
+- Pane `commandMode` is optional and defaults to `exit-on-success`, preserving prior command-pane behavior.
+- Pane `commandMode` may be `exit-on-success`, `keep-shell`, `exit-always`, or `loop`:
+  - `exit-on-success`: run `<command> && exit`.
+  - `keep-shell`: run `<command>` and leave the shell open when it exits.
+  - `exit-always`: run `<command>; exit`.
+  - `loop`: continuously rerun `<command>` after it exits, with a short restart message/delay.
 - Pane `direction` may be `right` or `down`; it defaults to `right` for top-level panes and non-root tab panes.
 - The first/root pane inside a tab must not define `direction`.
 - `idle-panes` runs `command` in every Herdr pane whose foreground process is an idle shell (`bash`, `sh`, `zsh`, or `fish`).

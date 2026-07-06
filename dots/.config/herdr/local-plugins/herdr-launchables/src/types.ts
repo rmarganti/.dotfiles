@@ -3,6 +3,12 @@ export type LaunchableSource = 'global' | 'project';
 
 export type SplitDirection = 'right' | 'down';
 
+export type PaneCommandMode =
+    | 'exit-on-success'
+    | 'keep-shell'
+    | 'exit-always'
+    | 'loop';
+
 /**
  * Runs a shell command detached from Herdr and writes output to a plugin log.
  */
@@ -17,6 +23,7 @@ export interface PaneLaunchable {
     type: 'pane';
     name?: string;
     command?: string;
+    commandMode?: PaneCommandMode;
     cwd?: string;
     direction?: SplitDirection;
 }

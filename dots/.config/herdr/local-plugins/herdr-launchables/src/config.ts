@@ -6,6 +6,7 @@ import { appendLog } from './log.ts';
 import type {
     Launchable,
     LaunchableSource,
+    PaneCommandMode,
     PaneLaunchable,
     ResolvedLaunchable,
     SplitDirection,
@@ -107,6 +108,26 @@ function validateDirection(
     return undefined;
 }
 
+function validatePaneCommandMode(
+    pathName: string,
+    value: unknown,
+    errors: string[]
+): PaneCommandMode | undefined {
+    if (value === undefined) return undefined;
+    if (
+        value === 'exit-on-success' ||
+        value === 'keep-shell' ||
+        value === 'exit-always' ||
+        value === 'loop'
+    ) {
+        return value;
+    }
+    errors.push(
+        `${pathName}: pane.commandMode must be exit-on-success, keep-shell, exit-always, or loop`
+    );
+    return undefined;
+}
+
 function validatePaneLaunchable(
     pathName: string,
     value: unknown,
@@ -120,9 +141,17 @@ function validatePaneLaunchable(
     const name = validateOptionalName(pathName, candidate, errors);
     const cwd = validateOptionalCwd(pathName, candidate, errors);
     const direction = validateDirection(pathName, candidate.direction, errors);
+    const commandMode = validatePaneCommandMode(
+        pathName,
+        candidate.commandMode,
+        errors
+    );
 
     if (candidate.command !== undefined && !isNonEmptyString(candidate.command)) {
         errors.push(`${pathName}: pane.command must be a non-empty string when provided`);
+    }
+    if (candidate.commandMode !== undefined && candidate.command === undefined) {
+        errors.push(`${pathName}: pane.commandMode requires pane.command`);
     }
     if (options.rootInTab && candidate.direction !== undefined) {
         errors.push(`${pathName}: first/root pane in a tab must not define direction`);
@@ -136,6 +165,7 @@ function validatePaneLaunchable(
                   type: 'pane',
                   ...(name ? { name } : {}),
                   ...(isNonEmptyString(candidate.command) ? { command: candidate.command } : {}),
+                  ...(commandMode ? { commandMode } : {}),
                   ...(cwd ? { cwd } : {}),
                   ...(direction ? { direction } : {}),
               },
@@ -155,6 +185,7 @@ function validateTabLaunchable(pathName: string, value: unknown): ValidationResu
 
     if (candidate.command !== undefined) errors.push(`${pathName}: tab.command is no longer supported; use tab.panes`);
     if (candidate.commands !== undefined) errors.push(`${pathName}: tab.commands is no longer supported; use tab.panes`);
+    if (candidate.commandMode !== undefined) errors.push(`${pathName}: tab must not define commandMode; set it on panes`);
     if (candidate.direction !== undefined) errors.push(`${pathName}: tab must not define direction`);
 
     let panes: PaneLaunchable[] | undefined;
@@ -197,6 +228,7 @@ function validateWorkspaceLaunchable(pathName: string, value: unknown): Validati
 
     if (candidate.command !== undefined) errors.push(`${pathName}: workspace must not define command`);
     if (candidate.commands !== undefined) errors.push(`${pathName}: workspace must not define commands`);
+    if (candidate.commandMode !== undefined) errors.push(`${pathName}: workspace must not define commandMode; set it on panes`);
     if (candidate.direction !== undefined) errors.push(`${pathName}: workspace must not define direction`);
 
     const tabs: TabLaunchable[] = [];
@@ -241,6 +273,7 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
         if (!isNonEmptyString(command)) errors.push(`${name}: background.command must be a non-empty string`);
         if (candidate.name !== undefined) errors.push(`${name}: background must not define name`);
         if (candidate.commands !== undefined) errors.push(`${name}: background must not define commands`);
+        if (candidate.commandMode !== undefined) errors.push(`${name}: background must not define commandMode`);
         if (candidate.direction !== undefined) errors.push(`${name}: background must not define direction`);
         if (candidate.panes !== undefined) errors.push(`${name}: background must not define panes`);
         if (candidate.tabs !== undefined) errors.push(`${name}: background must not define tabs`);
@@ -255,6 +288,7 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
         if (candidate.name !== undefined) errors.push(`${name}: idle-panes must not define name`);
         if (candidate.cwd !== undefined) errors.push(`${name}: idle-panes must not define cwd`);
         if (candidate.commands !== undefined) errors.push(`${name}: idle-panes must not define commands`);
+        if (candidate.commandMode !== undefined) errors.push(`${name}: idle-panes must not define commandMode`);
         if (candidate.direction !== undefined) errors.push(`${name}: idle-panes must not define direction`);
         if (candidate.panes !== undefined) errors.push(`${name}: idle-panes must not define panes`);
         if (candidate.tabs !== undefined) errors.push(`${name}: idle-panes must not define tabs`);

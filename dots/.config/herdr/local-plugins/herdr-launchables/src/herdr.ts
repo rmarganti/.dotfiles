@@ -1,6 +1,7 @@
 import { spawnSync } from 'node:child_process';
 
 import { HERDR_BIN } from './constants.ts';
+import type { PaneCommandMode } from './types.ts';
 
 export function herdr(
     args: string[],
@@ -23,8 +24,25 @@ export function herdr(
     return stdout;
 }
 
-export function herdrPaneRunThenExit(paneId: string, command: string): string {
-    return herdr(['pane', 'run', paneId, `${command} && exit`]);
+export function herdrPaneRun(
+    paneId: string,
+    command: string,
+    mode: PaneCommandMode = 'exit-on-success'
+): string {
+    return herdr(['pane', 'run', paneId, commandForMode(command, mode)]);
+}
+
+function commandForMode(command: string, mode: PaneCommandMode): string {
+    switch (mode) {
+        case 'exit-on-success':
+            return `${command} && exit`;
+        case 'keep-shell':
+            return command;
+        case 'exit-always':
+            return `${command}; exit`;
+        case 'loop':
+            return `while true; do ${command}; status=$?; printf '\\n[herdr-launchables] command exited with status %s; restarting in 1s...\\n' "$status"; sleep 1; done`;
+    }
 }
 
 export function herdrJson<T>(args: string[]): T {
