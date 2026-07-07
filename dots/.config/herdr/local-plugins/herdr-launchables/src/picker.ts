@@ -1,10 +1,39 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
-import type { ResolvedLaunchable } from './types.ts';
+import type {
+    Launchable,
+    LaunchableSource,
+    LaunchableType,
+    ResolvedLaunchable,
+} from './types.ts';
+
+const RESET = '\x1b[0m';
+const BLACK = '\x1b[30m';
+const CYAN = '\x1b[36m';
+const YELLOW = '\x1b[33m';
+
+const TYPE_ICONS: Record<LaunchableType, string> = {
+    workspace: '󰉋',
+    tab: '󰓩',
+    pane: '',
+    background: '󰒲',
+    'idle-panes': '󰌘',
+};
+
+const SOURCE_COLORS: Record<LaunchableSource, string> = {
+    global: CYAN, // cyan
+    project: YELLOW, // yellow
+};
+
+function displayIcon(type: LaunchableType, source: LaunchableSource): string {
+    return `${SOURCE_COLORS[source]}${TYPE_ICONS[type]}${RESET}`;
+}
 
 function displayLine(item: ResolvedLaunchable, index: number): string {
-    return `${index}\t${item.name} [${item.source}] [${item.launchable.type}]`;
+    const source = `${BLACK}[${item.source}]${RESET}`;
+    const type = `${BLACK}[${item.launchable.type}]${RESET}`;
+    return `${index}\t${displayIcon(item.launchable.type, item.source)} ${item.name} ${source} ${type}`;
 }
 
 export function selectLaunchable(

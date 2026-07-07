@@ -1,6 +1,8 @@
 /** Whether the the launchable was read from a global or project-specific .launchables.json */
 export type LaunchableSource = 'global' | 'project';
 
+export type LaunchableType = Launchable['type'];
+
 export type SplitDirection = 'right' | 'down';
 
 export type PaneCommandMode =

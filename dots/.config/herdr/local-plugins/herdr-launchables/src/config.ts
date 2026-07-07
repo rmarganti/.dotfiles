@@ -49,9 +49,10 @@ export function discoverLaunchables(cwd: string): ResolvedLaunchable[] {
         }
     }
 
-    return [...merged.values()].sort((left, right) =>
-        left.name.localeCompare(right.name)
-    );
+    return [...merged.values()].sort((left, right) => {
+        if (left.source !== right.source) return left.source === 'project' ? -1 : 1;
+        return left.name.localeCompare(right.name);
+    });
 }
 
 function readJsonFile<T>(filePath: string): T {
