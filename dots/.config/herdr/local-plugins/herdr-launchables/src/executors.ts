@@ -4,11 +4,18 @@ import path from 'node:path';
 
 import { IDLE_SHELL_NAMES } from './constants.ts';
 import { resolveConfiguredCwd, resolveInheritedConfiguredCwd } from './cwd.ts';
-import { herdr, herdrJson, herdrPaneRun } from './herdr.ts';
+import {
+    focusWorkspace,
+    herdr,
+    herdrJson,
+    herdrPaneRun,
+    listWorkspaces,
+} from './herdr.ts';
 import { backgroundLogFile } from './log.ts';
 import type {
+    OpenWorkspaceLaunchable,
     PaneLaunchable,
-    ResolvedLaunchable,
+    ResolvedConfiguredLaunchable,
     SelectionPayload,
     SplitDirection,
     TabLaunchable,
@@ -33,6 +40,9 @@ export function executeSelection(payload: SelectionPayload): void {
         case 'idle-panes':
             executeIdlePanesLaunchable(payload.resolved.launchable.command);
             return;
+        case 'open-workspace':
+            executeOpenWorkspaceLaunchable(payload.resolved.launchable);
+            return;
     }
 }
 
@@ -44,7 +54,8 @@ export function executeSelection(payload: SelectionPayload): void {
  */
 function executeBackgroundLaunchable(payload: SelectionPayload): void {
     const { resolved } = payload;
-    if (resolved.launchable.type !== 'background') return;
+    if (resolved.source === 'open' || resolved.launchable.type !== 'background')
+        return;
 
     const logPath = backgroundLogFile(resolved.name);
     const cwd = resolveConfiguredCwd(
@@ -65,7 +76,12 @@ function executeBackgroundLaunchable(payload: SelectionPayload): void {
 
 function executePaneLaunchable(payload: SelectionPayload): void {
     const { sourcePaneId, resolved } = payload;
-    if (!sourcePaneId || resolved.launchable.type !== 'pane') return;
+    if (
+        !sourcePaneId ||
+        resolved.source === 'open' ||
+        resolved.launchable.type !== 'pane'
+    )
+        return;
 
     const pane = resolved.launchable;
     const cwd = resolvePaneCwd(resolved, payload.selectedAtCwd, pane);
@@ -87,7 +103,12 @@ function executePaneLaunchable(payload: SelectionPayload): void {
 
 function executeTabLaunchable(payload: SelectionPayload): void {
     const { workspaceId, resolved } = payload;
-    if (!workspaceId || resolved.launchable.type !== 'tab') return;
+    if (
+        !workspaceId ||
+        resolved.source === 'open' ||
+        resolved.launchable.type !== 'tab'
+    )
+        return;
 
     const created = applyTabLayout({
         workspaceId,
@@ -104,11 +125,11 @@ function executeTabLaunchable(payload: SelectionPayload): void {
 
 function executeWorkspaceLaunchable(payload: SelectionPayload): void {
     const { resolved } = payload;
-    if (resolved.launchable.type !== 'workspace') return;
+    if (resolved.source === 'open' || resolved.launchable.type !== 'workspace')
+        return;
 
     const workspace = resolved.launchable;
     const label = workspace.name || resolved.name;
-
 
     // Workspaces are addressed by label: selecting an existing one focuses it
     // instead of recreating the configured layout.
@@ -165,6 +186,12 @@ function executeIdlePanesLaunchable(command: string): void {
     }
 }
 
+function executeOpenWorkspaceLaunchable(
+    launchable: OpenWorkspaceLaunchable
+): void {
+    focusWorkspace(launchable.workspaceId);
+}
+
 // -[ Tab / Pane Layout ]----------------------------------------
 
 /** A tab plus its root pane, whether newly created or supplied by Herdr. */
@@ -175,7 +202,7 @@ interface TabTarget {
 
 interface ApplyTabLayoutOptions {
     workspaceId: string;
-    resolved: ResolvedLaunchable;
+    resolved: ResolvedConfiguredLaunchable;
     selectedAtCwd: string;
     tab: TabLaunchable;
     inheritedCwd?: string;
@@ -284,13 +311,8 @@ function panesForTab(tab: TabLaunchable): PaneLaunchable[] {
 // -[ Workspace Commands ]---------------------------------------
 
 function findWorkspaceIdByLabel(label: string): string {
-    const workspaces =
-        herdrJson<WorkspaceListResponse>(['workspace', 'list']).result
-            ?.workspaces || [];
-    const match = workspaces.find(
-        (workspace) => (workspace.label || workspace.name || '') === label
-    );
-    return match?.workspace_id || '';
+    const match = listWorkspaces().find((workspace) => workspace.label === label);
+    return match?.workspaceId || '';
 }
 
 function createWorkspace(
@@ -321,7 +343,7 @@ function createWorkspace(
  * Child launchables inherit cwd from their parent unless they declare their own.
  */
 function resolveTabCwd(
-    resolved: ResolvedLaunchable,
+    resolved: ResolvedConfiguredLaunchable,
     selectedAtCwd: string,
     tab: TabLaunchable,
     inheritedCwd?: string
@@ -335,7 +357,7 @@ function resolveTabCwd(
 }
 
 function resolvePaneCwd(
-    resolved: ResolvedLaunchable,
+    resolved: ResolvedConfiguredLaunchable,
     selectedAtCwd: string,
     pane: PaneLaunchable,
     inheritedCwd?: string
@@ -352,7 +374,7 @@ function resolvePaneCwd(
  * Determines the cwd Herdr needs when creating a tab before its full layout exists.
  */
 function resolveTabRootPaneCwd(
-    resolved: ResolvedLaunchable,
+    resolved: ResolvedConfiguredLaunchable,
     selectedAtCwd: string,
     tab: TabLaunchable,
     inheritedCwd?: string
@@ -429,12 +451,6 @@ interface TabCreateResponse {
 interface PaneSplitResponse {
     result?: {
         pane?: { pane_id?: string };
-    };
-}
-
-interface WorkspaceListResponse {
-    result?: {
-        workspaces?: Array<{ workspace_id?: string; label?: string; name?: string }>;
     };
 }
 

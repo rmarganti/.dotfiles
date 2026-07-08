@@ -4,11 +4,11 @@ import path from 'node:path';
 import { GLOBAL_CONFIG_PATH, PROJECT_CONFIG_NAME } from './constants.ts';
 import { appendLog } from './log.ts';
 import type {
-    Launchable,
-    LaunchableSource,
+    ConfiguredLaunchable,
+    ConfiguredLaunchableSource,
     PaneCommandMode,
     PaneLaunchable,
-    ResolvedLaunchable,
+    ResolvedConfiguredLaunchable,
     SplitDirection,
     TabLaunchable,
     WorkspaceLaunchable,
@@ -35,8 +35,10 @@ export function findNearestProjectConfig(startCwd: string): string {
  * Discovers launchable configurations from both global
  * and project-specific configuration files.
  */
-export function discoverLaunchables(cwd: string): ResolvedLaunchable[] {
-    const merged = new Map<string, ResolvedLaunchable>();
+export function discoverConfiguredLaunchables(
+    cwd: string
+): ResolvedConfiguredLaunchable[] {
+    const merged = new Map<string, ResolvedConfiguredLaunchable>();
 
     for (const item of loadLaunchablesFile(GLOBAL_CONFIG_PATH, 'global')) {
         merged.set(item.name, item);
@@ -67,7 +69,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
     return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
-interface ValidationResult<T = Launchable> {
+interface ValidationResult<T = ConfiguredLaunchable> {
     launchable: T | null;
     errors: string[];
 }
@@ -315,8 +317,8 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
 
 function loadLaunchablesFile(
     filePath: string,
-    source: LaunchableSource
-): ResolvedLaunchable[] {
+    source: ConfiguredLaunchableSource
+): ResolvedConfiguredLaunchable[] {
     if (!fs.existsSync(filePath)) return [];
 
     let parsed: unknown;
@@ -333,7 +335,7 @@ function loadLaunchablesFile(
     }
 
     const configDir = path.dirname(filePath);
-    const entries: ResolvedLaunchable[] = [];
+    const entries: ResolvedConfiguredLaunchable[] = [];
 
     for (const [name, value] of Object.entries(parsed)) {
         const result = validateLaunchable(name, value);

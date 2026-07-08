@@ -2,7 +2,6 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 
 import type {
-    Launchable,
     LaunchableSource,
     LaunchableType,
     ResolvedLaunchable,
@@ -11,10 +10,12 @@ import type {
 const RESET = '\x1b[0m';
 const BLACK = '\x1b[30m';
 const CYAN = '\x1b[36m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
 
 const TYPE_ICONS: Record<LaunchableType, string> = {
     workspace: '󰉋',
+    'open-workspace': '󰉋',
     tab: '󰓩',
     pane: '',
     background: '󰒲',
@@ -22,9 +23,14 @@ const TYPE_ICONS: Record<LaunchableType, string> = {
 };
 
 const SOURCE_COLORS: Record<LaunchableSource, string> = {
-    global: CYAN, // cyan
-    project: YELLOW, // yellow
+    global: CYAN,
+    project: YELLOW,
+    open: GREEN,
 };
+
+function displayType(type: LaunchableType): string {
+    return type === 'open-workspace' ? 'workspace' : type;
+}
 
 function displayIcon(type: LaunchableType, source: LaunchableSource): string {
     return `${SOURCE_COLORS[source]}${TYPE_ICONS[type]}${RESET}`;
@@ -32,7 +38,7 @@ function displayIcon(type: LaunchableType, source: LaunchableSource): string {
 
 function displayLine(item: ResolvedLaunchable, index: number): string {
     const source = `${BLACK}[${item.source}]${RESET}`;
-    const type = `${BLACK}[${item.launchable.type}]${RESET}`;
+    const type = `${BLACK}[${displayType(item.launchable.type)}]${RESET}`;
     return `${index}\t${displayIcon(item.launchable.type, item.source)} ${item.name} ${source} ${type}`;
 }
 
@@ -76,7 +82,7 @@ export function selectLaunchable(
     process.stderr.write('launchables:\n');
     items.forEach((item, index) =>
         process.stderr.write(
-            `  ${index + 1}) ${item.name} [${item.source}] [${item.launchable.type}]\n`
+            `  ${index + 1}) ${item.name} [${item.source}] [${displayType(item.launchable.type)}]\n`
         )
     );
     process.stderr.write('Choose launchable: ');

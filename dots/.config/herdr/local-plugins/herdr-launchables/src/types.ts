@@ -1,5 +1,7 @@
-/** Whether the the launchable was read from a global or project-specific .launchables.json */
-export type LaunchableSource = 'global' | 'project';
+/** Whether a picker item came from config or Herdr's currently open workspaces. */
+export type LaunchableSource = 'global' | 'project' | 'open';
+
+export type ConfiguredLaunchableSource = Exclude<LaunchableSource, 'open'>;
 
 export type LaunchableType = Launchable['type'];
 
@@ -52,27 +54,50 @@ export interface IdlePanesLaunchable {
     command: string;
 }
 
-export type Launchable =
+/** Synthetic picker entry for an already-open Herdr workspace. */
+export interface OpenWorkspaceLaunchable {
+    type: 'open-workspace';
+    workspaceId: string;
+    label: string;
+    number?: number;
+    focused?: boolean;
+}
+
+export type ConfiguredLaunchable =
     | BackgroundLaunchable
     | PaneLaunchable
     | TabLaunchable
     | WorkspaceLaunchable
     | IdlePanesLaunchable;
 
+export type Launchable = ConfiguredLaunchable | OpenWorkspaceLaunchable;
+
 /** A validated `.launchables.json`, keyed by display name. */
-export type LaunchablesFile = Record<string, Launchable>;
+export type LaunchablesFile = Record<string, ConfiguredLaunchable>;
 
 /**
- * A launchable plus the file metadata needed for display, precedence, and cwd
- * resolution. Project entries replace global entries with the same name.
+ * A configured launchable plus the file metadata needed for display,
+ * precedence, and cwd resolution. Project entries replace global entries with
+ * the same name.
  */
-export interface ResolvedLaunchable {
+export interface ResolvedConfiguredLaunchable {
     name: string;
-    source: LaunchableSource;
+    source: ConfiguredLaunchableSource;
     configPath: string;
     configDir: string;
-    launchable: Launchable;
+    launchable: ConfiguredLaunchable;
 }
+
+/** A synthetic picker item for an already-open workspace. */
+export interface ResolvedOpenWorkspace {
+    name: string;
+    source: 'open';
+    launchable: OpenWorkspaceLaunchable;
+}
+
+export type ResolvedLaunchable =
+    | ResolvedConfiguredLaunchable
+    | ResolvedOpenWorkspace;
 
 /**
  * The picker writes this payload before exiting; the detached apply process reads

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { discoverLaunchables } from './config.ts';
+import { discoverPickerLaunchables } from './catalog.ts';
 import { PLUGIN_ID } from './constants.ts';
 import { contextValue, getPluginContext } from './context.ts';
 import { executeSelection } from './executors.ts';
@@ -58,7 +58,7 @@ async function cmdPicker(): Promise<void> {
     const pluginContext = getPluginContext();
     if (!pluginContext.cwd) return;
 
-    const items = discoverLaunchables(pluginContext.cwd);
+    const items = discoverPickerLaunchables(pluginContext.cwd);
     const selected = selectLaunchable(items);
     if (!selected) return;
 

@@ -3,6 +3,13 @@ import { spawnSync } from 'node:child_process';
 import { HERDR_BIN } from './constants.ts';
 import type { PaneCommandMode } from './types.ts';
 
+export interface HerdrWorkspace {
+    workspaceId: string;
+    label: string;
+    number?: number;
+    focused?: boolean;
+}
+
 export function herdr(
     args: string[],
     options: Parameters<typeof spawnSync>[2] = {}
@@ -50,6 +57,22 @@ export function herdrJson<T>(args: string[]): T {
     return JSON.parse(output) as T;
 }
 
+export function listWorkspaces(): HerdrWorkspace[] {
+    const data = herdrJson<WorkspaceListResponse>(['workspace', 'list']);
+    return (data.result?.workspaces || [])
+        .map((workspace) => ({
+            workspaceId: workspace.workspace_id || '',
+            label: workspace.label || workspace.name || '',
+            number: workspace.number,
+            focused: workspace.focused,
+        }))
+        .filter((workspace) => workspace.workspaceId && workspace.label);
+}
+
+export function focusWorkspace(workspaceId: string): void {
+    herdr(['workspace', 'focus', workspaceId]);
+}
+
 export function focusedPaneInfo(paneId?: string): {
     paneId: string;
     workspaceId: string;
@@ -73,5 +96,17 @@ export function focusedPaneInfo(paneId?: string): {
         paneId: pane.pane_id || '',
         workspaceId: pane.workspace_id || '',
         cwd: pane.foreground_cwd || pane.cwd || '',
+    };
+}
+
+interface WorkspaceListResponse {
+    result?: {
+        workspaces?: Array<{
+            workspace_id?: string;
+            label?: string;
+            name?: string;
+            number?: number;
+            focused?: boolean;
+        }>;
     };
 }
