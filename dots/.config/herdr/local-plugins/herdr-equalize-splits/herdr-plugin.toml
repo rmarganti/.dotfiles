@@ -1,0 +1,12 @@
+id = "dots.herdr-equalize-splits"
+name = "Herdr Equalize Splits"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Equalize all split ratios in the current Herdr tab."
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "equalize"
+title = "Equalize splits"
+contexts = ["workspace", "tab", "pane"]
+command = ["node", "equalize.mjs"]
