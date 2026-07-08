@@ -4,7 +4,7 @@ import { discoverLaunchables } from './config.ts';
 import { PLUGIN_ID } from './constants.ts';
 import { contextValue, getPluginContext } from './context.ts';
 import { executeSelection } from './executors.ts';
-import { herdr } from './herdr.ts';
+import { openPluginPane } from './herdr.ts';
 import { selectLaunchable } from './picker.ts';
 import {
     detachApply,
@@ -22,33 +22,18 @@ const SELF_PATH = fileURLToPath(import.meta.url);
  */
 async function cmdOpen(): Promise<void> {
     const pluginContext = getPluginContext();
-    const args = [
-        'plugin',
-        'pane',
-        'open',
-        '--plugin',
-        PLUGIN_ID,
-        '--entrypoint',
-        'picker',
-        '--placement',
-        'overlay',
-        '--focus',
-    ];
-
-    if (pluginContext.workspaceId)
-        args.push(
-            '--env',
-            `LAUNCHABLES_WORKSPACE_ID=${pluginContext.workspaceId}`
-        );
-    if (pluginContext.paneId)
-        args.push(
-            '--env',
-            `LAUNCHABLES_SOURCE_PANE_ID=${pluginContext.paneId}`
-        );
-    if (pluginContext.cwd)
-        args.push('--env', `LAUNCHABLES_CWD=${pluginContext.cwd}`);
-
-    herdr(args, { stdio: 'inherit' });
+    openPluginPane({
+        pluginId: PLUGIN_ID,
+        entrypoint: 'picker',
+        placement: 'overlay',
+        focus: true,
+        inheritStdio: true,
+        env: {
+            LAUNCHABLES_WORKSPACE_ID: pluginContext.workspaceId,
+            LAUNCHABLES_SOURCE_PANE_ID: pluginContext.paneId,
+            LAUNCHABLES_CWD: pluginContext.cwd,
+        },
+    });
 }
 
 /**

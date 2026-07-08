@@ -4,7 +4,20 @@ import path from 'node:path';
 
 import { IDLE_SHELL_NAMES } from './constants.ts';
 import { resolveConfiguredCwd, resolveInheritedConfiguredCwd } from './cwd.ts';
-import { herdr, herdrJson, herdrPaneRun } from './herdr.ts';
+import {
+    createTab,
+    createWorkspace,
+    focusTab,
+    focusWorkspace,
+    listPanes,
+    listWorkspaces,
+    paneProcessInfo,
+    renamePane,
+    renameTab,
+    runPaneCommand,
+    splitPane,
+    type PaneProcessInfo,
+} from './herdr.ts';
 import { backgroundLogFile } from './log.ts';
 import type {
     PaneLaunchable,
@@ -70,18 +83,12 @@ function executePaneLaunchable(payload: SelectionPayload): void {
     const pane = resolved.launchable;
     const cwd = resolvePaneCwd(resolved, payload.selectedAtCwd, pane);
     const direction = pane.direction || 'right';
-    const split = herdrJson<PaneSplitResponse>([
-        'pane',
-        'split',
-        sourcePaneId,
-        '--direction',
+    const { paneId } = splitPane({
+        paneId: sourcePaneId,
         direction,
-        '--cwd',
         cwd,
-        '--focus',
-    ]);
-    const paneId = split.result?.pane?.pane_id || '';
-    if (!paneId) throw new Error(`failed to create pane for ${resolved.name}`);
+        focus: true,
+    });
     configurePane(paneId, pane);
 }
 
@@ -98,8 +105,8 @@ function executeTabLaunchable(payload: SelectionPayload): void {
         focus: true,
     });
 
-    herdr(['workspace', 'focus', workspaceId]);
-    herdr(['tab', 'focus', created.tabId]);
+    focusWorkspace(workspaceId);
+    focusTab(created.tabId);
 }
 
 function executeWorkspaceLaunchable(payload: SelectionPayload): void {
@@ -114,7 +121,7 @@ function executeWorkspaceLaunchable(payload: SelectionPayload): void {
     // instead of recreating the configured layout.
     const existingId = findWorkspaceIdByLabel(label);
     if (existingId) {
-        herdr(['workspace', 'focus', existingId]);
+        focusWorkspace(existingId);
         return;
     }
 
@@ -131,7 +138,7 @@ function executeWorkspaceLaunchable(payload: SelectionPayload): void {
         inheritedWorkspaceCwd
     );
 
-    const created = createWorkspace(firstRootCwd, label);
+    const created = createWorkspace({ cwd: firstRootCwd, label, focus: true });
     const firstCreatedTab = applyTabLayout({
         workspaceId: created.workspaceId,
         resolved,
@@ -155,13 +162,13 @@ function executeWorkspaceLaunchable(payload: SelectionPayload): void {
         });
     }
 
-    herdr(['workspace', 'focus', created.workspaceId]);
-    herdr(['tab', 'focus', firstCreatedTab.tabId]);
+    focusWorkspace(created.workspaceId);
+    focusTab(firstCreatedTab.tabId);
 }
 
 function executeIdlePanesLaunchable(command: string): void {
     for (const paneId of idlePaneIds()) {
-        herdr(['pane', 'run', paneId, command]);
+        runPaneCommand(paneId, command, 'keep-shell');
     }
 }
 
@@ -205,15 +212,15 @@ function applyTabLayout(options: ApplyTabLayoutOptions): TabTarget {
 
     const target = options.existing
         ? options.existing
-        : createTab(
-              options.workspaceId,
-              rootCwd,
-              options.label,
-              options.focus !== false
-          );
+        : createTab({
+              workspaceId: options.workspaceId,
+              cwd: rootCwd,
+              label: options.label,
+              focus: options.focus !== false,
+          });
 
     if (options.existing && options.label) {
-        herdr(['tab', 'rename', target.tabId, options.label]);
+        renameTab(target.tabId, options.label);
     }
 
     let currentPaneId = target.rootPaneId;
@@ -227,53 +234,21 @@ function applyTabLayout(options: ApplyTabLayoutOptions): TabTarget {
             pane,
             inheritedTabCwd
         );
-        const split = herdrJson<PaneSplitResponse>([
-            'pane',
-            'split',
-            currentPaneId,
-            '--direction',
+        currentPaneId = splitPane({
+            paneId: currentPaneId,
             direction,
-            '--cwd',
             cwd,
-            '--no-focus',
-        ]);
-        currentPaneId = split.result?.pane?.pane_id || '';
-        if (!currentPaneId) {
-            throw new Error(`failed to create pane split for ${options.resolved.name}`);
-        }
+            focus: false,
+        }).paneId;
         configurePane(currentPaneId, pane);
     }
 
     return target;
 }
 
-function createTab(
-    workspaceId: string,
-    cwd: string,
-    label: string | undefined,
-    focus: boolean
-): TabTarget {
-    const args = [
-        'tab',
-        'create',
-        '--workspace',
-        workspaceId,
-        '--cwd',
-        cwd,
-    ];
-    if (label) args.push('--label', label);
-    args.push(focus ? '--focus' : '--no-focus');
-
-    const tab = herdrJson<TabCreateResponse>(args);
-    const tabId = tab.result?.tab?.tab_id || '';
-    const rootPaneId = tab.result?.root_pane?.pane_id || '';
-    if (!tabId || !rootPaneId) throw new Error('failed to create tab');
-    return { tabId, rootPaneId };
-}
-
 function configurePane(paneId: string, pane: PaneLaunchable): void {
-    if (pane.name) herdr(['pane', 'rename', paneId, pane.name]);
-    if (pane.command) herdrPaneRun(paneId, pane.command, pane.commandMode);
+    if (pane.name) renamePane(paneId, pane.name);
+    if (pane.command) runPaneCommand(paneId, pane.command, pane.commandMode);
 }
 
 /** Treats a tab with no pane list as a single default pane. */
@@ -284,35 +259,10 @@ function panesForTab(tab: TabLaunchable): PaneLaunchable[] {
 // -[ Workspace Commands ]---------------------------------------
 
 function findWorkspaceIdByLabel(label: string): string {
-    const workspaces =
-        herdrJson<WorkspaceListResponse>(['workspace', 'list']).result
-            ?.workspaces || [];
-    const match = workspaces.find(
+    const match = listWorkspaces().find(
         (workspace) => (workspace.label || workspace.name || '') === label
     );
-    return match?.workspace_id || '';
-}
-
-function createWorkspace(
-    cwd: string,
-    label: string
-): { workspaceId: string; tabId: string; rootPaneId: string } {
-    const created = herdrJson<WorkspaceCreateResponse>([
-        'workspace',
-        'create',
-        '--cwd',
-        cwd,
-        '--label',
-        label,
-        '--focus',
-    ]);
-    const workspaceId = created.result?.workspace?.workspace_id || '';
-    const tabId = created.result?.tab?.tab_id || '';
-    const rootPaneId = created.result?.root_pane?.pane_id || '';
-    if (!workspaceId || !tabId || !rootPaneId) {
-        throw new Error(`failed to create workspace ${label}`);
-    }
-    return { workspaceId, tabId, rootPaneId };
+    return match?.workspaceId || '';
 }
 
 // -[ CWD Resolution ]-------------------------------------------
@@ -377,19 +327,11 @@ function resolveTabRootPaneCwd(
  * Finds panes that appear safe to reuse because they are sitting at a shell prompt.
  */
 function idlePaneIds(): string[] {
-    const panes =
-        herdrJson<PaneListResponse>(['pane', 'list']).result?.panes || [];
     const ids: string[] = [];
 
-    for (const pane of panes) {
-        if (!pane.pane_id) continue;
-        const processInfo = herdrJson<PaneProcessInfoResponse>([
-            'pane',
-            'process-info',
-            '--pane',
-            pane.pane_id,
-        ]).result?.process_info;
-        if (isIdleShellProcessInfo(processInfo)) ids.push(pane.pane_id);
+    for (const pane of listPanes()) {
+        const processInfo = paneProcessInfo(pane.paneId);
+        if (isIdleShellProcessInfo(processInfo)) ids.push(pane.paneId);
     }
 
     return ids;
@@ -400,7 +342,7 @@ function idlePaneIds(): string[] {
  * shell names rather than an interactive program or running task.
  */
 function isIdleShellProcessInfo(processInfo?: PaneProcessInfo): boolean {
-    const foreground = processInfo?.foreground_processes?.[0];
+    const foreground = processInfo?.foregroundProcesses?.[0];
     const candidates = [foreground?.name, foreground?.argv0].filter(
         (value): value is string =>
             typeof value === 'string' && value.trim().length > 0
@@ -415,52 +357,4 @@ function isIdleShellProcessInfo(processInfo?: PaneProcessInfo): boolean {
  */
 function normalizeProcessName(value: string): string {
     return path.basename(value).replace(/^-+/, '');
-}
-
-// -[ Herdr Response Types ]-------------------------------------
-
-interface TabCreateResponse {
-    result?: {
-        tab?: { tab_id?: string };
-        root_pane?: { pane_id?: string };
-    };
-}
-
-interface PaneSplitResponse {
-    result?: {
-        pane?: { pane_id?: string };
-    };
-}
-
-interface WorkspaceListResponse {
-    result?: {
-        workspaces?: Array<{ workspace_id?: string; label?: string; name?: string }>;
-    };
-}
-
-interface WorkspaceCreateResponse {
-    result?: {
-        workspace?: { workspace_id?: string; label?: string; name?: string };
-        tab?: { tab_id?: string };
-        root_pane?: { pane_id?: string };
-    };
-}
-
-interface PaneListResponse {
-    result?: {
-        panes?: Array<{ pane_id?: string }>;
-    };
-}
-
-interface PaneProcessInfo {
-    foreground_processes?: Array<{
-        name?: string;
-        argv0?: string;
-    }>;
-}
-
-interface PaneProcessInfoResponse {
-    result?: {
-        process_info?: PaneProcessInfo;
-    };
 }
