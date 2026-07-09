@@ -2,9 +2,10 @@
 
 A Herdr plugin for launching reusable commands, panes, tabs, and workspaces from one picker.
 
-It merges:
-- global launchables from `~/.config/.launchables.json`
-- nearest project launchables from `.launchables.json` in the current cwd or an ancestor
+It discovers:
+- global configured launchables from `~/.config/.launchables.json`
+- nearest project configured launchables from `.launchables.json` in the current cwd or an ancestor
+- currently running Herdr workspaces that are not already represented by a configured workspace launchable
 
 Project launchables override global ones by JSON key. The picker always displays the JSON key. Optional `name` labels Herdr UI objects only.
 
@@ -108,4 +109,8 @@ Top-level relative `cwd` values resolve against the source default.
 
 ## Workspace idempotency
 
-Workspace launchables are idempotent by Herdr workspace label. If `herdr workspace list` already contains a workspace whose label matches `workspace.name ?? jsonKey`, the plugin focuses that workspace and does not replay tab/pane creation or commands.
+Configured workspace launchables are idempotent by Herdr workspace label. If `herdr workspace list` already contains a workspace whose label matches `workspace.name ?? jsonKey`, the plugin focuses that workspace and does not replay tab/pane creation or commands.
+
+## Running workspaces
+
+The picker also includes currently running, unconfigured workspaces. A running workspace is omitted when its label matches a configured workspace launchable, because selecting that configured launchable already focuses the existing workspace. Focused workspaces are omitted because selecting them would be a no-op.

@@ -4,14 +4,14 @@ import path from 'node:path';
 import { GLOBAL_CONFIG_PATH, PROJECT_CONFIG_NAME } from './constants.ts';
 import { appendLog } from './log.ts';
 import type {
-    Launchable,
-    LaunchableSource,
+    ConfigLaunchable,
+    ConfigLaunchableSource,
     PaneCommandMode,
-    PaneLaunchable,
-    ResolvedLaunchable,
+    PaneConfigLaunchable,
+    ResolvedConfigLaunchable,
     SplitDirection,
-    TabLaunchable,
-    WorkspaceLaunchable,
+    TabConfigLaunchable,
+    WorkspaceConfigLaunchable,
 } from './types.ts';
 
 /**
@@ -35,8 +35,8 @@ export function findNearestProjectConfig(startCwd: string): string {
  * Discovers launchable configurations from both global
  * and project-specific configuration files.
  */
-export function discoverLaunchables(cwd: string): ResolvedLaunchable[] {
-    const merged = new Map<string, ResolvedLaunchable>();
+export function discoverConfigLaunchables(cwd: string): ResolvedConfigLaunchable[] {
+    const merged = new Map<string, ResolvedConfigLaunchable>();
 
     for (const item of loadLaunchablesFile(GLOBAL_CONFIG_PATH, 'global')) {
         merged.set(item.name, item);
@@ -67,7 +67,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
     return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
-interface ValidationResult<T = Launchable> {
+interface ValidationResult<T = ConfigLaunchable> {
     launchable: T | null;
     errors: string[];
 }
@@ -129,11 +129,11 @@ function validatePaneCommandMode(
     return undefined;
 }
 
-function validatePaneLaunchable(
+function validatePaneConfigLaunchable(
     pathName: string,
     value: unknown,
     options: { rootInTab?: boolean } = {}
-): ValidationResult<PaneLaunchable> {
+): ValidationResult<PaneConfigLaunchable> {
     const errors: string[] = [];
     if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected pane object`] };
 
@@ -175,7 +175,7 @@ function validatePaneLaunchable(
         : { launchable: null, errors };
 }
 
-function validateTabLaunchable(pathName: string, value: unknown): ValidationResult<TabLaunchable> {
+function validateTabConfigLaunchable(pathName: string, value: unknown): ValidationResult<TabConfigLaunchable> {
     const errors: string[] = [];
     if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected tab object`] };
 
@@ -189,14 +189,14 @@ function validateTabLaunchable(pathName: string, value: unknown): ValidationResu
     if (candidate.commandMode !== undefined) errors.push(`${pathName}: tab must not define commandMode; set it on panes`);
     if (candidate.direction !== undefined) errors.push(`${pathName}: tab must not define direction`);
 
-    let panes: PaneLaunchable[] | undefined;
+    let panes: PaneConfigLaunchable[] | undefined;
     if (candidate.panes !== undefined) {
         if (!Array.isArray(candidate.panes) || candidate.panes.length === 0) {
             errors.push(`${pathName}: tab.panes must be a non-empty array when provided`);
         } else {
             panes = [];
             candidate.panes.forEach((pane, index) => {
-                const result = validatePaneLaunchable(`${pathName}.panes[${index}]`, pane, {
+                const result = validatePaneConfigLaunchable(`${pathName}.panes[${index}]`, pane, {
                     rootInTab: index === 0,
                 });
                 if (result.launchable) panes!.push(result.launchable);
@@ -218,7 +218,7 @@ function validateTabLaunchable(pathName: string, value: unknown): ValidationResu
         : { launchable: null, errors };
 }
 
-function validateWorkspaceLaunchable(pathName: string, value: unknown): ValidationResult<WorkspaceLaunchable> {
+function validateWorkspaceConfigLaunchable(pathName: string, value: unknown): ValidationResult<WorkspaceConfigLaunchable> {
     const errors: string[] = [];
     if (!isObject(value)) return { launchable: null, errors: [`${pathName}: expected workspace object`] };
 
@@ -232,12 +232,12 @@ function validateWorkspaceLaunchable(pathName: string, value: unknown): Validati
     if (candidate.commandMode !== undefined) errors.push(`${pathName}: workspace must not define commandMode; set it on panes`);
     if (candidate.direction !== undefined) errors.push(`${pathName}: workspace must not define direction`);
 
-    const tabs: TabLaunchable[] = [];
+    const tabs: TabConfigLaunchable[] = [];
     if (!Array.isArray(candidate.tabs) || candidate.tabs.length === 0) {
         errors.push(`${pathName}: workspace.tabs must be a non-empty array`);
     } else {
         candidate.tabs.forEach((tab, index) => {
-            const result = validateTabLaunchable(`${pathName}.tabs[${index}]`, tab);
+            const result = validateTabConfigLaunchable(`${pathName}.tabs[${index}]`, tab);
             if (result.launchable) tabs.push(result.launchable);
             errors.push(...result.errors);
         });
@@ -305,9 +305,9 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
         };
     }
 
-    if (type === 'pane') return validatePaneLaunchable(name, value);
-    if (type === 'tab') return validateTabLaunchable(name, value);
-    if (type === 'workspace') return validateWorkspaceLaunchable(name, value);
+    if (type === 'pane') return validatePaneConfigLaunchable(name, value);
+    if (type === 'tab') return validateTabConfigLaunchable(name, value);
+    if (type === 'workspace') return validateWorkspaceConfigLaunchable(name, value);
 
     if (isNonEmptyString(type)) errors.push(`${name}: unsupported type ${JSON.stringify(type)}`);
     return { launchable: null, errors };
@@ -315,8 +315,8 @@ function validateLaunchable(name: string, value: unknown): ValidationResult {
 
 function loadLaunchablesFile(
     filePath: string,
-    source: LaunchableSource
-): ResolvedLaunchable[] {
+    source: ConfigLaunchableSource
+): ResolvedConfigLaunchable[] {
     if (!fs.existsSync(filePath)) return [];
 
     let parsed: unknown;
@@ -333,7 +333,7 @@ function loadLaunchablesFile(
     }
 
     const configDir = path.dirname(filePath);
-    const entries: ResolvedLaunchable[] = [];
+    const entries: ResolvedConfigLaunchable[] = [];
 
     for (const [name, value] of Object.entries(parsed)) {
         const result = validateLaunchable(name, value);

@@ -131,16 +131,24 @@ interface WorkspaceListResponse {
         workspaces?: Array<{
             workspace_id?: string;
             label?: string;
-            name?: string;
+            focused?: boolean;
+            pane_count?: number;
+            tab_count?: number;
+            active_tab_id?: string;
         }>;
     };
 }
 
-export function listWorkspaces(): Array<{
+export interface HerdrWorkspace {
     workspaceId: string;
-    label?: string;
-    name?: string;
-}> {
+    label: string;
+    focused: boolean;
+    paneCount: number;
+    tabCount: number;
+    activeTabId: string;
+}
+
+export function listWorkspaces(): HerdrWorkspace[] {
     const workspaces =
         herdrJson<WorkspaceListResponse>(['workspace', 'list']).result
             ?.workspaces || [];
@@ -148,8 +156,11 @@ export function listWorkspaces(): Array<{
         .filter((workspace) => workspace.workspace_id)
         .map((workspace) => ({
             workspaceId: workspace.workspace_id!,
-            label: workspace.label,
-            name: workspace.name,
+            label: workspace.label || workspace.workspace_id!,
+            focused: workspace.focused || false,
+            paneCount: workspace.pane_count || 0,
+            tabCount: workspace.tab_count || 0,
+            activeTabId: workspace.active_tab_id || '',
         }));
 }
 

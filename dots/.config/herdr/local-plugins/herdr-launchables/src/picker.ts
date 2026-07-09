@@ -3,17 +3,17 @@ import fs from 'node:fs';
 
 import type {
     Launchable,
+    LaunchableKind,
     LaunchableSource,
-    LaunchableType,
-    ResolvedLaunchable,
 } from './types.ts';
 
 const RESET = '\x1b[0m';
 const BLACK = '\x1b[30m';
 const CYAN = '\x1b[36m';
 const YELLOW = '\x1b[33m';
+const BLUE = '\x1b[34m';
 
-const TYPE_ICONS: Record<LaunchableType, string> = {
+const KIND_ICONS: Record<LaunchableKind, string> = {
     workspace: '󰉋',
     tab: '󰓩',
     pane: '',
@@ -22,27 +22,26 @@ const TYPE_ICONS: Record<LaunchableType, string> = {
 };
 
 const SOURCE_COLORS: Record<LaunchableSource, string> = {
-    global: CYAN, // cyan
-    project: YELLOW, // yellow
+    'global-config': CYAN,
+    'project-config': YELLOW,
+    'running-workspace': BLUE,
 };
 
-function displayIcon(type: LaunchableType, source: LaunchableSource): string {
-    return `${SOURCE_COLORS[source]}${TYPE_ICONS[type]}${RESET}`;
+function displayIcon(kind: LaunchableKind, source: LaunchableSource): string {
+    return `${SOURCE_COLORS[source]}${KIND_ICONS[kind]}${RESET}`;
 }
 
-function displayLine(item: ResolvedLaunchable, index: number): string {
-    const source = `${BLACK}[${item.source}]${RESET}`;
-    const type = `${BLACK}[${item.launchable.type}]${RESET}`;
-    return `${index}\t${displayIcon(item.launchable.type, item.source)} ${item.name} ${source} ${type}`;
+function displayLine(launchable: Launchable, index: number): string {
+    const source = `${BLACK}[${launchable.source}]${RESET}`;
+    const kind = `${BLACK}[${launchable.kind}]${RESET}`;
+    return `${index}\t${displayIcon(launchable.kind, launchable.source)} ${launchable.title} ${source} ${kind}`;
 }
 
-export function selectLaunchable(
-    items: ResolvedLaunchable[]
-): ResolvedLaunchable | null {
-    if (items.length === 0) return null;
-    if (items.length === 1) return items[0] || null;
+export function selectLaunchable(launchables: Launchable[]): Launchable | null {
+    if (launchables.length === 0) return null;
+    if (launchables.length === 1) return launchables[0] || null;
 
-    const input = `${items.map((item, index) => displayLine(item, index)).join('\n')}\n`;
+    const input = `${launchables.map((launchable, index) => displayLine(launchable, index)).join('\n')}\n`;
     const fzf = spawnSync(
         'fzf',
         [
@@ -68,21 +67,21 @@ export function selectLaunchable(
         const selected = (fzf.stdout || '').trim();
         const indexText = selected.split('\t', 1)[0] || '';
         const index = Number.parseInt(indexText, 10);
-        return Number.isInteger(index) ? items[index] || null : null;
+        return Number.isInteger(index) ? launchables[index] || null : null;
     }
 
     if (!fzf.error) return null;
 
     process.stderr.write('launchables:\n');
-    items.forEach((item, index) =>
+    launchables.forEach((launchable, index) =>
         process.stderr.write(
-            `  ${index + 1}) ${item.name} [${item.source}] [${item.launchable.type}]\n`
+            `  ${index + 1}) ${launchable.title} [${launchable.source}] [${launchable.kind}]\n`
         )
     );
     process.stderr.write('Choose launchable: ');
     const choice = fs.readFileSync(0, 'utf8').trim();
     const index = Number.parseInt(choice, 10) - 1;
-    return Number.isInteger(index) && index >= 0 && index < items.length
-        ? items[index] || null
+    return Number.isInteger(index) && index >= 0 && index < launchables.length
+        ? launchables[index] || null
         : null;
 }

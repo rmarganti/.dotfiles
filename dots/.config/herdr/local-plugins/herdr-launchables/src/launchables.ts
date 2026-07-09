@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { discoverLaunchables } from './config.ts';
+import { discoverLaunchables } from './discovery.ts';
 import { PLUGIN_ID } from './constants.ts';
 import { contextValue, getPluginContext } from './context.ts';
-import { executeSelection } from './executors.ts';
+import { executeLaunchAction } from './executors.ts';
 import { openPluginPane } from './herdr.ts';
 import { selectLaunchable } from './picker.ts';
 import {
@@ -43,15 +43,13 @@ async function cmdPicker(): Promise<void> {
     const pluginContext = getPluginContext();
     if (!pluginContext.cwd) return;
 
-    const items = discoverLaunchables(pluginContext.cwd);
-    const selected = selectLaunchable(items);
+    const launchables = discoverLaunchables(pluginContext);
+    const selected = selectLaunchable(launchables);
     if (!selected) return;
 
     const payload: SelectionPayload = {
-        workspaceId: pluginContext.workspaceId,
-        sourcePaneId: pluginContext.paneId,
-        selectedAtCwd: pluginContext.cwd,
-        resolved: selected,
+        context: pluginContext,
+        selected,
     };
 
     const selectionPath = writeSelection(payload);
@@ -75,7 +73,7 @@ async function cmdApply(
 
     const payload = readSelection(selectionPath);
     try {
-        executeSelection(payload);
+        executeLaunchAction(payload.selected.action);
     } finally {
         removeSelection(selectionPath);
     }
