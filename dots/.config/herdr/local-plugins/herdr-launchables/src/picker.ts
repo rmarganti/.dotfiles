@@ -12,6 +12,7 @@ const BLACK = '\x1b[30m';
 const CYAN = '\x1b[36m';
 const YELLOW = '\x1b[33m';
 const BLUE = '\x1b[34m';
+const GREEN = '\x1b[32m';
 
 const KIND_ICONS: Record<LaunchableKind, string> = {
     workspace: '󰉋',
@@ -25,6 +26,7 @@ const SOURCE_COLORS: Record<LaunchableSource, string> = {
     'global-config': CYAN,
     'project-config': YELLOW,
     'running-workspace': BLUE,
+    zoxide: GREEN,
 };
 
 function displayIcon(kind: LaunchableKind, source: LaunchableSource): string {

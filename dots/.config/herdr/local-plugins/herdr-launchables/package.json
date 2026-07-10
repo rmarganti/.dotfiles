@@ -1,12 +1,13 @@
 {
-  "name": "herdr-launchables",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@types/node": "^24.0.0",
-    "typescript": "^5.9.2"
-  }
+    "name": "herdr-launchables",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "test": "node --test src/*.spec.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.0",
+        "typescript": "^5.9.2"
+    }
 }

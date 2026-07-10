@@ -38,7 +38,8 @@ export interface Launchable {
 export type LaunchableSource =
     | 'global-config'
     | 'project-config'
-    | 'running-workspace';
+    | 'running-workspace'
+    | 'zoxide';
 
 export type LaunchableKind =
     | 'workspace'

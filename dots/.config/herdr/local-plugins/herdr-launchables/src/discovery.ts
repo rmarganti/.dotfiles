@@ -1,3 +1,5 @@
+import os from 'node:os';
+import path from 'node:path';
 import { discoverConfigLaunchables } from './config.ts';
 import { resolveConfiguredCwd, resolveInheritedConfiguredCwd } from './cwd.ts';
 import { listWorkspaces } from './herdr.ts';
@@ -11,6 +13,10 @@ import type {
     TabConfigLaunchable,
     TabPlan,
 } from './types.ts';
+import {
+    discoverZoxideDirectories,
+    type ZoxideDirectory,
+} from './zoxide.ts';
 
 export function discoverLaunchables(context: PluginContext): Launchable[] {
     const workspaces = listWorkspaces();
@@ -44,13 +50,15 @@ export function discoverLaunchables(context: PluginContext): Launchable[] {
             .map((action) => action.label)
     );
 
-    return [
-        ...configured,
-        ...discoverRunningWorkspaceLaunchables({
-            workspaces,
-            excludeLabels: configuredWorkspaceLabels,
-        }),
-    ];
+    const running = discoverRunningWorkspaceLaunchables({
+        workspaces,
+        excludeLabels: configuredWorkspaceLabels,
+    });
+    const zoxide = discoverZoxideDirectories().map(
+        zoxideDirectoryToLaunchable
+    );
+
+    return [...configured, ...running, ...zoxide];
 }
 
 function isFocusedWorkspaceLaunchable(
@@ -86,6 +94,43 @@ function discoverRunningWorkspaceLaunchables(options: {
                 workspaceId: workspace.workspaceId,
             },
         }));
+}
+
+function zoxideDirectoryToLaunchable(
+    directory: ZoxideDirectory
+): Launchable {
+    const label = path.basename(directory.path) || directory.path;
+    return {
+        id: `zoxide:${directory.path}`,
+        title: shortenHome(directory.path),
+        source: 'zoxide',
+        kind: 'workspace',
+        action: {
+            type: 'ensure-workspace-layout',
+            label,
+            cwd: directory.path,
+            tabs: [
+                {
+                    cwd: directory.path,
+                    panes: [{ cwd: directory.path }],
+                },
+            ],
+            focus: true,
+        },
+    };
+}
+
+function shortenHome(directoryPath: string): string {
+    const relative = path.relative(os.homedir(), directoryPath);
+    if (relative === '') return '~';
+    if (
+        relative !== '..' &&
+        !relative.startsWith(`..${path.sep}`) &&
+        !path.isAbsolute(relative)
+    ) {
+        return `~${path.sep}${relative}`;
+    }
+    return directoryPath;
 }
 
 /**

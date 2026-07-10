@@ -2,12 +2,12 @@
 
 A Herdr plugin for launching reusable commands, panes, tabs, and workspaces from one picker.
 
-It discovers:
-- global configured launchables from `~/.config/.launchables.json`
-- nearest project configured launchables from `.launchables.json` in the current cwd or an ancestor
+It discovers, in picker priority order:
+- configured launchables from the nearest project `.launchables.json`, followed by `~/.config/.launchables.json`
 - currently running Herdr workspaces that are not already represented by a configured workspace launchable
+- directories ranked by zoxide, when zoxide is available
 
-Project launchables override global ones by JSON key. The picker always displays the JSON key. Optional `name` labels Herdr UI objects only.
+Project launchables override global ones by JSON key. The picker always displays the JSON key. Optional `name` labels Herdr UI objects only. Zoxide is an optional, silent fallback source: unavailable or failed zoxide discovery does not interrupt the picker.
 
 ## Schema
 
@@ -114,3 +114,7 @@ Configured workspace launchables are idempotent by Herdr workspace label. If `he
 ## Running workspaces
 
 The picker also includes currently running, unconfigured workspaces. A running workspace is omitted when its label matches a configured workspace launchable, because selecting that configured launchable already focuses the existing workspace. Focused workspaces are omitted because selecting them would be a no-op.
+
+## Zoxide directories
+
+When `zoxide` is available, its ranked directories appear after configured and running results. Their shortened full paths are shown for fuzzy matching. Selecting one ensures a workspace whose label is the directory basename, with one interactive shell rooted in that directory. Zoxide results are not deduplicated against configured or running workspaces.
