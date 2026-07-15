@@ -344,11 +344,36 @@
     },
 
     // ---------------------------------------------------
+    // Threads sidebar
+    // ---------------------------------------------------
+
+    {
+        "context": "ThreadsSidebar > Editor",
+        "bindings": {
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-j": "editor::MoveDown",
+        },
+    },
+    {
+        "context": "ThreadsSidebar",
+        "bindings": {
+            // [ Pane navigation ]-----------------------------
+
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-l": "workspace::ActivatePaneRight",
+            "ctrl-k": "agents_sidebar::FocusSidebarFilter",
+            "ctrl-j": "workspace::ActivatePaneDown",
+        },
+    },
+
+    // ---------------------------------------------------
     // All panels
     // ---------------------------------------------------
 
     {
-        "context": "AgentPanel || Panel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
+        "context": "AgentPanel || ThreadsSidebar || Panel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
         "bindings": {
             // [ Pane navigation ]-----------------------------
 
