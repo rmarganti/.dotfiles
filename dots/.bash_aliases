@@ -4,8 +4,8 @@
 
 # Enable color for `ls` command
 export CLICOLOR=1 # For BSD/Darwin
-ls --color=auto &>/dev/null && alias ls='ls --color=auto' ||
-	alias cpwd='pwd | pbcopy'
+ls --color=auto &>/dev/null && alias ls='ls --color=auto'
+alias cpwd='pwd | tr -d "\n" | pbcopy'
 alias ll='ls -alFh'
 alias up='cd ..'
 alias userlist="cut -d: -f1 /etc/passwd"
@@ -22,7 +22,7 @@ alias sysr="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 # ------------------------------------------------
 
 # Git Add All and Commit
-alias gaac='git add -A && git commit';
+alias gaac='git add -A && git commit'
 
 # Git Branch Copy -- Copy name to clipboard.
 alias gbc='git branch | grep -E "\* (.+)" | sed "s/* //" | xargs echo | tr -d "\n" | pbcopy'
