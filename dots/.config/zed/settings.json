@@ -9,11 +9,7 @@
 {
     // [ General ]-------------------------------------
 
-    "agent_servers": {
-        "pi-acp": {
-            "type": "registry"
-        }
-    },
+    "cli_default_open_behavior": "existing_window",
     "format_on_save": "on",
     "pane_split_direction_horizontal": "down",
     "pane_split_direction_vertical": "right",
@@ -75,6 +71,15 @@
     },
 
     // [ AI/Agent ]------------------------------------
+
+    "agent_servers": {
+        "opencode": {
+            "type": "registry",
+        },
+        "pi-acp": {
+            "type": "registry",
+        },
+    },
 
     "agent": {
         "dock": "left",
@@ -239,14 +244,10 @@
 
     // [ Panel Sizes ]---------------------------------
 
-    "collaboration_panel": { "dock": "right",
-                             "default_width": 480 },
-    "git_panel": { "dock": "right",
-                   "default_width": 640 },
-    "outline_panel": { "dock": "right",
-                       "default_width": 640 },
-    "project_panel": { "dock": "right",
-                       "default_width": 640 },
+    "collaboration_panel": { "dock": "right", "default_width": 480 },
+    "git_panel": { "dock": "right", "default_width": 640 },
+    "outline_panel": { "dock": "right", "default_width": 640 },
+    "project_panel": { "dock": "right", "default_width": 640 },
 
     // [ Search ]--------------------------------------
 
