@@ -68,7 +68,7 @@ split_vertical = ["prefix+|", "prefix+backslash"]
 split_horizontal = ["prefix+minus", "prefix+_"]
 zoom = "prefix+z"
 copy_mode = "prefix+["
-resize_mode = "prefix+="
+resize_mode = ""
 
 navigate_pane_left = ""
 navigate_pane_down = ""
@@ -81,7 +81,7 @@ navigate_workspace_up = "k"
 new_workspace = "prefix+shift+n"
 new_worktree = "prefix+shift+w"
 open_worktree = "prefix+shift+o"
-remove_worktree = ""
+remove_worktree = "prefix+shift+x"
 
 switch_workspace = "prefix+alt+1..9"
 focus_agent = "prefix+ctrl+1..9"
@@ -107,6 +107,12 @@ delivery = "off"
 
 [session]
 resume_agents_on_restore = true
+
+[[keys.command]]
+key = "prefix+="
+type = "plugin_action"
+command = "dots.herdr-equalize-splits.equalize"
+description = "equalize splits"
 
 [[keys.command]]
 key = "ctrl+shift+h"
