@@ -17,6 +17,13 @@ alias z=""
 # Restart service (via systemctl)
 alias sysr="systemctl | fzf | cut -d' ' -f1 | xargs sudo systemctl restart"
 
+function strlen() {
+	echo -n "$1" | wc -c
+}
+
+alias mpi="mise x node@latest -- pi"
+alias mnvim="mise x node@latest -- nvim"
+
 # ------------------------------------------------
 # Git
 # ------------------------------------------------
@@ -141,11 +148,3 @@ alias kl="kubectl get pods --no-headers | fzf | awk '{print \$1}' | xargs -o -I 
 
 # Copy pod
 alias kcp="kubectl get pods --no-headers | fzf | awk '{print \$1}' | tr 'A-Z' 'a-z' | pbcopy"
-
-# ------------------------------------------------
-# Misc
-# ------------------------------------------------
-
-function strlen() {
-	echo -n "$1" | wc -c
-}
