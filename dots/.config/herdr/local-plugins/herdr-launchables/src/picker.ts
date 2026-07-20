@@ -33,25 +33,50 @@ function displayIcon(kind: LaunchableKind, source: LaunchableSource): string {
     return `${SOURCE_COLORS[source]}${KIND_ICONS[kind]}${RESET}`;
 }
 
-function displayLine(launchable: Launchable, index: number): string {
-    const source = `${BLACK}[${launchable.source}]${RESET}`;
-    const kind = `${BLACK}[${launchable.kind}]${RESET}`;
-    return `${index}\t${displayIcon(launchable.kind, launchable.source)} ${launchable.title} ${source} ${kind}`;
+interface PickerRow {
+    index: number;
+    searchText: string;
+    displayText: string;
 }
 
-export function selectLaunchable(launchables: Launchable[]): Launchable | null {
-    if (launchables.length === 0) return null;
-    if (launchables.length === 1) return launchables[0] || null;
+function toPickerRow(launchable: Launchable, index: number): PickerRow {
+    const source = `${BLACK}[${launchable.source}]${RESET}`;
+    const kind = `${BLACK}[${launchable.kind}]${RESET}`;
+    return {
+        index,
+        searchText: launchable.title,
+        displayText: `${displayIcon(launchable.kind, launchable.source)} ${source} ${kind}`,
+    };
+}
 
-    const input = `${launchables.map((launchable, index) => displayLine(launchable, index)).join('\n')}\n`;
+function serializePickerRow(row: PickerRow): string {
+    return `${row.index}\t${row.searchText}\t${row.displayText}`;
+}
+
+function parseSelectedIndex(output: string): number | null {
+    const index = Number.parseInt(output.trim().split('\t', 1)[0] || '', 10);
+    return Number.isInteger(index) ? index : null;
+}
+
+type FzfSelection =
+    | { available: true; index: number | null }
+    | { available: false };
+
+function selectWithFzf(rows: PickerRow[]): FzfSelection {
+    const input = `${rows.map(serializePickerRow).join('\n')}\n`;
     const fzf = spawnSync(
         'fzf',
         [
             '--delimiter',
             '\t',
+            // with-nth is applied before nth. The template replaces the tab
+            // delimiter between title and metadata with one visible space.
             '--with-nth',
-            '2..',
-            '--no-sort',
+            '{2} {3}',
+            '--nth',
+            '1',
+            '--tiebreak',
+            'length,index',
             '--ansi',
             '--border-label',
             ' launchables ',
@@ -65,14 +90,25 @@ export function selectLaunchable(launchables: Launchable[]): Launchable | null {
         }
     );
 
-    if (!fzf.error && fzf.status === 0) {
-        const selected = (fzf.stdout || '').trim();
-        const indexText = selected.split('\t', 1)[0] || '';
-        const index = Number.parseInt(indexText, 10);
-        return Number.isInteger(index) ? launchables[index] || null : null;
-    }
+    if (fzf.error) return { available: false };
+    return {
+        available: true,
+        index: fzf.status === 0 ? parseSelectedIndex(fzf.stdout || '') : null,
+    };
+}
 
-    if (!fzf.error) return null;
+export function selectLaunchable(
+    launchables: readonly Launchable[]
+): Launchable | null {
+    if (launchables.length === 0) return null;
+    if (launchables.length === 1) return launchables[0] || null;
+
+    const selection = selectWithFzf(launchables.map(toPickerRow));
+    if (selection.available) {
+        return selection.index === null
+            ? null
+            : launchables[selection.index] || null;
+    }
 
     process.stderr.write('launchables:\n');
     launchables.forEach((launchable, index) =>

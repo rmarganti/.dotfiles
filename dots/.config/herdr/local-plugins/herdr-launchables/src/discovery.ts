@@ -18,6 +18,10 @@ import {
     type ZoxideDirectory,
 } from './zoxide.ts';
 
+/**
+ * Discovers launchables in preference order. Earlier entries win when the
+ * picker considers candidates equally relevant.
+ */
 export function discoverLaunchables(context: PluginContext): Launchable[] {
     const workspaces = listWorkspaces();
 
@@ -58,7 +62,35 @@ export function discoverLaunchables(context: PluginContext): Launchable[] {
         zoxideDirectoryToLaunchable
     );
 
-    return [...configured, ...running, ...zoxide];
+    return combineLaunchables({ configured, running, zoxide });
+}
+
+/**
+ * Combines sources in preference order and keeps zoxide supplemental. A
+ * configured workspace already rooted at a directory is the authoritative
+ * launchable for that directory.
+ */
+function combineLaunchables(options: {
+    configured: Launchable[];
+    running: Launchable[];
+    zoxide: Launchable[];
+}): Launchable[] {
+    const configuredWorkspaceCwds = new Set(
+        options.configured.flatMap((launchable) => {
+            const action = launchable.action;
+            return action.type === 'ensure-workspace-layout'
+                ? [path.normalize(action.cwd)]
+                : [];
+        })
+    );
+    const supplementalZoxide = options.zoxide.filter((launchable) => {
+        const action = launchable.action;
+        return (
+            action.type !== 'ensure-workspace-layout' ||
+            !configuredWorkspaceCwds.has(path.normalize(action.cwd))
+        );
+    });
+    return [...options.configured, ...options.running, ...supplementalZoxide];
 }
 
 function isFocusedWorkspaceLaunchable(

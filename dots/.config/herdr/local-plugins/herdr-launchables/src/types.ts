@@ -25,7 +25,7 @@ export interface Launchable {
     id: string;
     title: string;
 
-    /** Provenance only. Used for display/filtering, never execution. */
+    /** Provenance used for presentation and preference ordering, never execution. */
     source: LaunchableSource;
 
     /** Presentation/grouping only. Used for picker display, never execution. */

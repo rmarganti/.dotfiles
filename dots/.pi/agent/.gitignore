@@ -2,6 +2,7 @@ npm/
 sessions
 auth.json
 logs
+models-store.json
 settings.json
 state
 trust.json
