@@ -5,6 +5,9 @@ experimental = true
 dotfiles.root = "~/.dotfiles/dots"
 dotfiles.default_mode = "symlink"
 
+[tools]
+herdr = "latest"
+
 [bootstrap.packages]
 "brew:bash" = "latest"
 "brew:bat" = "latest"
@@ -20,7 +23,6 @@ dotfiles.default_mode = "symlink"
 "brew:git" = "latest"
 "brew:git-delta" = "latest"
 "brew:go" = "latest"
-"brew:herdr" = "latest"
 "brew:just" = "latest"
 "brew:kubectx" = "latest"
 "brew:lazygit" = "latest"
