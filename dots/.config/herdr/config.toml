@@ -197,3 +197,8 @@ key = "prefix+q"
 type = "plugin_action"
 command = "rmarganti.herdr-pluck.pluck"
 description = "pluck visible token"
+
+[experimental]
+# Enable Kitty graphics protocol for rendering images in panes
+# Requires a Kitty graphics-compatible terminal (e.g., Kitty, WezTerm, etc.)
+kitty_graphics = true
