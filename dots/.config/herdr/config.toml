@@ -1,6 +1,4 @@
-# Herdr config migrated from ~/.config/tmux.
-# Custom tmux scripts/plugins are intentionally omitted for now; this focuses on
-# tmux-like keybindings and the Neverforest palette used by Ghostty/Neovim.
+# Herdr configuration with a Neverforest palette matching Ghostty and Neovim.
 
 onboarding = false
 
@@ -27,11 +25,10 @@ teal = "#aeccc6"        # Done-but-unseen agent dots.
 peach = "#e6d1a7"       # Reserved for interrupted/warning states; currently not rendered in the UI.
 
 [terminal]
-# Match tmux split/new-window behavior: new panes/tabs follow the source pane cwd.
+# New panes and tabs follow the source pane's working directory.
 new_cwd = "follow"
 
 [keys]
-# tmux prefix: set -g prefix C-space
 prefix = "ctrl+space"
 
 # General / session-ish mappings
@@ -42,9 +39,9 @@ detach = "prefix+d"
 rename_workspace = "prefix+r"
 close_workspace = "prefix+shift+d"
 workspace_picker = "prefix+w"
-goto = "prefix+s"                  # matches tmux sesh binding
+goto = "prefix+s"
 
-# Tabs: Herdr tabs map closest to tmux windows.
+# Tabs
 new_tab = "prefix+c"
 rename_tab = ["prefix+shift+t", "prefix+comma"]
 previous_tab = "prefix+p"
@@ -96,10 +93,9 @@ open_notification_target = ""
 mouse_capture = true
 right_click_passthrough_modifier = "ctrl"
 mouse_scroll_lines = 3
-# tmux new-window does not prompt for a name.
 prompt_new_tab_name = false
 show_agent_labels_on_pane_borders = false
-agent_panel_scope = "all"
+agent_panel_sort = "priority"
 accent = "#9da9a0"
 
 [ui.toast]
