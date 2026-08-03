@@ -178,6 +178,9 @@ M.clients = {
     eslint = {
         formatting_enabled = true,
     },
+    oxlint = {
+        formatting_enabled = true,
+    },
 
     ------------------------------------------------
     -- Misc
