@@ -194,6 +194,12 @@ type = "plugin_action"
 command = "rmarganti.herdr-pluck.pluck"
 description = "pluck visible token"
 
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "rmarganti.herdr-pluck.open-url"
+description = "open visible URL"
+
 [experimental]
 # Enable Kitty graphics protocol for rendering images in panes
 # Requires a Kitty graphics-compatible terminal (e.g., Kitty, WezTerm, etc.)
