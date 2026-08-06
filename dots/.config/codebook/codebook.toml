@@ -29,6 +29,7 @@ words = [
     "jsdom",
     "lifecycle",
     "llm",
+    "lte",
     "muxer",
     "neovim",
     "nuqs",
