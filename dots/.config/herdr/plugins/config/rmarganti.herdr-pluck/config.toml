@@ -6,6 +6,11 @@ regex = "GCCDEV-\\d{4}"
 priority = 25
 
 [[patterns]]
+name = "adrev-ticket"
+regex = "ADREV-\\d{4}"
+priority = 25
+
+[[patterns]]
 name = "version"
 regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}(?:-beta[0-9]?)?"
 priority = 25
