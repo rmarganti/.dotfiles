@@ -5,9 +5,6 @@ experimental = true
 dotfiles.root = "~/.dotfiles/dots"
 dotfiles.default_mode = "symlink"
 
-[tools]
-herdr = "latest"
-
 [bootstrap.packages]
 "brew:bash" = "latest"
 "brew:bat" = "latest"
@@ -23,6 +20,7 @@ herdr = "latest"
 "brew:git" = "latest"
 "brew:git-delta" = "latest"
 "brew:go" = "latest"
+"brew:herdr" = "latest"
 "brew:just" = "latest"
 "brew:kubectx" = "latest"
 "brew:lazygit" = "latest"
@@ -56,10 +54,11 @@ herdr = "latest"
 "~/.pi" = {}
 
 "~/.config/bat" = {}
-"~/.config/btop" = {}
+"~/.config/btop/themes" = {}
 "~/.config/codebook" = {}
 "~/.config/ghostty" = {}
 "~/.config/herdr" = {}
+"~/.config/hunk/config.toml" = {}
 "~/.config/karabiner" = {}
 "~/.config/lazygit" = {}
 "~/.config/lf" = {}
