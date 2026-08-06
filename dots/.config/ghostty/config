@@ -2,7 +2,7 @@
 # General
 # ------------------------------------------------
 
-font-size = 15
+font-size = 16
 theme = neverforest
 
 # ------------------------------------------------
@@ -15,25 +15,25 @@ bell-features = no-attention,title
 # Keybinds
 # ------------------------------------------------
 
-# Trigger sesh session manager (prefix + s)
+# herdr quick picker (prefix + s)
 keybind = opt+cmd+o=text:\x00s
 
-# Trigger tmux/herdr zoom toggle
+# herdr zoom toggle
 keybind = shift+cmd+enter=text:\x00z
 
-# Trigger tmux quick-window/herdr launchables (prefix + C)
+# herdr launchables (prefix + C)
 keybind = cmd+k=text:\x00C
 
-# Trigger tmux create window (prefix + c)
+# herdr create tab (prefix + t)
 keybind = cmd+t=text:\x00c
 
-# Trigger tmux kill pane (prefix + x)
+# herdr kill pane (prefix + x)
 keybind = cmd+w=text:\x00x
 
-# Trigger telescope file finder n NeoVim (escape, space, s, f)
-keybind = cmd+p=text:\x1b sf
+# herdr toggle sidebar (prefix + b)
+keybind = cmd+b=text:\x00b
 
-# Windows
+# Tabs (prefix + 1-9)
 keybind = cmd+digit_1=text:\x001
 keybind = cmd+digit_2=text:\x002
 keybind = cmd+digit_3=text:\x003
