@@ -1,4 +1,12 @@
+menu_bar = false
+prompt_save_view_preferences = false
 theme = "custom"
+transparent_background = true
+
+[keybindings]
+"hunk.review.scrollCodeLeft" = ["h", "shift+h", "left", "shift+left"]
+"hunk.review.scrollCodeRight" = ["l", "shift+l", "right", "shift+right"]
+"hunk.view.toggleLineNumbers" = "i"
 
 [custom_theme]
 base = "github-dark-default"
