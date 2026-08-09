@@ -90,13 +90,13 @@ toggle_sidebar = "prefix+b"
 open_notification_target = ""
 
 [ui]
+agent_panel_sort = "priority"
 mouse_capture = true
-right_click_passthrough_modifier = "ctrl"
 mouse_scroll_lines = 3
 prompt_new_tab_name = false
+right_click_passthrough_modifier = "ctrl"
 show_agent_labels_on_pane_borders = false
-agent_panel_sort = "priority"
-accent = "#9da9a0"
+tab_bar_position = "bottom"
 
 [ui.toast]
 delivery = "off"
