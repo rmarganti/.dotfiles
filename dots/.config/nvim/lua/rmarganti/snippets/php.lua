@@ -1,6 +1,9 @@
 local ls = require('luasnip')
+local h = require('rmarganti.snippets.helpers')
 
 return {
+    h.comment_block('//'),
+    h.comment_line('// -[ ', ' ]'),
     ls.snippet({ trig = 'ali', name = 'App Log Info' }, {
         ls.text_node("app('log')->info("),
         ls.insert_node(0),
