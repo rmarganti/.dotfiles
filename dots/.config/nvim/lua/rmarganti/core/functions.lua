@@ -140,7 +140,7 @@ M.edit_snippets = function()
     local filetype = vim.bo.filetype
     local config_path = vim.fn.stdpath('config')
 
-    local cmd = 'e ' .. config_path .. '/snippets/' .. filetype .. '.json'
+    local cmd = 'e ' .. config_path .. '/lua/rmarganti/snippets/' .. filetype .. '.lua'
     vim.cmd(cmd)
 end
 

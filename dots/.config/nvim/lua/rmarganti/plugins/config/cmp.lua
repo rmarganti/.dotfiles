@@ -18,7 +18,9 @@ function M.config()
     local luasnip = require('luasnip')
 
     local tab_mapping = function(fallback)
-        if cmp.visible() then
+        if luasnip.jumpable(1) then
+            luasnip.jump(1)
+        elseif cmp.visible() then
             local entry = cmp.get_selected_entry()
 
             if not entry then
@@ -28,13 +30,10 @@ function M.config()
             cmp.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
             })
-        elseif luasnip.expand_or_jumpable() then
-            vim.fn.feedkeys(
-                vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true),
-                ''
-            )
+        elseif luasnip.expandable() then
+            luasnip.expand()
         else
-            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            fallback() -- The fallback function sends an already mapped key. In this case, it's probably `<Tab>`.
         end
     end
 

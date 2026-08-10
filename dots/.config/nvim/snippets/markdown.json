@@ -1,7 +1,0 @@
-{
-    "Jira link": {
-        "prefix": "jl",
-        "body": ["[$1](https://usatodayco.atlassian.net/browse/$1)"],
-        "description": "Link to a Jira issue"
-    }
-}
