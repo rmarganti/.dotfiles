@@ -1,36 +1,30 @@
 import type {
     ExtensionAPI,
+    ExtensionCommandContext,
     ExtensionContext,
 } from '@earendil-works/pi-coding-agent';
 import { Text } from '@earendil-works/pi-tui';
+
+// ----------------------------------------------------------------
+// Constants
+// ----------------------------------------------------------------
 
 const STATUS_KEY = 'hunk-review';
 const POLL_INTERVAL_MS = 250;
 const DISCOVERY_TIMEOUT_MS = 10_000;
 const DEGRADED_AFTER_FAILURES = 3;
 
-type JsonObject = Record<string, unknown>;
+// ----------------------------------------------------------------
+// Types
+// ----------------------------------------------------------------
+
+// -[ Review models ]--------------------------------------------
 
 type ReviewSource = 'diff' | 'show';
 
 interface ReviewInvocation {
     source: ReviewSource;
     args: string[];
-}
-
-interface ActiveReview {
-    tabId: string;
-    paneId: string;
-    cwd: string;
-    invocation: ReviewInvocation;
-    sessionsBefore: Set<string>;
-    controller: AbortController;
-    context: ExtensionContext;
-    sessionId?: string;
-    sessionInfo?: unknown;
-    comments: unknown[];
-    consecutivePollFailures: number;
-    degraded: boolean;
 }
 
 interface NormalizedComment {
@@ -47,6 +41,59 @@ interface ReviewFile {
     comments: NormalizedComment[];
 }
 
+// -[ External responses ]---------------------------------------
+
+interface HerdrTabCreateResponse {
+    result: {
+        tab: { tab_id: string };
+        root_pane: { pane_id: string };
+    };
+}
+
+interface HunkSessionSummary {
+    sessionId: string;
+}
+
+interface HunkSessionListResponse {
+    sessions: HunkSessionSummary[];
+}
+
+interface HunkSessionGetResponse {
+    session: unknown;
+}
+
+interface HunkReviewNote {
+    noteId: string;
+    filePath: string;
+    hunkIndex?: number;
+    oldRange?: [number, number];
+    newRange?: [number, number];
+    body: string;
+}
+
+interface HunkCommentListResponse {
+    comments: HunkReviewNote[];
+}
+
+// -[ Runtime state ]--------------------------------------------
+
+interface ActiveReview {
+    tabId: string;
+    paneId: string;
+    cwd: string;
+    invocation: ReviewInvocation;
+    sessionsBefore: Set<string>;
+    controller: AbortController;
+    context: ExtensionContext;
+    sessionId?: string;
+    sessionInfo?: unknown;
+    comments: HunkReviewNote[];
+    consecutivePollFailures: number;
+    degraded: boolean;
+}
+
+// -[ Pi interfaces ]--------------------------------------------
+
 interface ReviewResultDetails {
     repository: string;
     source: ReviewSource;
@@ -54,24 +101,22 @@ interface ReviewResultDetails {
     hunkSessionId: string;
     session: unknown;
     files: ReviewFile[];
-    comments: unknown[];
+    comments: HunkReviewNote[];
     completedAt: string;
 }
 
-function isObject(value: unknown): value is JsonObject {
-    return typeof value === 'object' && value !== null && !Array.isArray(value);
+interface ReviewController {
+    start(args: string, ctx: ExtensionCommandContext): Promise<void>;
+    shutdown(ctx: ExtensionContext): Promise<void>;
 }
 
-function parseJson(text: string, label: string): unknown {
-    try {
-        return JSON.parse(text);
-    } catch (error) {
-        throw new Error(
-            `${label} returned invalid JSON: ${error instanceof Error ? error.message : String(error)}`
-        );
-    }
-}
+// ----------------------------------------------------------------
+// Pure helpers
+// ----------------------------------------------------------------
 
+/**
+ * Splits command arguments while preserving quoted values.
+ */
 function tokenize(input: string): string[] {
     const tokens: string[] = [];
     let token = '';
@@ -129,6 +174,9 @@ function tokenize(input: string): string[] {
     return tokens;
 }
 
+/**
+ * Resolves command input into a supported Hunk review invocation.
+ */
 function parseInvocation(input: string): ReviewInvocation {
     const tokens = tokenize(input.trim());
     if (tokens.length === 0) return { source: 'diff', args: [] };
@@ -142,157 +190,49 @@ function parseInvocation(input: string): ReviewInvocation {
     return { source, args };
 }
 
+/**
+ * Quotes one shell argument so user input remains a literal value.
+ */
 function shellQuote(value: string): string {
     if (value.length === 0) return "''";
     return `'${value.split("'").join(`'"'"'`)}'`;
 }
 
-function commandFor(invocation: ReviewInvocation): string {
-    return ['exec', 'hunk', invocation.source, ...invocation.args]
-        .map(shellQuote)
-        .join(' ');
-}
-
-function nestedResult(payload: unknown): JsonObject | undefined {
-    if (!isObject(payload)) return undefined;
-    return isObject(payload.result) ? payload.result : payload;
-}
-
-function extractTabAndPane(payload: unknown): {
-    tabId: string;
-    paneId: string;
-} {
-    const result = nestedResult(payload);
-    const tab = result && isObject(result.tab) ? result.tab : undefined;
-    const pane =
-        result && isObject(result.root_pane) ? result.root_pane : undefined;
-    const tabId = tab?.tab_id;
-    const paneId = pane?.pane_id;
-    if (typeof tabId !== 'string' || typeof paneId !== 'string') {
-        throw new Error(
-            'Herdr did not return the created tab and root pane IDs.'
-        );
-    }
-    return { tabId, paneId };
-}
-
-function extractSessions(payload: unknown): unknown[] {
-    if (!isObject(payload)) return [];
-    const sessions =
-        payload.sessions ??
-        (isObject(payload.result) ? payload.result.sessions : undefined);
-    return Array.isArray(sessions) ? sessions : [];
-}
-
-function sessionId(session: unknown): string | undefined {
-    if (!isObject(session)) return undefined;
-    for (const key of ['id', 'sessionId', 'session_id']) {
-        if (typeof session[key] === 'string') return session[key] as string;
-    }
-    return undefined;
-}
-
-function extractComments(payload: unknown): unknown[] {
-    if (Array.isArray(payload)) return payload;
-    if (!isObject(payload)) return [];
-    if (Array.isArray(payload.comments)) return payload.comments;
-    if (isObject(payload.result) && Array.isArray(payload.result.comments))
-        return payload.result.comments;
-    return [];
-}
-
-function commentField(
-    comment: unknown,
-    keys: string[]
-): string | number | undefined {
-    if (!isObject(comment)) return undefined;
-    for (const key of keys) {
-        const value = comment[key];
-        if (typeof value === 'string' || typeof value === 'number')
-            return value;
-    }
-    return undefined;
-}
-
-function commentRange(
-    comment: unknown,
-    keys: string[]
-): [number, number] | undefined {
-    if (!isObject(comment)) return undefined;
-    for (const key of keys) {
-        const value = comment[key];
-        if (
-            Array.isArray(value) &&
-            value.length >= 2 &&
-            typeof value[0] === 'number' &&
-            typeof value[1] === 'number'
-        ) {
-            return [value[0], value[1]];
-        }
-    }
-    return undefined;
-}
-
-function normalizeComments(comments: unknown[]): ReviewFile[] {
+/**
+ * Groups Hunk notes by file and adapts them for review rendering.
+ */
+function normalizeComments(comments: HunkReviewNote[]): ReviewFile[] {
     const files = new Map<string, ReviewFile>();
-    for (const raw of comments) {
-        const path = String(
-            commentField(raw, ['filePath', 'file', 'path']) ?? 'unknown file'
-        );
-        const newRange = commentRange(raw, ['newRange', 'new_range']);
-        const oldRange = commentRange(raw, ['oldRange', 'old_range']);
-        const newLine = commentField(raw, ['newLine', 'new_line']);
-        const oldLine = commentField(raw, ['oldLine', 'old_line']);
-        const genericLine = commentField(raw, ['line']);
-        const range =
-            newRange ??
-            oldRange ??
-            (typeof newLine === 'number'
-                ? ([newLine, newLine] as [number, number])
-                : undefined) ??
-            (typeof oldLine === 'number'
-                ? ([oldLine, oldLine] as [number, number])
-                : undefined) ??
-            (typeof genericLine === 'number'
-                ? ([genericLine, genericLine] as [number, number])
-                : undefined);
-        const side =
-            newRange || typeof newLine === 'number'
-                ? 'new'
-                : oldRange || typeof oldLine === 'number'
-                  ? 'old'
-                  : undefined;
-        const hunkIndex = commentField(raw, ['hunkIndex', 'hunk_index']);
-        const hunkNumber = commentField(raw, [
-            'hunkNumber',
-            'hunk_number',
-            'hunk',
-        ]);
+    for (const comment of comments) {
+        const range = comment.newRange ?? comment.oldRange;
         const normalized: NormalizedComment = {
-            id:
-                String(commentField(raw, ['noteId', 'note_id', 'id']) ?? '') ||
-                undefined,
-            side,
+            id: comment.noteId,
+            side: comment.newRange
+                ? 'new'
+                : comment.oldRange
+                  ? 'old'
+                  : undefined,
             startLine: range?.[0],
             endLine: range?.[1],
             hunkNumber:
-                typeof hunkIndex === 'number'
-                    ? hunkIndex + 1
-                    : typeof hunkNumber === 'number'
-                      ? hunkNumber
-                      : undefined,
-            body: String(
-                commentField(raw, ['body', 'summary', 'text', 'message']) ??
-                    'Review comment'
-            ),
+                comment.hunkIndex === undefined
+                    ? undefined
+                    : comment.hunkIndex + 1,
+            body: comment.body,
         };
-        const file = files.get(path) ?? { path, comments: [] };
+        const file = files.get(comment.filePath) ?? {
+            path: comment.filePath,
+            comments: [],
+        };
         file.comments.push(normalized);
-        files.set(path, file);
+        files.set(comment.filePath, file);
     }
     return [...files.values()];
 }
 
+/**
+ * Describes a comment target in human-readable diff coordinates.
+ */
 function commentLocation(comment: NormalizedComment): string {
     const parts: string[] = [];
     if (comment.startLine !== undefined) {
@@ -309,6 +249,9 @@ function commentLocation(comment: NormalizedComment): string {
     return parts.length > 0 ? parts.join(' · ') : 'location unavailable';
 }
 
+/**
+ * Formats human feedback as quoted Markdown to distinguish it from instructions.
+ */
 function blockquote(body: string): string[] {
     return body
         .replace(/\r\n?/g, '\n')
@@ -316,6 +259,9 @@ function blockquote(body: string): string[] {
         .map((line) => (line.length > 0 ? `> ${line}` : '>'));
 }
 
+/**
+ * Builds the follow-up prompt that presents human feedback to the agent.
+ */
 function resultContent(files: ReviewFile[], commentCount: number): string {
     const feedback = files.flatMap((file) => [
         `## \`${file.path.replace(/`/g, '\\`')}\``,
@@ -341,6 +287,9 @@ function resultContent(files: ReviewFile[], commentCount: number): string {
         .trimEnd();
 }
 
+/**
+ * Waits between polls while allowing shutdown to interrupt promptly.
+ */
 function sleep(ms: number, signal: AbortSignal): Promise<void> {
     return new Promise((resolve) => {
         if (signal.aborted) return resolve();
@@ -353,9 +302,19 @@ function sleep(ms: number, signal: AbortSignal): Promise<void> {
     });
 }
 
-export default function (pi: ExtensionAPI) {
+// ----------------------------------------------------------------
+// Review lifecycle
+// ----------------------------------------------------------------
+
+/**
+ * Owns active-review state and the complete review lifecycle.
+ */
+function createReviewController(pi: ExtensionAPI): ReviewController {
     let active: ActiveReview | undefined;
 
+    /**
+     * Shows whether review monitoring is healthy or degraded.
+     */
     const setStatus = (review: ActiveReview, degraded = false) => {
         if (!review.context.hasUI) return;
         const color = degraded ? 'warning' : 'accent';
@@ -364,11 +323,17 @@ export default function (pi: ExtensionAPI) {
         ]);
     };
 
+    /**
+     * Removes the review status when monitoring ends.
+     */
     const clearStatus = (review: ActiveReview) => {
         if (review.context.hasUI)
             review.context.ui.setWidget(STATUS_KEY, undefined);
     };
 
+    /**
+     * Runs a CLI command and turns process failures into actionable errors.
+     */
     async function execCommand(
         command: string,
         args: string[],
@@ -385,18 +350,24 @@ export default function (pi: ExtensionAPI) {
         return result;
     }
 
-    async function execJson(
+    /**
+     * Runs a CLI command whose documented response is JSON.
+     */
+    async function execJson<T>(
         command: string,
         args: string[],
         signal?: AbortSignal
-    ): Promise<unknown> {
+    ): Promise<T> {
         const result = await execCommand(command, args, signal);
-        return parseJson(result.stdout, `${command} ${args.join(' ')}`);
+        return JSON.parse(result.stdout) as T;
     }
 
+    /**
+     * Uses the review tab's existence as the review-lifetime signal.
+     */
     async function tabExists(review: ActiveReview): Promise<boolean> {
         try {
-            await execJson(
+            await execCommand(
                 'herdr',
                 ['tab', 'get', review.tabId],
                 review.controller.signal
@@ -407,21 +378,23 @@ export default function (pi: ExtensionAPI) {
         }
     }
 
+    /**
+     * Captures active session IDs so the newly launched review can be identified.
+     */
     async function listHunkSessionIds(
         signal?: AbortSignal
     ): Promise<Set<string>> {
-        const payload = await execJson(
+        const { sessions } = await execJson<HunkSessionListResponse>(
             'hunk',
             ['session', 'list', '--json'],
             signal
         );
-        return new Set(
-            extractSessions(payload)
-                .map(sessionId)
-                .filter((id): id is string => id !== undefined)
-        );
+        return new Set(sessions.map((session) => session.sessionId));
     }
 
+    /**
+     * Finds the single Hunk session created by the active review.
+     */
     async function discoverSession(
         review: ActiveReview
     ): Promise<{ sessionId?: string; tabClosed: boolean }> {
@@ -454,9 +427,12 @@ export default function (pi: ExtensionAPI) {
         return { tabClosed: false };
     }
 
+    /**
+     * Refreshes captured human notes and restores healthy status after recovery.
+     */
     async function snapshotComments(review: ActiveReview): Promise<void> {
         if (!review.sessionId) return;
-        const payload = await execJson(
+        const { comments } = await execJson<HunkCommentListResponse>(
             'hunk',
             [
                 'session',
@@ -469,7 +445,7 @@ export default function (pi: ExtensionAPI) {
             ],
             review.controller.signal
         );
-        review.comments = extractComments(payload);
+        review.comments = comments;
         review.consecutivePollFailures = 0;
         if (review.degraded) {
             review.degraded = false;
@@ -477,6 +453,9 @@ export default function (pi: ExtensionAPI) {
         }
     }
 
+    /**
+     * Ends monitoring and forwards captured feedback into a new agent turn.
+     */
     async function finalize(review: ActiveReview): Promise<void> {
         if (active !== review || review.controller.signal.aborted) return;
         active = undefined;
@@ -520,6 +499,9 @@ export default function (pi: ExtensionAPI) {
         );
     }
 
+    /**
+     * Tracks the review session until its Herdr tab closes or monitoring stops.
+     */
     async function monitor(review: ActiveReview): Promise<void> {
         try {
             const discovery = await discoverSession(review);
@@ -543,11 +525,12 @@ export default function (pi: ExtensionAPI) {
 
             review.sessionId = discovery.sessionId;
             try {
-                review.sessionInfo = await execJson(
+                const { session } = await execJson<HunkSessionGetResponse>(
                     'hunk',
                     ['session', 'get', discovery.sessionId, '--json'],
                     review.controller.signal
                 );
+                review.sessionInfo = session;
             } catch {
                 review.sessionInfo = undefined;
             }
@@ -587,168 +570,127 @@ export default function (pi: ExtensionAPI) {
         }
     }
 
-    pi.registerMessageRenderer(
-        'hunk-review-result',
-        (message, options, theme) => {
-            const details = message.details as ReviewResultDetails | undefined;
-            if (!details) {
-                const content =
-                    typeof message.content === 'string'
-                        ? message.content
-                        : JSON.stringify(message.content);
-                return new Text(content, 0, 0);
-            }
-
-            const files = details.files ?? normalizeComments(details.comments);
-            const lines = [
-                theme.fg(
-                    'success',
-                    theme.bold(
-                        `Hunk review: ${details.comments.length} human comment${details.comments.length === 1 ? '' : 's'}`
-                    )
-                ),
-            ];
-            for (const file of files) {
-                lines.push('', theme.fg('accent', theme.bold(file.path)));
-                file.comments.forEach((comment, index) => {
-                    lines.push(
-                        `  ${theme.fg('muted', `Comment ${index + 1} — ${commentLocation(comment)}`)}`
-                    );
-                    for (const bodyLine of comment.body
-                        .replace(/\r\n?/g, '\n')
-                        .split('\n')) {
-                        lines.push(`    ${theme.fg('dim', '│')} ${bodyLine}`);
-                    }
-                });
-            }
-            if (options.expanded) {
-                lines.push(
-                    '',
-                    theme.fg('dim', JSON.stringify(details, null, 2))
-                );
-            }
-            return new Text(lines.join('\n'), 0, 0);
+    /**
+     * Starts a review or focuses the review already in progress.
+     */
+    async function start(
+        args: string,
+        ctx: ExtensionCommandContext
+    ): Promise<void> {
+        if (process.env.HERDR_ENV !== '1' || !process.env.HERDR_WORKSPACE_ID) {
+            ctx.ui.notify(
+                '/hunk-review requires Pi to be running inside Herdr.',
+                'error'
+            );
+            return;
         }
-    );
 
-    pi.registerCommand('hunk-review', {
-        description: 'Open a Hunk diff or show review in a new Herdr tab',
-        getArgumentCompletions: (prefix) => {
-            const values = ['diff', 'show'];
-            const matches = values
-                .filter((value) => value.startsWith(prefix))
-                .map((value) => ({ value, label: value }));
-            return matches.length > 0 ? matches : null;
-        },
-        handler: async (args, ctx) => {
-            if (
-                process.env.HERDR_ENV !== '1' ||
-                !process.env.HERDR_WORKSPACE_ID
-            ) {
-                ctx.ui.notify(
-                    '/hunk-review requires Pi to be running inside Herdr.',
-                    'error'
-                );
-                return;
-            }
-
-            if (active) {
-                try {
-                    await execJson('herdr', ['tab', 'focus', active.tabId]);
-                } catch {
-                    ctx.ui.notify(
-                        'The active Hunk review tab could not be focused.',
-                        'warning'
-                    );
-                }
-                return;
-            }
-
-            let invocation: ReviewInvocation;
+        if (active) {
             try {
-                invocation = parseInvocation(args);
-            } catch (error) {
+                await execCommand('herdr', ['tab', 'focus', active.tabId]);
+            } catch {
                 ctx.ui.notify(
-                    error instanceof Error ? error.message : String(error),
-                    'error'
+                    'The active Hunk review tab could not be focused.',
+                    'warning'
                 );
-                return;
             }
+            return;
+        }
 
-            let sessionsBefore: Set<string>;
-            try {
-                sessionsBefore = await listHunkSessionIds();
-            } catch (error) {
-                ctx.ui.notify(
-                    `Could not inspect Hunk sessions: ${error instanceof Error ? error.message : String(error)}`,
-                    'error'
-                );
-                return;
-            }
+        let invocation: ReviewInvocation;
+        try {
+            invocation = parseInvocation(args);
+        } catch (error) {
+            ctx.ui.notify(
+                error instanceof Error ? error.message : String(error),
+                'error'
+            );
+            return;
+        }
 
-            let created: { tabId: string; paneId: string };
-            try {
-                const payload = await execJson('herdr', [
-                    'tab',
-                    'create',
-                    '--workspace',
-                    process.env.HERDR_WORKSPACE_ID,
-                    '--cwd',
-                    ctx.cwd,
-                    '--label',
-                    'Hunk Review',
-                    '--focus',
-                ]);
-                created = extractTabAndPane(payload);
-            } catch (error) {
-                ctx.ui.notify(
-                    `Could not create the Herdr tab: ${error instanceof Error ? error.message : String(error)}`,
-                    'error'
-                );
-                return;
-            }
+        let sessionsBefore: Set<string>;
+        try {
+            sessionsBefore = await listHunkSessionIds();
+        } catch (error) {
+            ctx.ui.notify(
+                `Could not inspect Hunk sessions: ${error instanceof Error ? error.message : String(error)}`,
+                'error'
+            );
+            return;
+        }
 
-            const review: ActiveReview = {
-                ...created,
-                cwd: ctx.cwd,
-                invocation,
-                sessionsBefore,
-                controller: new AbortController(),
-                context: ctx,
-                comments: [],
-                consecutivePollFailures: 0,
-                degraded: false,
+        let created: { tabId: string; paneId: string };
+        try {
+            const { result } = await execJson<HerdrTabCreateResponse>('herdr', [
+                'tab',
+                'create',
+                '--workspace',
+                process.env.HERDR_WORKSPACE_ID,
+                '--cwd',
+                ctx.cwd,
+                '--label',
+                'Hunk Review',
+                '--focus',
+            ]);
+            created = {
+                tabId: result.tab.tab_id,
+                paneId: result.root_pane.pane_id,
             };
-            active = review;
-            setStatus(review);
+        } catch (error) {
+            ctx.ui.notify(
+                `Could not create the Herdr tab: ${error instanceof Error ? error.message : String(error)}`,
+                'error'
+            );
+            return;
+        }
 
-            try {
-                await execCommand('herdr', [
-                    'pane',
-                    'run',
-                    review.paneId,
-                    commandFor(invocation),
-                ]);
-            } catch (error) {
-                active = undefined;
-                clearStatus(review);
-                await pi
-                    .exec('herdr', ['tab', 'close', review.tabId], {
-                        timeout: 5_000,
-                    })
-                    .catch(() => undefined);
-                ctx.ui.notify(
-                    `Could not launch Hunk: ${error instanceof Error ? error.message : String(error)}`,
-                    'error'
-                );
-                return;
-            }
+        const review: ActiveReview = {
+            ...created,
+            cwd: ctx.cwd,
+            invocation,
+            sessionsBefore,
+            controller: new AbortController(),
+            context: ctx,
+            comments: [],
+            consecutivePollFailures: 0,
+            degraded: false,
+        };
+        active = review;
+        setStatus(review);
 
-            void monitor(review);
-        },
-    });
+        try {
+            const command = [
+                'exec',
+                'hunk',
+                invocation.source,
+                ...invocation.args,
+            ]
+                .map(shellQuote)
+                .join(' ');
 
-    pi.on('session_shutdown', async (_event, ctx) => {
+            await execCommand('herdr', ['pane', 'run', review.paneId, command]);
+        } catch (error) {
+            active = undefined;
+            clearStatus(review);
+            await pi
+                .exec('herdr', ['tab', 'close', review.tabId], {
+                    timeout: 5_000,
+                })
+                .catch(() => undefined);
+            ctx.ui.notify(
+                `Could not launch Hunk: ${error instanceof Error ? error.message : String(error)}`,
+                'error'
+            );
+            return;
+        }
+
+        void monitor(review);
+    }
+
+    /**
+     * Stops monitoring while leaving the external review tab open.
+     */
+    async function shutdown(ctx: ExtensionContext): Promise<void> {
         const review = active;
         if (!review) return;
         active = undefined;
@@ -759,5 +701,83 @@ export default function (pi: ExtensionAPI) {
                 'Stopped monitoring Hunk; the review tab was left open.',
                 'info'
             );
+    }
+
+    return { start, shutdown };
+}
+
+// ----------------------------------------------------------------
+// Pi adapters
+// ----------------------------------------------------------------
+
+const reviewCommandCompletions: NonNullable<
+    Parameters<ExtensionAPI['registerCommand']>[1]['getArgumentCompletions']
+> = (prefix) => {
+    const values = ['diff', 'show'];
+    const matches = values
+        .filter((value) => value.startsWith(prefix))
+        .map((value) => ({ value, label: value }));
+    return matches.length > 0 ? matches : null;
+};
+
+/**
+ * Renders completed review feedback in the transcript.
+ */
+const renderReviewResult: Parameters<
+    ExtensionAPI['registerMessageRenderer']
+>[1] = (message, options, theme) => {
+    const details = message.details as ReviewResultDetails | undefined;
+    if (!details) {
+        const content =
+            typeof message.content === 'string'
+                ? message.content
+                : JSON.stringify(message.content);
+        return new Text(content, 0, 0);
+    }
+
+    const files = details.files ?? normalizeComments(details.comments);
+    const lines = [
+        theme.fg(
+            'success',
+            theme.bold(
+                `Hunk review: ${details.comments.length} human comment${details.comments.length === 1 ? '' : 's'}`
+            )
+        ),
+    ];
+    for (const file of files) {
+        lines.push('', theme.fg('accent', theme.bold(file.path)));
+        file.comments.forEach((comment, index) => {
+            lines.push(
+                `  ${theme.fg('muted', `Comment ${index + 1} — ${commentLocation(comment)}`)}`
+            );
+            for (const bodyLine of comment.body
+                .replace(/\r\n?/g, '\n')
+                .split('\n')) {
+                lines.push(`    ${theme.fg('dim', '│')} ${bodyLine}`);
+            }
+        });
+    }
+    if (options.expanded) {
+        lines.push('', theme.fg('dim', JSON.stringify(details, null, 2)));
+    }
+    return new Text(lines.join('\n'), 0, 0);
+};
+
+// ----------------------------------------------------------------
+// Plugin definition
+// ----------------------------------------------------------------
+
+/**
+ * Registers the extension's Pi-facing adapters.
+ */
+export default function (pi: ExtensionAPI) {
+    const reviews = createReviewController(pi);
+
+    pi.registerMessageRenderer('hunk-review-result', renderReviewResult);
+    pi.registerCommand('hunk-review', {
+        description: 'Open a Hunk diff or show review in a new Herdr tab',
+        getArgumentCompletions: reviewCommandCompletions,
+        handler: reviews.start,
     });
+    pi.on('session_shutdown', (_event, ctx) => reviews.shutdown(ctx));
 }
