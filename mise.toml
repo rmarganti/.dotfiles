@@ -36,7 +36,6 @@ dotfiles.default_mode = "symlink"
 "brew:starship" = "latest"
 "brew:television" = "latest"
 "brew:tldr" = "latest"
-"brew:tmux" = "latest"
 "brew:tree" = "latest"
 "brew:tree-sitter-cli" = "latest"
 "brew:yarn" = "latest"
@@ -68,7 +67,6 @@ dotfiles.default_mode = "symlink"
 "~/.config/phpactor" = {}
 "~/.config/starship.toml" = {}
 "~/.config/television" = {}
-"~/.config/tmux" = {}
 "~/.config/wezterm" = {}
 "~/.config/zed" = {}
 

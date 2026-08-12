@@ -1,5 +1,3 @@
-# Herdr Pluck custom patterns translated from tmux-fingers.
-
 [[patterns]]
 name = "gccdev-ticket"
 regex = "GCCDEV-\\d{4}"
