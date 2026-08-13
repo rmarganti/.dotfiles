@@ -99,7 +99,7 @@ show_agent_labels_on_pane_borders = false
 tab_bar_position = "bottom"
 
 [ui.toast]
-delivery = "off"
+delivery = "herdr"
 
 [session]
 resume_agents_on_restore = true
