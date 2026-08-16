@@ -1,0 +1,6 @@
+# ~/.bb contains runtime state, credentials, logs, databases, and sessions.
+# Only explicitly allow portable configuration managed by this repository.
+*
+!.gitignore
+!theme/
+!theme/**
