@@ -7,22 +7,25 @@ name = "catppuccin"
 
 [theme.custom]
 
-accent = "#7a8a93"      # Main highlight: active pane borders, selected tabs/buttons, key hints.
-panel_bg = "#20262a"    # Floating panels, popups, toasts, menus, bottom bars; "reset" inherits terminal bg.
-surface0 = "#30383f"    # Selected rows, input fields, inactive tab fill, mobile cards/code badges.
-surface1 = "#4b565c"    # Dragged/hover-ish rows and release-note code blocks.
-surface_dim = "#2a3137" # Active workspace rows, separators, sidebar dividers, empty-pane border.
-overlay0 = "#4b565c"    # Muted labels, unfocused pane borders/titles, unknown states, scrollbar tracks.
-overlay1 = "#7a8a93"    # Brighter muted labels, secondary text, inactive tab text, scrollbar thumbs.
-text = "#d3c6aa"        # Primary UI text in dialogs, sidebar, release notes, status messages.
-subtext0 = "#a6b0a8"    # Subdued workspace names and detail metadata.
-mauve = "#d699b6"       # Branch names when selected; special help/menu labels.
-green = "#a2ccae"       # Idle/seen agent dots, copy success, git-ahead, current integrations.
-yellow = "#dbbc7f"      # Working agent dots/spinners, config warnings, outdated integrations.
-red = "#e67e80"         # Blocked/error/destructive UI, git-behind, needs-attention toasts.
-blue = "#87b5c1"        # Finished/done toasts and mobile done summaries.
-teal = "#aeccc6"        # Done-but-unseen agent dots.
-peach = "#e6d1a7"       # Reserved for interrupted/warning states; currently not rendered in the UI.
+accent = "#7a8a93"        # Main highlight: active pane borders, selected tabs/buttons, key hints.
+panel_bg = "#20262a"      # Floating panels, popups, toasts, menus, bottom bars; "reset" inherits terminal bg.
+sidebar_bg = "#1d2226"    # Desktop sidebar background; matches the Neverforest terminal/editor background.
+active_row_bg = "#2a3137" # Active workspace and focused agent rows; Neverforest bg_lighter.
+selection_bg = "#30383f"  # Navigate-mode cursor row; Neverforest bg_lightest.
+surface0 = "#30383f"      # Input fields, inactive tab fill, selected controls, mobile cards/code badges.
+surface1 = "#4b565c"      # Dragged/hover-ish rows and release-note code blocks.
+surface_dim = "#2a3137"   # Separators, sidebar dividers, scrollbar tracks, and empty-pane borders.
+overlay0 = "#4b565c"      # Muted labels, unfocused pane borders/titles, unknown states, scrollbar tracks.
+overlay1 = "#7a8a93"      # Brighter muted labels, secondary text, inactive tab text, scrollbar thumbs.
+text = "#d3c6aa"          # Primary UI text in dialogs, sidebar, release notes, status messages.
+subtext0 = "#a6b0a8"      # Subdued workspace names and detail metadata.
+mauve = "#d699b6"         # Branch names when selected; special help/menu labels.
+green = "#a2ccae"         # Idle/seen agent dots, copy success, git-ahead, current integrations.
+yellow = "#dbbc7f"        # Working agent dots/spinners, config warnings, outdated integrations.
+red = "#e67e80"           # Blocked/error/destructive UI, git-behind, needs-attention toasts.
+blue = "#87b5c1"          # Finished/done toasts and mobile done summaries.
+teal = "#aeccc6"          # Done-but-unseen agent dots.
+peach = "#e6d1a7"         # Reserved for interrupted/warning states; currently not rendered in the UI.
 
 [terminal]
 # New panes and tabs follow the source pane's working directory.
@@ -46,6 +49,8 @@ new_tab = "prefix+c"
 rename_tab = ["prefix+shift+t", "prefix+comma"]
 previous_tab = "prefix+p"
 next_tab = "prefix+n"
+move_tab_previous = "prefix+<"
+move_tab_next = "prefix+>"
 switch_tab = "prefix+1..9"
 close_tab = "prefix+ampersand"
 
@@ -66,6 +71,10 @@ split_horizontal = ["prefix+minus", "prefix+_"]
 zoom = "prefix+z"
 copy_mode = "prefix+["
 resize_mode = ""
+resize_pane_left = "ctrl+shift+h"
+resize_pane_down = "ctrl+shift+j"
+resize_pane_up = "ctrl+shift+k"
+resize_pane_right = "ctrl+shift+l"
 
 navigate_pane_left = ""
 navigate_pane_down = ""
@@ -97,6 +106,11 @@ prompt_new_tab_name = false
 right_click_passthrough_modifier = "ctrl"
 show_agent_labels_on_pane_borders = false
 tab_bar_position = "bottom"
+tab_bar_right = [
+  { type = "datetime", format = "%H:%M" },
+  { type = "text", text = "󰇥 " },
+]
+tab_bar_right_separator = " · "
 
 [ui.toast]
 delivery = "herdr"
@@ -109,30 +123,6 @@ key = "prefix+="
 type = "plugin_action"
 command = "dots.herdr-equalize-splits.equalize"
 description = "equalize splits"
-
-[[keys.command]]
-key = "ctrl+shift+h"
-type = "shell"
-command = "herdr pane resize --direction left --amount 0.05 --current"
-description = "resize pane left"
-
-[[keys.command]]
-key = "ctrl+shift+j"
-type = "shell"
-command = "herdr pane resize --direction down --amount 0.05 --current"
-description = "resize pane down"
-
-[[keys.command]]
-key = "ctrl+shift+k"
-type = "shell"
-command = "herdr pane resize --direction up --amount 0.05 --current"
-description = "resize pane up"
-
-[[keys.command]]
-key = "ctrl+shift+l"
-type = "shell"
-command = "herdr pane resize --direction right --amount 0.05 --current"
-description = "resize pane right"
 
 [[keys.command]]
 key = "ctrl+h"

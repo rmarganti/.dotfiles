@@ -33,6 +33,10 @@ keybind = cmd+w=text:\x00x
 # herdr toggle sidebar (prefix + b)
 keybind = cmd+b=text:\x00b
 
+# Move Herdr tabs (prefix + < / >)
+keybind = cmd+shift+,=text:\x00<
+keybind = cmd+shift+.=text:\x00>
+
 # Tabs (prefix + 1-9)
 keybind = cmd+digit_1=text:\x001
 keybind = cmd+digit_2=text:\x002
