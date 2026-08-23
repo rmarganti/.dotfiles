@@ -53,6 +53,10 @@ dotfiles.default_mode = "symlink"
 "~/.agents" = {}
 "~/.pi" = {}
 
+# Link only portable BB configuration. Never link ~/.bb itself: it also
+# contains credentials, databases, logs, runtime files, and thread data.
+"~/.bb/theme" = {}
+
 "~/.config/bat" = {}
 "~/.config/btop/themes" = {}
 "~/.config/codebook" = {}

@@ -1,0 +1,151 @@
+/* Neverforest for BB — adapted from ~/.dotfiles/dots/.config/nvim/lua/rmarganti/colors/palette.lua */
+
+:root, .light {
+  /* A light companion palette derived from Neverforest's warm foregrounds. */
+  --canvas: #f6f3ed;
+  --ink: #2f363b;
+  --primary: #65858e;
+  --primary-foreground: #f6f3ed;
+  --timeline-accent: #65858e;
+  --file-accent: var(--timeline-accent);
+
+  /* Explicit neutral surfaces prevent warm text from tinting app chrome. */
+  --background: #f6f3ed;
+  --foreground: #2f363b;
+  --card: #f6f3ed;
+  --card-foreground: #2f363b;
+  --popover: #f6f3ed;
+  --popover-foreground: #2f363b;
+  --secondary: #ebe7de;
+  --secondary-foreground: #2f363b;
+  --accent: #ebe7de;
+  --accent-foreground: #2f363b;
+  --muted: #e4dfd4;
+  --border: #d8d2c5;
+  --border-hairline: #d3cdbf;
+  --border-seam: #e1dcd2;
+  --border-seam-vertical: #e1dcd2;
+  --input: #b8b1a3;
+  --surface-recessed: rgb(47 54 59 / 6%);
+  --surface-recessed-solid: #eae7df;
+  --surface-raised: rgb(47 54 59 / 4%);
+  --surface-raised-solid: #efebe4;
+  --surface-scrim: rgb(246 243 237 / 92%);
+  --state-hover: rgb(47 54 59 / 6%);
+  --state-active: rgb(47 54 59 / 12%);
+  --sidebar: #eeeae1;
+  --sidebar-foreground: #2f363b;
+  --sidebar-accent: #dfdad0;
+  --sidebar-accent-foreground: #2f363b;
+  --sidebar-border: #d8d2c5;
+  --sidebar-ring: #65858e;
+  --ring: #65858e;
+  --surface-selected: #dbe5e5;
+  --surface-selected-border: #8eaaaf;
+
+  --muted-foreground: color-mix(in oklch, var(--ink) 70%, var(--canvas));
+  --subtle-foreground: color-mix(in oklch, var(--ink) 58%, var(--canvas));
+  --readback-foreground: color-mix(in oklch, var(--ink) 64%, var(--canvas));
+
+  --destructive: #a56163;
+  --destructive-foreground: #f6f3ed;
+  --destructive-text: #8f4c4e;
+  --warning: #9d8a63;
+  --warning-text: #725f38;
+  --attention: #9d8a63;
+  --success: #617f6c;
+  --diff-added: #617f6c;
+  --diff-removed: #a56163;
+  --pr-merged: #9a7387;
+
+  --ansi-0: #2f363b;
+  --ansi-1: #a56163;
+  --ansi-2: #617f6c;
+  --ansi-3: #9d8a63;
+  --ansi-4: #65858e;
+  --ansi-5: #9a7387;
+  --ansi-6: #7f9492;
+  --ansi-7: #d3c6aa;
+  --ansi-8: #627078;
+  --ansi-9: #e67e80;
+  --ansi-10: #779482;
+  --ansi-11: #dbbc7f;
+  --ansi-12: #87b5c1;
+  --ansi-13: #d699b6;
+  --ansi-14: #aeccc6;
+  --ansi-15: #f6f3ed;
+
+  --ansi-bg-fg-0: #f6f3ed;
+  --ansi-bg-fg-1: #f6f3ed;
+  --ansi-bg-fg-2: #f6f3ed;
+  --ansi-bg-fg-3: #0d1011;
+  --ansi-bg-fg-4: #f6f3ed;
+  --ansi-bg-fg-5: #f6f3ed;
+  --ansi-bg-fg-6: #0d1011;
+  --ansi-bg-fg-7: #0d1011;
+  --ansi-bg-fg-8: #f6f3ed;
+  --ansi-bg-fg-9: #0d1011;
+  --ansi-bg-fg-10: #0d1011;
+  --ansi-bg-fg-11: #0d1011;
+  --ansi-bg-fg-12: #0d1011;
+  --ansi-bg-fg-13: #0d1011;
+  --ansi-bg-fg-14: #0d1011;
+  --ansi-bg-fg-15: #0d1011;
+}
+
+.dark {
+  --canvas: #1d2226;
+  --ink: #d3c6aa;
+  --primary: #87b5c1;
+  --primary-foreground: #181c1e;
+  --timeline-accent: #87b5c1;
+  --file-accent: var(--timeline-accent);
+
+  /* Map every major BB surface onto Neverforest's neutral background ramp. */
+  --background: #1d2226;
+  --foreground: #d3c6aa;
+  --card: #1d2226;
+  --card-foreground: #d3c6aa;
+  --popover: #23292e;
+  --popover-foreground: #d3c6aa;
+  --secondary: #23292e;
+  --secondary-foreground: #d3c6aa;
+  --accent: #23292e;
+  --accent-foreground: #d3c6aa;
+  --muted: #2a3137;
+  --muted-foreground: #9da9a0;
+  --subtle-foreground: #77817d;
+  --readback-foreground: #9da9a0;
+  --border: #30383f;
+  --border-hairline: #30383f;
+  --border-seam: #2a3137;
+  --border-seam-vertical: #2a3137;
+  --input: #515a5b;
+  --surface-recessed: #181c1e;
+  --surface-recessed-solid: #181c1e;
+  --surface-raised: #23292e;
+  --surface-raised-solid: #23292e;
+  --surface-scrim: rgb(29 34 38 / 92%);
+  --state-hover: rgb(211 198 170 / 6%);
+  --state-active: rgb(211 198 170 / 12%);
+  --sidebar: #181c1e;
+  --sidebar-foreground: #d3c6aa;
+  --sidebar-accent: #23292e;
+  --sidebar-accent-foreground: #d3c6aa;
+  --sidebar-border: #30383f;
+  --sidebar-ring: #87b5c1;
+  --ring: #87b5c1;
+  --surface-selected: #26363a;
+  --surface-selected-border: #45585f;
+
+  --destructive: #e67e80;
+  --destructive-foreground: #181c1e;
+  --destructive-text: #eea9aa;
+  --warning: #dbbc7f;
+  --warning-text: #e6d1a7;
+  --attention: #dbbc7f;
+  --success: #a2ccae;
+  --diff-added: #a2ccae;
+  --diff-removed: #e67e80;
+  --pr-merged: #d699b6;
+}
