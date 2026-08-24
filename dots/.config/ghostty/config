@@ -36,6 +36,8 @@ keybind = cmd+b=text:\x00b
 # Move Herdr tabs (prefix + < / >)
 keybind = cmd+shift+,=text:\x00<
 keybind = cmd+shift+.=text:\x00>
+keybind = cmd+,=text:\x00<
+keybind = cmd+.=text:\x00>
 
 # Tabs (prefix + 1-9)
 keybind = cmd+digit_1=text:\x001
