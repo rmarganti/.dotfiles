@@ -42,23 +42,18 @@ dotfiles.default_mode = "symlink"
 "brew:zoxide" = "latest"
 
 [dotfiles]
-"~/.bashrc" = {}
-"~/.bash_profile" = {}
+"~/.agents" = {}
 "~/.bash_aliases" = {}
 "~/.bash_colors" = {}
-
-"~/.gitconfig" = {}
-"~/.gitignore.global" = {}
-
-"~/.agents" = {}
-"~/.pi" = {}
-
+"~/.bash_profile" = {}
+"~/.bashrc" = {}
 "~/.config/bat" = {}
 "~/.config/btop/themes" = {}
 "~/.config/codebook" = {}
 "~/.config/ghostty" = {}
 "~/.config/herdr" = {}
 "~/.config/hunk/config.toml" = {}
+"~/.config/hunk/extensions" = {}
 "~/.config/karabiner" = {}
 "~/.config/lazygit" = {}
 "~/.config/lf" = {}
@@ -69,8 +64,11 @@ dotfiles.default_mode = "symlink"
 "~/.config/television" = {}
 "~/.config/wezterm" = {}
 "~/.config/zed" = {}
-
+"~/.gitconfig" = {}
+"~/.gitignore.global" = {}
 "~/.local/bin/ralph" = {}
+"~/.pi" = {}
+"~/.plannotator/config.json" = {}
 
 [tasks.bootstrap]
 run = '''
