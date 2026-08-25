@@ -40,10 +40,13 @@ async function cmdOpen(): Promise<void> {
  * Launchables picker entrypoint. This is invoked by the overlay pane opened by `cmdOpen()`.
  */
 async function cmdPicker(): Promise<void> {
+    showPickerLoadingScreen();
+
     const pluginContext = getPluginContext();
     if (!pluginContext.cwd) return;
 
     const launchables = discoverLaunchables(pluginContext);
+    clearPickerLoadingScreen();
     const selected = selectLaunchable(launchables);
     if (!selected) return;
 
@@ -77,6 +80,16 @@ async function cmdApply(
     } finally {
         removeSelection(selectionPath);
     }
+}
+
+function showPickerLoadingScreen(): void {
+    process.stderr.write(
+        '\x1b[2J\x1b[H\n  \x1b[30mLoading launchables…\x1b[0m\n'
+    );
+}
+
+function clearPickerLoadingScreen(): void {
+    process.stderr.write('\x1b[2J\x1b[H');
 }
 
 async function main(): Promise<void> {

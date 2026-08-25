@@ -37,10 +37,12 @@ export function getPluginContext(): PluginContext {
         process.env.LAUNCHABLES_CWD ||
         contextValue('focused_pane_cwd', 'pane_cwd', 'workspace_cwd');
 
-    const fallback = focusedPaneInfo(paneId || undefined);
-    if (!paneId) paneId = fallback.paneId;
-    if (!workspaceId) workspaceId = fallback.workspaceId;
-    if (!cwd) cwd = fallback.cwd;
+    if (!paneId || !workspaceId || !cwd) {
+        const fallback = focusedPaneInfo(paneId || undefined);
+        if (!paneId) paneId = fallback.paneId;
+        if (!workspaceId) workspaceId = fallback.workspaceId;
+        if (!cwd) cwd = fallback.cwd;
+    }
 
     return {
         workspaceId,
