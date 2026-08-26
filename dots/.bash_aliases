@@ -25,6 +25,18 @@ alias mpi="mise x node@latest -- pi"
 alias mnvim="mise x node@latest -- nvim"
 
 # ------------------------------------------------
+# Homebrew
+# ------------------------------------------------
+
+# Select and upgrade outdated packages using FZF.
+function bup() {
+	local packages
+	packages=$(brew outdated --quiet | fzf --multi \
+		--bind='tab:toggle+up,shift-tab:toggle+down') || return
+	[[ -n "$packages" ]] && brew upgrade $packages
+}
+
+# ------------------------------------------------
 # Git
 # ------------------------------------------------
 
