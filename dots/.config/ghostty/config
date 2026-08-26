@@ -36,10 +36,10 @@ keybind = cmd+b=text:\x00b
 # Move Herdr tabs (prefix + < / >)
 keybind = cmd+shift+,=text:\x00<
 keybind = cmd+shift+.=text:\x00>
-keybind = cmd+,=text:\x00<
-keybind = cmd+.=text:\x00>
 
-# Tabs (prefix + 1-9)
+# Select Herdr Tabs (prefix + 1-9)
+keybind = cmd+,=text:\x00p
+keybind = cmd+.=text:\x00n
 keybind = cmd+digit_1=text:\x001
 keybind = cmd+digit_2=text:\x002
 keybind = cmd+digit_3=text:\x003
