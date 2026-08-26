@@ -28,6 +28,9 @@ require('rmarganti.core.lsp')
 require('rmarganti.core.keybindings')
 require('rmarganti.core.user_commands')
 
+-- Let Pi reveal files it is changing when both tools run inside Herdr.
+require('rmarganti.integrations.pi_follow_agent').setup()
+
 vim.cmd('colorscheme neverforest')
 
 require('rmarganti.plugins')
