@@ -1,0 +1,583 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "extends": "default",
+  "meta": {
+    "name": "agent-common",
+    "version": "0.1.0",
+    "description": "Shared daily-driver capabilities for local coding agents"
+  },
+  "groups": {
+    "include": [
+      "mise_manager",
+      "node_runtime",
+      "rust_runtime",
+      "go_runtime",
+      {
+        "name": "go_runtime_macos",
+        "when": "macos"
+      },
+      {
+        "name": "go_runtime_linux",
+        "when": "linux"
+      },
+      "python_runtime",
+      "bun_runtime",
+      "git_config"
+    ]
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.local/state/mise/tracked-configs"
+    ],
+    "unix_socket": [
+      "$HERDR_SOCKET_PATH"
+    ]
+  },
+  "network": {
+    "block": false,
+    "network_profile": null,
+    "tls_intercept": {
+      "ca_lifecycle": "trusted",
+      "ca_validity": "24h",
+      "leaf_validity": "15m"
+    }
+  },
+  "command_policies": {
+    "approval_backends": {
+      "terminal": {
+        "type": "terminal",
+        "timeout_secs": 30
+      }
+    },
+    "approval_defaults": {
+      "backend": "terminal",
+      "timeout_secs": 30
+    },
+    "credentials": {
+      "ssh-agent": {
+        "type": "local-socket",
+        "path": "$SSH_AUTH_SOCK",
+        "mode": "connect",
+        "env_var": "SSH_AUTH_SOCK"
+      },
+      "github-api": {
+        "type": "proxy",
+        "upstream": "https://api.github.com",
+        "credential_key": "keyring://gh:github.com/rmarganti?decode=go-keyring",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    },
+    "commands": {
+      "git": {
+        "executable": "/opt/homebrew/bin/git",
+        "can_use": [
+          "ssh"
+        ],
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "@git:hooks-path",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel",
+                "@git:toplevel-parent",
+                "/opt/homebrew"
+              ],
+              "fs_read_file": [
+                "@git:config-files"
+              ],
+              "fs_write": [
+                ".",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "SSH_AUTH_SOCK",
+                  "GIT_*"
+                ],
+                "set_vars": {}
+              }
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "approve": [
+                {
+                  "argv": {
+                    "contains": [
+                      "--force"
+                    ]
+                  },
+                  "reason": "Force pushes require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "--force-with-lease"
+                    ]
+                  },
+                  "reason": "Force-with-lease pushes require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "-f"
+                    ]
+                  },
+                  "reason": "Short-form force operations require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "--delete"
+                    ]
+                  },
+                  "reason": "Remote deletion requires explicit approval",
+                  "timeout_secs": 30
+                }
+              ]
+            }
+          },
+          "gh": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "@git:hooks-path",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel",
+                "@git:toplevel-parent",
+                "/opt/homebrew"
+              ],
+              "fs_read_file": [
+                "@git:config-files"
+              ],
+              "fs_write": [
+                ".",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "SSH_AUTH_SOCK",
+                  "GIT_*"
+                ],
+                "set_vars": {}
+              }
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "approve": [
+                {
+                  "argv": {
+                    "contains": [
+                      "--force"
+                    ]
+                  },
+                  "reason": "Force pushes require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "--force-with-lease"
+                    ]
+                  },
+                  "reason": "Force-with-lease pushes require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "-f"
+                    ]
+                  },
+                  "reason": "Short-form force operations require explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "contains": [
+                      "--delete"
+                    ]
+                  },
+                  "reason": "Remote deletion requires explicit approval",
+                  "timeout_secs": 30
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ssh": {
+        "executable": "/usr/bin/ssh",
+        "from": {
+          "git": {
+            "sandbox": {
+              "use_credentials": [
+                "ssh-agent"
+              ],
+              "fs_read_file": [
+                "$HOME/.ssh/known_hosts",
+                "$HOME/.ssh/config"
+              ],
+              "fs_write_file": [
+                "$HOME/.ssh/known_hosts"
+              ],
+              "network": {
+                "allow_all": true
+              },
+              "argv_prepend": [
+                "-o",
+                "ControlMaster=no",
+                "-o",
+                "ControlPath=none"
+              ]
+            },
+            "invocation_policy": {
+              "default": "deny",
+              "allow": [
+                {
+                  "argv": {
+                    "contains": [
+                      "git@github.com"
+                    ]
+                  },
+                  "reason": "Git transport is limited to GitHub"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "gh": {
+        "executable": "/opt/homebrew/bin/gh",
+        "can_use": [
+          "git"
+        ],
+        "from": {
+          "session": {
+            "sandbox": {
+              "credentials": [
+                {
+                  "name": "github-api",
+                  "endpoint_policy": {
+                    "default": "allow",
+                    "deny": [
+                      {
+                        "method": "DELETE",
+                        "path": "/repos/*/*",
+                        "reason": "Repository deletion is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/actions/secrets/**",
+                        "reason": "Repository secret administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/actions/variables/**",
+                        "reason": "Repository variable administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/keys/**",
+                        "reason": "Deploy-key administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/collaborators/**",
+                        "reason": "Collaborator administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/branches/*/protection/**",
+                        "reason": "Branch-protection administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/repos/*/*/rulesets/**",
+                        "reason": "Repository ruleset administration is always denied"
+                      },
+                      {
+                        "method": "POST",
+                        "path": "/repos/*/*/transfer",
+                        "reason": "Repository transfer is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/orgs/*/teams/**",
+                        "reason": "Organization team administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/user/keys/**",
+                        "reason": "Account SSH-key administration is always denied"
+                      },
+                      {
+                        "method": "*",
+                        "path": "/user/gpg_keys/**",
+                        "reason": "Account GPG-key administration is always denied"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "fs_read": [
+                ".",
+                "/opt/homebrew"
+              ],
+              "fs_read_file": [
+                "$HOME/.config/gh/hosts.yml",
+                "$HOME/.config/gh/config.yml",
+                "$HOME/.CFUserTextEncoding",
+                "/opt/homebrew/bin/gh"
+              ],
+              "fs_write": [
+                "."
+              ],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "GH_TOKEN",
+                  "GITHUB_TOKEN",
+                  "GH_HOST",
+                  "GH_REPO",
+                  "GH_CONFIG_DIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "NO_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "no_proxy",
+                  "NONO_PROXY_TOKEN",
+                  "SSL_CERT_FILE",
+                  "REQUESTS_CA_BUNDLE",
+                  "NODE_EXTRA_CA_CERTS",
+                  "CURL_CA_BUNDLE",
+                  "GIT_SSL_CAINFO"
+                ],
+                "set_vars": {
+                  "GH_PROMPT_DISABLED": "1",
+                  "GH_NO_UPDATE_NOTIFIER": "1"
+                }
+              },
+              "stdio": {
+                "stdout": {
+                  "max_bytes": 1048576,
+                  "on_limit": "truncate"
+                },
+                "stderr": {
+                  "max_bytes": 262144,
+                  "on_limit": "truncate"
+                }
+              }
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "deny": [
+                {
+                  "argv": {
+                    "exact": [
+                      "auth",
+                      "token"
+                    ]
+                  },
+                  "reason": "Credential output is not available to coding agents"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "repo",
+                      "delete"
+                    ]
+                  },
+                  "reason": "Repository deletion is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "repo",
+                      "archive"
+                    ]
+                  },
+                  "reason": "Repository archival is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "repo",
+                      "rename"
+                    ]
+                  },
+                  "reason": "Repository renaming is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "repo",
+                      "deploy-key"
+                    ]
+                  },
+                  "reason": "Deploy-key administration is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "secret"
+                    ]
+                  },
+                  "reason": "Secret administration is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "variable"
+                    ]
+                  },
+                  "reason": "Variable administration is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "ssh-key"
+                    ]
+                  },
+                  "reason": "Account SSH-key administration is always denied"
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "gpg-key"
+                    ]
+                  },
+                  "reason": "Account GPG-key administration is always denied"
+                }
+              ],
+              "approve": [
+                {
+                  "argv": {
+                    "prefix": [
+                      "api"
+                    ]
+                  },
+                  "reason": "Direct GitHub API access requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "pr",
+                      "merge"
+                    ]
+                  },
+                  "reason": "Pull-request merge requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "pr",
+                      "close"
+                    ]
+                  },
+                  "reason": "Pull-request closure requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "workflow",
+                      "run"
+                    ]
+                  },
+                  "reason": "Workflow dispatch requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "run",
+                      "rerun"
+                    ]
+                  },
+                  "reason": "Workflow rerun requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "release",
+                      "create"
+                    ]
+                  },
+                  "reason": "Release creation requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "release",
+                      "delete"
+                    ]
+                  },
+                  "reason": "Release deletion requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "release",
+                      "upload"
+                    ]
+                  },
+                  "reason": "Release upload requires explicit approval",
+                  "timeout_secs": 30
+                },
+                {
+                  "argv": {
+                    "prefix": [
+                      "repo",
+                      "create"
+                    ]
+                  },
+                  "reason": "Repository creation requires explicit approval",
+                  "timeout_secs": 30
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

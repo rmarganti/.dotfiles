@@ -1,0 +1,21 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "extends": [
+    "agent-common",
+    "nolabs-ai/pi"
+  ],
+  "meta": {
+    "name": "pi-base",
+    "version": "0.1.0",
+    "description": "Daily-driver Pi profile with shared coding-agent capabilities"
+  },
+  "filesystem": {
+    "read": [
+      "$HOME/code/rmarganti/anno/pi/anno-review"
+    ]
+  },
+  "network": {
+    "block": false,
+    "network_profile": null
+  }
+}

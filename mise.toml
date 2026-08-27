@@ -57,6 +57,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/karabiner" = {}
 "~/.config/lazygit" = {}
 "~/.config/lf" = {}
+"~/.config/nono/profiles" = {}
 "~/.config/nvim" = {}
 "~/.config/opencode" = {}
 "~/.config/phpactor" = {}
