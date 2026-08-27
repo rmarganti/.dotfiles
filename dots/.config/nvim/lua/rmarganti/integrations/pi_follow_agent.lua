@@ -20,6 +20,7 @@ function M.follow(path, line)
   end
 
   local buffer = vim.fn.bufadd(vim.fn.fnamemodify(path, ':p'))
+  vim.bo[buffer].buflisted = true
   vim.fn.bufload(buffer)
   vim.api.nvim_win_set_buf(0, buffer)
 
