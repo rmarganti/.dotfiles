@@ -33,8 +33,13 @@
       "$HOME/.local/state/mise/tracked-configs"
     ],
     "read": [
-      "$HOME/.local/state/mise/trusted-configs"
-    ]
+      "$HOME/.local/state/mise/trusted-configs",
+      "$HOME/.config/yarn"
+    ],
+    "read_file": [
+      "$HOME/.yarnrc",
+      "$HOME/.yarnrc.yml"
+    ],
     "unix_socket": [
       "$HERDR_SOCKET_PATH"
     ]
