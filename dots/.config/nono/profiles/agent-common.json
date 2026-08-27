@@ -32,6 +32,9 @@
     "allow": [
       "$HOME/.local/state/mise/tracked-configs"
     ],
+    "read": [
+      "$HOME/.local/state/mise/trusted-configs"
+    ]
     "unix_socket": [
       "$HERDR_SOCKET_PATH"
     ]
