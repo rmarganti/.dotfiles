@@ -63,7 +63,6 @@ dotfiles.default_mode = "symlink"
 "~/.config/phpactor" = {}
 "~/.config/starship.toml" = {}
 "~/.config/television" = {}
-"~/.config/wezterm" = {}
 "~/.config/zed" = {}
 "~/.gitconfig" = {}
 "~/.gitignore.global" = {}
