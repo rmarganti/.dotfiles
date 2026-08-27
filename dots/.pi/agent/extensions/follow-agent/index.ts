@@ -2,7 +2,6 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 
 import { revealAfterEdit, revealBeforeEdit, type FollowTarget } from "./herdr.ts";
 import { resolveLocation, type FollowLocation } from "./locations.ts";
-import { readEnabled, writeEnabled } from "./settings.ts";
 
 const statusId = "follow-agent";
 
@@ -14,8 +13,9 @@ export default function followAgent(pi: ExtensionAPI): void {
   let enabled = false;
   const pending = new Map<string, { location: FollowLocation; target: FollowTarget }>();
 
-  pi.on("session_start", async (_event, ctx) => {
-    enabled = await readEnabled();
+  pi.on("session_start", (_event, ctx) => {
+    enabled = false;
+    pending.clear();
     updateStatus(ctx, enabled);
   });
 
@@ -64,7 +64,6 @@ export default function followAgent(pi: ExtensionAPI): void {
 
       enabled = action === "on";
       pending.clear();
-      await writeEnabled(enabled);
       updateStatus(ctx, enabled);
       ctx.ui.notify(`Follow agent turned ${action}.`, "info");
     },
