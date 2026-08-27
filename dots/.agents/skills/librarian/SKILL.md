@@ -1,6 +1,6 @@
 ---
 name: librarian
-description: "Cache and refresh remote git repositories under ~/.cache/checkouts/<host>/<org>/<repo> so future references can reuse a local copy. Use this skill when the user points you to a remote git repository as reference or you encountered a remote git repo through other means."
+description: "Cache and refresh remote git repositories under ~/.cache/checkouts/<host>/<org>/<repo> so future references can reuse a local copy. Use when the user references a repository by URL, owner/repo, or a potentially ambiguous name, or when a remote git repository is encountered through other means."
 ---
 
 Use this skill when the user points you to a remote git repository (GitHub/GitLab/Bitbucket URLs, `git@...`, or `owner/repo` shorthand).
@@ -19,6 +19,14 @@ Repositories are stored at:
 Example:
 
 `github.com/mitsuhiko/minijinja` → `~/.cache/checkouts/github.com/mitsuhiko/minijinja`
+
+## Resolving name-only references
+
+When the user refers to a repository without a URL or `owner/repo` identifier (for example, “reference minijinja”):
+
+1. Search `~/.cache/checkouts` for plausible repository-name matches.
+2. If there is one clear match, use its canonical `<host>/<org>/<repo>` identity and continue with the normal checkout flow.
+3. If there are multiple plausible matches or no clear match, ask the user for an `owner/repo` identifier or repository URL. Do not guess.
 
 ## Command
 
