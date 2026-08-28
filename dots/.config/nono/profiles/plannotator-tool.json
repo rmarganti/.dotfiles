@@ -1,0 +1,21 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "meta": {
+    "name": "plannotator-tool",
+    "version": "0.1.0",
+    "description": "Filesystem and localhost port access for Plannotator"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.plannotator"
+    ],
+    "read_file": [
+      "$HOME/.dotfiles/dots/.plannotator/config.json"
+    ]
+  },
+  "network": {
+    "open_port_range": [
+      [49152, 65535]
+    ]
+  }
+}

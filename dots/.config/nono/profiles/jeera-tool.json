@@ -1,0 +1,75 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "meta": {
+    "name": "jeera-tool",
+    "version": "0.1.0",
+    "description": "Command policy for sandboxed jeera access"
+  },
+  "command_policies": {
+    "approval_backends": {
+      "terminal": {
+        "type": "terminal",
+        "timeout_secs": 30
+      }
+    },
+    "approval_defaults": {
+      "backend": "terminal",
+      "timeout_secs": 30
+    },
+    "commands": {
+      "jeera": {
+        "executable": "/Users/rmarganti/.cargo/bin/jeera",
+        "from": {
+          "session": {
+            "sandbox": {
+              "fs_read": [
+                "."
+              ],
+              "fs_read_file": [
+                "$HOME/.config/jeera/settings.json"
+              ],
+              "network": {
+                "allow_all": true
+              },
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "NO_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "no_proxy",
+                  "NONO_PROXY_TOKEN",
+                  "SSL_CERT_FILE",
+                  "REQUESTS_CA_BUNDLE",
+                  "NODE_EXTRA_CA_CERTS",
+                  "CURL_CA_BUNDLE"
+                ]
+              }
+            },
+            "invocation_policy": {
+              "default": "allow",
+              "approve": [
+                {
+                  "argv": {
+                    "prefix": [
+                      "create"
+                    ]
+                  },
+                  "reason": "Creating Jira issues requires explicit approval",
+                  "timeout_secs": 30
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
