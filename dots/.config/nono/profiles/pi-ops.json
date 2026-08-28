@@ -1,0 +1,12 @@
+{
+  "extends": "pi-base",
+  "meta": {
+    "name": "pi-ops",
+    "version": "1.0.0",
+    "description": "Pi profile for authenticated cloud operations"
+  },
+  "filesystem": {
+    "allow": ["$HOME/.config/gcloud"],
+    "bypass_protection": ["$HOME/.config/gcloud"]
+  }
+}

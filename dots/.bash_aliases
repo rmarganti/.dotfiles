@@ -21,8 +21,10 @@ function strlen() {
 	echo -n "$1" | wc -c
 }
 
-alias pi='nono run --profile pi-base --allow-cwd -- /opt/homebrew/bin/pi'
-alias mpi="mise x node@latest -- pi"
+alias pi='nono run --profile pi-base --allow-cwd -- pi'
+alias pi-ops='nono run --profile pi-ops --allow-cwd -- pi'
+alias pi-yolo='/opt/homebrew/bin/pi'
+alias mpi='nono run --profile pi-base --allow-cwd -- mise x node@latest -- pi'
 alias mnvim="mise x node@latest -- nvim"
 
 # ------------------------------------------------
