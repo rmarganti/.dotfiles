@@ -42,8 +42,12 @@
       "$HOME/.config/yarn"
     ],
     "read_file": [
+      "$HOME/.npmrc",
       "$HOME/.yarnrc",
       "$HOME/.yarnrc.yml"
+    ],
+    "bypass_protection": [
+      "$HOME/.npmrc"
     ],
     "unix_socket": [
       "$HERDR_SOCKET_PATH"
