@@ -1,0 +1,59 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "extends": [
+    "agent-common"
+  ],
+  "meta": {
+    "name": "gemini-base",
+    "version": "0.1.0",
+    "description": "Daily-driver Gemini CLI profile with shared coding-agent capabilities"
+  },
+  "security": {
+    "signal_mode": "isolated",
+    "capability_elevation": false
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.gemini"
+    ],
+    "read": [
+      "$HOME/.agents/skills",
+      "$HOME/.npm-global"
+    ]
+  },
+  "network": {
+    "block": false,
+    "custom_credentials": {
+      "gemini": {
+        "upstream": "https://generativelanguage.googleapis.com",
+        "credential_key": "GOOGLE_API_KEY",
+        "inject_header": "x-goog-api-key",
+        "credential_format": "{}",
+        "env_var": "GEMINI_API_KEY"
+      }
+    }
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "open_urls": {
+    "allow_origins": [
+      "https://accounts.google.com"
+    ],
+    "allow_localhost": true
+  },
+  "allow_launch_services": true,
+  "undo": {
+    "exclude_patterns": [
+      "node_modules",
+      ".next",
+      "__pycache__",
+      "target",
+      ".gemini"
+    ],
+    "exclude_globs": [
+      "*.tmp.[0-9]*.[0-9]*"
+    ]
+  },
+  "interactive": true
+}

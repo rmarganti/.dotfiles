@@ -35,13 +35,22 @@
   },
   "filesystem": {
     "allow": [
-      "$HOME/.local/state/mise/tracked-configs"
+      "$HOME/.cache/checkouts",
+      "$HOME/.config/gh",
+      "$HOME/.local/state/mise/tracked-configs",
+      "$HOME/.yarn/berry/cache",
+      "$HOME/OneDrive - Gannett Company, Incorporated/obsidian/work"
     ],
     "read": [
       "$HOME/.local/state/mise/trusted-configs",
-      "$HOME/.config/yarn"
+      "$HOME/.config/yarn",
+      "$HOME/.claude/skills"
     ],
     "read_file": [
+      "$HOME/.config/dev-common.json",
+      "$HOME/.dotfiles/dots/.config/delta/themes.gitconfig",
+      "$HOME/.gitignore.global",
+      "$HOME/.local.gitconfig",
       "$HOME/.npmrc",
       "$HOME/.yarnrc",
       "$HOME/.yarnrc.yml"
@@ -55,11 +64,6 @@
   },
   "network": {
     "block": false,
-    "network_profile": null,
-    "tls_intercept": {
-      "ca_lifecycle": "trusted",
-      "ca_validity": "24h",
-      "leaf_validity": "15m"
-    }
+    "network_profile": null
   }
 }

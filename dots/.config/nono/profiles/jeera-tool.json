@@ -54,18 +54,7 @@
               }
             },
             "invocation_policy": {
-              "default": "allow",
-              "approve": [
-                {
-                  "argv": {
-                    "prefix": [
-                      "create"
-                    ]
-                  },
-                  "reason": "Creating Jira issues requires explicit approval",
-                  "timeout_secs": 30
-                }
-              ]
+              "default": "allow"
             }
           }
         }
