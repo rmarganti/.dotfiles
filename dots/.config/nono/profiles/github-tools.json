@@ -26,6 +26,9 @@
     "commands": {
       "gh": {
         "executable": "/opt/homebrew/bin/gh",
+        "can_use": [
+          "git"
+        ],
         "from": {
           "session": {
             "sandbox": {
@@ -178,6 +181,58 @@
                   "reason": "Account GPG-key administration is denied"
                 }
               ]
+            }
+          }
+        }
+      },
+      "git": {
+        "executable": "/opt/homebrew/bin/git",
+        "from": {
+          "gh": {
+            "sandbox": {
+              "fs_read": [
+                ".",
+                "/opt/homebrew",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "fs_read_file": [
+                "@git:config-files"
+              ],
+              "fs_write": [
+                ".",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "GIT_*",
+                  "GH_HOST",
+                  "GH_REPO",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "NO_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "CURL_CA_BUNDLE",
+                  "GIT_SSL_CAINFO"
+                ]
+              }
+            },
+            "invocation_policy": {
+              "default": "allow"
             }
           }
         }
