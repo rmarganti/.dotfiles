@@ -1,0 +1,19 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "meta": {
+    "name": "obsidian-common",
+    "version": "0.1.0",
+    "description": "Shared Obsidian workspace configuration and vault access"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/obsidian-vaults"
+    ],
+    "allow_file": [
+      "$HOME/obsidian-vaults"
+    ],
+    "read_file": [
+      "$HOME/.config/dev-common.json"
+    ]
+  }
+}

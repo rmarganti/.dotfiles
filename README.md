@@ -39,6 +39,51 @@ Notes:
 - `mise bootstrap` is currently experimental; this repo enables it via `[settings].experimental = true`.
 - Dotfile sources are rooted at `~/.dotfiles/dots`, so this repo should be cloned to `~/.dotfiles`.
 
+## Nono
+
+Bootstrap installs Nono and links the profiles in `dots/.config/nono/profiles`. Install the registry-managed Pi pack separately:
+
+```sh
+nono pull nolabs-ai/pi
+```
+
+Use the local profiles when starting agents or tools:
+
+```sh
+nono run --profile pi-base -- pi
+nono run --profile neovim-tool -- nvim
+```
+
+Profiles compose shared capabilities:
+
+- `agent-common` contains capabilities shared by coding agents.
+- `obsidian-common` grants access to the machine's Obsidian parent directory.
+- `neovim-tool` adds Neovim, plugin, config, state, and working-directory access.
+- `pi-base` combines the shared agent profile with the registry-managed Pi profile.
+
+Profile changes only affect new sandboxes. Restart the command after editing a profile. Diagnose denials from inside a sandbox with:
+
+```sh
+nono why --self --path /blocked/path --op readwrite
+```
+
+Do not edit registry-managed files under `~/.config/nono/packages`; extend them with a user profile instead.
+
+### Obsidian bootstrap
+
+Each machine must expose its Obsidian vault parent at `~/obsidian-vaults` before starting a Nono profile:
+
+```sh
+ln -s "/machine-specific/obsidian-parent" ~/obsidian-vaults
+```
+
+Nono resolves this symlink when building the sandbox, so `obsidian-common` remains portable while granting the machine-specific target. On macOS, applications should use the canonical target path rather than traverse `~/obsidian-vaults` at runtime. Put that canonical workspace path in `~/.config/dev-common.json`:
+
+```sh
+cp ~/.dotfiles/dots/.config/ide-common.example.json ~/.config/dev-common.json
+realpath ~/obsidian-vaults
+```
+
 ## Shared Dev Configuration
 
 ### `~/.config/dev-common.json`
@@ -51,8 +96,8 @@ This file provides a unified configuration for all IDE/editor/dev workflows (Neo
 {
     "obsidian": {
         "workspaces": [
-            { "name": "Personal", "path": "~/vaults/personal" },
-            { "name": "Work", "path": "~/vaults/work" }
+            { "name": "Personal", "path": "/canonical/obsidian-parent/personal" },
+            { "name": "Work", "path": "/canonical/obsidian-parent/work" }
         ],
         "diary_folder": "diary",
         "date_format": "%Y-%m-%d",

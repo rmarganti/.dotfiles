@@ -4,6 +4,8 @@
     "default",
     "github-tools",
     "jeera-tool",
+    "neovim-tool",
+    "obsidian-common",
     "plannotator-tool"
   ],
   "meta": {
@@ -38,8 +40,7 @@
       "$HOME/.cache/checkouts",
       "$HOME/.config/gh",
       "$HOME/.local/state/mise/tracked-configs",
-      "$HOME/.yarn/berry/cache",
-      "$HOME/OneDrive - Gannett Company, Incorporated/obsidian/work"
+      "$HOME/.yarn/berry/cache"
     ],
     "read": [
       "$HOME/.local/state/mise/trusted-configs",
@@ -47,7 +48,6 @@
       "$HOME/.claude/skills"
     ],
     "read_file": [
-      "$HOME/.config/dev-common.json",
       "$HOME/.dotfiles/dots/.config/delta/themes.gitconfig",
       "$HOME/.gitignore.global",
       "$HOME/.local.gitconfig",

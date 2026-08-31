@@ -1,0 +1,27 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "extends": "obsidian-common",
+  "meta": {
+    "name": "neovim-tool",
+    "version": "0.1.0",
+    "description": "Filesystem access required to run Neovim from coding-agent sessions"
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.cache/nvim",
+      "$HOME/.dotfiles/dots/.config/nvim",
+      "$HOME/.local/share/nvim",
+      "$HOME/.local/state/nvim"
+    ],
+    "read": [
+      "$HOME/.local/share/bob",
+      "$HOME/code/folke/sidekick.nvim"
+    ],
+    "allow_file": [
+      "$HOME/.config/nvim"
+    ]
+  }
+}
