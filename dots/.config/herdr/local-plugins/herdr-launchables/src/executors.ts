@@ -166,12 +166,17 @@ function applyTabLayout(options: ApplyTabLayoutOptions): TabTarget {
     let currentPaneId = target.rootPaneId;
     configurePane(currentPaneId, rootPane);
 
-    for (const pane of options.tab.panes.slice(1)) {
+    const additionalPanes = options.tab.panes.slice(1);
+    for (const [index, pane] of additionalPanes.entries()) {
+        // Each split keeps one equal share in the current pane and gives the
+        // remaining shares to the subtree that subsequent splits will create.
+        const remainingPaneCount = options.tab.panes.length - index;
         currentPaneId = splitPane({
             paneId: currentPaneId,
             direction: pane.direction || 'right',
             cwd: pane.cwd,
             focus: false,
+            ratio: 1 / remainingPaneCount,
         }).paneId;
         configurePane(currentPaneId, pane);
     }

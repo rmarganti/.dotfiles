@@ -50,8 +50,9 @@ export function splitPane(options: {
     direction: SplitDirection;
     cwd: string;
     focus?: boolean;
+    ratio?: number;
 }): { paneId: string } {
-    const split = herdrJson<PaneSplitResponse>([
+    const args = [
         'pane',
         'split',
         options.paneId,
@@ -59,8 +60,13 @@ export function splitPane(options: {
         options.direction,
         '--cwd',
         options.cwd,
-        options.focus === false ? '--no-focus' : '--focus',
-    ]);
+    ];
+    if (options.ratio !== undefined) {
+        args.push('--ratio', String(options.ratio));
+    }
+    args.push(options.focus === false ? '--no-focus' : '--focus');
+
+    const split = herdrJson<PaneSplitResponse>(args);
     const paneId = split.result?.pane?.pane_id || '';
     if (!paneId) throw new Error('failed to create pane split');
     return { paneId };
