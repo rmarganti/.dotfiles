@@ -14,6 +14,12 @@
   },
   "command_policies": {
     "credentials": {
+      "ssh-agent": {
+        "type": "local-socket",
+        "path": "$SSH_AUTH_SOCK",
+        "mode": "connect",
+        "env_var": "SSH_AUTH_SOCK"
+      },
       "github-api": {
         "type": "proxy",
         "upstream": "https://api.github.com",
@@ -187,9 +193,15 @@
       },
       "git": {
         "executable": "/opt/homebrew/bin/git",
+        "can_use": [
+          "ssh"
+        ],
         "from": {
-          "gh": {
+          "session": {
             "sandbox": {
+              "use_credentials": [
+                "ssh-agent"
+              ],
               "fs_read": [
                 ".",
                 "/opt/homebrew",
@@ -234,6 +246,82 @@
             "invocation_policy": {
               "default": "allow"
             }
+          },
+          "gh": {
+            "sandbox": {
+              "use_credentials": [
+                "ssh-agent"
+              ],
+              "fs_read": [
+                ".",
+                "/opt/homebrew",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "fs_read_file": [
+                "@git:config-files"
+              ],
+              "fs_write": [
+                ".",
+                "@git:common-dir",
+                "@git:worktree",
+                "@git:toplevel"
+              ],
+              "environment": {
+                "allow_vars": [
+                  "PATH",
+                  "HOME",
+                  "USER",
+                  "LOGNAME",
+                  "LANG",
+                  "LC_*",
+                  "TERM",
+                  "TMPDIR",
+                  "GIT_*",
+                  "GH_HOST",
+                  "GH_REPO",
+                  "HTTP_PROXY",
+                  "HTTPS_PROXY",
+                  "NO_PROXY",
+                  "http_proxy",
+                  "https_proxy",
+                  "no_proxy",
+                  "SSL_CERT_FILE",
+                  "CURL_CA_BUNDLE",
+                  "GIT_SSL_CAINFO"
+                ]
+              }
+            },
+            "invocation_policy": {
+              "default": "allow"
+            }
+          }
+        }
+      },
+      "ssh": {
+        "executable": "/usr/bin/ssh",
+        "from": {
+          "git": {
+            "use_credentials": [
+              "ssh-agent"
+            ],
+            "fs_read_file": [
+              "$HOME/.ssh/known_hosts",
+              "$HOME/.ssh/config"
+            ],
+            "fs_write_file": [
+              "$HOME/.ssh/known_hosts"
+            ],
+            "network": {
+              "allow_all": true
+            },
+            "argv_prepend": [
+              "-o",
+              "ControlMaster=no",
+              "-o",
+              "ControlPath=none"
+            ]
           }
         }
       }

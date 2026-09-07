@@ -6,7 +6,8 @@
     "jeera-tool",
     "neovim-tool",
     "obsidian-common",
-    "plannotator-tool"
+    "plannotator-tool",
+    "nx-tool"
   ],
   "meta": {
     "name": "agent-common",

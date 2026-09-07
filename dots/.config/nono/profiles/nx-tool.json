@@ -1,0 +1,18 @@
+{
+    "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+    "meta": {
+        "name": "nx-tool",
+        "version": "0.1.0",
+        "description": "Unix socket access for Nx daemon and plugin workers"
+    },
+    "environment": {
+        "set_vars": {
+            "NX_SOCKET_DIR": "$TMPDIR/nono-nx"
+        }
+    },
+    "filesystem": {
+        "allow": ["$TMPDIR/nono-nx"],
+        "unix_socket_dir": ["$TMPDIR/nono-nx"],
+        "unix_socket_dir_bind": ["$TMPDIR/nono-nx"]
+    }
+}
