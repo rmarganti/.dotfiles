@@ -71,5 +71,5 @@ export default function followAgent(pi: ExtensionAPI): void {
 }
 
 function updateStatus(ctx: ExtensionContext, enabled: boolean): void {
-  ctx.ui.setStatus(statusId, enabled ? "follow: nvim" : undefined);
+  ctx.ui.setStatus(statusId, enabled ? ctx.ui.theme.fg("thinkingText", "follow: nvim") : undefined);
 }
