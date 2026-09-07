@@ -1,139 +1,61 @@
 ---
 name: simplify
-description: Audit a user-specified code scope for materially useful simplifications without changing it.
+description: Simplify code without changing behavior. Use after making changes, or when asked to simplify a repository, feature, module, file, directory, or other code scope.
 disable-model-invocation: true
 ---
 
 # Simplify
 
-Audit the requested scope for materially useful simplifications in its data structures, state representation, control flow, algorithms, and ownership.
+Simplify the requested code while preserving behavior exactly. Do not add features or fix unrelated bugs.
 
-This is an audit-only exercise. Do not edit repository files, run tests, implement recommendations, commit, or push. Read-only inspection commands are allowed. If a report or scratchpad is needed, write it outside the repository in the OS temporary directory.
+## Resolve the scope
 
-You are the coordinator. Continue until the complete requested scope has been reviewed and the final audit is validated.
+Use the scope specified by the user:
 
-## 1. Resolve the audit target
+- **Recent changes (default):** Review the changes just made in the current task. Use the diff to identify them, then inspect the surrounding code needed to understand them.
+- **Change target:** Support unstaged, staged, or all uncommitted changes; a commit; a ref range; or a pull request. Resolve refs, merge bases, and changed files precisely. For a single commit, simplify the change introduced by that commit (`<commit>^..<commit>`) unless the user asks for its full snapshot. For a pull request, resolve its base and head. Do not check out another ref or otherwise disturb the worktree.
+- **Specific scope:** If the user names a feature, module, section, file, directory, package, or similar boundary, review that scope and the surrounding code needed to understand it. Combine this boundary with a change target when both are given.
+- **Entire repository:** Only use repository-wide scope when explicitly requested. Explore the repository first, identify a small ranked list of concrete, high-confidence simplification candidates, and work through only the best bounded candidates. Do not turn a repository-wide request into an unbounded rewrite.
 
-Derive the target from the user's request. Supported targets include:
+Treat code outside the resolved scope as context. Inspect interfaces, callers, dependencies, and tests as needed, but do not silently expand the work. If the target is omitted and no changes from the current task can be identified, or if the target is materially ambiguous, ask one concise clarifying question.
 
-- the entire repository;
-- unstaged changes;
-- staged changes;
-- all local/uncommitted changes;
-- a specific commit;
-- the difference between two commits, branches, tags, or other git refs;
-- a pull request;
-- one or more files, directories, packages, apps, or other sections of a repository;
-- an explicit combination of the above, such as unstaged changes within one app.
+## Review
 
-Use repository metadata and read-only git or forge commands to resolve the target precisely. For diff-based targets, inventory the changed files and inspect the relevant diff. For a single commit, normally audit the change introduced by that commit (`<commit>^..<commit>`), unless the user clearly asks for the repository snapshot at that commit. For a pull request, resolve its base, head, and changed files. Do not check out another ref or otherwise modify the worktree.
+Inspect the relevant diff, implementation, callers, tests, and established local patterns. Look for:
 
-If the target is omitted or materially ambiguous, ask one concise clarifying question rather than assuming the entire repository.
+- code that can be deleted;
+- existing code that should be reused;
+- unnecessary abstractions or indirection;
+- duplicated logic or state;
+- overly complex control flow;
+- speculative flexibility or configuration;
+- local workarounds that should be replaced by a simpler underlying design;
+- names, types, and structure that make the code harder to understand;
+- implementation patterns inconsistent with the surrounding codebase.
 
-State a scope contract before reviewing. It must identify:
+Prefer, in order:
 
-- the exact target and, where applicable, resolved refs or merge base;
-- included files and subsystems;
-- explicit exclusions;
-- whether findings should concern only changed code or may include pre-existing code directly implicated by the change.
+> delete > reuse > inline > consolidate > abstract
 
-Treat files outside the scope as context only. Inspect public interfaces, callers, dependencies, and tests outside the target when needed to validate a finding, but do not silently expand the audit into those areas. If a useful simplification requires out-of-scope changes, identify those changes as dependencies or follow-up scope.
+Optimize for the smallest number of concepts a future developer or coding agent needs to understand, not the smallest number of lines.
 
-## 2. Establish the coverage contract
+Do not introduce a new abstraction unless it makes the resulting code materially easier to understand. Do not merely move complexity, hide it behind a helper, or trade clear duplication for premature generalization.
 
-Inventory every identifiable subsystem or review unit within the resolved target. Choose review units proportional to the target: changed hunks or files for a small diff, packages or apps for a section of a monorepo, and subsystems for a repository-wide audit.
+## Apply
 
-Give each review unit:
+Make the simplifications directly unless the user asks for an audit or recommendations only.
 
-- a stable ID and descriptive name;
-- an exact ownership boundary;
-- its in-scope implementation files or changed hunks;
-- relevant public interfaces, major call sites, and tests, including contextual files outside the scope where necessary;
-- a status: queued, in review, recommend, or skip.
+Keep edits within the resolved scope. Changes immediately outside it are allowed only when required to complete the simplification safely, such as updating a caller after removing an unnecessary interface; keep these changes minimal and explain them.
 
-Include frontend, backend, shared infrastructure, platform bridges, generated-contract ownership, and test/tooling infrastructure only where they intersect the target materially.
+Preserve public behavior, compatibility, error handling, and observable side effects. Preserve intentional tests; update tests only when their structure must change without changing what they verify.
 
-Create one canonical temporary scratchpad or report containing:
+For repository-wide work, present the short candidate list before editing when user input is available. Otherwise, select only a few high-confidence, low-risk candidates with clear verification paths.
 
-- the scope contract;
-- the review-unit inventory;
-- confirmed opportunities;
-- explicit skip decisions;
-- cross-cutting patterns;
-- duplicates and superseded findings;
-- final priorities and dependencies;
-- an audit log.
+## Verify
 
-Treat this inventory as the coverage contract. Do not assume broad catch-all rows prove coverage.
+Review the final diff to ensure it is simpler and contains no unrelated changes. Run the relevant focused checks, then broader checks when practical. Report:
 
-## 3. Run bounded reviews
-
-Use fresh, read-only agents where available. Give every worker one distinct review unit with an exact, non-overlapping ownership boundary.
-
-Keep concurrency bounded to the number of lanes you can actively coordinate. Use one consolidated wait mechanism, do not interrupt productive workers merely because they are slow, and close completed workers after harvesting their results.
-
-Each worker receives this brief:
-
-> Review the assigned scope for at most two materially useful simplifications in its data structures, state representation, control flow, algorithms, or organizing model.
->
-> Inspect its implementation, diff where applicable, public interfaces, major call sites, and existing tests. Stay within the assigned ownership boundary. You may inspect and identify cross-boundary concerns, but do not expand the scope to solve them.
->
-> Look for:
->
-> - scattered booleans or nullable fields that permit invalid combinations and should become a state machine or discriminated union;
-> - repeated assumptions about object shape that need a shared typed model;
-> - duplicated branching that a small map, registry, reducer, or command model would remove;
-> - unclear state or behavior ownership that a small module boundary would clarify;
-> - repeated scans, transformations, or lookups where a more appropriate collection or index would materially simplify behavior;
-> - lifecycle, concurrency, or async states whose representation permits stale or contradictory state.
->
-> Do not force an abstraction. Prefer boring local code when it is already clear.
->
-> Do not recommend changes solely for stylistic consistency, hypothetical extensibility, minor line-count reduction, or moving existing branching behind a new type.
->
-> Return at most two opportunities. If nothing clearly meets the threshold, return `skip`.
->
-> For every recommendation, provide:
->
-> 1. Verdict: recommend or skip.
-> 2. Evidence with exact file and line references; include diff references when the target is change-based.
-> 3. Current complexity or invalid states.
-> 4. Proposed representation and why it is simpler.
-> 5. Smallest credible implementation scope, including affected files and interfaces, and flag anything outside the audit target.
-> 6. Regression risks and migration concerns.
-> 7. Existing and additional validation required.
-> 8. Confidence: high, medium, or low.
-
-## 4. Validate and synthesize
-
-Independently verify every finding against the current repository and, for change-based audits, against the resolved diff or snapshot before accepting it.
-
-Reject, narrow, or demote recommendations that are vague, duplicate another finding, misunderstand intentional semantics, are unrelated to the requested target, or merely relocate complexity.
-
-Record skips as completed coverage. Deduplicate overlapping findings and assign each accepted recommendation to one authoritative review unit.
-
-Continue opening bounded review batches until every inventory row is complete.
-
-## 5. Audit the audit
-
-Before finishing, run fresh independent passes for:
-
-- target coverage and missing review-unit boundaries;
-- accidental scope expansion;
-- duplication and ownership overlap;
-- materiality and over-abstraction;
-- schema completeness;
-- dependency-aware priority ranking.
-
-If the coverage pass finds a real omission inside the target, add an explicit review-unit row and audit it. Do not hide it by broadening a previously completed boundary.
-
-Rank the final recommendations by concrete impact, confidence, implementation effort, blast radius, and prerequisites. Identify the best first implementation slices. Clearly distinguish in-scope edits from required or optional out-of-scope follow-ups.
-
-The audit is complete only when:
-
-- every review unit in the requested target has been reviewed;
-- every review unit has a recommendation or explicit skip;
-- every finding has complete evidence, scope, risk, and validation fields;
-- duplicates and weak abstractions have been removed;
-- priorities and dependencies are internally consistent;
-- the repository remains unchanged.
+- what was simplified;
+- the scope used;
+- verification performed;
+- anything not verified or any candidate deliberately left untouched.
