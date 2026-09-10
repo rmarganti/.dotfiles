@@ -112,6 +112,9 @@ tab_bar_right = [
 ]
 tab_bar_right_separator = " · "
 
+[ui.sidebar.agents]
+rows = [["state_icon", "workspace", "tab"], ["machine", "agent"]]
+
 [ui.toast]
 delivery = "herdr"
 
