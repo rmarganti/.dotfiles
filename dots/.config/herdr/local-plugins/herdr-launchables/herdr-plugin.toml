@@ -11,6 +11,10 @@ title = "Open launchables"
 contexts = ["workspace", "tab", "pane"]
 command = ["node", "src/launchables.ts", "open"]
 
+[[events]]
+on = "worktree.created"
+command = ["node", "src/launchables.ts", "copy-worktree-config"]
+
 [[panes]]
 id = "picker"
 title = "Launchables"

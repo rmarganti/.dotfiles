@@ -5,6 +5,7 @@ import { PLUGIN_ID } from './constants.ts';
 import { contextValue, getPluginContext } from './context.ts';
 import { executeLaunchAction } from './executors.ts';
 import { openPluginPane } from './herdr.ts';
+import { appendLog } from './log.ts';
 import { selectLaunchable } from './picker.ts';
 import {
     detachApply,
@@ -14,6 +15,10 @@ import {
     writeSelection,
 } from './selection.ts';
 import type { SelectionPayload } from './types.ts';
+import {
+    copyPrimaryWorktreeConfig,
+    worktreePathFromEnvironment,
+} from './worktree-config.ts';
 
 const SELF_PATH = fileURLToPath(import.meta.url);
 
@@ -82,6 +87,21 @@ async function cmdApply(
     }
 }
 
+/** Copy project-local launchables into a newly created Herdr worktree. */
+function cmdCopyWorktreeConfig(): void {
+    const worktreePath = worktreePathFromEnvironment(process.env);
+    if (!worktreePath) {
+        throw new Error('worktree.created did not include a checkout path');
+    }
+
+    const result = copyPrimaryWorktreeConfig(worktreePath);
+    if (result.status === 'copied') {
+        appendLog(
+            `copied ${result.source} to ${result.destination} for worktree.created`
+        );
+    }
+}
+
 function showPickerLoadingScreen(): void {
     process.stderr.write(
         '\x1b[2J\x1b[H\n  \x1b[30mLoading launchables…\x1b[0m\n'
@@ -97,8 +117,11 @@ async function main(): Promise<void> {
     if (command === 'open') return cmdOpen();
     if (command === 'picker') return cmdPicker();
     if (command === 'apply') return cmdApply(args[0] || '', args[1] || '');
+    if (command === 'copy-worktree-config') return cmdCopyWorktreeConfig();
 
-    process.stderr.write('usage: launchables.ts <open|picker|apply>\n');
+    process.stderr.write(
+        'usage: launchables.ts <open|picker|apply|copy-worktree-config>\n'
+    );
     process.exitCode = 2;
 }
 
