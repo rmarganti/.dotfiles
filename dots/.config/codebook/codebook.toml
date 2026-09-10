@@ -59,6 +59,7 @@ words = [
     "varchar",
     "vercel",
     "vitest",
+    "worktree",
     "zod",
     "zustand",
 ]
