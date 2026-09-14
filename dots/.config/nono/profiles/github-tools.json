@@ -205,6 +205,7 @@
               "fs_read": [
                 ".",
                 "/opt/homebrew",
+                "$HOME/.cache/checkouts",
                 "@git:common-dir",
                 "@git:worktree",
                 "@git:toplevel"
@@ -214,6 +215,7 @@
               ],
               "fs_write": [
                 ".",
+                "$HOME/.cache/checkouts",
                 "@git:common-dir",
                 "@git:worktree",
                 "@git:toplevel"
