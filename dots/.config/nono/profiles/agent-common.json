@@ -48,6 +48,9 @@
       "$HOME/.config/yarn",
       "$HOME/.claude/skills"
     ],
+    "allow_file": [
+      "~/.dotfiles/dots/.plannotator/config.json"
+    ],
     "read_file": [
       "$HOME/.dotfiles/dots/.config/delta/themes.gitconfig",
       "$HOME/.gitignore.global",
