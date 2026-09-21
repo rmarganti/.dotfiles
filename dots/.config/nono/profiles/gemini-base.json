@@ -54,6 +54,5 @@
     "exclude_globs": [
       "*.tmp.[0-9]*.[0-9]*"
     ]
-  },
-  "interactive": true
+  }
 }
