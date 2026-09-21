@@ -40,11 +40,11 @@ agent="$1"
 case "$agent" in
 pi)
     agent_name="pi"
-    run_agent=(pi --stream=all --model openai-codex/gpt-5.5 -p "$PROMPT")
+    run_agent=(pi --stream=all --model openai-codex/gpt-5.6-sol --thinking low -p "$PROMPT")
     ;;
 opencode)
     agent_name="OpenCode"
-    run_agent=(opencode run --model openai/gpt-5.5 "$PROMPT")
+    run_agent=(opencode run --model openai/gpt-5.6-sol --variant low "$PROMPT")
     ;;
 *)
     echo "Unknown agent: $agent" >&2
