@@ -103,14 +103,14 @@ function scope() {
 
 // How many slots a node occupies along a given axis. A pane is one slot. A
 // split on the SAME axis contributes all of its slots, so three nested columns
-// read as one 3-column group. A split on the OTHER axis is a single unit — a
-// column that happens to contain stacked rows is still just one column.
+// read as one 3-column group. For a split on the OTHER axis, use the larger
+// child span: stacked rows share horizontal slots, and side-by-side columns
+// share vertical slots, but either child may reveal additional grid tracks.
 function axisSpan(node, axis) {
   if (node.type === "pane") return 1;
-  if (node.direction === axis) {
-    return axisSpan(node.first, axis) + axisSpan(node.second, axis);
-  }
-  return 1;
+  const first = axisSpan(node.first, axis);
+  const second = axisSpan(node.second, axis);
+  return node.direction === axis ? first + second : Math.max(first, second);
 }
 
 function opposite(direction) {
