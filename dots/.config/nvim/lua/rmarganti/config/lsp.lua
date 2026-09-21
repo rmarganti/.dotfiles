@@ -171,7 +171,7 @@ M.clients = {
     -- Typescript, Javascript
     ------------------------------------------------
 
-    tsgo = {
+    tsc = {
         formatting_enabled = true,
     },
 
