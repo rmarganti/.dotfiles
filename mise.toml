@@ -6,6 +6,7 @@ dotfiles.root = "~/.dotfiles/dots"
 dotfiles.default_mode = "symlink"
 
 [bootstrap.packages]
+"brew:agent-browser" = "latest"
 "brew:bash" = "latest"
 "brew:bat" = "latest"
 "brew:bruno-cli" = "latest"
