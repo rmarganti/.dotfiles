@@ -125,7 +125,7 @@ end, { desc = 'AI Toggle NES' })
 -- Buffers
 ------------------------------------------------
 
--- See mini-clue.lua
+-- See hydra.lua
 
 ------------------------------------------------
 -- Code & LSP
@@ -519,7 +519,7 @@ vim.keymap.set({ 'n', 'x' }, '<C-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 'x' }, '<C-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 'x' }, '<C-k>', '<CMD>NavigatorUp<CR>')
 
--- See mini-clue.lua for more Window mappings.
+-- See hydra.lua for more Window mappings.
 
 ------------------------------------------------
 -- Obsidian.nvim

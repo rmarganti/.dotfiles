@@ -7,6 +7,7 @@ return {
     -- Plugins
     cmp = require('rmarganti.colors.integrations.cmp'),
     gitsigns = require('rmarganti.colors.integrations.gitsigns'),
+    hydra = require('rmarganti.colors.integrations.hydra'),
     indent_blanklink = require('rmarganti.colors.integrations.indent_blankline'),
     minijump2d = require('rmarganti.colors.integrations.mini-jump2d'),
     nvim_lightbulb = require('rmarganti.colors.integrations.nvim_lightbulb'),
