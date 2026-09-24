@@ -1,6 +1,7 @@
 -- Create mini-modes with their own set of key bindings.
 local M = {
-    'nvimtools/hydra.nvim',
+    dir = vim.fn.expand('~/code/rmarganti/hydra.nvim'),
+    name = 'hydra.nvim',
     event = 'VeryLazy',
     dependencies = {
         { 'anuvyklack/keymap-layer.nvim' }, -- needed only for pink hydras
