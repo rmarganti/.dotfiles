@@ -2,7 +2,8 @@
  * Code Review Extension (inspired by Codex's review feature)
  *
  * Provides a `/review` command that prompts the agent to review code changes.
- * Supports multiple review modes:
+ * Reviews run once in the current conversation; no review mode or return step.
+ * Supports multiple review targets:
  * - Review a GitHub pull request (checks out the PR locally)
  * - Review against a base branch (PR style)
  * - Review uncommitted changes
@@ -28,7 +29,7 @@
  */
 
 import type { ExtensionAPI, ExtensionContext, ExtensionCommandContext } from "@mariozechner/pi-coding-agent";
-import { DynamicBorder, BorderedLoader } from "@mariozechner/pi-coding-agent";
+import { DynamicBorder } from "@mariozechner/pi-coding-agent";
 import {
 	Container,
 	fuzzyFilter,
@@ -41,74 +42,17 @@ import {
 import path from "node:path";
 import { promises as fs } from "node:fs";
 
-// State to track fresh session review (where we branched from).
-// Module-level state means only one review can be active at a time.
-// This is intentional - the UI and /end-review command assume a single active review.
-let reviewOriginId: string | undefined = undefined;
-let endReviewInProgress = false;
 let reviewCustomInstructions: string | undefined = undefined;
 
-const REVIEW_STATE_TYPE = "review-session";
-const REVIEW_ANCHOR_TYPE = "review-anchor";
 const REVIEW_SETTINGS_TYPE = "review-settings";
 const GH_SETUP_INSTRUCTIONS =
 	"Install GitHub CLI (`gh`) from https://cli.github.com/ (macOS: `brew install gh`), then sign in with `gh auth login` and verify with `gh auth status`.";
 const PR_CHECKOUT_BLOCKED_BY_PENDING_CHANGES_MESSAGE =
 	"Cannot checkout PR: you have uncommitted changes. Please commit or stash them first.";
 
-type ReviewSessionState = {
-	active: boolean;
-	originId?: string;
-};
-
 type ReviewSettingsState = {
 	customInstructions?: string;
 };
-
-function setReviewWidget(ctx: ExtensionContext, active: boolean) {
-	if (!ctx.hasUI) return;
-	if (!active) {
-		ctx.ui.setWidget("review", undefined);
-		return;
-	}
-
-	ctx.ui.setWidget("review", (_tui, theme) => {
-		const message = "Review session active, return with /end-review";
-		const text = new Text(theme.fg("warning", message), 0, 0);
-		return {
-			render(width: number) {
-				return text.render(width);
-			},
-			invalidate() {
-				text.invalidate();
-			},
-		};
-	});
-}
-
-function getReviewState(ctx: ExtensionContext): ReviewSessionState | undefined {
-	let state: ReviewSessionState | undefined;
-	for (const entry of ctx.sessionManager.getBranch()) {
-		if (entry.type === "custom" && entry.customType === REVIEW_STATE_TYPE) {
-			state = entry.data as ReviewSessionState | undefined;
-		}
-	}
-
-	return state;
-}
-
-function applyReviewState(ctx: ExtensionContext) {
-	const state = getReviewState(ctx);
-
-	if (state?.active && state.originId) {
-		reviewOriginId = state.originId;
-		setReviewWidget(ctx, true);
-		return;
-	}
-
-	reviewOriginId = undefined;
-	setReviewWidget(ctx, false);
-}
 
 function getReviewSettings(ctx: ExtensionContext): ReviewSettingsState {
 	let state: ReviewSettingsState | undefined;
@@ -567,11 +511,6 @@ export default function reviewExtension(pi: ExtensionAPI) {
 		persistReviewSettings();
 	}
 
-	function applyAllReviewState(ctx: ExtensionContext) {
-		applyReviewSettings(ctx);
-		applyReviewState(ctx);
-	}
-
 	async function ensureGithubCliReady(ctx: ExtensionContext): Promise<boolean> {
 		const ghVersion = await pi.exec("gh", ["--version"]);
 		if (ghVersion.code !== 0) {
@@ -647,12 +586,11 @@ export default function reviewExtension(pi: ExtensionAPI) {
 	}
 
 	pi.on("session_start", (_event, ctx) => {
-		applyAllReviewState(ctx);
+		applyReviewSettings(ctx);
 	});
 
-
 	pi.on("session_tree", (_event, ctx) => {
-		applyAllReviewState(ctx);
+		applyReviewSettings(ctx);
 	});
 
 	/**
@@ -1073,70 +1011,8 @@ export default function reviewExtension(pi: ExtensionAPI) {
 	async function executeReview(
 		ctx: ExtensionCommandContext,
 		target: ReviewTarget,
-		useFreshSession: boolean,
 		options?: { extraInstruction?: string },
-	): Promise<boolean> {
-		// Check if we're already in a review
-		if (reviewOriginId) {
-			ctx.ui.notify("Already in a review. Use /end-review to finish first.", "warning");
-			return false;
-		}
-
-		// Handle fresh session mode
-		if (useFreshSession) {
-			// Store current position (where we'll return to).
-			// In an empty session there is no leaf yet, so create a lightweight anchor first.
-			let originId = ctx.sessionManager.getLeafId() ?? undefined;
-			if (!originId) {
-				pi.appendEntry(REVIEW_ANCHOR_TYPE, { createdAt: new Date().toISOString() });
-				originId = ctx.sessionManager.getLeafId() ?? undefined;
-			}
-			if (!originId) {
-				ctx.ui.notify("Failed to determine review origin.", "error");
-				return false;
-			}
-			reviewOriginId = originId;
-
-			// Keep a local copy so session_tree events during navigation don't wipe it
-			const lockedOriginId = originId;
-
-			// Find the first user message in the session.
-			// If none exists (e.g. brand-new session), we'll stay on the current leaf.
-			const entries = ctx.sessionManager.getEntries();
-			const firstUserMessage = entries.find(
-				(e) => e.type === "message" && e.message.role === "user",
-			);
-
-			if (firstUserMessage) {
-				// Navigate to first user message to create a new branch from that point
-				// Label it as "code-review" so it's visible in the tree
-				try {
-					const result = await ctx.navigateTree(firstUserMessage.id, { summarize: false, label: "code-review" });
-					if (result.cancelled) {
-						reviewOriginId = undefined;
-						return false;
-					}
-				} catch (error) {
-					// Clean up state if navigation fails
-					reviewOriginId = undefined;
-					ctx.ui.notify(`Failed to start review: ${error instanceof Error ? error.message : String(error)}`, "error");
-					return false;
-				}
-
-				// Clear the editor (navigating to user message fills it with the message text)
-				ctx.ui.setEditorText("");
-			}
-
-			// Restore origin after navigation events (session_tree can reset it)
-			reviewOriginId = lockedOriginId;
-
-			// Show widget indicating review is active
-			setReviewWidget(ctx, true);
-
-			// Persist review state so tree navigation can restore/reset it
-			pi.appendEntry(REVIEW_STATE_TYPE, { active: true, originId: lockedOriginId });
-		}
-
+	): Promise<void> {
 		const prompt = await buildReviewPrompt(pi, target);
 		const hint = getUserFacingHint(target);
 		const projectGuidelines = await loadProjectReviewGuidelines(ctx.cwd);
@@ -1156,12 +1032,10 @@ export default function reviewExtension(pi: ExtensionAPI) {
 			fullPrompt += `\n\nThis project has additional instructions for code reviews:\n\n${projectGuidelines}`;
 		}
 
-		const modeHint = useFreshSession ? " (fresh session)" : "";
-		ctx.ui.notify(`Starting review: ${hint}${modeHint}`, "info");
+		ctx.ui.notify(`Starting review: ${hint}`, "info");
 
 		// Send as a user message that triggers a turn
 		pi.sendUserMessage(fullPrompt);
-		return true;
 	}
 
 	/**
@@ -1303,12 +1177,6 @@ export default function reviewExtension(pi: ExtensionAPI) {
 				return;
 			}
 
-			// Check if we're already in a review
-			if (reviewOriginId) {
-				ctx.ui.notify("Already in a review. Use /end-review to finish first.", "warning");
-				return;
-			}
-
 			// Check if we're in a git repository
 			const { code } = await pi.exec("git", ["rev-parse", "--git-dir"]);
 			if (code !== 0) {
@@ -1318,7 +1186,6 @@ export default function reviewExtension(pi: ExtensionAPI) {
 
 			// Try to parse direct arguments
 			let target: ReviewTarget | null = null;
-			let fromSelector = false;
 			let extraInstruction: string | undefined;
 			const parsed = parseArgs(args);
 			if (parsed.error) {
@@ -1341,287 +1208,15 @@ export default function reviewExtension(pi: ExtensionAPI) {
 
 			// If no args or invalid args, show selector
 			if (!target) {
-				fromSelector = true;
+				target = await showReviewSelector(ctx);
 			}
 
-			while (true) {
-				if (!target && fromSelector) {
-					target = await showReviewSelector(ctx);
-				}
-
-				if (!target) {
-					ctx.ui.notify("Review cancelled", "info");
-					return;
-				}
-
-				// Determine if we should use fresh session mode
-				// Check if this is a new session (no messages yet)
-				const entries = ctx.sessionManager.getEntries();
-				const messageCount = entries.filter((e) => e.type === "message").length;
-
-				// In an empty session, default to fresh review mode so /end-review works consistently.
-				let useFreshSession = messageCount === 0;
-
-				if (messageCount > 0) {
-					// Existing session - ask user which mode they want
-					const choice = await ctx.ui.select("Start review in:", ["Empty branch", "Current session"]);
-
-					if (choice === undefined) {
-						if (fromSelector) {
-							target = null;
-							continue;
-						}
-						ctx.ui.notify("Review cancelled", "info");
-						return;
-					}
-
-					useFreshSession = choice === "Empty branch";
-				}
-
-				await executeReview(ctx, target, useFreshSession, { extraInstruction });
-				return;
-			}
-		},
-	});
-
-	// Custom prompt for review summaries - focuses on preserving actionable findings
-	const REVIEW_SUMMARY_PROMPT = `We are leaving a code-review branch and returning to the main coding branch.
-Create a structured handoff that can be used immediately to implement fixes.
-
-You MUST summarize the review that happened in this branch so findings can be acted on.
-Do not omit findings: include every actionable issue that was identified.
-
-Required sections (in order):
-
-## Review Scope
-- What was reviewed (files/paths, changes, and scope)
-
-## Verdict
-- "correct" or "needs attention"
-
-## Findings
-For EACH finding, include:
-- Priority tag ([P0]..[P3]) and short title
-- File location (\`path/to/file.ext:line\`)
-- Why it matters (brief)
-- What should change (brief, actionable)
-
-## Fix Queue
-1. Ordered implementation checklist (highest priority first)
-
-## Constraints & Preferences
-- Any constraints or preferences mentioned during review
-- Or "(none)"
-
-## Human Reviewer Callouts (Non-Blocking)
-Include only applicable callouts (no yes/no lines):
-- **This change adds a database migration:** <files/details>
-- **This change introduces a new dependency:** <package(s)/details>
-- **This change changes a dependency (or the lockfile):** <files/package(s)/details>
-- **This change modifies auth/permission behavior:** <what changed and where>
-- **This change introduces backwards-incompatible public schema/API/contract changes:** <what changed and where>
-- **This change includes irreversible or destructive operations:** <operation and scope>
-
-If none apply, write "- (none)".
-
-These are informational callouts for humans and are not fix items by themselves.
-
-Preserve exact file paths, function names, and error messages where available.`;
-
-	const REVIEW_FIX_FINDINGS_PROMPT = `Use the latest review summary in this session and implement the review findings now.
-
-Instructions:
-1. Treat the summary's Findings/Fix Queue as a checklist.
-2. Fix in priority order: P0, P1, then P2 (include P3 if quick and safe).
-3. If a finding is invalid/already fixed/not possible right now, briefly explain why and continue.
-4. Treat "Human Reviewer Callouts (Non-Blocking)" as informational only; do not convert them into fix tasks unless there is a separate explicit finding.
-5. Follow fail-fast error handling: do not add local catch/fallback recovery unless this scope is an explicit boundary that can safely translate the failure.
-6. If you add or keep a \`try/catch\`, explain the expected failure mode and either rethrow with context or return a boundary-safe error response.
-7. JSON parsing/decoding should fail loudly by default; avoid silent fallback parsing.
-8. Run relevant tests/checks for touched code where practical.
-9. End with: fixed items, deferred/skipped items (with reasons), and verification results.`;
-
-	type EndReviewAction = "returnOnly" | "returnAndFix" | "returnAndSummarize";
-	type EndReviewActionResult = "ok" | "cancelled" | "error";
-	type EndReviewActionOptions = {
-		showSummaryLoader?: boolean;
-		notifySuccess?: boolean;
-	};
-
-	function getActiveReviewOrigin(ctx: ExtensionContext): string | undefined {
-		if (reviewOriginId) {
-			return reviewOriginId;
-		}
-
-		const state = getReviewState(ctx);
-		if (state?.active && state.originId) {
-			reviewOriginId = state.originId;
-			return reviewOriginId;
-		}
-
-		if (state?.active) {
-			setReviewWidget(ctx, false);
-			pi.appendEntry(REVIEW_STATE_TYPE, { active: false });
-			ctx.ui.notify("Review state was missing origin info; cleared review status.", "warning");
-		}
-
-		return undefined;
-	}
-
-	function clearReviewState(ctx: ExtensionContext) {
-		setReviewWidget(ctx, false);
-		reviewOriginId = undefined;
-		pi.appendEntry(REVIEW_STATE_TYPE, { active: false });
-	}
-
-	async function navigateWithSummary(
-		ctx: ExtensionCommandContext,
-		originId: string,
-		showLoader: boolean,
-	): Promise<{ cancelled: boolean; error?: string } | null> {
-		if (showLoader && ctx.hasUI) {
-			return ctx.ui.custom<{ cancelled: boolean; error?: string } | null>((tui, theme, _kb, done) => {
-				const loader = new BorderedLoader(tui, theme, "Returning and summarizing review branch...");
-				loader.onAbort = () => done(null);
-
-				ctx.navigateTree(originId, {
-					summarize: true,
-					customInstructions: REVIEW_SUMMARY_PROMPT,
-					replaceInstructions: true,
-				})
-					.then(done)
-					.catch((err) => done({ cancelled: false, error: err instanceof Error ? err.message : String(err) }));
-
-				return loader;
-			});
-		}
-
-		try {
-			return await ctx.navigateTree(originId, {
-				summarize: true,
-				customInstructions: REVIEW_SUMMARY_PROMPT,
-				replaceInstructions: true,
-			});
-		} catch (error) {
-			return { cancelled: false, error: error instanceof Error ? error.message : String(error) };
-		}
-	}
-
-	async function executeEndReviewAction(
-		ctx: ExtensionCommandContext,
-		action: EndReviewAction,
-		options: EndReviewActionOptions = {},
-	): Promise<EndReviewActionResult> {
-		const originId = getActiveReviewOrigin(ctx);
-		if (!originId) {
-			if (!getReviewState(ctx)?.active) {
-				ctx.ui.notify("Not in a review branch (use /review first, or review was started in current session mode)", "info");
-			}
-			return "error";
-		}
-
-		const notifySuccess = options.notifySuccess ?? true;
-
-		if (action === "returnOnly") {
-			try {
-				const result = await ctx.navigateTree(originId, { summarize: false });
-				if (result.cancelled) {
-					ctx.ui.notify("Navigation cancelled. Use /end-review to try again.", "info");
-					return "cancelled";
-				}
-			} catch (error) {
-				ctx.ui.notify(`Failed to return: ${error instanceof Error ? error.message : String(error)}`, "error");
-				return "error";
-			}
-
-			clearReviewState(ctx);
-			if (notifySuccess) {
-				ctx.ui.notify("Review complete! Returned to original position.", "info");
-			}
-			return "ok";
-		}
-
-		const summaryResult = await navigateWithSummary(ctx, originId, options.showSummaryLoader ?? false);
-		if (summaryResult === null) {
-			ctx.ui.notify("Summarization cancelled. Use /end-review to try again.", "info");
-			return "cancelled";
-		}
-
-		if (summaryResult.error) {
-			ctx.ui.notify(`Summarization failed: ${summaryResult.error}`, "error");
-			return "error";
-		}
-
-		if (summaryResult.cancelled) {
-			ctx.ui.notify("Navigation cancelled. Use /end-review to try again.", "info");
-			return "cancelled";
-		}
-
-		clearReviewState(ctx);
-
-		if (action === "returnAndSummarize") {
-			if (!ctx.ui.getEditorText().trim()) {
-				ctx.ui.setEditorText("Act on the review findings");
-			}
-			if (notifySuccess) {
-				ctx.ui.notify("Review complete! Returned and summarized.", "info");
-			}
-			return "ok";
-		}
-
-		pi.sendUserMessage(REVIEW_FIX_FINDINGS_PROMPT, { deliverAs: "followUp" });
-		if (notifySuccess) {
-			ctx.ui.notify("Review complete! Returned and queued a follow-up to fix findings.", "info");
-		}
-		return "ok";
-	}
-
-	async function runEndReview(ctx: ExtensionCommandContext): Promise<void> {
-		if (!ctx.hasUI) {
-			ctx.ui.notify("End-review requires interactive mode", "error");
-			return;
-		}
-
-
-		if (endReviewInProgress) {
-			ctx.ui.notify("/end-review is already running", "info");
-			return;
-		}
-
-		endReviewInProgress = true;
-		try {
-			const choice = await ctx.ui.select("Finish review:", [
-				"Return only",
-				"Return and fix findings",
-				"Return and summarize",
-			]);
-
-			if (choice === undefined) {
-				ctx.ui.notify("Cancelled. Use /end-review to try again.", "info");
+			if (!target) {
+				ctx.ui.notify("Review cancelled", "info");
 				return;
 			}
 
-			const action: EndReviewAction =
-				choice === "Return and fix findings"
-					? "returnAndFix"
-					: choice === "Return and summarize"
-						? "returnAndSummarize"
-						: "returnOnly";
-
-			await executeEndReviewAction(ctx, action, {
-				showSummaryLoader: true,
-				notifySuccess: true,
-			});
-		} finally {
-			endReviewInProgress = false;
-		}
-	}
-
-	// Register the /end-review command
-	pi.registerCommand("end-review", {
-		description: "Complete review and return to original position",
-		handler: async (_args, ctx) => {
-			await runEndReview(ctx);
+			await executeReview(ctx, target, { extraInstruction });
 		},
 	});
 }
