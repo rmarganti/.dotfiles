@@ -104,7 +104,7 @@ mouse_capture = true
 mouse_scroll_lines = 3
 prompt_new_tab_name = false
 right_click_passthrough_modifier = "ctrl"
-show_agent_labels_on_pane_borders = false
+show_agent_labels_on_pane_borders = true
 tab_bar_position = "bottom"
 tab_bar_right = [
   { type = "datetime", format = "%H:%M" },
