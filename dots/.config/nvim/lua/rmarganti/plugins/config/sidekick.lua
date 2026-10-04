@@ -4,7 +4,7 @@ local M = {
     dir = '/Users/rmarganti/code/folke/sidekick.nvim',
     event = 'VeryLazy',
     dependencies = {
-        { 'zbirenbaum/copilot.lua' },
+        { 'zbirenbaum/copilot.lua', enabled = false },
         { 'nvim-treesitter/nvim-treesitter-textobjects' },
     },
 }
@@ -53,7 +53,7 @@ function M.config()
         -- Copilot status tracking
         copilot = {
             status = {
-                enabled = true,
+                enabled = false,
                 level = vim.log.levels.WARN,
             },
         },

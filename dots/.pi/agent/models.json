@@ -1,0 +1,8 @@
+{
+    "providers": {
+        "openai": {
+            "baseUrl": "http://127.0.0.1:8787/v1",
+            "apiKey": "!cat ~/.config/smoko/secret"
+        }
+    }
+}

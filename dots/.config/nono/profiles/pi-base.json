@@ -29,7 +29,8 @@
   "filesystem": {
     "allow": [],
     "read": [
-      "$HOME/code/rmarganti/anno/pi/anno-review"
+      "$HOME/code/rmarganti/anno/pi/anno-review",
+      "$HOME/.npm-global"
     ],
     "write": [],
     "allow_file": [],

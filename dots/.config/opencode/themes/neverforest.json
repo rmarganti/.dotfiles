@@ -1,12 +1,12 @@
 {
     "$schema": "https://opencode.ai/theme.json",
     "defs": {
-        "bg_darker": "#0d1011",
-        "bg_dark": "#181c1e",
+        "bg_darker": "#0a0d0e",
+        "bg_dark": "#15181a",
         "bg": "none",
-        "bg_light": "#23292e",
-        "bg_lighter": "#2a3137",
-        "bg_lightest": "#30383f",
+        "bg_light": "#20252a",
+        "bg_lighter": "#272d33",
+        "bg_lightest": "#2d343b",
         "fg": "#d3c6aa",
         "black": "#4b565c",
         "red_darkest": "#342525",

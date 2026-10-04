@@ -49,6 +49,22 @@ dotfiles.default_mode = "symlink"
 "~/.bash_colors" = {}
 "~/.bash_profile" = {}
 "~/.bashrc" = {}
+# Share skills from ~/.agents with Claude Code. The plannotator-* skills
+# are omitted because the plannotator installer writes them to both places.
+"~/.claude/skills/agent-browser" = { source = "dots/.agents/skills/agent-browser" }
+"~/.claude/skills/bro" = { source = "dots/.agents/skills/bro" }
+"~/.claude/skills/codebase-design" = { source = "dots/.agents/skills/codebase-design" }
+"~/.claude/skills/grill-me" = { source = "dots/.agents/skills/grill-me" }
+"~/.claude/skills/herdr" = { source = "dots/.agents/skills/herdr" }
+"~/.claude/skills/improve-codebase-architecture" = { source = "dots/.agents/skills/improve-codebase-architecture" }
+"~/.claude/skills/librarian" = { source = "dots/.agents/skills/librarian" }
+"~/.claude/skills/make-a-prd" = { source = "dots/.agents/skills/make-a-prd" }
+"~/.claude/skills/obsidian-notes" = { source = "dots/.agents/skills/obsidian-notes" }
+"~/.claude/skills/show-me" = { source = "dots/.agents/skills/show-me" }
+"~/.claude/skills/simplify" = { source = "dots/.agents/skills/simplify" }
+"~/.claude/skills/tdd" = { source = "dots/.agents/skills/tdd" }
+"~/.claude/skills/write-like-ryan" = { source = "dots/.agents/skills/write-like-ryan" }
+"~/.claude/themes" = {}
 "~/.config/bat" = {}
 "~/.config/btop/themes" = {}
 "~/.config/codebook" = {}
@@ -74,7 +90,7 @@ dotfiles.default_mode = "symlink"
 
 [tasks.bootstrap]
 run = '''
-mkdir -p ~/.config ~/.local/bin
+mkdir -p ~/.claude/skills ~/.config ~/.local/bin
 if [ ! -f ~/.git-completion.bash ]; then
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 fi

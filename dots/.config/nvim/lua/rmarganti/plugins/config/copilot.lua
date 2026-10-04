@@ -1,6 +1,7 @@
 -- AI code-completion.
 local M = {
     'zbirenbaum/copilot.lua',
+    enabled = false,
     event = 'VeryLazy',
 }
 

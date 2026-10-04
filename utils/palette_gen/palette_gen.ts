@@ -7,7 +7,7 @@ import { rgbToX256 } from './x256.js';
 extend([mixPlugin]);
 
 const COLORS = {
-    bg: '#1d2226',
+    bg: '#1a1e22',
     fg: '#d3c6aa',
     black: '#4b565c',
     red: '#e67e80',
@@ -22,7 +22,7 @@ const COLORS = {
 
 function main() {
     Object.entries(COLORS).forEach(([name, value]) => {
-        const darkest = colord(value).mix('#0d1011', 0.85);
+        const darkest = colord(value).mix('#0a0d0e', 0.85);
         const darker = colord(value).mix(COLORS.bg, 0.6);
         const dark = colord(value).mix(COLORS.bg, 0.3);
         const light = colord(value).lighten(0.1);

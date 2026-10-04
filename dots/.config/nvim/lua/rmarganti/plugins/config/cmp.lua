@@ -9,7 +9,7 @@ local M = {
         { 'hrsh7th/cmp-nvim-lua' },
         { 'hrsh7th/cmp-path' },
         { 'saadparwaiz1/cmp_luasnip' },
-        { 'zbirenbaum/copilot-cmp' },
+        { 'zbirenbaum/copilot-cmp', enabled = false },
     },
 }
 
@@ -48,7 +48,7 @@ function M.config()
         end
     end
 
-    require('copilot_cmp').setup()
+    -- require('copilot_cmp').setup()
 
     cmp.setup({
         snippet = {
@@ -79,7 +79,7 @@ function M.config()
         sources = {
             { name = 'nvim_lsp_signature_help' },
             { name = 'luasnip' },
-            { name = 'copilot' },
+            -- { name = 'copilot' },
             { name = 'nvim_lsp' },
             {
                 name = 'buffer',

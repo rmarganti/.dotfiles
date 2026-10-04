@@ -69,7 +69,7 @@
     plus-empty-line-marker-style = "#aec89f"
 
     # Blame (gradient of subtle panels)
-    blame-palette = "#23292e" "#2a3137" "#30383f" "#515a5b" "#77817d"
+    blame-palette = "#20252a" "#272d33" "#2d343b" "#515a5b" "#77817d"
 
     # Inline code / decorations
     decoration-style = "#9da9a0"

@@ -23,7 +23,7 @@ function strlen() {
 
 alias pi='HERDR_AGENT=pi nono run --profile pi-base --allow-cwd -- pi'
 alias pi-ops='HERDR_AGENT=pi nono run --profile pi-ops --allow-cwd -- pi'
-alias pi-yolo='/opt/homebrew/bin/pi'
+alias pi-yolo='/Users/rmarganti/.npm-global/bin/pi'
 alias mpi='nono run --profile pi-base --allow-cwd -- mise x node@latest -- pi'
 alias mnvim="mise x node@latest -- nvim"
 

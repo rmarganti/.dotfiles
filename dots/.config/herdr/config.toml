@@ -8,13 +8,13 @@ name = "catppuccin"
 [theme.custom]
 
 accent = "#7a8a93"        # Main highlight: active pane borders, selected tabs/buttons, key hints.
-panel_bg = "#20262a"      # Floating panels, popups, toasts, menus, bottom bars; "reset" inherits terminal bg.
-sidebar_bg = "#1d2226"    # Desktop sidebar background; matches the Neverforest terminal/editor background.
-active_row_bg = "#2a3137" # Active workspace and focused agent rows; Neverforest bg_lighter.
-selection_bg = "#30383f"  # Navigate-mode cursor row; Neverforest bg_lightest.
-surface0 = "#30383f"      # Input fields, inactive tab fill, selected controls, mobile cards/code badges.
+panel_bg = "#1d2226"      # Floating panels, popups, toasts, menus, bottom bars; "reset" inherits terminal bg.
+sidebar_bg = "#1a1e22"    # Desktop sidebar background; matches the Neverforest terminal/editor background.
+active_row_bg = "#272d33" # Active workspace and focused agent rows; Neverforest bg_lighter.
+selection_bg = "#2d343b"  # Navigate-mode cursor row; Neverforest bg_lightest.
+surface0 = "#2d343b"      # Input fields, inactive tab fill, selected controls, mobile cards/code badges.
 surface1 = "#4b565c"      # Dragged/hover-ish rows and release-note code blocks.
-surface_dim = "#2a3137"   # Separators, sidebar dividers, scrollbar tracks, and empty-pane borders.
+surface_dim = "#272d33"   # Separators, sidebar dividers, scrollbar tracks, and empty-pane borders.
 overlay0 = "#4b565c"      # Muted labels, unfocused pane borders/titles, unknown states, scrollbar tracks.
 overlay1 = "#7a8a93"      # Brighter muted labels, secondary text, inactive tab text, scrollbar thumbs.
 text = "#d3c6aa"          # Primary UI text in dialogs, sidebar, release notes, status messages.
@@ -99,6 +99,7 @@ toggle_sidebar = "prefix+b"
 open_notification_target = ""
 
 [ui]
+sidebar_collapsed_mode = "compact"
 agent_panel_sort = "priority"
 mouse_capture = true
 mouse_scroll_lines = 3
