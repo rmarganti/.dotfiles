@@ -1,0 +1,16 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "meta": {
+    "name": "smoko-tool",
+    "version": "0.1.0",
+    "description": "Config and localhost access for the Smoko API proxy"
+  },
+  "filesystem": {
+    "read": [
+      "$HOME/.config/smoko"
+    ]
+  },
+  "network": {
+    "open_port": [8787]
+  }
+}
