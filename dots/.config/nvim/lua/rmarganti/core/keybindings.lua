@@ -298,11 +298,30 @@ end)
 
 -- File eXplore
 vim.keymap.set('n', '<Leader>fx', function()
-    require('lf').start({
-        height = vim.fn.float2nr(vim.o.lines - 10),
-        width = vim.fn.float2nr(vim.o.columns - 18),
-    })
+    require('tfm').open()
 end)
+
+-- File explorer open modes (preserve lf.nvim's terminal mappings).
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'tfm',
+    callback = function(event)
+        local tfm = require('tfm')
+        local open_modes = {
+            ['<C-t>'] = tfm.OPEN_MODE.tabedit,
+            ['<C-x>'] = tfm.OPEN_MODE.split,
+            ['<C-v>'] = tfm.OPEN_MODE.vsplit,
+            ['<C-e>'] = 'edit',
+        }
+
+        for key, mode in pairs(open_modes) do
+            vim.keymap.set('t', key, function()
+                tfm.set_next_open_mode(mode)
+                local enter = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
+                vim.api.nvim_feedkeys(enter, 'n', false)
+            end, { buffer = event.buf })
+        end
+    end,
+})
 
 -- File Types
 vim.keymap.set('n', '<Leader>ft', '<Cmd>lua require("telescope.builtin").filetypes({})<CR>')
