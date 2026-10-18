@@ -143,6 +143,7 @@ function zoxideDirectoryToLaunchable(
             cwd: directory.path,
             tabs: [
                 {
+                    label,
                     cwd: directory.path,
                     panes: [{ cwd: directory.path }],
                 },
