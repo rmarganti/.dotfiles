@@ -86,7 +86,21 @@ M.format = function(is_auto_format)
         local user_lsp_config = require('rmarganti.config.lsp')
         local should_format_async = misc_utils.has_value(SLOW_FORMAT_FILE_TYPES, vim.bo.filetype)
 
-        require('conform').format({
+        local conform = require('conform')
+        local formatters
+        if is_auto_format then
+            formatters = {}
+            for _, formatter in ipairs(conform.list_formatters_to_run()) do
+                -- Prettierd's cwd discovery recognizes config files and package.json's prettier field.
+                -- Only automatic formatting requires a config; manual formatting retains defaults.
+                if formatter.name ~= 'prettierd' or formatter.cwd then
+                    table.insert(formatters, formatter.name)
+                end
+            end
+        end
+
+        conform.format({
+            formatters = formatters,
             async = should_format_async,
             filter = function(client)
                 local client_config = user_lsp_config.clients[client.name]
