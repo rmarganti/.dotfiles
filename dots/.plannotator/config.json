@@ -14,7 +14,7 @@
   },
   "prompts": {
     "review": {
-      "denied": "\n\nThe feedback above comes from a human reviewer. Make the requested corrections in the code. Focus only on addressing this feedback; do not perform a separate code review or introduce unrelated changes. Run the relevant tests or checks after making the corrections. If any request is unclear, conflicts with the codebase, or cannot be applied safely, explain the issue and ask for clarification before proceeding with that item. When finished, briefly summarize what you changed and how you validated it."
+      "denied": "\n\nThe feedback above comes from a human reviewer. Treat change requests and questions differently:\n\n- Implement direct requests for changes.\n- Answer questions instead of treating them as instructions to change code. You may inspect the code and run relevant checks to support your answer, but do not make changes based on a question without explicit approval.\n- If the intent is ambiguous, ask for clarification before making changes.\n\nFocus only on this feedback; do not perform a separate code review or introduce unrelated changes. If a requested change conflicts with the codebase or cannot be applied safely, explain the issue before proceeding with that item. Run relevant tests or checks for any changes you make. When finished, answer the reviewer’s questions and briefly summarize any changes and validation."
     }
   },
   "theme": {
