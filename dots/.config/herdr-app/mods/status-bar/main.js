@@ -1,20 +1,17 @@
 // Herdr's workspace-status bar, with Todoist counts from shared("todoist")
 // (published by the todoist mod) on the right in place of the palette hint.
-// Clicking the counts refreshes them.
+// Clicking the counts opens the task list.
 
 import { View, div, svg } from "gpui-kit";
 import { h_flex } from "gpui-base";
-import { spaces, agents, theme, run, shared, notify } from "herdr";
+import { spaces, agents, theme, run, shared } from "herdr";
 
 function todoistSegment(t, label) {
   const td = shared("todoist");
   if (!td) return null;
   const hasCounts = td.total != null;
   const segment = h_flex().id("todoist").gap(6).items_center().hover((s) => s.text_color(t.foreground))
-    .on_click(() => {
-      if (td.error && !hasCounts) notify({ title: "Todoist", body: `${td.error}. Add your API token with: security add-generic-password -a "$USER" -s todoist-api-token -w`, level: "warning" });
-      run("todoist.refresh");
-    });
+    .on_click(() => run("mod.open", { name: "todoist" }));
   if (!hasCounts) {
     return segment.child(label("circle-check", td.loading ? "Todoist…" : "Todoist unavailable"));
   }

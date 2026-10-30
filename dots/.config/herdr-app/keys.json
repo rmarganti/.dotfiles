@@ -22,6 +22,7 @@
     "cmd-shift-l": "layout.switch",
     "cmd-n": "space.new",
     "cmd-p": "mod.open:picker",
+    "cmd-shift-t": "mod.open:todoist",
     "cmd-shift-p": "app.palette",
     "cmd-,": "app.settings",
     "cmd-d": "pane.split:right",
