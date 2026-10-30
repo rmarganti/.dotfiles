@@ -8,8 +8,8 @@
     "#77817d", "#eea9aa", "#c3decb", "#e6d1a7", "#a9cad2", "#e5bdd0", "#cde0dc", "#e4ddcc"
   ],
   "colors": {
-    "canvas": "#15181a",
-    "chrome": "#15181a",
+    "canvas": "#1a1e22",
+    "chrome": "#1a1e22",
     "surface": "#20252a",
     "popover": "#20252a",
     "raised": "#272d33",

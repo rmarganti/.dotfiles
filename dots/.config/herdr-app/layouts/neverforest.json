@@ -209,6 +209,10 @@
     }
   ],
   "background": "canvas",
+  "colors": {
+    "canvas": "#1a1e22",
+    "chrome": "#1a1e22"
+  },
   "terminal_padding": [
     14,
     12
