@@ -160,7 +160,7 @@
           "id": "status",
           "type": "block",
           "content": {
-            "mod": "workspace-status"
+            "mod": "status-bar"
           },
           "size": {
             "px": 28
@@ -171,6 +171,16 @@
           "type": "block",
           "content": {
             "mod": "navigator"
+          },
+          "size": {
+            "px": 0
+          }
+        },
+        {
+          "id": "todoist",
+          "type": "block",
+          "content": {
+            "mod": "todoist"
           },
           "size": {
             "px": 0
