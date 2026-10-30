@@ -3,6 +3,7 @@ sessions
 auth.json
 logs
 models-store.json
+models.json
 settings.json
 state
 trust.json
