@@ -24,5 +24,6 @@ Behavior:
 2. Wait for it to finish.
 3. If it returns feedback or annotations, address them in the same conversation.
 4. If it returns an approval/LGTM-style message, acknowledge that review passed and continue.
+5. If the session closes without feedback (the output is "Review session closed without feedback." or empty), acknowledge it in one sentence and stop. Do not begin any work: closing the session is not approval.
 
 Do not ask the user to copy shell commands into chat. Run the command yourself.
