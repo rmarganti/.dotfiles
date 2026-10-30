@@ -1,10 +1,12 @@
 -- AI Sidekick for Neovim - Next Edit Suggestions & CLI Integration
+local copilot_enabled = require('rmarganti.utils.dev_common').copilot_enabled()
+
 local M = {
     'folke/sidekick.nvim',
     dir = '/Users/rmarganti/code/folke/sidekick.nvim',
     event = 'VeryLazy',
     dependencies = {
-        { 'zbirenbaum/copilot.lua', enabled = false },
+        { 'zbirenbaum/copilot.lua', cond = copilot_enabled },
         { 'nvim-treesitter/nvim-treesitter-textobjects' },
     },
 }
@@ -13,7 +15,7 @@ function M.config()
     require('sidekick').setup({
         -- Next Edit Suggestions configuration
         nes = {
-            enabled = true,
+            enabled = copilot_enabled,
             debounce = 100,
             diff = {
                 inline = 'words',
@@ -53,7 +55,7 @@ function M.config()
         -- Copilot status tracking
         copilot = {
             status = {
-                enabled = false,
+                enabled = copilot_enabled,
                 level = vim.log.levels.WARN,
             },
         },

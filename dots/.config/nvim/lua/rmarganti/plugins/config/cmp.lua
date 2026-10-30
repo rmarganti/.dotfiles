@@ -1,4 +1,6 @@
 -- Code completion.
+local copilot_enabled = require('rmarganti.utils.dev_common').copilot_enabled()
+
 local M = {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
@@ -9,7 +11,7 @@ local M = {
         { 'hrsh7th/cmp-nvim-lua' },
         { 'hrsh7th/cmp-path' },
         { 'saadparwaiz1/cmp_luasnip' },
-        { 'zbirenbaum/copilot-cmp', enabled = false },
+        { 'zbirenbaum/copilot-cmp', cond = copilot_enabled },
     },
 }
 
@@ -48,7 +50,27 @@ function M.config()
         end
     end
 
-    -- require('copilot_cmp').setup()
+    if copilot_enabled then
+        require('copilot_cmp').setup()
+    end
+
+    local sources = {
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'luasnip' },
+        { name = 'nvim_lsp' },
+        {
+            name = 'buffer',
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end,
+            },
+        },
+        { name = 'path' },
+    }
+    if copilot_enabled then
+        table.insert(sources, 3, { name = 'copilot' })
+    end
 
     cmp.setup({
         snippet = {
@@ -76,21 +98,7 @@ function M.config()
             ['<S-Tab>'] = cmp.mapping(shift_tab_mapping, { 'i', 's' }),
         }),
 
-        sources = {
-            { name = 'nvim_lsp_signature_help' },
-            { name = 'luasnip' },
-            -- { name = 'copilot' },
-            { name = 'nvim_lsp' },
-            {
-                name = 'buffer',
-                option = {
-                    get_bufnrs = function()
-                        return vim.api.nvim_list_bufs()
-                    end,
-                },
-            },
-            { name = 'path' },
-        },
+        sources = sources,
 
         -- Ignore LSPs suggested first selection
         preselect = cmp.PreselectMode.None,

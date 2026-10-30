@@ -1,7 +1,7 @@
 -- AI code-completion.
 local M = {
     'zbirenbaum/copilot.lua',
-    enabled = false,
+    cond = require('rmarganti.utils.dev_common').copilot_enabled(),
     event = 'VeryLazy',
 }
 

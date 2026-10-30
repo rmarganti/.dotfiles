@@ -1,18 +1,3 @@
-local function load_ide_common_config()
-    local config_path = vim.fn.expand('~/.config/dev-common.json')
-    if vim.fn.filereadable(config_path) == 0 then
-        return nil
-    end
-    local lines = vim.fn.readfile(config_path)
-    local content = table.concat(lines, '\n')
-    local ok, config = pcall(vim.fn.json_decode, content)
-    if not ok or not config then
-        vim.notify('Failed to parse dev-common config', vim.log.levels.ERROR)
-        return nil
-    end
-    return config
-end
-
 local function expand_workspace_paths(workspaces)
     local expanded = {}
     for _, ws in ipairs(workspaces or {}) do
@@ -24,7 +9,7 @@ local function expand_workspace_paths(workspaces)
     return expanded
 end
 
-local config = (load_ide_common_config() or {}).obsidian or {}
+local config = require('rmarganti.utils.dev_common').load().obsidian or {}
 
 local M = {
     'epwalsh/obsidian.nvim',
