@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Alphabetize the current Herdr session's workspaces without recreating them."""
+
+import argparse
+import json
+import os
+import socket
+import sys
+
+
+def call(socket_path, method, params):
+    request_id = "sort-workspaces:" + method
+    request = {"id": request_id, "method": method, "params": params}
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
+        connection.settimeout(5)
+        connection.connect(socket_path)
+        connection.sendall((json.dumps(request) + "\n").encode())
+        with connection.makefile("r", encoding="utf-8") as response:
+            message = json.loads(response.readline())
+    if message.get("id") != request_id:
+        raise ValueError("Herdr returned an unexpected response ID")
+    if "error" in message:
+        raise ValueError("Herdr API error: " + json.dumps(message["error"]))
+    return message["result"]
+
+
+def sort_workspaces(api, dry_run=False):
+    workspaces = api("workspace.list", {})["workspaces"]
+    # Stable sorting preserves the existing order of equal labels.
+    ordered = sorted(workspaces, key=lambda workspace: workspace["label"].casefold())
+    current = [workspace["workspace_id"] for workspace in workspaces]
+    moves = 0
+    for index, workspace in enumerate(ordered):
+        workspace_id = workspace["workspace_id"]
+        if current[index] != workspace_id:
+            if not dry_run:
+                api("workspace.move", {"workspace_id": workspace_id, "insert_index": index})
+            current.remove(workspace_id)
+            current.insert(index, workspace_id)
+            moves += 1
+    return ordered, moves
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true", help="show sorted labels without moving workspaces")
+    args = parser.parse_args()
+    socket_path = os.environ.get("HERDR_SOCKET_PATH")
+    if not socket_path:
+        parser.exit(1, "herdr-sort-workspaces: HERDR_SOCKET_PATH is not set; run inside Herdr\n")
+    try:
+        ordered, moves = sort_workspaces(
+            lambda method, params: call(socket_path, method, params), args.dry_run
+        )
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        parser.exit(1, f"herdr-sort-workspaces: {error}\n")
+    if args.dry_run:
+        for workspace in ordered:
+            print(workspace["label"])
+    else:
+        print(f"Alphabetized {len(ordered)} workspaces ({moves} moves).")
+
+
+if __name__ == "__main__":
+    main()

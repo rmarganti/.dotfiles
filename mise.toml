@@ -90,6 +90,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/zed" = {}
 "~/.gitconfig" = {}
 "~/.gitignore.global" = {}
+"~/.local/bin/herdr-sort-workspaces" = {}
 "~/.local/bin/ralph" = {}
 "~/.pi" = {}
 "~/.plannotator/config.json" = {}
