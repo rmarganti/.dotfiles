@@ -1,7 +1,10 @@
 {
   "global": {
     "cmd-q": "app.quit",
-    "cmd-h": "app.hide",
+    "cmd-h": "navigator.left",
+    "cmd-j": "navigator.down",
+    "cmd-k": "navigator.up",
+    "cmd-l": "navigator.right",
     "cmd-alt-h": "app.hide_others",
     "cmd-t": "tab.new",
     "cmd-w": "tab.close",

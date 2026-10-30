@@ -31,6 +31,9 @@ require('rmarganti.core.user_commands')
 -- Let Pi reveal files it is changing when both tools run inside Herdr.
 require('rmarganti.integrations.pi_follow_agent').setup()
 
+-- Let the herdr-app navigator mod press keys here without hc's typing pause.
+require('rmarganti.integrations.herdr_app_socket').setup()
+
 vim.cmd('colorscheme neverforest')
 
 require('rmarganti.plugins')

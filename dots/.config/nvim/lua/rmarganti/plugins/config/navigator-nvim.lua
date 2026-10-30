@@ -40,11 +40,53 @@ function HerdrMux.new()
     }
 end
 
+-- The Herdr desktop app (herdr-app). Its terminals are herdr-core terminals,
+-- which set HC_TERMINAL_ID instead of HERDR_PANE_ID.
+local HerdrAppMux = {}
+
+function HerdrAppMux.is_available()
+    return vim.env.HC_TERMINAL_ID ~= nil and vim.env.HC_TERMINAL_ID ~= ''
+end
+
+function HerdrAppMux.new()
+    return {
+        zoomed = function()
+            return false
+        end,
+
+        navigate = function(_, direction)
+            local map = {
+                h = 'left',
+                j = 'down',
+                k = 'up',
+                l = 'right',
+            }
+
+            local dir = map[direction]
+            if not dir then
+                return
+            end
+
+            vim.fn.jobstart({
+                'herdr-app',
+                'do',
+                'pane.go',
+                '--direction',
+                dir,
+            }, { detach = true })
+        end,
+    }
+end
+
 local M = {
     'numToStr/Navigator.nvim',
     opts = function()
         if HerdrMux.is_available() then
             return { mux = HerdrMux.new() }
+        end
+
+        if HerdrAppMux.is_available() then
+            return { mux = HerdrAppMux.new() }
         end
 
         return { mux = 'auto' }
