@@ -21,8 +21,14 @@ keybind = opt+cmd+o=text:\x00s
 # herdr zoom toggle
 keybind = shift+cmd+enter=text:\x00z
 
+# Herdr / Neovim smart pane navigation
+keybind = cmd+h=text:\x08
+keybind = cmd+j=text:\x0a
+keybind = cmd+k=text:\x0b
+keybind = cmd+l=text:\x0c
+
 # herdr launchables (prefix + C)
-keybind = cmd+k=text:\x00C
+keybind = cmd+p=text:\x00C
 
 # herdr create tab (prefix + t)
 keybind = cmd+t=text:\x00c
