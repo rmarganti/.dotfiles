@@ -3,16 +3,16 @@
 // it. Links to other pull requests open here too, with Back to return.
 
 import { div, svg, image } from "gpui-kit";
-import { v_flex, h_flex, TextView } from "gpui-base";
-import { exec, theme, openOverlay, closeOverlay, readTextFile, appHome, notify } from "herdr";
+import { v_flex, h_flex, TextView, TextareaState, Textarea } from "gpui-base";
+import { exec, theme, openOverlay, closeOverlay, readTextFile, appHome, notify, shared, setShared } from "herdr";
 import { icons, icon, avatarPath, loadAvatar } from "./assets.js";
 import { blocks, picture, failed, loadPicture } from "./pictures.js";
 import { checks } from "./sync.js";
-import { checkout, openReview } from "./actions.js";
+import { checkout, openReview, comment, review, reply, ready, setOpen, mergeOptions, merge } from "./actions.js";
 
 const DETAIL = [
   "number", "title", "body", "author", "state", "isDraft", "url", "createdAt",
-  "headRefName", "baseRefName", "additions", "deletions", "changedFiles",
+  "headRefName", "headRefOid", "baseRefName", "additions", "deletions", "changedFiles",
   "reviewDecision", "latestReviews", "reviewRequests", "statusCheckRollup", "mergeStateStatus",
   "labels", "closingIssuesReferences", "reactionGroups",
 ].join(",");
@@ -174,9 +174,16 @@ function timeline(raw, comments) {
 }
 
 export class Dialog {
-  constructor({ repo, number, data, local }, overlay, cx) {
-    this.repo = repo; this.number = number; this.local = local; this.overlay = overlay;
-    this.history = []; this.cache = {}; this.timelines = {}; this.expanded = new Set();
+  constructor({ repo, number, data, local, me }, overlay, cx) {
+    this.repo = repo; this.number = number; this.local = local; this.overlay = overlay; this.me = me ?? null;
+    this.history = []; this.cache = {}; this.timelines = {}; this.expanded = new Set(); this.tab = "write";
+    this.box = TextareaState.new({ placeholder: "Leave a comment (Markdown)" });
+    this.box.set_auto_grow(4, 14);
+    this.box.on("change", (_e, cx) => { const has = Boolean(this.box.value().trim()); if (has !== this.typed) { this.typed = has; cx.notify(); } });
+    this.box.on("submit", (e, cx) => { if (e.secondary) this.doComment(cx); });
+    this.replyBox = TextareaState.new({ placeholder: "Reply…" });
+    this.replyBox.set_auto_grow(2, 10);
+    this.replyBox.on("submit", (e, cx) => { if (e.secondary && this.replyTo) this.doReply(this.replyTo, cx); });
     if (data) this.cache[`${repo}#${number}`] = data;
     cx.spawn(async (cx) => { await icons(); this.icons = true; cx.notify(); });
     this.load(cx);
@@ -202,6 +209,7 @@ export class Dialog {
         ]);
         this.cache[id] = pr;
         if (events) this.timelines[id] = timeline(events, comments ?? []);
+        if (pr.state === "OPEN") this.merging = await mergeOptions(repo).catch(() => null);
         if (current()) this.pr = pr;
       } catch (e) {
         // An issue link from a body: GitHub can show it, the dialog can't.
@@ -234,6 +242,69 @@ export class Dialog {
     if (m) this.go(m[1], Number(m[2]), cx); else openUrl(url);
   }
 
+  // Runs one write on GitHub, then reloads this pull request and tells the panel.
+  change(label, run, cx, after) {
+    if (this.busy) return;
+    const repo = this.repo, number = this.number, id = this.id();
+    this.busy = label; this.error = null;
+    cx.spawn(async (cx) => {
+      try {
+        await run({ repo, number });
+        after?.();
+      } catch (e) { this.error = String(e?.message ?? e); }
+      finally {
+        this.busy = null;
+        setShared("gh-prs.changed", { repo, number, at: Date.now() });
+        if (this.id() === id) this.load(cx);
+        cx.notify();
+      }
+    });
+    cx.notify();
+  }
+
+  cleared() { this.box.set_value(""); this.typed = false; this.tab = "write"; this.verdictMenu = false; }
+
+  text() { return this.box.value().trim(); }
+
+  doComment(cx) {
+    const body = this.text();
+    if (body) this.change("Commenting", (pr) => comment({ ...pr, body }), cx, () => this.cleared());
+  }
+
+  doReview(verdict, cx) {
+    const body = this.text();
+    if (verdict !== "approve" && !body) { this.error = "Write the review in the comment box first."; this.verdictMenu = false; cx.notify(); return; }
+    const label = { approve: "Approving", changes: "Requesting changes", comment: "Reviewing" }[verdict];
+    this.change(label, (pr) => review({ ...pr, verdict, body }), cx, () => this.cleared());
+  }
+
+  doReply(id, cx) {
+    const body = this.replyBox.value().trim();
+    if (body) this.change("Replying", (pr) => reply({ ...pr, id, body }), cx, () => { this.replyBox.set_value(""); this.replyTo = null; });
+  }
+
+  // Closing or reopening takes the comment box along, as on GitHub.
+  doSetOpen(open, cx) {
+    const body = this.text();
+    this.change(open ? "Reopening" : "Closing", (pr) => setOpen({ ...pr, open, body }), cx, () => this.cleared());
+  }
+
+  doReady(undo, cx) { this.change(undo ? "Converting to draft" : "Marking ready", (pr) => ready({ ...pr, undo }), cx); }
+
+  // The last method picked per repo, else squash when allowed, else the first allowed.
+  method() {
+    const allowed = this.merging?.methods ?? [];
+    const last = shared("gh-prs.mergeMethods")?.[this.repo];
+    return allowed.includes(last) ? last : allowed.includes("squash") ? "squash" : allowed[0];
+  }
+
+  doMerge(cx) {
+    const { method, auto } = this.confirming, head = this.pr.headRefOid;
+    this.confirming = null;
+    setShared("gh-prs.mergeMethods", { ...(shared("gh-prs.mergeMethods") ?? {}), [this.repo]: method });
+    this.change(auto ? "Enabling auto-merge" : "Merging", (pr) => merge({ ...pr, method, auto, head }), cx);
+  }
+
   checkout(cx) {
     const pr = this.pr;
     if (!pr || this.busy) return;
@@ -263,11 +334,12 @@ export class Dialog {
 
   glyph(name, size, color) { return div().size(size).flex_none().when(this.icons, (e) => e.child(svg(icon(name)).size(size).text_color(color))); }
 
-  button(id, label, t, onClick, { enabled = true, glyph = null } = {}) {
+  button(id, label, t, onClick, { enabled = true, glyph = null, primary = false, color = GITHUB.open } = {}) {
+    const solid = primary && enabled;
     return h_flex().id(id).h(32).px(12).gap(6).flex_none().items_center().justify_center().rounded(6).text_size(13).font_medium()
-      .bg(t.raised).border_1().border_color(t.border).text_color(enabled ? t.foreground : t.dim)
-      .when(enabled, (e) => e.cursor_pointer().hover((s) => s.bg(t.hover)).on_click(onClick))
-      .when(Boolean(glyph), (e) => e.child(this.glyph(glyph, 14, enabled ? t.muted : t.dim)))
+      .bg(solid ? color : t.raised).border_1().border_color(solid ? color : t.border).text_color(solid ? "#ffffff" : enabled ? t.foreground : t.dim)
+      .when(enabled, (e) => e.cursor_pointer().hover((s) => s.opacity(0.88)).on_click(onClick))
+      .when(Boolean(glyph), (e) => e.child(this.glyph(glyph, 14, solid ? "#ffffff" : enabled ? t.muted : t.dim)))
       .when(label !== "", (e) => e.child(label));
   }
 
@@ -364,7 +436,25 @@ export class Dialog {
             .when(bot(c.login), (el) => el.child(this.badge("bot", t)))
             .child(div().text_color(t.muted).child(ago(c.at))))
           .child(div().text_size(14).child(this.markdown(`${key}-c${n}`, c.body ?? "", t, cx)))
-          .when(c.reactions?.length > 0, (el) => el.child(this.reactionsRow(c.reactions, t).px(0).pb(0))))));
+          .when(c.reactions?.length > 0, (el) => el.child(this.reactionsRow(c.reactions, t).px(0).pb(0)))))
+        .child(this.replyArea(key, th, t)));
+  }
+
+  // One reply box at a time, under the thread it answers.
+  replyArea(key, th, t) {
+    const busy = Boolean(this.busy);
+    if (this.replyTo !== th.id) {
+      return div().id(`${key}-reply-open`).px(12).py(8).border_t(1).border_color(t.border).text_size(13).text_color(t.muted)
+        .cursor_text().hover((s) => s.text_color(t.foreground))
+        .on_click((_e, cx) => { this.replyTo = th.id; this.replyBox.set_value(""); this.replyBox.focus?.(); cx.notify(); })
+        .child("Reply…");
+    }
+    return v_flex().px(12).py(10).gap(8).border_t(1).border_color(t.border)
+      .child(div().id(`${key}-reply`).px(10).py(8).rounded(6).border_1().border_color(t.input).bg(t.background).cursor_text()
+        .child(Textarea.new(this.replyBox).w_full().text_size(14).text_color(t.foreground)))
+      .child(h_flex().gap(8).justify_end()
+        .child(this.button(`${key}-reply-cancel`, "Cancel", t, (_e, cx) => { this.replyTo = null; cx.notify(); }, { enabled: !busy }))
+        .child(this.button(`${key}-reply-send`, "Reply", t, (_e, cx) => this.doReply(th.id, cx), { enabled: !busy, primary: true })));
   }
 
   // An event: a round icon on the line, then who did what, when.
@@ -433,6 +523,94 @@ export class Dialog {
       .child(body);
   }
 
+  // GitHub's merge box: what stands in the way, then Merge ▾. A merge asks
+  // first, here in the dialog (the confirm mod runs a command, and commands
+  // can't carry which pull request or how).
+  mergeBox(p, t) {
+    const opts = this.merging, busy = Boolean(this.busy), c = checks(p.statusCheckRollup);
+    const blockers = [];
+    if (p.isDraft) blockers.push("This pull request is still a draft.");
+    if (p.mergeStateStatus === "DIRTY") blockers.push("This branch has conflicts with the base branch.");
+    if (p.mergeStateStatus === "BEHIND") blockers.push("This branch is behind the base branch.");
+    if (c.failed.length) blockers.push(`${c.failed.length} failing check${c.failed.length === 1 ? "" : "s"}.`);
+    if (c.running) blockers.push(`${c.running} check${c.running === 1 ? "" : "s"} still running.`);
+    if (p.reviewDecision === "CHANGES_REQUESTED") blockers.push("Changes were requested.");
+    if (p.reviewDecision === "REVIEW_REQUIRED") blockers.push("A review is required.");
+    const LABEL = { squash: "Squash and merge", merge: "Create a merge commit", rebase: "Rebase and merge" };
+    const box = v_flex().flex_none().rounded(6).border_1().border_color(blockers.length ? t.border : `${GITHUB.open}99`).overflow_hidden().bg(t.background);
+    const status = v_flex().px(16).py(12).gap(4).text_size(13)
+      .child(div().font_semibold().text_color(blockers.length ? t.foreground : GITHUB.open).child(blockers.length ? "Merging is blocked or may fail" : "Ready to merge"))
+      .children(blockers.map((b) => div().text_color(t.muted).child(b)));
+    if (!opts) return box.child(status).child(div().px(16).pb(12).text_size(12).text_color(t.muted).child(this.loading ? "Loading merge options…" : "Merge options unavailable"));
+
+    if (this.confirming) {
+      const { method, auto } = this.confirming;
+      const branch = auto
+        ? (opts.deletesBranches ? `GitHub deletes \`${p.headRefName}\` once it merges.` : `\`${p.headRefName}\` stays after the auto-merge: this repository doesn't delete merged branches.`)
+        : `Then delete \`${p.headRefName}\` on GitHub. Local branches and worktrees stay.`;
+      return box.child(status).child(v_flex().px(16).py(12).gap(10).border_t(1).border_color(t.border).bg(t.raised)
+        .child(div().text_size(14).font_semibold().child(auto
+          ? `Enable auto-merge (${LABEL[method].toLowerCase()}) for #${p.number} into ${p.baseRefName}?`
+          : `${LABEL[method]} #${p.number} into ${p.baseRefName}?`))
+        .child(div().text_size(12).text_color(t.muted).child(branch.replace(/`/g, "")))
+        .child(h_flex().gap(8)
+          .child(this.button("pr-merge-cancel", "Cancel", t, (_e, cx) => { this.confirming = null; cx.notify(); }))
+          .child(this.button("pr-merge-confirm", auto ? "Enable auto-merge" : "Confirm merge", t, (_e, cx) => this.doMerge(cx), { primary: true, color: GITHUB.merged, enabled: !busy }))));
+    }
+
+    const method = this.method();
+    const items = [...opts.methods.map((m) => ({ id: m, label: LABEL[m], method: m, auto: false })),
+      ...(opts.auto ? [{ id: "auto", label: `Enable auto-merge (${LABEL[method].toLowerCase()})`, method, auto: true }] : [])];
+    return box.child(status)
+      .child(h_flex().px(16).pb(12).gap(0)
+        .child(this.button("pr-merge", LABEL[method] ?? "Merge", t, (_e, cx) => { this.confirming = { method, auto: false }; this.mergeMenu = false; cx.notify(); },
+          { primary: true, color: GITHUB.open, enabled: !busy && Boolean(method) && !p.isDraft }))
+        .child(this.button("pr-merge-more", "▾", t, (_e, cx) => { this.mergeMenu = !this.mergeMenu; cx.notify(); }, { enabled: !busy && items.length > 1 && !p.isDraft })))
+      .when(Boolean(this.mergeMenu), (e) => e.child(v_flex().px(8).py(6).border_t(1).border_color(t.border).bg(t.raised)
+        .children(items.map((i) => h_flex().id(`pr-merge-${i.id}`).px(8).py(6).gap(10).items_center().rounded(6).cursor_pointer()
+          .hover((s) => s.bg(t.hover)).text_size(13)
+          .on_click((_e, cx) => { this.confirming = { method: i.method, auto: i.auto }; this.mergeMenu = false; cx.notify(); })
+          .child(div().w(14).text_color(GITHUB.link).child(!i.auto && i.method === method ? "✓" : ""))
+          .child(i.label)))));
+  }
+
+  // The comment box: Comment, a verdict (not on your own pull request: GitHub
+  // refuses it), and Close or Reopen taking the text along.
+  composer(p, t) {
+    const busy = Boolean(this.busy), text = Boolean(this.typed), open = p.state === "OPEN", merged = p.state === "MERGED";
+    const mine = Boolean(this.me) && login(p.author) === this.me;
+    const tab = (id, label) => div().id(`pr-tab-${id}`).h(32).px(14).flex().items_center().rounded_t(6).text_size(13).cursor_pointer()
+      .when(this.tab === id, (e) => e.bg(t.background).border_1().border_b(0).border_color(t.border).text_color(t.foreground))
+      .when(this.tab !== id, (e) => e.text_color(t.muted).hover((s) => s.text_color(t.foreground)))
+      .on_click((_e, cx) => { this.tab = id; cx.notify(); }).child(label);
+    const verdicts = [
+      ...(mine ? [] : [["approve", "Approve", "Merge-ready from your side", GITHUB.open], ["changes", "Request changes", "Needs work before merging (uses the box)", GITHUB.closed]]),
+      ["comment", "Comment", "A review without a verdict (uses the box)", null],
+    ];
+    return v_flex().flex_none().gap(10)
+      .child(div().text_size(16).font_semibold().child("Add a comment"))
+      .child(v_flex().rounded(6).border_1().border_color(t.border).overflow_hidden()
+        .child(h_flex().px(8).pt(8).gap(4).items_end().bg(t.raised).border_b(1).border_color(t.border)
+          .child(tab("write", "Write")).child(tab("preview", "Preview")))
+        .child(this.tab === "write"
+          ? div().id("pr-box").px(12).py(10).bg(t.background).cursor_text().child(Textarea.new(this.box).w_full().text_size(14).text_color(t.foreground))
+          : div().px(16).py(14).min_h(110).bg(t.background).text_size(14).child(text
+            ? TextView.markdown("pr-preview", linkify(this.box.value(), this.repo)).on_link_click((url, cx) => this.link(url, cx))
+            : div().text_color(t.muted).child("Nothing to preview")))
+        .child(h_flex().px(12).py(10).gap(8).items_center().bg(t.background).border_t(1).border_color(t.border)
+          .child(div().flex_1().text_size(12).text_color(t.muted).child("Markdown · Ctrl+Enter comments"))
+          .when(!merged, (e) => e.child(open
+            ? this.button("pr-close-pr", text ? "Close with comment" : "Close pull request", t, (_e, cx) => this.doSetOpen(false, cx), { enabled: !busy, glyph: "closed" })
+            : this.button("pr-reopen", text ? "Reopen with comment" : "Reopen pull request", t, (_e, cx) => this.doSetOpen(true, cx), { enabled: !busy, glyph: "pull" })))
+          .when(open, (e) => e.child(this.button("pr-verdict", "Submit review ▾", t, (_e, cx) => { this.verdictMenu = !this.verdictMenu; cx.notify(); }, { enabled: !busy })))
+          .child(this.button("pr-comment", "Comment", t, (_e, cx) => this.doComment(cx), { primary: true, enabled: text && !busy })))
+        .when(open && Boolean(this.verdictMenu), (e) => e.child(v_flex().px(8).py(6).border_t(1).border_color(t.border).bg(t.raised)
+          .children(verdicts.map(([id, title, note, tint]) => h_flex().id(`pr-verdict-${id}`).px(8).py(6).gap(10).items_start().rounded(6).cursor_pointer()
+            .hover((s) => s.bg(t.hover)).on_click((_e, cx) => this.doReview(id, cx))
+            .child(div().pt(2).child(this.glyph(id === "approve" ? "check" : id === "changes" ? "x" : "eye", 16, tint ?? t.muted)))
+            .child(v_flex().child(div().text_size(13).font_semibold().child(title)).child(div().text_size(12).text_color(t.muted).child(note))))))));
+  }
+
   sidebar(p, t, cx) {
     const none = (text) => div().text_size(12).text_color(t.muted).child(text);
     const reviews = (p.latestReviews ?? []).filter((r) => r.state !== "PENDING");
@@ -475,7 +653,13 @@ export class Dialog {
         : none("None")))
       .child(this.section("Labels", t, p.labels?.length
         ? h_flex().gap(4).flex_wrap().children(p.labels.map((l) => this.labelChip(l, t)))
-        : none("No labels")));
+        : none("No labels")))
+      .when(p.state === "OPEN", (e) => e.child(this.section("Status", t, p.isDraft
+        ? v_flex().gap(8).child(none("Draft: reviewers aren't notified yet."))
+          .child(this.button("pr-ready", "Ready for review", t, (_e, cx) => this.doReady(false, cx), { enabled: !this.busy }))
+        : v_flex().gap(8).child(none("Open for review."))
+          .child(div().id("pr-to-draft").text_size(12).text_color(GITHUB.link).cursor_pointer().hover((s) => s.underline())
+            .on_click((_e, cx) => this.doReady(true, cx)).child("Convert to draft")))));
   }
 
   render(cx) {
@@ -526,6 +710,8 @@ export class Dialog {
       .child(h_flex().flex_1().min_h(0).items_start()
         .child(v_flex().id(`pr-thread-${this.id()}`).flex_1().min_w(0).h_full().overflow_y_scrollbar().pl(32).pr(24).py(20)
           .children(this.timelineItems(p, t, cx))
+          .when(p.state === "OPEN", (e) => e.child(div().flex_none().h(24)).child(this.mergeBox(p, t)))
+          .child(div().flex_none().h(24)).child(this.composer(p, t))
           .child(div().flex_none().h(24)))
         .child(this.sidebar(p, t, cx)))
       .when(Boolean(this.copyOpen), (e) => e.child(this.copyDropdown(p, t)));

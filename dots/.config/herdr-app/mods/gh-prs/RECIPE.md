@@ -36,9 +36,9 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
     - Reviews as cards whose header names the verdict ("approved these changes", "requested changes"), with the review's summary body.
     - Inline review threads under the review that started them: the file path, the `diff_hunk` as a code block, the thread's comments and a Reply box. Outdated threads collapse to one "Outdated" line.
     - Events between cards: pushed N commits, force-pushed, review requested, ready for review, converted to draft, merged, closed, labels.
-  - Bottom: a Write/Preview comment box, **Comment**, **Review ▾** (Approve, Request changes, Comment; the box is the review body), **Merge ▾** and Close or Reopen.
+  - Bottom, on open pull requests: the merge box (what's blocking, then **Merge ▾**). Then a Write/Preview comment box with **Comment**, **Submit review ▾** (Approve, Request changes, Comment; the box is the review body) and Close or Reopen. Approve and Request changes don't show on my own pull requests: GitHub refuses them.
   - Right, a 264px sidebar: Reviewers with verdicts and pending requests, Checks (counts, failing checks linked), linked issues, labels (read-only), and Ready for review or Convert to draft.
-- **Merge ▾**: the merge methods the repository allows, squash first, plus "Enable auto-merge". Picking one opens `confirm`: "Squash and merge #123 and delete `feature/foo`?"
+- **Merge ▾**: the merge methods the repository allows, squash first (or the last one picked there), plus "Enable auto-merge" when the repository allows it. Disabled on drafts. Picking one asks first, in the merge box: "Squash and merge #123 into main?" with what happens to the branch, then Cancel or Confirm.
 - **The copy menu**: Copy link, Copy reference (`owner/repo#123`), Copy number, Copy branch name.
 
 ## How it behaves
@@ -77,10 +77,12 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
   - Reply to a thread: `gh api -X POST repos/{o}/{r}/pulls/{n}/comments/{id}/replies`.
   - Ready for review or Convert to draft: `gh pr ready [--undo]`.
   - Close or Reopen: `gh pr close | reopen`.
-  - Merge: `gh pr merge N -R owner/repo --squash | --merge | --rebase [--auto] --delete-branch`, run from `$HOME`.
+  - Merge: `gh pr merge N -R owner/repo --squash | --merge | --rebase --match-head-commit <sha> --delete-branch` (or `--auto` instead of `--delete-branch`), run from `$HOME`. `--match-head-commit` refuses the merge if someone pushed after the dialog loaded.
   - Each action reloads the pull request and tells the panel through shared state (`gh-prs.changed`).
 - **Merge** always deletes the branch. It runs from `$HOME` with `-R` so `gh` deletes only the remote branch. Inside a checkout, `gh` would switch that checkout to the default branch to delete the local one, which fails when another worktree has `main` and yanks a running agent's branch when it doesn't. Local branches and worktrees are left for the `worktree` mod's Remove. This is intentional.
-- **Merge methods** come from `gh api repos/{o}/{r}` (`allow_squash_merge`, `allow_merge_commit`, `allow_rebase_merge`), cached per repository. The last pick is remembered per repository. Auto-merge with `--delete-branch` deletes the branch when it merges.
+- **Merge methods** come from `gh api repos/{o}/{r}` (`allow_squash_merge`, `allow_merge_commit`, `allow_rebase_merge`, `allow_auto_merge`, `delete_branch_on_merge`), cached per repository. The last pick is remembered per repository (`gh-prs.mergeMethods`).
+- **Auto-merge** hands the merge to GitHub, so `--delete-branch` can't apply then: the branch is deleted only if the repository deletes merged branches itself (`delete_branch_on_merge`), and the confirmation says which.
+- **The confirmation lives in the dialog.** The `confirm` mod runs a Herdr command on Enter, and commands can't carry which pull request or which method.
 - **Checkout** needs a local clone: the focused folder when it's in the repo, else any folder the panel has seen in it. Without one (an inbox pull request from a repo never visited) the button is disabled.
 - **Checkout** never touches an existing checkout:
   1. If `git worktree list` has the pull request's branch, open (or switch to) a space on that folder.

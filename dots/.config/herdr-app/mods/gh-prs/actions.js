@@ -66,3 +66,69 @@ export async function checkout({ number, repo, branch, local }) {
 export function openReview({ number, repo }) {
   run("terminal.open", { argv: ["plannotator", "review", `https://github.com/${repo}/pull/${number}`], folder: home(), place: "tab", name: `Review #${number}` });
 }
+
+// ---- writes on GitHub ----
+
+async function gh(args, { cwd } = {}) {
+  const r = await exec("gh", args, { cwd: cwd ?? home() });
+  if (r.code !== 0) throw new Error((r.stderr || r.stdout).trim() || `gh ${args.slice(0, 2).join(" ")} failed`);
+  return r.stdout;
+}
+
+/**
+ * A top-level comment.
+ */
+export const comment = ({ repo, number, body }) => gh(["pr", "comment", String(number), "-R", repo, "--body", body]);
+
+const VERDICT_FLAG = { approve: "--approve", changes: "--request-changes", comment: "--comment" };
+
+/**
+ * A review with a verdict. Request changes and comment need a body; approve doesn't.
+ */
+export const review = ({ repo, number, verdict, body }) =>
+  gh(["pr", "review", String(number), "-R", repo, VERDICT_FLAG[verdict], ...(body ? ["--body", body] : [])]);
+
+/**
+ * A reply in an inline review thread (REST: gh has no porcelain for it).
+ */
+export const reply = ({ repo, number, id, body }) =>
+  gh(["api", "-X", "POST", `repos/${repo}/pulls/${number}/comments/${id}/replies`, "-f", `body=${body}`]);
+
+export const ready = ({ repo, number, undo }) => gh(["pr", "ready", String(number), "-R", repo, ...(undo ? ["--undo"] : [])]);
+
+/**
+ * Close or reopen, taking the comment box's text along as a comment.
+ */
+export const setOpen = ({ repo, number, open, body }) =>
+  gh(["pr", open ? "reopen" : "close", String(number), "-R", repo, ...(body ? ["--comment", body] : [])]);
+
+const methodCache = {};
+
+/**
+ * What the repository allows: merge methods, auto-merge, and whether GitHub
+ * deletes head branches by itself.
+ */
+export async function mergeOptions(repo) {
+  methodCache[repo] ??= gh(["api", `repos/${repo}`]).then((out) => {
+    const r = JSON.parse(out);
+    return {
+      methods: [["squash", r.allow_squash_merge], ["merge", r.allow_merge_commit], ["rebase", r.allow_rebase_merge]].filter(([, ok]) => ok).map(([m]) => m),
+      auto: Boolean(r.allow_auto_merge),
+      deletesBranches: Boolean(r.delete_branch_on_merge),
+    };
+  }).catch((e) => { delete methodCache[repo]; throw e; });
+  return methodCache[repo];
+}
+
+/**
+ * Merges and deletes the remote branch. Runs from $HOME with -R so gh never
+ * touches a local checkout (inside one it would switch it to the default
+ * branch to delete the local branch). --match-head-commit refuses the merge
+ * if someone pushed after the dialog loaded. With auto, GitHub merges later
+ * and --delete-branch can't apply; the repository setting decides.
+ */
+export function merge({ repo, number, method, auto, head }) {
+  const args = ["pr", "merge", String(number), "-R", repo, `--${method}`, "--match-head-commit", head];
+  args.push(auto ? "--auto" : "--delete-branch");
+  return gh(args);
+}

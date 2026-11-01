@@ -454,7 +454,7 @@ export default class PullRequests extends View {
 
   // The list's rows have no bodies, so the dialog loads the pull request itself.
   open(repo, number) {
-    openDialog({ repo, number, local: this.localFor(repo) });
+    openDialog({ repo, number, local: this.localFor(repo), me: this.me });
   }
 
   copyMenuView(t) {
@@ -482,6 +482,17 @@ export default class PullRequests extends View {
     const away = hidden();
     if (!away && (this.away || this.context() !== this.ctx)) this.refresh(cx);
     this.away = away;
+
+    // The dialog changed a pull request: refresh what shows it.
+    const changed = shared("gh-prs.changed");
+    if (changed?.at && changed.at !== this.changedAt) {
+      const first = this.changedAt === undefined;
+      this.changedAt = changed.at;
+      if (!first) {
+        if (changed.repo === this.repo) { this.refreshList(cx); this.refreshCard(cx); }
+        setShared(INBOX_REQUEST, Date.now());
+      }
+    }
 
     const inboxShown = view() === "inbox";
     const busy = !inboxShown && this.listBusy;
