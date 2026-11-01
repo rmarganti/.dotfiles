@@ -4,9 +4,10 @@
 
 import { View, div, svg, image } from "gpui-kit";
 import { v_flex, h_flex, InputState, Input } from "gpui-base";
-import { spaces, panes, focused, exec, hc, run, layout, theme, props, shared, setShared, notify, nextCommand } from "herdr";
+import { spaces, panes, focused, exec, hc, run, layout, theme, props, shared, setShared, notify, nextCommand, openOverlay, closeOverlay } from "herdr";
 import { repoFor, login, currentBranch, branchPr, openPrs, readCache, writeCache, checks, inbox, lookup, mentions, OPEN_LIMIT } from "./sync.js";
 import { icons, icon, avatarPath, loadAvatar } from "./assets.js";
+import { Dialog, copyMenu, openUrl, openDialog } from "./dialog.js";
 
 const MOD = "gh-prs";
 const CARD_EVERY = 30000;
@@ -39,7 +40,6 @@ const VERDICT = { APPROVED: "approved", CHANGES_REQUESTED: "requested changes", 
 const MERGE_PROBLEM = { DIRTY: "Merge conflicts", BEHIND: "Behind the base branch" };
 
 const stop = (_e, cx) => cx.stop_propagation();
-const openUrl = (url) => url && exec("open", [url]).catch(() => null);
 const stateOf = (pr) => (pr.state === "OPEN" && pr.isDraft ? "DRAFT" : pr.state);
 
 function find(node, id) {
@@ -106,7 +106,9 @@ function remember(key, value) {
 
 export default class PullRequests extends View {
   init(_props, cx) {
-    const { button } = props() ?? {};
+    const { button, pr, copyMenu: copying, overlay } = props() ?? {};
+    if (pr) { this.dialog = new Dialog(pr, overlay, cx); return; }
+    if (copying) { this.copying = { ...copying, overlay }; return; }
     cx.spawn(async (cx) => { await icons(); this.icons = true; cx.notify(); });
     if (button) {
       // The tab bar restores each space's panel only if it's listed here.
@@ -363,7 +365,8 @@ export default class PullRequests extends View {
         .child(div().min_w(0).child(c.error ?? `No pull request for ${c.branch}`)));
     }
     const pr = c.pr, problem = pr.state === "OPEN" ? MERGE_PROBLEM[pr.mergeStateStatus] : null;
-    return box.cursor_pointer().hover((s) => s.border_color(t.input)).on_click(() => openUrl(pr.url))
+    return box.cursor_pointer().hover((s) => s.border_color(t.input)).on_click(() => this.open(this.repo, pr.number))
+      .on_mouse_down("right", () => copyMenu({ repo: this.repo, number: pr.number, title: pr.title, url: pr.url, branch: pr.headRefName }, "pointer"))
       .child(h_flex().gap(8).items_start()
         .child(this.pill(pr, t))
         .child(div().flex_1().min_w(0).font_semibold().child(pr.title)))
@@ -393,7 +396,8 @@ export default class PullRequests extends View {
     const dot = c.failed.length ? t.ansi1 : c.running ? t.ansi3 : c.total ? t.ansi2 : null;
     const number = p.state === "MERGED" ? t.ansi5 : p.state === "CLOSED" ? t.ansi1 : t.dim;
     return h_flex().id(`${where}-${p.number}`).flex_none().px(10).py(6).gap(8).items_start().rounded(7).cursor_pointer()
-      .hover((s) => s.bg(t.hover)).on_click(() => openUrl(p.url))
+      .hover((s) => s.bg(t.hover)).on_click(() => this.open(this.repo, p.number))
+      .on_mouse_down("right", () => copyMenu({ repo: this.repo, number: p.number, title: p.title, url: p.url, branch: p.headRefName }, "pointer"))
       .child(div().flex_none().w(40).text_color(number).child(`#${p.number}`))
       .child(this.avatar(p.author?.login, 16, cx).mt(1))
       .child(div().flex_1().min_w(0).text_color(p.isDraft ? t.muted : t.foreground).child(p.title))
@@ -417,7 +421,8 @@ export default class PullRequests extends View {
   inboxRow(p, t, cx) {
     const tags = { review: "review requested", changes: "changes requested", failing: "failing checks" };
     return h_flex().id(`inbox-${p.repo}-${p.number}`).flex_none().px(10).py(6).gap(8).items_start().rounded(7).cursor_pointer()
-      .hover((s) => s.bg(t.hover)).on_click(() => openUrl(p.url))
+      .hover((s) => s.bg(t.hover)).on_click(() => this.open(p.repo, p.number))
+      .on_mouse_down("right", () => copyMenu({ repo: p.repo, number: p.number, title: p.title, url: p.url }, "pointer"))
       .child(this.avatar(p.author, 16, cx).mt(1))
       .child(v_flex().flex_1().min_w(0).gap(2)
         .child(h_flex().gap(6).items_center().text_size(11).text_color(t.dim)
@@ -440,8 +445,32 @@ export default class PullRequests extends View {
       ]));
   }
 
+  // A folder inside a clone of the repo, for Checkout: the focused one when it
+  // matches, else any folder this panel has seen in that repo.
+  localFor(repo) {
+    if (this.repos[this.cwd]?.repo === repo) return this.cwd;
+    return Object.entries(this.repos).find(([, r]) => r.repo === repo)?.[0] ?? null;
+  }
+
+  // The list's rows have no bodies, so the dialog loads the pull request itself.
+  open(repo, number) {
+    openDialog({ repo, number, local: this.localFor(repo) });
+  }
+
+  copyMenuView(t) {
+    const { url, ref, number, title, branch, overlay } = this.copying;
+    const items = [["Copy link", url], ["Copy reference", ref], ["Copy number", number], ["Copy number and title", title], ["Copy branch name", branch]].filter(([, text]) => text);
+    return v_flex().id("gh-prs-copy").size_full().p(6).gap(1).bg(t.popover).text_color(t.foreground).text_size(12)
+      .children(items.map(([label, text], n) => v_flex().id(`copy-${n}`).px(8).py(6).rounded(6).cursor_pointer().hover((e) => e.bg(t.hover))
+        .on_click((_e, cx) => { cx.write_to_clipboard(text); notify({ title: "Copied", body: text, level: "success", timeout: 2500 }); closeOverlay(overlay); })
+        .child(div().font_semibold().child(label))
+        .child(div().text_size(11).text_color(t.muted).truncate().child(text))));
+  }
+
   render(cx) {
+    if (this.dialog) return this.dialog.render(cx);
     const t = theme();
+    if (this.copying) return this.copyMenuView(t);
     if (this.button) {
       // The panel's Refresh and Inbox tab ask through shared state.
       const request = shared(INBOX_REQUEST);

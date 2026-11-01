@@ -29,7 +29,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
   - **Failing checks**: my pull requests.
   - A pull request in two groups shows once, under the first, with a tag for the other reason.
 - **The pull request dialog**, 86% by 90% of the window:
-  - Top bar: the repository, Back after following a link, the last error, a spinner, and Checkout, Open diff, Copy ▾, Open on GitHub and close.
+  - Top bar: the repository, Back after following a link, the last error, a spinner, and Checkout, Review, Copy ▾, Open on GitHub and close.
   - Header: the title, `#N`, the state pill, `base ← head`, `+adds −dels · N files`.
   - Left, the timeline:
     - The description, then top-level comments as cards with reactions.
@@ -68,7 +68,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 
 - Opening a pull request shows what the list has at once, then loads three sources and merges them by time:
   - `gh pr view N -R owner/repo --json …`: description, comments, reviews, checks, reviewers, merge state, linked issues.
-  - `gh api --paginate --slurp repos/{o}/{r}/pulls/{n}/comments`: inline review comments, grouped into threads by `in_reply_to_id` and placed under their review by `pull_request_review_id`. A comment with `position: null` is outdated.
+  - `gh api --paginate --slurp repos/{o}/{r}/pulls/{n}/comments`: inline review comments, grouped into threads by `in_reply_to_id` and placed under their review by `pull_request_review_id`. A comment with `line: null` is outdated (it keeps a `position`). A reply is a review of its own with no body; those empty reviews are left out of the timeline.
   - `gh api --paginate --slurp repos/{o}/{r}/issues/{n}/timeline`: events.
 - `#123` and `owner/repo#123` links open in the dialog, with Back. Other links open in the browser.
 - **Actions**:
@@ -81,13 +81,14 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
   - Each action reloads the pull request and tells the panel through shared state (`gh-prs.changed`).
 - **Merge** always deletes the branch. It runs from `$HOME` with `-R` so `gh` deletes only the remote branch. Inside a checkout, `gh` would switch that checkout to the default branch to delete the local one, which fails when another worktree has `main` and yanks a running agent's branch when it doesn't. Local branches and worktrees are left for the `worktree` mod's Remove. This is intentional.
 - **Merge methods** come from `gh api repos/{o}/{r}` (`allow_squash_merge`, `allow_merge_commit`, `allow_rebase_merge`), cached per repository. The last pick is remembered per repository. Auto-merge with `--delete-branch` deletes the branch when it merges.
+- **Checkout** needs a local clone: the focused folder when it's in the repo, else any folder the panel has seen in it. Without one (an inbox pull request from a repo never visited) the button is disabled.
 - **Checkout** never touches an existing checkout:
   1. If `git worktree list` has the pull request's branch, open (or switch to) a space on that folder.
   2. Otherwise `git worktree add --detach ~/.herdr/worktrees/<repo>/<branch slug>`, then `gh pr checkout N` inside it. That handles forks and sets the upstream.
   3. `run("space.new", { folder })`.
 
   It uses the `worktree` mod's root and slug, so that mod's Open and Remove see these checkouts. That mod can't be handed the branch directly: it makes a missing branch from `HEAD`, not from the pull request.
-- **Open diff** splits the focused pane right and runs `gh pr diff N -R owner/repo`.
+- **Review** opens a new tab named `Review #N` running `plannotator review <PR_URL>`: plannotator's browser review, which uses `gh`'s auth, works on its own temporary checkout, and posts the review (line comments included) to GitHub. A tab, not a split, so the layout stays as it is. The session blocks until the review is submitted or closed; then the tab closes. A terminal closes when its program exits, so whatever runs there must wait (a bare `gh pr diff` with no pager configured flashes and closes).
 
 ### Keys
 
@@ -103,12 +104,12 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
   - `main.js`: the panel, the button (props `button`) and the overlays (the dialog, the copy and merge menus).
   - `sync.js`: every read through `gh` and `hc`: repository resolution, the branch card, the open list and its cache, the inbox, mention lookups.
   - `dialog.js`: the dialog.
-  - `actions.js`: every write: comment, review, reply, ready, close, merge, checkout, open diff.
+  - `actions.js`: every write: comment, review, reply, ready, close, merge, checkout, review.
   - `assets.js`: icons and avatars, written to `data/gh-prs/`.
 - **Dotfiles**: linked by `mise.toml` (`"~/.config/herdr-app/mods/gh-prs" = {}`). Keys in `keys.json`.
 - **herdr**: `spaces`, `panes`, `focused`, `layout`, `theme`, `exec`, `hc`, `run` (`layout.select`, `layout.show`, `layout.hide`, `pane.split`, `space.new`), `openOverlay`, `closeOverlay`, `notify`, `props`, `shared` / `setShared` (`workspace.panels`, `gh-prs.inbox`, `gh-prs.view`, `gh-prs.changed`), `nextCommand`, `appHome`, `home`, `localStorage`, `fs/promises`.
 - **gpui-base**: `TextView.markdown`, `TextareaState` / `Textarea`, `InputState` / `Input`.
-- **Programs**: `gh`, `git`, `curl` (avatars).
+- **Programs**: `gh`, `git`, `curl` (avatars), `plannotator` (Review).
 
 ## Watch out
 
@@ -116,7 +117,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 - `shared("workspace.panels")` is the list of panels the tab bar remembers per space. Append `gh-prs` to what's there; never reset it to the default `["files", "changes"]`. Mine has Files turned off.
 - Key commands reach shown copies only, and `localStorage` is per copy. The button copy is always shown, so it owns the keys and the inbox; it talks to the panel through `shared`.
 - `init`'s first argument isn't an overlay's props: read them with `props()`.
-- `TextView.markdown` draws no images, and there's no inline styled text.
+- `TextView.markdown` draws no images, and there's no inline styled text. Images are cut out of the markdown and drawn between its runs, except in table rows, where cutting breaks the table: there the alt text stands in.
 - Saving a file in this symlinked mod doesn't hot reload it. Switch layouts and back (`herdr-app do layout.switch --name main`, then `--name neverforest`) to start it fresh.
 - Saving a mod file reloads it; a dialog loading at that moment shows "interrupted".
 - `statusCheckRollup` mixes `CheckRun` (`name`, `status`, `conclusion`, `detailsUrl`) and `StatusContext` (`context`, `state`, `targetUrl`). Count both. `SKIPPED` and `NEUTRAL` count as passed.
@@ -126,7 +127,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 ## Not in v1
 
 - Unread review comments on my pull requests and unresolved thread counts: both need GraphQL.
-- New inline comments on diff lines, an in-dialog diff viewer.
+- An in-dialog diff viewer. Line comments happen in plannotator (Review).
 - Editing labels, reviewers or assignees.
 - Deleting local branches or worktrees after a merge.
 - Remote-machine spaces. Every `gh` call goes through one helper, so passing `on` later is a small change.
@@ -135,7 +136,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 
 1. **Skeleton**: the mod folder, the `mise.toml` link, the layout, the button and `workspace.panels`, the branch card and the open list with its cache.
 2. **Inbox**: the three searches, the badge, the toast, `cmd-g` / `cmd-shift-g`, In this terminal.
-3. **Dialog, read-only**: the timeline, the sidebar, the copy menu, links with Back, Open diff, Checkout.
+3. **Dialog, read-only**: the timeline, the sidebar, the copy menu, links with Back, Review, Checkout.
 4. **Actions**: comment, review, reply, ready, close and reopen, merge.
 
 ## Done when
