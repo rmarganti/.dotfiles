@@ -76,15 +76,36 @@
       "type": "column",
       "children": [
         {
-          "id": "tabs",
-          "type": "block",
-          "content": {
-            "mod": "tabs"
-          },
+          "id": "tab-bar",
+          "type": "row",
           "size": {
             "px": 42
           },
-          "window_drag": true
+          "resizable": false,
+          "children": [
+            {
+              "id": "tabs",
+              "type": "block",
+              "content": {
+                "mod": "tabs"
+              },
+              "window_drag": true
+            },
+            {
+              "id": "gh-prs-button",
+              "type": "block",
+              "size": {
+                "px": 88
+              },
+              "window_drag": true,
+              "content": {
+                "mod": "gh-prs",
+                "props": {
+                  "button": true
+                }
+              }
+            }
+          ]
         },
         {
           "id": "work-body",
@@ -139,6 +160,13 @@
                       "type": "block",
                       "content": {
                         "mod": "changes"
+                      }
+                    },
+                    {
+                      "id": "gh-prs",
+                      "type": "block",
+                      "content": {
+                        "mod": "gh-prs"
                       }
                     }
                   ],
