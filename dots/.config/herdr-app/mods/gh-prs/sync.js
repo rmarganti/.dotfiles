@@ -76,6 +76,50 @@ export async function openPrs(repo) {
   };
 }
 
+const INBOX_LIMIT = "50";
+const INBOX_FIELDS = "number,title,repository,url,isDraft,updatedAt,author";
+
+/**
+ * The three inbox searches. Kept slim: the result lives in shared state.
+ */
+export async function inbox() {
+  const search = async (args) => JSON.parse(await gh(["search", "prs", "--state=open", "--limit", INBOX_LIMIT, "--json", INBOX_FIELDS, ...args]))
+    .map((p) => ({ repo: p.repository.nameWithOwner, number: p.number, title: p.title, url: p.url, isDraft: p.isDraft, updatedAt: p.updatedAt, author: p.author?.login }));
+  const [requested, changes, failing] = await Promise.all([
+    search(["--review-requested=@me"]),
+    search(["--author=@me", "--review=changes_requested"]),
+    search(["--author=@me", "--checks=failure"]),
+  ]);
+  return { requested, changes, failing, at: Date.now(), error: null };
+}
+
+/**
+ * A pull request's number, title and state, or null when the number isn't one.
+ */
+export async function lookup(repo, number) {
+  try {
+    return JSON.parse(await gh(["pr", "view", String(number), "-R", repo, "--json", "number,title,state,isDraft,url,author"]));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * #123 and links to this repo's pull requests on a terminal's screen: the
+ * lowest line (the newest) first, each line read left to right.
+ */
+export function mentions(text, repo) {
+  const found = [];
+  const pattern = new RegExp(`(?:^|[^\\w&/#])#(\\d{1,6})(?![\\w-])|github\\.com/${repo.replace(/\./g, "\\.")}/pull/(\\d+)`, "g");
+  for (const line of text.split("\n").reverse()) {
+    for (const m of line.matchAll(pattern)) {
+      const n = Number(m[1] ?? m[2]);
+      if (!found.includes(n)) found.push(n);
+    }
+  }
+  return found;
+}
+
 export async function readCache(repo) {
   const saved = await fs.readFile(cacheFile(repo), "utf8").then(JSON.parse).catch(() => null);
   return saved?.version === VERSION ? saved : null;

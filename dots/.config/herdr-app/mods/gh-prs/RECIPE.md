@@ -60,7 +60,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
   - `gh search prs --author=@me --state=open --review=changes_requested`
   - `gh search prs --author=@me --state=open --checks=failure`
 - The badge counts only the first: pull requests where someone is waiting on me. My own red or blocked pull requests are mine to deal with and only show in the inbox.
-- Opening Inbox, or `cmd-shift-g`, searches at once.
+- Landing on Inbox (its tab or `cmd-shift-g`) searches at once.
 - A review request that wasn't in the previous result posts a toast ("Review requested: owner/repo#766") that opens the dialog. The first search after startup posts none. No sound.
 - The tab bar button runs the inbox, since it's always shown, and hands results to the panel through shared state (`gh-prs.inbox`).
 
@@ -92,7 +92,9 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 ### Keys
 
 - `cmd-g` → `gh-prs.toggle`: show or hide the panel on its last view.
-- `cmd-shift-g` → `gh-prs.inbox`: show the panel on Inbox.
+- `cmd-shift-g` → `gh-prs.inbox`: with the panel hidden, show it on Inbox. With it shown, flip between Inbox and This repo.
+- `gh-prs.repo` (unbound): show the panel on This repo.
+- A toast's click action can't carry arguments to a mod command, so a review request toast opens Inbox rather than the pull request.
 
 ## Built from
 
@@ -115,6 +117,7 @@ Structure borrows from [jankeesvw/herdr-issues](https://github.com/jankeesvw/her
 - Key commands reach shown copies only, and `localStorage` is per copy. The button copy is always shown, so it owns the keys and the inbox; it talks to the panel through `shared`.
 - `init`'s first argument isn't an overlay's props: read them with `props()`.
 - `TextView.markdown` draws no images, and there's no inline styled text.
+- Saving a file in this symlinked mod doesn't hot reload it. Switch layouts and back (`herdr-app do layout.switch --name main`, then `--name neverforest`) to start it fresh.
 - Saving a mod file reloads it; a dialog loading at that moment shows "interrupted".
 - `statusCheckRollup` mixes `CheckRun` (`name`, `status`, `conclusion`, `detailsUrl`) and `StatusContext` (`context`, `state`, `targetUrl`). Count both. `SKIPPED` and `NEUTRAL` count as passed.
 - `reviewDecision` is `""` on repositories without required reviews.
