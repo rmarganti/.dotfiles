@@ -1,0 +1,6 @@
+{
+  "global": {
+    "cmd-g": "gh-prs.toggle",
+    "cmd-shift-g": "gh-prs.inbox"
+  }
+}
