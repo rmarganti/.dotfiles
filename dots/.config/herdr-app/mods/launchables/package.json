@@ -1,0 +1,9 @@
+{
+  "name": "herdr-app-launchables",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:integration": "LAUNCHABLES_INTEGRATION=1 node --test test/integration.test.js"
+  }
+}

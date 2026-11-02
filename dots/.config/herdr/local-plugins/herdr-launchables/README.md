@@ -2,6 +2,8 @@
 
 A Herdr plugin for launching reusable commands, panes, tabs, and workspaces from one picker.
 
+The Herdr app has a port at `dots/.config/herdr-app/mods/launchables` that reads the same `.launchables.json` files. Keep the two validators in step when the schema changes.
+
 When Herdr creates a Git worktree, the plugin also copies `.launchables.json` from the repository's primary worktree when that file exists. This keeps untracked, project-local launchables available in each new checkout.
 
 It discovers, in picker priority order:

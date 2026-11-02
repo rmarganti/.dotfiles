@@ -221,5 +221,15 @@
   "traffic_lights": [
     12,
     16
+  ],
+  "floating": [
+    {
+      "id": "launchables",
+      "content": {
+        "mod": "launchables"
+      },
+      "edge": "top",
+      "align": "center"
+    }
   ]
 }
