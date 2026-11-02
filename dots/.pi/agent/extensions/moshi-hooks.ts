@@ -583,6 +583,7 @@ export default function moshiPiHook(pi: ExtensionAPI): void {
 
 
   pi.on("before_agent_start", (event, ctx) => {
+    if (!("prompt" in event)) return
     send("UserPromptSubmit", event, ctx, { prompt: event.prompt })
   })
 
