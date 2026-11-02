@@ -83,7 +83,7 @@ const INBOX_FIELDS = "number,title,repository,url,isDraft,updatedAt,author";
  * The three inbox searches. Kept slim: the result lives in shared state.
  */
 export async function inbox() {
-  const search = async (args) => JSON.parse(await gh(["search", "prs", "--state=open", "--limit", INBOX_LIMIT, "--json", INBOX_FIELDS, ...args]))
+  const search = async (args) => JSON.parse(await gh(["search", "prs", "--state=open", "--archived=false", "--limit", INBOX_LIMIT, "--json", INBOX_FIELDS, ...args]))
     .map((p) => ({ repo: p.repository.nameWithOwner, number: p.number, title: p.title, url: p.url, isDraft: p.isDraft, updatedAt: p.updatedAt, author: p.author?.login }));
   const [requested, changes, failing] = await Promise.all([
     search(["--review-requested=@me"]),
