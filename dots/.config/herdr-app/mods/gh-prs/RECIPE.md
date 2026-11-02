@@ -8,7 +8,7 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 
 - **The PRs button**, at the right end of the tab bar after Files and Changes: a 26px pill (6px radius, 12px text) with a pull request icon and "PRs", `selected` while the panel shows, `chrome` otherwise. With review requests waiting it reads "PRs · 4", the count semibold in `accent`.
 - **The panel**, in the side panel column as a card: 10px radius, 1px `border`, `background`, 13px text.
-  - A 42px header: a pull request icon in `ansi2`, "Pull requests" semibold, the repository (`owner/name`, 11px, `dim`, right-aligned, truncated; blank on Inbox) and a bordered 26px Refresh button, or a spinner and "Syncing".
+  - A 42px header: a pull request icon in `ansi2`, "Pull requests" semibold, the repository (`owner/name`, 11px, `dim`, right-aligned, truncated; blank on Inbox) and a bordered 26px Refresh button, a spinner and "Syncing" while the list loads, or a red "Retry" after it failed.
   - Two equal tabs below it, in a bordered 8px-radius strip: **This repo** and **Inbox** ("Inbox · 4" with review requests waiting). The current one is `selected` and semibold.
 - **This repo**, scrolling as one column:
   - **The branch card**, the pull request for the focused terminal's branch: a 6px-margin card, 10px padding, 8px radius, `raised`.
@@ -56,7 +56,7 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 - **Keys** (`keys.json` here, to merge into the person's): `"cmd-g": "gh-prs.toggle"` and `"cmd-shift-g": "gh-prs.inbox"` under `global`. `gh-prs.repo` also exists, unbound: the panel on This repo.
 - **Mod** `mods/gh-prs/` (`mod.json`: `{ "place": "none" }`). One mod, five roles by props:
   - none: the panel; `{ button: true }`: the tab bar button, which also owns the inbox and the keys; overlay `{ pr: { repo, number, local, me } }`: the dialog; overlay `{ copyMenu }`: the right-click copy menu.
-  - `main.js` the panel and button; `sync.js` every read; `dialog.js` the dialog; `actions.js` every write; `assets.js` icons and avatars; `pictures.js` images in markdown.
+  - `main.js` the panel and button; `sync.js` every read; `fetch.js` each fetch's state; `dialog.js` the dialog; `actions.js` every write; `assets.js` icons and avatars; `pictures.js` images in markdown.
 - **Reads through `gh`**:
   - `gh repo view --json nameWithOwner,defaultBranchRef` in the focused folder; `gh api user` for your login; `git branch --show-current`.
   - Branch card: `gh pr view --json …` in the focused folder (the branch's pull request).
@@ -77,6 +77,7 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 
 - **Images only from the data folder.** Herdr doesn't draw SVGs or images from a symlinked mod folder (JavaScript loads fine), so icons, avatars and images are written to `data/gh-prs/` and drawn only once they're on disk.
 - **A symlinked mod doesn't hot reload.** Saving its files changes nothing; switch layouts and back to start it fresh.
+- **A background fetch can be lost**: its promise never settles, so a busy flag cleared in `finally` stays set and the panel shows "Syncing" forever. Each fetch (list per repository, card per folder, inbox, terminal scan) runs through `fetch.js`, a small reducer: idle → loading → ok or error. Each fetch has an id and only the current one's result is kept. A fetch still loading after 30 seconds becomes "Sync timed out" and the next request replaces it. Refresh always starts a new fetch.
 - **`workspace.panels`**: the button appends `gh-prs` to what's there. Never write the default `["files", "changes"]` back; people turn Files off.
 - **Key commands reach shown copies only**, and `localStorage` is per copy. The button is always shown, so it owns the keys and the inbox and talks to the panel through shared state.
 - **Commands can't carry arguments to a mod.** So a toast can't open its pull request (it opens Inbox), and the shipped `confirm` mod can't drive a merge (the question lives in the merge box).

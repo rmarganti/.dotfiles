@@ -8,12 +8,14 @@ import { spaces, panes, focused, exec, hc, run, layout, theme, props, shared, se
 import { repoFor, login, currentBranch, branchPr, openPrs, readCache, writeCache, checks, inbox, lookup, mentions, OPEN_LIMIT } from "./sync.js";
 import { icons, icon, avatarPath, loadAvatar } from "./assets.js";
 import { Dialog, copyMenu, openUrl, openDialog } from "./dialog.js";
+import { Fetch } from "./fetch.js";
 
 const MOD = "gh-prs";
 const CARD_EVERY = 30000;
 const LIST_EVERY = 60000;
 const INBOX_EVERY = 3 * 60000;
 const SCAN_EVERY = 3000;
+const EXPIRE_EVERY = 5000;
 const MENTIONS = 8;
 
 // Shared state: the button copy owns the inbox; the panel asks it to refresh.
@@ -96,6 +98,16 @@ function location(last) {
   return pane?.cwd || f?.cwd || space?.folder || null;
 }
 
+// One Fetch per key (repo, folder), made on first use.
+const fetchOf = (fetches, key) => (fetches[key] ??= new Fetch());
+
+// Times out stuck fetches; re-renders only when one did.
+function expireAll(fetches, cx) {
+  let changed = false;
+  for (const f of fetches) changed = f.expire() || changed;
+  if (changed) cx.notify();
+}
+
 function remembered(key) {
   try { return JSON.parse(localStorage.getItem(key) ?? "{}"); } catch { return {}; }
 }
@@ -118,8 +130,11 @@ export default class PullRequests extends View {
       // The button is always shown, so it gets the keys and runs the inbox.
       this.seen = null;
       this.request = shared(INBOX_REQUEST);
+      // The panel reads the inbox from shared state, so failures go there too.
+      this.inboxFetch = new Fetch({ onError: (error) => setShared(INBOX, { ...(shared(INBOX) ?? {}), error }) });
       this.fetchInbox(cx);
       cx.timer.every(INBOX_EVERY, (cx) => this.fetchInbox(cx));
+      cx.timer.every(EXPIRE_EVERY, (cx) => expireAll([this.inboxFetch], cx));
       cx.spawn(async (cx) => {
         for (;;) {
           const command = await nextCommand();
@@ -140,7 +155,10 @@ export default class PullRequests extends View {
     this.repos = remembered("repos");           // cwd -> { repo, defaultBranch }
     this.spaceRepos = remembered("spaces");     // space -> { repo, defaultBranch }
     this.stores = {};                           // repo -> openPrs() result
-    this.cards = {};                            // cwd -> { branch, pr, hidden, error }
+    this.cards = {};                            // cwd -> { branch, pr, hidden }
+    this.listFetches = {};                      // repo -> Fetch
+    this.cardFetches = {};                      // cwd -> Fetch
+    this.scanFetch = new Fetch();
     this.repo = null;
     this.query = ""; this.filter = "all";
     this.input = InputState.new({ placeholder: "Filter pull requests" });
@@ -153,29 +171,23 @@ export default class PullRequests extends View {
     cx.timer.every(CARD_EVERY, (cx) => { if (!hidden()) this.refreshCard(cx); });
     cx.timer.every(LIST_EVERY, (cx) => { if (!hidden()) this.refreshList(cx); });
     cx.timer.every(SCAN_EVERY, (cx) => { if (!hidden() && view() === "repo") this.scan(cx); });
+    cx.timer.every(EXPIRE_EVERY, (cx) => expireAll(
+      [this.scanFetch, ...Object.values(this.listFetches), ...Object.values(this.cardFetches)], cx));
   }
 
   // Button copy only. The first result after startup posts no toasts.
   fetchInbox(cx) {
-    if (this.inboxBusy) return;
-    this.inboxBusy = true;
-    cx.spawn(async (cx) => {
-      try {
-        const data = await inbox();
-        const ids = data.requested.map((p) => `${p.repo}#${p.number}`);
-        if (this.seen) {
-          for (const p of data.requested.filter((p) => !this.seen.has(`${p.repo}#${p.number}`))) {
-            notify({ title: "Review requested", body: `${p.repo}#${p.number}: ${p.title}`, level: "info", timeout: 8000, action: { name: "gh-prs.inbox" } });
-          }
+    this.inboxFetch.run(cx, async (live) => {
+      const data = await inbox();
+      if (!live()) return;
+      const ids = data.requested.map((p) => `${p.repo}#${p.number}`);
+      if (this.seen) {
+        for (const p of data.requested.filter((p) => !this.seen.has(`${p.repo}#${p.number}`))) {
+          notify({ title: "Review requested", body: `${p.repo}#${p.number}: ${p.title}`, level: "info", timeout: 8000, action: { name: "gh-prs.inbox" } });
         }
-        this.seen = new Set(ids);
-        setShared(INBOX, data);
-      } catch (e) {
-        setShared(INBOX, { ...(shared(INBOX) ?? {}), error: String(e?.message ?? e) });
-      } finally {
-        this.inboxBusy = false;
-        cx.notify();
       }
+      this.seen = new Set(ids);
+      setShared(INBOX, data);
     });
   }
 
@@ -183,9 +195,8 @@ export default class PullRequests extends View {
   // mentions. A focused mod pane has no terminal: the last one stays.
   scan(cx) {
     const terminal = (this.terminal = focused()?.terminal ?? this.terminal), repo = this.repo;
-    if (this.scanning || !terminal || !repo) return;
-    this.scanning = true;
-    cx.spawn(async (cx) => {
+    if (!terminal || !repo || this.scanFetch.loading) return;
+    this.scanFetch.run(cx, async (live, cx) => {
       try {
         const r = await hc(["read", terminal, "--lines", "300"]);
         if (r.code !== 0 || repo !== this.repo) return;
@@ -194,11 +205,10 @@ export default class PullRequests extends View {
         for (const n of numbers.slice(0, MENTIONS)) {
           if (!(n in known)) known[n] = await lookup(repo, n);
         }
-        if (repo !== this.repo) return;
+        if (!live() || repo !== this.repo) return;
         const mentioned = numbers.map((n) => known[n]).filter(Boolean).slice(0, MENTIONS);
         if (JSON.stringify(mentioned) !== JSON.stringify(this.mentioned)) { this.mentioned = mentioned; cx.notify(); }
       } catch { /* the terminal closed, or gh is missing: try again next time */ }
-      finally { this.scanning = false; }
     });
   }
 
@@ -211,7 +221,7 @@ export default class PullRequests extends View {
   pick(found, space) {
     if (found) { this.spaceRepos[space] = found; remember("spaces", this.spaceRepos); }
     const choice = this.spaceRepos[space] ?? null;
-    if ((choice?.repo ?? null) !== this.repo) { this.error = null; this.mentioned = []; }
+    if ((choice?.repo ?? null) !== this.repo) this.mentioned = [];
     this.repo = choice?.repo ?? null;
     this.defaultBranch = choice?.defaultBranch ?? null;
   }
@@ -240,52 +250,34 @@ export default class PullRequests extends View {
     });
   }
 
-  // One fetch at a time each; a request while busy runs once it finishes, so
-  // moving focus to another repo mid-fetch isn't dropped.
-  refreshCard(cx) {
+  // One fetch at a time per folder and per repo; a request while one runs
+  // queues another (see fetch.js). `force` (the Refresh button) starts over.
+  refreshCard(cx, { force = false } = {}) {
     const cwd = this.cwd, defaultBranch = this.defaultBranch;
     if (!cwd || !this.repo) return;
-    if (this.cardBusy) { this.cardAgain = true; return; }
-    this.cardBusy = true;
-    cx.spawn(async (cx) => {
-      try {
-        const branch = await currentBranch(cwd);
-        // Detached HEAD, or the default branch: nothing to show.
-        if (!branch || branch === defaultBranch) this.cards[cwd] = { branch, hidden: true };
-        else this.cards[cwd] = { branch, pr: await branchPr(cwd) };
-      } catch (e) {
-        this.cards[cwd] = { ...this.cards[cwd], error: String(e?.message ?? e) };
-      } finally {
-        this.cardBusy = false;
-        cx.notify();
-        if (this.cardAgain) { this.cardAgain = false; this.refreshCard(cx); }
-      }
-    });
+    fetchOf(this.cardFetches, cwd).run(cx, async (live) => {
+      const branch = await currentBranch(cwd);
+      // Detached HEAD, or the default branch: nothing to show.
+      const card = !branch || branch === defaultBranch ? { branch, hidden: true } : { branch, pr: await branchPr(cwd) };
+      if (live()) this.cards[cwd] = card;
+    }, { force });
   }
 
-  refreshList(cx) {
+  refreshList(cx, { force = false } = {}) {
     const repo = this.repo;
     if (!repo) return;
-    if (this.listBusy) { this.listAgain = true; return; }
-    this.listBusy = true;
+    fetchOf(this.listFetches, repo).run(cx, async (live, cx) => {
+      this.stores[repo] ??= await readCache(repo);
+      cx.notify();
+      const store = await openPrs(repo);
+      if (!live()) return;
+      this.stores[repo] = store;
+      await writeCache(repo, store).catch(() => null);
+    }, { force });
     cx.notify();
-    cx.spawn(async (cx) => {
-      try {
-        this.stores[repo] ??= await readCache(repo);
-        cx.notify();
-        const store = await openPrs(repo);
-        this.stores[repo] = store;
-        this.error = null;
-        await writeCache(repo, store).catch(() => null);
-      } catch (e) {
-        if (repo === this.repo) this.error = String(e?.message ?? e);
-      } finally {
-        this.listBusy = false;
-        cx.notify();
-        if (this.listAgain) { this.listAgain = false; this.refreshList(cx); }
-      }
-    });
   }
+
+  listFetch() { return this.repo ? this.listFetches[this.repo] : null; }
 
   avatar(login, size, cx) {
     const loading = loadAvatar(login);
@@ -356,13 +348,13 @@ export default class PullRequests extends View {
   }
 
   card(t, cx) {
-    const c = this.cards[this.cwd];
-    if (!c || c.hidden) return null;
+    const c = this.cards[this.cwd], error = this.cardFetches[this.cwd]?.error;
+    if ((!c && !error) || c?.hidden) return null;
     const box = v_flex().id("branch-card").flex_none().m(6).p(10).gap(8).rounded(8).border_1().border_color(t.border).bg(t.raised);
-    if (!c.pr) {
-      return box.child(h_flex().gap(6).items_center().text_size(12).text_color(c.error ? t.ansi1 : t.dim)
+    if (!c?.pr) {
+      return box.child(h_flex().gap(6).items_center().text_size(12).text_color(error ? t.ansi1 : t.dim)
         .child(this.glyph("branch", 12, t.dim))
-        .child(div().min_w(0).child(c.error ?? `No pull request for ${c.branch}`)));
+        .child(div().min_w(0).child(error ?? `No pull request for ${c.branch}`)));
     }
     const pr = c.pr, problem = pr.state === "OPEN" ? MERGE_PROBLEM[pr.mergeStateStatus] : null;
     return box.cursor_pointer().hover((s) => s.border_color(t.input)).on_click(() => this.open(this.repo, pr.number))
@@ -495,7 +487,9 @@ export default class PullRequests extends View {
     }
 
     const inboxShown = view() === "inbox";
-    const busy = !inboxShown && this.listBusy;
+    const list = this.listFetch();
+    const busy = !inboxShown && Boolean(list?.loading);
+    const failed = !inboxShown && Boolean(list?.error);
     const requested = shared(INBOX)?.requested?.length ?? 0;
     const showView = (v) => (_e, cx) => {
       setShared(VIEW, v);
@@ -513,12 +507,12 @@ export default class PullRequests extends View {
           .text_size(12).text_color(t.muted).cursor_pointer().hover((s) => s.bg(t.hover).text_color(t.foreground))
           .on_click((_e, cx) => {
             if (inboxShown) setShared(INBOX_REQUEST, Date.now());
-            else { this.refreshCard(cx); this.refreshList(cx); }
+            else { this.refreshCard(cx, { force: true }); this.refreshList(cx, { force: true }); }
           })
           .child(busy
             ? svg("mods/workspace-chrome/spinner.svg").size(12).text_color(t.working).spin(900)
-            : this.glyph("refresh", 12, t.muted))
-          .child(busy ? "Syncing" : "Refresh")))
+            : this.glyph("refresh", 12, failed ? t.ansi1 : t.muted))
+          .child(busy ? "Syncing" : failed ? "Retry" : "Refresh")))
       .child(h_flex().flex_none().px(8).py(6).border_b(1).border_color(t.border)
         .child(h_flex().flex_1().p(2).gap(2).rounded(8).border_1().border_color(t.border)
           .child(this.segment("view-repo", "This repo", !inboxShown, t, showView("repo")).flex_1().justify_center())
@@ -534,8 +528,8 @@ export default class PullRequests extends View {
         .child(div().text_size(12).text_color(t.dim).text_center().child("Focus a terminal inside a GitHub repository."));
     }
 
-    const store = this.stores[this.repo], list = this.shown();
-    const empty = this.error || (!store ? "Loading pull requests…"
+    const store = this.stores[this.repo], list = this.shown(), error = this.listFetch()?.error;
+    const empty = error || (!store ? "Loading pull requests…"
       : this.query.trim() ? "No pull requests match"
       : this.filter === "mine" ? "No open pull requests of yours"
       : this.filter === "review" ? "No open pull requests need your review"
@@ -557,8 +551,8 @@ export default class PullRequests extends View {
           .child(this.segment("filter-mine", "Mine", this.filter === "mine", t, (_e, cx) => { this.filter = "mine"; cx.notify(); }))
           .child(this.segment("filter-review", "Needs my review", this.filter === "review", t, (_e, cx) => { this.filter = "review"; cx.notify(); }))))
       .child(v_flex().flex_none().px(6).pb(6).gap(1)
-        .when(Boolean(this.error) && list.length > 0, (e) => e.child(div().px(10).py(4).text_size(11).text_color(t.ansi1).child(this.error)))
+        .when(Boolean(error) && list.length > 0, (e) => e.child(div().px(10).py(4).text_size(11).text_color(t.ansi1).child(error)))
         .children(list.map((p) => this.row(p, t, cx)))
-        .when(!list.length, (e) => e.child(div().px(16).py(28).text_size(12).text_center().text_color(this.error ? t.ansi1 : t.dim).child(empty))));
+        .when(!list.length, (e) => e.child(div().px(16).py(28).text_size(12).text_center().text_color(error ? t.ansi1 : t.dim).child(empty))));
   }
 }
