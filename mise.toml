@@ -64,7 +64,6 @@ dotfiles.default_mode = "symlink"
 "~/.claude/skills/simplify" = { source = "dots/.agents/skills/simplify" }
 "~/.claude/skills/tdd" = { source = "dots/.agents/skills/tdd" }
 "~/.claude/skills/write-like-ryan" = { source = "dots/.agents/skills/write-like-ryan" }
-"~/.claude/themes" = {}
 "~/.config/bat" = {}
 "~/.config/btop/themes" = {}
 "~/.config/codebook" = {}
