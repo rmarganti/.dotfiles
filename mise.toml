@@ -84,7 +84,6 @@ dotfiles.default_mode = "symlink"
 "~/.config/mise/config.toml" = {}
 "~/.config/nono/profiles" = {}
 "~/.config/nvim" = {}
-"~/.config/opencode" = {}
 "~/.config/phpactor" = {}
 "~/.config/starship.toml" = {}
 "~/.config/television" = {}

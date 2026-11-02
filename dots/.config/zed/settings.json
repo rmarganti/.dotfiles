@@ -73,9 +73,6 @@
     // [ AI/Agent ]------------------------------------
 
     "agent_servers": {
-        "opencode": {
-            "type": "registry",
-        },
         "pi-acp": {
             "type": "registry",
         },

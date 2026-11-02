@@ -34,11 +34,7 @@ function M.config()
             picker = 'telescope',
 
             tools = {
-                -- Only enable opencode
-                opencode = {
-                    cmd = { 'opencode' },
-                },
-
+                opencode = false,
                 aider = false,
                 amazon_q = false,
                 claude = false,
