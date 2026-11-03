@@ -18,7 +18,6 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
     - Reviews: the decision (Approved `ansi2`, Changes requested `ansi1`, Review required `muted`), one line per reviewer (16px avatar, login, their latest verdict) and "Awaiting …" for pending requests.
     - When it can't merge cleanly, one `ansi3` line: "Merge conflicts" or "Behind the base branch".
     - With no pull request: "No pull request for feature/foo" in `dim`. On the default branch, no card at all.
-  - **In this terminal**, when the focused terminal mentions pull requests of this repository: up to 8 rows, merged numbers in `ansi5`, closed in `ansi1`.
   - **Open pull requests N**: a 28px "Filter pull requests" field, then **All | Mine | Needs my review**. Rows: `#N` (40px, `dim`), a 16px author avatar, the title (`muted` for drafts), then a bordered "Draft" tag, ✓ `ansi2` when approved or ✗ `ansi1` when changes were requested, and an 8px CI dot: `ansi1` failing, `ansi3` running, `ansi2` passing, none without checks.
   - Before any repository: a centered pull request icon, "No repository yet" and "Focus a terminal inside a GitHub repository."
 - **Inbox**: three groups, each headed with its count (11px, semibold, `dim`), empty groups left out: **Review requested**, **Changes requested** (yours), **Failing checks** (yours). A row: 16px avatar, then `owner/repo #N` (11px, `dim`) with a Draft tag and a tag for any other group it's in, then the title. "Nothing waiting on you" when all three are empty.
@@ -37,8 +36,8 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 ## How it behaves
 
 - **Following focus.** The panel shows the repository of the focused terminal's folder. Each space remembers its last repository: a folder outside any repository keeps it, and a space never in one shows "No repository yet". Focus moving to a mod pane keeps the last folder.
-- **This repo** shows cached pull requests at once (after a restart too), then refreshes: the list every 60 seconds and the branch card every 30, both at once when focus moves or the panel comes back. Refresh does both now. Every 3 seconds it reads the focused terminal for `#123` and this repository's pull request links, newest line first.
-- **Hidden, it rests.** While another side panel shows, or none, This repo doesn't refresh or read terminals.
+- **This repo** shows cached pull requests at once (after a restart too), then refreshes: the list every 60 seconds and the branch card every 30, both at once when focus moves or the panel comes back. Refresh does both now.
+- **Hidden, it rests.** While another side panel shows, or none, This repo doesn't refresh.
 - **The inbox runs regardless**, every 3 minutes, from the tab bar button. Opening Inbox refreshes it. The badge counts only review requests: someone waiting on you. A review request that wasn't there before posts a toast, "Review requested: owner/repo#766: title"; clicking it opens the panel on Inbox. The first refresh after starting posts none.
 - **Keys:** `cmd-g` shows or hides the panel on whichever tab it was on. `cmd-shift-g` with the panel hidden shows it on Inbox; with it shown, flips between Inbox and This repo.
 - **Clicks:** the PRs button shows or hides the panel. A branch card or any row opens the dialog; right-clicking one opens the copy menu at the pointer. A failing check on the card opens its run in the browser.
@@ -62,7 +61,6 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
   - Branch card: `gh pr view --json …` in the focused folder (the branch's pull request).
   - List: `gh pr list -R repo --state open --limit 100 --json number,title,author,isDraft,headRefName,reviewDecision,statusCheckRollup,updatedAt,url`, and the same with `--search review-requested:@me` for Needs my review. Cached per repository in `data/gh-prs/repo-<owner>__<name>.json`.
   - Inbox: `gh search prs --state=open` with `--review-requested=@me`; `--author=@me --review=changes_requested`; `--author=@me --checks=failure`.
-  - Mentions: `hc read <terminal> --lines 300`, then `gh pr view N` once per number (remembered, numbers that aren't pull requests too).
   - Dialog: `gh pr view N -R repo --json …`; `gh api --paginate --slurp repos/{o}/{r}/issues/{n}/timeline` (comments, reviews, commits, events); `gh api … repos/{o}/{r}/pulls/{n}/comments` (inline comments, threaded by `in_reply_to_id`, placed under their review by `pull_request_review_id`); `gh api repos/{o}/{r}` for merge methods, `allow_auto_merge` and `delete_branch_on_merge`.
 - **Writes through `gh`**: `gh pr comment --body`; `gh pr review --approve | --request-changes | --comment [--body]`; `gh api -X POST repos/{o}/{r}/pulls/{n}/comments/{id}/replies -f body=…`; `gh pr ready [--undo]`; `gh pr close | reopen [--comment]`; `gh pr merge N -R repo --squash | --merge | --rebase --match-head-commit <sha>` with `--delete-branch`, or `--auto`, run from `$HOME`.
 - **Checkout**: `git rev-parse --git-common-dir` for the main checkout, `git worktree list --porcelain`, `git worktree add --detach <path>`, then `gh pr checkout N` inside it; `space.select` or `space.new { folder }`.
@@ -77,7 +75,7 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 
 - **Images only from the data folder.** Herdr doesn't draw SVGs or images from a symlinked mod folder (JavaScript loads fine), so icons, avatars and images are written to `data/gh-prs/` and drawn only once they're on disk.
 - **A symlinked mod doesn't hot reload.** Saving its files changes nothing; switch layouts and back to start it fresh.
-- **A background fetch can be lost**: its promise never settles, so a busy flag cleared in `finally` stays set and the panel shows "Syncing" forever. Each fetch (list per repository, card per folder, inbox, terminal scan) runs through `fetch.js`, a small reducer: idle → loading → ok or error. Each fetch has an id and only the current one's result is kept. A fetch still loading after 30 seconds becomes "Sync timed out" and the next request replaces it. Refresh always starts a new fetch.
+- **A background fetch can be lost**: its promise never settles, so a busy flag cleared in `finally` stays set and the panel shows "Syncing" forever. Each fetch (list per repository, card per folder, inbox) runs through `fetch.js`, a small reducer: idle → loading → ok or error. Each fetch has an id and only the current one's result is kept. A fetch still loading after 30 seconds becomes "Sync timed out" and the next request replaces it. Refresh always starts a new fetch.
 - **`workspace.panels`**: the button appends `gh-prs` to what's there. Never write the default `["files", "changes"]` back; people turn Files off.
 - **Key commands reach shown copies only**, and `localStorage` is per copy. The button is always shown, so it owns the keys and the inbox and talks to the panel through shared state.
 - **Commands can't carry arguments to a mod.** So a toast can't open its pull request (it opens Inbox), and the shipped `confirm` mod can't drive a merge (the question lives in the merge box).
@@ -91,7 +89,7 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 - **`statusCheckRollup` mixes** `CheckRun` (`name`, `status`, `conclusion`, `detailsUrl`) and `StatusContext` (`context`, `state`, `targetUrl`). Skipped and neutral count as passed. `reviewDecision` is `""` without required reviews. `latestReviews` reports `is_bot: null` for everyone, so bots can't be told apart there.
 - **The markdown view draws no images.** They're cut out and drawn between its runs, except in table rows, where cutting breaks the table: there the alt text stands in.
 - **There's no inline styled text**: the dialog's title is one element per word so the muted number can follow it.
-- **Limits**: 100 open pull requests per repository (the most recently updated), 50 per inbox group, 8 mentions, the last 8 lines of a thread's diff.
+- **Limits**: 100 open pull requests per repository (the most recently updated), 50 per inbox group, the last 8 lines of a thread's diff.
 - **Checkout needs a local clone**: the focused folder when it's in the repository, else any folder the panel has seen in it. An inbox pull request from a repository never visited can't be checked out.
 - **Assumes** macOS (`open` for links), a local space (remote machines aren't passed through), and `gh` logged in to github.com.
 
@@ -101,7 +99,6 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 - The tab bar shows PRs after Changes; clicking it shows and hides the panel, and `workspace.panels` gains `gh-prs` without losing anything.
 - In a worktree on a branch with an open pull request, the card shows its state, checks and reviews matching `gh pr view`; on the default branch there's no card.
 - The list matches `gh pr list --state open`; Mine, Needs my review and the filter narrow it.
-- `echo "#12"` in the focused terminal puts #12 under "In this terminal" within 3 seconds when #12 is a pull request.
 - The badge and Inbox's Review requested count match `gh search prs --review-requested=@me --state=open`.
 - `cmd-g` hides and shows the panel; `cmd-shift-g` flips between Inbox and This repo.
 - A row opens the dialog; inline threads sit under their reviews and outdated ones fold; a `#N` link opens that pull request with Back.

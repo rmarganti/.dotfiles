@@ -4,8 +4,8 @@
 
 import { View, div, svg, image } from "gpui-kit";
 import { v_flex, h_flex, InputState, Input } from "gpui-base";
-import { spaces, panes, focused, exec, hc, run, layout, theme, props, shared, setShared, notify, nextCommand, openOverlay, closeOverlay } from "herdr";
-import { repoFor, login, currentBranch, branchPr, openPrs, readCache, writeCache, checks, inbox, lookup, mentions, OPEN_LIMIT } from "./sync.js";
+import { spaces, panes, focused, exec, run, layout, theme, props, shared, setShared, notify, nextCommand, openOverlay, closeOverlay } from "herdr";
+import { repoFor, login, currentBranch, branchPr, openPrs, readCache, writeCache, checks, inbox, OPEN_LIMIT } from "./sync.js";
 import { icons, icon, avatarPath, loadAvatar } from "./assets.js";
 import { Dialog, copyMenu, openUrl, openDialog } from "./dialog.js";
 import { Fetch } from "./fetch.js";
@@ -14,9 +14,7 @@ const MOD = "gh-prs";
 const CARD_EVERY = 30000;
 const LIST_EVERY = 60000;
 const INBOX_EVERY = 3 * 60000;
-const SCAN_EVERY = 3000;
 const EXPIRE_EVERY = 5000;
-const MENTIONS = 8;
 
 // Shared state: the button copy owns the inbox; the panel asks it to refresh.
 const INBOX = "gh-prs.inbox";
@@ -158,21 +156,17 @@ export default class PullRequests extends View {
     this.cards = {};                            // cwd -> { branch, pr, hidden }
     this.listFetches = {};                      // repo -> Fetch
     this.cardFetches = {};                      // cwd -> Fetch
-    this.scanFetch = new Fetch();
     this.repo = null;
     this.query = ""; this.filter = "all";
     this.input = InputState.new({ placeholder: "Filter pull requests" });
     this.input.on("change", (_e, cx) => { this.query = this.input.value(); cx.notify(); });
     this.input.on("focus", (_e, cx) => { this.typing = true; cx.notify(); });
     this.input.on("blur", (_e, cx) => { this.typing = false; cx.notify(); });
-    this.known = {};                            // repo -> { number: lookup() result or null }
-    this.mentioned = [];
     cx.spawn(async (cx) => { this.me = await login().catch(() => null); cx.notify(); });
     cx.timer.every(CARD_EVERY, (cx) => { if (!hidden()) this.refreshCard(cx); });
     cx.timer.every(LIST_EVERY, (cx) => { if (!hidden()) this.refreshList(cx); });
-    cx.timer.every(SCAN_EVERY, (cx) => { if (!hidden() && view() === "repo") this.scan(cx); });
     cx.timer.every(EXPIRE_EVERY, (cx) => expireAll(
-      [this.scanFetch, ...Object.values(this.listFetches), ...Object.values(this.cardFetches)], cx));
+      [...Object.values(this.listFetches), ...Object.values(this.cardFetches)], cx));
   }
 
   // Button copy only. The first result after startup posts no toasts.
@@ -191,27 +185,6 @@ export default class PullRequests extends View {
     });
   }
 
-  // The focused terminal's screen and recent history, for the pull requests it
-  // mentions. A focused mod pane has no terminal: the last one stays.
-  scan(cx) {
-    const terminal = (this.terminal = focused()?.terminal ?? this.terminal), repo = this.repo;
-    if (!terminal || !repo || this.scanFetch.loading) return;
-    this.scanFetch.run(cx, async (live, cx) => {
-      try {
-        const r = await hc(["read", terminal, "--lines", "300"]);
-        if (r.code !== 0 || repo !== this.repo) return;
-        const known = (this.known[repo] ??= {});
-        const numbers = mentions(r.stdout, repo).filter((n) => known[n] !== null);
-        for (const n of numbers.slice(0, MENTIONS)) {
-          if (!(n in known)) known[n] = await lookup(repo, n);
-        }
-        if (!live() || repo !== this.repo) return;
-        const mentioned = numbers.map((n) => known[n]).filter(Boolean).slice(0, MENTIONS);
-        if (JSON.stringify(mentioned) !== JSON.stringify(this.mentioned)) { this.mentioned = mentioned; cx.notify(); }
-      } catch { /* the terminal closed, or gh is missing: try again next time */ }
-    });
-  }
-
   where() { return (this.cwd = location(this.cwd)); }
 
   context() { return JSON.stringify([this.where(), focused()?.space]); }
@@ -221,7 +194,6 @@ export default class PullRequests extends View {
   pick(found, space) {
     if (found) { this.spaceRepos[space] = found; remember("spaces", this.spaceRepos); }
     const choice = this.spaceRepos[space] ?? null;
-    if ((choice?.repo ?? null) !== this.repo) this.mentioned = [];
     this.repo = choice?.repo ?? null;
     this.defaultBranch = choice?.defaultBranch ?? null;
   }
@@ -383,14 +355,13 @@ export default class PullRequests extends View {
       && (!q || `#${p.number} ${p.title} ${p.headRefName}`.toLowerCase().includes(q)));
   }
 
-  row(p, t, cx, where = "pr") {
+  row(p, t, cx) {
     const c = checks(p.statusCheckRollup);
     const dot = c.failed.length ? t.ansi1 : c.running ? t.ansi3 : c.total ? t.ansi2 : null;
-    const number = p.state === "MERGED" ? t.ansi5 : p.state === "CLOSED" ? t.ansi1 : t.dim;
-    return h_flex().id(`${where}-${p.number}`).flex_none().px(10).py(6).gap(8).items_start().rounded(7).cursor_pointer()
+    return h_flex().id(`pr-${p.number}`).flex_none().px(10).py(6).gap(8).items_start().rounded(7).cursor_pointer()
       .hover((s) => s.bg(t.hover)).on_click(() => this.open(this.repo, p.number))
       .on_mouse_down("right", () => copyMenu({ repo: this.repo, number: p.number, title: p.title, url: p.url, branch: p.headRefName }, "pointer"))
-      .child(div().flex_none().w(40).text_color(number).child(`#${p.number}`))
+      .child(div().flex_none().w(40).text_color(t.dim).child(`#${p.number}`))
       .child(this.avatar(p.author?.login, 16, cx).mt(1))
       .child(div().flex_1().min_w(0).text_color(p.isDraft ? t.muted : t.foreground).child(p.title))
       .child(h_flex().flex_none().gap(6).items_center().mt(2)
@@ -538,9 +509,6 @@ export default class PullRequests extends View {
 
     return v_flex().id("gh-prs-body").flex_1().min_h(0).overflow_y_scrollbar()
       .child(this.card(t, cx) ?? div())
-      .when(this.mentioned.length > 0, (e) => e.child(v_flex().flex_none().px(6).gap(1)
-        .child(this.heading("In this terminal", t))
-        .children(this.mentioned.map((p) => this.row(p, t, cx, "mentioned")))))
       .child(v_flex().flex_none().px(8).pt(4).pb(6).gap(6)
         .child(this.heading(`Open pull requests${count}`, t).px(2))
         .child(div().id("gh-prs-filter").h(28).px(9).flex().items_center().rounded(7).border_1()
