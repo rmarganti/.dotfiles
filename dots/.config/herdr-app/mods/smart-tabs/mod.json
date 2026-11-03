@@ -1,0 +1,5 @@
+{
+  "place": "none",
+  "title": "Smart Tabs",
+  "cloned_from": { "name": "tabs", "version": "0.1.7" }
+}

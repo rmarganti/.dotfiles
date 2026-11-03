@@ -87,7 +87,7 @@
               "id": "tabs",
               "type": "block",
               "content": {
-                "mod": "tabs"
+                "mod": "smart-tabs"
               },
               "window_drag": true
             },
