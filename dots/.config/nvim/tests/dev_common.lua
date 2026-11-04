@@ -62,6 +62,21 @@ for _, enabled in ipairs({ false, true }) do
     assert(sidekick_opts.nes.enabled == enabled)
     assert(sidekick_opts.copilot.status.enabled == enabled)
     assert(sidekick_opts.cli.tools.copilot == false)
+    local hc, herdr = vim.env.HC_TERMINAL_ID, vim.env.HERDR_ENV
+    for _, case in ipairs({
+        { hc = 't7', herdr = '1', backend = 'hc', create = 'split', mux = true },
+        { herdr = '1', backend = 'herdr', create = 'split', mux = true },
+        { backend = 'herdr', create = 'terminal', mux = false },
+    }) do
+        vim.env.HC_TERMINAL_ID, vim.env.HERDR_ENV = case.hc, case.herdr
+        sidekick.config()
+        assert(sidekick_opts.cli.mux.backend == case.backend)
+        assert(sidekick_opts.cli.mux.create == case.create)
+        assert(sidekick_opts.cli.mux.enabled == case.mux)
+        assert(sidekick_opts.cli.watch)
+        assert(sidekick_opts.cli.picker == 'telescope')
+    end
+    vim.env.HC_TERMINAL_ID, vim.env.HERDR_ENV = hc, herdr
 
     local cmp = spec('cmp')
     assert(cmp.dependencies[#cmp.dependencies].cond == enabled)

@@ -26,9 +26,11 @@ function M.config()
         cli = {
             watch = true, -- notify Neovim of file changes done by AI CLI tools
             mux = {
-                enabled = true, -- persistent sessions through Herdr
-                backend = 'herdr',
-                create = vim.env.HERDR_ENV == '1' and 'split' or 'terminal',
+                enabled = vim.env.HC_TERMINAL_ID ~= nil or vim.env.HERDR_ENV == '1',
+                backend = vim.env.HC_TERMINAL_ID and 'hc' or 'herdr',
+                -- Outside either Herdr, use Sidekick's embedded terminal backend.
+                create = (vim.env.HC_TERMINAL_ID or vim.env.HERDR_ENV == '1') and 'split'
+                    or 'terminal',
                 dump = 2000,
             },
             picker = 'telescope',
