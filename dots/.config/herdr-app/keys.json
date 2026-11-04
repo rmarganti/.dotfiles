@@ -64,7 +64,9 @@
     "ctrl-8": "space.select:8",
     "ctrl-9": "space.select:9",
     "cmd-g": "gh-prs.toggle",
-    "cmd-shift-g": "gh-prs.inbox"
+    "cmd-shift-g": "gh-prs.inbox",
+    "cmd-shift-f": "pluck.copy",
+    "cmd-shift-u": "pluck.open"
   },
   "terminal": {
     "cmd-c": "terminal.copy",

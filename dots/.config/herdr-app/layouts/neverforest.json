@@ -234,6 +234,14 @@
       },
       "edge": "top",
       "align": "center"
+    },
+    {
+      "id": "pluck",
+      "content": {
+        "mod": "pluck"
+      },
+      "edge": "bottom",
+      "align": "end"
     }
   ]
 }

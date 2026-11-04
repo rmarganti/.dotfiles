@@ -75,6 +75,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/herdr-app/mods/gh-prs" = {}
 "~/.config/herdr-app/mods/launchables" = {}
 "~/.config/herdr-app/mods/navigator" = {}
+"~/.config/herdr-app/mods/pluck" = { source = "~/code/rmarganti/herdr-app-pluck/mod" }
 "~/.config/herdr-app/mods/smart-tabs" = {}
 "~/.config/herdr-app/themes/neverforest.json" = {}
 "~/.config/hunk/config.toml" = {}
