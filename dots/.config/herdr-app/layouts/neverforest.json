@@ -110,6 +110,7 @@
         {
           "id": "work-body",
           "type": "row",
+          "background": "#15181a",
           "children": [
             {
               "id": "main",
@@ -143,6 +144,7 @@
             {
               "id": "panel",
               "type": "column",
+              "background": "canvas",
               "children": [
                 {
                   "id": "panel-body",
