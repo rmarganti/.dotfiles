@@ -9,15 +9,15 @@ const PX = 3; // one art pixel, in logical px
 const HEIGHT = 64;
 const WATER = 44; // y of the waterline
 
-// Neverforest. Body and beak are warmed-up takes on its yellow and red.
+// A duck at dusk, from Neverforest: slate body, cyan eye, deep teal beak.
 const C = {
-  Y: "#dbbc7f", // body
-  L: "#e6d1a7", // highlight
-  S: "#b49a64", // shade
-  D: "#9c8862", // deep shade, closed eye
-  O: "#e69875", // beak
-  o: "#c8785c", // beak shade
-  E: "#15181a", // eye
+  Y: "#4b565c", // body
+  L: "#5f6b70", // highlight
+  S: "#3a4347", // shade
+  D: "#2e3539", // deep shade, closed eye
+  O: "#527a86", // beak
+  o: "#41626c", // beak shade
+  E: "#aeccc6", // eye
 };
 
 // Facing right. `E` is the eye; it closes while the duck dozes.
@@ -105,6 +105,9 @@ export default class Duck extends View {
     if (this.x === null && this.width > 0) this.x = Math.round((this.width - DUCK_W) / 2) - 10;
     const x = narrow ? Math.round((this.width - DUCK_W) / 2) : this.x ?? 0;
     const asleep = !working && !blocked;
+    // Swimming, it faces where it's going. Stopped, it turns to look into the
+    // pond rather than at the nearer edge.
+    const flip = working ? this.flip : x + DUCK_W / 2 > (this.width - 34) / 2;
     const water = "#87b5c1";
 
     // Above the waterline: the duck bobbing, with what it's thinking.
@@ -134,7 +137,7 @@ export default class Duck extends View {
           .loop("top", working
             ? { from: DUCK_TOP, to: DUCK_TOP + 2, period: 900 }
             : { from: DUCK_TOP, to: DUCK_TOP + 1, period: 4200 })
-          .children(pixels(DUCK, { flip: this.flip, asleep })),
+          .children(pixels(DUCK, { flip, asleep })),
       )
       // A wake trailing behind while it paddles.
       .when(working, (el) =>
@@ -142,19 +145,19 @@ export default class Duck extends View {
           div()
             .absolute()
             .top(WATER + 2)
-            .left(this.flip ? DUCK_W - 2 : -10)
+            .left(flip ? DUCK_W - 2 : -10)
             .w(12)
             .h(4)
             .loop("opacity", { from: 0.15, to: 0.7, period: 700 })
-            .child(dot(this.flip ? 2 : 0, 0, 8, water))
-            .child(dot(this.flip ? 0 : 4, 3, 8, water)),
+            .child(dot(flip ? 2 : 0, 0, 8, water))
+            .child(dot(flip ? 0 : 4, 3, 8, water)),
         ),
       )
       .when(blocked, (el) =>
         el.child(
           div()
             .absolute()
-            .left(this.flip ? 2 * PX : DUCK_W - 4 * PX)
+            .left(flip ? 2 * PX : DUCK_W - 4 * PX)
             .top(DUCK_TOP - 5 * PX)
             .w(PX)
             .h(5 * PX)
@@ -167,7 +170,7 @@ export default class Duck extends View {
         el.child(
           div()
             .absolute()
-            .left(this.flip ? -4 : DUCK_W - 6)
+            .left(flip ? -4 : DUCK_W - 6)
             .top(DUCK_TOP - 16)
             .text_size(9)
             .font_family("JetBrains Mono")
@@ -179,7 +182,7 @@ export default class Duck extends View {
         el.child(
           div()
             .absolute()
-            .left(this.flip ? -22 : DUCK_W - 14)
+            .left(flip ? -22 : DUCK_W - 14)
             .top(DUCK_TOP - 16)
             .text_size(9)
             .font_family("JetBrains Mono")
