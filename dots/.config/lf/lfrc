@@ -16,6 +16,18 @@ set preview true
 # Commands
 # --------------------------------
 
+# Edit text and empty files in Neovim; use OS associations for binary files.
+cmd open ${{
+	if [ ! -s "$f" ] || [ "$(file --brief --mime-encoding -- "$f")" != binary ]; then
+		nvim -- "$f"
+	else
+		case "$(uname -s)" in
+			Darwin) open "$f" ;;
+			*) xdg-open "$f" ;;
+		esac
+	fi
+}}
+
 # `z` command to jump to a directory
 cmd z %{{
 	result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
