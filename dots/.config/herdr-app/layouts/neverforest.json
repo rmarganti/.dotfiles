@@ -40,7 +40,7 @@
               "id": "agents",
               "type": "block",
               "content": {
-                "mod": "agents"
+                "mod": "duck-agents"
               },
               "size": {
                 "weight": 1
@@ -48,16 +48,6 @@
               "min": 90
             }
           ]
-        },
-        {
-          "id": "duck",
-          "type": "block",
-          "content": {
-            "mod": "duck"
-          },
-          "size": {
-            "px": 64
-          }
         },
         {
           "id": "sidebar-footer",
