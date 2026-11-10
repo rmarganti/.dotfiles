@@ -4,6 +4,12 @@ Changes to `layout.json`, newest first. Run `./layout_to_svg.py layout.json`
 to refresh `layout.svg`, and `git log -p layout.json` to see the full diff
 for any entry.
 
+## 2026-11-09
+
+- Add herdr-app shortcuts to the NUM layer:
+  - W/E send Cmd+[/] for the previous/next agent.
+  - S/D send Option+Cmd+[/] for the previous/next space.
+
 ## 2026-11-06
 
 - Holding Space turns on the Nav layer, so navigating takes one thumb.
