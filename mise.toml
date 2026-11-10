@@ -55,7 +55,6 @@ dotfiles.default_mode = "symlink"
 "~/.claude/skills/bro" = { source = "dots/.agents/skills/bro" }
 "~/.claude/skills/codebase-design" = { source = "dots/.agents/skills/codebase-design" }
 "~/.claude/skills/grill-me" = { source = "dots/.agents/skills/grill-me" }
-"~/.claude/skills/herdr" = { source = "dots/.agents/skills/herdr" }
 "~/.claude/skills/improve-codebase-architecture" = { source = "dots/.agents/skills/improve-codebase-architecture" }
 "~/.claude/skills/librarian" = { source = "dots/.agents/skills/librarian" }
 "~/.claude/skills/make-a-prd" = { source = "dots/.agents/skills/make-a-prd" }
