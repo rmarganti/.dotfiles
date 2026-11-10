@@ -113,20 +113,6 @@ fi
 # Misc Interactive Config
 # ------------------------------------------------
 
-# https://github.com/ajeetdsouza/zoxide (cached)
-# Cache generated shell integration so startup only sources a file. Regenerate
-# when the zoxide binary is newer than the cached init script.
-_zoxide_bin=$(command -v zoxide 2>/dev/null)
-if [[ -n "$_zoxide_bin" ]]; then
-    _zoxide_cache="$HOME/.cache/zoxide_init.bash"
-    if [[ ! -f "$_zoxide_cache" || "$_zoxide_bin" -nt "$_zoxide_cache" ]]; then
-        mkdir -p "$(dirname "$_zoxide_cache")"
-        zoxide init bash > "$_zoxide_cache" 2>/dev/null || true
-    fi
-    [ -f "$_zoxide_cache" ] && . "$_zoxide_cache"
-    unset _zoxide_bin _zoxide_cache
-fi
-
 # gh completion — cached to avoid forking gh binary every shell start.
 # Regenerate the completion file if it is missing or older than the gh binary.
 _gh_bin=$(command -v gh 2>/dev/null)
@@ -157,4 +143,19 @@ if [[ -n "$_starship_bin" ]]; then
     fi
     [ -f "$_starship_cache" ] && . "$_starship_cache"
     unset _starship_cache _starship_bin
+fi
+
+# https://github.com/ajeetdsouza/zoxide (cached)
+# Keep this last so prompt integrations don't hide zoxide's hook from its doctor.
+# Cache generated shell integration so startup only sources a file. Regenerate
+# when the zoxide binary is newer than the cached init script.
+_zoxide_bin=$(command -v zoxide 2>/dev/null)
+if [[ -n "$_zoxide_bin" ]]; then
+    _zoxide_cache="$HOME/.cache/zoxide_init.bash"
+    if [[ ! -f "$_zoxide_cache" || "$_zoxide_bin" -nt "$_zoxide_cache" ]]; then
+        mkdir -p "$(dirname "$_zoxide_cache")"
+        zoxide init bash > "$_zoxide_cache" 2>/dev/null || true
+    fi
+    [ -f "$_zoxide_cache" ] && . "$_zoxide_cache"
+    unset _zoxide_bin _zoxide_cache
 fi
