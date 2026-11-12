@@ -340,6 +340,10 @@ def label_for(code: str, layer_names: list[str], macros: list[str]) -> Label:
 
     if fn in MOD_FUNCS:
         mods, base = unwrap_mods(code)
+        if base in NONE:
+            if mods == {CTL, ALT, SFT, GUI}:
+                return Label("Hyper", mods=mods_glyphs(mods), kind="mod")
+            return Label(mods_glyphs(mods), kind="mod")
         glyphs, key = combo_parts(mods, base)
         return Label(key, mods=glyphs, kind="combo" if glyphs else "key")
     if fn == "MO":

@@ -4,6 +4,12 @@ Changes to `layout.json`, newest first. Run `./layout_to_svg.py layout.json`
 to refresh `layout.svg`, and `git log -p layout.json` to see the full diff
 for any entry.
 
+## 2026-11-12
+
+- The unused left thumb key now holds Hyper (Ctrl+Opt+Shift+Cmd).
+  - It stays available on SYM, NUM and NAV through transparent bindings.
+- The SVG labels the modifier-only chord as Hyper.
+
 ## 2026-11-09
 
 - Add herdr-app shortcuts to the NUM layer:
