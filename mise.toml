@@ -97,6 +97,14 @@ dotfiles.default_mode = "symlink"
 "~/.pi" = {}
 "~/.plannotator/config.json" = {}
 
+[tasks.herdr-gitview-install]
+description = "Install the pinned upstream Gitview trial (preserves Herdr symlinks and keys)"
+run = "python3 utils/herdr-gitview.py install"
+
+[tasks.herdr-gitview-uninstall]
+description = "Remove the Gitview trial and restore the previous Changes content"
+run = "python3 utils/herdr-gitview.py uninstall"
+
 [tasks.bootstrap]
 run = '''
 mkdir -p ~/.claude/skills ~/.config ~/.local/bin
