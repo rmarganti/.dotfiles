@@ -4,6 +4,10 @@ A pull requests panel beside Files and Changes. It follows the focused terminal:
 
 ![gh-prs](preview.png)
 
+## Local toolbar integration
+
+Neverforest renders Files, Changes, CI, and PRs together in `smart-tabs/main.js`, using one button builder for consistent spacing and active styling. The PR badge reads `gh-prs.inbox` from shared state; its icon uses `data/gh-prs/icons/pull.svg`, written by this mod. The layout keeps a zero-width `{ button: true, headless: true }` copy of `gh-prs` alive for inbox polling and the existing keyboard commands. Omitting `headless` keeps the standalone button described below.
+
 ## What you see
 
 - **The PRs button**, at the right end of the tab bar after Files and Changes: a 26px pill (6px radius, 12px text) with a pull request icon and "PRs", `selected` while the panel shows, `chrome` otherwise. With review requests waiting it reads "PRs · 4", the count semibold in `accent`.

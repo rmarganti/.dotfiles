@@ -95,13 +95,14 @@
               "id": "gh-prs-button",
               "type": "block",
               "size": {
-                "px": 88
+                "px": 0
               },
               "window_drag": true,
               "content": {
                 "mod": "gh-prs",
                 "props": {
-                  "button": true
+                  "button": true,
+                  "headless": true
                 }
               }
             }
@@ -167,6 +168,14 @@
                             "mod": "changes"
                           }
                         }
+                      }
+                    },
+                    {
+                      "id": "ci-dash",
+                      "type": "block",
+                      "content": {
+                        "mod": "ci-dash",
+                        "props": { "panel": true }
                       }
                     },
                     {

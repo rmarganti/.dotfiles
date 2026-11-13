@@ -71,6 +71,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/herdr-app/settings.json" = {}
 "~/.config/herdr-app/keys.json" = {}
 "~/.config/herdr-app/layouts/neverforest.json" = {}
+"~/.config/herdr-app/mods/ci-dash" = {}
 "~/.config/herdr-app/mods/duck-agents" = {}
 "~/.config/herdr-app/mods/gh-prs" = {}
 "~/.config/herdr-app/mods/launchables" = {}

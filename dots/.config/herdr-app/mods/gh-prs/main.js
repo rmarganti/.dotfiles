@@ -1,6 +1,6 @@
 // GitHub pull requests beside Changes: the focused terminal's branch PR and
-// the repository's open PRs. The tab bar button is this mod with props
-// { button: true }. See RECIPE.md.
+// the repository's open PRs. { button: true, headless: true } keeps the
+// inbox and shortcuts alive while smart-tabs draws the button. See RECIPE.md.
 
 import { View, div, svg, image } from "gpui-kit";
 import { v_flex, h_flex, InputState, Input } from "gpui-base";
@@ -116,7 +116,7 @@ function remember(key, value) {
 
 export default class PullRequests extends View {
   init(_props, cx) {
-    const { button, pr, copyMenu: copying, overlay } = props() ?? {};
+    const { button, headless, pr, copyMenu: copying, overlay } = props() ?? {};
     if (pr) { this.dialog = new Dialog(pr, overlay, cx); return; }
     if (copying) { this.copying = { ...copying, overlay }; return; }
     cx.spawn(async (cx) => { await icons(); this.icons = true; cx.notify(); });
@@ -125,6 +125,7 @@ export default class PullRequests extends View {
       const panels = shared("workspace.panels") ?? ["files", "changes"];
       if (!panels.includes(MOD)) setShared("workspace.panels", [...panels, MOD]);
       this.button = true;
+      this.headless = Boolean(headless);
       // The button is always shown, so it gets the keys and runs the inbox.
       this.seen = null;
       this.request = shared(INBOX_REQUEST);
@@ -438,7 +439,7 @@ export default class PullRequests extends View {
       // The panel's Refresh and Inbox tab ask through shared state.
       const request = shared(INBOX_REQUEST);
       if (request !== this.request) { this.request = request; this.fetchInbox(cx); }
-      return this.toolbar(t);
+      return this.headless ? div() : this.toolbar(t);
     }
 
 
