@@ -80,7 +80,6 @@ dotfiles.default_mode = "symlink"
 "~/.config/herdr-app/mods/smart-tabs" = {}
 "~/.config/herdr-app/themes/neverforest.json" = {}
 "~/.config/hunk/config.toml" = {}
-"~/.config/hunk/extensions" = {}
 "~/.config/karabiner" = {}
 "~/.config/lazygit" = {}
 "~/.config/lf" = {}
