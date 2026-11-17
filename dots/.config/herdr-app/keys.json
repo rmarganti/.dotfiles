@@ -63,6 +63,7 @@
     "ctrl-7": "space.select:7",
     "ctrl-8": "space.select:8",
     "ctrl-9": "space.select:9",
+    "cmd-f": "terminal.search",
     "cmd-g": "gh-prs.toggle",
     "cmd-shift-g": "gh-prs.inbox",
     "cmd-shift-f": "pluck.copy",
