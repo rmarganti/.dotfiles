@@ -1,10 +1,10 @@
 {
   "global": {
     "cmd-q": "app.quit",
-    "cmd-h": "navigator.left",
-    "cmd-j": "navigator.down",
-    "cmd-k": "navigator.up",
-    "cmd-l": "navigator.right",
+    "cmd-h": "pane.go:left",
+    "cmd-j": "pane.go:down",
+    "cmd-k": "pane.go:up",
+    "cmd-l": "pane.go:right",
     "cmd-alt-h": "pane.swap:left",
     "cmd-alt-j": "pane.swap:down",
     "cmd-alt-k": "pane.swap:up",
@@ -40,7 +40,7 @@
     "shift-f2": "space.rename",
     "cmd-/": "app.help",
     "cmd-shift-/": "app.help",
-    "cmd-b": "navigator.sidebar",
+    "cmd-b": "duck-agents.toggle-rail",
     "cmd-=": "app.zoom_in",
     "cmd-+": "app.zoom_in",
     "cmd--": "app.zoom_out",

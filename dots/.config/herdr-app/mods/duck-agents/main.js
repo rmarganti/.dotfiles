@@ -5,7 +5,7 @@
 import { View, div, svg } from "gpui-kit";
 import { v_flex, h_flex } from "gpui-base";
 import { duck, hash, HAT_NAMES } from "./ducks.js";
-import { agents, terminals, panes, focused, spaces, run, theme, shared, setShared, setAgentOrder, openOverlay, closeOverlay, props, window, layout } from "herdr";
+import { agents, terminals, panes, focused, spaces, run, theme, shared, setShared, setAgentOrder, openOverlay, closeOverlay, props, window, layout, nextCommand } from "herdr";
 
 function find(node, id) {
   if (node?.id === id) return node;
@@ -21,11 +21,16 @@ const narrow = () => (find(layout(), "sidebar")?.size?.px ?? Infinity) < 160;
 
 // To the rail (on macOS wide enough for the traffic lights), or back to the width it had.
 function toggleSidebar() {
-  const width = find(layout(), "sidebar")?.size?.px;
-  if (!narrow()) setShared("sidebar.width", width);
+  const sidebar = find(layout(), "sidebar");
+  if (!sidebar) return;
+  if (sidebar.hidden) run("layout.show", { id: "sidebar" });
+  const width = sidebar.size?.px;
+  const collapsed = (width ?? Infinity) < 160;
+  if (!collapsed && width != null) setShared("sidebar.width", width);
   // Mods edited before the rail went by width still read the flag.
-  setShared("sidebar.collapsed", !narrow());
-  run("layout.resize", { id: "sidebar", px: narrow() ? (shared("sidebar.width") ?? 268) : window()?.platform === "macos" ? 76 : 44 });
+  setShared("sidebar.collapsed", !collapsed);
+  const rail = window()?.platform === "macos" ? 76 : 44;
+  run("layout.resize", { id: "sidebar", px: collapsed ? (shared("sidebar.width") ?? 268) : rail });
 }
 
 const clean = (s) => (s ?? "").replace(/^[^\p{L}\p{N}]+/u, "").trim();
@@ -85,6 +90,13 @@ export default class Agents extends View {
     // Each agent's hat, kept for its life: siblings in a space get different ones.
     this.hats = JSON.parse(localStorage.getItem("hats") ?? "{}");
     cx.timer.every(30000, (cx) => cx.notify());
+    cx.spawn(async (cx) => {
+      for (;;) {
+        if (await nextCommand() === "toggle-rail") toggleSidebar();
+        // Yield through the view context so reloading retires this listener.
+        cx.notify();
+      }
+    });
   }
 
   // Stamps agents whose state changed. Done and idle count as one: looking at a
@@ -329,17 +341,22 @@ export default class Agents extends View {
       // An agent on another machine (`vps/t7`) says which.
       const machine = a.address.includes("/") ? a.address.split("/")[0] : null;
       if (collapsed) {
-        return h_flex()
-          .id(`ag-${a.address}`)
-          .h(26)
-          .px(8)
-          .flex_none()
-          .items_center()
-          .gap(4)
-          .hover((s) => s.bg(t.hover))
-          .on_click(() => run("pane.focus", { pane: a.pane }))
-          .child(div().flex_1().min_w(0).whitespace_nowrap().text_right().text_color(t.muted).child(String(i + 1)))
-          .child(h_flex().w(14).flex_none().items_center().justify_center().child(this.status(t, a, true)));
+        // Match Spaces: center the number on the rail and take status out of flow.
+        // Our spinner and badge need a wider tile than the Spaces glyphs.
+        return h_flex().flex_none().justify_center().child(
+          h_flex()
+            .id(`ag-${a.address}`)
+            .relative()
+            .w(44)
+            .h(26)
+            .rounded(6)
+            .justify_center()
+            .items_center()
+            .hover((s) => s.bg(t.hover))
+            .on_click(() => run("pane.focus", { pane: a.pane }))
+            .child(div().text_color(t.muted).child(String(i + 1)))
+            .child(h_flex().absolute().right(0).top(0).h_full().w(14).items_center().justify_center().child(this.status(t, a, true))),
+        );
       }
       const when = this.since(a);
       const idle = a.status === "idle" && !a.focused;
