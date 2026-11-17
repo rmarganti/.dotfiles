@@ -1,7 +1,8 @@
 {
-  "zoom": 1.0,
+  "zoom": 1,
   "theme": "neverforest",
   "sounds": {
     "enabled": true
-  }
+  },
+  "telemetry": false
 }
