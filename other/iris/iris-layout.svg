@@ -95,7 +95,7 @@
 <g class="k-key"><rect class="cap" x="697.5" y="175.5" width="55.0" height="55.0" rx="7"/><text class="tap" x="725.0" y="203.0" font-size="18">,</text></g>
 <g class="k-key"><rect class="cap" x="639.5" y="182.8" width="55.0" height="55.0" rx="7"/><text class="tap" x="667.0" y="210.2" font-size="18">M</text></g>
 <g class="k-key"><rect class="cap" x="581.5" y="190.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="609.0" y="217.5" font-size="18">N</text></g>
-<g class="k-key"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">R⌥</text></g>
+<g class="k-key"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">⌥</text></g>
 <g class="k-layer"><rect class="cap" x="610.5" y="255.2" width="55.0" height="55.0" rx="7"/><text class="tap" x="638.0" y="276.8" font-size="15">Sym</text><text class="hold" x="638.0" y="303.2">hold</text></g>
 <g class="k-key" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="299.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="326.5" font-size="11">Enter</text></g>
 <g class="k-mod" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="241.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="268.5" font-size="18">R⌥</text></g>
@@ -155,7 +155,7 @@
 <g class="k-key"><rect class="cap" x="697.5" y="175.5" width="55.0" height="55.0" rx="7"/><text class="tap" x="725.0" y="203.0" font-size="18">}</text></g>
 <g class="k-key"><rect class="cap" x="639.5" y="182.8" width="55.0" height="55.0" rx="7"/><text class="tap" x="667.0" y="210.2" font-size="18">)</text></g>
 <g class="k-key"><rect class="cap" x="581.5" y="190.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="609.0" y="217.5" font-size="18">&gt;</text></g>
-<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">R⌥</text></g>
+<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">⌥</text></g>
 <g class="k-layer k-held"><rect class="cap" x="610.5" y="255.2" width="55.0" height="55.0" rx="7"/><text class="tap" x="638.0" y="276.8" font-size="15">Sym</text><text class="hold" x="638.0" y="303.2">held</text></g>
 <g class="k-trns" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="299.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="326.5" font-size="11">Enter</text></g>
 <g class="k-trns" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="241.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="268.5" font-size="18">R⌥</text></g>
@@ -215,7 +215,7 @@
 <g class="k-key"><rect class="cap" x="697.5" y="175.5" width="55.0" height="55.0" rx="7"/><text class="tap" x="725.0" y="203.0" font-size="18">2</text></g>
 <g class="k-key"><rect class="cap" x="639.5" y="182.8" width="55.0" height="55.0" rx="7"/><text class="tap" x="667.0" y="210.2" font-size="18">1</text></g>
 <g class="k-key"><rect class="cap" x="581.5" y="190.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="609.0" y="217.5" font-size="18">,</text></g>
-<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">R⌥</text></g>
+<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">⌥</text></g>
 <g class="k-key"><rect class="cap" x="610.5" y="255.2" width="55.0" height="55.0" rx="7"/><text class="tap" x="638.0" y="282.8" font-size="18">0</text></g>
 <g class="k-trns" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="299.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="326.5" font-size="11">Enter</text></g>
 <g class="k-none" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="241.0" width="55.0" height="55.0" rx="7"/></g>
@@ -275,7 +275,7 @@
 <g class="k-combo"><rect class="cap" x="697.5" y="175.5" width="55.0" height="55.0" rx="7"/><text class="mods" x="725.0" y="190.5">⌘</text><text class="tap" x="725.0" y="209.0" font-size="18">↑</text></g>
 <g class="k-combo"><rect class="cap" x="639.5" y="182.8" width="55.0" height="55.0" rx="7"/><text class="mods" x="667.0" y="197.8">⌘</text><text class="tap" x="667.0" y="216.2" font-size="18">↓</text></g>
 <g class="k-combo"><rect class="cap" x="581.5" y="190.0" width="55.0" height="55.0" rx="7"/><text class="mods" x="609.0" y="205.0">⌘</text><text class="tap" x="609.0" y="223.5" font-size="18">←</text></g>
-<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">R⌥</text></g>
+<g class="k-trns"><rect class="cap" x="668.5" y="248.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="696.0" y="269.5" font-size="18">⌫</text><text class="hold" x="696.0" y="296.0">⌥</text></g>
 <g class="k-combo"><rect class="cap" x="610.5" y="255.2" width="55.0" height="55.0" rx="7"/><text class="mods" x="638.0" y="270.2">⌥</text><text class="tap" x="638.0" y="288.8" font-size="18">⌫</text></g>
 <g class="k-trns" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="299.0" width="55.0" height="55.0" rx="7"/><text class="tap" x="400.2" y="326.5" font-size="11">Enter</text></g>
 <g class="k-none" transform="rotate(-30 464 0.0)"><rect class="cap" x="372.7" y="241.0" width="55.0" height="55.0" rx="7"/></g>

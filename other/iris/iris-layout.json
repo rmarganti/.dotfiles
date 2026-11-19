@@ -77,7 +77,7 @@
       "KC_N",
       "KC_NO",
       "KC_NO",
-      "MT(MOD_RALT,KC_BSPC)",
+      "MT(MOD_LALT,KC_BSPC)",
       "MO(1)",
       "KC_ENT",
       "KC_RALT"
