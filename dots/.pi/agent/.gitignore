@@ -11,3 +11,4 @@ settings.json
 state
 trust.json
 *.local.json
+/pi-web-access/
