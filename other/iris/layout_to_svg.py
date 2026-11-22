@@ -7,6 +7,7 @@ as "{KC_LGUI,KC_LEFT}" is "⌘←", and tap/hold keys show both actions.
 
 Usage:
     layout_to_svg.py layout.json [-o out.svg] [--names Base,Sym,Num,Nav]
+                     [--columns N] [--size WxH] [--theme auto|light|dark]
 """
 
 from __future__ import annotations
@@ -384,6 +385,7 @@ GAP = 3  # px between keycaps
 PAD = 24
 TITLE_H = 40
 PANEL_GAP = 28
+COL_GAP = 72  # px between side-by-side layers
 
 STYLE = """
   svg { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; }
@@ -406,7 +408,9 @@ STYLE = """
   .k-held .cap { fill: #f08c1a; stroke: #c96f0c; }
   .k-held .tap, .k-held .hold { fill: #ffffff; }
   .legend { fill: #6b7280; font-size: 11px; }
-  @media (prefers-color-scheme: dark) {
+"""
+
+DARK_STYLE = """
     .bg { fill: #16181d; }
     .title { fill: #e6e8eb; }
     .subtitle, .hold, .legend { fill: #8b929c; }
@@ -422,8 +426,16 @@ STYLE = """
     .k-trns .cap { fill: #1c1e23; stroke: #3a3f48; }
     .k-trns .tap { fill: #5d636c; }
     .k-held .cap { fill: #d9780f; stroke: #f08c1a; }
-  }
 """
+
+
+def style_for(theme: str) -> str:
+    """CSS for "light", "dark", or "auto" (follow prefers-color-scheme)."""
+    if theme == "light":
+        return STYLE
+    if theme == "dark":
+        return STYLE + DARK_STYLE
+    return STYLE + "  @media (prefers-color-scheme: dark) {" + DARK_STYLE + "  }\n"
 
 
 def font_size(text: str) -> float:
@@ -480,7 +492,13 @@ def holders(layers: list[list[str]], target: int) -> list[list[int]]:
     return ways
 
 
-def render(layout: dict, layer_names: list[str]) -> str:
+def render(layout: dict, layer_names: list[str], columns: int = 1,
+           canvas: tuple[int, int] | None = None, theme: str = "auto") -> str:
+    """Draw every layer in a grid `columns` wide.
+
+    With `canvas`, the grid is scaled to fit and centred on a canvas of that
+    exact pixel size (e.g. a desktop wallpaper).
+    """
     keys = parse_kle(KLE)
     layers: list[list[str]] = layout["layers"]
     macros: list[str] = layout.get("macros", [])
@@ -491,22 +509,35 @@ def render(layout: dict, layer_names: list[str]) -> str:
     board_w = (max(xs) - min_x) * U
     board_h = (max(ys) - min_y) * U
     panel_h = TITLE_H + board_h
+    rows = math.ceil(len(layers) / columns)
 
-    width = board_w + PAD * 2
-    height = PAD + len(layers) * (panel_h + PANEL_GAP) + 20 + PAD
+    width = PAD * 2 + columns * board_w + (columns - 1) * COL_GAP
+    height = PAD + rows * (panel_h + PANEL_GAP) + 20 + PAD
     title = layout.get("name", "Keyboard layout")
 
+    if canvas:
+        cw, ch = canvas
+        scale = min(cw / width, ch / height)
+        ox, oy = (cw - width * scale) / 2, (ch - height * scale) / 2
+        frame = (f'width="{cw}" height="{ch}" viewBox="0 0 {cw} {ch}"',
+                 f'<rect class="bg" width="{cw}" height="{ch}"/>',
+                 f'<g transform="translate({ox:.1f} {oy:.1f}) scale({scale:.4f})">')
+    else:
+        frame = (f'width="{width:.0f}" height="{height:.0f}" viewBox="0 0 {width:.0f} {height:.0f}"',
+                 f'<rect class="bg" width="{width:.0f}" height="{height:.0f}"/>', "<g>")
+
     out = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}" height="{height:.0f}" '
-        f'viewBox="0 0 {width:.0f} {height:.0f}">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" {frame[0]}>',
         f"<title>{escape(title)}</title>",
-        f"<style>{STYLE}</style>",
-        f'<rect class="bg" width="{width:.0f}" height="{height:.0f}"/>',
+        f"<style>{style_for(theme)}</style>",
+        frame[1],
+        frame[2],
     ]
 
     base_labels = [label_for(c, layer_names, macros) for c in layers[0]]
     for li, layer in enumerate(layers):
-        top = PAD + li * (panel_h + PANEL_GAP)
+        top = PAD + (li // columns) * (panel_h + PANEL_GAP)
+        left = PAD + (li % columns) * (board_w + COL_GAP)
         name = layer_names[li] if li < len(layer_names) else f"Layer {li}"
         ways = holders(layers, li) if li else []
         held = {i for way in ways for i in way}
@@ -521,11 +552,11 @@ def render(layout: dict, layer_names: list[str]) -> str:
             else:
                 descs.append(" + ".join(key_name(i) for i in way))
         how = "hold " + " or ".join(dict.fromkeys(descs)) if descs else ""
-        out.append(f'<text class="title" x="{PAD}" y="{top + 22}">{li} · {escape(name)}</text>')
+        out.append(f'<text class="title" x="{left}" y="{top + 22}">{li} · {escape(name)}</text>')
         if how:
-            out.append(f'<text class="subtitle" x="{PAD + 14 + 10 * len(name) + 40}" y="{top + 22}">'
+            out.append(f'<text class="subtitle" x="{left + 14 + 10 * len(name) + 40}" y="{top + 22}">'
                        f"{escape(how)}</text>")
-        out.append(f'<g transform="translate({PAD - min_x * U:.1f} {top + TITLE_H - min_y * U:.1f})">')
+        out.append(f'<g transform="translate({left - min_x * U:.1f} {top + TITLE_H - min_y * U:.1f})">')
         for idx, key in sorted(keys.items()):
             code = layer[idx] if idx < len(layer) else "KC_NO"
             lbl = label_for(code, layer_names, macros)
@@ -546,6 +577,7 @@ def render(layout: dict, layer_names: list[str]) -> str:
         "Small text = action when held  ·  dashed = falls through to base  ·  "
         "orange = key holding this layer  ·  green = shortcut / combo  ·  blue = modifier</text>"
     )
+    out.append("</g>")
     out.append("</svg>")
     return "\n".join(out) + "\n"
 
@@ -555,7 +587,12 @@ def main() -> None:
     ap.add_argument("layout", type=Path, help="VIA layout export (.json)")
     ap.add_argument("-o", "--output", type=Path, help="output .svg (default: next to the input)")
     ap.add_argument("--names", default="Base,Sym,Num,Nav", help="comma-separated layer names (default: %(default)s)")
+    ap.add_argument("--columns", type=int, default=1, help="layers per row (default: %(default)s)")
+    ap.add_argument("--size", metavar="WxH", help="fit and centre on a canvas this many pixels, e.g. 3440x1440")
+    ap.add_argument("--theme", choices=["auto", "light", "dark"], default="auto",
+                    help="colours; auto follows the viewer's light/dark setting (default: %(default)s)")
     args = ap.parse_args()
+    canvas = tuple(int(v) for v in args.size.lower().split("x")) if args.size else None
 
     layout = json.loads(args.layout.read_text())
     n = len(layout["layers"])
@@ -563,7 +600,7 @@ def main() -> None:
     names += ["Base" if i == 0 else f"Layer {i}" for i in range(len(names), n)]
 
     out = args.output or args.layout.with_suffix(".svg")
-    out.write_text(render(layout, names))
+    out.write_text(render(layout, names, args.columns, canvas, args.theme))
     print(out)
 
 
