@@ -11,6 +11,9 @@ for any entry.
 - Add RGB matrix controls to the SYM layer's left number row:
   toggle, previous/next effect, and brightness down/up.
 - The SVG labels the RGB matrix keycodes.
+- Upgrade the firmware from Keebio's `rev6a` to `rev6b` (current QMK), so the
+  `RM_*` RGB keycodes work. The layout now targets the Rev. 6b USB ID. See
+  `README.md` for building and flashing.
 
 ## 2026-11-12
 
