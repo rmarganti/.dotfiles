@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Render the Iris layout as a PNG wallpaper sized for the main display.
 #
-# Usage: make_wallpaper.sh [-s WxH] [-t dark|light] [-o out.png] [--set]
+# Usage: iris-make-wallpaper.sh [-s WxH] [-t dark|light] [-o out.png] [--set]
 #   -s     canvas size (default: the main display's native resolution)
 #   -t     colour theme (default: dark)
-#   -o     output file (default: ~/Pictures/iris-wallpaper-<theme>.png)
+#   -o     output file (default: iris-wallpaper-<theme>-<W>x<H>.png next to this script)
 #   --set  also make it the desktop picture
 set -euo pipefail
 
@@ -28,7 +28,7 @@ if [[ -z $size ]]; then
         /Main Display: Yes/ { print res; exit }')
     [[ -n $size ]] || { echo "couldn't detect the main display; pass -s WxH" >&2; exit 1; }
 fi
-out=${out:-$HOME/Pictures/iris-wallpaper-$theme.png}
+out=${out:-$here/iris-wallpaper-$theme-$size.png}
 w=${size%x*} h=${size#*x}
 
 chrome="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -39,7 +39,7 @@ trap 'rm -rf "$tmp"' EXIT
 
 # Wide screens fit all four layers in a 2x2 grid; tall ones stack them.
 columns=$(( w > h ? 2 : 1 ))
-"$here/layout_to_svg.py" "$here/layout.json" -o "$tmp/layout.svg" \
+"$here/iris-layout-to-svg.py" "$here/iris-layout.json" -o "$tmp/layout.svg" \
     --columns "$columns" --size "$size" --theme "$theme" >/dev/null
 
 "$chrome" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \

@@ -6,8 +6,8 @@ keys they actually send: S(KC_2) is "@", LCA(KC_J) is "⌃⌥J", a VIA macro suc
 as "{KC_LGUI,KC_LEFT}" is "⌘←", and tap/hold keys show both actions.
 
 Usage:
-    layout_to_svg.py layout.json [-o out.svg] [--names Base,Sym,Num,Nav]
-                     [--columns N] [--size WxH] [--theme auto|light|dark]
+    iris-layout-to-svg.py iris-layout.json [-o out.svg] [--names Base,Sym,Num,Nav]
+                          [--columns N] [--size WxH] [--theme auto|light|dark]
 """
 
 from __future__ import annotations

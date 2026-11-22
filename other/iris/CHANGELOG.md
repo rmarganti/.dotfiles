@@ -1,7 +1,7 @@
 # Iris layout changelog
 
-Changes to `layout.json`, newest first. Run `./layout_to_svg.py layout.json`
-to refresh `layout.svg`, and `git log -p layout.json` to see the full diff
+Changes to `iris-layout.json`, newest first. Run `./iris-layout-to-svg.py iris-layout.json`
+to refresh `iris-layout.svg`, and `git log -p --follow iris-layout.json` to see the full diff
 for any entry.
 
 ## 2026-11-12
