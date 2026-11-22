@@ -42,9 +42,32 @@ columns=$(( w > h ? 2 : 1 ))
 "$here/iris-layout-to-svg.py" "$here/iris-layout.json" -o "$tmp/layout.svg" \
     --columns "$columns" --size "$size" --theme "$theme" >/dev/null
 
+# Headless Chrome's viewport can come out shorter than --window-size, leaving
+# the bottom unpainted, so render into a taller window and crop to size.
 "$chrome" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
-    --user-data-dir="$tmp/profile" --window-size="$w,$h" \
+    --user-data-dir="$tmp/profile" --window-size="$w,$((h + 200))" \
     --screenshot="$tmp/out.png" "file://$tmp/layout.svg" 2>/dev/null
+# Keep the top $h rows (sips -c only crops around the centre). Each PNG
+# scanline is filtered against the one above it, so a prefix stays valid.
+python3 - "$tmp/out.png" "$h" <<'PY'
+import struct, sys, zlib
+path, h = sys.argv[1], int(sys.argv[2])
+data = open(path, "rb").read()
+chunks, pos = [], 8
+while pos < len(data):
+    n, kind = struct.unpack(">I4s", data[pos:pos + 8])
+    chunks.append((kind, data[pos + 8:pos + 8 + n]))
+    pos += 12 + n
+ihdr = chunks[0][1]
+w, _, depth, color = struct.unpack(">IIBB", ihdr[:10])
+bpp = {0: 1, 2: 3, 4: 2, 6: 4}[color] * depth // 8
+rows = zlib.decompress(b"".join(c for k, c in chunks if k == b"IDAT"))[:h * (1 + w * bpp)]
+def chunk(kind, body):
+    return struct.pack(">I", len(body)) + kind + body + struct.pack(">I", zlib.crc32(kind + body))
+out = data[:8] + chunk(b"IHDR", ihdr[:4] + struct.pack(">I", h) + ihdr[8:])
+out += chunk(b"IDAT", zlib.compress(rows, 9)) + chunk(b"IEND", b"")
+open(path, "wb").write(out)
+PY
 
 mkdir -p "$(dirname "$out")"
 mv "$tmp/out.png" "$out"

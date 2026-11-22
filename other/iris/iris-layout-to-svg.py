@@ -186,6 +186,15 @@ BASIC = {
     "KC_BRIU": "Bri+", "KC_BRID": "Bri−",
     "QK_BOOT": "Boot", "RESET": "Boot",
 }
+# RGB matrix: legacy VIA names, then current QMK names.
+for _old, _new, _lbl in [
+    ("RGB_TOG", "RM_TOGG", "RGB"), ("RGB_MOD", "RM_NEXT", "Mode+"), ("RGB_RMOD", "RM_PREV", "Mode−"),
+    ("RGB_HUI", "RM_HUEU", "Hue+"), ("RGB_HUD", "RM_HUED", "Hue−"),
+    ("RGB_SAI", "RM_SATU", "Sat+"), ("RGB_SAD", "RM_SATD", "Sat−"),
+    ("RGB_VAI", "RM_VALU", "RGB+"), ("RGB_VAD", "RM_VALD", "RGB−"),
+    ("RGB_SPI", "RM_SPDU", "Spd+"), ("RGB_SPD", "RM_SPDD", "Spd−"),
+]:
+    BASIC[_old] = BASIC[_new] = _lbl
 for _c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
     BASIC[f"KC_{_c}"] = _c
 for _d in "0123456789":

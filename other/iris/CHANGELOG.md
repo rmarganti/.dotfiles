@@ -4,6 +4,14 @@ Changes to `iris-layout.json`, newest first. Run `./iris-layout-to-svg.py iris-l
 to refresh `iris-layout.svg`, and `git log -p --follow iris-layout.json` to see the full diff
 for any entry.
 
+## 2026-11-22
+
+- Add media keys to the NAV layer's right number row (hold Space):
+  Prev, Play, Next, Mute, Vol−, Vol+, in the order of a Mac's F7–F12.
+- Add RGB matrix controls to the SYM layer's left number row:
+  toggle, previous/next effect, and brightness down/up.
+- The SVG labels the RGB matrix keycodes.
+
 ## 2026-11-12
 
 - The unused left thumb key now holds Hyper (Ctrl+Opt+Shift+Cmd).
