@@ -64,7 +64,7 @@ test("launches a real workspace, tab layout, split and background job", { skip: 
   const read = (name) => fs.readFileSync(path.join(dir, `${name}.mark`), "utf8").trim();
   const exists = (name) => fs.existsSync(path.join(dir, `${name}.mark`));
 
-  const before = (await ls()).spaces.map((s) => s.id);
+  const before = JSON.parse((await cli("herdr-app", ["status"])).stdout);
   const created = new Set();
   const api = makeApi(created);
   const background = [];
@@ -78,7 +78,9 @@ test("launches a real workspace, tab layout, split and background job", { skip: 
       const mine = created.has((await labels(address))["herdr.space"]);
       if (mine) await cli("hc", ["rm", address]);
     }
-    if (before.length) await cli("herdr-app", ["do", "space.select", JSON.stringify({ id: before[0] })]);
+    if (before.space) await cli("herdr-app", ["do", "space.select", JSON.stringify({ id: before.space })]);
+    if (before.tab) await cli("herdr-app", ["do", "tab.select", JSON.stringify({ id: before.tab })]);
+    if (before.focused_pane) await cli("herdr-app", ["do", "pane.focus", JSON.stringify({ pane: before.focused_pane })]);
     fs.rmSync(dir, { recursive: true, force: true });
   });
 
@@ -94,8 +96,8 @@ test("launches a real workspace, tab layout, split and background job", { skip: 
         label: "grid",
         cwd: dir,
         panes: [
-          { cwd: dir, command: `${mark("root")}`, commandMode: "keep-shell" },
-          { cwd: path.join(dir, "a"), command: mark("a"), commandMode: "keep-shell", direction: "right" },
+          { cwd: dir, name: "root shell", command: `${mark("root")}`, commandMode: "keep-shell" },
+          { cwd: path.join(dir, "a"), name: "server", command: mark("a"), commandMode: "keep-shell", direction: "right" },
           { cwd: path.join(dir, "b"), command: `${mark("b")} && true`, direction: "right" }, // exit-on-success: closes
           { cwd: path.join(dir, "c"), command: `${mark("c")} && false`, direction: "right" }, // fails: stays as a shell
         ],

@@ -14,7 +14,7 @@
 //   run-in-idle-panes { command }
 //
 // Plans: TabPlan { label?, cwd, panes: PanePlan[] }
-//        PanePlan { cwd, command?, commandMode?, direction? }
+//        PanePlan { cwd, name?, command?, commandMode?, direction? }
 
 import { basename, normalize, resolve, shortenHome } from "./path.js";
 
@@ -34,6 +34,7 @@ function resolveCwd(entry, currentCwd, inherited, configured) {
 function panePlan(entry, currentCwd, pane, inherited, includeDirection) {
   return {
     cwd: resolveCwd(entry, currentCwd, inherited, pane.cwd),
+    ...(pane.name ? { name: pane.name } : {}),
     ...(pane.command ? { command: pane.command } : {}),
     ...(pane.commandMode ? { commandMode: pane.commandMode } : {}),
     ...(includeDirection ? { direction: pane.direction || "right" } : {}),

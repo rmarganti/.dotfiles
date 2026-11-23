@@ -84,12 +84,17 @@ async function split(api, fromPane, plan, gated = false) {
   });
 }
 
+async function namePane(api, pane, plan) {
+  if (plan.name) await api.do("pane.rename", { pane, name: plan.name });
+}
+
 /** Splits `paneId` (which already shows plans[0]) so plans run side by side as evenly as halving allows. */
 async function splitBalanced(api, paneId, plans, made) {
   if (plans.length <= 1) return;
   const mid = Math.floor(plans.length / 2);
   const right = await split(api, paneId, plans[mid], true);
   made.push(right);
+  await namePane(api, right.pane, plans[mid]);
   await splitBalanced(api, paneId, plans.slice(0, mid), made);
   await splitBalanced(api, right.pane, plans.slice(mid), made);
 }
@@ -103,6 +108,7 @@ async function splitBalanced(api, paneId, plans, made) {
  */
 async function layoutTab(api, root, tab) {
   const [first, ...rest] = tab.panes;
+  if (first) await namePane(api, root.pane, first);
   const made = [];
   if (rest.length && rest.every((p) => (p.direction || "right") === (rest[0].direction || "right"))) {
     await splitBalanced(api, root.pane, tab.panes, made);
@@ -111,6 +117,7 @@ async function layoutTab(api, root, tab) {
     for (const plan of rest) {
       const pane = await split(api, from, plan, true);
       made.push(pane);
+      await namePane(api, pane.pane, plan);
       from = pane.pane;
     }
   }
@@ -159,8 +166,16 @@ export async function execute(api, action) {
   switch (action.type) {
     case "split-pane": {
       if (!action.fromPane) throw new Error("no focused pane to split from");
-      const made = await split(api, action.fromPane, action.pane);
-      await api.do("pane.focus", { pane: made.pane });
+      // A named pane may run a command that exits immediately. Hold it until
+      // the name is set and the pane receives focus.
+      const gated = Boolean(action.pane.name);
+      const made = await split(api, action.fromPane, action.pane, gated);
+      try {
+        await namePane(api, made.pane, action.pane);
+        await api.do("pane.focus", { pane: made.pane });
+      } finally {
+        if (gated) await send(api, made.terminal, "");
+      }
       return made;
     }
     case "create-tab": {

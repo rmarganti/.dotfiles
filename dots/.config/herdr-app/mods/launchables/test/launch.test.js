@@ -109,14 +109,26 @@ test("split-pane splits the source pane with an argv and focuses it", async () =
   assert.deepEqual(args.argv.slice(-2), ["launchables", "pi"]);
 });
 
+test("a named standalone pane is renamed before its command starts", async () => {
+  const api = fakeApi();
+  const made = await execute(api, { type: "split-pane", fromPane: "p0", pane: { cwd: "/w", name: "tests", command: "true" } });
+  assert.deepEqual(names(api.calls), ["pane.split", "pane.rename", "pane.focus", "hc send"]);
+  assert.deepEqual(api.calls[1][2], { pane: made.pane, name: "tests" });
+  assert.match(api.calls[0][2].argv[2], /read -r _;/);
+});
+
 test("create-tab types the root command and splits the rest in a balanced tree", async () => {
   const api = fakeApi();
-  const panes = ["a", "b", "c", "d"].map((id, i) => ({ cwd: "/w", command: `cmd-${id}`, ...(i ? { direction: "right" } : {}) }));
+  const panes = ["a", "b", "c", "d"].map((id, i) => ({ cwd: "/w", name: id, command: `cmd-${id}`, ...(i ? { direction: "right" } : {}) }));
   await execute(api, { type: "create-tab", space: "s0", tab: { label: "T", cwd: "/w", panes } });
   const splits = api.calls.filter((c) => c[1] === "pane.split").map((c) => [c[2].pane, c[2].argv.at(-1)]);
   // root p? shows a; split root → c (right half), root → b, c's pane → d: four equal quarters, in order
   const rootPane = api.calls.find((c) => c[1] === "tab.new") && "p3";
   assert.deepEqual(splits, [[rootPane, "cmd-c"], [rootPane, "cmd-b"], ["p5", "cmd-d"]]);
+  const renames = api.calls.slice(0, names(api.calls).indexOf("hc send")).filter((c) => c[1] === "pane.rename");
+  assert.deepEqual(renames.map((c) => c[2]), [
+    { pane: "p3", name: "a" }, { pane: "p5", name: "c" }, { pane: "p7", name: "b" }, { pane: "p9", name: "d" },
+  ]);
   assert.ok(api.calls.some((c) => c[0] === "hc" && c[1] === "send" && c[3] === "cmd-a && exit"));
   assert.deepEqual(names(api.calls).slice(-2), ["pane.focus", "tab.select"]);
 });

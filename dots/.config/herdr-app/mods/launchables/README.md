@@ -28,7 +28,7 @@ A layout without the floating block can still open the picker with `mod.open {na
 | overlay pane + detached `apply` process | a persistent floating block that launches directly |
 | `fzf` | `lib/fuzzy.js`: fzf's v1 algorithm and scoring |
 | `herdr workspace/tab/pane …` | `herdr-app do space.new / tab.new / pane.split`, `hc send` |
-| `pane rename` | none: the Herdr app has no pane names, so a pane's `name` is accepted and ignored |
+| `pane rename` | `pane.rename` applies each configured pane `name` on launch (Herdr App 0.1.17+) |
 | `--ratio` splits | none in Herdr: a run of panes in one direction is split as a balanced tree (2 and 4 come out even) |
 | `background` log files | `hc run --bg`, labelled `launchables.background=<key>`; `hc read <t>` shows its output |
 | `idle-panes` process check | panes whose program is a shell |

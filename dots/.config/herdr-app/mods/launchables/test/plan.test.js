@@ -48,6 +48,15 @@ test("direction defaults to right for top-level and non-root panes, never on a t
   assert.deepEqual(t.panes.map((p) => p.direction), [undefined, "down", "right"]);
 });
 
+test("configured pane names survive planning", () => {
+  const pane = { type: "pane", name: "server" };
+  assert.equal(compileConfigEntry(global("P", pane), ctx).pane.name, "server");
+  const action = compileConfigEntry(global("W", {
+    type: "workspace", tabs: [{ type: "tab", panes: [pane, { ...pane, name: "logs" }] }],
+  }), ctx);
+  assert.deepEqual(action.tabs[0].panes.map((p) => p.name), ["server", "logs"]);
+});
+
 test("a tab without panes gets one shell pane", () => {
   assert.deepEqual(compileConfigEntry(global("T", { type: "tab" }), ctx).tab.panes, [{ cwd: "/work/here" }]);
 });
