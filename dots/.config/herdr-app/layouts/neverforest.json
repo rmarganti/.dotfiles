@@ -5,6 +5,7 @@
     "version": "0.1.7"
   },
   "type": "row",
+  "link_handlers": ["nvim-links"],
   "children": [
     {
       "id": "sidebar",

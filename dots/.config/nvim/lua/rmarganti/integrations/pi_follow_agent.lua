@@ -14,7 +14,7 @@ local function socket_path()
 end
 
 --- Opens a file in the current Neovim window and reveals the requested line.
-function M.follow(path, line)
+function M.follow(path, line, column)
   if type(path) ~= 'string' or path == '' then
     return false
   end
@@ -26,7 +26,9 @@ function M.follow(path, line)
 
   local line_count = vim.api.nvim_buf_line_count(buffer)
   local target_line = math.max(1, math.min(tonumber(line) or 1, line_count))
-  vim.api.nvim_win_set_cursor(0, { target_line, 0 })
+  local text = vim.api.nvim_buf_get_lines(buffer, target_line - 1, target_line, false)[1] or ''
+  local target_column = math.max(0, math.min((tonumber(column) or 1) - 1, #text))
+  vim.api.nvim_win_set_cursor(0, { target_line, target_column })
   vim.cmd('normal! zz')
   return true
 end
@@ -69,17 +71,30 @@ function M.refresh(path, start_line, end_line)
   return true
 end
 
---- Starts the pane-specific RPC listener when Neovim is running inside Herdr.
+--- Opens a verified file for the desktop link handler, never a missing path.
+function M.follow_link(path, line, column)
+  return vim.fn.filereadable(path) == 1 and M.follow(path, line, column)
+end
+
+--- Starts a pane-specific RPC listener for the TUI or a terminal-specific one for the app.
 function M.setup()
-  if vim.env.HERDR_ENV ~= '1' or not vim.env.HERDR_PANE_ID then
+  local tui = vim.env.HERDR_ENV == '1' and vim.env.HERDR_PANE_ID
+  local terminal = vim.env.HC_TERMINAL_ID
+  local runtime = vim.env.XDG_RUNTIME_DIR or vim.env.TMPDIR
+  if tui then
+    socket = socket_path()
+  elseif terminal and terminal:match('^t[0-9a-z]+$') and runtime and runtime ~= '' then
+    socket = string.format('%s/herdr-nvim/%s.sock', runtime:gsub('/+$', ''), terminal)
+  else
     return
   end
 
   vim.api.nvim_set_hl(0, 'PiFollowAgentChange', { default = true, link = 'Visual' })
 
-  socket = socket_path()
-  vim.fn.mkdir(vim.fn.fnamemodify(socket, ':h'), 'p')
-  vim.fn.delete(socket)
+  vim.fn.mkdir(vim.fn.fnamemodify(socket, ':h'), 'p', 448) -- 0700
+  if tui then
+    vim.fn.delete(socket)
+  end
 
   local ok = pcall(vim.fn.serverstart, socket)
   if not ok then

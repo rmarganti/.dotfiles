@@ -1,0 +1,4 @@
+{
+  "place": "none",
+  "link_handlers": [{ "kind": "file", "pattern": "." }]
+}
