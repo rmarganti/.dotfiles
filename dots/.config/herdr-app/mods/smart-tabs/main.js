@@ -1,6 +1,6 @@
 import { View, div, svg, image } from "gpui-kit";
 import { h_flex } from "gpui-base";
-import { spaces, panes, run, openOverlay, theme, window, shared, layout, settings, home } from "herdr";
+import { spaces, panes, run, openOverlay, theme, window, shared, layout, settings, home, nextCommand } from "herdr";
 import { tabName } from "./tab-name.js";
 import { tabShortcuts } from "./tab-shortcuts.js";
 
@@ -13,10 +13,27 @@ function find(node, id) {
   return null;
 }
 
+function togglePanel(id) {
+  const root = layout(), panel = find(root, "panel"), body = find(root, "panel-body");
+  if (!panel || !body) return;
+  if (!panel.hidden && body.active === id) run("layout.hide", { id: "panel" });
+  else {
+    run("layout.select", { stack: "panel-body", child: id });
+    run("layout.show", { id: "panel" });
+  }
+}
+
 export default class Tabs extends View {
-  init() {
+  init(_props, cx) {
     this.pressed = null;
     this.panels = JSON.parse(localStorage.getItem("panels") ?? "{}");
+    cx.spawn(async (cx) => {
+      for (;;) {
+        if (await nextCommand() !== "ci" || !shared("workspace.panels")?.includes("ci-dash")) continue;
+        togglePanel("ci-dash");
+        cx.notify();
+      }
+    });
   }
 
   // The side panel is remembered per space: switching shows that space's choice
@@ -89,10 +106,7 @@ export default class Tabs extends View {
       return h_flex().id(`panel-${id}`).h(26).px(8).gap(5).flex_none().items_center().rounded(6)
         .text_size(12).bg(on ? t.selected : t.chrome).text_color(on ? t.foreground : t.muted)
         .hover(s => s.bg(t.hover)).on_mouse_down("left", stop)
-        .on_click(() => {
-          if (on) run("layout.hide", { id: "panel" });
-          else { run("layout.select", { stack: "panel-body", child: id }); run("layout.show", { id: "panel" }); }
-        }).child(svg(icon).size(14).flex_none()).child(label)
+        .on_click(() => togglePanel(id)).child(svg(icon).size(14).flex_none()).child(label)
         .when(count > 0, el => el.child(div().text_color(t.accent).font_semibold().child(`· ${count}`)));
     };
     return h_flex().size_full().min_w(0).px(10).pl(lightsPadding).gap(3).items_center().bg(t.chrome).border_b(1).border_color(t.border)

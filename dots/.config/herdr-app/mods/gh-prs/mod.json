@@ -1,1 +1,8 @@
-{ "place": "none", "title": "Pull requests" }
+{
+  "place": "none",
+  "title": "Pull requests",
+  "palette": [
+    { "title": "Pull Requests", "command": "gh-prs.toggle", "words": "github prs panel" },
+    { "title": "PR Inbox", "command": "gh-prs.inbox", "words": "github pull requests review requests" }
+  ]
+}

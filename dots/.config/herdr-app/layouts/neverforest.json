@@ -120,6 +120,7 @@
               "content": {
                 "tab": "active",
                 "pane": {
+                  "veil": 0.3,
                   "header": {
                     "content": {
                       "mod": "pane"

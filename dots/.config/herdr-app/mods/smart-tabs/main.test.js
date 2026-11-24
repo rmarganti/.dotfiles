@@ -37,6 +37,7 @@ const mocks = {
     export const layout = () => ({id:'panel',hidden:globalThis.__toolbar.hidden ?? false,children:[{id:'panel-body',active:globalThis.__toolbar.active ?? 'ci-dash'}]});
     export const settings = () => ({zoom:1});
     export const home = () => '/home/test';
+    export const nextCommand = () => new Promise(resolve => { globalThis.__toolbar.send = resolve; });
   `,
 };
 registerHooks({resolve(specifier, context, next) {
@@ -44,7 +45,7 @@ registerHooks({resolve(specifier, context, next) {
 }});
 const {default: Tabs} = await import("./main.js");
 const walk = node => typeof node === "object" ? [node, ...(node.nodes ?? []).flatMap(walk)] : [];
-function render() {const tabs = new Tabs(); tabs.init(); return tabs.render();}
+function render() {const tabs = new Tabs(); tabs.init({}, {spawn() {}}); return tabs.render();}
 const buttons = root => walk(root).filter(n => /^panel-/.test(n.styles.id?.[0] ?? ""));
 
 test("Files, Changes, CI, and PRs share one toolbar and identical spacing", () => {
@@ -81,6 +82,25 @@ test("each toggle selects its panel or hides it when already active", () => {
     ["layout.hide",{id:"panel"}],
     ["layout.select",{stack:"panel-body",child:"gh-prs"}], ["layout.show",{id:"panel"}],
   ]);
+});
+
+test("the CI palette command opens the hidden dashboard and toggles it closed", async () => {
+  const tabs = new Tabs();
+  tabs.init({}, { spawn(fn) { void fn({ notify() {} }); } });
+  env.commands = [];
+  env.hidden = true;
+  env.active = "files";
+  env.send("ci");
+  await Promise.resolve();
+  assert.deepEqual(env.commands, [
+    ["layout.select", {stack:"panel-body", child:"ci-dash"}], ["layout.show", {id:"panel"}],
+  ]);
+  env.commands = [];
+  env.hidden = false;
+  env.active = "ci-dash";
+  env.send("ci");
+  await Promise.resolve();
+  assert.deepEqual(env.commands, [["layout.hide", {id:"panel"}]]);
 });
 
 test("all four toggles use the same selected and unselected styling", () => {
