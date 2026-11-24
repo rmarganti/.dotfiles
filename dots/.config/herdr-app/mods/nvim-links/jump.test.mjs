@@ -36,6 +36,18 @@ test("jumps in the same tab with the resolved path and numeric coordinates", asy
   assert.deepEqual(api.calls[1], ["pane.focus", { pane: "editor" }]);
 });
 
+test("opens references without diagnostic coordinates at line 1, column 1", async () => {
+  for (const [raw, path] of [
+    ["src/main.js", "/repo/src/main.js"],
+    ["src/main.js:12:4", "/repo/src/main.js:12:4"],
+    ["file:///repo/src/main.js%3A12:4", "/repo/src/main.js:12:4"],
+  ]) {
+    const api = fake();
+    assert.equal(await jumpToLink({ link: { kind: "file", raw, path }, source }, api), "handled");
+    assert.ok(api.calls[0][1][4].endsWith(`['${path}', 1, 1])`));
+  }
+});
+
 test("prefers the clicked editor, but never guesses between two siblings", async () => {
   const api = fake({ other: true });
   assert.equal(await jumpToLink({ link, source }, api), "pass");
@@ -44,13 +56,13 @@ test("prefers the clicked editor, but never guesses between two siblings", async
   assert.deepEqual(api.calls[1], ["pane.focus", { pane: "second" }]);
 });
 
-test("leaves URLs, remote links, missing files and literal filenames to Herdr", async () => {
+test("leaves URLs, remote links, unresolved paths and invalid coordinates to Herdr", async () => {
   const api = fake();
   for (const click of [
     { link: { kind: "url", raw: "https://example.org:443" }, source },
     { link, source: { ...source, machine: "remote" } },
     { link: { ...link, path: null }, source },
-    { link: { ...link, path: "/repo/" + link.raw }, source },
+    { link: { ...link, raw: "src/main.js:0", path: "/repo/src/main.js" }, source },
   ]) assert.equal(await jumpToLink(click, api), "pass");
   assert.equal(api.calls.length, 0);
 });

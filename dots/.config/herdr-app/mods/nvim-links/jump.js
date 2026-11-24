@@ -12,13 +12,14 @@ const invoke = `
 
 export async function jumpToLink({ link, source }, api) {
   if (source.machine || !source.tab || link.kind !== "file" || !link.path?.startsWith("/")) return "pass";
-  // Herdr matches mod.json against the resolved spelling, where it already
-  // stripped the diagnostic suffix. Only the raw click still has line/column.
-  // If the suffix resolved as part of an actual filename, leave it alone.
-  const suffix = /:(\d+)(?::(\d+))?$/.exec(link.raw);
-  if (!suffix || link.path.endsWith(suffix[0]) || /[\u0000-\u001f\u007f]/.test(link.path)) return "pass";
-  const line = Number(suffix[1]);
-  const column = Number(suffix[2] ?? 1);
+  if (/[\u0000-\u001f\u007f]/.test(link.path)) return "pass";
+
+  // Herdr 0.1.17 only exposes diagnostic coordinates in the raw click.
+  // File URIs and verified filenames ending in :digits have no coordinates.
+  const suffix = /^file:/i.test(link.raw) ? null : /:(\d+)(?::(\d+))?$/.exec(link.raw);
+  const place = suffix && !link.path.endsWith(suffix[0]) ? suffix : null;
+  const line = Number(place?.[1] ?? 1);
+  const column = Number(place?.[2] ?? 1);
   if (![line, column].every((n) => Number.isSafeInteger(n) && n > 0)) return "pass";
 
   const editors = new Set(api.terminals()
