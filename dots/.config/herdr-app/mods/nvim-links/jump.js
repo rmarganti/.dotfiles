@@ -1,5 +1,14 @@
 // Positional arguments keep the terminal address and Vim expression out of shell source.
-const invoke = 'runtime=${XDG_RUNTIME_DIR:-${TMPDIR:-}}; [ -n "$runtime" ] || exit 1; PATH="$PATH:$HOME/.local/share/bob/nvim-bin"; exec nvim --server "${runtime%/}/herdr-nvim/$1.sock" --remote-expr "$2"';
+const invoke = `
+  runtime=\${XDG_RUNTIME_DIR:-\${TMPDIR:-}}
+  socket="\${runtime%/}/herdr-nvim/$1.sock"
+  PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
+  if [ -z "$runtime" ] || [ ! -S "$socket" ] || ! command -v nvim >/dev/null; then
+    printf 0
+    exit 0
+  fi
+  exec nvim --server "$socket" --remote-expr "$2"
+`;
 
 export async function jumpToLink({ link, source }, api) {
   if (source.machine || !source.tab || link.kind !== "file" || !link.path?.startsWith("/")) return "pass";
@@ -21,12 +30,24 @@ export async function jumpToLink({ link, source }, api) {
   if (!target) return "pass";
 
   const path = "'" + link.path.replaceAll("'", "''") + "'";
-  const expr = `luaeval('require("rmarganti.integrations.pi_follow_agent").follow_link(_A[1], _A[2], _A[3]) and 1 or 0', [${path}, ${line}, ${column}])`;
-  try {
-    const result = await api.exec("sh", ["-c", invoke, "herdr-nvim", target.terminal, expr], { timeout: 1000 });
-    if (result.code !== 0 || result.stdout.trim() !== "1") return "pass";
-  } catch {
-    return "pass";
+  // Acknowledge the queued jump before loading the file or running its autocmds.
+  const queueJump = [
+    '(function(a)',
+    'if vim.fn.filereadable(a[1]) ~= 1 then return 0 end;',
+    'local follow = require("rmarganti.integrations.pi_follow_agent").follow_link;',
+    'vim.schedule(function() follow(a[1], a[2], a[3]) end);',
+    'return 1 end)(_A)',
+  ].join(" ");
+  const expr = `luaeval('${queueJump}', [${path}, ${line}, ${column}])`;
+  const result = await api.exec("sh", ["-c", invoke, "herdr-nvim", target.terminal, expr], { timeout: 5000 });
+  const reply = result.stdout.trim();
+  // E247 means the RPC connection was never made (e.g. a stale socket).
+  if (result.code === 2 && result.stderr.startsWith("E247: Failed to connect")) return "pass";
+  if (result.code === 0 && reply === "0") return "pass";
+  // A lost or unexpected reply doesn't prove Neovim didn't receive the jump.
+  // Let Herdr report the error rather than opening the same file externally.
+  if (result.code !== 0 || reply !== "1") {
+    throw new Error(`Neovim did not acknowledge the jump: ${result.stderr.trim() || reply || `exit ${result.code}`}`);
   }
   api.run("pane.focus", { pane: target.pane });
   return "handled";
