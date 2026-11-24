@@ -87,6 +87,7 @@ dotfiles.default_mode = "symlink"
 "~/.config/nono/profiles" = {}
 "~/.config/nvim" = {}
 "~/.config/phpactor" = {}
+"~/.config/rex/init.lua" = {}
 "~/.config/starship.toml" = {}
 "~/.config/television" = {}
 "~/.config/zed" = {}
